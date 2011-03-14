@@ -2,20 +2,22 @@
 
 namespace Monocle
 {
-	class Vector2
+	class Vector3
 	{
 	public:
-		float x,y;
+		float x,y,z;
 
-		static Vector2 zero;
-		static Vector2 one;
-		static Vector2 down;
-		static Vector2 up;
-		static Vector2 left;
-		static Vector2 right;
-		
-		Vector2(float x, float y);
+		static Vector3 zero;
+		static Vector3 one;
+		static Vector3 down;
+		static Vector3 up;
+		static Vector3 left;
+		static Vector3 right;
 
+		Vector3();
+		Vector3(float x, float y, float z);
+
+		/*
 		float GetSquaredMagnitude();
 		float GetMagnitude();
 		Vector2 GetNormalized();
@@ -25,6 +27,7 @@ namespace Monocle
 		void Clamp(float max);
 		bool IsInRange(float range);
 		float Dot(Vector2 other);
+		*/
 		
 		/*
 		static Vector2 Add(Vector2 a, Vector2 b);
