@@ -1,10 +1,5 @@
 #pragma once
 
-//Platform Wrapper
-#include "Graphics.h"
-#include "Debug.h"
-#include "Input.h"
-
 // deals with managing
 // - windows
 // - basic mouse, keyboard input wrappers
@@ -12,12 +7,19 @@
 
 namespace Monocle
 {
-	/*
+	enum KeyCode
+	{
+		LeftArrow,
+		RightArrow,
+		UpArrow,
+		DownArrow
+	};
+
 	class Platform
 	{
 	public:
 		Platform();
-		void Init(); // CreateWindow
-	}
-	*/
+		void Init();
+		bool IsKeyPressed(KeyCode keyCode);
+	};
 }

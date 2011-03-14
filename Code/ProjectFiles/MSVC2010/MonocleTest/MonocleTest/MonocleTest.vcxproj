@@ -76,8 +76,9 @@
     <ClCompile Include="..\..\..\..\Main.cpp" />
     <ClCompile Include="..\..\..\..\Math.cpp" />
     <ClCompile Include="..\..\..\..\Monocle.cpp" />
-    <ClCompile Include="..\..\..\..\OGL_Graphics.cpp" />
+    <ClCompile Include="..\..\..\..\OpenGL_Graphics.cpp" />
     <ClCompile Include="..\..\..\..\Vector2.cpp" />
+    <ClCompile Include="..\..\..\..\Windows_Platform.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

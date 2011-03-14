@@ -1,6 +1,8 @@
 #pragma once
 
-#include "Platform.h"
+#include "Input.h"
+#include "Graphics.h"
+#include "Debug.h"
 
 namespace Monocle
 {

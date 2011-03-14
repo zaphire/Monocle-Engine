@@ -56,13 +56,16 @@
     <ClCompile Include="..\..\..\..\Core.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\OGL_Graphics.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Debug.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Input.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Windows_Platform.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\OpenGL_Graphics.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
   </ItemGroup>

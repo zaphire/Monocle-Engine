@@ -20,7 +20,7 @@ namespace Monocle
 		bool isDone = false;
 		while (!isDone)
 		{
-			Debug::Log("here we are!");
+			Debug::Log("Hello, World!");
 		}
 	}
 }
