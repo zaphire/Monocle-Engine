@@ -62,21 +62,25 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Core.h" />
     <ClInclude Include="..\..\..\..\Debug.h" />
+    <ClInclude Include="..\..\..\..\Entity.h" />
     <ClInclude Include="..\..\..\..\Graphics.h" />
     <ClInclude Include="..\..\..\..\Input.h" />
     <ClInclude Include="..\..\..\..\Math.h" />
     <ClInclude Include="..\..\..\..\Monocle.h" />
     <ClInclude Include="..\..\..\..\Platform.h" />
+    <ClInclude Include="..\..\..\..\Scene.h" />
     <ClInclude Include="..\..\..\..\Vector2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Core.cpp" />
     <ClCompile Include="..\..\..\..\Debug.cpp" />
+    <ClCompile Include="..\..\..\..\Entity.cpp" />
     <ClCompile Include="..\..\..\..\Input.cpp" />
     <ClCompile Include="..\..\..\..\Main.cpp" />
     <ClCompile Include="..\..\..\..\Math.cpp" />
     <ClCompile Include="..\..\..\..\Monocle.cpp" />
     <ClCompile Include="..\..\..\..\OpenGL_Graphics.cpp" />
+    <ClCompile Include="..\..\..\..\Scene.cpp" />
     <ClCompile Include="..\..\..\..\Vector2.cpp" />
     <ClCompile Include="..\..\..\..\Windows_Platform.cpp" />
   </ItemGroup>

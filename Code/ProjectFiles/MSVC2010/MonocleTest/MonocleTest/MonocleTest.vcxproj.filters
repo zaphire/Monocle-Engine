@@ -39,6 +39,12 @@
     <ClInclude Include="..\..\..\..\Debug.h">
       <Filter>Monocle</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Entity.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Scene.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Monocle.cpp">
@@ -66,6 +72,12 @@
       <Filter>Monocle</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\OpenGL_Graphics.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Scene.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Entity.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
   </ItemGroup>
