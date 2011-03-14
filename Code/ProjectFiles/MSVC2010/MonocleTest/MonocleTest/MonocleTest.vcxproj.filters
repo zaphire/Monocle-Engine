@@ -13,6 +13,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Monocle\Windows">
+      <UniqueIdentifier>{028412ef-d5d9-4aab-ad4d-df588e57c6a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Monocle.h">
@@ -39,6 +42,12 @@
     <ClInclude Include="..\..\..\..\Debug.h">
       <Filter>Monocle</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Windows\WindowsPlatform.h">
+      <Filter>Monocle\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Vector3.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Monocle.cpp">
@@ -62,10 +71,13 @@
     <ClCompile Include="..\..\..\..\Input.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Windows_Platform.cpp">
-      <Filter>Monocle</Filter>
+    <ClCompile Include="..\..\..\..\Windows\WindowsPlatform.cpp">
+      <Filter>Monocle\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\OpenGL_Graphics.cpp">
+    <ClCompile Include="..\..\..\..\Windows\WindowsOpenGLGraphics.cpp">
+      <Filter>Monocle\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Vector3.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
   </ItemGroup>

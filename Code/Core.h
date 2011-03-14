@@ -13,6 +13,7 @@ namespace Monocle
 		void Init();
 		void Main();
 
+		Platform platform;
 		Input input;
 		Graphics graphics;
 		Debug debug;

@@ -16,35 +16,35 @@ namespace Monocle
 		this->y = y;
 	}
 
-	float Vector2::getSquaredMagnitude()
+	float Vector2::GetSquaredMagnitude()
 	{
 		return pow(x, 2) + pow(y, 2);
 	}
 
-	float Vector2::getMagnitude()
+	float Vector2::GetMagnitude()
 	{
 		return sqrt(pow(x, 2) + pow(y, 2));
 	}
 
-	Vector2 Vector2::getNormalized()
+	Vector2 Vector2::GetNormalized()
 	{
-		float mag = getMagnitude();
+		float mag = GetMagnitude();
 		return Vector2(x / mag, y / mag);
 	}
 
-	void Vector2::normalize()
+	void Vector2::Normalize()
 	{
-		float mag = getMagnitude();
+		float mag = GetMagnitude();
 		x /= mag;
 		y /= mag;
 	}
 
-	Vector2 Vector2::getPerpendicularLeft()
+	Vector2 Vector2::GetPerpendicularLeft()
 	{
 		return Vector2(-y, x);
 	}
 
-	Vector2 Vector2::getPerpendicularRight()
+	Vector2 Vector2::GetPerpendicularRight()
 	{
 		return Vector2(y, -x);
 	}
@@ -53,7 +53,7 @@ namespace Monocle
 	{
 		if ((pow(x, 2) + pow(y, 2)) > pow(max, 2))
 		{
-			normalize();
+			Normalize();
 			x *= max;
 			y *= max;
 		}

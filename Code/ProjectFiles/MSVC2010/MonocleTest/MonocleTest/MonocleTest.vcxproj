@@ -44,6 +44,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>OpenGL32.lib;GLu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -68,6 +69,8 @@
     <ClInclude Include="..\..\..\..\Monocle.h" />
     <ClInclude Include="..\..\..\..\Platform.h" />
     <ClInclude Include="..\..\..\..\Vector2.h" />
+    <ClInclude Include="..\..\..\..\Vector3.h" />
+    <ClInclude Include="..\..\..\..\Windows\WindowsPlatform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Core.cpp" />
@@ -76,9 +79,10 @@
     <ClCompile Include="..\..\..\..\Main.cpp" />
     <ClCompile Include="..\..\..\..\Math.cpp" />
     <ClCompile Include="..\..\..\..\Monocle.cpp" />
-    <ClCompile Include="..\..\..\..\OpenGL_Graphics.cpp" />
     <ClCompile Include="..\..\..\..\Vector2.cpp" />
-    <ClCompile Include="..\..\..\..\Windows_Platform.cpp" />
+    <ClCompile Include="..\..\..\..\Vector3.cpp" />
+    <ClCompile Include="..\..\..\..\Windows\WindowsOpenGLGraphics.cpp" />
+    <ClCompile Include="..\..\..\..\Windows\WindowsPlatform.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
