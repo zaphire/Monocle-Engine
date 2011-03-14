@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Vector2.h"
+
 namespace Monocle
 {
 	class Entity
@@ -8,16 +10,20 @@ namespace Monocle
 		Entity();
 		~Entity();
 
+		Vector2 position;
+		int layer;
+		float depth;
+
 		//Called by the scene when the entity should update its game logic
-		void Update();
+		virtual void Update();
 
 		//Called by the scene when the entity should render
-		void Render();
+		virtual void Render();
 
 		//Called by the scene when the entity is added to that scene
-		void Added();
+		virtual void Added();
 
 		//Called by the scene when the entity is removed from that scene
-		void Removed();
+		virtual void Removed();
 	};
 }

@@ -60,11 +60,14 @@ namespace Monocle
 	};
 
 	WindowsGraphics *WindowsGraphics::instance = NULL;
+	Graphics *Graphics::instance = NULL;
 
 	Graphics::Graphics()
 	{
 		WindowsGraphics::instance = new WindowsGraphics();
 		WindowsGraphics::instance->graphics = this;
+
+		instance = this;
 		//WindowsPlatform::instance->hWnd;
 	}
 
@@ -82,12 +85,17 @@ namespace Monocle
 
 	void Graphics::SetCameraPosition(const Vector3 &position)
 	{
-		cameraPosition = position;
+		instance->cameraPosition = position;
 	}
 
 	void Graphics::Translate(float x, float y, float z)
 	{
 		glTranslatef(x, y, z);
+	}
+
+	void Graphics::Translate(Vector2 pos)
+	{
+		glTranslatef(pos.x, pos.y, 0.0f);
 	}
 
 	void Graphics::Rotate(float ax, float ay, float az, float r)

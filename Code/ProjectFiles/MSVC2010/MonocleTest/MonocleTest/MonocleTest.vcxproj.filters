@@ -42,14 +42,17 @@
     <ClInclude Include="..\..\..\..\Debug.h">
       <Filter>Monocle</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Entity.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Scene.h">
       <Filter>Monocle</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Windows\WindowsPlatform.h">
       <Filter>Monocle\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Entity.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Vector3.h">
+      <Filter>Monocle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -74,13 +77,7 @@
     <ClCompile Include="..\..\..\..\Input.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Windows_Platform.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Scene.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Entity.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Windows\WindowsOpenGLGraphics.cpp">
@@ -88,6 +85,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Windows\WindowsPlatform.cpp">
       <Filter>Monocle\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Entity.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Vector3.cpp">
+      <Filter>Monocle</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

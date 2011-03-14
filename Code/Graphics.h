@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Vector2.h"
 #include "Vector3.h"
 
 namespace Monocle
@@ -15,13 +16,16 @@ namespace Monocle
 		void EndFrame();
 		void ShowBuffer();
 
-		void SetCameraPosition(const Vector3 &position);
-		void Translate(float x, float y, float z);
-		void Rotate(float ax, float ay, float az, float r);
-		void RenderTriangle(float size);
-		void RenderQuad(float size);
+		static void SetCameraPosition(const Vector3 &position);
+		static void Translate(float x, float y, float z);
+		static void Translate(Vector2 pos);
+		static void Rotate(float ax, float ay, float az, float r);
+		static void RenderTriangle(float size);
+		static void RenderQuad(float size);
 
 		Vector3 cameraPosition;
+
+		static Graphics *instance;
 	};
 
 }

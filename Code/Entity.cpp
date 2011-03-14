@@ -4,7 +4,8 @@ namespace Monocle
 {
 	Entity::Entity()
 	{
-
+		layer = 0;
+		depth = 0.0f;
 	}
 
 	Entity::~Entity()

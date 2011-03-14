@@ -14,6 +14,7 @@ namespace Monocle
 		static Vector2 left;
 		static Vector2 right;
 		
+		Vector2();
 		Vector2(float x, float y);
 
 		float GetSquaredMagnitude();

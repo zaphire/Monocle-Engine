@@ -2,20 +2,12 @@
 
 #include "Debug.h"
 #include <list>
+#include "Entity.h"
 
 using std::list;
 
 namespace Monocle
 {
-	class Entity
-	{
-	public:
-		void Update();
-		void Render();
-		void Added();
-		void Removed();
-	};
-
 	class Scene
 	{
 	public:

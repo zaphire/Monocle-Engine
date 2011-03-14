@@ -1,4 +1,4 @@
-#pragma strict
+#pragma once
 
 namespace Monocle
 {
