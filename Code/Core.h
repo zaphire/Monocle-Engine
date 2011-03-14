@@ -3,6 +3,7 @@
 #include "Input.h"
 #include "Graphics.h"
 #include "Debug.h"
+#include "Scene.h"
 
 namespace Monocle
 {
@@ -17,5 +18,6 @@ namespace Monocle
 		Input input;
 		Graphics graphics;
 		Debug debug;
+		Scene scene;
 	};
 }
