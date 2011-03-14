@@ -46,6 +46,10 @@
       <Filter>Monocle\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Vector3.h">
+    <ClInclude Include="..\..\..\..\Entity.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Scene.h">
       <Filter>Monocle</Filter>
     </ClInclude>
   </ItemGroup>
@@ -78,6 +82,12 @@
       <Filter>Monocle\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Vector3.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Scene.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Entity.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
   </ItemGroup>
