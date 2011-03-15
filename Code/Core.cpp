@@ -3,9 +3,10 @@
 //#define TEST_ENTITY
 //#define SCENE_CODE_WRITTEN
 
-//If you want to use fixed timestep, uncomment the following two lines:
+//If you want to use fixed timestep, uncomment the following three lines:
 #define FIXED_TIMESTEP
 #define MILLISECONDS_PER_FRAME 1000/60
+#define MAX_UPDATES_PER_RENDER 4
 
 namespace Monocle
 {
@@ -48,31 +49,41 @@ namespace Monocle
 			tick = Platform::GetMilliseconds();
 			Monocle::deltaTime = ((double)(tick - lastTick))/1000.0;
 
-			// **** BEGIN UPDATE
 #ifdef FIXED_TIMESTEP
-			if ((tick - lastTick) >= MILLISECONDS_PER_FRAME)
+			int updates = 0;
+			while (updates < MAX_UPDATES_PER_RENDER && (tick - lastTick) >= MILLISECONDS_PER_FRAME)
 			{
+				//Update
 				if (scene != NULL)
 					scene->Update();
-				lastTick = tick;
+				++updates;
+				lastTick += MILLISECONDS_PER_FRAME;
 			}
-#else
-			if (scene != NULL)
-				scene->Update();
-			lastTick = tick;
-#endif
-			// **** END UPDATE
 
-			// **** BEGIN RENDER
+			//Auto catch-up if it is really slowing down
+			if (updates == MAX_UPDATES_PER_RENDER)
+				lastTick = tick;
+
+			//Render
 			graphics.BeginFrame();
-			
 			if (scene != NULL)
 				scene->Render();
-			
 			graphics.EndFrame();
-
 			graphics.ShowBuffer();
-			// **** END RENDER
+#else
+			//Update
+			if (scene != NULL)
+				scene->Update();
+
+			//Render
+			graphics.BeginFrame();
+			if (scene != NULL)
+				scene->Render();
+			graphics.EndFrame();
+			graphics.ShowBuffer();
+
+			lastTick = tick;
+#endif
 		}
 	}
 

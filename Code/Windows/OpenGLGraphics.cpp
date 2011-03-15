@@ -1,6 +1,14 @@
+#ifdef MONOCLE_OPENGL
+
 #include "../Graphics.h"
 #include "../Debug.h"
-#include "WindowsPlatform.h"
+#include "../Platform.h"
+
+#ifdef MONOCLE_WINDOWS
+	#define WIN32_LEAN_AND_MEAN
+	#include <Windows.h>
+
+#endif
 
 #include <gl/GL.h>
 #include <gl/GLU.h>
@@ -9,10 +17,10 @@
 
 namespace Monocle
 {
-	class WindowsGraphics
+	class OpenGLGraphics
 	{
 	public:
-		static WindowsGraphics *instance;
+		static OpenGLGraphics *instance;
 		Graphics *graphics;
 
 		static void Init()
@@ -34,12 +42,7 @@ namespace Monocle
 			glTranslatef(instance->graphics->cameraPosition.x, instance->graphics->cameraPosition.y, instance->graphics->cameraPosition.z);
 		}
 
-		static void ShowBuffer()
-		{
-			SwapBuffers(WindowsPlatform::instance->hDC);
-		}
-
-		static void SetResolution(int width, int height)		// Resize And Initialize The GL Window
+		static void Resize(int width, int height)		// Resize And Initialize The GL Window
 		{
 			if (height==0)										// Prevent A Divide By Zero By
 			{
@@ -59,13 +62,13 @@ namespace Monocle
 		}
 	};
 
-	WindowsGraphics *WindowsGraphics::instance = NULL;
+	OpenGLGraphics *OpenGLGraphics::instance = NULL;
 	Graphics *Graphics::instance = NULL;
 
 	Graphics::Graphics()
 	{
-		WindowsGraphics::instance = new WindowsGraphics();
-		WindowsGraphics::instance->graphics = this;
+		OpenGLGraphics::instance = new OpenGLGraphics();
+		OpenGLGraphics::instance->graphics = this;
 
 		instance = this;
 		//WindowsPlatform::instance->hWnd;
@@ -74,12 +77,13 @@ namespace Monocle
 	void Graphics::Init()
 	{
 		Debug::Log("Graphics::Init");
-		WindowsGraphics::Init();
-		WindowsGraphics::SetResolution(800, 600);
+		OpenGLGraphics::Init();
+		OpenGLGraphics::Resize(800, 600);
 	}
 
 	bool Graphics::SetResolution(int w, int h, int bits, bool full)
 	{
+		OpenGLGraphics::Resize(w, h);
 		return true;
 	}
 
@@ -151,7 +155,7 @@ namespace Monocle
 
 	void Graphics::BeginFrame()
 	{
-		WindowsGraphics::BeginFrame();
+		OpenGLGraphics::BeginFrame();
 	}
 
 	void Graphics::EndFrame()
@@ -160,6 +164,8 @@ namespace Monocle
 
 	void Graphics::ShowBuffer()
 	{
-		WindowsGraphics::ShowBuffer();
+		Platform::ShowBuffer();
 	}
 }
+
+#endif

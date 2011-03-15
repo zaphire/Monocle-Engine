@@ -1,3 +1,5 @@
+#ifdef MONOCLE_WINDOWS
+
 #include "WindowsPlatform.h"
 #include "../Debug.h"
 
@@ -9,6 +11,7 @@ namespace Monocle
 {	
 	WindowsPlatform *WindowsPlatform::instance = NULL;
 
+	//TODO: cleanup code, replace message boxes
 	bool WindowsPlatform::CreatePlatformWindow(const char* title, int width, int height, int bits, bool fullscreenflag)
 	{
 		unsigned int		PixelFormat;			// Holds The Results After Searching For A Match
@@ -295,6 +298,10 @@ namespace Monocle
 		return (long)timeGetTime();
 	}
 
-
-
+	void Platform::ShowBuffer()
+	{
+		SwapBuffers(WindowsPlatform::instance->hDC);
+	}
 }
+
+#endif
