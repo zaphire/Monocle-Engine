@@ -24,6 +24,22 @@ namespace Engine
 		// TODO: Implement.
 	}
 
+    Graphics::Graphics()
+    {
+        }
+
+    void Graphics::BeginFrame()
+    {
+        }
+
+    void Graphics::EndFrame()
+    {
+        }
+
+    void Graphics::ShowBuffer()
+    {
+        }
+
     /* Automatic dispatchers for overloaded methods */
     /* Automatic property getter-setter definitions */
     /* Binding variables */

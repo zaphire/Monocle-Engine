@@ -23,6 +23,7 @@ namespace Engine
 
         /* Method and constructor declarations */
         public: Debug(lua_State * L, bool byuser);
+        public: Debug();
 
         /* Automatic dispatchers for overloaded methods */
 

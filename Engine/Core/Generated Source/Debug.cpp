@@ -24,6 +24,10 @@ namespace Engine
 		// TODO: Implement.
 	}
 
+    Debug::Debug()
+    {
+        }
+
     /* Automatic dispatchers for overloaded methods */
     /* Automatic property getter-setter definitions */
     /* Binding variables */

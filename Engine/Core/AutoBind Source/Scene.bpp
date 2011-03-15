@@ -15,4 +15,20 @@ class Engine.Scene
 		}
 		// TODO: Implement.
 	}
+
+	public unbound void Begin()
+	{
+	}
+
+	public unbound void Update()
+	{
+	}
+
+	public unbound void Render()
+	{
+	}
+
+	public unbound void End()
+	{
+	}
 }

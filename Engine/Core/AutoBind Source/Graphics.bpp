@@ -15,4 +15,20 @@ class Engine.Graphics
 		}
 		// TODO: Implement.
 	}
+
+	public unbound Graphics()
+	{
+	}
+
+	public unbound void BeginFrame()
+	{
+	}
+
+	public unbound void EndFrame()
+	{
+	}
+
+	public unbound void ShowBuffer()
+	{
+	}
 }

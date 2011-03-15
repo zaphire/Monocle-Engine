@@ -9,6 +9,8 @@
 #include "Object.h"
 #include "Platform.h"
 #include "InternalConstructorOnlyException.h"
+#include "Platforms/Backend.h"
+#include "Platforms/Windows/Backend.h"
 
 namespace Engine
 {
@@ -18,10 +20,42 @@ namespace Engine
     Platform::Platform(lua_State * L, bool byuser)
     {
         if (byuser)
-		{
 			throw new Engine::InternalConstructorOnlyException();
-		}
-		// TODO: Implement.
+		this->m_Backend = NULL;
+	}
+
+    Platform::Platform()
+    {
+        this->m_Backend = NULL;
+	}
+
+    void Platform::Init()
+    {
+        // Here we initalize the backend to Windows.  When other platforms are implemented,
+		// you'll need to work out which one to initalize using #ifdefs.
+		this->m_Backend = new Native::Windows::Backend();
+	}
+
+    void Platform::Update()
+    {
+        this->m_Backend->Update();
+	}
+
+    bool Platform::IsKeyPressed()
+    {
+        }
+
+    void Platform::ShowBuffer()
+    {
+        this->m_Backend->ShowBuffer();
+	}
+
+	/// <summary>
+	/// Returns the number of milliseconds since the system started.
+	/// </summary>
+    long Platform::GetMilliseconds()
+    {
+        return this->m_Backend->GetMilliseconds();
 	}
 
     /* Automatic dispatchers for overloaded methods */

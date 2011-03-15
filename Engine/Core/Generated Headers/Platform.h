@@ -11,6 +11,8 @@
 class Object;
 namespace Engine { class InternalConstructorOnlyException; } 
 #include "Object.h"
+#include "Platforms/Backend.h"
+#include "Platforms/Windows/Backend.h"
 
 /* Using declarations */
 
@@ -20,9 +22,16 @@ namespace Engine
     class Platform : public Object
     {
         /* Variable declarations */
+        private: Native::Backend * m_Backend;
 
         /* Method and constructor declarations */
         public: Platform(lua_State * L, bool byuser);
+        public: Platform();
+        public: void Init();
+        public: void Update();
+        public: bool IsKeyPressed();
+        public: void ShowBuffer();
+        public: long GetMilliseconds();
 
         /* Automatic dispatchers for overloaded methods */
 

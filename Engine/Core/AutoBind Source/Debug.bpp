@@ -15,4 +15,8 @@ class Engine.Debug
 		}
 		// TODO: Implement.
 	}
+
+	public unbound Debug()
+	{
+	}
 }

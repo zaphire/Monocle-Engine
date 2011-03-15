@@ -23,6 +23,7 @@ namespace Engine
 
         /* Method and constructor declarations */
         public: Input(lua_State * L, bool byuser);
+        public: Input();
 
         /* Automatic dispatchers for overloaded methods */
 

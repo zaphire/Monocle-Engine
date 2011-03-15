@@ -23,6 +23,10 @@ namespace Engine
 
         /* Method and constructor declarations */
         public: Scene(lua_State * L, bool byuser);
+        public: void Begin();
+        public: void Update();
+        public: void Render();
+        public: void End();
 
         /* Automatic dispatchers for overloaded methods */
 

@@ -23,6 +23,10 @@ namespace Engine
 
         /* Method and constructor declarations */
         public: Graphics(lua_State * L, bool byuser);
+        public: Graphics();
+        public: void BeginFrame();
+        public: void EndFrame();
+        public: void ShowBuffer();
 
         /* Automatic dispatchers for overloaded methods */
 

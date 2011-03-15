@@ -24,6 +24,10 @@ namespace Engine
 		// TODO: Implement.
 	}
 
+    Input::Input()
+    {
+        }
+
     /* Automatic dispatchers for overloaded methods */
     /* Automatic property getter-setter definitions */
     /* Binding variables */

@@ -15,4 +15,8 @@ class Engine.Input
 		}
 		// TODO: Implement.
 	}
+
+	public unbound Input()
+	{
+	}
 }

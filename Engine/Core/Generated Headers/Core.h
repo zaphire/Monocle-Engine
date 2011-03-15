@@ -10,6 +10,11 @@
 /* Imports */
 class Object;
 namespace Engine { class InternalConstructorOnlyException; } 
+namespace Engine { class Input; } 
+namespace Engine { class Graphics; } 
+namespace Engine { class Debug; } 
+namespace Engine { class Platform; } 
+namespace Engine { class Scene; } 
 #include "Object.h"
 
 /* Using declarations */
@@ -20,13 +25,31 @@ namespace Engine
     class Core : public Object
     {
         /* Variable declarations */
+        private: Engine::Platform * p_Platform;
+        private: Engine::Input * p_Input;
+        private: Engine::Graphics * p_Graphics;
+        private: Engine::Debug * p_Debug;
+        private: Engine::Scene * p_Scene;
+        private: Engine::Scene * p_SwitchTo;
+        private: double  p_DeltaTime;
+        private: bool  p_FixedTimestep;
+        private: int  p_TargetFrames;
 
         /* Method and constructor declarations */
         public: Core(lua_State * L, bool byuser);
+        public: int Init(lua_State * L);
+        public: int Main(lua_State * L);
 
         /* Automatic dispatchers for overloaded methods */
 
         /* Automatic property getter-setter declarations */
+        private: int __autobind_property_get_Scene(lua_State * L);
+        private: int __autobind_property_set_Scene(lua_State * L);
+        private: int __autobind_property_get_DeltaTime(lua_State * L);
+        private: int __autobind_property_get_FixedTimestep(lua_State * L);
+        private: int __autobind_property_set_FixedTimestep(lua_State * L);
+        private: int __autobind_property_get_TargetFrames(lua_State * L);
+        private: int __autobind_property_set_TargetFrames(lua_State * L);
 
         /* Binding variables */
         public: static const char *ClassName;

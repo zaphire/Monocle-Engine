@@ -210,6 +210,26 @@
 				RelativePath=".\Static Source\Utility.cpp"
 				>
 			</File>
+			<Filter
+				Name="Platforms"
+				>
+				<Filter
+					Name="Windows"
+					>
+					<File
+						RelativePath=".\Static Source\Platforms\Windows\Backend.cpp"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="Linux"
+					>
+				</Filter>
+				<Filter
+					Name="Mac"
+					>
+				</Filter>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Static Headers"
@@ -252,6 +272,30 @@
 				RelativePath=".\Static Headers\Utility.h"
 				>
 			</File>
+			<Filter
+				Name="Platforms"
+				>
+				<File
+					RelativePath=".\Static Headers\Platforms\Backend.h"
+					>
+				</File>
+				<Filter
+					Name="Windows"
+					>
+					<File
+						RelativePath=".\Static Headers\Platforms\Windows\Backend.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="Linux"
+					>
+				</Filter>
+				<Filter
+					Name="Mac"
+					>
+				</Filter>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"

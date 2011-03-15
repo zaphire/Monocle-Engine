@@ -1,7 +1,11 @@
 #import Engine.InternalConstructorOnlyException
+#include "Platforms/Backend.h"
+#include "Platforms/Windows/Backend.h"
 
 class Engine.Platform
 {
+	private	Native::Backend * m_Backend;
+
 	/// <summary>
 	/// A non-public constructor for initalizing a Platform instance.
 	/// </summary>
@@ -10,9 +14,41 @@ class Engine.Platform
 	bound Platform()
 	{
 		if (byuser)
-		{
 			throw new Engine::InternalConstructorOnlyException();
-		}
-		// TODO: Implement.
+		this->m_Backend = NULL;
+	}
+
+	public unbound Platform()
+	{
+		this->m_Backend = NULL;
+	}
+
+	public unbound void Init()
+	{
+		// Here we initalize the backend to Windows.  When other platforms are implemented,
+		// you'll need to work out which one to initalize using #ifdefs.
+		this->m_Backend = new Native::Windows::Backend();
+	}
+
+	public unbound void Update()
+	{
+		this->m_Backend->Update();
+	}
+
+	public unbound bool IsKeyPressed()
+	{
+	}
+
+	public unbound void ShowBuffer()
+	{
+		this->m_Backend->ShowBuffer();
+	}
+
+	/// <summary>
+	/// Returns the number of milliseconds since the system started.
+	/// </summary>
+	public unbound long GetMilliseconds()
+	{
+		return this->m_Backend->GetMilliseconds();
 	}
 }

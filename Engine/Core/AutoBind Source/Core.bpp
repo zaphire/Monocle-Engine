@@ -1,18 +1,139 @@
 #import Engine.InternalConstructorOnlyException
+#import Engine.Input
+#import Engine.Graphics
+#import Engine.Debug
+#import Engine.Platform
+#import Engine.Scene
 
 class Engine.Core
 {
+	private Engine::Platform * p_Platform;
+	private Engine::Input * p_Input;
+	private Engine::Graphics * p_Graphics;
+	private Engine::Debug * p_Debug;
+
+	private Engine::Scene * p_Scene;
+	private Engine::Scene * p_SwitchTo;
+	private double p_DeltaTime;
+
+	private bool p_FixedTimestep;
+	private int p_TargetFrames;
+
 	/// <summary>
-	/// A non-public constructor for initalizing a Core instance.
+	/// Creates a new instance of the Monocle engine.
 	/// </summary>
-	/// <internal>true</internal>
-	/// <exception>Engine::InternalConstructorOnlyException</exception>
 	bound Core()
 	{
-		if (byuser)
+		this->p_Platform = NULL;
+		this->p_Input = NULL;
+		this->p_Graphics = NULL;
+		this->p_Debug = NULL;
+
+		this->p_Scene = NULL;
+		this->p_SwitchTo = NULL;
+		this->p_DeltaTime = 0.0;
+
+		// These settings are configurable by the user at runtime.
+		this->p_FixedTimestep = false;
+		this->p_TargetFrames = 60;
+	}
+
+	/// <summary>
+	/// Initalizes the Monocle engine's subcomponents.
+	/// </summary>
+	bound void Init()
+	{
+		this->p_Platform = new Platform();
+		this->p_Input = new Input();
+		this->p_Graphics = new Graphics();
+		this->p_Debug = new Debug();
+	}
+
+	/// <summary>
+	/// Executes the main game loop after you've added all the scenes
+	/// and set the initial scene.
+	/// </summary>
+	bound void Main()
+	{
+		bool isDone = false;
+		long lastTick = Platform::GetMilliseconds();
+		long tick = 0.0f;
+
+		while (!isDone)
 		{
-			throw new Engine::InternalConstructorOnlyException();
+			// Switch scenes if needed.
+			if (this->p_SwitchTo != NULL)
+			{
+				if (this->p_Scene != NULL)
+					this->p_Scene->End();
+				this->p_Scene = this->p_SwitchTo;
+				this->p_SwitchTo = NULL;
+				if (this->p_Scene != NULL)
+					this->p_Scene->Begin();
+			}
+
+			// Calculate the amount of time that has passed since the last frame.
+			tick = Platform::GetMilliseconds();
+			this->p_DeltaTime = ((double)(tick - lastTick))/1000.0;
+
+			// Perform an update on the scene.
+			if (this->p_FixedTimestep)
+			{
+				if ((tick - lastTick) >= this->p_TargetFrames)
+				{
+					if (this->p_Scene != NULL)
+						this->p_Scene->Update();
+					lastTick = tick;
+				}
+			}
+			else
+			{
+				if (this->p_Scene != NULL)
+					this->p_Scene->Update();
+				lastTick = tick;
+			}
+
+			// Perform a render of the scene.
+			this->p_Graphics->BeginFrame();
+			if (this->p_Scene != NULL)
+				this->p_Scene->Render();
+			this->p_Graphics->EndFrame();
+			this->p_Graphics->ShowBuffer();
 		}
-		// TODO: Implement.
+	}
+
+	/// <summary>
+	/// The current scene.
+	/// </summary>
+	bound property Engine::Scene * Scene
+	{
+		get: p_Scene;
+		set: p_SwitchTo;
+	}
+
+	/// <summary>
+	/// The delta time.
+	/// </summary>
+	bound property numeric DeltaTime
+	{
+		get: p_DeltaTime;
+	}
+
+	/// <summary>
+	/// Whether to use a fixed timestep or not.
+	/// </summary>
+	bound property bool FixedTimestep
+	{
+		get: p_FixedTimestep;
+		set: p_FixedTimestep;
+	}
+
+	/// <summary>
+	/// The target FPS for the game.
+	/// </summary>
+	bound property numeric TargetFrames
+	{
+		get: p_TargetFrames;
+		set: p_TargetFrames;
 	}
 }

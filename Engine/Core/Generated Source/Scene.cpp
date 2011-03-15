@@ -24,6 +24,22 @@ namespace Engine
 		// TODO: Implement.
 	}
 
+    void Scene::Begin()
+    {
+        }
+
+    void Scene::Update()
+    {
+        }
+
+    void Scene::Render()
+    {
+        }
+
+    void Scene::End()
+    {
+        }
+
     /* Automatic dispatchers for overloaded methods */
     /* Automatic property getter-setter definitions */
     /* Binding variables */
