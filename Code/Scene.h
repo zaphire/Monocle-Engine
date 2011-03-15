@@ -47,6 +47,8 @@ namespace Monocle
 		//HACK: test function
 		Entity *GetEntity(int index);
 
+		Entity* GetEntityNearestTo(const Vector2 &position);
+
 	private:
 		//Holds all the entities currently in the scene
 		list<Entity*> entities;

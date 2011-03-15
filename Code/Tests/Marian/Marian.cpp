@@ -72,6 +72,24 @@ namespace Marian
 				}
 			}
 
+			/*
+			if (Input::IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE))
+			{
+				// need to get mouse position into world coordinates somehow
+				Entity *entity = Core::GetScene()->GetEntityNearestTo(Input::GetMousePosition());
+				if (entity)
+				{
+					if (selectedSprite)
+						selectedSprite->isSelected = false;
+
+					selectedSprite = ((Sprite*)entity);
+
+					if (selectedSprite)
+						selectedSprite->isSelected = true;
+				}
+			}
+			*/
+
 			// add new sprite
 			if (Input::IsKeyPressed(KEY_SPACE))
 			{

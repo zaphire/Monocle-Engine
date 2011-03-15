@@ -11,9 +11,9 @@ namespace Monocle
 		Input();
 		void Init();
 
-		static bool IsMouseButtonHeld(int buttonID);
-		static bool IsMouseButtonReleased(int buttonID);
-		static bool IsMouseButtonPressed(int buttonID);
+		static bool IsMouseButtonHeld(MouseButton mouseButton);
+		static bool IsMouseButtonReleased(MouseButton mouseButton);
+		static bool IsMouseButtonPressed(MouseButton mouseButton);
 
 		static Vector2 GetMousePosition();
 

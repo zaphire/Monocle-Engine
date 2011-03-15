@@ -162,4 +162,23 @@ namespace Monocle
 		}
 		return NULL;
 	}
+
+	Entity* Scene::GetEntityNearestTo(const Vector2 &position)
+	{
+		float smallestSqrMag = -1.0f;
+
+		Entity *nearestEntity = NULL;
+
+		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+		{
+			Vector2 diff = (*i)->position - position;
+			float sqrMag = diff.GetSquaredMagnitude();
+			if (smallestSqrMag == -1 || sqrMag < smallestSqrMag)
+			{
+				nearestEntity = (*i);
+			}
+		}
+
+		return nearestEntity;
+	}
 }

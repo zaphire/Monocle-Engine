@@ -55,18 +55,18 @@ namespace Monocle
 		return Platform::mousePosition;
 	}
 
-	bool Input::IsMouseButtonHeld(int buttonID)
+	bool Input::IsMouseButtonHeld(MouseButton mouseButton)
 	{
-		return Platform::mouseButtons[buttonID];
+		return Platform::mouseButtons[(int)mouseButton];
 	}
 
-	bool Input::IsMouseButtonReleased(int buttonID)
+	bool Input::IsMouseButtonReleased(MouseButton mouseButton)
 	{
-		return !instance->currentMouseButtons[buttonID] && instance->previousMouseButtons[buttonID];
+		return !instance->currentMouseButtons[(int)mouseButton] && instance->previousMouseButtons[(int)mouseButton];
 	}
 
-	bool Input::IsMouseButtonPressed(int buttonID)
+	bool Input::IsMouseButtonPressed(MouseButton mouseButton)
 	{
-		return instance->currentMouseButtons[buttonID] && !instance->previousMouseButtons[buttonID];
+		return instance->currentMouseButtons[(int)mouseButton] && !instance->previousMouseButtons[(int)mouseButton];
 	}
 }
