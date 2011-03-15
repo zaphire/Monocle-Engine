@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Monocle.h"
 #include "Input.h"
 #include "Graphics.h"
 #include "Debug.h"

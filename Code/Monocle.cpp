@@ -2,5 +2,5 @@
 
 namespace Monocle
 {
-
+	double deltaTime;
 }

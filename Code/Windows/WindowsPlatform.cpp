@@ -303,5 +303,3 @@ namespace Monocle
 		SwapBuffers(WindowsPlatform::instance->hDC);
 	}
 }
-
-#endif
