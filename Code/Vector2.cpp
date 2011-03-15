@@ -10,10 +10,14 @@ namespace Monocle
 	Vector2 Vector2::left = Vector2(-1, 0);
 	Vector2 Vector2::right = Vector2(1, 0);
 
-	Vector2::Vector2(float x, float y)
+	Vector2::Vector2()
+		: x(0.0f), y(0.0f)
 	{
-		this->x = x;
-		this->y = y;
+	}
+
+	Vector2::Vector2(float x, float y)
+		: x(x), y(y)
+	{
 	}
 
 	float Vector2::GetSquaredMagnitude()
