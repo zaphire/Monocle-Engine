@@ -1,33 +1,20 @@
 #include "Core.h"
 
-#define TEST_ENTITY
+//#define TEST_ENTITY
 //#define SCENE_CODE_WRITTEN
+
+//If you want to use fixed timestep, uncomment the following two lines:
+#define FIXED_TIMESTEP
+#define MILLISECONDS_PER_FRAME 1000/60
 
 namespace Monocle
 {
-
-#ifdef TEST_ENTITY
-	class Player : Entity
-	{
-	public:
-
-		void Update()
-		{
-			Entity::Update();
-			position.x += 0.01f;
-		}
-
-		void Render()
-		{
-			Entity::Render();
-			Graphics::Translate(position);
-			Graphics::RenderQuad(0.5f);
-		}
-	};
-#endif
-
 	Core::Core()
 	{
+		scene				= NULL;
+		switchTo			= NULL;
+		switchScenes		= false;
+		Monocle::deltaTime	= 0.0;
 	}
 
 	void Core::Init()
@@ -40,33 +27,63 @@ namespace Monocle
 
 	void Core::Main()
 	{
-#ifdef TEST_ENTITY
-		graphics.SetCameraPosition(Vector3(0,0,-6));
-
-		Entity* newEntity = (Entity*)new Player();
-		scene.Add(newEntity);
-#endif
-
 		bool isDone = false;
+		long lastTick = Platform::GetMilliseconds();
+		long tick;
+
 		while (!isDone)
 		{
-			//Debug::Log("Core::Main...");
+			//Switch scenes if necessary
+			if (switchScenes)
+			{
+				switchScenes = false;
+				if (scene != NULL)
+					scene->End();
+				scene = switchTo;
+				switchTo = NULL;
+				if (scene != NULL)
+					scene->Begin();
+			}
+
+			tick = Platform::GetMilliseconds();
+			Monocle::deltaTime = ((double)(tick - lastTick))/1000.0;
 
 			// **** BEGIN UPDATE
-			scene.Update();
+#ifdef FIXED_TIMESTEP
+			if ((tick - lastTick) >= MILLISECONDS_PER_FRAME)
+			{
+				if (scene != NULL)
+					scene->Update();
+				lastTick = tick;
+			}
+#else
+			if (scene != NULL)
+				scene->Update();
+			lastTick = tick;
+#endif
 			// **** END UPDATE
 
 			// **** BEGIN RENDER
 			graphics.BeginFrame();
 			
-			// iterate through all the entities/gameObjects
-			// call render on them
-			scene.Render();
+			if (scene != NULL)
+				scene->Render();
 			
 			graphics.EndFrame();
 
 			graphics.ShowBuffer();
 			// **** END RENDER
 		}
+	}
+
+	void Core::SetScene(Scene* scene)
+	{
+		switchTo = scene;
+		switchScenes = true;
+	}
+
+	Scene* Core::GetScene()
+	{
+		return scene;
 	}
 }

@@ -44,7 +44,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>OpenGL32.lib;GLu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.lib;GLu32.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -71,6 +71,7 @@
     <ClInclude Include="..\..\..\..\Monocle.h" />
     <ClInclude Include="..\..\..\..\Platform.h" />
     <ClInclude Include="..\..\..\..\Scene.h" />
+    <ClInclude Include="..\..\..\..\Tests\Pong\Pong.h" />
     <ClInclude Include="..\..\..\..\TextureAsset.h" />
     <ClInclude Include="..\..\..\..\Vector2.h" />
     <ClInclude Include="..\..\..\..\Vector3.h" />
@@ -86,6 +87,8 @@
     <ClCompile Include="..\..\..\..\Math.cpp" />
     <ClCompile Include="..\..\..\..\Monocle.cpp" />
     <ClCompile Include="..\..\..\..\Scene.cpp" />
+    <ClCompile Include="..\..\..\..\Tests\Pong\Pong.cpp" />
+    <ClCompile Include="..\..\..\..\TextureAsset.cpp" />
     <ClCompile Include="..\..\..\..\Vector2.cpp" />
     <ClCompile Include="..\..\..\..\Vector3.cpp" />
     <ClCompile Include="..\..\..\..\Windows\WindowsOpenGLGraphics.cpp" />

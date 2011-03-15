@@ -25,6 +25,8 @@ namespace Monocle
 		bool IsKeyPressed(KeyCode keyCode);
 		void Update();
 
+		static long GetMilliseconds();
+
 		int keys[KeyCode::Max];
 	};
 }

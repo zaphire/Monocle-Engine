@@ -15,13 +15,13 @@ namespace Monocle
 		~Scene();
 
 		//Called when this scene becomes the currently active scene
-		void Begin();
+		virtual void Begin();
 
 		//Called when this scene is ended and a different one becomes the active scene
-		void End();
+		virtual void End();
 
 		//Called by the main game loop every time the scene should update game logic
-		void Update();
+		virtual void Update();
 
 		//Called by the main game loop every time the scene should render
 		void Render();

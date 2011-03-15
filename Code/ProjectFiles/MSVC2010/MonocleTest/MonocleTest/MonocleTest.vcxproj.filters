@@ -16,6 +16,12 @@
     <Filter Include="Monocle\Windows">
       <UniqueIdentifier>{359e2e0d-6b74-4021-9d89-0af58ffa0042}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Monocle\Tests">
+      <UniqueIdentifier>{108f55c5-9ca0-4a9b-9d2c-29a184c1ac10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\Tests\Pong">
+      <UniqueIdentifier>{a012267c-9d76-4faa-8f4f-8ce0d9f25d62}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Monocle.h">
@@ -60,6 +66,9 @@
     <ClInclude Include="..\..\..\..\TextureAsset.h">
       <Filter>Monocle</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Tests\Pong\Pong.h">
+      <Filter>Monocle\Tests\Pong</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Monocle.cpp">
@@ -99,6 +108,12 @@
       <Filter>Monocle</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Asset.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Tests\Pong\Pong.cpp">
+      <Filter>Monocle\Tests\Pong</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\TextureAsset.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
   </ItemGroup>
