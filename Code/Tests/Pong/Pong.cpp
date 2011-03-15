@@ -6,7 +6,7 @@ namespace Pong
 
 	void Ball::Update()
 	{
-		position.x += 1.0f * Monocle::deltaTime;
+		position += Vector2::right * Monocle::deltaTime;
 		//position += velocity * Time::deltaTime;
 	}
 
