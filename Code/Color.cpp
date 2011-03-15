@@ -2,6 +2,8 @@
 
 namespace Monocle
 {
+	Color Color::white = Color(1,1,1,1);
+
 	Color::Color()
 		: r(1), g(1), b(1), a(1)
 	{

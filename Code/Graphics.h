@@ -29,6 +29,7 @@ namespace Monocle
 		static void RenderTriangle(float size);
 		static void RenderQuad(float size);
 		static void RenderQuad(float width, float height);
+		static void RenderLineRect(float x, float y, float w, float h);
 		static void PushMatrix();
 		static void PopMatrix();
 		static void Blend();

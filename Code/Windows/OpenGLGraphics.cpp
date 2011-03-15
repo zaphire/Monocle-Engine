@@ -130,6 +130,26 @@ namespace Monocle
 		glEnd();
 	}
 
+	void Graphics::RenderLineRect(float x, float y, float w, float h)
+	{
+		float hw = w*0.5f;
+		float hh = h*0.5f;
+
+		glBegin(GL_LINES);
+			glVertex3f(x-hw, y-hh, 0.0f);
+			glVertex3f(x+hw, y-hh, 0.0f);
+
+			glVertex3f(x+hw, y-hh, 0.0f);
+			glVertex3f(x+hw, y+hh, 0.0f);
+			
+			glVertex3f(x+hw, y+hh, 0.0f);
+			glVertex3f(x-hw, y+hh, 0.0f);
+
+			glVertex3f(x-hw, y+hh, 0.0f);
+			glVertex3f(x-hw, y-hh, 0.0f);
+		glEnd();
+	}
+
 	void Graphics::SetColor(const Color &color)
 	{
 		glColor4f(color.r, color.g, color.b, color.a);

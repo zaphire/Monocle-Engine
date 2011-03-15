@@ -7,6 +7,7 @@ using namespace Monocle;
 
 namespace Marian
 {
+	class Sprite;
 
 	class LevelEditor : public Editor
 	{
@@ -14,17 +15,21 @@ namespace Marian
 		LevelEditor();
 		void Update();
 		bool isOn;
-		Entity *selectedEntity;
+		Sprite *selectedSprite;
+		int selectedSpriteIndex;
 	};
 
 	class Sprite : public Entity
 	{
 	public:
+		Sprite(const char *filename, float scale);
 		Sprite();
 		void Render();
 		TextureAsset *texture;
 		Color color;
 		float scale;
+
+		bool isSelected;
 	};
 
 	class TitleScene : public Scene
