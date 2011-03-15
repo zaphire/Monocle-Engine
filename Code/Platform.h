@@ -9,11 +9,11 @@ namespace Monocle
 {
 	enum KeyCode
 	{
-		LeftArrow,
-		RightArrow,
-		UpArrow,
-		DownArrow,
-		Max
+		KCLeftArrow,
+		KCRightArrow,
+		KCUpArrow,
+		KCDownArrow,
+		KCMax
 	};
 
 	class Platform
@@ -27,6 +27,6 @@ namespace Monocle
 
 		static long GetMilliseconds();
 
-		int keys[KeyCode::Max];
+		int keys[KCMax];
 	};
 }

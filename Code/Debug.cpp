@@ -16,3 +16,4 @@ namespace Monocle
 		std::cout << outputString << std::endl;
 	}
 }
+

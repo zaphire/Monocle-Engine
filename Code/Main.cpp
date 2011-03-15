@@ -27,3 +27,4 @@ int main(void)
 	delete core;
 	return 0;
 }
+

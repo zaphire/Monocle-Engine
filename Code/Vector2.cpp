@@ -73,3 +73,4 @@ namespace Monocle
 		return (x * b.x + y * b.y);
 	}
 }
+

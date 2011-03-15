@@ -3,7 +3,7 @@
 namespace Monocle
 {
 	TextureAsset::TextureAsset()
-		: Asset(AssetType::Texture)
+		: Asset(ATTexture)
 	{
 	}
 
@@ -18,3 +18,4 @@ namespace Monocle
 	{
 	}
 }
+

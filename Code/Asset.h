@@ -4,15 +4,15 @@ namespace Monocle
 {
 	enum AssetType
 	{
-		Undefined,
-		Texture,
-		Audio,
+		ATUndefined,
+		ATTexture,
+		ATAudio,
 		/*
-		Mesh,
-		Text,
-		XML,
+		ATMesh,
+		ATText,
+		ATXML,
 		*/
-		Max
+		ATMax
 	};
 
 	class Asset
@@ -35,3 +35,4 @@ namespace Monocle
 		virtual void Unload() = 0;
 	};
 }
+
