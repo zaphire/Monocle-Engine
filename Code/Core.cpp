@@ -1,7 +1,5 @@
 #include "Core.h"
 
-#include <iostream>
-
 //#define TEST_ENTITY
 //#define SCENE_CODE_WRITTEN
 
