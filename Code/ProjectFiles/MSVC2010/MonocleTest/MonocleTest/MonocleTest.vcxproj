@@ -94,6 +94,7 @@
     <ClInclude Include="..\..\..\..\Vector2.h" />
     <ClInclude Include="..\..\..\..\Vector3.h" />
     <ClInclude Include="..\..\..\..\Windows\WindowsPlatform.h" />
+    <ClInclude Include="Collider.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Asset.cpp" />

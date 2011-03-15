@@ -22,8 +22,9 @@ namespace Pong
 	}
 
 	Paddle::Paddle()
-		: Entity("paddle"), speed(0.0f)
+		: Entity(), speed(0.0f)
 	{
+		AddTag("paddle");
 	}
 
 	void Paddle::Update()

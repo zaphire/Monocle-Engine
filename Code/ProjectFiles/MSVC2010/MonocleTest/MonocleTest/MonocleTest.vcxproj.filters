@@ -135,6 +135,9 @@
     <ClInclude Include="..\..\..\..\Color.h">
       <Filter>Monocle</Filter>
     </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Monocle.cpp">

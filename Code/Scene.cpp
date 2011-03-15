@@ -53,7 +53,7 @@ namespace Monocle
 		{
 			if ((*i) == entity)
 			{
-				Debug::Log("Adding an entity to the scene that is already in the scene.");
+				Debug::Log("ERROR: Adding an entity to the scene that is already in the scene.");
 				break;
 			}
 		}
@@ -63,7 +63,7 @@ namespace Monocle
 		{
 			if ((*i) == entity)
 			{
-				Debug::Log("Adding an entity to the scene that is already flagged to be added at the end of the frame.");
+				Debug::Log("ERROR: Adding an entity to the scene that is already flagged to be added at the end of the frame.");
 				break;
 			}
 		}
@@ -86,14 +86,14 @@ namespace Monocle
 			}
 		}
 		if (!in)
-			Debug::Log("Removing an entity from the scene that isn't in the scene.");
+			Debug::Log("ERROR: Removing an entity from the scene that isn't in the scene.");
 
 		//Error: If the entity is already marked to be removed
 		for (list<Entity*>::iterator i = toRemove.begin(); i != toRemove.end(); ++i)
 		{
 			if ((*i) == entity)
 			{
-				Debug::Log("Removing an entity from the scene that is already flagged for removal at the end of the frame.");
+				Debug::Log("ERROR: Removing an entity from the scene that is already flagged for removal at the end of the frame.");
 				break;
 			}
 		}
@@ -119,8 +119,8 @@ namespace Monocle
 			(*i)->Removed();
 
 			//If the tag is set, remove the entity from the tag map
-			if ((*i)->GetTag().compare("") != 0)
-				tagMap[(*i)->GetTag()].remove(*i);
+			for (int j = 0; j < (*i)->GetNumberOfTags(); ++j)
+				EntityAddTag(*i, (*i)->GetTag(j));
 		}
 		toRemove.clear();
 
@@ -132,23 +132,22 @@ namespace Monocle
 			(*i)->Added();
 
 			//If the tag is set, add the entity to the tag map
-			if ((*i)->GetTag().compare("") != 0)
-				tagMap[(*i)->GetTag()].push_back(*i);
+			for (int j = 0; j < (*i)->GetNumberOfTags(); ++j)
+				EntityRemoveTag(*i, (*i)->GetTag(j));
 		}
 		toAdd.clear();
 
 		//TODO: Sort the entity list based on layer
 	}
 
-	void Scene::RetagEntity(Entity* entity, string oldTag)
+	void Scene::EntityAddTag(Entity* entity, const string& tag)
 	{
-		//Remove it from the old tag list
-		if (oldTag.compare("") != 0)
-			tagMap[oldTag].remove(entity);
+		tagMap[tag].push_back(entity);
+	}
 
-		//Add it to the new one
-		if (entity->GetTag().compare("") != 0)
-			tagMap[entity->GetTag()].push_back(entity);
+	void Scene::EntityRemoveTag(Entity* entity, const string& tag)
+	{
+		tagMap[tag].remove(entity);
 	}
 
 	Entity* Scene::GetEntity(int index)

@@ -42,7 +42,8 @@ namespace Monocle
 		void RemoveAll();
 
 		//Called by an entity when its tag has changed; the scene must reposition that entity in the tag map
-		void RetagEntity(Entity* entity, string oldTag);
+		void EntityAddTag(Entity* entity, const string& tag);
+		void EntityRemoveTag(Entity* entity, const string& tag);
 
 		//HACK: test function
 		Entity *GetEntity(int index);

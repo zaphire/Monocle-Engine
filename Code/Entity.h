@@ -3,8 +3,10 @@
 #include "Vector2.h"
 #include "Scene.h"
 #include <string>
+#include <vector>
 
 using std::string;
+using std::vector;
 
 namespace Monocle
 {
@@ -14,7 +16,6 @@ namespace Monocle
 	{
 	public:
 		Entity();
-		Entity(string tag);
 		~Entity();
 
 		Vector2 position;
@@ -36,10 +37,13 @@ namespace Monocle
 		//Called by the scene when the entity is removed from that scene
 		virtual void Removed();
 
-		//Get and set the tag
-		const string& GetTag();
-		void SetTag(string tag);
+		//Tagging API
+		void AddTag(const string& tag);
+		bool HasTag(const string& tag);
+		void RemoveTag(const string& tag);
+		const string& GetTag(int index);
+		int GetNumberOfTags();
 	private:
-		string tag;
+		vector<string> tags;
 	};
 }
