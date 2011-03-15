@@ -96,7 +96,7 @@ namespace Marian
 				if (selectedSprite)
 					selectedSprite->isSelected = false;
 
-				selectedSprite = new Sprite(0, "../../../../../Content/Marian/Title.png", 0.003f);
+				selectedSprite = new Sprite(0, "../../../../../Content/Marian/Title.png", Vector2(400, 300), 1.0f);
 				Tween::FromTo(&selectedSprite->color.a, 0.0f, 1.0f, 0.5f, EASE_LINEAR);
 				Core::GetScene()->Add(selectedSprite);
 
@@ -120,8 +120,8 @@ namespace Marian
 			// manipulate existing sprite
 			if (selectedSprite)
 			{
-				float moveSpeed = 1.0f;
-				float scaleSpeed = 0.001f;
+				float moveSpeed = 100.0f;
+				float scaleSpeed = 0.5f;
 
 				if (Input::IsKeyHeld(KEY_RIGHT))
 				{
@@ -160,9 +160,10 @@ namespace Marian
 
 	bool Sprite::showBounds = false;
 
-	Sprite::Sprite(int layer, const char *filename, float scale)
+	Sprite::Sprite(int layer, const char *filename, Vector2 position, float scale)
 		: Entity(), texture(NULL), scale(scale), isSelected(false)
 	{
+		this->position = position;
 		SetLayer(layer);
 		texture = AssetDatabase::RequestTexture(filename);
 	}
@@ -205,14 +206,12 @@ namespace Marian
 
 		Core::SetEditor(new LevelEditor());
 
-		Graphics::SetCameraPosition(Vector3(0,0,-6));
-
 		Sprite *sprite = NULL;
 		
-		sprite = new Sprite(-20, "../../../../../Content/Marian/ReverieSky.png", 0.01f);
+		sprite = new Sprite(-20, "../../../../../Content/Marian/ReverieSky.png", Vector2(400, 300), 0.75f);
 		Add(sprite);
 
-		sprite = new Sprite(-10, "../../../../../Content/Marian/Title.png", 0.003f);
+		sprite = new Sprite(-10, "../../../../../Content/Marian/Title.png", Vector2(400, 300), 0.4f);
 		Tween::FromTo(&sprite->color.a, 0.0f, 1.0f, 5.0f, EASE_OUTSIN);
 		Add(sprite);
 	}

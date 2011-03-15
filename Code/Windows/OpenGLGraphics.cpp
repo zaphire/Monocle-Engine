@@ -21,6 +21,8 @@ namespace Monocle
 {
 	Graphics *Graphics::instance = NULL;
 
+	Vector2 Graphics::screenCenter;
+
 	Graphics::Graphics()
 	{
 		instance = this;
@@ -29,7 +31,7 @@ namespace Monocle
 	void Graphics::Init()
 	{
 		Debug::Log("Graphics::Init");
-
+		
 		glEnable(GL_BLEND);
 		glDisable(GL_LIGHTING);
 		glEnable(GL_TEXTURE_2D);
@@ -39,6 +41,10 @@ namespace Monocle
 		glDisable(GL_DEPTH_TEST);
 		//glDepthFunc(GL_LEQUAL); 
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+
+		Set2D(800,600);
+
+		cameraPosition = screenCenter;
 	}
 
 	void Graphics::SetBackgroundColor(const Color &color)
@@ -53,11 +59,36 @@ namespace Monocle
 		return true;
 	}
 
-	// temporary
+	///HACK: temporary
 	void Graphics::Blend()
 	{
 		glBlendFunc(GL_SRC_ALPHA,GL_ONE);
 	}
+
+	void Graphics::Set2D(int virtualWidth, int virtualHeight)
+	{
+		instance->virtualWidth = virtualWidth;
+		instance->virtualHeight = virtualHeight;
+
+		GLint viewPort[4];
+		glGetIntegerv(GL_VIEWPORT, viewPort);
+
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+
+		glOrtho(0.0f, Platform::GetWidth(), Platform::GetHeight(), 0.0f, -1.0, 1.0);
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		instance->resolutionScale = Vector2(float(Platform::GetWidth())/virtualWidth, float(Platform::GetHeight())/virtualHeight);
+		printf("Set2D: resScale: (%f, %f)\n window (%d, %d)\n", instance->resolutionScale.x, instance->resolutionScale.y, Platform::GetWidth(), Platform::GetHeight());
+		screenCenter.x = virtualWidth/2;
+		screenCenter.y = virtualHeight/2;
+	}
+
+	void Graphics::Set3D()
+	{
+	}
+
 
 	void Graphics::Resize(int width, int height)
 	{
@@ -76,9 +107,11 @@ namespace Monocle
 
 		glMatrixMode(GL_MODELVIEW);							// Select The Modelview Matrix
 		glLoadIdentity();									// Reset The Modelview Matrix
+
+		Set2D(instance->virtualWidth,instance->virtualHeight);
 	}
 
-	void Graphics::SetCameraPosition(const Vector3 &position)
+	void Graphics::SetCameraPosition(const Vector2 &position)
 	{
 		instance->cameraPosition = position;
 	}
@@ -119,6 +152,7 @@ namespace Monocle
 		glEnd();
 	}
 
+	/*
 	void Graphics::RenderQuad(float size)
 	{
 		float halfSize = size*0.5f;
@@ -134,6 +168,8 @@ namespace Monocle
 			glTexCoord2f(0, 1);
 		glEnd();
 	}
+	*/
+
 
 	void Graphics::RenderLineRect(float x, float y, float w, float h)
 	{
@@ -167,13 +203,13 @@ namespace Monocle
 
 		glBegin(GL_QUADS);
 			glVertex3f(-halfWidth, -halfHeight, 0.0f);
-			glTexCoord2f(1, 1);
-			glVertex3f(halfWidth, -halfHeight, 0.0f);
 			glTexCoord2f(1, 0);
+			glVertex3f(halfWidth, -halfHeight, 0.0f);
+			glTexCoord2f(1, 1);
 			glVertex3f(halfWidth, halfHeight, 0.0f);
-			glTexCoord2f(0, 0);
-			glVertex3f(-halfWidth, halfHeight, 0.0f);
 			glTexCoord2f(0, 1);
+			glVertex3f(-halfWidth, halfHeight, 0.0f);
+			glTexCoord2f(0, 0);
 		glEnd();
 	}
 
@@ -182,7 +218,8 @@ namespace Monocle
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
 		glLoadIdentity();									// Reset The Current Modelview Matrix
 
-		glTranslatef(cameraPosition.x, cameraPosition.y, cameraPosition.z);
+		glTranslatef(cameraPosition.x - screenCenter.x, cameraPosition.y - screenCenter.y, 0.0f);
+		glScalef(resolutionScale.x, resolutionScale.y, 0.0f);
 	}
 
 	void Graphics::EndFrame()

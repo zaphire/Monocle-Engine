@@ -9,7 +9,8 @@ namespace Pong
 
 	void Ball::Update()
 	{
-		position += Vector2::right * Monocle::deltaTime;
+		const float speed = 100.0f;
+		position += Vector2::right * speed * Monocle::deltaTime;
 	}
 
 	void Ball::Render()
@@ -17,7 +18,7 @@ namespace Pong
 		Graphics::BindTexture(texture);
 		Graphics::PushMatrix();
 		Graphics::Translate(position);
-		Graphics::RenderQuad(0.25f);
+		Graphics::RenderQuad(25.0f, 25.0f);
 		Graphics::PopMatrix();
 	}
 
@@ -29,10 +30,10 @@ namespace Pong
 
 	void Paddle::Update()
 	{
-		const float accel = 8.0f;
-		const float maxSpeed = 3.0f;
-		const float friction = 4.0f;
-		const float maxY = 2.0f;
+		const float accel = 1000.0f;
+		const float maxSpeed = 300.0f;
+		const float friction = 500.0f;
+		const float maxY = 600.0f;
 		if (Input::IsKeyHeld(keyUp))
 		{
 			speed += accel * Monocle::deltaTime;
@@ -66,9 +67,9 @@ namespace Pong
 			position.y = maxY;
 			speed = -1.0f;
 		}
-		else if (position.y < -maxY)
+		else if (position.y < 0)
 		{
-			position.y = -maxY;
+			position.y = 0;
 			speed = 1.0f;
 		}
 	}
@@ -77,7 +78,7 @@ namespace Pong
 	{
 		Graphics::PushMatrix();
 		Graphics::Translate(position);
-		Graphics::RenderQuad(0.25f, 1.0f);
+		Graphics::RenderQuad(25, 100.0f);
 		Graphics::PopMatrix();
 	}
 
@@ -86,22 +87,19 @@ namespace Pong
 		Debug::Log("Pong::GameScene::Begin()!");
 
 		Scene::Begin();
-
-		// do pong specific init
-		Graphics::SetCameraPosition(Vector3(0,0,-6));
 		
 		ball = new Ball();
-		ball->position = Vector2(0, 0);
+		ball->position = Vector2(400, 300);
 		Add(ball);
 
 		paddle1 = new Paddle();
-		paddle1->position = Vector2(-2, 0);
+		paddle1->position = Vector2(100, 300);
 		paddle1->keyUp = KEY_W;
 		paddle1->keyDown = KEY_S;
 		Add(paddle1);
 
 		paddle2 = new Paddle();
-		paddle2->position = Vector2(2, 0);
+		paddle2->position = Vector2(700, 300);
 		paddle2->keyUp = KEY_UP;
 		paddle2->keyDown = KEY_DOWN;
 		Add(paddle2);
