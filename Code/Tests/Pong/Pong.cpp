@@ -1,11 +1,12 @@
 #include "Pong.h"
+#include "../../Input.h"
 
 namespace Pong
 {
 
 	void Ball::Update()
 	{
-		position.x += 0.01f;
+		position.x += 1.0f * Monocle::deltaTime;
 		//position += velocity * Time::deltaTime;
 	}
 
@@ -19,6 +20,14 @@ namespace Pong
 
 	void Paddle::Update()
 	{
+		if (Input::IsKeyPressed(KEY_DOWN))
+		{
+			position.y -= 1.0f * Monocle::deltaTime;
+		}
+		if (Input::IsKeyPressed(KEY_UP))
+		{
+			position.y += 1.0f * Monocle::deltaTime;
+		}
 	}
 
 	void Paddle::Render()

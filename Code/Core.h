@@ -24,7 +24,12 @@ namespace Monocle
 		Graphics graphics;
 		Debug debug;
 
+		static void Quit();
+
+		static Core *instance;
+
 	private:
+		bool isDone;
 		//The currently running scene
 		Scene* scene;
 
@@ -33,5 +38,7 @@ namespace Monocle
 
 		//Whether the game should switch scenes at the end of the frame
 		bool switchScenes;
+
+
 	};
 }

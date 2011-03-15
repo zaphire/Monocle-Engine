@@ -4,15 +4,10 @@ namespace Monocle
 {
 	enum AssetType
 	{
-		Undefined,
-		Texture,
-		Audio,
-		/*
-		Mesh,
-		Text,
-		XML,
-		*/
-		Max
+		AT_UNDEFINED,
+		AT_TEXTURE,
+		AT_AUDIO,
+		AT_MAX
 	};
 
 	class Asset

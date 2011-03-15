@@ -1,11 +1,68 @@
 #ifdef MONOCLE_WINDOWS
 
-#include "WindowsPlatform.h"
 #include "../Debug.h"
+#include "../Core.h"
 
+#include "WindowsPlatform.h"
 #include "Mmsystem.h"
 
+
 // opengl/windows init code borrowed from http://nehe.gamedev.net
+// keyboard code based on SDL http://www.libsdl.org/
+
+#ifndef VK_0
+#define VK_0	'0'
+#define VK_1	'1'
+#define VK_2	'2'
+#define VK_3	'3'
+#define VK_4	'4'
+#define VK_5	'5'
+#define VK_6	'6'
+#define VK_7	'7'
+#define VK_8	'8'
+#define VK_9	'9'
+#define VK_A	'A'
+#define VK_B	'B'
+#define VK_C	'C'
+#define VK_D	'D'
+#define VK_E	'E'
+#define VK_F	'F'
+#define VK_G	'G'
+#define VK_H	'H'
+#define VK_I	'I'
+#define VK_J	'J'
+#define VK_K	'K'
+#define VK_L	'L'
+#define VK_M	'M'
+#define VK_N	'N'
+#define VK_O	'O'
+#define VK_P	'P'
+#define VK_Q	'Q'
+#define VK_R	'R'
+#define VK_S	'S'
+#define VK_T	'T'
+#define VK_U	'U'
+#define VK_V	'V'
+#define VK_W	'W'
+#define VK_X	'X'
+#define VK_Y	'Y'
+#define VK_Z	'Z'
+#endif /* VK_0 */
+
+#define VK_SEMICOLON	0xBA
+#define VK_EQUALS	0xBB
+#define VK_COMMA	0xBC
+#define VK_MINUS	0xBD
+#define VK_PERIOD	0xBE
+#define VK_SLASH	0xBF
+#define VK_GRAVE	0xC0
+#define VK_LBRACKET	0xDB
+#define VK_BACKSLASH	0xDC
+#define VK_RBRACKET	0xDD
+#define VK_APOSTROPHE	0xDE
+#define VK_BACKTICK	0xDF
+#define VK_OEM_102	0xE2
+
 
 namespace Monocle
 {	
@@ -167,6 +224,8 @@ namespace Monocle
 		//return true;
 		SetForegroundWindow(hWnd);
 		SetFocus(hWnd);
+
+		return true;
 	}
 
 	void WindowsPlatform::KillPlatformWindow()								// Properly Kill The Window
@@ -250,13 +309,17 @@ namespace Monocle
 
 			case WM_KEYDOWN:							// Is A Key Being Held Down?
 			{
-				instance->platform->keys[wParam] = true;					// If So, Mark It As TRUE
+				//Debug::Log("Down!");
+				//Debug::Log((int)wParam);
+				instance->platform->keys[instance->platform->localKeymap[wParam]] = true;					// If So, Mark It As TRUE
 				return 0;								// Jump Back
 			}
 
 			case WM_KEYUP:								// Has A Key Been Released?
 			{
-				instance->platform->keys[wParam] = false;					// If So, Mark It As FALSE
+				//Debug::Log("Up!");
+				//Debug::Log((int)wParam);
+				instance->platform->keys[instance->platform->localKeymap[wParam]] = false;					// If So, Mark It As FALSE
 				return 0;								// Jump Back
 			}
 
@@ -271,31 +334,169 @@ namespace Monocle
 		return DefWindowProc(hWnd,uMsg,wParam,lParam);
 	}
 
+	Platform *Platform::instance = NULL;
+
 	Platform::Platform()
 	{
 		WindowsPlatform::instance = new WindowsPlatform();
+		instance = this;
+		WindowsPlatform::instance->platform = this;
+
+		for (int i = 0; i < KEY_MAX; i++)
+		{
+			keys[i] = false;
+		}
+
+		localKeymap[VK_BACK] = KEY_BACKSPACE;
+		localKeymap[VK_TAB] = KEY_TAB;
+		localKeymap[VK_CLEAR] = KEY_CLEAR;
+		localKeymap[VK_RETURN] = KEY_RETURN;
+		localKeymap[VK_PAUSE] = KEY_PAUSE;
+		localKeymap[VK_ESCAPE] = KEY_ESCAPE;
+		localKeymap[VK_SPACE] = KEY_SPACE;
+		localKeymap[VK_APOSTROPHE] = KEY_QUOTE;
+		localKeymap[VK_COMMA] = KEY_COMMA;
+		localKeymap[VK_MINUS] = KEY_MINUS;
+		localKeymap[VK_PERIOD] = KEY_PERIOD;
+		localKeymap[VK_SLASH] = KEY_SLASH;
+		localKeymap[VK_0] = KEY_0;
+		localKeymap[VK_1] = KEY_1;
+		localKeymap[VK_2] = KEY_2;
+		localKeymap[VK_3] = KEY_3;
+		localKeymap[VK_4] = KEY_4;
+		localKeymap[VK_5] = KEY_5;
+		localKeymap[VK_6] = KEY_6;
+		localKeymap[VK_7] = KEY_7;
+		localKeymap[VK_8] = KEY_8;
+		localKeymap[VK_9] = KEY_9;
+		localKeymap[VK_SEMICOLON] = KEY_SEMICOLON;
+		localKeymap[VK_EQUALS] = KEY_EQUALS;
+		localKeymap[VK_LBRACKET] = KEY_LEFTBRACKET;
+		localKeymap[VK_BACKSLASH] = KEY_BACKSLASH;
+		localKeymap[VK_OEM_102] = KEY_LESS;
+		localKeymap[VK_RBRACKET] = KEY_RIGHTBRACKET;
+		localKeymap[VK_GRAVE] = KEY_BACKQUOTE;
+		localKeymap[VK_BACKTICK] = KEY_BACKQUOTE;
+		localKeymap[VK_A] = KEY_A;
+		localKeymap[VK_B] = KEY_B;
+		localKeymap[VK_C] = KEY_C;
+		localKeymap[VK_D] = KEY_D;
+		localKeymap[VK_E] = KEY_E;
+		localKeymap[VK_F] = KEY_F;
+		localKeymap[VK_G] = KEY_G;
+		localKeymap[VK_H] = KEY_H;
+		localKeymap[VK_I] = KEY_I;
+		localKeymap[VK_J] = KEY_J;
+		localKeymap[VK_K] = KEY_K;
+		localKeymap[VK_L] = KEY_L;
+		localKeymap[VK_M] = KEY_M;
+		localKeymap[VK_N] = KEY_N;
+		localKeymap[VK_O] = KEY_O;
+		localKeymap[VK_P] = KEY_P;
+		localKeymap[VK_Q] = KEY_Q;
+		localKeymap[VK_R] = KEY_R;
+		localKeymap[VK_S] = KEY_S;
+		localKeymap[VK_T] = KEY_T;
+		localKeymap[VK_U] = KEY_U;
+		localKeymap[VK_V] = KEY_V;
+		localKeymap[VK_W] = KEY_W;
+		localKeymap[VK_X] = KEY_X;
+		localKeymap[VK_Y] = KEY_Y;
+		localKeymap[VK_Z] = KEY_Z;
+		localKeymap[VK_DELETE] = KEY_DELETE;
+
+		localKeymap[VK_NUMPAD0] = KEY_KP0;
+		localKeymap[VK_NUMPAD1] = KEY_KP1;
+		localKeymap[VK_NUMPAD2] = KEY_KP2;
+		localKeymap[VK_NUMPAD3] = KEY_KP3;
+		localKeymap[VK_NUMPAD4] = KEY_KP4;
+		localKeymap[VK_NUMPAD5] = KEY_KP5;
+		localKeymap[VK_NUMPAD6] = KEY_KP6;
+		localKeymap[VK_NUMPAD7] = KEY_KP7;
+		localKeymap[VK_NUMPAD8] = KEY_KP8;
+		localKeymap[VK_NUMPAD9] = KEY_KP9;
+		localKeymap[VK_DECIMAL] = KEY_KP_PERIOD;
+		localKeymap[VK_DIVIDE] = KEY_KP_DIVIDE;
+		localKeymap[VK_MULTIPLY] = KEY_KP_MULTIPLY;
+		localKeymap[VK_SUBTRACT] = KEY_KP_MINUS;
+		localKeymap[VK_ADD] = KEY_KP_PLUS;
+
+		localKeymap[VK_UP] = KEY_UP;
+		localKeymap[VK_DOWN] = KEY_DOWN;
+		localKeymap[VK_RIGHT] = KEY_RIGHT;
+		localKeymap[VK_LEFT] = KEY_LEFT;
+		localKeymap[VK_INSERT] = KEY_INSERT;
+		localKeymap[VK_HOME] = KEY_HOME;
+		localKeymap[VK_END] = KEY_END;
+		localKeymap[VK_PRIOR] = KEY_PAGEUP;
+		localKeymap[VK_NEXT] = KEY_PAGEDOWN;
+
+		localKeymap[VK_F1] = KEY_F1;
+		localKeymap[VK_F2] = KEY_F2;
+		localKeymap[VK_F3] = KEY_F3;
+		localKeymap[VK_F4] = KEY_F4;
+		localKeymap[VK_F5] = KEY_F5;
+		localKeymap[VK_F6] = KEY_F6;
+		localKeymap[VK_F7] = KEY_F7;
+		localKeymap[VK_F8] = KEY_F8;
+		localKeymap[VK_F9] = KEY_F9;
+		localKeymap[VK_F10] = KEY_F10;
+		localKeymap[VK_F11] = KEY_F11;
+		localKeymap[VK_F12] = KEY_F12;
+		localKeymap[VK_F13] = KEY_F13;
+		localKeymap[VK_F14] = KEY_F14;
+		localKeymap[VK_F15] = KEY_F15;
+
+		localKeymap[VK_NUMLOCK] = KEY_NUMLOCK;
+		localKeymap[VK_CAPITAL] = KEY_CAPSLOCK;
+		localKeymap[VK_SCROLL] = KEY_SCROLLOCK;
+		localKeymap[VK_RSHIFT] = KEY_RSHIFT;
+		localKeymap[VK_LSHIFT] = KEY_LSHIFT;
+		localKeymap[VK_RCONTROL] = KEY_RCTRL;
+		localKeymap[VK_LCONTROL] = KEY_LCTRL;
+		localKeymap[VK_RMENU] = KEY_RALT;
+		localKeymap[VK_LMENU] = KEY_LALT;
+		localKeymap[VK_RWIN] = KEY_RMETA;
+		localKeymap[VK_LWIN] = KEY_LMETA;
+
+		localKeymap[VK_HELP] = KEY_HELP;
+
+		//localKeymap[VK_PRINT] = KEY_PRINT;
+		localKeymap[VK_SNAPSHOT] = KEY_PRINT;
+		localKeymap[VK_CANCEL] = KEY_BREAK;
+		localKeymap[VK_APPS] = KEY_MENU;
 	}
 
 	void Platform::Init()
 	{
-		// make a default window?
 		WindowsPlatform::instance->CreatePlatformWindow("Title", 800, 600, 32, false);
 	}
 
 	void Platform::Update()
 	{
-
-	}
-
-	bool Platform::IsKeyPressed(KeyCode keyCode)
-	{
-		// do fugly windows key stuff
-		return false;
+		MSG msg;	
+		if (PeekMessage(&msg,NULL,0,0,PM_REMOVE))
+		{
+			if (msg.message==WM_QUIT)
+			{
+				Core::Quit();
+			}
+			else
+			{
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
+		}
 	}
 
 	long Platform::GetMilliseconds()
 	{
 		return (long)timeGetTime();
+	}
+
+	bool Platform::IsKeyPressed(KeyCode keyCode)
+	{
+		return instance->keys[(int)keyCode];
 	}
 
 	void Platform::ShowBuffer()

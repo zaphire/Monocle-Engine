@@ -8,6 +8,7 @@ namespace Monocle
 	class Input
 	{
 	public:
+		Input();
 		void Init();
 
 		bool IsMouseButtonDown();
@@ -16,10 +17,12 @@ namespace Monocle
 
 		Vector2 GetMousePosition();
 
-		bool IsKeyDown(KeyCode keyCode);
-		bool IsKeyUp(KeyCode keyCode);
-		bool IsKeyPressed(KeyCode keyCode);
+		static bool IsKeyDown(KeyCode keyCode);
+		static bool IsKeyUp(KeyCode keyCode);
+		static bool IsKeyPressed(KeyCode keyCode);
 
 		void Update();
+		
+		static Input *instance;
 	};
 }

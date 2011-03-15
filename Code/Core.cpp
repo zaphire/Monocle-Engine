@@ -9,12 +9,17 @@
 
 namespace Monocle
 {
+	Core *Core::instance = NULL;
+
 	Core::Core()
 	{
+		instance = this;
 		scene				= NULL;
 		switchTo			= NULL;
 		switchScenes		= false;
 		Monocle::deltaTime	= 0.0;
+		isDone = false;
+		
 	}
 
 	void Core::Init()
@@ -25,14 +30,21 @@ namespace Monocle
 		graphics.Init();
 	}
 
+	void Core::Quit()
+	{
+		instance->isDone = true;
+	}
+
 	void Core::Main()
 	{
-		bool isDone = false;
+
 		long lastTick = Platform::GetMilliseconds();
 		long tick;
 
 		while (!isDone)
 		{
+			platform.Update();
+
 			//Switch scenes if necessary
 			if (switchScenes)
 			{
