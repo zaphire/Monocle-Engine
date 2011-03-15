@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AutoBind" GeneratedClassName="CompileErrorList">
+  <Profiles />
+  <Settings>
+    <Setting Name="A0001" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Unable to locate AutoBind.xml within the current working directory.</Value>
+    </Setting>
+    <Setting Name="A0002" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Unable to locate the input folder '${1}'.</Value>
+    </Setting>
+    <Setting Name="A0003" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Unable to locate the header output folder '${1}'.</Value>
+    </Setting>
+    <Setting Name="A0004" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Unable to locate the code output folder '${1}'.</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,8 @@
+E:\Projects\Redpoint Engine\Utility\AutoBind\bin\Debug\AutoBind.exe.config
+E:\Projects\Redpoint Engine\Utility\AutoBind\bin\Debug\AutoBind.exe
+E:\Projects\Redpoint Engine\Utility\AutoBind\bin\Debug\AutoBind.pdb
+E:\Projects\Redpoint Engine\Utility\AutoBind\bin\Debug\LibAutoBind.dll
+E:\Projects\Redpoint Engine\Utility\AutoBind\bin\Debug\LibAutoBind.pdb
+E:\Projects\Redpoint Engine\Utility\AutoBind\obj\Debug\ResolveAssemblyReference.cache
+E:\Projects\Redpoint Engine\Utility\AutoBind\obj\Debug\AutoBind.exe
+E:\Projects\Redpoint Engine\Utility\AutoBind\obj\Debug\AutoBind.pdb
