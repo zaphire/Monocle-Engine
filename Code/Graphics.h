@@ -22,6 +22,9 @@ namespace Monocle
 		static void Rotate(float ax, float ay, float az, float r);
 		static void RenderTriangle(float size);
 		static void RenderQuad(float size);
+		static void RenderQuad(float width, float height);
+		static void PushMatrix();
+		static void PopMatrix();
 
 		Vector3 cameraPosition;
 

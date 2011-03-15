@@ -98,6 +98,16 @@ namespace Monocle
 		glTranslatef(pos.x, pos.y, 0.0f);
 	}
 
+	void Graphics::PushMatrix()
+	{
+		glPushMatrix();
+	}
+
+	void Graphics::PopMatrix()
+	{
+		glPopMatrix();
+	}
+
 	void Graphics::Rotate(float ax, float ay, float az, float r)
 	{
 		glRotatef(ax, ay, az, r);
@@ -123,6 +133,19 @@ namespace Monocle
 			glVertex3f(halfSize, -halfSize, 0.0f);
 			glVertex3f(halfSize, halfSize, 0.0f);
 			glVertex3f(-halfSize, halfSize, 0.0f);
+		glEnd();
+	}
+
+	void Graphics::RenderQuad(float width, float height)
+	{
+		float halfWidth = width*0.5f;
+		float halfHeight = height*0.5f;
+
+		glBegin(GL_QUADS);
+			glVertex3f(-halfWidth, -halfHeight, 0.0f);
+			glVertex3f(halfWidth, -halfHeight, 0.0f);
+			glVertex3f(halfWidth, halfHeight, 0.0f);
+			glVertex3f(-halfWidth, halfHeight, 0.0f);
 		glEnd();
 	}
 

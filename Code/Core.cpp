@@ -1,6 +1,6 @@
 #include "Core.h"
 
-#define TEST_ENTITY
+//#define TEST_ENTITY
 //#define SCENE_CODE_WRITTEN
 
 namespace Monocle
@@ -51,6 +51,7 @@ namespace Monocle
 		while (!isDone)
 		{
 			//Debug::Log("Core::Main...");
+			Update();
 
 			// **** BEGIN UPDATE
 			scene.Update();
@@ -68,5 +69,9 @@ namespace Monocle
 			graphics.ShowBuffer();
 			// **** END RENDER
 		}
+	}
+
+	void Core::Update()
+	{
 	}
 }

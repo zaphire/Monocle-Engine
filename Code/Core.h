@@ -11,7 +11,9 @@ namespace Monocle
 	{
 	public:
 		Core();
-		void Init();
+		virtual void Init();
+		virtual void Update();
+
 		void Main();
 
 		Platform platform;
