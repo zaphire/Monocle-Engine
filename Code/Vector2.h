@@ -34,5 +34,19 @@ namespace Monocle
 		static Vector2 Scale(Vector2 a, float s);
 		*/
 
+		inline Vector2 operator+=(const Vector2& rhs);	
+		inline Vector2 operator-=(const Vector2& rhs);
+		inline Vector2 operator*=(float rhs);					// scalar multiplication
+		inline Vector2 operator/=(float rhs);					// scalar inverse multiplication
 	};
+
+	inline Vector2 operator+(const Vector2& lhs, const Vector2& rhs);	
+	inline Vector2 operator-(const Vector2& lhs, const Vector2& rhs);
+
+	inline Vector2 operator*(float lhs, const Vector2& rhs);			// left scalar multiplication
+	inline Vector2 operator*(const Vector2& lhs, float rhs);			// right scalar multiplication
+	inline Vector2 operator/(const Vector2& lhs, float rhs);			// right scalar inverse multiplication
+	
+	inline float operator*(const Vector2& lhs, const Vector2& rhs);	// dot product
+	inline float operator^(const Vector2& lhs, const Vector2& rhs);	// cross product
 }
