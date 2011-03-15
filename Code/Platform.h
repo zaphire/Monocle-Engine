@@ -4,6 +4,7 @@ namespace Monocle
 {
 	enum KeyCode
 	{
+		KEY_UNDEFINED=-1,
 		KEY_BACKSPACE=0,
 		KEY_TAB,
 		KEY_CLEAR,

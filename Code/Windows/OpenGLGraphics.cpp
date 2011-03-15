@@ -22,7 +22,6 @@ namespace Monocle
 	Graphics::Graphics()
 	{
 		instance = this;
-		//WindowsPlatform::instance->hWnd;
 	}
 
 	void Graphics::Init()
