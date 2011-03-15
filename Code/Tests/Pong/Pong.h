@@ -9,6 +9,9 @@ namespace Pong
 	public:
 		void Update();
 		void Render();
+
+		KeyCode keyUp;
+		KeyCode keyDown;
 	};
 
 	class Ball : public Entity

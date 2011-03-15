@@ -268,7 +268,7 @@ namespace Monocle
 		{
 			case WM_ACTIVATE:							// Watch For Window Activate Message
 			{
-				if (!HIWORD(wParam))					// Check Minimization State
+				if (!HIWORD(wParam))						// Check Minimization State
 				{
 					instance->active = true;						// Program Is Active
 				}
@@ -288,37 +288,71 @@ namespace Monocle
 					case SC_MONITORPOWER:				// Monitor Trying To Enter Powersave?
 					return 0;							// Prevent From Happening
 				}
-				break;									// Exit
+				break;
 			}
 
-			case WM_CLOSE:								// Did We Receive A Close Message?
+			case WM_CLOSE:
 			{
-				PostQuitMessage(0);						// Send A Quit Message
-				return 0;								// Jump Back
+				PostQuitMessage(0);
+				return 0;
 			}
 
 			//TODO: clean this up
 
-			case WM_KEYDOWN:							// Is A Key Being Held Down?
+			case WM_KEYDOWN:
 			{
 				//Debug::Log("Down!");
 				//Debug::Log((int)wParam);
-				instance->platform->keys[instance->platform->localKeymap[wParam]] = true;					// If So, Mark It As TRUE
-				return 0;								// Jump Back
+				if (wParam >= KEY_MAX || wParam < 0)
+				{
+					Debug::Log("Received KeyCode out of range");
+					Debug::Log((int)wParam);
+				}
+				else
+				{
+					KeyCode keyCode = (KeyCode)instance->platform->localKeymap[wParam];
+					if (keyCode == KEY_UNDEFINED)
+					{
+						Debug::Log("Received undefined KeyCode");
+						Debug::Log((int)wParam);
+					}
+					else
+					{
+						instance->platform->keys[keyCode] = true;
+					}
+				}
+				return 0;
 			}
 
-			case WM_KEYUP:								// Has A Key Been Released?
+			case WM_KEYUP:
 			{
 				//Debug::Log("Up!");
 				//Debug::Log((int)wParam);
-				instance->platform->keys[instance->platform->localKeymap[wParam]] = false;					// If So, Mark It As FALSE
-				return 0;								// Jump Back
+				if (wParam >= KEY_MAX || wParam < 0)
+				{
+					Debug::Log("Received KeyCode out of range");
+					Debug::Log((int)wParam);
+				}
+				else
+				{
+					KeyCode keyCode = (KeyCode)instance->platform->localKeymap[wParam];
+					if (keyCode == KEY_UNDEFINED)
+					{
+						Debug::Log("Received undefined KeyCode");
+						Debug::Log((int)wParam);
+					}
+					else
+					{
+						instance->platform->keys[keyCode] = false;
+					}
+				}
+				return 0;
 			}
 
-			case WM_SIZE:								// Resize The OpenGL Window
+			case WM_SIZE:
 			{
 				instance->platform->WindowSizeChanged(LOWORD(lParam), HIWORD(lParam));
-				return 0;								// Jump Back
+				return 0;
 			}
 		}
 
@@ -337,6 +371,7 @@ namespace Monocle
 		for (int i = 0; i < KEY_MAX; i++)
 		{
 			keys[i] = false;
+			localKeymap[i] = KEY_UNDEFINED;
 		}
 
 		localKeymap[VK_BACK] = KEY_BACKSPACE;

@@ -3,7 +3,6 @@
 
 namespace Pong
 {
-
 	void Ball::Update()
 	{
 		position += Vector2::right * Monocle::deltaTime;
@@ -19,13 +18,13 @@ namespace Pong
 
 	void Paddle::Update()
 	{
-		if (Input::IsKeyPressed(KEY_DOWN))
+		if (Input::IsKeyPressed(keyUp))
 		{
-			position.y -= 1.0f * Monocle::deltaTime;
+			position += Vector2::up * Monocle::deltaTime;
 		}
-		if (Input::IsKeyPressed(KEY_UP))
+		if (Input::IsKeyPressed(keyDown))
 		{
-			position.y += 1.0f * Monocle::deltaTime;
+			position += Vector2::down * Monocle::deltaTime;
 		}
 	}
 
@@ -52,10 +51,14 @@ namespace Pong
 
 		paddle1 = new Paddle();
 		paddle1->position = Vector2(-2, 0);
+		paddle1->keyUp = KEY_W;
+		paddle1->keyDown = KEY_S;
 		Add(paddle1);
 
 		paddle2 = new Paddle();
 		paddle2->position = Vector2(2, 0);
+		paddle2->keyUp = KEY_UP;
+		paddle2->keyDown = KEY_DOWN;
 		Add(paddle2);
 	}
 
