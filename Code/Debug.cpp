@@ -36,12 +36,12 @@ namespace Monocle
 		std::cout << num << std::endl;
 	}
 
-	void Debug::Log(Vector2 vec)
+	void Debug::Log(const Vector2& vec)
 	{
 		std::cout << "Vector2: (" << vec.x << ", " << vec.y << ")" << std::endl;
 	}
 
-	void Debug::Log(Vector3 vec)
+	void Debug::Log(const Vector3& vec)
 	{
 		std::cout << "Vector3: (" << vec.x << ", " << vec.y << ", " << vec.z << ")" << std::endl;
 	}

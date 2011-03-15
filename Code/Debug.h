@@ -14,7 +14,7 @@ namespace Monocle
 		static void Log(long num);
 		static void Log(float num);
 		static void Log(double num);
-		static void Log(Vector2 vec);
-		static void Log(Vector3 vec);
+		static void Log(const Vector2& vec);
+		static void Log(const Vector3& vec);
 	};
 }
