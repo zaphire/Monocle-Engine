@@ -3,6 +3,57 @@
 
 namespace Marian
 {
+	LevelEditor::LevelEditor()
+		: isOn(false), selectedEntity(NULL)
+	{
+	}
+
+	void LevelEditor::Update()
+	{
+		if (Input::IsKeyPressed(KEY_TAB))
+		{
+			isOn = !isOn;
+			Debug::Log("Toggle LevelEditor:");
+			Debug::Log(isOn);
+		}
+
+		if (isOn)
+		{
+			// you can do stuff now, yay
+
+			if (Input::IsKeyPressed(KEY_1))
+			{
+				selectedEntity = Core::GetScene()->GetEntity(0);
+			}
+
+			if (Input::IsKeyPressed(KEY_2))
+			{
+				selectedEntity = Core::GetScene()->GetEntity(1);
+			}
+
+
+			if (selectedEntity)
+			{
+				if (Input::IsKeyHeld(KEY_RIGHT))
+				{
+					selectedEntity->position += Vector2::right * Monocle::deltaTime;
+				}
+				if (Input::IsKeyHeld(KEY_LEFT))
+				{
+					selectedEntity->position += Vector2::left * Monocle::deltaTime;
+				}
+				if (Input::IsKeyHeld(KEY_UP))
+				{
+					selectedEntity->position += Vector2::up * Monocle::deltaTime;
+				}
+				if (Input::IsKeyHeld(KEY_DOWN))
+				{
+					selectedEntity->position += Vector2::down * Monocle::deltaTime;
+				}
+			}
+		}
+	}
+
 	Sprite::Sprite()
 		: Entity(), texture(NULL), scale(1.0f)
 	{
@@ -23,6 +74,8 @@ namespace Marian
 	void TitleScene::Begin()
 	{
 		Scene::Begin();
+
+		Core::SetEditor(new LevelEditor());
 
 		Graphics::SetCameraPosition(Vector3(0,0,-6));
 

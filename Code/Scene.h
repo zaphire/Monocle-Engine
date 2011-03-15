@@ -44,6 +44,9 @@ namespace Monocle
 		//Called by an entity when its tag has changed; the scene must reposition that entity in the tag map
 		void RetagEntity(Entity* entity, string oldTag);
 
+		//HACK: test function
+		Entity *GetEntity(int index);
+
 	private:
 		//Holds all the entities currently in the scene
 		list<Entity*> entities;

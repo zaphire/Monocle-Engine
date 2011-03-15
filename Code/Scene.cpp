@@ -150,4 +150,16 @@ namespace Monocle
 		if (entity->GetTag().compare("") != 0)
 			tagMap[entity->GetTag()].push_back(entity);
 	}
+
+	Entity* Scene::GetEntity(int index)
+	{
+		int c = 0;
+		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+		{
+			if (c == index)
+				return *i;
+			c++;
+		}
+		return NULL;
+	}
 }

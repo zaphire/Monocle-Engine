@@ -10,12 +10,10 @@ namespace Monocle
 	Core *Core::instance = NULL;
 
 	Core::Core()
+		:  scene(NULL), switchTo(NULL), isDone(false), editor(NULL)
 	{
-		instance			= this;
-		scene				= NULL;
-		switchTo				= NULL;
+		instance = this;
 		Monocle::deltaTime	= 0.0f;
-		isDone				= false;
 	}
 
 	void Core::Init()
@@ -37,6 +35,11 @@ namespace Monocle
 		{
 			platform.Update();
 			tween.Update();
+
+			if (editor != NULL)
+			{
+				editor->Update();
+			}
 
 			//Switch scenes if necessary
 			if (switchTo != NULL)
@@ -99,11 +102,16 @@ namespace Monocle
 
 	void Core::SetScene(Scene* scene)
 	{
-		switchTo = scene;
+		instance->switchTo = scene;
 	}
 
 	Scene* Core::GetScene()
 	{
-		return scene;
+		return instance->scene;
+	}
+
+	void Core::SetEditor(Editor *editor)
+	{
+		instance->editor = editor;
 	}
 }

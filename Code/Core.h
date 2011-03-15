@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "AssetDatabase.h"
 #include "Tween.h"
+#include "Editor.h"
 
 namespace Monocle
 {
@@ -18,8 +19,10 @@ namespace Monocle
 
 		void Main();
 
-		void SetScene(Scene* scene);
-		Scene* GetScene();
+		static void SetScene(Scene* scene);
+		static Scene* GetScene();
+
+		static void SetEditor(Editor *editor);
 
 		static void Quit();
 
@@ -41,5 +44,6 @@ namespace Monocle
 		Debug debug;
 		AssetDatabase assetDatabase;
 		Tween tween;
+		Editor *editor;
 	};
 }

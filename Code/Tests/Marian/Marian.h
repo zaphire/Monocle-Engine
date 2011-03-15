@@ -8,6 +8,15 @@ using namespace Monocle;
 namespace Marian
 {
 
+	class LevelEditor : public Editor
+	{
+	public:
+		LevelEditor();
+		void Update();
+		bool isOn;
+		Entity *selectedEntity;
+	};
+
 	class Sprite : public Entity
 	{
 	public:
