@@ -24,7 +24,6 @@ namespace Pong
 	Paddle::Paddle()
 		: Entity("paddle"), speed(0.0f)
 	{
-
 	}
 
 	void Paddle::Update()
@@ -32,6 +31,7 @@ namespace Pong
 		const float accel = 8.0f;
 		const float maxSpeed = 3.0f;
 		const float friction = 4.0f;
+		const float maxY = 2.0f;
 		if (Input::IsKeyHeld(keyUp))
 		{
 			speed += accel * Monocle::deltaTime;
@@ -59,6 +59,17 @@ namespace Pong
 			}
 		}
 		position += Vector2::up * Monocle::deltaTime * speed;
+		
+		if (position.y > maxY)
+		{
+			position.y = maxY;
+			speed = -1.0f;
+		}
+		else if (position.y < -maxY)
+		{
+			position.y = -maxY;
+			speed = 1.0f;
+		}
 	}
 
 	void Paddle::Render()

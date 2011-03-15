@@ -21,28 +21,25 @@ namespace Monocle
 		void SetScene(Scene* scene);
 		Scene* GetScene();
 
-		Platform platform;
-		Input input;
-		Graphics graphics;
-		Debug debug;
-		AssetDatabase assetDatabase;
-		Tween tween;
-
 		static void Quit();
 
 	private:
 		static Core *instance;
 
 		bool isDone;
+
 		//The currently running scene
 		Scene* scene;
 
-		//The scene to switch to at the end of the frame
+		//The scene to switch to at the end of the frame; if NULL, no switch
 		Scene* switchTo;
 
-		//Whether the game should switch scenes at the end of the frame
-		bool switchScenes;
-
-
+		//access these using the public static functions
+		Platform platform;
+		Input input;
+		Graphics graphics;
+		Debug debug;
+		AssetDatabase assetDatabase;
+		Tween tween;
 	};
 }

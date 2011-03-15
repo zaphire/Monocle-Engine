@@ -23,6 +23,7 @@ namespace Marian
 	public:
 		void Begin();
 		void End();
+		void Update();
 	};
 
 }

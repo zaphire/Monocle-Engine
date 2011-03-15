@@ -133,17 +133,15 @@ namespace Monocle
 		static int GetWidth();
 		static int GetHeight();
 
-		bool keys[KEY_MAX];
+		static bool keys[KEY_MAX];
 
-		int localKeymap[KEY_MAX];
+		static void SetLocalKey(int key, bool on);
 
 		void WindowSizeChanged(int w, int h);
 
-		static Platform *instance; //TODO: refactor this (make static accessor methods instead)
-
 	private:
-		
+		static Platform *instance;
+		int localKeymap[KEY_MAX];
 		int width, height;
-		
 	};
 }

@@ -346,16 +346,7 @@ namespace Monocle
 				}
 				else
 				{
-					KeyCode keyCode = (KeyCode)instance->platform->localKeymap[wParam];
-					if (keyCode == KEY_UNDEFINED)
-					{
-						Debug::Log("Received undefined KeyCode");
-						Debug::Log((int)wParam);
-					}
-					else
-					{
-						instance->platform->keys[keyCode] = true;
-					}
+					Platform::SetLocalKey((int)wParam, true);
 				}
 				return 0;
 			}
@@ -371,16 +362,7 @@ namespace Monocle
 				}
 				else
 				{
-					KeyCode keyCode = (KeyCode)instance->platform->localKeymap[wParam];
-					if (keyCode == KEY_UNDEFINED)
-					{
-						Debug::Log("Received undefined KeyCode");
-						Debug::Log((int)wParam);
-					}
-					else
-					{
-						instance->platform->keys[keyCode] = false;
-					}
+					Platform::SetLocalKey((int)wParam, false);
 				}
 				return 0;
 			}
@@ -397,6 +379,8 @@ namespace Monocle
 	}
 
 	Platform *Platform::instance = NULL;
+
+	bool Platform::keys[KEY_MAX];
 
 	Platform::Platform()
 	{
@@ -590,6 +574,20 @@ namespace Monocle
 		instance->width = w;
 		instance->height = h;
 		Graphics::Resize(w, h);
+	}
+
+	void Platform::SetLocalKey(int key, bool on)
+	{
+		KeyCode keyCode = (KeyCode)instance->localKeymap[key];
+		if (keyCode == KEY_UNDEFINED)
+		{
+			Debug::Log("Received undefined KeyCode");
+			Debug::Log(key);
+		}
+		else
+		{
+			instance->keys[instance->localKeymap[key]] = on;			
+		}
 	}
 }
 
