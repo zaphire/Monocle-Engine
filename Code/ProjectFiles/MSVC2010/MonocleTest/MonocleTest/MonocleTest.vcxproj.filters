@@ -95,9 +95,6 @@
     <ClCompile Include="..\..\..\..\Scene.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Windows\WindowsOpenGLGraphics.cpp">
-      <Filter>Monocle\Windows</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Windows\WindowsPlatform.cpp">
       <Filter>Monocle\Windows</Filter>
     </ClCompile>
@@ -115,6 +112,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\TextureAsset.cpp">
       <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Windows\OpenGLGraphics.cpp">
+      <Filter>Monocle\Windows</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
