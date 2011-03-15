@@ -22,7 +22,7 @@ namespace Monocle
 		for (int i = 0; i < (int)KEY_MAX; i++)
 		{
 			previousKeys[i] = currentKeys[i];
-			currentKeys[i] = Platform::instance->keys[i];
+			currentKeys[i] = Platform::keys[i];
 		}
 	}
 

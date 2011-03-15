@@ -9,8 +9,6 @@
 #define TEST_PONG
 //#define TEST_MARIAN
 
-
-
 #ifdef TEST_PONG
 #include "Tests/Pong/Pong.h"
 #endif

@@ -14,10 +14,8 @@ namespace Monocle
 		instance			= this;
 		scene				= NULL;
 		switchTo				= NULL;
-		switchScenes			= false;
-		Monocle::deltaTime	= 0.0;
+		Monocle::deltaTime	= 0.0f;
 		isDone				= false;
-		
 	}
 
 	void Core::Init()
@@ -27,11 +25,6 @@ namespace Monocle
 		assetDatabase.Init();
 		input.Init();
 		graphics.Init();
-	}
-
-	void Core::Quit()
-	{
-		instance->isDone = true;
 	}
 
 	void Core::Main()
@@ -46,9 +39,8 @@ namespace Monocle
 			tween.Update();
 
 			//Switch scenes if necessary
-			if (switchScenes)
+			if (switchTo != NULL)
 			{
-				switchScenes = false;
 				if (scene != NULL)
 					scene->End();
 				scene = switchTo;
@@ -100,10 +92,14 @@ namespace Monocle
 		}
 	}
 
+	void Core::Quit()
+	{
+		instance->isDone = true;
+	}
+
 	void Core::SetScene(Scene* scene)
 	{
 		switchTo = scene;
-		switchScenes = true;
 	}
 
 	Scene* Core::GetScene()

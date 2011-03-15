@@ -15,7 +15,8 @@ namespace Marian
 		Graphics::Blend();
 		Graphics::SetColor(color);
 		Graphics::BindTexture(texture);
-		Graphics::RenderQuad(texture->width * scale, texture->height * scale);
+		if (texture != NULL)
+			Graphics::RenderQuad(texture->width * scale, texture->height * scale);
 		Graphics::PopMatrix();
 	}
 
@@ -38,6 +39,16 @@ namespace Marian
 		sprite->scale = 0.003f;
 		Tween::FromTo(&sprite->color.a, 0.0f, 1.0f, 5.0f, EASE_OUTSIN);
 		Add(sprite);
+	}
+
+	void TitleScene::Update()
+	{
+		Scene::Update();
+
+		if (Input::IsKeyPressed(KEY_ESCAPE))
+		{
+			Core::Quit();
+		}
 	}
 
 	void TitleScene::End()
