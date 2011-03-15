@@ -26,6 +26,7 @@ namespace Monocle
 		void Update();
 
 		static long GetMilliseconds();
+		static void ShowBuffer();
 
 		int keys[KeyCode::Max];
 	};

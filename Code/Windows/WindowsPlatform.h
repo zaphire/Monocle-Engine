@@ -1,3 +1,5 @@
+#ifdef MONOCLE_WINDOWS
+
 #pragma once
 
 #include "../Platform.h"
@@ -39,3 +41,5 @@ namespace Monocle
 	};
 
 }
+
+#endif
