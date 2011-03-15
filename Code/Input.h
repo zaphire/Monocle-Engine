@@ -17,7 +17,7 @@ namespace Monocle
 
 		Vector2 GetMousePosition();
 
-		static bool IsKeyDown(KeyCode keyCode);
+		static bool IsKeyHeld(KeyCode keyCode);
 		static bool IsKeyReleased(KeyCode keyCode);
 		static bool IsKeyPressed(KeyCode keyCode);
 

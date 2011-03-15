@@ -26,7 +26,7 @@ namespace Monocle
 		}
 	}
 
-	bool Input::IsKeyDown(KeyCode keyCode)
+	bool Input::IsKeyHeld(KeyCode keyCode)
 	{
 		return instance->currentKeys[(int)keyCode];
 	}
