@@ -5,9 +5,6 @@
 #include <string>
 #include <vector>
 
-using std::string;
-using std::vector;
-
 namespace Monocle
 {
 	class Scene;
@@ -37,17 +34,17 @@ namespace Monocle
 		virtual void Removed();
 
 		//Tagging API
-		void AddTag(const string& tag);
-		bool HasTag(const string& tag);
-		void RemoveTag(const string& tag);
-		const string& GetTag(int index);
+		void AddTag(const std::string& tag);
+		bool HasTag(const std::string& tag);
+		void RemoveTag(const std::string& tag);
+		const std::string& GetTag(int index);
 		int GetNumberOfTags();
 
 		bool IsLayer(int layer);
 		int GetLayer();
 		void SetLayer(int layer);
 	private:
-		vector<string> tags;
+		std::vector<std::string> tags;
 		int layer;
 	};
 }

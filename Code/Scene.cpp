@@ -26,7 +26,7 @@ namespace Monocle
 	void Scene::Update()
 	{
 		//Update all the entities
-		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+		for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 		{
 			(*i)->Update();
 		}
@@ -43,16 +43,16 @@ namespace Monocle
 		const int MAX_LAYER = 100;
 		const int MIN_LAYER = -100;
 
-		printf("\n\n****\n");
+		//printf("\n\n****\n");
 
 		///HACK: this next line is a hack - temporary only
 		for (int layer = MAX_LAYER; layer >= MIN_LAYER; layer--)
 		{
-			for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+			for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 			{
 				if ((*i)->IsLayer(layer))
 				{
-					printf("rendering layer -> %d\n", layer);
+					//printf("rendering layer -> %d\n", layer);
 					(*i)->Render();
 				}
 			}
@@ -63,7 +63,7 @@ namespace Monocle
 	{
 #ifdef DEBUG
 		//Error: If the entity is already in the scene
-		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+		for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 		{
 			if ((*i) == entity)
 			{
@@ -91,7 +91,7 @@ namespace Monocle
 #ifdef DEBUG
 		//Error: If the entity isn't in the entity list
 		bool in = false;
-		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+		for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 		{
 			if ((*i) == entity)
 			{
@@ -103,7 +103,7 @@ namespace Monocle
 			Debug::Log("ERROR: Removing an entity from the scene that isn't in the scene.");
 
 		//Error: If the entity is already marked to be removed
-		for (list<Entity*>::iterator i = toRemove.begin(); i != toRemove.end(); ++i)
+		for (std::list<Entity*>::iterator i = toRemove.begin(); i != toRemove.end(); ++i)
 		{
 			if ((*i) == entity)
 			{
@@ -119,14 +119,14 @@ namespace Monocle
 	void Scene::RemoveAll()
 	{
 		toRemove.clear();
-		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+		for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 			toRemove.push_back(*i);
 	}
 
 	void Scene::ResolveEntityChanges()
 	{
 		//Resolve removes
-		for (list<Entity*>::iterator i = toRemove.begin(); i != toRemove.end(); ++i)
+		for (std::list<Entity*>::iterator i = toRemove.begin(); i != toRemove.end(); ++i)
 		{
 			entities.remove(*i);
 			(*i)->scene = NULL;
@@ -139,7 +139,7 @@ namespace Monocle
 		toRemove.clear();
 
 		//Resolve adds
-		for (list<Entity*>::iterator i = toAdd.begin(); i != toAdd.end(); ++i)
+		for (std::list<Entity*>::iterator i = toAdd.begin(); i != toAdd.end(); ++i)
 		{
 			entities.push_back(*i);
 			(*i)->scene = this;
@@ -154,12 +154,12 @@ namespace Monocle
 		//TODO: Sort the entity list based on layer
 	}
 
-	void Scene::EntityAddTag(Entity* entity, const string& tag)
+	void Scene::EntityAddTag(Entity* entity, const std::string& tag)
 	{
 		tagMap[tag].push_back(entity);
 	}
 
-	void Scene::EntityRemoveTag(Entity* entity, const string& tag)
+	void Scene::EntityRemoveTag(Entity* entity, const std::string& tag)
 	{
 		tagMap[tag].remove(entity);
 	}
@@ -167,7 +167,7 @@ namespace Monocle
 	Entity* Scene::GetEntity(int index)
 	{
 		int c = 0;
-		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+		for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 		{
 			if (c == index)
 				return *i;
@@ -182,7 +182,7 @@ namespace Monocle
 
 		Entity *nearestEntity = NULL;
 
-		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+		for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 		{
 			Vector2 diff = (*i)->position - position;
 			float sqrMag = diff.GetSquaredMagnitude();
@@ -195,7 +195,7 @@ namespace Monocle
 		return nearestEntity;
 	}
 
-	Entity* Scene::GetFirstTag(const string& tag)
+	Entity* Scene::GetFirstTag(const std::string& tag)
 	{
 		if (tagMap.count(tag) == 0 || tagMap[tag].size() == 0)
 			return NULL;
@@ -203,7 +203,7 @@ namespace Monocle
 		return tagMap[tag].front();
 	}
 
-	list<Entity*>* Scene::GetAllTag(const string& tag)
+	std::list<Entity*>* Scene::GetAllTag(const std::string& tag)
 	{
 		if (tagMap.count(tag) == 0)
 			return NULL;
@@ -211,7 +211,7 @@ namespace Monocle
 			return &tagMap[tag];
 	}
 
-	int Scene::GetAmountTag(const string& tag)
+	int Scene::GetAmountTag(const std::string& tag)
 	{
 		if (tagMap.count(tag) == 0)
 			return 0;

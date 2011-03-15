@@ -7,11 +7,6 @@
 #include <vector>
 #include "Entity.h"
 
-using std::vector;
-using std::list;
-using std::map;
-using std::string;
-
 namespace Monocle
 {
 	class Entity;
@@ -44,13 +39,13 @@ namespace Monocle
 		void RemoveAll();
 
 		//Called by an entity when its tag has changed; the scene must reposition that entity in the tag map
-		void EntityAddTag(Entity* entity, const string& tag);
-		void EntityRemoveTag(Entity* entity, const string& tag);
+		void EntityAddTag(Entity* entity, const std::string& tag);
+		void EntityRemoveTag(Entity* entity, const std::string& tag);
 
 		//Tag API
-		Entity* GetFirstTag(const string& tag);
-		list<Entity*>* GetAllTag(const string& tag);
-		int GetAmountTag(const string& tag);
+		Entity* GetFirstTag(const std::string& tag);
+		std::list<Entity*>* GetAllTag(const std::string& tag);
+		int GetAmountTag(const std::string& tag);
 
 		//HACK: test function
 		Entity *GetEntity(int index);
@@ -59,16 +54,16 @@ namespace Monocle
 
 	private:
 		//Holds all the entities currently in the scene
-		list<Entity*> entities;
+		std::list<Entity*> entities;
 
 		//All the entities that will be added at the end of the frame
-		list<Entity*> toAdd;
+		std::list<Entity*> toAdd;
 
 		//All the entities that will be removed at the end of the frame
-		list<Entity*> toRemove;
+		std::list<Entity*> toRemove;
 
 		//The map of entities sorted by tag
-		map<string, list<Entity*> > tagMap;
+		std::map<std::string, std::list<Entity*> > tagMap;
 
 		//Resolves all entities to be added or removed
 		void ResolveEntityChanges();
