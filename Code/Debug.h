@@ -2,6 +2,7 @@
 
 #include "Vector2.h"
 #include "Vector3.h"
+#include <string>
 
 namespace Monocle
 {
@@ -17,5 +18,6 @@ namespace Monocle
 		static void Log(double num);
 		static void Log(const Vector2& vec);
 		static void Log(const Vector3& vec);
+		static void Log(const std::string& string);
 	};
 }

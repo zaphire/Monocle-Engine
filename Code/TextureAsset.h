@@ -8,7 +8,7 @@ namespace Monocle
 	{
 	public:
 		TextureAsset();
-		void Load(const char *filename);
+		void Load(const std::string &filename);
 		void Unload();
 		void Bind();
 

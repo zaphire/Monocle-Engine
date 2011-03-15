@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 namespace Monocle
 {
 	enum AssetType
@@ -15,7 +17,7 @@ namespace Monocle
 	public:
 		Asset(AssetType type);
 
-		const char *name; // <- what string class are we using?
+		std::string filename;
 
 		AssetType type;
 
@@ -26,7 +28,7 @@ namespace Monocle
 		void AddReference();
 		void RemoveReference();
 
-		virtual void Load(const char *filename) = 0;
+		virtual void Load(const std::string &filename) = 0;
 		virtual void Unload() = 0;
 	};
 }

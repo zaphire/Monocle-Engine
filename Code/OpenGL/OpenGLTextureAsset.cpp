@@ -20,8 +20,9 @@ namespace Monocle
 	{
 	}
 
-	void TextureAsset::Load(const char *filename)
+	void TextureAsset::Load(const std::string &filename)
 	{
+		this->filename = filename;
 		// only load png for now
 		pngInfo info;
 		glGenTextures(1, &texID);
@@ -32,7 +33,7 @@ namespace Monocle
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 
-		if (pngLoad(filename, PNG_BUILDMIPMAPS, PNG_ALPHA, &info))
+		if (pngLoad(filename.c_str(), PNG_BUILDMIPMAPS, PNG_ALPHA, &info))
 		{
 			width = info.Width;
 			height = info.Height;

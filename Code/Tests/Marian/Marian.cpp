@@ -170,11 +170,9 @@ namespace Marian
 
 		Sprite *sprite = NULL;
 		
-		/*
 		sprite = new Sprite("../../../../../Content/Marian/ReverieSky.png", 0.01f);
 		sprite->depth = -5.0f;
 		Add(sprite);
-		*/
 
 		sprite = new Sprite("../../../../../Content/Marian/Title.png", 0.003f);
 		Tween::FromTo(&sprite->color.a, 0.0f, 1.0f, 5.0f, EASE_OUTSIN);

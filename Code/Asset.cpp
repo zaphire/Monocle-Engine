@@ -5,7 +5,6 @@ namespace Monocle
 	Asset::Asset(AssetType type)
 		: type(type)
 	{
-		name = "\0";
 		isCached = false;
 		referenceCount = 0;
 		type = AT_UNDEFINED;

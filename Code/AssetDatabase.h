@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Asset.h"
+#include <list>
+#include <string>
 
 namespace Monocle
 {
@@ -11,14 +13,16 @@ namespace Monocle
 	public:
 		AssetDatabase();
 		void Init();
-		static Asset *RequestAsset(AssetType assetType, const char *filename);
-		static TextureAsset *RequestTexture(const char *filename);
+		//static Asset *RequestAsset(AssetType assetType, const char *filename);
+		static TextureAsset *RequestTexture(const std::string &filename);
 
 		void StoreAsset(Asset *asset); // TODO: make private
 
 	private:
-		static AssetDatabase *instance;
+		Asset* GetAssetByFilename(const std::string &filename);
 
+		static AssetDatabase *instance;
+		std::list<Asset*> assets;
 		
 	};
 }

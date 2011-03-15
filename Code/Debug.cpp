@@ -50,4 +50,9 @@ namespace Monocle
 	{
 		std::cout << "Vector3: (" << vec.x << ", " << vec.y << ", " << vec.z << ")" << std::endl;
 	}
+
+	void Debug::Log(const std::string& string)
+	{
+		std::cout << string << std::endl;
+	}
 }
