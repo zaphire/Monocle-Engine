@@ -16,6 +16,11 @@ namespace Monocle
 		std::cout << outputString << std::endl;
 	}
 
+	void Debug::Log(bool boolean)
+	{
+		std::cout << (boolean?"true":"false") << std::endl;
+	}
+
 	void Debug::Log(int num)
 	{
 		std::cout << num << std::endl;

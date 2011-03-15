@@ -4,7 +4,7 @@
 //#define SCENE_CODE_WRITTEN
 
 //If you want to use fixed timestep, uncomment the following three lines:
-#define FIXED_TIMESTEP
+//#define FIXED_TIMESTEP
 #define MILLISECONDS_PER_FRAME 1000/60
 #define MAX_UPDATES_PER_RENDER 4
 
@@ -65,6 +65,7 @@ namespace Monocle
 			int updates = 0;
 			while (updates < MAX_UPDATES_PER_RENDER && (tick - lastTick) >= MILLISECONDS_PER_FRAME)
 			{
+				input.Update();	
 				//Update
 				if (scene != NULL)
 					scene->Update();
@@ -84,6 +85,7 @@ namespace Monocle
 			graphics.ShowBuffer();
 #else
 			//Update
+			input.Update();
 			if (scene != NULL)
 				scene->Update();
 

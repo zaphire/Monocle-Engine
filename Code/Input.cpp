@@ -13,11 +13,31 @@ namespace Monocle
 
 	void Input::Init()
 	{
+		for (int i = 0; i < (int)KEY_MAX; i++)
+			previousKeys[i] = currentKeys[i] = false;
+	}
 
+	void Input::Update()
+	{
+		for (int i = 0; i < (int)KEY_MAX; i++)
+		{
+			previousKeys[i] = currentKeys[i];
+			currentKeys[i] = Platform::instance->keys[i];
+		}
+	}
+
+	bool Input::IsKeyDown(KeyCode keyCode)
+	{
+		return instance->currentKeys[(int)keyCode];
 	}
 
 	bool Input::IsKeyPressed(KeyCode keyCode)
 	{
-		return Platform::IsKeyPressed(keyCode);
+		return instance->currentKeys[(int)keyCode] && !instance->previousKeys[(int)keyCode];
+	}
+
+	bool Input::IsKeyReleased(KeyCode keyCode)
+	{
+		return !instance->currentKeys[(int)keyCode] && instance->previousKeys[(int)keyCode];
 	}
 }
