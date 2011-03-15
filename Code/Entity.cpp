@@ -90,4 +90,21 @@ namespace Monocle
 	{
 		return tags.size();
 	}
+
+	int Entity::GetLayer()
+	{
+		return layer;
+	}
+
+	void Entity::SetLayer(int layer)
+	{
+		this->layer = layer;
+
+		//TODO: get scene to re-sort me
+	}
+
+	bool Entity::IsLayer(int layer)
+	{
+		return this->layer == layer;
+	}
 }

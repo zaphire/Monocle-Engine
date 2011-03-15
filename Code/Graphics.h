@@ -34,6 +34,7 @@ namespace Monocle
 		static void PopMatrix();
 		static void Blend();
 		static void SetColor(const Color &color);
+		static void SetBackgroundColor(const Color &color);
 
 	private:
 		static Graphics *instance;

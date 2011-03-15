@@ -22,7 +22,7 @@ namespace Marian
 	class Sprite : public Entity
 	{
 	public:
-		Sprite(const char *filename, float scale);
+		Sprite(int layer, const char *filename, float scale);
 		Sprite();
 		void Render();
 		TextureAsset *texture;

@@ -15,7 +15,7 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
-// opengl/windows init code borrowed from http://nehe.gamedev.net
+// some opengl/windows init code based on http://nehe.gamedev.net
 
 namespace Monocle
 {
@@ -32,13 +32,18 @@ namespace Monocle
 
 		glEnable(GL_BLEND);
 		glDisable(GL_LIGHTING);
-		glEnable(GL_TEXTURE_2D);						// Enable Texture Mapping ( NEW )
-		glShadeModel(GL_SMOOTH);						// Enable Smooth Shading
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);					// Black Background
-		glClearDepth(1.0f);							// Depth Buffer Setup
-		glEnable(GL_DEPTH_TEST);						// Enables Depth Testing
-		glDepthFunc(GL_LEQUAL);							// The Type Of Depth Testing To Do
-		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);			// Really Nice Perspective Calculations	
+		glEnable(GL_TEXTURE_2D);
+		glShadeModel(GL_SMOOTH);	
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClearDepth(1.0f);
+		glDisable(GL_DEPTH_TEST);
+		//glDepthFunc(GL_LEQUAL); 
+		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+	}
+
+	void Graphics::SetBackgroundColor(const Color &color)
+	{
+		glClearColor(color.r, color.g, color.b, color.a);
 	}
 
 	bool Graphics::SetResolution(int w, int h, int bits, bool full)

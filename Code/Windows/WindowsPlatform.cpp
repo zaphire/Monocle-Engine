@@ -7,8 +7,7 @@
 #include "WindowsPlatform.h"
 #include "Mmsystem.h"
 
-
-// opengl/windows init code borrowed from http://nehe.gamedev.net
+// opengl/windows init code baesd on http://nehe.gamedev.net
 // keyboard code based on SDL http://www.libsdl.org/
 
 #ifndef VK_0
@@ -63,6 +62,9 @@
 #define VK_APOSTROPHE	0xDE
 #define VK_BACKTICK		0xDF
 #define VK_OEM_102		0xE2
+
+#define REPEATED_KEYMASK	(1<<30)
+#define EXTENDED_KEYMASK	(1<<24)
 
 
 namespace Monocle
@@ -360,6 +362,33 @@ namespace Monocle
 
 			case WM_KEYDOWN:
 			{
+				switch (wParam)
+				{
+					case VK_CONTROL:
+						if ( lParam&EXTENDED_KEYMASK )
+							wParam = VK_RCONTROL;
+						else
+							wParam = VK_LCONTROL;
+						break;
+					case VK_SHIFT:
+						/* EXTENDED trick doesn't work here */
+						if ((GetKeyState(VK_LSHIFT) & 0x8000))
+						{
+							wParam = VK_LSHIFT;
+						}
+						else if ((GetKeyState(VK_RSHIFT) & 0x8000))
+						{
+							wParam = VK_RSHIFT;
+						}
+						break;
+					case VK_MENU:
+						if ( lParam&EXTENDED_KEYMASK )
+							wParam = VK_RMENU;
+						else
+							wParam = VK_LMENU;
+						break;
+				}
+
 				//Debug::Log("Down!");
 				//Debug::Log((int)wParam);
 				if (wParam >= KEY_MAX || wParam < 0)
@@ -376,6 +405,33 @@ namespace Monocle
 
 			case WM_KEYUP:
 			{
+				switch (wParam)
+				{
+					case VK_CONTROL:
+						if ( lParam&EXTENDED_KEYMASK )
+							wParam = VK_RCONTROL;
+						else
+							wParam = VK_LCONTROL;
+						break;
+					case VK_SHIFT:
+						/* EXTENDED trick doesn't work here */
+						if (!(GetKeyState(VK_LSHIFT) & 0x8000))
+						{
+							wParam = VK_LSHIFT;
+						}
+						else if (!(GetKeyState(VK_RSHIFT) & 0x8000))
+						{
+							wParam = VK_RSHIFT;
+						}
+						break;
+					case VK_MENU:
+						if ( lParam&EXTENDED_KEYMASK )
+							wParam = VK_RMENU;
+						else
+							wParam = VK_LMENU;
+						break;
+				}
+
 				//Debug::Log("Up!");
 				//Debug::Log((int)wParam);
 				if (wParam >= KEY_MAX || wParam < 0)
