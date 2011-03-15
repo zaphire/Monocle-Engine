@@ -26,6 +26,7 @@ namespace Monocle
 		void Clamp(float max);
 		bool IsInRange(float range);
 		float Dot(Vector2 other);
+		float Cross(Vector2 other);
 		
 		/*
 		static Vector2 Add(Vector2 a, Vector2 b);
@@ -33,6 +34,27 @@ namespace Monocle
 		static Vector2 Multiply(Vector2 a, float s);
 		static Vector2 Scale(Vector2 a, float s);
 		*/
+		
+		float operator[](int i);
+		
+		Vector2& operator=(const Vector2& rhs);
+		bool operator==(const Vector2& rhs);
+		bool operator!=(const Vector2& rhs);
+	
+		Vector2& operator+=(const Vector2& rhs);
+		Vector2& operator-=(const Vector2& rhs);
+		Vector2& operator*=(float rhs);				// scalar multiplication
+		Vector2& operator/=(float rhs);				// scalar inverse multiplication
 
 	};
+
+	Vector2 operator+(const Vector2& lhs, const Vector2& rhs);	
+	Vector2 operator-(const Vector2& lhs, const Vector2& rhs);
+	
+	Vector2 operator*(float lhs, const Vector2& rhs);		// left scalar multiplication
+	Vector2 operator*(const Vector2& lhs, float rhs);		// right scalar multiplication
+	Vector2 operator/(const Vector2& lhs, float rhs);		// right scalar inverse multiplication
+	
+	float operator*(const Vector2& lhs, const Vector2& rhs);	// dot product
+	float operator^(const Vector2& lhs, const Vector2& rhs);	// cross product
 }
