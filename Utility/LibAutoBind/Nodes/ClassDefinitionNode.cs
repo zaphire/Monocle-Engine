@@ -15,7 +15,7 @@ namespace LibAutoBind.Nodes
         internal ClassDefinitionNode(string cls, string alias)
         {
             // Get inheritance.
-            this.p_Inheritance = "RObject";
+            this.p_Inheritance = "Object";
             if (alias.Contains(":"))
                 throw new InvalidClassDefinitionException("The inheritance ':' specifier must be before the alias 'as' specifier.");
             if (cls.Contains(":"))

@@ -1,0 +1,50 @@
+#import Engine.InterpreterException
+
+class Engine.KeyNotFoundException : Engine.InterpreterException
+{
+	public static const char* Message = "Attempted to index a key which does not exist in the table.";
+
+	/// <summary>
+	/// Exception constructor for C++ code.
+	/// </summay>
+	unbound public KeyNotFoundException()
+	{
+	}
+
+	/// <summary>
+	/// Exception constructor for Lua code.
+	/// </summary>
+	bound KeyNotFoundException()
+	{
+	}
+
+	/// <summary>
+	/// Returns the static Message variable.  Required for downcasting.
+	/// <summary>
+	unbound public virtual const char* GetMessage()
+	{
+		return this->Message;
+	}
+
+	/// <summary>
+	/// Returns the static ClassName variable.  Required for downcasting.
+	/// <summary>
+	unbound public virtual const char* GetName()
+	{
+		return this->ClassName;
+	}
+
+	/// <summary>
+	/// A property to access the exception message.
+	/// </summary>
+	/// <readonly>true</readonly>
+	bound property string Message
+	{
+		get: call GetMessageL;
+	}
+
+	unbound ::string GetMessageL()
+	{
+		return Engine::Exception::GetParsedMessage(this->Message, this->Arguments).c_str();
+	}
+}

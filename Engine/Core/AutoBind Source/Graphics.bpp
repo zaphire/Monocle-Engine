@@ -1,0 +1,18 @@
+#import Engine.InternalConstructorOnlyException
+
+class Engine.Graphics
+{
+	/// <summary>
+	/// A non-public constructor for initalizing a Graphics instance.
+	/// </summary>
+	/// <internal>true</internal>
+	/// <exception>Engine::InternalConstructorOnlyException</exception>
+	bound Graphics()
+	{
+		if (byuser)
+		{
+			throw new Engine::InternalConstructorOnlyException();
+		}
+		// TODO: Implement.
+	}
+}

@@ -1,0 +1,50 @@
+#import Engine.InterpreterException
+
+class Engine.InvalidOperationException : Engine.InterpreterException
+{
+	public static const char* Message = "An operation was attempted that is not valid for the current state.";
+
+	/// <summary>
+	/// Exception constructor for C++ code.
+	/// </summay>
+	unbound public InvalidOperationException()
+	{
+	}
+
+	/// <summary>
+	/// Exception constructor for Lua code.
+	/// </summary>
+	bound InvalidOperationException()
+	{	
+	}
+
+	/// <summary>
+	/// Returns the static Message variable.  Required for downcasting.
+	/// <summary>
+	unbound public virtual const char* GetMessage()
+	{
+		return this->Message;
+	}
+
+	/// <summary>
+	/// Returns the static ClassName variable.  Required for downcasting.
+	/// <summary>
+	unbound public virtual const char* GetName()
+	{
+		return this->ClassName;
+	}
+
+	/// <summary>
+	/// A property to access the exception message.
+	/// </summary>
+	/// <readonly>true</readonly>
+	bound property string Message
+	{
+		get: call GetMessageL;
+	}
+
+	unbound ::string GetMessageL()
+	{
+		return Engine::Exception::GetParsedMessage(this->Message, this->Arguments).c_str();
+	}
+}

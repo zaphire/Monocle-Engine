@@ -44,7 +44,7 @@ namespace LibAutoBind.Transformers
             // what classes reference what other classes.
             List<Node> imports = this.GetNodesOfType(nodes, typeof(ImportNode));
             this.WriteHeaderLine("/* Imports */");
-            this.WriteHeaderLine("class RObject;");
+            this.WriteHeaderLine("class Object;");
             foreach (Node n in imports)
             {
                 string[] components = n.Content.Split('.');
@@ -61,7 +61,7 @@ namespace LibAutoBind.Transformers
                 }
                 this.WriteHeaderLine();
             }
-            this.WriteHeaderLine("#include \"RObject.h\"");
+            this.WriteHeaderLine("#include \"Object.h\"");
             foreach (Node n in imports)
             {
                 if (n.Content == cls.Inheritance)
@@ -306,7 +306,7 @@ namespace LibAutoBind.Transformers
             ClassDefinitionNode cls = (ClassDefinitionNode)(this.GetNodesOfType(nodes, typeof(ClassDefinitionNode))[0]);
             this.WriteCodeLine("#include \"autobind/types.h\"");
             this.WriteCodeLine("#include \"autobind/binding/lua.h\"");
-            this.WriteCodeLine("#include \"RObject.h\"");
+            this.WriteCodeLine("#include \"Object.h\"");
             this.WriteCodeLine("#include \"" + ClassName.ResolveToHeaderFilename(cls.Class) + "\"");
             List<Node> imports = this.GetNodesOfType(nodes, typeof(ImportNode));
             foreach (Node n in imports)

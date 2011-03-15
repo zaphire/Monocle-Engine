@@ -20,8 +20,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)\Engine\Build\Output\$(ConfigurationName)"
+			IntermediateDirectory="$(SolutionDir)\Engine\Build\Objects\$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="2"
 			>
@@ -46,6 +46,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)\Static Headers&quot;;&quot;$(ProjectDir)\Generated Headers&quot;;&quot;$(SolutionDir)\Utility\AutoBind\Include&quot;;&quot;$(SolutionDir)\Engine\Libraries\Lua\Include&quot;"
+				PreprocessorDefinitions="WIN32"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -90,8 +92,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)\Engine\Build\Output\$(ConfigurationName)"
+			IntermediateDirectory="$(SolutionDir)\Engine\Build\Objects\$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="2"
 			WholeProgramOptimization="1"
@@ -118,6 +120,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)\Static Headers&quot;;&quot;$(ProjectDir)\Generated Headers&quot;;&quot;$(SolutionDir)\Utility\AutoBind\Include&quot;;&quot;$(SolutionDir)\Engine\Libraries\Lua\Include&quot;"
+				PreprocessorDefinitions="WIN32"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -163,6 +167,10 @@
 		</Configuration>
 	</Configurations>
 	<References>
+		<ProjectReference
+			ReferencedProjectIdentifier="{13CFB1C1-1B81-400B-819D-762E47F78D80}"
+			RelativePathToProject=".\Engine\Libraries\Lua\Lua.vcproj"
+		/>
 	</References>
 	<Files>
 		<Filter
@@ -171,65 +179,37 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\..\Asset.cpp"
+				RelativePath=".\Static Source\ClassRegistration.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Core.cpp"
+				RelativePath=".\Static Source\Debugger.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Debug.cpp"
+				RelativePath=".\Static Source\LowLevel.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Entity.cpp"
+				RelativePath=".\Static Source\main.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Input.cpp"
+				RelativePath=".\Static Source\Object.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Main.cpp"
+				RelativePath=".\Static Source\Profiler.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Math.cpp"
+				RelativePath=".\Static Source\Program.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Monocle.cpp"
+				RelativePath=".\Static Source\Utility.cpp"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\Scene.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\TextureAsset.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\Vector2.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\Vector3.cpp"
-				>
-			</File>
-			<Filter
-				Name="Windows"
-				>
-				<File
-					RelativePath="..\..\..\Windows\OpenGLGraphics.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\Windows\WindowsPlatform.cpp"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="Static Headers"
@@ -237,65 +217,41 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\..\Asset.h"
+				RelativePath=".\Static Headers\ClassRegistration.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Core.h"
+				RelativePath=".\Static Headers\Debugger.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Debug.h"
+				RelativePath=".\Static Headers\Enumerations.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Entity.h"
+				RelativePath=".\Static Headers\LowLevel.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Graphics.h"
+				RelativePath=".\Static Headers\Object.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Input.h"
+				RelativePath=".\Static Headers\Profiler.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Math.h"
+				RelativePath=".\Static Headers\Program.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Monocle.h"
+				RelativePath=".\Static Headers\StackPoint.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Platform.h"
+				RelativePath=".\Static Headers\Utility.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\Scene.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\TextureAsset.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\Vector2.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\Vector3.h"
-				>
-			</File>
-			<Filter
-				Name="Windows"
-				>
-				<File
-					RelativePath="..\..\..\Windows\WindowsPlatform.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"
@@ -306,6 +262,1110 @@
 		<Filter
 			Name="AutoBind Source"
 			>
+			<File
+				RelativePath=".\AutoBind Source\Asset.bpp"
+				>
+			</File>
+			<File
+				RelativePath=".\AutoBind Source\Core.bpp"
+				>
+			</File>
+			<File
+				RelativePath=".\AutoBind Source\Debug.bpp"
+				>
+			</File>
+			<File
+				RelativePath=".\AutoBind Source\Entity.bpp"
+				>
+			</File>
+			<File
+				RelativePath=".\AutoBind Source\Graphics.bpp"
+				>
+			</File>
+			<File
+				RelativePath=".\AutoBind Source\Input.bpp"
+				>
+			</File>
+			<File
+				RelativePath=".\AutoBind Source\Math.bpp"
+				>
+			</File>
+			<File
+				RelativePath=".\AutoBind Source\Platform.bpp"
+				>
+			</File>
+			<File
+				RelativePath=".\AutoBind Source\Scene.bpp"
+				>
+			</File>
+			<File
+				RelativePath=".\AutoBind Source\TextureAsset.bpp"
+				>
+			</File>
+			<File
+				RelativePath=".\AutoBind Source\Vector2.bpp"
+				>
+			</File>
+			<File
+				RelativePath=".\AutoBind Source\Vector3.bpp"
+				>
+			</File>
+			<Filter
+				Name="Exceptions"
+				>
+				<File
+					RelativePath=".\AutoBind Source\AccessViolationException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\ArgumentCountMismatchException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\ArgumentTypeNotValidException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\ContextNotProvidedException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\DataMisalignedException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\DebuggerNotAttachedException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\DivideByZeroException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\EngineException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\EntryPointNotFoundException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\Exception.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\GraphicsEngineNotFoundException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\IllegalInstructionException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\InheritedClassNotFoundException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\InternalConstructorOnlyException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\InterpreterException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\InterpreterStateNotValidException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\InvalidMetamethodOperationException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\InvalidObjectThrownException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\InvalidOperationException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\InvalidSyntaxException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\KeyNotFoundException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\LowLevelException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\NilReferenceException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\ObjectDisposedException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\OutOfMemoryException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\OverflowException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\PathNotFoundException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\PermissionDeniedException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\PrivilegedInstructionException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\ReadOnlyPropertyException.bpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AutoBind Source\UnderflowException.bpp"
+					>
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Generated Headers"
+			>
+			<File
+				RelativePath=".\Generated Headers\AccessViolationException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\ArgumentCountMismatchException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\ArgumentTypeNotValidException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\Asset.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\ContextNotProvidedException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\Core.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\DataMisalignedException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\Debug.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\DebuggerNotAttachedException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\DivideByZeroException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\EngineException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\Entity.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\EntryPointNotFoundException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\Exception.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\Graphics.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\GraphicsEngineNotFoundException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\IllegalInstructionException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\InheritedClassNotFoundException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\Input.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\InternalConstructorOnlyException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\InterpreterException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\InterpreterStateNotValidException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\InvalidMetamethodOperationException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\InvalidObjectThrownException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\InvalidOperationException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\InvalidSyntaxException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\KeyNotFoundException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\LowLevelException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\Math.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\NilReferenceException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\ObjectDisposedException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\OutOfMemoryException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\OverflowException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\PathNotFoundException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\PermissionDeniedException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\Platform.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\PrivilegedInstructionException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\ReadOnlyPropertyException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\Scene.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\TextureAsset.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\UnderflowException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\Vector2.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Headers\Vector3.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Generated Source"
+			>
+			<File
+				RelativePath=".\Generated Source\AccessViolationException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\ArgumentCountMismatchException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\ArgumentTypeNotValidException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\Asset.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\ContextNotProvidedException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\Core.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\DataMisalignedException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\Debug.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\DebuggerNotAttachedException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\DivideByZeroException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\EngineException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\Entity.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\EntryPointNotFoundException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\Exception.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\Graphics.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\GraphicsEngineNotFoundException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\IllegalInstructionException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\InheritedClassNotFoundException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\Input.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\InternalConstructorOnlyException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\InterpreterException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\InterpreterStateNotValidException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\InvalidMetamethodOperationException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\InvalidObjectThrownException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\InvalidOperationException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\InvalidSyntaxException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\KeyNotFoundException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\LowLevelException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\Math.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\NilReferenceException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\ObjectDisposedException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\OutOfMemoryException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\OverflowException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\PathNotFoundException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\PermissionDeniedException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\Platform.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\PrivilegedInstructionException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\ReadOnlyPropertyException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\Scene.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\TextureAsset.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\UnderflowException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\Vector2.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Generated Source\Vector3.cpp"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Original Source"
+			>
+			<File
+				RelativePath=".\Original Source\Asset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Source\Core.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Source\Debug.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Source\Entity.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Source\Input.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Source\Main.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Source\Math.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Source\Monocle.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Source\Scene.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Source\TextureAsset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Source\Vector2.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Source\Vector3.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<Filter
+				Name="Windows"
+				>
+				<File
+					RelativePath=".\Original Source\Windows\OpenGLGraphics.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\Original Source\Windows\WindowsPlatform.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Original Headers"
+			>
+			<File
+				RelativePath=".\Original Headers\Asset.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Headers\Core.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Headers\Debug.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Headers\Entity.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Headers\Graphics.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Headers\Input.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Headers\Math.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Headers\Monocle.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Headers\Platform.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Headers\Scene.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Headers\TextureAsset.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Headers\Vector2.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Original Headers\Vector3.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<Filter
+				Name="Windows"
+				>
+				<File
+					RelativePath=".\Original Headers\Windows\WindowsPlatform.h"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+						/>
+					</FileConfiguration>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>
