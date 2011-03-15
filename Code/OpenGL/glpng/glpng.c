@@ -27,7 +27,15 @@
 #endif
 
 #include "glpng.h"
-#include <gl/GL.h>
+
+#ifdef __APPLE__
+    /* Mac OS X GL headers */
+    #include <OpenGL/gl.h>
+    #include <OpenGL/glext.h>
+#else
+    #include <gl/GL.h>
+#endif
+
 #include <stdlib.h>
 #include <math.h>
 #include "png/png.h"
