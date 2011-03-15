@@ -16,6 +16,8 @@ namespace Marian
 			Debug::Log("Toggle LevelEditor:");
 			Debug::Log(isOn);
 
+			Sprite::showBounds = isOn;
+
 			if (!isOn)
 			{
 				if (selectedSprite)
@@ -84,6 +86,19 @@ namespace Marian
 					selectedSprite->isSelected = true;
 			}
 
+			if (Input::IsKeyPressed(KEY_BACKSPACE))
+			{
+				if (selectedSprite)
+				{
+					Core::GetScene()->Remove(selectedSprite);
+					// hmm... i think Scene::Remove is gonna have to delete this guy for us
+					// we're probably leaking memory right now :)
+					//delete selectedSprite;
+					selectedSprite = NULL;
+					selectedSpriteIndex --;
+				}
+			}
+
 			// manipulate existing sprite
 			if (selectedSprite)
 			{
@@ -125,6 +140,8 @@ namespace Marian
 		}
 	}
 
+	bool Sprite::showBounds = false;
+
 	Sprite::Sprite(const char *filename, float scale)
 		: Entity(), texture(NULL), scale(scale), isSelected(false)
 	{
@@ -149,11 +166,14 @@ namespace Marian
 			Graphics::RenderQuad(texture->width * scale, texture->height * scale);
 		Graphics::PopMatrix();
 
-		if (isSelected)
+		if (showBounds || isSelected)
 		{
 			if (texture != NULL)
 			{
-				Graphics::SetColor(Color::white);
+				if (isSelected)
+					Graphics::SetColor(Color::red);
+				else
+					Graphics::SetColor(Color(0.5f,0.5f,0.5f,0.25f));
 				Graphics::BindTexture(NULL);
 				Graphics::RenderLineRect(position.x, position.y, texture->width * scale, texture->height * scale);
 			}

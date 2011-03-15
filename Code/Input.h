@@ -26,7 +26,10 @@ namespace Monocle
 	private:
 		static Input *instance;
 
-		bool previousKeys [KEY_MAX];
-		bool currentKeys [KEY_MAX];
+		bool previousKeys[KEY_MAX];
+		bool currentKeys[KEY_MAX];
+	
+		bool previousMouseButtons[MOUSE_BUTTON_MAX];
+		bool currentMouseButtons[MOUSE_BUTTON_MAX];
 	};
 }

@@ -15,6 +15,9 @@ namespace Monocle
 	{
 		for (int i = 0; i < (int)KEY_MAX; i++)
 			previousKeys[i] = currentKeys[i] = false;
+
+		for (int i = 0; i < MOUSE_BUTTON_MAX; i++)
+			previousMouseButtons[i] = currentMouseButtons[i] = false;
 	}
 
 	void Input::Update()
@@ -23,6 +26,12 @@ namespace Monocle
 		{
 			previousKeys[i] = currentKeys[i];
 			currentKeys[i] = Platform::keys[i];
+		}
+
+		for (int i = 0; i < MOUSE_BUTTON_MAX; i++)
+		{
+			previousMouseButtons[i] = currentMouseButtons[i];
+			currentMouseButtons[i] = Platform::mouseButtons[i];
 		}
 	}
 
@@ -41,20 +50,23 @@ namespace Monocle
 		return !instance->currentKeys[(int)keyCode] && instance->previousKeys[(int)keyCode];
 	}
 
-	// TODO:
-
-	bool IsMouseButtonHeld(int buttonID)
+	Vector2 Input::GetMousePosition()
 	{
-		return false;
+		return Platform::mousePosition;
 	}
 
-	bool IsMouseButtonReleased(int buttonID)
+	bool Input::IsMouseButtonHeld(int buttonID)
 	{
-		return false;
+		return Platform::mouseButtons[buttonID];
 	}
 
-	bool IsMouseButtonPressed(int buttonID)
+	bool Input::IsMouseButtonReleased(int buttonID)
 	{
-		return false;
+		return !instance->currentMouseButtons[buttonID] && instance->previousMouseButtons[buttonID];
+	}
+
+	bool Input::IsMouseButtonPressed(int buttonID)
+	{
+		return instance->currentMouseButtons[buttonID] && !instance->previousMouseButtons[buttonID];
 	}
 }

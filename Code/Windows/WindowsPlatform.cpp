@@ -222,6 +222,29 @@ namespace Monocle
 
 		return true;
 	}
+	
+	void WindowsPlatform::GetDesktopSize(int *width, int *height)
+	{
+		RECT	rWorkArea;
+		BOOL    bResult;
+
+		// Get the limits of the 'workarea'
+		bResult = SystemParametersInfo(
+			SPI_GETWORKAREA,    // system parameter to query or set
+			sizeof(RECT),
+			&rWorkArea,
+			0);
+
+		if (!bResult)
+		{
+			rWorkArea.left = rWorkArea.top = 0;
+			rWorkArea.right = GetSystemMetrics(SM_CXSCREEN);
+			rWorkArea.bottom = GetSystemMetrics(SM_CYSCREEN);
+		}
+
+		*width = rWorkArea.right;
+		*height = rWorkArea.bottom;
+	}
 
 	void WindowsPlatform::CenterWindow()
 	{
@@ -367,6 +390,42 @@ namespace Monocle
 				return 0;
 			}
 
+			case WM_LBUTTONDOWN:
+			{
+				Platform::SetMouseButton(0, true);
+				return 0;
+			}
+
+			case WM_LBUTTONUP:
+			{
+				Platform::SetMouseButton(0, false);
+				return 0;
+			}
+
+			case WM_RBUTTONDOWN:
+			{
+				Platform::SetMouseButton(1, true);
+				return 0;
+			}
+			
+			case WM_RBUTTONUP:
+			{
+				Platform::SetMouseButton(1, false);
+				return 0;
+			}
+
+			case WM_MBUTTONDOWN:
+			{
+				Platform::SetMouseButton(2, true);
+				return 0;
+			}
+			
+			case WM_MBUTTONUP:
+			{
+				Platform::SetMouseButton(2, false);
+				return 0;
+			}
+
 			case WM_SIZE:
 			{
 				instance->platform->WindowSizeChanged(LOWORD(lParam), HIWORD(lParam));
@@ -381,6 +440,8 @@ namespace Monocle
 	Platform *Platform::instance = NULL;
 
 	bool Platform::keys[KEY_MAX];
+	bool Platform::mouseButtons[3];
+	Vector2 Platform::mousePosition;
 
 	Platform::Platform()
 	{
@@ -529,19 +590,47 @@ namespace Monocle
 
 	void Platform::Update()
 	{
+		// Pump messages
 		MSG msg;	
-		if (PeekMessage(&msg,NULL,0,0,PM_REMOVE))
+		while (PeekMessage(&msg,NULL,0,0,PM_NOREMOVE))
 		{
 			if (msg.message==WM_QUIT)
 			{
 				Core::Quit();
+				break;
 			}
-			else
+
+			if (GetMessage(&msg, NULL, 0, 0) > 0)
 			{
 				TranslateMessage(&msg);
 				DispatchMessage(&msg);
 			}
 		}
+
+		POINT mouse;
+		// get current mouse position
+		GetCursorPos(&mouse);
+
+		// get current size of the desktop
+		int desktopWidth, desktopHeight;
+		WindowsPlatform::GetDesktopSize(&desktopWidth, &desktopHeight);
+
+		// adjust mouse position to fit into window
+		// TODO: this might need refining
+		mousePosition.x = mouse.x - (desktopWidth/2 - width/2);
+		mousePosition.y = mouse.y - (desktopHeight/2 - height/2);
+
+		/*
+		printf("mouse (%d, %d)\n", mouse.x, mouse.y);
+		printf("desktop (%d, %d)\n", desktopWidth, desktopHeight);
+		printf("mousePosition (%f, %f)\n", mousePosition.x, mousePosition.y);
+		printf("mouseButtons: %d, %d, %d", mouseButtons[0], mouseButtons[1], mouseButtons[2]);
+		*/
+	}
+
+	void Platform::SetMouseButton(int button, bool on)
+	{
+		mouseButtons[button] = on;
 	}
 
 	long Platform::GetMilliseconds()

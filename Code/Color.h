@@ -11,5 +11,11 @@ namespace Monocle
 		float r, g, b, a;
 
 		static Color white;
+		static Color grey;
+		static Color black;
+		static Color red;
+		static Color green;
+		static Color blue;
+		static Color yellow;
 	};
 }

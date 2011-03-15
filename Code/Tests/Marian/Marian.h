@@ -30,6 +30,8 @@ namespace Marian
 		float scale;
 
 		bool isSelected;
+
+		static bool showBounds;
 	};
 
 	class TitleScene : public Scene

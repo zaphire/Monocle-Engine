@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Vector2.h"
+
 namespace Monocle
 {
 	enum KeyCode
@@ -118,6 +120,14 @@ namespace Monocle
 		KEY_MAX = 323
 	};
 
+	enum MouseButton
+	{
+		MOUSE_BUTTON_LEFT=0,
+		MOUSE_BUTTON_RIGHT,
+		MOUSE_BUTTON_MIDDLE,
+		MOUSE_BUTTON_MAX
+	};
+
 	class Platform
 	{
 	public:
@@ -134,8 +144,11 @@ namespace Monocle
 		static int GetHeight();
 
 		static bool keys[KEY_MAX];
+		static bool mouseButtons[MOUSE_BUTTON_MAX];
+		static Vector2 mousePosition;
 
 		static void SetLocalKey(int key, bool on);
+		static void SetMouseButton(int button, bool on);
 
 		void WindowSizeChanged(int w, int h);
 
