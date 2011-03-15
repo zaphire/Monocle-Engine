@@ -54,4 +54,21 @@ namespace Monocle
 		this->tag = tag;
 		scene->RetagEntity(this, oldTag);
 	}
+
+	int Entity::GetLayer()
+	{
+		return layer;
+	}
+
+	void Entity::SetLayer(int layer)
+	{
+		this->layer = layer;
+
+		//TODO: get scene to re-sort me
+	}
+
+	bool Entity::IsLayer(int layer)
+	{
+		return this->layer == layer;
+	}
 }

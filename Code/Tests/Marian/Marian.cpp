@@ -96,7 +96,7 @@ namespace Marian
 				if (selectedSprite)
 					selectedSprite->isSelected = false;
 
-				selectedSprite = new Sprite("../../../../../Content/Marian/Title.png", 0.003f);
+				selectedSprite = new Sprite(0, "../../../../../Content/Marian/Title.png", 0.003f);
 				Tween::FromTo(&selectedSprite->color.a, 0.0f, 1.0f, 0.5f, EASE_LINEAR);
 				Core::GetScene()->Add(selectedSprite);
 
@@ -160,9 +160,10 @@ namespace Marian
 
 	bool Sprite::showBounds = false;
 
-	Sprite::Sprite(const char *filename, float scale)
+	Sprite::Sprite(int layer, const char *filename, float scale)
 		: Entity(), texture(NULL), scale(scale), isSelected(false)
 	{
+		SetLayer(layer);
 		texture = AssetDatabase::RequestTexture(filename);
 	}
 
@@ -208,11 +209,10 @@ namespace Marian
 
 		Sprite *sprite = NULL;
 		
-		sprite = new Sprite("../../../../../Content/Marian/ReverieSky.png", 0.01f);
-		sprite->depth = -5.0f;
+		sprite = new Sprite(-20, "../../../../../Content/Marian/ReverieSky.png", 0.01f);
 		Add(sprite);
 
-		sprite = new Sprite("../../../../../Content/Marian/Title.png", 0.003f);
+		sprite = new Sprite(-10, "../../../../../Content/Marian/Title.png", 0.003f);
 		Tween::FromTo(&sprite->color.a, 0.0f, 1.0f, 5.0f, EASE_OUTSIN);
 		Add(sprite);
 	}

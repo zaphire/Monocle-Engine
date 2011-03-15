@@ -18,7 +18,6 @@ namespace Monocle
 		~Entity();
 
 		Vector2 position;
-		int layer;
 		float depth;
 
 		//The scene that contains the entity
@@ -39,7 +38,12 @@ namespace Monocle
 		//Get and set the tag
 		const string& GetTag();
 		void SetTag(string tag);
+
+		bool IsLayer(int layer);
+		int GetLayer();
+		void SetLayer(int layer);
 	private:
 		string tag;
+		int layer;
 	};
 }

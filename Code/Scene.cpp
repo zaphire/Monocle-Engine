@@ -39,9 +39,23 @@ namespace Monocle
 	{
 		//Render all the entities
 		// sort by layer?
-		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+
+		const int MAX_LAYER = 100;
+		const int MIN_LAYER = -100;
+
+		printf("\n\n****\n");
+
+		///HACK: this next line is a hack - temporary only
+		for (int layer = MAX_LAYER; layer >= MIN_LAYER; layer--)
 		{
-			(*i)->Render();
+			for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+			{
+				if ((*i)->IsLayer(layer))
+				{
+					printf("rendering layer -> %d\n", layer);
+					(*i)->Render();
+				}
+			}
 		}
 	}
 
