@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibAutoBind", "Utility\LibA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoBind", "Utility\AutoBind\AutoBind.csproj", "{76F2CFAC-B767-4A89-9BD2-96B099C5B909}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Code\ProjectFiles\MSVC2008\Engine\Engine.vcproj", "{39E954D0-3C8B-4C9E-868B-963AA0892121}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine\Core\Engine.vcproj", "{39E954D0-3C8B-4C9E-868B-963AA0892121}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -14,7 +14,7 @@
 	</Platforms>
 	<ToolFiles>
 		<ToolFile
-			RelativePath="..\..\..\..\Utility\AutoBind\AutoBind.rules"
+			RelativePath="..\..\Utility\AutoBind\AutoBind.rules"
 		/>
 	</ToolFiles>
 	<Configurations>
