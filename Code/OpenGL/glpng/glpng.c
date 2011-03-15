@@ -24,10 +24,14 @@
 #ifdef _WIN32 /* Stupid Windows needs to include windows.h before gl.h */
 	#undef FAR
 	#include <windows.h>
+    #include <gl/GL.h>
+#else
+    /* Mac OS X header */
+    #include <OpenGL/gl.h>
+    #include <OpenGL/glext.h>
 #endif
 
 #include "glpng.h"
-#include <gl/GL.h>
 #include <stdlib.h>
 #include <math.h>
 #include "png/png.h"
