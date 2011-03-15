@@ -4,8 +4,10 @@
 #include <list>
 #include <map>
 #include <string>
+#include <vector>
 #include "Entity.h"
 
+using std::vector;
 using std::list;
 using std::map;
 using std::string;
@@ -44,6 +46,11 @@ namespace Monocle
 		//Called by an entity when its tag has changed; the scene must reposition that entity in the tag map
 		void EntityAddTag(Entity* entity, const string& tag);
 		void EntityRemoveTag(Entity* entity, const string& tag);
+
+		//Tag API
+		Entity* GetFirstTag(const string& tag);
+		list<Entity*>* GetAllTag(const string& tag);
+		int GetAmountTag(const string& tag);
 
 		//HACK: test function
 		Entity *GetEntity(int index);

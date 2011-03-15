@@ -194,4 +194,28 @@ namespace Monocle
 
 		return nearestEntity;
 	}
+
+	Entity* Scene::GetFirstTag(const string& tag)
+	{
+		if (tagMap.count(tag) == 0 || tagMap[tag].size() == 0)
+			return NULL;
+		
+		return tagMap[tag].front();
+	}
+
+	list<Entity*>* Scene::GetAllTag(const string& tag)
+	{
+		if (tagMap.count(tag) == 0)
+			return NULL;
+		else
+			return &tagMap[tag];
+	}
+
+	int Scene::GetAmountTag(const string& tag)
+	{
+		if (tagMap.count(tag) == 0)
+			return 0;
+		
+		return tagMap[tag].size();
+	}
 }
