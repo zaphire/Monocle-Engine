@@ -10,14 +10,10 @@ namespace Monocle
 	Vector2 Vector2::left = Vector2(-1, 0);
 	Vector2 Vector2::right = Vector2(1, 0);
 
-	Vector2::Vector2()
-		: x(0.0f), y(0.0f)
-	{
-	}
-
 	Vector2::Vector2(float x, float y)
-		: x(x), y(y)
 	{
+		this->x = x;
+		this->y = y;
 	}
 
 	float Vector2::GetSquaredMagnitude()
@@ -71,5 +67,105 @@ namespace Monocle
 	float Vector2::Dot(Vector2 b)
 	{
 		return (x * b.x + y * b.y);
+	}
+	
+	float Vector2::Cross(Vector2 b)
+	{
+		return (x * b.y - y * b.x);
+	}
+	
+	float Vector2::operator[](int i)
+	{
+		if (i <= 0)
+		{
+			return x;
+		}
+		else
+		{
+			return y;
+		}
+	}
+	
+	Vector2& Vector2::operator=(const Vector2& rhs)
+	{
+		if (&rhs != this)
+		{
+			x = rhs.x;
+			y = rhs.y;
+		}
+		return *this;
+	}
+	
+	bool Vector2::operator==(const Vector2& rhs)
+	{
+		return ((x == rhs.x) && (y == rhs.y));
+	}
+	
+	bool Vector2::operator!=(const Vector2& rhs)
+	{
+		return ((x != rhs.x) || (y != rhs.y));
+	}
+	
+	Vector2& Vector2::operator+=(const Vector2& rhs)
+	{
+		x = x + rhs.x;
+		y = y + rhs.y;
+		return *this;
+	}
+	
+	Vector2& Vector2::operator-=(const Vector2& rhs)
+	{
+		x = x - rhs.x;
+		y = y - rhs.y;
+		return *this;
+	}
+	
+	Vector2& Vector2::operator*=(float rhs)				// scalar multiplication
+	{
+		x = x * rhs;
+		y = y * rhs;
+		return *this;
+	}
+	
+	Vector2& Vector2::operator/=(float rhs)				// scalar inverse multiplication
+	{
+		x = x / rhs;
+		y = y / rhs;
+		return *this;
+	}
+
+	Vector2 operator+(const Vector2& lhs, const Vector2& rhs)
+	{
+		return Vector2(lhs.x + rhs.x, lhs.y + rhs.y);
+	}
+	
+	Vector2 operator-(const Vector2& lhs, const Vector2& rhs)
+	{
+		return Vector2(lhs.x - rhs.x, lhs.y - rhs.y);
+	}
+	
+	Vector2 operator*(float lhs, const Vector2& rhs)		// left scalar multiplication
+	{
+		return Vector2(lhs * rhs.x, lhs * rhs.y);
+	}
+	
+	Vector2 operator*(const Vector2& lhs, float rhs)		// right scalar multiplication
+	{
+		return Vector2(lhs.x * rhs, lhs.y * rhs);
+	}
+	
+	Vector2 operator/(const Vector2& lhs, float rhs)		// right scalar inverse multiplication
+	{
+		return Vector2(lhs.x / rhs, lhs.y / rhs);
+	}
+	
+	float operator*(const Vector2& lhs, const Vector2& rhs)		// dot product
+	{
+		return lhs.x * rhs.x + lhs.y * rhs.y;
+	}
+	
+	float operator^(const Vector2& lhs, const Vector2& rhs)		// cross product
+	{
+		return lhs.x * rhs.y - lhs.y * rhs.x;
 	}
 }
