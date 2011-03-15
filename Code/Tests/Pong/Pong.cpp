@@ -24,11 +24,11 @@ namespace Pong
 
 	void Paddle::Update()
 	{
-		if (Input::IsKeyPressed(keyUp))
+		if (Input::IsKeyHeld(keyUp))
 		{
 			position += Vector2::up * Monocle::deltaTime;
 		}
-		if (Input::IsKeyPressed(keyDown))
+		if (Input::IsKeyHeld(keyDown))
 		{
 			position += Vector2::down * Monocle::deltaTime;
 		}
