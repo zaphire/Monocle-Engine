@@ -15,4 +15,34 @@ namespace Monocle
 
 		std::cout << outputString << std::endl;
 	}
+
+	void Debug::Log(int num)
+	{
+		std::cout << num << std::endl;
+	}
+
+	void Debug::Log(long num)
+	{
+		std::cout << num << std::endl;
+	}
+
+	void Debug::Log(float num)
+	{
+		std::cout << num << std::endl;
+	}
+
+	void Debug::Log(double num)
+	{
+		std::cout << num << std::endl;
+	}
+
+	void Debug::Log(Vector2 vec)
+	{
+		std::cout << "Vector2: (" << vec.x << ", " << vec.y << ")" << std::endl;
+	}
+
+	void Debug::Log(Vector3 vec)
+	{
+		std::cout << "Vector3: (" << vec.x << ", " << vec.y << ", " << vec.z << ")" << std::endl;
+	}
 }
