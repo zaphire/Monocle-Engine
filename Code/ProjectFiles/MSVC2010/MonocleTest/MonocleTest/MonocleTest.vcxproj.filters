@@ -113,5 +113,8 @@
     <ClCompile Include="..\..\..\..\Tests\Pong\Pong.cpp">
       <Filter>Monocle\Tests\Pong</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\TextureAsset.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

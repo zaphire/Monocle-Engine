@@ -1,6 +1,8 @@
 #include "WindowsPlatform.h"
 #include "../Debug.h"
 
+#include "Mmsystem.h"
+
 // opengl/windows init code borrowed from http://nehe.gamedev.net
 
 namespace Monocle
@@ -286,6 +288,11 @@ namespace Monocle
 	{
 		// do fugly windows key stuff
 		return false;
+	}
+
+	long Platform::GetMilliseconds()
+	{
+		return (long)timeGetTime();
 	}
 
 }

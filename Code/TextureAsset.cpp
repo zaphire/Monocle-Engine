@@ -3,18 +3,18 @@
 namespace Monocle
 {
 	TextureAsset::TextureAsset()
+		: Asset(AssetType::Texture)
 	{
 	}
 
 	void TextureAsset::Load(const char *filename)
 	{
-		Asset::Load();
+		// load from file
+		// switch off extension to figure out filetype?
 
-		// load from file, whatever the file is
 	}
 
 	void TextureAsset::Unload()
 	{
-		Asset::Unload();
 	}
 }

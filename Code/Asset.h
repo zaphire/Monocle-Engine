@@ -5,7 +5,7 @@ namespace Monocle
 	enum AssetType
 	{
 		Undefined,
-		Image,
+		Texture,
 		Audio,
 		/*
 		Mesh,
@@ -18,7 +18,7 @@ namespace Monocle
 	class Asset
 	{
 	public:
-		Asset();
+		Asset(AssetType type);
 
 		const char *name; // <- what string class are we using?
 
@@ -31,7 +31,7 @@ namespace Monocle
 		void AddReference();
 		void RemoveReference();
 
-		virtual void Load(const char *filename);
-		virtual void Unload();
+		virtual void Load(const char *filename) = 0;
+		virtual void Unload() = 0;
 	};
 }

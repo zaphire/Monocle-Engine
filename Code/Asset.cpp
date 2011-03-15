@@ -2,7 +2,8 @@
 
 namespace Monocle
 {
-	Asset::Asset()
+	Asset::Asset(AssetType type)
+		: type(type)
 	{
 		name = "\0";
 		isCached = false;
@@ -28,6 +29,7 @@ namespace Monocle
 		}
 	}
 
+	/*
 	void Asset::Load(const char *filename)
 	{
 
@@ -37,4 +39,5 @@ namespace Monocle
 	{
 
 	}
+	*/
 }
