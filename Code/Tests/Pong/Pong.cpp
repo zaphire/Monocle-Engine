@@ -22,6 +22,12 @@ namespace Pong
 		Graphics::PopMatrix();
 	}
 
+	Paddle::Paddle()
+		: Entity("paddle")
+	{
+
+	}
+
 	void Paddle::Update()
 	{
 		if (Input::IsKeyHeld(keyUp))
