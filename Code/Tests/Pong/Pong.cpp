@@ -3,9 +3,8 @@
 
 namespace Pong
 {
-	Ball::Ball() : Entity()
+	Ball::Ball() : Entity(), texture(NULL)
 	{
-		texture = (TextureAsset*)AssetDatabase::RequestAsset(AT_TEXTURE, "blah.png");
 	}
 
 	void Ball::Update()
@@ -23,21 +22,43 @@ namespace Pong
 	}
 
 	Paddle::Paddle()
-		: Entity("paddle")
+		: Entity("paddle"), speed(0.0f)
 	{
 
 	}
 
 	void Paddle::Update()
 	{
+		const float accel = 8.0f;
+		const float maxSpeed = 3.0f;
+		const float friction = 4.0f;
 		if (Input::IsKeyHeld(keyUp))
 		{
-			position += Vector2::up * Monocle::deltaTime;
+			speed += accel * Monocle::deltaTime;
+			if (speed > maxSpeed) speed = maxSpeed;
 		}
-		if (Input::IsKeyHeld(keyDown))
+		else if (Input::IsKeyHeld(keyDown))
 		{
-			position += Vector2::down * Monocle::deltaTime;
+			speed -= accel * Monocle::deltaTime;
+			if (speed < -maxSpeed) speed = -maxSpeed;
 		}
+		else
+		{
+			if (speed > 0.0f)
+			{
+				speed -= friction * Monocle::deltaTime;
+			}
+			else if (speed < 0.0f)
+			{
+				speed += friction * Monocle::deltaTime;
+			}
+
+			if (abs(speed) < 0.05f)
+			{
+				speed = 0.0f;
+			}
+		}
+		position += Vector2::up * Monocle::deltaTime * speed;
 	}
 
 	void Paddle::Render()

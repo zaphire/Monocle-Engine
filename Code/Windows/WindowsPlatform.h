@@ -38,6 +38,7 @@ namespace Monocle
 		bool CreatePlatformWindow(const char* title, int width, int height, int bits, bool fullscreenflag);
 		void KillPlatformWindow();
 		static LRESULT CALLBACK WndProc(	HWND	hWnd, UINT	uMsg, WPARAM	wParam, LPARAM	lParam);
+		void CenterWindow();
 	};
 
 }

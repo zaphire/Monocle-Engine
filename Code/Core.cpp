@@ -22,9 +22,9 @@ namespace Monocle
 
 	void Core::Init()
 	{
-		assetDatabase.Init();
-		platform.Init();
 		debug.Init();
+		platform.Init();
+		assetDatabase.Init();
 		input.Init();
 		graphics.Init();
 	}

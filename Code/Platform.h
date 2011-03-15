@@ -124,6 +124,7 @@ namespace Monocle
 		Platform();
 
 		void Init();
+		void Init(int w, int h, int bits, bool fullscreen);
 		void Update();
 
 		static long GetMilliseconds();

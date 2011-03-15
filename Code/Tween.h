@@ -17,6 +17,8 @@ namespace Monocle
 		EASE_MAX
 	};
 
+	class Tweener;
+
 	class Tween
 	{
 	public:
@@ -26,16 +28,23 @@ namespace Monocle
 		static void Update();
 		static void Clear();
 		static float Ease(float p, EaseType easeType);
+		static void Remove(Tweener *tweener);
 
 	private:
-		Tween(float *value, float end, float time, EaseType easeType);
-		void UpdateOne();
+		static std::list<Tweener*> tweeners;
+		static std::list<Tweener*> tweenersToRemove;
+	};
 
+	class Tweener
+	{
+	private:
+		friend class Tween;
+		Tweener(float *value, float end, float time, EaseType easeType);
+		
 		float *value;
 		float timer, time, end, start;
 		EaseType easeType;
 
-		static std::list<Tween*> tweens;
-		static std::list<Tween*> tweensToRemove;
+		void Update();
 	};
 }

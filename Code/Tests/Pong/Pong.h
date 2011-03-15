@@ -14,6 +14,8 @@ namespace Pong
 
 		KeyCode keyUp;
 		KeyCode keyDown;
+
+		float speed;
 	};
 
 	class Ball : public Entity
