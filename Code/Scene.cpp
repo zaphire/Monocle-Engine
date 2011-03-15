@@ -26,7 +26,7 @@ namespace Monocle
 	void Scene::Update()
 	{
 		//Update all the entities
-		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); i++)
+		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 		{
 			(*i)->Update();
 		}
@@ -38,7 +38,7 @@ namespace Monocle
 	void Scene::Render()
 	{
 		//Render all the entities
-		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); i++)
+		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 		{
 			(*i)->Render();
 		}
@@ -48,7 +48,7 @@ namespace Monocle
 	{
 #if DEBUG
 		//Error: If the entity is already in the scene
-		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); i++)
+		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 		{
 			if ((*i) == entity)
 			{
@@ -58,7 +58,7 @@ namespace Monocle
 		}
 
 		//Error: If the entity is already marked to be added
-		for (list<Entity*>::iterator i = toAdd.begin(); i != toAdd.end(); i++)
+		for (list<Entity*>::iterator i = toAdd.begin(); i != toAdd.end(); ++i)
 		{
 			if ((*i) == entity)
 			{
@@ -76,7 +76,7 @@ namespace Monocle
 #if DEBUG
 		//Error: If the entity isn't in the entity list
 		bool in = false;
-		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); i++)
+		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 		{
 			if ((*i) == entity)
 			{
@@ -88,7 +88,7 @@ namespace Monocle
 			Debug::Log("Removing an entity from the scene that isn't in the scene.");
 
 		//Error: If the entity is already marked to be removed
-		for (list<Entity*>::iterator i = toRemove.begin(); i != toRemove.end(); i++)
+		for (list<Entity*>::iterator i = toRemove.begin(); i != toRemove.end(); ++i)
 		{
 			if ((*i) == entity)
 			{
@@ -104,14 +104,14 @@ namespace Monocle
 	void Scene::RemoveAll()
 	{
 		toRemove.clear();
-		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); i++)
+		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 			toRemove.push_back(*i);
 	}
 
 	void Scene::ResolveEntityChanges()
 	{
 		//Resolve removes
-		for (list<Entity*>::iterator i = toRemove.begin(); i != toRemove.end(); i++)
+		for (list<Entity*>::iterator i = toRemove.begin(); i != toRemove.end(); ++i)
 		{
 			entities.remove(*i);
 			(*i)->Removed();
@@ -119,7 +119,7 @@ namespace Monocle
 		toRemove.clear();
 
 		//Resolve adds
-		for (list<Entity*>::iterator i = toAdd.begin(); i != toAdd.end(); i++)
+		for (list<Entity*>::iterator i = toAdd.begin(); i != toAdd.end(); ++i)
 		{
 			entities.push_back(*i);
 			(*i)->Added();
