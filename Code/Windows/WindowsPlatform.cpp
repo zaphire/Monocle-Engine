@@ -162,19 +162,6 @@ namespace Monocle
 		//return true;
 		SetForegroundWindow(hWnd);
 		SetFocus(hWnd);
-
-		/*
-		ReSizeGLScene(width, height);					// Set Up Our Perspective GL Screen
-
-		if (!InitGL())									// Initialize Our Newly Created GL Window
-		{
-			KillGLWindow();								// Reset The Display
-			MessageBox(NULL,"Initialization Failed.","ERROR",MB_OK|MB_ICONEXCLAMATION);
-			return FALSE;								// Return FALSE
-		}
-
-		return TRUE;									// Success
-		*/
 	}
 
 	void WindowsPlatform::KillPlatformWindow()								// Properly Kill The Window
@@ -258,13 +245,13 @@ namespace Monocle
 
 			case WM_KEYDOWN:							// Is A Key Being Held Down?
 			{
-				instance->keys[wParam] = true;					// If So, Mark It As TRUE
+				instance->platform->keys[wParam] = true;					// If So, Mark It As TRUE
 				return 0;								// Jump Back
 			}
 
 			case WM_KEYUP:								// Has A Key Been Released?
 			{
-				instance->keys[wParam] = false;					// If So, Mark It As FALSE
+				instance->platform->keys[wParam] = false;					// If So, Mark It As FALSE
 				return 0;								// Jump Back
 			}
 
@@ -288,6 +275,11 @@ namespace Monocle
 	{
 		// make a default window?
 		WindowsPlatform::instance->CreatePlatformWindow("Title", 800, 600, 32, false);
+	}
+
+	void Platform::Update()
+	{
+
 	}
 
 	bool Platform::IsKeyPressed(KeyCode keyCode)

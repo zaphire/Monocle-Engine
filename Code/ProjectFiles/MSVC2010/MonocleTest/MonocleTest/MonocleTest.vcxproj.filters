@@ -54,6 +54,12 @@
     <ClInclude Include="..\..\..\..\Vector3.h">
       <Filter>Monocle</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Asset.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TextureAsset.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Monocle.cpp">
@@ -90,6 +96,9 @@
       <Filter>Monocle</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Vector3.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Asset.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
   </ItemGroup>

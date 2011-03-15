@@ -61,6 +61,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Asset.h" />
     <ClInclude Include="..\..\..\..\Core.h" />
     <ClInclude Include="..\..\..\..\Debug.h" />
     <ClInclude Include="..\..\..\..\Entity.h" />
@@ -70,11 +71,13 @@
     <ClInclude Include="..\..\..\..\Monocle.h" />
     <ClInclude Include="..\..\..\..\Platform.h" />
     <ClInclude Include="..\..\..\..\Scene.h" />
+    <ClInclude Include="..\..\..\..\TextureAsset.h" />
     <ClInclude Include="..\..\..\..\Vector2.h" />
     <ClInclude Include="..\..\..\..\Vector3.h" />
     <ClInclude Include="..\..\..\..\Windows\WindowsPlatform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\Asset.cpp" />
     <ClCompile Include="..\..\..\..\Core.cpp" />
     <ClCompile Include="..\..\..\..\Debug.cpp" />
     <ClCompile Include="..\..\..\..\Entity.cpp" />

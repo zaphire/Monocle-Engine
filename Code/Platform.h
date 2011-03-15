@@ -12,14 +12,19 @@ namespace Monocle
 		LeftArrow,
 		RightArrow,
 		UpArrow,
-		DownArrow
+		DownArrow,
+		Max
 	};
 
 	class Platform
 	{
 	public:
 		Platform();
+
 		void Init();
 		bool IsKeyPressed(KeyCode keyCode);
+		void Update();
+
+		int keys[KeyCode::Max];
 	};
 }
