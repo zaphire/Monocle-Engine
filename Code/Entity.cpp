@@ -43,12 +43,12 @@ namespace Monocle
 
 	}
 
-	const string& Entity::getTag()
+	const string& Entity::GetTag()
 	{
 		return tag;
 	}
 
-	void Entity::setTag(string tag)
+	void Entity::SetTag(string tag)
 	{
 		string oldTag = this->tag;
 		this->tag = tag;

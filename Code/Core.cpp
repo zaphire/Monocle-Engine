@@ -43,6 +43,7 @@ namespace Monocle
 		while (!isDone)
 		{
 			platform.Update();
+			tween.Update();
 
 			//Switch scenes if necessary
 			if (switchScenes)

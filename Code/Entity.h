@@ -37,8 +37,8 @@ namespace Monocle
 		virtual void Removed();
 
 		//Get and set the tag
-		const string& getTag();
-		void setTag(string tag);
+		const string& GetTag();
+		void SetTag(string tag);
 	private:
 		string tag;
 	};

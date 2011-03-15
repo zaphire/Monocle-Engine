@@ -6,6 +6,7 @@
 #include "Debug.h"
 #include "Scene.h"
 #include "AssetDatabase.h"
+#include "Tween.h"
 
 namespace Monocle
 {
@@ -25,6 +26,7 @@ namespace Monocle
 		Graphics graphics;
 		Debug debug;
 		AssetDatabase assetDatabase;
+		Tween tween;
 
 		static void Quit();
 

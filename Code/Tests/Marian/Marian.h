@@ -1,5 +1,7 @@
 #include "../../Monocle.h"
 #include "../../TextureAsset.h"
+#include "../../Tween.h"
+#include "../../Color.h"
 
 using namespace Monocle;
 
@@ -12,6 +14,8 @@ namespace Marian
 		Sprite();
 		void Render();
 		TextureAsset *texture;
+		Color color;
+		float scale;
 	};
 
 	class TitleScene : public Scene

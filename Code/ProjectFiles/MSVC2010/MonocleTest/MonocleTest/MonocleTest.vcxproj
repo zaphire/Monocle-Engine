@@ -64,6 +64,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Asset.h" />
     <ClInclude Include="..\..\..\..\AssetDatabase.h" />
+    <ClInclude Include="..\..\..\..\Color.h" />
     <ClInclude Include="..\..\..\..\Core.h" />
     <ClInclude Include="..\..\..\..\Debug.h" />
     <ClInclude Include="..\..\..\..\Entity.h" />
@@ -89,6 +90,7 @@
     <ClInclude Include="..\..\..\..\Tests\Marian\Marian.h" />
     <ClInclude Include="..\..\..\..\Tests\Pong\Pong.h" />
     <ClInclude Include="..\..\..\..\TextureAsset.h" />
+    <ClInclude Include="..\..\..\..\Tween.h" />
     <ClInclude Include="..\..\..\..\Vector2.h" />
     <ClInclude Include="..\..\..\..\Vector3.h" />
     <ClInclude Include="..\..\..\..\Windows\WindowsPlatform.h" />
@@ -96,6 +98,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Asset.cpp" />
     <ClCompile Include="..\..\..\..\AssetDatabase.cpp" />
+    <ClCompile Include="..\..\..\..\Color.cpp" />
     <ClCompile Include="..\..\..\..\Core.cpp" />
     <ClCompile Include="..\..\..\..\Debug.cpp" />
     <ClCompile Include="..\..\..\..\Entity.cpp" />
@@ -131,6 +134,7 @@
     <ClCompile Include="..\..\..\..\Scene.cpp" />
     <ClCompile Include="..\..\..\..\Tests\Marian\Marian.cpp" />
     <ClCompile Include="..\..\..\..\Tests\Pong\Pong.cpp" />
+    <ClCompile Include="..\..\..\..\Tween.cpp" />
     <ClCompile Include="..\..\..\..\Vector2.cpp" />
     <ClCompile Include="..\..\..\..\Vector3.cpp" />
     <ClCompile Include="..\..\..\..\Windows\OpenGLGraphics.cpp" />

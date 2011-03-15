@@ -129,6 +129,12 @@
     <ClInclude Include="..\..\..\..\Tests\Marian\Marian.h">
       <Filter>Monocle\Tests\Marian</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Tween.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Color.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Monocle.cpp">
@@ -253,6 +259,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Tests\Marian\Marian.cpp">
       <Filter>Monocle\Tests\Marian</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Tween.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Color.cpp">
+      <Filter>Monocle</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

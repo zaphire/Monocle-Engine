@@ -26,15 +26,23 @@ namespace Monocle
 		pngInfo info;
 		glGenTextures(1, &texID);
 		glBindTexture(GL_TEXTURE_2D, texID);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		// choose GL_NEAREST or PNG_NOMIPMAPS
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 
-		if (pngLoad(filename, PNG_NOMIPMAP, PNG_ALPHA, &info))
+		if (pngLoad(filename, PNG_BUILDMIPMAPS, PNG_ALPHA, &info))
 		{
-			Debug::Log("Loaded with resounding success:");
+			width = info.Width;
+			height = info.Height;
+
+			Debug::Log("Loaded texture:");
 			Debug::Log(filename);
+			Debug::Log((int)width);
+			Debug::Log((int)height);
+
+
 			//printf("Size=%i,%i Depth=%i Alpha=%i\n", info.Width, info.Height, info.Depth, info.Alpha);
 		}
 		else

@@ -4,6 +4,7 @@
 #include "../Debug.h"
 #include "../Platform.h"
 #include "../TextureAsset.h"
+#include "../Color.h"
 
 #ifdef MONOCLE_WINDOWS
 	#define WIN32_LEAN_AND_MEAN
@@ -48,7 +49,7 @@ namespace Monocle
 	}
 
 	// temporary
-	void Graphics::Alpha()
+	void Graphics::Blend()
 	{
 		glBlendFunc(GL_SRC_ALPHA,GL_ONE);
 	}
@@ -129,6 +130,11 @@ namespace Monocle
 		glEnd();
 	}
 
+	void Graphics::SetColor(const Color &color)
+	{
+		glColor4f(color.r, color.g, color.b, color.a);
+	}
+
 	void Graphics::RenderQuad(float width, float height)
 	{
 		float halfWidth = width*0.5f;
@@ -136,9 +142,13 @@ namespace Monocle
 
 		glBegin(GL_QUADS);
 			glVertex3f(-halfWidth, -halfHeight, 0.0f);
+			glTexCoord2f(1, 1);
 			glVertex3f(halfWidth, -halfHeight, 0.0f);
+			glTexCoord2f(1, 0);
 			glVertex3f(halfWidth, halfHeight, 0.0f);
+			glTexCoord2f(0, 0);
 			glVertex3f(-halfWidth, halfHeight, 0.0f);
+			glTexCoord2f(0, 1);
 		glEnd();
 	}
 

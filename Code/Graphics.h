@@ -2,6 +2,7 @@
 
 #include "Vector2.h"
 #include "Vector3.h"
+#include "Color.h"
 
 namespace Monocle
 {
@@ -30,7 +31,8 @@ namespace Monocle
 		static void RenderQuad(float width, float height);
 		static void PushMatrix();
 		static void PopMatrix();
-		static void Alpha();
+		static void Blend();
+		static void SetColor(const Color &color);
 
 	private:
 		static Graphics *instance;
