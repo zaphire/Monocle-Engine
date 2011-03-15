@@ -10,5 +10,6 @@ namespace Monocle
 		TextureAsset();
 		void Load(const char *filename);
 		void Unload();
+		void Bind();
 	};
 }
