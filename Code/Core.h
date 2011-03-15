@@ -5,6 +5,8 @@
 #include "Graphics.h"
 #include "Debug.h"
 #include "Scene.h"
+#include "AssetDatabase.h"
+#include "Tween.h"
 
 namespace Monocle
 {
@@ -23,8 +25,15 @@ namespace Monocle
 		Input input;
 		Graphics graphics;
 		Debug debug;
+		AssetDatabase assetDatabase;
+		Tween tween;
+
+		static void Quit();
 
 	private:
+		static Core *instance;
+
+		bool isDone;
 		//The currently running scene
 		Scene* scene;
 
@@ -33,5 +42,7 @@ namespace Monocle
 
 		//Whether the game should switch scenes at the end of the frame
 		bool switchScenes;
+
+
 	};
 }

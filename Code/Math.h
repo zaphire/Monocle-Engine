@@ -4,9 +4,11 @@ namespace Monocle
 {
 	class Math
 	{
-		const float PI;
-		const float Rad2Deg;
-		const float Deg2Rad;
+	public:
+
+		static float PI;
+		static float Rad2Deg;
+		static float Deg2Rad;
 
 		Math();
 	};

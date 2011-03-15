@@ -8,18 +8,25 @@ namespace Monocle
 	class Input
 	{
 	public:
+		Input();
 		void Init();
 
-		bool IsMouseButtonDown();
-		bool IsMouseButtonUp();
-		bool IsMouseButtonPressed();
+		static bool IsMouseButtonHeld(int buttonID);
+		static bool IsMouseButtonReleased(int buttonID);
+		static bool IsMouseButtonPressed(int buttonID);
 
-		Vector2 GetMousePosition();
+		static Vector2 GetMousePosition();
 
-		bool IsKeyDown(KeyCode keyCode);
-		bool IsKeyUp(KeyCode keyCode);
-		bool IsKeyPressed(KeyCode keyCode);
+		static bool IsKeyHeld(KeyCode keyCode);
+		static bool IsKeyReleased(KeyCode keyCode);
+		static bool IsKeyPressed(KeyCode keyCode);
 
 		void Update();
+		
+	private:
+		static Input *instance;
+
+		bool previousKeys [KEY_MAX];
+		bool currentKeys [KEY_MAX];
 	};
 }

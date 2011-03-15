@@ -2,9 +2,12 @@
 
 #include "Vector2.h"
 #include "Vector3.h"
+#include "Color.h"
 
 namespace Monocle
 {
+	class TextureAsset;
+
 	class Graphics
 	{
 	public:
@@ -16,6 +19,9 @@ namespace Monocle
 		void EndFrame();
 		void ShowBuffer();
 
+		static void Resize(int w, int h);
+
+		static void BindTexture(TextureAsset* textureAsset);
 		static void SetCameraPosition(const Vector3 &position);
 		static void Translate(float x, float y, float z);
 		static void Translate(Vector2 pos);
@@ -25,10 +31,12 @@ namespace Monocle
 		static void RenderQuad(float width, float height);
 		static void PushMatrix();
 		static void PopMatrix();
+		static void Blend();
+		static void SetColor(const Color &color);
 
-		Vector3 cameraPosition;
-
+	private:
 		static Graphics *instance;
+		Vector3 cameraPosition;
 	};
 
 }

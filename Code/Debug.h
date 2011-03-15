@@ -10,6 +10,7 @@ namespace Monocle
 	public:
 		void Init();
 		static void Log(const char *string);
+		static void Log(bool boolean);
 		static void Log(int num);
 		static void Log(long num);
 		static void Log(float num);

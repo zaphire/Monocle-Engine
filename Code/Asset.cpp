@@ -8,7 +8,7 @@ namespace Monocle
 		name = "\0";
 		isCached = false;
 		referenceCount = 0;
-		type = AssetType::Undefined;
+		type = AT_UNDEFINED;
 	}
 
 	void Asset::AddReference()

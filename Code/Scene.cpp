@@ -38,6 +38,7 @@ namespace Monocle
 	void Scene::Render()
 	{
 		//Render all the entities
+		// sort by layer?
 		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 		{
 			(*i)->Render();
@@ -114,7 +115,12 @@ namespace Monocle
 		for (list<Entity*>::iterator i = toRemove.begin(); i != toRemove.end(); ++i)
 		{
 			entities.remove(*i);
+			(*i)->scene = NULL;
 			(*i)->Removed();
+
+			//If the tag is set, remove the entity from the tag map
+			if ((*i)->GetTag().compare("") != 0)
+				tagMap[(*i)->GetTag()].remove(*i);
 		}
 		toRemove.clear();
 
@@ -122,10 +128,26 @@ namespace Monocle
 		for (list<Entity*>::iterator i = toAdd.begin(); i != toAdd.end(); ++i)
 		{
 			entities.push_back(*i);
+			(*i)->scene = this;
 			(*i)->Added();
+
+			//If the tag is set, add the entity to the tag map
+			if ((*i)->GetTag().compare("") != 0)
+				tagMap[(*i)->GetTag()].push_back(*i);
 		}
 		toAdd.clear();
 
-		//Sort the entity list based on layer
+		//TODO: Sort the entity list based on layer
+	}
+
+	void Scene::RetagEntity(Entity* entity, string oldTag)
+	{
+		//Remove it from the old tag list
+		if (oldTag.compare("") != 0)
+			tagMap[oldTag].remove(entity);
+
+		//Add it to the new one
+		if (entity->GetTag().compare("") != 0)
+			tagMap[entity->GetTag()].push_back(entity);
 	}
 }
