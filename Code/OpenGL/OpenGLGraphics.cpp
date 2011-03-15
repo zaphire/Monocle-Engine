@@ -29,15 +29,14 @@ namespace Monocle
 	{
 		Debug::Log("Graphics::Init");
 
-		glEnable(GL_BLEND);
-		glDisable(GL_LIGHTING);
-		glEnable(GL_TEXTURE_2D);						// Enable Texture Mapping ( NEW )
-		glShadeModel(GL_SMOOTH);						// Enable Smooth Shading
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);					// Black Background
-		glClearDepth(1.0f);							// Depth Buffer Setup
-		glEnable(GL_DEPTH_TEST);						// Enables Depth Testing
-		glDepthFunc(GL_LEQUAL);							// The Type Of Depth Testing To Do
-		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);			// Really Nice Perspective Calculations	
+		glShadeModel(GL_SMOOTH);								// Enable Smooth Shading
+		glClearColor(0.0f, 0.0f, 0.0f, 0.5f);				// Black Background
+		glClearDepth(1.0f);									// Depth Buffer Setup
+		glEnable(GL_DEPTH_TEST);							// Enables Depth Testing
+		glDepthFunc(GL_LEQUAL);								// The Type Of Depth Testing To Do
+		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);	// Really Nice Perspective Calculations
+
+		Resize(Platform::GetWidth(), Platform::GetHeight());
 	}
 
 	bool Graphics::SetResolution(int w, int h, int bits, bool full)
@@ -45,12 +44,6 @@ namespace Monocle
 		//TODO: tell platform to change window size
 		Resize(w, h);
 		return true;
-	}
-
-	// temporary
-	void Graphics::Alpha()
-	{
-		glBlendFunc(GL_SRC_ALPHA,GL_ONE);
 	}
 
 	void Graphics::Resize(int width, int height)
@@ -119,13 +112,9 @@ namespace Monocle
 
 		glBegin(GL_QUADS);
 			glVertex3f(-halfSize, -halfSize, 0.0f);
-			glTexCoord2f(1, 1);
 			glVertex3f(halfSize, -halfSize, 0.0f);
-			glTexCoord2f(1, 0);
 			glVertex3f(halfSize, halfSize, 0.0f);
-			glTexCoord2f(0, 0);
 			glVertex3f(-halfSize, halfSize, 0.0f);
-			glTexCoord2f(0, 1);
 		glEnd();
 	}
 
@@ -161,16 +150,7 @@ namespace Monocle
 
 	void Graphics::BindTexture(TextureAsset* textureAsset)
 	{
-		if (textureAsset != NULL)
-		{
-			//Debug::Log("bound texture");
-			//Debug::Log((int)textureAsset->texID);
-			glBindTexture(GL_TEXTURE_2D, textureAsset->texID);
-		}
-		else
-		{
-			glBindTexture(GL_TEXTURE_2D, NULL);
-		}
+		//textureAsset
 	}
 }
 

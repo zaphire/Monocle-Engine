@@ -1,4 +1,5 @@
 #include "../../Monocle.h"
+#include "../../TextureAsset.h"
 
 using namespace Monocle;
 
@@ -17,8 +18,10 @@ namespace Pong
 	class Ball : public Entity
 	{
 	public:
+		Ball();
 		void Update();
 		void Render();
+		TextureAsset *texture;
 	};
 
 	class GameScene : public Scene

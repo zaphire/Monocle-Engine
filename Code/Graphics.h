@@ -5,6 +5,8 @@
 
 namespace Monocle
 {
+	class TextureAsset;
+
 	class Graphics
 	{
 	public:
@@ -18,6 +20,7 @@ namespace Monocle
 
 		static void Resize(int w, int h);
 
+		static void BindTexture(TextureAsset* textureAsset);
 		static void SetCameraPosition(const Vector3 &position);
 		static void Translate(float x, float y, float z);
 		static void Translate(Vector2 pos);
@@ -27,10 +30,11 @@ namespace Monocle
 		static void RenderQuad(float width, float height);
 		static void PushMatrix();
 		static void PopMatrix();
+		static void Alpha();
 
-		Vector3 cameraPosition;
-
+	private:
 		static Graphics *instance;
+		Vector3 cameraPosition;
 	};
 
 }

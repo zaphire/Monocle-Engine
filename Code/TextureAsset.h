@@ -11,5 +11,7 @@ namespace Monocle
 		void Load(const char *filename);
 		void Unload();
 		void Bind();
+
+		unsigned int texID;
 	};
 }

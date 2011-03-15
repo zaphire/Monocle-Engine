@@ -1,8 +1,5 @@
 #include "Core.h"
 
-//#define TEST_ENTITY
-//#define SCENE_CODE_WRITTEN
-
 //If you want to use fixed timestep, uncomment the following three lines:
 //#define FIXED_TIMESTEP
 #define MILLISECONDS_PER_FRAME 1000/60
@@ -14,17 +11,18 @@ namespace Monocle
 
 	Core::Core()
 	{
-		instance = this;
+		instance			= this;
 		scene				= NULL;
-		switchTo			= NULL;
-		switchScenes		= false;
+		switchTo				= NULL;
+		switchScenes			= false;
 		Monocle::deltaTime	= 0.0;
-		isDone = false;
+		isDone				= false;
 		
 	}
 
 	void Core::Init()
 	{
+		assetDatabase.Init();
 		platform.Init();
 		debug.Init();
 		input.Init();

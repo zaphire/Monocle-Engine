@@ -40,4 +40,21 @@ namespace Monocle
 	{
 		return !instance->currentKeys[(int)keyCode] && instance->previousKeys[(int)keyCode];
 	}
+
+	// TODO:
+
+	bool IsMouseButtonHeld(int buttonID)
+	{
+		return false;
+	}
+
+	bool IsMouseButtonReleased(int buttonID)
+	{
+		return false;
+	}
+
+	bool IsMouseButtonPressed(int buttonID)
+	{
+		return false;
+	}
 }

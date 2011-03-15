@@ -11,11 +11,11 @@ namespace Monocle
 		Input();
 		void Init();
 
-		bool IsMouseButtonDown();
-		bool IsMouseButtonUp();
-		bool IsMouseButtonPressed();
+		static bool IsMouseButtonHeld(int buttonID);
+		static bool IsMouseButtonReleased(int buttonID);
+		static bool IsMouseButtonPressed(int buttonID);
 
-		Vector2 GetMousePosition();
+		static Vector2 GetMousePosition();
 
 		static bool IsKeyHeld(KeyCode keyCode);
 		static bool IsKeyReleased(KeyCode keyCode);
@@ -23,9 +23,9 @@ namespace Monocle
 
 		void Update();
 		
+	private:
 		static Input *instance;
 
-	private:
 		bool previousKeys [KEY_MAX];
 		bool currentKeys [KEY_MAX];
 	};

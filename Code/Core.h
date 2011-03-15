@@ -5,6 +5,7 @@
 #include "Graphics.h"
 #include "Debug.h"
 #include "Scene.h"
+#include "AssetDatabase.h"
 
 namespace Monocle
 {
@@ -23,12 +24,13 @@ namespace Monocle
 		Input input;
 		Graphics graphics;
 		Debug debug;
+		AssetDatabase assetDatabase;
 
 		static void Quit();
 
+	private:
 		static Core *instance;
 
-	private:
 		bool isDone;
 		//The currently running scene
 		Scene* scene;

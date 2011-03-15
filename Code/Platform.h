@@ -136,11 +136,12 @@ namespace Monocle
 
 		int localKeymap[KEY_MAX];
 
-		static Platform *instance;
-
 		void WindowSizeChanged(int w, int h);
 
+		static Platform *instance; //TODO: refactor this (make static accessor methods instead)
+
 	private:
+		
 		int width, height;
 		
 	};

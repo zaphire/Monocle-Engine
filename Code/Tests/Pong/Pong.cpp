@@ -3,6 +3,11 @@
 
 namespace Pong
 {
+	Ball::Ball() : Entity()
+	{
+		texture = (TextureAsset*)AssetDatabase::RequestAsset(AT_TEXTURE, "blah.png");
+	}
+
 	void Ball::Update()
 	{
 		position += Vector2::right * Monocle::deltaTime;
@@ -10,6 +15,7 @@ namespace Pong
 
 	void Ball::Render()
 	{
+		Graphics::BindTexture(texture);
 		Graphics::PushMatrix();
 		Graphics::Translate(position);
 		Graphics::RenderQuad(0.25f);

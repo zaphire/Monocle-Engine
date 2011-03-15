@@ -63,6 +63,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Asset.h" />
+    <ClInclude Include="..\..\..\..\AssetDatabase.h" />
     <ClInclude Include="..\..\..\..\Core.h" />
     <ClInclude Include="..\..\..\..\Debug.h" />
     <ClInclude Include="..\..\..\..\Entity.h" />
@@ -70,8 +71,22 @@
     <ClInclude Include="..\..\..\..\Input.h" />
     <ClInclude Include="..\..\..\..\Math.h" />
     <ClInclude Include="..\..\..\..\Monocle.h" />
+    <ClInclude Include="..\..\..\..\OpenGL\glpng\glpng.h" />
+    <ClInclude Include="..\..\..\..\OpenGL\glpng\png\png.h" />
+    <ClInclude Include="..\..\..\..\OpenGL\glpng\png\pngconf.h" />
+    <ClInclude Include="..\..\..\..\OpenGL\glpng\zlib\crc32.h" />
+    <ClInclude Include="..\..\..\..\OpenGL\glpng\zlib\deflate.h" />
+    <ClInclude Include="..\..\..\..\OpenGL\glpng\zlib\inffast.h" />
+    <ClInclude Include="..\..\..\..\OpenGL\glpng\zlib\inffixed.h" />
+    <ClInclude Include="..\..\..\..\OpenGL\glpng\zlib\inflate.h" />
+    <ClInclude Include="..\..\..\..\OpenGL\glpng\zlib\inftrees.h" />
+    <ClInclude Include="..\..\..\..\OpenGL\glpng\zlib\trees.h" />
+    <ClInclude Include="..\..\..\..\OpenGL\glpng\zlib\zconf.h" />
+    <ClInclude Include="..\..\..\..\OpenGL\glpng\zlib\zlib.h" />
+    <ClInclude Include="..\..\..\..\OpenGL\glpng\zlib\zutil.h" />
     <ClInclude Include="..\..\..\..\Platform.h" />
     <ClInclude Include="..\..\..\..\Scene.h" />
+    <ClInclude Include="..\..\..\..\Tests\Marian\Marian.h" />
     <ClInclude Include="..\..\..\..\Tests\Pong\Pong.h" />
     <ClInclude Include="..\..\..\..\TextureAsset.h" />
     <ClInclude Include="..\..\..\..\Vector2.h" />
@@ -80,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Asset.cpp" />
+    <ClCompile Include="..\..\..\..\AssetDatabase.cpp" />
     <ClCompile Include="..\..\..\..\Core.cpp" />
     <ClCompile Include="..\..\..\..\Debug.cpp" />
     <ClCompile Include="..\..\..\..\Entity.cpp" />
@@ -87,8 +103,33 @@
     <ClCompile Include="..\..\..\..\Main.cpp" />
     <ClCompile Include="..\..\..\..\Math.cpp" />
     <ClCompile Include="..\..\..\..\Monocle.cpp" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\glpng.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\png\png.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\png\pngerror.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\png\pngget.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\png\pngmem.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\png\pngpread.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\png\pngread.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\png\pngrio.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\png\pngrtran.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\png\pngrutil.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\png\pngset.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\png\pngtrans.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\zlib\adler32.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\zlib\compress.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\zlib\crc32.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\zlib\deflate.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\zlib\gzio.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\zlib\infback.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\zlib\inffast.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\zlib\inflate.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\zlib\inftrees.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\zlib\trees.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\zlib\uncompr.c" />
+    <ClCompile Include="..\..\..\..\OpenGL\glpng\zlib\zutil.c" />
     <ClCompile Include="..\..\..\..\OpenGL\OpenGLTextureAsset.cpp" />
     <ClCompile Include="..\..\..\..\Scene.cpp" />
+    <ClCompile Include="..\..\..\..\Tests\Marian\Marian.cpp" />
     <ClCompile Include="..\..\..\..\Tests\Pong\Pong.cpp" />
     <ClCompile Include="..\..\..\..\Vector2.cpp" />
     <ClCompile Include="..\..\..\..\Vector3.cpp" />
