@@ -18,12 +18,14 @@ namespace Pong
 		void Render();
 	};
 
-	class PongGame : public Core
+	class GameScene : public Scene
 	{
 	public:
 		Ball *ball;
 		Paddle *paddle1, *paddle2;
-		void Init();
+
+		void Begin();
+		void End();
 		void Update();
 	};
 }

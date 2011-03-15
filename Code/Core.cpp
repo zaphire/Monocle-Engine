@@ -37,9 +37,6 @@ namespace Monocle
 					scene->Begin();
 			}
 
-			//Debug::Log("Core::Main...");
-			Update();
-
 			// **** BEGIN UPDATE
 			if (scene != NULL)
 				scene->Update();
@@ -56,10 +53,6 @@ namespace Monocle
 			graphics.ShowBuffer();
 			// **** END RENDER
 		}
-	}
-
-	void Core::Update()
-	{
 	}
 
 	void Core::SetScene(Scene* scene)

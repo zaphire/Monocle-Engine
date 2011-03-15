@@ -18,19 +18,12 @@ using namespace Monocle;
 
 int main(void)
 {
-#ifdef TEST_CORE
 	Core *core = new Core();
 	core->Init();
-	core->Main();
-	delete core;
-	return 0;
-#endif
-
 #ifdef TEST_PONG
-	Pong::PongGame *core = new Pong::PongGame();
-	core->Init();
+	core->SetScene(new Pong::GameScene());
+#endif
 	core->Main();
 	delete core;
 	return 0;
-#endif
 }
