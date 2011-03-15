@@ -46,7 +46,7 @@ namespace Monocle
 
 	void Scene::Add(Entity* entity)
 	{
-#if DEBUG
+#ifdef DEBUG
 		//Error: If the entity is already in the scene
 		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); i++)
 		{
@@ -73,7 +73,7 @@ namespace Monocle
 
 	void Scene::Remove(Entity* entity)
 	{
-#if DEBUG
+#ifdef DEBUG
 		//Error: If the entity isn't in the entity list
 		bool in = false;
 		for (list<Entity*>::iterator i = entities.begin(); i != entities.end(); i++)

@@ -35,18 +35,22 @@ namespace Pong
 
 		// do pong specific init
 		graphics.SetCameraPosition(Vector3(0,0,-6));
+		
+		Scene *scene = new Scene();
 
 		ball = new Ball();
 		ball->position = Vector2(0, 0);
-		scene.Add(ball);
+		scene->Add(ball);
 
 		paddle1 = new Paddle();
 		paddle1->position = Vector2(-2, 0);
-		scene.Add(paddle1);
+		scene->Add(paddle1);
 
 		paddle2 = new Paddle();
 		paddle2->position = Vector2(2, 0);
-		scene.Add(paddle2);
+		scene->Add(paddle2);
+
+		SetScene(scene);
 	}
 
 	void PongGame::Update()

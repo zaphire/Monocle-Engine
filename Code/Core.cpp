@@ -28,6 +28,9 @@ namespace Monocle
 
 	Core::Core()
 	{
+		scene			= NULL;
+		switchTo		= NULL;
+		switchScenes	= false;
 	}
 
 	void Core::Init()
@@ -43,8 +46,10 @@ namespace Monocle
 #ifdef TEST_ENTITY
 		graphics.SetCameraPosition(Vector3(0,0,-6));
 
+		Scene* s = new Scene();
+		setScene(s);
 		Entity* newEntity = (Entity*)new Player();
-		scene.Add(newEntity);
+		s->Add(newEntity);
 #endif
 
 		bool isDone = false;
@@ -53,8 +58,21 @@ namespace Monocle
 			//Debug::Log("Core::Main...");
 			Update();
 
+			//Switch scenes if necessary
+			if (switchScenes)
+			{
+				switchScenes = false;
+				if (scene != NULL)
+					scene->End();
+				scene = switchTo;
+				switchTo = NULL;
+				if (scene != NULL)
+					scene->Begin();
+			}
+
 			// **** BEGIN UPDATE
-			scene.Update();
+			if (scene != NULL)
+				scene->Update();
 			// **** END UPDATE
 
 			// **** BEGIN RENDER
@@ -62,7 +80,8 @@ namespace Monocle
 			
 			// iterate through all the entities/gameObjects
 			// call render on them
-			scene.Render();
+			if (scene != NULL)
+				scene->Render();
 			
 			graphics.EndFrame();
 
@@ -73,5 +92,16 @@ namespace Monocle
 
 	void Core::Update()
 	{
+	}
+
+	void Core::SetScene(Scene* scene)
+	{
+		switchTo = scene;
+		switchScenes = true;
+	}
+
+	Scene* Core::GetScene()
+	{
+		return scene;
 	}
 }
