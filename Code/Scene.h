@@ -2,12 +2,18 @@
 
 #include "Debug.h"
 #include <list>
+#include <map>
+#include <string>
 #include "Entity.h"
 
 using std::list;
+using std::map;
+using std::string;
 
 namespace Monocle
 {
+	class Entity;
+
 	class Scene
 	{
 	public:
@@ -35,6 +41,9 @@ namespace Monocle
 		//Remove all entities in the scene
 		void RemoveAll();
 
+		//Called by an entity when its tag has changed; the scene must reposition that entity in the tag map
+		void RetagEntity(Entity* entity, string oldTag);
+
 	private:
 		//Holds all the entities currently in the scene
 		list<Entity*> entities;
@@ -44,6 +53,9 @@ namespace Monocle
 
 		//All the entities that will be removed at the end of the frame
 		list<Entity*> toRemove;
+
+		//The map of entities sorted by tag
+		map<string, list<Entity*> > tagMap;
 
 		//Resolves all entities to be added or removed
 		void ResolveEntityChanges();

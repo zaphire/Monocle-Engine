@@ -7,6 +7,7 @@ namespace Pong
 	class Paddle : public Entity
 	{
 	public:
+		Paddle();
 		void Update();
 		void Render();
 
