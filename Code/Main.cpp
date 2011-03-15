@@ -6,7 +6,7 @@
 
 
 //#define TEST_CORE
-#define TEST_PONG
+//#define TEST_PONG
 
 
 

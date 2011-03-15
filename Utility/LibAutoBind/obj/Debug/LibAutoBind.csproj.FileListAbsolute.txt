@@ -1,5 +1,0 @@
-E:\Projects\Redpoint Engine\Utility\LibAutoBind\bin\Debug\LibAutoBind.dll
-E:\Projects\Redpoint Engine\Utility\LibAutoBind\bin\Debug\LibAutoBind.pdb
-E:\Projects\Redpoint Engine\Utility\LibAutoBind\obj\Debug\ResolveAssemblyReference.cache
-E:\Projects\Redpoint Engine\Utility\LibAutoBind\obj\Debug\LibAutoBind.dll
-E:\Projects\Redpoint Engine\Utility\LibAutoBind\obj\Debug\LibAutoBind.pdb

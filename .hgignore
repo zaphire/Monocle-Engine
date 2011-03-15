@@ -1,0 +1,8 @@
+syntax: glob
+*.obj
+*/BuildLog.htm
+*.exe.intermediate.manifest
+*.vcproj.*.user
+Code
+Debug
+*.ncb
