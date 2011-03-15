@@ -7,7 +7,6 @@ namespace Pong
 	void Ball::Update()
 	{
 		position += Vector2::right * Monocle::deltaTime;
-		//position += velocity * Time::deltaTime;
 	}
 
 	void Ball::Render()
@@ -65,12 +64,6 @@ namespace Pong
 		Scene::Update();
 
 		// do pong specific update
-		/*
-		//output current MS
-		char buf[64];
-		itoa(Platform::GetMilliseconds(), buf, 10);
-		Debug::Log(buf);
-		*/
 	}
 
 	void GameScene::End()

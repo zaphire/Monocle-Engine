@@ -16,6 +16,8 @@ namespace Monocle
 		void EndFrame();
 		void ShowBuffer();
 
+		static void Resize(int w, int h);
+
 		static void SetCameraPosition(const Vector3 &position);
 		static void Translate(float x, float y, float z);
 		static void Translate(Vector2 pos);

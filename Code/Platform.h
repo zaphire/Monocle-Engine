@@ -128,11 +128,19 @@ namespace Monocle
 		static long GetMilliseconds();
 		static void ShowBuffer();
 		static bool IsKeyPressed(KeyCode keyCode);
-		
+		static int GetWidth();
+		static int GetHeight();
+
 		bool keys[KEY_MAX];
 
 		int localKeymap[KEY_MAX];
 
 		static Platform *instance;
+
+		void WindowSizeChanged(int w, int h);
+
+	private:
+		int width, height;
+		
 	};
 }

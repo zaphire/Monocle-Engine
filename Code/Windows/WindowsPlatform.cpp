@@ -2,6 +2,7 @@
 
 #include "../Debug.h"
 #include "../Core.h"
+#include "../Graphics.h"
 
 #include "WindowsPlatform.h"
 #include "Mmsystem.h"
@@ -49,19 +50,19 @@
 #define VK_Z	'Z'
 #endif /* VK_0 */
 
-#define VK_SEMICOLON	0xBA
-#define VK_EQUALS	0xBB
-#define VK_COMMA	0xBC
-#define VK_MINUS	0xBD
-#define VK_PERIOD	0xBE
-#define VK_SLASH	0xBF
-#define VK_GRAVE	0xC0
-#define VK_LBRACKET	0xDB
+#define VK_SEMICOLON		0xBA
+#define VK_EQUALS		0xBB
+#define VK_COMMA			0xBC
+#define VK_MINUS			0xBD
+#define VK_PERIOD		0xBE
+#define VK_SLASH		0xBF
+#define VK_GRAVE		0xC0
+#define VK_LBRACKET		0xDB
 #define VK_BACKSLASH	0xDC
-#define VK_RBRACKET	0xDD
+#define VK_RBRACKET		0xDD
 #define VK_APOSTROPHE	0xDE
-#define VK_BACKTICK	0xDF
-#define VK_OEM_102	0xE2
+#define VK_BACKTICK		0xDF
+#define VK_OEM_102		0xE2
 
 
 namespace Monocle
@@ -71,6 +72,7 @@ namespace Monocle
 	//TODO: cleanup code, replace message boxes
 	bool WindowsPlatform::CreatePlatformWindow(const char* title, int width, int height, int bits, bool fullscreenflag)
 	{
+		const char *windowName = "Monocle Engine\0";
 		unsigned int		PixelFormat;			// Holds The Results After Searching For A Match
 		WNDCLASS	wc;						// Windows Class Structure
 		DWORD		dwExStyle;				// Window Extended Style
@@ -84,16 +86,16 @@ namespace Monocle
 		fullscreen=fullscreenflag;			// Set The Global Fullscreen Flag
 
 		hInstance			= GetModuleHandle(NULL);				// Grab An Instance For Our Window
-		wc.style			= CS_HREDRAW | CS_VREDRAW | CS_OWNDC;	// Redraw On Size, And Own DC For Window.
+		wc.style				= CS_HREDRAW | CS_VREDRAW | CS_OWNDC;	// Redraw On Size, And Own DC For Window.
 		wc.lpfnWndProc		= (WNDPROC) WndProc;					// WndProc Handles Messages
 		wc.cbClsExtra		= 0;									// No Extra Window Data
 		wc.cbWndExtra		= 0;									// No Extra Window Data
-		wc.hInstance		= hInstance;							// Set The Instance
-		wc.hIcon			= LoadIcon(NULL, IDI_WINLOGO);			// Load The Default Icon
+		wc.hInstance			= hInstance;							// Set The Instance
+		wc.hIcon				= LoadIcon(NULL, IDI_WINLOGO);			// Load The Default Icon
 		wc.hCursor			= LoadCursor(NULL, IDC_ARROW);			// Load The Arrow Pointer
-		wc.hbrBackground	= NULL;									// No Background Required For GL
+		wc.hbrBackground		= NULL;									// No Background Required For GL
 		wc.lpszMenuName		= NULL;									// We Don't Want A Menu
-		wc.lpszClassName	= "OpenGL";								// Set The Class Name
+		wc.lpszClassName		= windowName;								// Set The Class Name
 
 		if (!RegisterClass(&wc))									// Attempt To Register The Window Class
 		{
@@ -114,17 +116,9 @@ namespace Monocle
 			// Try To Set Selected Mode And Get Results.  NOTE: CDS_FULLSCREEN Gets Rid Of Start Bar.
 			if (ChangeDisplaySettings(&dmScreenSettings,CDS_FULLSCREEN)!=DISP_CHANGE_SUCCESSFUL)
 			{
-				// If The Mode Fails, Offer Two Options.  Quit Or Use Windowed Mode.
-				if (MessageBox(NULL,"The Requested Fullscreen Mode Is Not Supported By\nYour Video Card. Use Windowed Mode Instead?","NeHe GL",MB_YESNO|MB_ICONEXCLAMATION)==IDYES)
-				{
-					fullscreen=FALSE;		// Windowed Mode Selected.  Fullscreen = FALSE
-				}
-				else
-				{
-					// Pop Up A Message Box Letting User Know The Program Is Closing.
-					MessageBox(NULL,"Program Will Now Close.","ERROR",MB_OK|MB_ICONSTOP);
-					return FALSE;									// Return FALSE
-				}
+				Debug::Log("The Requested Fullscreen Mode Is Not Supported");
+				return false;
+				//TODO: fallback on windowed?
 			}
 		}
 
@@ -137,14 +131,14 @@ namespace Monocle
 		else
 		{
 			dwExStyle=WS_EX_APPWINDOW | WS_EX_WINDOWEDGE;			// Window Extended Style
-			dwStyle=WS_OVERLAPPEDWINDOW;							// Windows Style
+			dwStyle=WS_OVERLAPPEDWINDOW;								// Windows Style
 		}
 
 		AdjustWindowRectEx(&WindowRect, dwStyle, FALSE, dwExStyle);		// Adjust Window To True Requested Size
 
 		// Create The Window
 		if (!(hWnd=CreateWindowEx(	dwExStyle,							// Extended Style For The Window
-									"OpenGL",							// Class Name
+									windowName,							// Class Name
 									title,								// Window Title
 									dwStyle |							// Defined Window Style
 									WS_CLIPSIBLINGS |					// Required Window Style
@@ -157,12 +151,12 @@ namespace Monocle
 									hInstance,							// Instance
 									NULL)))								// Dont Pass Anything To WM_CREATE
 		{
-			KillPlatformWindow();								// Reset The Display
-			MessageBox(NULL,"Window Creation Error.","ERROR",MB_OK|MB_ICONEXCLAMATION);
-			return FALSE;								// Return FALSE
+			KillPlatformWindow();								// Reset The 
+			Debug::Log("Window Creation Error");
+			return false;								// Return FALSE
 		}
 
-		static	PIXELFORMATDESCRIPTOR pfd=				// pfd Tells Windows How We Want Things To Be
+		static PIXELFORMATDESCRIPTOR pfd=				// pfd Tells Windows How We Want Things To Be
 		{
 			sizeof(PIXELFORMATDESCRIPTOR),				// Size Of This Pixel Format Descriptor
 			1,											// Version Number
@@ -187,41 +181,40 @@ namespace Monocle
 		if (!(hDC=GetDC(hWnd)))							// Did We Get A Device Context?
 		{
 			KillPlatformWindow();								// Reset The Display
-			MessageBox(NULL,"Can't Create A GL Device Context.","ERROR",MB_OK|MB_ICONEXCLAMATION);
-			return FALSE;								// Return FALSE
+			Debug::Log("Can't Create Device Context");
+			return false;								// Return FALSE
 		}
 
 		if (!(PixelFormat=ChoosePixelFormat(hDC,&pfd)))	// Did Windows Find A Matching Pixel Format?
 		{
 			KillPlatformWindow();								// Reset The Display
-			MessageBox(NULL,"Can't Find A Suitable PixelFormat.","ERROR",MB_OK|MB_ICONEXCLAMATION);
-			return FALSE;								// Return FALSE
+			Debug::Log("Can't Find A Suitable PixelFormat");
+			return false;								// Return FALSE
 		}
 
 		if(!SetPixelFormat(hDC,PixelFormat,&pfd))		// Are We Able To Set The Pixel Format?
 		{
 			KillPlatformWindow();								// Reset The Display
-			MessageBox(NULL,"Can't Set The PixelFormat.","ERROR",MB_OK|MB_ICONEXCLAMATION);
-			return FALSE;								// Return FALSE
+			Debug::Log("Can't Set The PixelFormat");
+			return false;								// Return FALSE
 		}
 
 		if (!(hRC=wglCreateContext(hDC)))				// Are We Able To Get A Rendering Context?
 		{
 			KillPlatformWindow();								// Reset The Display
-			MessageBox(NULL,"Can't Create A GL Rendering Context.","ERROR",MB_OK|MB_ICONEXCLAMATION);
-			return FALSE;								// Return FALSE
+			Debug::Log("Can't Create a GL Rendering Context");
+			return false;								// Return FALSE
 		}
 
 		if(!wglMakeCurrent(hDC,hRC))					// Try To Activate The Rendering Context
 		{
 			KillPlatformWindow();								// Reset The Display
-			MessageBox(NULL,"Can't Activate The GL Rendering Context.","ERROR",MB_OK|MB_ICONEXCLAMATION);
+			Debug::Log("Can't Activate The GL Rendering Context");
 			return FALSE;								// Return FALSE
 		}
 
 		ShowWindow(hWnd,SW_SHOW);						// Show The Window
 
-		//return true;
 		SetForegroundWindow(hWnd);
 		SetFocus(hWnd);
 
@@ -240,39 +233,36 @@ namespace Monocle
 		{
 			if (!wglMakeCurrent(NULL,NULL))					// Are We Able To Release The DC And RC Contexts?
 			{
-				MessageBox(NULL,"Release Of DC And RC Failed.","SHUTDOWN ERROR",MB_OK | MB_ICONINFORMATION);
+				Debug::Log("Release Of DC And RC Failed");
 			}
 
 			if (!wglDeleteContext(hRC))						// Are We Able To Delete The RC?
 			{
-				MessageBox(NULL,"Release Rendering Context Failed.","SHUTDOWN ERROR",MB_OK | MB_ICONINFORMATION);
+				Debug::Log("Release Rendering Context Failed");
 			}
 			hRC=NULL;										// Set RC To NULL
 		}
 
 		if (hDC && !ReleaseDC(hWnd,hDC))					// Are We Able To Release The DC
 		{
-			MessageBox(NULL,"Release Device Context Failed.","SHUTDOWN ERROR",MB_OK | MB_ICONINFORMATION);
+			Debug::Log("Release Device Context Failed");
 			hDC=NULL;										// Set DC To NULL
 		}
 
 		if (hWnd && !DestroyWindow(hWnd))					// Are We Able To Destroy The Window?
 		{
-			MessageBox(NULL,"Could Not Release hWnd.","SHUTDOWN ERROR",MB_OK | MB_ICONINFORMATION);
+			Debug::Log("Could Not Release hWnd");
 			hWnd=NULL;										// Set hWnd To NULL
 		}
 
 		if (!UnregisterClass("OpenGL",hInstance))			// Are We Able To Unregister Class
 		{
-			MessageBox(NULL,"Could Not Unregister Class.","SHUTDOWN ERROR",MB_OK | MB_ICONINFORMATION);
+			Debug::Log("Could Not Unregister Class");
 			hInstance=NULL;									// Set hInstance To NULL
 		}
 	}
 
-	LRESULT CALLBACK WindowsPlatform::WndProc(	HWND	hWnd,			// Handle For This Window
-								UINT	uMsg,			// Message For This Window
-								WPARAM	wParam,			// Additional Message Information
-								LPARAM	lParam)			// Additional Message Information
+	LRESULT CALLBACK WindowsPlatform::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		switch (uMsg)									// Check For Windows Messages
 		{
@@ -307,6 +297,8 @@ namespace Monocle
 				return 0;								// Jump Back
 			}
 
+			//TODO: clean this up
+
 			case WM_KEYDOWN:							// Is A Key Being Held Down?
 			{
 				//Debug::Log("Down!");
@@ -325,7 +317,7 @@ namespace Monocle
 
 			case WM_SIZE:								// Resize The OpenGL Window
 			{
-				//ReSizeGLScene(LOWORD(lParam),HIWORD(lParam));  // LoWord=Width, HiWord=Height
+				instance->platform->WindowSizeChanged(LOWORD(lParam), HIWORD(lParam));
 				return 0;								// Jump Back
 			}
 		}
@@ -470,6 +462,9 @@ namespace Monocle
 	void Platform::Init()
 	{
 		WindowsPlatform::instance->CreatePlatformWindow("Title", 800, 600, 32, false);
+		//TEMP: hack
+		width = 800;
+		height = 600;
 	}
 
 	void Platform::Update()
@@ -502,6 +497,23 @@ namespace Monocle
 	void Platform::ShowBuffer()
 	{
 		SwapBuffers(WindowsPlatform::instance->hDC);
+	}
+
+	int Platform::GetWidth()
+	{
+		return instance->width;
+	}
+
+	int Platform::GetHeight()
+	{
+		return instance->height;
+	}
+
+	void Platform::WindowSizeChanged(int w, int h)
+	{
+		instance->width = w;
+		instance->height = h;
+		Graphics::Resize(w, h);
 	}
 }
 

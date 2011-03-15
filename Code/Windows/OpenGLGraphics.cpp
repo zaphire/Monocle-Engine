@@ -17,59 +17,10 @@
 
 namespace Monocle
 {
-	class OpenGLGraphics
-	{
-	public:
-		static OpenGLGraphics *instance;
-		Graphics *graphics;
-
-		static void Init()
-		{
-			glShadeModel(GL_SMOOTH);								// Enable Smooth Shading
-			glClearColor(0.0f, 0.0f, 0.0f, 0.5f);				// Black Background
-			glClearDepth(1.0f);									// Depth Buffer Setup
-			glEnable(GL_DEPTH_TEST);							// Enables Depth Testing
-			glDepthFunc(GL_LEQUAL);								// The Type Of Depth Testing To Do
-			glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);	// Really Nice Perspective Calculations
-		}
-
-		//test
-		static void BeginFrame()
-		{
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
-			glLoadIdentity();									// Reset The Current Modelview Matrix
-
-			glTranslatef(instance->graphics->cameraPosition.x, instance->graphics->cameraPosition.y, instance->graphics->cameraPosition.z);
-		}
-
-		static void Resize(int width, int height)		// Resize And Initialize The GL Window
-		{
-			if (height==0)										// Prevent A Divide By Zero By
-			{
-				height=1;										// Making Height Equal One
-			}
-
-			glViewport(0,0,width,height);						// Reset The Current Viewport
-
-			glMatrixMode(GL_PROJECTION);						// Select The Projection Matrix
-			glLoadIdentity();									// Reset The Projection Matrix
-
-			// Calculate The Aspect Ratio Of The Window
-			gluPerspective(45.0f,(GLfloat)width/(GLfloat)height,0.1f,100.0f);
-
-			glMatrixMode(GL_MODELVIEW);							// Select The Modelview Matrix
-			glLoadIdentity();									// Reset The Modelview Matrix
-		}
-	};
-
-	OpenGLGraphics *OpenGLGraphics::instance = NULL;
 	Graphics *Graphics::instance = NULL;
 
 	Graphics::Graphics()
 	{
-		OpenGLGraphics::instance = new OpenGLGraphics();
-		OpenGLGraphics::instance->graphics = this;
-
 		instance = this;
 		//WindowsPlatform::instance->hWnd;
 	}
@@ -77,14 +28,41 @@ namespace Monocle
 	void Graphics::Init()
 	{
 		Debug::Log("Graphics::Init");
-		OpenGLGraphics::Init();
-		OpenGLGraphics::Resize(800, 600);
+
+		glShadeModel(GL_SMOOTH);								// Enable Smooth Shading
+		glClearColor(0.0f, 0.0f, 0.0f, 0.5f);				// Black Background
+		glClearDepth(1.0f);									// Depth Buffer Setup
+		glEnable(GL_DEPTH_TEST);							// Enables Depth Testing
+		glDepthFunc(GL_LEQUAL);								// The Type Of Depth Testing To Do
+		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);	// Really Nice Perspective Calculations
+
+		Resize(Platform::GetWidth(), Platform::GetHeight());
 	}
 
 	bool Graphics::SetResolution(int w, int h, int bits, bool full)
 	{
-		OpenGLGraphics::Resize(w, h);
+		//TODO: tell platform to change window size
+		Resize(w, h);
 		return true;
+	}
+
+	void Graphics::Resize(int width, int height)
+	{
+		if (height==0)										// Prevent A Divide By Zero By
+		{
+			height=1;										// Making Height Equal One
+		}
+
+		glViewport(0,0,width,height);						// Reset The Current Viewport
+
+		glMatrixMode(GL_PROJECTION);						// Select The Projection Matrix
+		glLoadIdentity();									// Reset The Projection Matrix
+
+		// Calculate The Aspect Ratio Of The Window
+		gluPerspective(45.0f,(GLfloat)width/(GLfloat)height,0.1f,100.0f);
+
+		glMatrixMode(GL_MODELVIEW);							// Select The Modelview Matrix
+		glLoadIdentity();									// Reset The Modelview Matrix
 	}
 
 	void Graphics::SetCameraPosition(const Vector3 &position)
@@ -155,7 +133,10 @@ namespace Monocle
 
 	void Graphics::BeginFrame()
 	{
-		OpenGLGraphics::BeginFrame();
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
+		glLoadIdentity();									// Reset The Current Modelview Matrix
+
+		glTranslatef(cameraPosition.x, cameraPosition.y, cameraPosition.z);
 	}
 
 	void Graphics::EndFrame()
