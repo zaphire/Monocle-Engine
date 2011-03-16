@@ -12,8 +12,14 @@
 
 #endif
 
+#ifdef MONOCLE_MAC
+#include <OpenGL/gl.h>
+#include <OpenGL/glext.h>
+#include <OpenGL/glu.h>
+#else
 #include <gl/GL.h>
 #include <gl/GLU.h>
+#endif
 
 // some opengl/windows init code based on http://nehe.gamedev.net
 
