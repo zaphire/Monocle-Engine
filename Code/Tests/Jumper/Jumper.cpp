@@ -5,7 +5,7 @@
 namespace Jumper
 {
 	Player::Player(Vector2 pos) 
-		: Sprite(-10, "../../../../../Content/Jumper/Player.png", pos, 1.0f)
+		: Sprite(-10, "../../../../Content/Jumper/Player.png", pos, 1.0f)
 	{
 		speed = 100.0f;
 		gravity = 0.25f;

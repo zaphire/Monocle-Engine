@@ -50,6 +50,8 @@ namespace Monocle
 		{
 			Debug::Log("Can't load texture:");
 			Debug::Log(filename);
+
+			width = height = 64;
 		}
 	}
 

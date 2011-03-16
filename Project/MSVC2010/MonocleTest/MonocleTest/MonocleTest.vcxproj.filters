@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Monocle">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Monocle\Windows">
+      <UniqueIdentifier>{359e2e0d-6b74-4021-9d89-0af58ffa0042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\Tests">
+      <UniqueIdentifier>{108f55c5-9ca0-4a9b-9d2c-29a184c1ac10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\Tests\Pong">
+      <UniqueIdentifier>{a012267c-9d76-4faa-8f4f-8ce0d9f25d62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\OpenGL">
+      <UniqueIdentifier>{67e43894-0ffd-47d4-b06b-fe37a76b1e97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\OpenGL\glpng">
+      <UniqueIdentifier>{b9b6ba1b-157a-466a-836b-c7b5487937fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\OpenGL\glpng\zlib">
+      <UniqueIdentifier>{14a527e7-87e7-488b-8c8e-a474ac50f4cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\OpenGL\glpng\png">
+      <UniqueIdentifier>{8c91ded5-8070-41a1-95b8-81a4d0f3e504}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\Tests\Marian">
+      <UniqueIdentifier>{60c815d5-9b47-4995-b41f-f9133f42cf64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\Colliders">
+      <UniqueIdentifier>{a834cc3d-7677-41d6-a8ec-d21b830b4b57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\OpenAL">
+      <UniqueIdentifier>{ecaa9dfa-367d-4d2d-8d60-0aa9062531ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\Tests\Jumper">
+      <UniqueIdentifier>{0cc35010-5a27-4319-bca8-8c4de55f63fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\Main">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Vector3.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Asset.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\AssetDatabase.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Audio.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Collision.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Color.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Core.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Debug.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Editor.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Entity.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Graphics.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Input.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Math.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Monocle.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Platform.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Random.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Scene.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Sprite.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\TextureAsset.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Tween.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Vector2.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Windows\WindowsPlatform.h">
+      <Filter>Monocle\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Tests\Jumper\Jumper.h">
+      <Filter>Monocle\Tests\Jumper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Tests\Marian\Marian.h">
+      <Filter>Monocle\Tests\Marian</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Tests\Pong\Pong.h">
+      <Filter>Monocle\Tests\Pong</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\glpng.h">
+      <Filter>Monocle\OpenGL\glpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\png\png.h">
+      <Filter>Monocle\OpenGL\glpng\png</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\png\pngconf.h">
+      <Filter>Monocle\OpenGL\glpng\png</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\zutil.h">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\crc32.h">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\deflate.h">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\inffast.h">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\inffixed.h">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\inflate.h">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\inftrees.h">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\trees.h">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\zconf.h">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\zlib.h">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Colliders\CircleCollider.h">
+      <Filter>Monocle\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Colliders\Collider.h">
+      <Filter>Monocle\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Colliders\RectangleCollider.h">
+      <Filter>Monocle\Colliders</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Asset.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\AssetDatabase.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Collision.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Color.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Core.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Debug.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Entity.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Input.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Math.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Monocle.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Random.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Scene.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Sprite.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Tween.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Vector2.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Vector3.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Windows\WindowsPlatform.cpp">
+      <Filter>Monocle\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Tests\Jumper\Jumper.cpp">
+      <Filter>Monocle\Tests\Jumper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Tests\Marian\Marian.cpp">
+      <Filter>Monocle\Tests\Marian</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Tests\Pong\Pong.cpp">
+      <Filter>Monocle\Tests\Pong</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLGraphics.cpp">
+      <Filter>Monocle\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLTextureAsset.cpp">
+      <Filter>Monocle\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\glpng.c">
+      <Filter>Monocle\OpenGL\glpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngtrans.c">
+      <Filter>Monocle\OpenGL\glpng\png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\png.c">
+      <Filter>Monocle\OpenGL\glpng\png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngerror.c">
+      <Filter>Monocle\OpenGL\glpng\png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngget.c">
+      <Filter>Monocle\OpenGL\glpng\png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngmem.c">
+      <Filter>Monocle\OpenGL\glpng\png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngpread.c">
+      <Filter>Monocle\OpenGL\glpng\png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngread.c">
+      <Filter>Monocle\OpenGL\glpng\png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngrio.c">
+      <Filter>Monocle\OpenGL\glpng\png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngrtran.c">
+      <Filter>Monocle\OpenGL\glpng\png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngrutil.c">
+      <Filter>Monocle\OpenGL\glpng\png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngset.c">
+      <Filter>Monocle\OpenGL\glpng\png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\adler32.c">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\compress.c">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\crc32.c">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\deflate.c">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\gzio.c">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\infback.c">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\inffast.c">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\inflate.c">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\inftrees.c">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\trees.c">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\uncompr.c">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\zutil.c">
+      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenAL\OpenALAudio.cpp">
+      <Filter>Monocle\OpenAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Colliders\CircleCollider.cpp">
+      <Filter>Monocle\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Colliders\Collider.cpp">
+      <Filter>Monocle\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Colliders\RectangleCollider.cpp">
+      <Filter>Monocle\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Main.cpp">
+      <Filter>Monocle\Main</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

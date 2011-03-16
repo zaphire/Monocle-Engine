@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FF228BD1-426C-496D-95C1-4928CF205826}</ProjectGuid>
+    <RootNamespace>MonocleTest</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>MONOCLE_WINDOWS;MONOCLE_OPENGL;MONOCLE_OPENAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>OpenGL32.lib;GLu32.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Asset.h" />
+    <ClInclude Include="..\..\..\..\Code\AssetDatabase.h" />
+    <ClInclude Include="..\..\..\..\Code\Audio.h" />
+    <ClInclude Include="..\..\..\..\Code\Colliders\CircleCollider.h" />
+    <ClInclude Include="..\..\..\..\Code\Colliders\Collider.h" />
+    <ClInclude Include="..\..\..\..\Code\Colliders\RectangleCollider.h" />
+    <ClInclude Include="..\..\..\..\Code\Collision.h" />
+    <ClInclude Include="..\..\..\..\Code\Color.h" />
+    <ClInclude Include="..\..\..\..\Code\Core.h" />
+    <ClInclude Include="..\..\..\..\Code\Debug.h" />
+    <ClInclude Include="..\..\..\..\Code\Editor.h" />
+    <ClInclude Include="..\..\..\..\Code\Entity.h" />
+    <ClInclude Include="..\..\..\..\Code\Graphics.h" />
+    <ClInclude Include="..\..\..\..\Code\Input.h" />
+    <ClInclude Include="..\..\..\..\Code\Math.h" />
+    <ClInclude Include="..\..\..\..\Code\Monocle.h" />
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\glpng.h" />
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\png\png.h" />
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\png\pngconf.h" />
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\crc32.h" />
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\deflate.h" />
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\inffast.h" />
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\inffixed.h" />
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\inflate.h" />
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\inftrees.h" />
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\trees.h" />
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\zconf.h" />
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\zlib.h" />
+    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\zutil.h" />
+    <ClInclude Include="..\..\..\..\Code\Platform.h" />
+    <ClInclude Include="..\..\..\..\Code\Random.h" />
+    <ClInclude Include="..\..\..\..\Code\Scene.h" />
+    <ClInclude Include="..\..\..\..\Code\Sprite.h" />
+    <ClInclude Include="..\..\..\..\Code\Tests\Jumper\Jumper.h" />
+    <ClInclude Include="..\..\..\..\Code\Tests\Marian\Marian.h" />
+    <ClInclude Include="..\..\..\..\Code\Tests\Pong\Pong.h" />
+    <ClInclude Include="..\..\..\..\Code\TextureAsset.h" />
+    <ClInclude Include="..\..\..\..\Code\Tween.h" />
+    <ClInclude Include="..\..\..\..\Code\Vector2.h" />
+    <ClInclude Include="..\..\..\..\Code\Vector3.h" />
+    <ClInclude Include="..\..\..\..\Code\Windows\WindowsPlatform.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Asset.cpp" />
+    <ClCompile Include="..\..\..\..\Code\AssetDatabase.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Colliders\CircleCollider.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Colliders\Collider.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Colliders\RectangleCollider.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Collision.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Color.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Core.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Debug.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Entity.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Input.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Main.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Math.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Monocle.cpp" />
+    <ClCompile Include="..\..\..\..\Code\OpenAL\OpenALAudio.cpp" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\glpng.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\png.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngerror.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngget.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngmem.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngpread.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngread.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngrio.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngrtran.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngrutil.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngset.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngtrans.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\adler32.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\compress.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\crc32.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\deflate.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\gzio.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\infback.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\inffast.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\inflate.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\inftrees.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\trees.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\uncompr.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\zutil.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLGraphics.cpp" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLTextureAsset.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Random.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Scene.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Sprite.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Tests\Jumper\Jumper.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Tests\Marian\Marian.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Tests\Pong\Pong.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Tween.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Vector2.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Vector3.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Windows\WindowsPlatform.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
