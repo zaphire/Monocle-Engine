@@ -5,7 +5,7 @@
 namespace Jumper
 {
 	Player::Player(Vector2 pos) 
-		: Sprite(-10, "../../../../Content/Jumper/Player.png", pos, 1.0f)
+		: Sprite(pos, -10, "../../../../Content/Jumper/Player.png", 64, 64)
 	{
 		speed = 100.0f;
 		gravity = 0.25f;
@@ -61,12 +61,18 @@ namespace Jumper
 		onGround = false;
 
 		position.y += velocity.y;
+
 		if(Collide("Wall"))
 		{
+			// small ground collision problem here if falling fast (warps back up too far)
+			// could do a line intersection with the collider we hit
+			// collider->IntersectsLine()
+			// ^ if this gave us the intersection point, we could snap right to the ground instead
+
 			position.y = lastPosition.y;
 			velocity.y = 0;
 			onGround = true;
-			isJumping = false;
+			isJumping = false;;
 		}
 	}
 

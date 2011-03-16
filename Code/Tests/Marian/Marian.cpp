@@ -96,7 +96,7 @@ namespace Marian
 				if (selectedSprite)
 					selectedSprite->isSelected = false;
 
-				selectedSprite = new Sprite(0, "../../../../Content/Marian/Title.png", Vector2(400, 300), 1.0f);
+				selectedSprite = new Sprite(Vector2(400, 300), 0, "../../../../Content/Marian/Title.png", 512, 512);
 				Tween::FromTo(&selectedSprite->color.a, 0.0f, 1.0f, 0.5f, EASE_LINEAR);
 				Core::GetScene()->Add(selectedSprite);
 
@@ -166,10 +166,12 @@ namespace Marian
 
 		Sprite *sprite = NULL;
 		
-		sprite = new Sprite(-20, "../../../../Content/Marian/ReverieSky.png", Vector2(400, 300), 0.75f);
+		sprite = new Sprite(Vector2(400, 300), 20, "../../../../Content/Marian/ReverieSky.png", 1024, 512);
+		sprite->scale = 1.25f;
 		Add(sprite);
 
-		sprite = new Sprite(-10, "../../../../Content/Marian/Title.png", Vector2(400, 300), 0.4f);
+		sprite = new Sprite(Vector2(400, 300), -20, "../../../../Content/Marian/Title.png", 512, 512);
+		sprite->scale = 1.5f;
 		Tween::FromTo(&sprite->color.a, 0.0f, 1.0f, 8.0f, EASE_OUTSIN);
 		Tween::FromTo(&sprite->position, Vector2(400, 1024), Vector2(400, 300), 4.0f, EASE_OUTSIN);
 		Add(sprite);

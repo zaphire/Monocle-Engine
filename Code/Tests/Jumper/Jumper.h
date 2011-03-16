@@ -3,11 +3,20 @@
 
 // by @NoelFB
 using namespace Monocle;
-using std::list;
-using std::string;
 
 namespace Jumper
 {
+	/*
+	class Mover : public Sprite
+	{
+	public:
+		Mover(int layer, std::string graphic, Vector2 pos, float scale);
+		void Update();
+
+		Vector2 velocity;
+	};
+	*/
+
 	class Player : public Sprite
 	{
 	public:

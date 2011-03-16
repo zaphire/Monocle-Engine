@@ -7,12 +7,12 @@ namespace Monocle
 	class Sprite : public Entity
 	{
 	public:
-		Sprite(int layer, const char *filename, Vector2 position, float scale);
+		Sprite(Vector2 position, int layer, const char *filename, float width=-1, float height=-1);
 		Sprite();
 		void Render();
 		TextureAsset *texture;
 		Color color;
-		float scale;
+		float width, height, scale;
 
 		bool isSelected;
 
