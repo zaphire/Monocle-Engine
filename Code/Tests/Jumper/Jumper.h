@@ -35,6 +35,8 @@ namespace Jumper
 		float jump;
 		float maxSpeed;
 		bool isJumping;
+
+		float leanAmount; // how much does he lean into his left/right movement?
 	};
 
 	

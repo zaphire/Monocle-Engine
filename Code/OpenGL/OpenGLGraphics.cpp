@@ -144,9 +144,9 @@ namespace Monocle
 		glPopMatrix();
 	}
 
-	void Graphics::Rotate(float ax, float ay, float az, float r)
+	void Graphics::Rotate(float r, float ax, float ay, float az)
 	{
-		glRotatef(ax, ay, az, r);
+		glRotatef(r, ax, ay, az);
 	}
 
 	void Graphics::RenderTriangle(float size)

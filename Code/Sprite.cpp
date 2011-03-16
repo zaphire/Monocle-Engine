@@ -8,7 +8,7 @@ namespace Monocle
 	bool Sprite::showBounds = false;
 
 	Sprite::Sprite(Vector2 position, int layer, const char *filename, float width, float height)
-		: Entity(), texture(NULL), isSelected(false), scale(1.0f), width(width), height(height)
+		: Entity(), texture(NULL), isSelected(false), scale(1.0f), width(width), height(height), angle(0.0f)
 	{
 		this->position = position;
 		SetLayer(layer);
@@ -25,13 +25,14 @@ namespace Monocle
 
 
 	Sprite::Sprite()
-		: Entity(), texture(NULL), scale(1.0f), isSelected(false)
+		: Entity(), texture(NULL), scale(1.0f), isSelected(false), angle(0.0f), width(64), height(64)
 	{}
 
 	void Sprite::Render()
 	{
 		Graphics::PushMatrix();
 		Graphics::Translate(position.x, position.y, depth);
+		Graphics::Rotate(angle, 0, 0, 1);
 		Graphics::Blend();
 		Graphics::SetColor(color);
 		Graphics::BindTexture(texture);

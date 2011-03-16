@@ -12,7 +12,7 @@ namespace Monocle
 		void Render();
 		TextureAsset *texture;
 		Color color;
-		float width, height, scale;
+		float width, height, scale, angle;
 
 		bool isSelected;
 

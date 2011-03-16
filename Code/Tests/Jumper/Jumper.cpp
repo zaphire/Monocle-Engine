@@ -12,6 +12,7 @@ namespace Jumper
 		velocity = Vector2(0.0f, 0.0f);
 		jump = 8.0f;
 		maxSpeed = 4.0f;
+		leanAmount = 1.5f;
 
 		AddTag("Player");
 		AddRectangleCollider(40, 64);
@@ -33,12 +34,20 @@ namespace Jumper
 			velocity.x = 0;
 		}
 
+		// lean
+		angle = velocity.x * leanAmount;
+
 		// jump
 		if(Input::IsKeyHeld(keyUp) && onGround)
 		{
 			velocity.y = -jump;
 			isJumping = true;
 			onGround = false;
+
+			// stretch a bit when jumping
+			width = 64 * 1.0f;
+			height = 64 * 1.1f;
+			angle = 0;
 		}
 
 		// friction
@@ -58,11 +67,11 @@ namespace Jumper
 			velocity.x = 0.0f;
 		}
 
-		onGround = false;
-
 		position.y += velocity.y;
 
-		if(Collide("Wall"))
+		onGround = false;
+
+		if (Collide("Wall"))
 		{
 			// small ground collision problem here if falling fast (warps back up too far)
 			// could do a line intersection with the collider we hit
@@ -72,7 +81,16 @@ namespace Jumper
 			position.y = lastPosition.y;
 			velocity.y = 0;
 			onGround = true;
-			isJumping = false;;
+			
+			// get fat when we're landing
+			if (isJumping)
+			{
+				width = 64 * 1.1f;
+				height = 64 * 1.0f;
+				angle = 0;
+			}
+
+			isJumping = false;
 		}
 	}
 
