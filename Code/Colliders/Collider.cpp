@@ -28,6 +28,12 @@ namespace Monocle
 
 		if (typeA == CT_RECT && typeB == CT_RECT)
 			return CollideRectRect((RectangleCollider*)a, (RectangleCollider*)b);
+		else if (typeA == CT_CIRCLE && typeB == CT_CIRCLE)
+			return CollideCircleCircle((CircleCollider*)a, (CircleCollider*)b);
+		else if (typeA == CT_RECT && typeB == CT_CIRCLE)
+			return CollideRectCircle((RectangleCollider*)a, (CircleCollider*)b);
+		else if (typeA == CT_CIRCLE && typeB == CT_RECT)
+			return CollideRectCircle((RectangleCollider*)b, (CircleCollider*)a);
 	}
 
 	bool Collider::CollideRectRect(RectangleCollider* a, RectangleCollider* b)
