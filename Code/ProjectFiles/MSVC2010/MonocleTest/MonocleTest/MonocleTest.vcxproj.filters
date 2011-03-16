@@ -43,7 +43,7 @@
     <Filter Include="Monocle\OpenAL">
       <UniqueIdentifier>{ecaa9dfa-367d-4d2d-8d60-0aa9062531ee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Monocle\Jumper">
+    <Filter Include="Monocle\Tests\Jumper">
       <UniqueIdentifier>{0cc35010-5a27-4319-bca8-8c4de55f63fc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -163,7 +163,10 @@
       <Filter>Monocle</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Tests\Jumper\Jumper.h">
-      <Filter>Monocle\Jumper</Filter>
+      <Filter>Monocle\Tests\Jumper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Sprite.h">
+      <Filter>Monocle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -315,7 +318,10 @@
       <Filter>Monocle\OpenAL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Tests\Jumper\Jumper.cpp">
-      <Filter>Monocle\Jumper</Filter>
+      <Filter>Monocle\Tests\Jumper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Sprite.cpp">
+      <Filter>Monocle</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

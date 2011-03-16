@@ -638,7 +638,7 @@ namespace Monocle
 
 	void Platform::Init(int w, int h, int bits, bool fullscreen)
 	{
-		WindowsPlatform::instance->CreatePlatformWindow("Title", w, h, bits, fullscreen);
+		WindowsPlatform::instance->CreatePlatformWindow("Monocle Powered", w, h, bits, fullscreen);
 		//TEMP: hack
 		//width = w;
 		//height = h;

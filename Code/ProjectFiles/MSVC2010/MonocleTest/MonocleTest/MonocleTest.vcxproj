@@ -93,6 +93,7 @@
     <ClInclude Include="..\..\..\..\Platform.h" />
     <ClInclude Include="..\..\..\..\Random.h" />
     <ClInclude Include="..\..\..\..\Scene.h" />
+    <ClInclude Include="..\..\..\..\Sprite.h" />
     <ClInclude Include="..\..\..\..\Tests\Jumper\Jumper.h" />
     <ClInclude Include="..\..\..\..\Tests\Marian\Marian.h" />
     <ClInclude Include="..\..\..\..\Tests\Pong\Pong.h" />
@@ -145,6 +146,7 @@
     <ClCompile Include="..\..\..\..\OpenGL\OpenGLTextureAsset.cpp" />
     <ClCompile Include="..\..\..\..\Random.cpp" />
     <ClCompile Include="..\..\..\..\Scene.cpp" />
+    <ClCompile Include="..\..\..\..\Sprite.cpp" />
     <ClCompile Include="..\..\..\..\Tests\Jumper\Jumper.cpp" />
     <ClCompile Include="..\..\..\..\Tests\Marian\Marian.cpp" />
     <ClCompile Include="..\..\..\..\Tests\Pong\Pong.cpp" />
