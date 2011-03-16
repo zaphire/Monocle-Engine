@@ -43,6 +43,9 @@
     <Filter Include="Monocle\OpenAL">
       <UniqueIdentifier>{ecaa9dfa-367d-4d2d-8d60-0aa9062531ee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Monocle\Jumper">
+      <UniqueIdentifier>{0cc35010-5a27-4319-bca8-8c4de55f63fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Monocle.h">
@@ -158,6 +161,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Audio.h">
       <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Tests\Jumper\Jumper.h">
+      <Filter>Monocle\Jumper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -307,6 +313,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\OpenAL\OpenALAudio.cpp">
       <Filter>Monocle\OpenAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Tests\Jumper\Jumper.cpp">
+      <Filter>Monocle\Jumper</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
