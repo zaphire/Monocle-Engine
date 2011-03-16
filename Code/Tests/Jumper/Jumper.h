@@ -1,5 +1,5 @@
 #include "../../Monocle.h"
-#include "../../TextureAsset.h"
+#include "../../Sprite.h"
 
 // by @NoelFB
 using namespace Monocle;
@@ -8,12 +8,11 @@ using std::string;
 
 namespace Jumper
 {
-	class Player : public Entity
+	class Player : public Sprite
 	{
 	public:
-		Player();
+		Player(Vector2 pos);
 		void Update();
-		void Render();
 		float Sign(float i, float to);
 
 		KeyCode keyUp;
