@@ -80,7 +80,14 @@ namespace Monocle
 		glOrtho(0.0f, Platform::GetWidth(), Platform::GetHeight(), 0.0f, -1.0, 1.0);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		instance->resolutionScale = Vector2(float(Platform::GetWidth())/virtualWidth, float(Platform::GetHeight())/virtualHeight);
+
+		//instance->resolutionScale = Vector2(float(Platform::GetWidth())/virtualWidth, float(Platform::GetHeight())/virtualHeight);
+
+		// avoid vertical stretch:
+
+		// if > 4:3, do something else
+		instance->resolutionScale = Vector2(float(Platform::GetWidth())/virtualWidth, float(Platform::GetWidth())/virtualWidth);
+
 		printf("Set2D: resScale: (%f, %f)\n window (%d, %d)\n", instance->resolutionScale.x, instance->resolutionScale.y, Platform::GetWidth(), Platform::GetHeight());
 		screenCenter.x = virtualWidth/2;
 		screenCenter.y = virtualHeight/2;
