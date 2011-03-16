@@ -40,6 +40,9 @@
     <Filter Include="Monocle\Colliders">
       <UniqueIdentifier>{a834cc3d-7677-41d6-a8ec-d21b830b4b57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Monocle\OpenAL">
+      <UniqueIdentifier>{ecaa9dfa-367d-4d2d-8d60-0aa9062531ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Monocle.h">
@@ -151,6 +154,9 @@
       <Filter>Monocle</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Random.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Audio.h">
       <Filter>Monocle</Filter>
     </ClInclude>
   </ItemGroup>
@@ -298,6 +304,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Random.cpp">
       <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\OpenAL\OpenALAudio.cpp">
+      <Filter>Monocle\OpenAL</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

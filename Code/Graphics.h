@@ -47,6 +47,7 @@ namespace Monocle
 		Vector2 cameraPosition;
 		Vector2 resolutionScale;
 		int virtualWidth, virtualHeight;
+		unsigned int lastBoundTextureID;
 	};
 
 }

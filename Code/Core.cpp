@@ -24,11 +24,11 @@ namespace Monocle
 		input.Init();
 		graphics.Init();
 		collision.Init();
+		audio.Init();
 	}
 
 	void Core::Main()
 	{
-
 		long lastTick = Platform::GetMilliseconds();
 		long tick;
 

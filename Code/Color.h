@@ -18,4 +18,9 @@ namespace Monocle
 		static Color blue;
 		static Color yellow;
 	};
+
+	Color operator+(const Color& lhs, const Color& rhs);	
+	Color operator-(const Color& lhs, const Color& rhs);
+	Color operator*(float lhs, const Color& rhs);		// left scalar multiplication
+	Color operator*(const Color& lhs, float rhs);		// right scalar multiplication
 }

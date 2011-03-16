@@ -26,6 +26,7 @@ namespace Monocle
 	Graphics::Graphics()
 	{
 		instance = this;
+		lastBoundTextureID = 0;
 	}
 
 	void Graphics::Init()
@@ -235,13 +236,19 @@ namespace Monocle
 	{
 		if (textureAsset != NULL)
 		{
-			//Debug::Log("bound texture");
-			//Debug::Log((int)textureAsset->texID);
-			glBindTexture(GL_TEXTURE_2D, textureAsset->texID);
+			if (instance->lastBoundTextureID != textureAsset->texID)
+			{
+				glBindTexture(GL_TEXTURE_2D, textureAsset->texID);
+				instance->lastBoundTextureID = textureAsset->texID;
+			}
 		}
 		else
 		{
-			glBindTexture(GL_TEXTURE_2D, NULL);
+			if (instance->lastBoundTextureID != 0)
+			{
+				glBindTexture(GL_TEXTURE_2D, 0);
+				instance->lastBoundTextureID = 0;
+			}
 		}
 	}
 }

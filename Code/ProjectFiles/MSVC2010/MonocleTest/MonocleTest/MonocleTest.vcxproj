@@ -41,7 +41,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>MONOCLE_WINDOWS;MONOCLE_OPENGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MONOCLE_WINDOWS;MONOCLE_OPENGL;MONOCLE_OPENAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -64,6 +64,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Asset.h" />
     <ClInclude Include="..\..\..\..\AssetDatabase.h" />
+    <ClInclude Include="..\..\..\..\Audio.h" />
     <ClInclude Include="..\..\..\..\Colliders\CircleCollider.h" />
     <ClInclude Include="..\..\..\..\Colliders\Collider.h" />
     <ClInclude Include="..\..\..\..\Colliders\RectangleCollider.h" />
@@ -115,6 +116,7 @@
     <ClCompile Include="..\..\..\..\Main.cpp" />
     <ClCompile Include="..\..\..\..\Math.cpp" />
     <ClCompile Include="..\..\..\..\Monocle.cpp" />
+    <ClCompile Include="..\..\..\..\OpenAL\OpenALAudio.cpp" />
     <ClCompile Include="..\..\..\..\OpenGL\glpng\glpng.c" />
     <ClCompile Include="..\..\..\..\OpenGL\glpng\png\png.c" />
     <ClCompile Include="..\..\..\..\OpenGL\glpng\png\pngerror.c" />

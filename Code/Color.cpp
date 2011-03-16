@@ -22,4 +22,24 @@ namespace Monocle
 	{
 
 	}
+
+	Color operator+(const Color& lhs, const Color& rhs)
+	{
+		return Color(lhs.r + rhs.r, lhs.g + rhs.g, lhs.b + rhs.b, lhs.a + rhs.a);
+	}
+	
+	Color operator-(const Color& lhs, const Color& rhs)
+	{
+		return Color(lhs.r - rhs.r, lhs.g - rhs.g, lhs.b - rhs.b, lhs.a - rhs.a);
+	}
+
+	Color operator*(float lhs, const Color& rhs)		// left scalar multiplication
+	{
+		return Color(lhs * rhs.r, lhs * rhs.g, lhs * rhs.b, lhs * rhs.a);
+	}
+	
+	Color operator*(const Color& lhs, float rhs)		// right scalar multiplication
+	{
+		return Color(lhs.r * rhs, lhs.g * rhs, lhs.b * rhs, lhs.a * rhs);
+	}
 }

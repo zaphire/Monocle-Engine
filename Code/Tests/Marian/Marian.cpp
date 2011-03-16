@@ -212,7 +212,8 @@ namespace Marian
 		Add(sprite);
 
 		sprite = new Sprite(-10, "../../../../../Content/Marian/Title.png", Vector2(400, 300), 0.4f);
-		Tween::FromTo(&sprite->color.a, 0.0f, 1.0f, 5.0f, EASE_OUTSIN);
+		Tween::FromTo(&sprite->color.a, 0.0f, 1.0f, 8.0f, EASE_OUTSIN);
+		Tween::FromTo(&sprite->position, Vector2(400, 1024), Vector2(400, 300), 4.0f, EASE_OUTSIN);
 		Add(sprite);
 	}
 

@@ -8,40 +8,56 @@ namespace Monocle
 	std::list<Tweener*> Tween::tweeners;
 	std::list<Tweener*> Tween::tweenersToRemove;
 
-	Tweener::Tweener(float *value, float end, float time, EaseType easeType)
-		: time(time), timer(0.0f), easeType(easeType), end(end), value(value), start(*value)
-	{
-	}
-
-	void Tweener::Update()
-	{
-		timer += Monocle::deltaTime;
-		if (timer > time) timer = time;
-		float p = (timer/time);
-		p = Tween::Ease(p, easeType);
-		(*value) = ((end - start) * p) + start;
-
-		if (timer >= time)
-		{
-			Tween::Remove(this);
-		}
-	}
-
 	Tween::Tween()
 	{
 	}
 
-	void Tween::To(float *value, float to, float time, EaseType easeType)
+	template <typename T, typename N>
+	void Tween::To(T *value, const T &end, float time, EaseType easeType)
 	{
-		Tweener *t = new Tweener(value, to, time, easeType);
+		Tweener *t = (Tweener*)new N(value, end, time, easeType);
 		tweeners.push_back(t);
 	}
 
-	void Tween::FromTo(float *value, float from, float to, float time, EaseType easeType)
+	template <typename T, typename N>
+	void Tween::FromTo(T *value, const T &start, const T &end, float time, EaseType easeType)
 	{
-		*value = from;
-		Tweener *t = new Tweener(value, to, time, easeType);
+		*value = start;
+		Tweener *t = (Tweener*)new N(value, end, time, easeType);
 		tweeners.push_back(t);
+	}
+	
+	//float
+	void Tween::To(float *value, const float &end, float time, EaseType easeType)
+	{
+		To<float, FloatTweener>(value, end, time, easeType);
+	}
+
+	void Tween::FromTo(float *value, const float &start, const float &end, float time, EaseType easeType)
+	{
+		FromTo<float, FloatTweener>(value, start, end, time, easeType);
+	}
+
+	//Vector2
+	void Tween::To(Vector2 *value, const Vector2 &end, float time, EaseType easeType)
+	{
+		To<Vector2, Vector2Tweener>(value, end, time, easeType);
+	}
+
+	void Tween::FromTo(Vector2 *value, const Vector2 &start, const Vector2 &end, float time, EaseType easeType)
+	{
+		FromTo<Vector2, Vector2Tweener>(value, start, end, time, easeType);
+	}
+
+	//Color
+	void Tween::To(Color *value, const Color &end, float time, EaseType easeType)
+	{
+		To<Color, ColorTweener>(value, end, time, easeType);
+	}
+
+	void Tween::FromTo(Color *value, const Color &start, const Color &end, float time, EaseType easeType)
+	{
+		FromTo<Color, ColorTweener>(value, start, end, time, easeType);
 	}
 
 	void Tween::Update()
@@ -103,5 +119,52 @@ namespace Monocle
 		}
 
 		return t;
+	}
+
+
+	Tweener::Tweener(float time, EaseType easeType)
+		: time(time), timer(0.0f), easeType(easeType)
+	{
+	}
+
+	void Tweener::Update()
+	{
+		timer += Monocle::deltaTime;
+		if (timer > time) timer = time;
+		float p = (timer/time);
+		p = Tween::Ease(p, easeType);
+		SetValue(p);
+
+		if (timer >= time)
+		{
+			Tween::Remove((Tweener*)this);
+		}
+	}
+
+	FloatTweener::FloatTweener(float *value, float end, float time, EaseType easeType)
+		: Tweener(time, easeType), value(value), start(*value), end(end)
+	{}
+
+	void FloatTweener::SetValue(float p)
+	{
+		(*value) = ((end - start) * p) + start;
+	}
+
+	Vector2Tweener::Vector2Tweener(Vector2 *value, Vector2 end, float time, EaseType easeType)
+		: Tweener(time, easeType), value(value), start(*value), end(end)
+	{}
+
+	void Vector2Tweener::SetValue(float p)
+	{
+		(*value) = ((end - start) * p) + start;
+	}
+
+	ColorTweener::ColorTweener(Color *value, Color end, float time, EaseType easeType)
+		: Tweener(time, easeType), value(value), start(*value), end(end)
+	{}
+
+	void ColorTweener::SetValue(float p)
+	{
+		(*value) = ((end - start) * p) + start;
 	}
 }

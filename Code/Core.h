@@ -10,6 +10,7 @@
 #include "Editor.h"
 #include "Collision.h"
 #include "Random.h"
+#include "Audio.h"
 
 namespace Monocle
 {
@@ -48,6 +49,7 @@ namespace Monocle
 		Tween tween;
 		Collision collision;
 		Random random;
+		Audio audio;
 
 		Editor *editor;
 	};
