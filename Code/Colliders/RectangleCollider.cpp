@@ -2,9 +2,14 @@
 
 namespace Monocle
 {
-	RectangleCollider::RectangleCollider(Vector2 position, float width, float height)
+	//Note: collision is centered
+	// so 0,0 is the center of the sprite
+	// unless you set an offset (position)
+
+	RectangleCollider::RectangleCollider(float width, float height, Vector2 offset)
+		: Collider()
 	{
-		this->position	= position;
+		this->offset	= offset;
 		this->width		= width;
 		this->height	= height;
 	}
@@ -16,7 +21,7 @@ namespace Monocle
 
 	bool RectangleCollider::IntersectsPoint(const Vector2& point)
 	{
-		return (point.x >= position.x && point.y >= position.y && point.x < position.x + width && point.y < position.y + height);
+		return (point.x > offset.x - width*0.5f && point.y > offset.y - height*0.5f && point.x < offset.x + width*0.5f && point.y < offset.y + height*0.5f);
 	}
 
 	bool RectangleCollider::IntersectsLine(const Vector2& start, const Vector2& end)

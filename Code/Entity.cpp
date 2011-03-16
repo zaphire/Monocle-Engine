@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "Collision.h"
 
 namespace Monocle
 {
@@ -106,5 +107,33 @@ namespace Monocle
 	bool Entity::IsLayer(int layer)
 	{
 		return this->layer == layer;
+	}
+
+	void Entity::SetCollider(Collider *collider)
+	{
+		this->collider = collider;
+	}
+
+	Collider* Entity::GetCollider()
+	{
+		return collider;
+	}
+
+	Collider* Entity::Collide(const std::string &tag)
+	{
+		return Collision::Collide(this, tag);
+	}
+
+	RectangleCollider* Entity::AddRectangleCollider(float width, float height, const Vector2 &offset)
+	{
+		return Collision::AddRectangleCollider(this, width, height, offset);
+	}
+
+	void Entity::SendMessageToScene(const std::string &message)
+	{
+		if (scene)
+		{
+			scene->ReceiveMessage(message);
+		}
 	}
 }

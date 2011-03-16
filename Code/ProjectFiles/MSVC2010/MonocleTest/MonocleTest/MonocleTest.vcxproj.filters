@@ -147,6 +147,12 @@
     <ClInclude Include="..\..\..\..\Colliders\RectangleCollider.h">
       <Filter>Monocle\Colliders</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Collision.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Random.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Monocle.cpp">
@@ -286,6 +292,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Colliders\RectangleCollider.cpp">
       <Filter>Monocle\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Collision.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Random.cpp">
+      <Filter>Monocle</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

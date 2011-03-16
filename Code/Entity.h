@@ -2,12 +2,17 @@
 
 #include "Vector2.h"
 #include "Scene.h"
+
 #include <string>
 #include <vector>
+#include <list>
 
 namespace Monocle
 {
 	class Scene;
+	class Collider;
+	class RectangleCollider;
+	class CircleCollider;
 
 	class Entity
 	{
@@ -33,6 +38,13 @@ namespace Monocle
 		//Called by the scene when the entity is removed from that scene
 		virtual void Removed();
 
+		//Call to check our collider against all entities that have "tag"
+		Collider* Collide(const std::string &tag);
+		RectangleCollider *AddRectangleCollider(float width, float height, const Vector2 &offset = Vector2::zero);
+
+		//very simple "message" sending
+		void SendMessageToScene(const std::string &message);
+
 		//Tagging API
 		void AddTag(const std::string& tag);
 		bool HasTag(const std::string& tag);
@@ -40,10 +52,16 @@ namespace Monocle
 		const std::string& GetTag(int index);
 		int GetNumberOfTags();
 
+		//Layer
 		bool IsLayer(int layer);
 		int GetLayer();
 		void SetLayer(int layer);
+
+		// only for use by Collision class
+		void SetCollider(Collider *collider);
+		Collider* GetCollider();
 	private:
+		Collider* collider;
 		std::vector<std::string> tags;
 		int layer;
 	};

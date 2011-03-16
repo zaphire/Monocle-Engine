@@ -67,6 +67,7 @@
     <ClInclude Include="..\..\..\..\Colliders\CircleCollider.h" />
     <ClInclude Include="..\..\..\..\Colliders\Collider.h" />
     <ClInclude Include="..\..\..\..\Colliders\RectangleCollider.h" />
+    <ClInclude Include="..\..\..\..\Collision.h" />
     <ClInclude Include="..\..\..\..\Color.h" />
     <ClInclude Include="..\..\..\..\Core.h" />
     <ClInclude Include="..\..\..\..\Debug.h" />
@@ -89,6 +90,7 @@
     <ClInclude Include="..\..\..\..\OpenGL\glpng\zlib\zlib.h" />
     <ClInclude Include="..\..\..\..\OpenGL\glpng\zlib\zutil.h" />
     <ClInclude Include="..\..\..\..\Platform.h" />
+    <ClInclude Include="..\..\..\..\Random.h" />
     <ClInclude Include="..\..\..\..\Scene.h" />
     <ClInclude Include="..\..\..\..\Tests\Marian\Marian.h" />
     <ClInclude Include="..\..\..\..\Tests\Pong\Pong.h" />
@@ -104,6 +106,7 @@
     <ClCompile Include="..\..\..\..\Colliders\CircleCollider.cpp" />
     <ClCompile Include="..\..\..\..\Colliders\Collider.cpp" />
     <ClCompile Include="..\..\..\..\Colliders\RectangleCollider.cpp" />
+    <ClCompile Include="..\..\..\..\Collision.cpp" />
     <ClCompile Include="..\..\..\..\Color.cpp" />
     <ClCompile Include="..\..\..\..\Core.cpp" />
     <ClCompile Include="..\..\..\..\Debug.cpp" />
@@ -137,6 +140,7 @@
     <ClCompile Include="..\..\..\..\OpenGL\glpng\zlib\uncompr.c" />
     <ClCompile Include="..\..\..\..\OpenGL\glpng\zlib\zutil.c" />
     <ClCompile Include="..\..\..\..\OpenGL\OpenGLTextureAsset.cpp" />
+    <ClCompile Include="..\..\..\..\Random.cpp" />
     <ClCompile Include="..\..\..\..\Scene.cpp" />
     <ClCompile Include="..\..\..\..\Tests\Marian\Marian.cpp" />
     <ClCompile Include="..\..\..\..\Tests\Pong\Pong.cpp" />

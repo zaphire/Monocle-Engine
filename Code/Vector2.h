@@ -17,6 +17,9 @@ namespace Monocle
 		Vector2();
 		Vector2(float x, float y);
 
+		// return random vector
+		static Vector2 Random();
+
 		float GetSquaredMagnitude();
 		float GetMagnitude();
 		Vector2 GetNormalized();

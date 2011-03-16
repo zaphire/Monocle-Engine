@@ -1,5 +1,6 @@
 #include "Vector2.h"
-#include <math.h>
+#include "Math.h"
+#include "Random.h"
 
 namespace Monocle
 {
@@ -18,6 +19,12 @@ namespace Monocle
 	Vector2::Vector2(float x, float y)
 		: x(x), y(y)
 	{
+	}
+
+	Vector2 Vector2::Random()
+	{
+		float rad = (Random::Range(0,360)) * Math::Deg2Rad;
+		return Vector2(sin(rad), cos(rad));
 	}
 
 	float Vector2::GetSquaredMagnitude()

@@ -2,9 +2,10 @@
 
 namespace Monocle
 {
-	CircleCollider::CircleCollider(Vector2 position, float radius)
+	CircleCollider::CircleCollider(float radius, Vector2 offset)
+		: Collider()
 	{
-		this->position	= position;
+		this->offset	= offset;
 		this->radius	= radius;
 	}
 
@@ -15,7 +16,8 @@ namespace Monocle
 
 	bool CircleCollider::IntersectsPoint(const Vector2& point)
 	{
-		Vector2 diff = point - position;
+		//TODO: take into account entity position
+		Vector2 diff = point - offset;
 		return (diff.IsInRange(radius));
 	}
 

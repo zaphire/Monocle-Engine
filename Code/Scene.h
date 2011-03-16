@@ -52,6 +52,8 @@ namespace Monocle
 
 		Entity* GetEntityNearestTo(const Vector2 &position);
 
+		virtual void ReceiveMessage(const std::string &message);
+
 	private:
 		//Holds all the entities currently in the scene
 		std::list<Entity*> entities;

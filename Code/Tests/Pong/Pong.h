@@ -25,6 +25,7 @@ namespace Pong
 		void Update();
 		void Render();
 		TextureAsset *texture;
+		Vector2 velocity;
 	};
 
 	class GameScene : public Scene
@@ -33,8 +34,12 @@ namespace Pong
 		Ball *ball;
 		Paddle *paddle1, *paddle2;
 
+		void ResetBall();
+
 		void Begin();
 		void End();
-		void Update();
+		//void Update();
+		
+		void ReceiveMessage(const std::string &message);
 	};
 }

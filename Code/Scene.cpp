@@ -82,8 +82,14 @@ namespace Monocle
 			}
 		}
 #endif
-
-		toAdd.push_back(entity);
+		if (entity->scene != NULL)
+		{
+			Debug::Log("ERROR: Trying to add an Entity to a Scene, but Entity is already in a Scene");
+		}
+		else
+		{
+			toAdd.push_back(entity);
+		}
 	}
 
 	void Scene::Remove(Entity* entity)
@@ -217,5 +223,9 @@ namespace Monocle
 			return 0;
 		
 		return tagMap[tag].size();
+	}
+
+	void Scene::ReceiveMessage(const std::string &message)
+	{
 	}
 }

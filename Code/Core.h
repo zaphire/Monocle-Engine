@@ -8,6 +8,8 @@
 #include "AssetDatabase.h"
 #include "Tween.h"
 #include "Editor.h"
+#include "Collision.h"
+#include "Random.h"
 
 namespace Monocle
 {
@@ -44,6 +46,9 @@ namespace Monocle
 		Debug debug;
 		AssetDatabase assetDatabase;
 		Tween tween;
+		Collision collision;
+		Random random;
+
 		Editor *editor;
 	};
 }

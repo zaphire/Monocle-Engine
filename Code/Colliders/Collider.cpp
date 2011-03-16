@@ -1,9 +1,26 @@
 #include "Collider.h"
 #include "RectangleCollider.h"
 #include "CircleCollider.h"
+#include "../Entity.h"
+#include <stdio.h> // for NULL
 
 namespace Monocle
 {
+	Collider::Collider()
+		: entity(NULL)
+	{
+	}
+
+	void Collider::SetEntity(Entity* entity)
+	{
+		this->entity = entity;
+	}
+
+	Entity* Collider::GetEntity()
+	{
+		return entity;
+	}
+
 	bool Collider::Collide(Collider* a, Collider* b)
 	{
 		ColliderType typeA = a->GetColliderType();
@@ -15,16 +32,22 @@ namespace Monocle
 
 	bool Collider::CollideRectRect(RectangleCollider* a, RectangleCollider* b)
 	{
-		if (a->position.y + a->height < b->position.y)
+		Vector2 aOff, bOff;
+		if (a->entity != NULL)
+			aOff = a->entity->position;
+		if (b->entity != NULL)
+			bOff = b->entity->position;
+
+		if (a->offset.y + aOff.y + a->height*0.5f < b->offset.y + bOff.y - b->height*0.5f)
 			return false;
 
-		if (a->position.y > b->position.y + b->height)
+		if (a->offset.y + aOff.y - a->height*0.5f > b->offset.y + bOff.y + b->height*0.5f)
 			return false;
 
-		if (a->position.x + a->width < b->position.x)
+		if (a->offset.x + aOff.x + a->width*0.5f < b->offset.x + bOff.x - b->width*0.5f)
 			return false;
 
-		if (a->position.x > b->position.x + b->width)
+		if (a->offset.x + aOff.x - a->width*0.5f > b->offset.x + bOff.x + b->width*0.5f)
 			return false;
 
 		return true;
@@ -32,21 +55,29 @@ namespace Monocle
 
 	bool Collider::CollideCircleCircle(CircleCollider* a, CircleCollider* b)
 	{
-		Vector2 diff = b->position - a->position;
+		Vector2 aOff, bOff;
+		if (a->entity != NULL)
+			aOff = a->entity->position;
+		if (b->entity != NULL)
+			bOff = b->entity->position;
+
+		Vector2 diff = (b->offset + bOff) - (a->offset + aOff);
 		return (diff.IsInRange(a->radius + b->radius));
 	}
 
 	bool Collider::CollideRectCircle(RectangleCollider* a, CircleCollider* b)
 	{
+		//TODO: add in entity position as offset!
+
 		//The center of the circle is within the rectangle
-		if (a->IntersectsPoint(b->position))
+		if (a->IntersectsPoint(b->offset))
 			return true;
 
 		//Check the circle against the four edges of the rectangle
-		Vector2 pB = Vector2(a->position.x + a->width, a->position.y);
-		Vector2 pC = Vector2(a->position.x + a->width, a->position.y + a->height);
-		Vector2 pD = Vector2(a->position.x, a->position.y + a->height);
-		if (b->IntersectsLine(a->position, pB) || b->IntersectsLine(pB, pC) || b->IntersectsLine(pC, pD) || b->IntersectsLine(pD, a->position))
+		Vector2 pB = Vector2(a->offset.x + a->width, a->offset.y);
+		Vector2 pC = Vector2(a->offset.x + a->width, a->offset.y + a->height);
+		Vector2 pD = Vector2(a->offset.x, a->offset.y + a->height);
+		if (b->IntersectsLine(a->offset, pB) || b->IntersectsLine(pB, pC) || b->IntersectsLine(pC, pD) || b->IntersectsLine(pD, a->offset))
 			return true;
 
 		return false;

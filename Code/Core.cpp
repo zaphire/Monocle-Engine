@@ -23,6 +23,7 @@ namespace Monocle
 		assetDatabase.Init();
 		input.Init();
 		graphics.Init();
+		collision.Init();
 	}
 
 	void Core::Main()
