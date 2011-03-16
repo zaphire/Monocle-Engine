@@ -147,8 +147,8 @@ namespace Monocle
 				else
 					return Ease(t*2-d, EASE_OUTBOUNCE) * .5f + c*.5f + b;
 				break;
-            default:
-                break;
+			default:
+				break;
 		}
 
 		return t;
