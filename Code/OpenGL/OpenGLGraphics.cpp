@@ -63,7 +63,7 @@ namespace Monocle
 	///HACK: temporary
 	void Graphics::Blend()
 	{
-		glBlendFunc(GL_SRC_ALPHA,GL_ONE);
+		glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 	}
 
 	void Graphics::Set2D(int virtualWidth, int virtualHeight)

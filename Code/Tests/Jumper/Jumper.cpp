@@ -61,7 +61,7 @@ namespace Jumper
 		float temp = 0.001f;
 
 		position.x += velocity.x;
-		if(Collide("Wall"))
+		if(Collide("Wall") || Collide("Player"))
 		{
 			position.x = lastPosition.x;
 			velocity.x = 0.0f;
@@ -71,7 +71,7 @@ namespace Jumper
 
 		onGround = false;
 
-		if (Collide("Wall"))
+		if (Collide("Wall") || Collide("Player"))
 		{
 			// small ground collision problem here if falling fast (warps back up too far)
 			// could do a line intersection with the collider we hit
@@ -124,10 +124,17 @@ namespace Jumper
 		Debug::Log("Jumper::GameScene::Begin()!");
 		Scene::Begin();
 
+		Graphics::SetBackgroundColor(Color::blue * 0.1f);
+
 		Add(new Wall(Vector2(400.0f, 500.0), 200.0f, 10.0f));
 		Add(new Wall(Vector2(600.0f, 400.0), 100.0f, 10.0f));
 		Add(new Wall(Vector2(200.0f, 400.0), 20.0f, 150.0f));
 
+		SpawnPlayer();
+	}
+
+	void GameScene::SpawnPlayer()
+	{
 		player = new Player(Vector2(400.0f, 300.0f));
 		player->keyUp = KEY_UP;
 		player->keyLeft = KEY_LEFT;
@@ -138,6 +145,11 @@ namespace Jumper
 	void GameScene::Update()
 	{
 		Scene::Update();
+
+		if (Input::IsKeyPressed(KEY_SPACE))
+		{
+			SpawnPlayer();
+		}
 	}
 
 	void GameScene::End()

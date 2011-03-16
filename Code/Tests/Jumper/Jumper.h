@@ -60,5 +60,7 @@ namespace Jumper
 		void Begin();
 		void End();
 		void Update();
+
+		void SpawnPlayer();
 	};
 }
