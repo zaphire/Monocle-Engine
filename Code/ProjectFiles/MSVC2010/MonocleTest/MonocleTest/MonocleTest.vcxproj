@@ -64,6 +64,9 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Asset.h" />
     <ClInclude Include="..\..\..\..\AssetDatabase.h" />
+    <ClInclude Include="..\..\..\..\Colliders\CircleCollider.h" />
+    <ClInclude Include="..\..\..\..\Colliders\Collider.h" />
+    <ClInclude Include="..\..\..\..\Colliders\RectangleCollider.h" />
     <ClInclude Include="..\..\..\..\Color.h" />
     <ClInclude Include="..\..\..\..\Core.h" />
     <ClInclude Include="..\..\..\..\Debug.h" />
@@ -94,11 +97,13 @@
     <ClInclude Include="..\..\..\..\Vector2.h" />
     <ClInclude Include="..\..\..\..\Vector3.h" />
     <ClInclude Include="..\..\..\..\Windows\WindowsPlatform.h" />
-    <ClInclude Include="Collider.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Asset.cpp" />
     <ClCompile Include="..\..\..\..\AssetDatabase.cpp" />
+    <ClCompile Include="..\..\..\..\Colliders\CircleCollider.cpp" />
+    <ClCompile Include="..\..\..\..\Colliders\Collider.cpp" />
+    <ClCompile Include="..\..\..\..\Colliders\RectangleCollider.cpp" />
     <ClCompile Include="..\..\..\..\Color.cpp" />
     <ClCompile Include="..\..\..\..\Core.cpp" />
     <ClCompile Include="..\..\..\..\Debug.cpp" />

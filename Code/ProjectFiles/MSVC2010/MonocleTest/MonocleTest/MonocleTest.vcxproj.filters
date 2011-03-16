@@ -37,6 +37,9 @@
     <Filter Include="Monocle\Tests\Marian">
       <UniqueIdentifier>{60c815d5-9b47-4995-b41f-f9133f42cf64}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Monocle\Colliders">
+      <UniqueIdentifier>{a834cc3d-7677-41d6-a8ec-d21b830b4b57}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Monocle.h">
@@ -135,8 +138,14 @@
     <ClInclude Include="..\..\..\..\Color.h">
       <Filter>Monocle</Filter>
     </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>Monocle</Filter>
+    <ClInclude Include="..\..\..\..\Colliders\CircleCollider.h">
+      <Filter>Monocle\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Colliders\Collider.h">
+      <Filter>Monocle\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Colliders\RectangleCollider.h">
+      <Filter>Monocle\Colliders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -268,6 +277,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Color.cpp">
       <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Colliders\CircleCollider.cpp">
+      <Filter>Monocle\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Colliders\Collider.cpp">
+      <Filter>Monocle\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Colliders\RectangleCollider.cpp">
+      <Filter>Monocle\Colliders</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
