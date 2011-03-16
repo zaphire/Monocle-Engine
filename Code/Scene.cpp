@@ -73,7 +73,7 @@ namespace Monocle
 		}
 
 		//Error: If the entity is already marked to be added
-		for (list<Entity*>::iterator i = toAdd.begin(); i != toAdd.end(); ++i)
+		for (std::list<Entity*>::iterator i = toAdd.begin(); i != toAdd.end(); ++i)
 		{
 			if ((*i) == entity)
 			{
@@ -222,7 +222,7 @@ namespace Monocle
 		if (tagMap.count(tag) == 0)
 			return 0;
 		
-		return tagMap[tag].size();
+		return static_cast<int>(tagMap[tag].size());
 	}
 
 	void Scene::ReceiveMessage(const std::string &message)

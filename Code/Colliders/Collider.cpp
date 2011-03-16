@@ -34,6 +34,9 @@ namespace Monocle
 			return CollideRectCircle((RectangleCollider*)a, (CircleCollider*)b);
 		else if (typeA == CT_CIRCLE && typeB == CT_RECT)
 			return CollideRectCircle((RectangleCollider*)b, (CircleCollider*)a);
+        
+        // Unhandled case
+        return false;
 	}
 
 	bool Collider::CollideRectRect(RectangleCollider* a, RectangleCollider* b)
