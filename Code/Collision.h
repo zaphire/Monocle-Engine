@@ -22,7 +22,6 @@ namespace Monocle
 		static void Collision::RemoveCollider(Collider *collider);
 
 		static Collider* Collision::Collide(Entity *entity, const std::string &tag);
-		std::vector<Collider*> Collision::Overlap(Entity *entity, const std::string &tag);
 
 	private:
 		static void Collision::RegisterColliderWithEntity(Collider *collider, Entity *entity);

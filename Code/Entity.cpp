@@ -4,10 +4,8 @@
 namespace Monocle
 {
 	Entity::Entity()
+		: scene(NULL), collider(NULL), layer(0), depth(0.0f)
 	{
-		scene = NULL;
-		layer = 0;
-		depth = 0.0f;
 	}
 
 	Entity::~Entity()

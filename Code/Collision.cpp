@@ -15,23 +15,37 @@ namespace Monocle
 	}
 	
 	//OPTION: refactor to add multiple colliders? (consider carefully)
+	//FORNOW: limit to one collider per entity (simpler, makes more sense)
+	//LATER: rename these to "Set" or something else?
 
 	CircleCollider* Collision::AddCircleCollider(Entity *entity, float radius, Vector2 offset)
 	{
-		CircleCollider* circleCollider = new CircleCollider(radius, offset);
+		if (entity->GetCollider() == NULL)
+		{
+			CircleCollider* circleCollider = new CircleCollider(radius, offset);
 
-		RegisterColliderWithEntity((Collider*)circleCollider, entity);
+			RegisterColliderWithEntity((Collider*)circleCollider, entity);
 
-		return circleCollider;
+			return circleCollider;
+		}
+
+		Debug::Log("ERROR: Cannot add more than one Collider to an Entity.");
+		return NULL;
 	}
 
 	RectangleCollider* Collision::AddRectangleCollider(Entity *entity, float width, float height, Vector2 offset)
 	{
-		RectangleCollider *rectangleCollider = new RectangleCollider(width, height, offset);
+		if (entity->GetCollider() == NULL)
+		{
+			RectangleCollider *rectangleCollider = new RectangleCollider(width, height, offset);
 
-		RegisterColliderWithEntity((Collider*)rectangleCollider, entity);
+			RegisterColliderWithEntity((Collider*)rectangleCollider, entity);
 
-		return rectangleCollider;
+			return rectangleCollider;
+		}
+
+		Debug::Log("ERROR: Cannot add more than one Collider to an Entity.");
+		return NULL;
 	}
 
 	void Collision::RegisterColliderWithEntity(Collider *collider, Entity *entity)
@@ -70,16 +84,6 @@ namespace Monocle
 		}
 
 		return NULL;
-	}
-
-	std::vector<Collider*> Collision::Overlap(Entity *entity, const std::string &tag)
-	{
-		std::vector<Collider*> colliders;
-
-		//TODO: implement function
-		printf("Collision::Overlap not written yet!\n");
-
-		return colliders;
 	}
 
 }
