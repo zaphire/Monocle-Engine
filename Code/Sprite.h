@@ -15,6 +15,8 @@ namespace Monocle
 		TextureAsset *texture;
 		Color color;
 		float width, height, scale, angle;
+		Vector2 textureOffset;
+		Vector2 textureScale;
 
 		bool isSelected;
 

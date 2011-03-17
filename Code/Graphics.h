@@ -39,7 +39,7 @@ namespace Monocle
 		static void Rotate(float ax, float ay, float az, float r);
 		static void RenderTriangle(float size);
 		//static void RenderQuad(float size);
-		static void RenderQuad(float width, float height);
+		static void RenderQuad(float width, float height, Vector2 textureOffset=Vector2::zero, Vector2 textureScale=Vector2::one);
 		static void RenderLineRect(float x, float y, float w, float h);
 		static void PushMatrix();
 		static void PopMatrix();

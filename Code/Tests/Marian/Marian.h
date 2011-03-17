@@ -28,4 +28,9 @@ namespace Marian
 		Entity* AddSpriteEntity(Vector2 pos, int layer, const char *filename, int width, int height, float scale, Sprite** sprite=NULL);
 	};
 
+	class GameState : public Scene
+	{
+	public:
+		
+	};
 }

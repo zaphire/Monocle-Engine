@@ -9,7 +9,15 @@ namespace Monocle
 	bool Sprite::showBounds = false;
 
 	Sprite::Sprite(const char *filename, float width, float height)
-		: Graphic(), texture(NULL), isSelected(false), scale(1.0f), width(width), height(height), angle(0.0f)
+		: Graphic(),
+		texture(NULL),
+		isSelected(false),
+		scale(1.0f),
+		width(width),
+		height(height),
+		angle(0.0f),
+		textureOffset(Vector2::zero),
+		textureScale(Vector2::one)
 	{
 		texture = AssetDatabase::RequestTexture(filename);
 		if (texture != NULL)
@@ -37,7 +45,7 @@ namespace Monocle
 		Graphics::SetColor(color);
 		Graphics::BindTexture(texture);
 		if (texture != NULL)
-			Graphics::RenderQuad(width * scale, height * scale);
+			Graphics::RenderQuad(width * scale, height * scale, textureOffset, textureScale);
 		Graphics::PopMatrix();
 
 		if (showBounds || isSelected)
