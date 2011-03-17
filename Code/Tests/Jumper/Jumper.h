@@ -1,5 +1,5 @@
 #include "../../Monocle.h"
-#include "../../Sprite.h"
+#include "../../Graphics/Sprite.h"
 
 // by @NoelFB
 using namespace Monocle;

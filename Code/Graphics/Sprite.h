@@ -1,6 +1,6 @@
-#include "Color.h"
-#include "TextureAsset.h"
-#include "Graphics.h"
+#include "../Color.h"
+#include "../TextureAsset.h"
+#include "../Graphics.h"
 
 namespace Monocle
 {

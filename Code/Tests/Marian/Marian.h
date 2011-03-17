@@ -1,6 +1,6 @@
 #include "../../Monocle.h"
 #include "../../Tween.h"
-#include "../../Sprite.h"
+#include "../../Graphics/Sprite.h"
 
 using namespace Monocle;
 

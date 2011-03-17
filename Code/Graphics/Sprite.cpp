@@ -1,8 +1,6 @@
 #include "Sprite.h"
-#include "TextureAsset.h"
-#include "AssetDatabase.h"
-#include "Graphics.h"
-#include "Entity.h"
+#include "../AssetDatabase.h"
+#include "../Entity.h"
 
 namespace Monocle
 {
