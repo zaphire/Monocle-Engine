@@ -10,7 +10,6 @@
 	#include <Windows.h>
 #endif
 
-
 #if defined(MONOCLE_MAC)
 	#include <OpenGL/gl.h>
 	#include <OpenGL/glext.h>
