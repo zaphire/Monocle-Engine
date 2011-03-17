@@ -24,8 +24,8 @@ namespace Monocle
 
 	private:
 		friend class Entity;
-		static void Collision::RegisterColliderWithEntity(Collider *collider, Entity *entity);
-		static void Collision::RemoveCollider(Collider *collider);
+		static void RegisterColliderWithEntity(Collider *collider, Entity *entity);
+		static void RemoveCollider(Collider *collider);
 
 	private:
 		static Collision *instance;
