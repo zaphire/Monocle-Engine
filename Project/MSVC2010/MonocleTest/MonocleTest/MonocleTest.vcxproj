@@ -63,7 +63,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Asset.h" />
-    <ClInclude Include="..\..\..\..\Code\AssetDatabase.h" />
+    <ClInclude Include="..\..\..\..\Code\Assets.h" />
     <ClInclude Include="..\..\..\..\Code\Audio.h" />
     <ClInclude Include="..\..\..\..\Code\Colliders\CircleCollider.h" />
     <ClInclude Include="..\..\..\..\Code\Colliders\Collider.h" />
@@ -106,7 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp" />
-    <ClCompile Include="..\..\..\..\Code\AssetDatabase.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Assets.cpp" />
     <ClCompile Include="..\..\..\..\Code\Colliders\CircleCollider.cpp" />
     <ClCompile Include="..\..\..\..\Code\Colliders\Collider.cpp" />
     <ClCompile Include="..\..\..\..\Code\Colliders\RectangleCollider.cpp" />

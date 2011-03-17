@@ -8,10 +8,10 @@ namespace Monocle
 {
 	class TextureAsset;
 
-	class AssetDatabase
+	class Assets
 	{
 	public:
-		AssetDatabase();
+		Assets();
 		void Init();
 		//static Asset *RequestAsset(AssetType assetType, const char *filename);
 		static TextureAsset *RequestTexture(const std::string &filename);
@@ -24,7 +24,7 @@ namespace Monocle
 	private:
 		Asset* GetAssetByFilename(const std::string &filename);
 
-		static AssetDatabase *instance;
+		static Assets *instance;
 		std::list<Asset*> assets;
 
 		std::string contentPath;

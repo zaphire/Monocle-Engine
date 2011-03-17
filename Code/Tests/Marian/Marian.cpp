@@ -40,7 +40,7 @@ namespace Marian
 
 		Core::SetEditor(new LevelEditor());
 
-		AssetDatabase::SetContentPath("../../../../Content/Marian/");
+		Assets::SetContentPath("../../../../Content/Marian/");
 
 		Sprite *sprite=NULL;
 		Entity *bg = AddSpriteEntity(Vector2(400, 300), 20, "Graphics/ReverieSky.png", 1024, 512, 1.25f);

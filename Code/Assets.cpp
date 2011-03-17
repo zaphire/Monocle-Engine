@@ -1,22 +1,22 @@
-#include "AssetDatabase.h"
+#include "Assets.h"
 #include "TextureAsset.h"
 #include <stdio.h> // for NULL
 #include "Debug.h"
 
 namespace Monocle
 {
-	AssetDatabase *AssetDatabase::instance = NULL;
+	Assets *Assets::instance = NULL;
 
-	AssetDatabase::AssetDatabase()
+	Assets::Assets()
 	{
 		instance = this;
 	}
 
-	void AssetDatabase::Init()
+	void Assets::Init()
 	{
 	}
 
-	TextureAsset *AssetDatabase::RequestTexture(const std::string &filename)
+	TextureAsset *Assets::RequestTexture(const std::string &filename)
 	{
 		TextureAsset *asset = NULL;
 		std::string fullFilename = instance->contentPath + filename;
@@ -43,13 +43,13 @@ namespace Monocle
 		return asset;
 	}
 
-	void AssetDatabase::StoreAsset(Asset *asset)
+	void Assets::StoreAsset(Asset *asset)
 	{
 		// put in some list
 		assets.push_back(asset);
 	}
 
-	Asset *AssetDatabase::GetAssetByFilename(const std::string &filename)
+	Asset *Assets::GetAssetByFilename(const std::string &filename)
 	{
 		for(std::list<Asset*>::iterator i = assets.begin(); i != assets.end(); ++i)
 		{
@@ -61,7 +61,7 @@ namespace Monocle
 		return NULL;
 	}
 
-	void AssetDatabase::SetContentPath(const std::string &contentPath)
+	void Assets::SetContentPath(const std::string &contentPath)
 	{
 		instance->contentPath = contentPath;
 
@@ -76,7 +76,7 @@ namespace Monocle
 
 	//generic request asset, not sure if we need this yet
 	/*
-	Asset* AssetDatabase::RequestAsset(AssetType assetType, const char *filename)
+	Asset* Assets::RequestAsset(AssetType assetType, const char *filename)
 	{
 		Asset *newAsset = NULL;
 

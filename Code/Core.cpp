@@ -20,7 +20,7 @@ namespace Monocle
 	{
 		debug.Init();
 		platform.Init();
-		assetDatabase.Init();
+		assets.Init();
 		input.Init();
 		graphics.Init();
 		collision.Init();

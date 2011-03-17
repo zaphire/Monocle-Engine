@@ -57,9 +57,6 @@
     <ClInclude Include="..\..\..\..\Code\Asset.h">
       <Filter>Monocle</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\AssetDatabase.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Audio.h">
       <Filter>Monocle</Filter>
     </ClInclude>
@@ -174,12 +171,12 @@
     <ClInclude Include="..\..\..\..\Code\Graphics\Sprite.h">
       <Filter>Monocle\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Assets.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\AssetDatabase.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Collision.cpp">
@@ -328,6 +325,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Graphics\Sprite.cpp">
       <Filter>Monocle\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Assets.cpp">
+      <Filter>Monocle</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

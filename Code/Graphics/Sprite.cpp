@@ -1,5 +1,5 @@
 #include "Sprite.h"
-#include "../AssetDatabase.h"
+#include "../Assets.h"
 #include "../Entity.h"
 
 namespace Monocle
@@ -17,7 +17,7 @@ namespace Monocle
 		textureOffset(Vector2::zero),
 		textureScale(Vector2::one)
 	{
-		texture = AssetDatabase::RequestTexture(filename);
+		texture = Assets::RequestTexture(filename);
 		if (texture != NULL)
 		{
 			if (width == -1 || height == -1)

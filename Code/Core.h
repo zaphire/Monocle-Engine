@@ -5,7 +5,7 @@
 #include "Graphics.h"
 #include "Debug.h"
 #include "Scene.h"
-#include "AssetDatabase.h"
+#include "Assets.h"
 #include "Tween.h"
 #include "Editor.h"
 #include "Collision.h"
@@ -45,7 +45,7 @@ namespace Monocle
 		Input input;
 		Graphics graphics;
 		Debug debug;
-		AssetDatabase assetDatabase;
+		Assets assets;
 		Tween tween;
 		Collision collision;
 		Random random;
