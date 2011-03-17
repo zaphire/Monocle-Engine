@@ -734,6 +734,12 @@ namespace Monocle
 			instance->keys[instance->localKeymap[key]] = on;			
 		}
 	}
+
+	// does windows support touches? NO! >:(
+	bool Platform::IsTouchEnabled()
+	{
+		return false;
+	}
 }
 
 #endif

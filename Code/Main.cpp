@@ -7,8 +7,8 @@
 
 //#define TEST_CORE
 //#define TEST_PONG
-//#define TEST_MARIAN
-#define TEST_JUMPER
+#define TEST_MARIAN
+//#define TEST_JUMPER
 
 #ifdef TEST_PONG
 #include "Tests/Pong/Pong.h"

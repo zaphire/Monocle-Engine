@@ -128,6 +128,21 @@ namespace Monocle
 		MOUSE_BUTTON_MAX
 	};
 
+	// placeholder class for Android/iOS touch input
+	// based on Unity's method for now
+	class Touch
+	{
+	public:
+		Vector2 position;
+		//fingerID
+		//deltaPosition
+		//deltaTime
+		//tapCount
+		//stage
+	};
+
+	// add an option to automatically use touches as "mouse position" and "mouse buttons"
+
 	class Platform
 	{
 	public:
@@ -149,6 +164,9 @@ namespace Monocle
 
 		static void SetLocalKey(int key, bool on);
 		static void SetMouseButton(int button, bool on);
+
+		// does this platform support touches?
+		static bool IsTouchEnabled();
 
 		void WindowSizeChanged(int w, int h);
 

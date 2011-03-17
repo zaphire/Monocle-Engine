@@ -40,19 +40,27 @@ namespace Marian
 
 		Core::SetEditor(new LevelEditor());
 
-		/*
-		Sprite *sprite = NULL;
-		
-		sprite = new Sprite(Vector2(400, 300), 20, "../../../../Content/Marian/ReverieSky.png", 1024, 512);
-		sprite->scale = 1.25f;
-		Add(sprite);
+		Sprite *sprite=NULL;
+		Entity *bg = AddSpriteEntity(Vector2(400, 300), 20, "../../../../Content/Marian/Graphics/ReverieSky.png", 1024, 512, 1.25f);
+		Entity *title = AddSpriteEntity(Vector2(400, 300), -20, "../../../../Content/Marian/Graphics/Title.png", 512, 512, 1.5f, &sprite);
 
-		sprite = new Sprite(Vector2(400, 300), -20, "../../../../Content/Marian/Title.png", 512, 512);
-		sprite->scale = 1.5f;
 		Tween::FromTo(&sprite->color.a, 0.0f, 1.0f, 8.0f, EASE_OUTSIN);
-		Tween::FromTo(&sprite->position, Vector2(400, 1024), Vector2(400, 300), 4.0f, EASE_OUTSIN);
-		Add(sprite);
-		*/
+		Tween::FromTo(&title->position, Vector2(400, 1024), Vector2(400, 300), 4.0f, EASE_OUTSIN);
+	}
+
+	Entity* TitleScene::AddSpriteEntity(Vector2 pos, int layer, const char *filename, int width, int height, float scale, Sprite **spriteRef)
+	{
+		Entity *entity = new Entity();
+		entity->position = pos;
+		Sprite *sprite = new Sprite(filename, width, height);
+		sprite->scale = scale;
+		entity->SetGraphic(sprite);
+		Add(entity);
+		if (spriteRef != NULL)
+		{
+			*spriteRef = sprite;
+		}
+		return entity;
 	}
 
 	void TitleScene::Update()

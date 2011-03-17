@@ -24,6 +24,8 @@ namespace Marian
 		void Begin();
 		void End();
 		void Update();
+
+		Entity* AddSpriteEntity(Vector2 pos, int layer, const char *filename, int width, int height, float scale, Sprite** sprite=NULL);
 	};
 
 }
