@@ -21,6 +21,7 @@ namespace Monocle
 
 		void SetEntity(Entity* entity);
 		Entity* GetEntity();
+		Vector2 GetEntityPosition();
 
 		Vector2 offset;
 
