@@ -34,6 +34,9 @@ namespace Monocle
 	{}
 	*/
 
+	// store color info in entity?
+	// that would bloat entity... hmm.
+	// or make materials system...
 	void Sprite::Render(Entity *entity)
 	{
 		Graphics::PushMatrix();
@@ -46,6 +49,7 @@ namespace Monocle
 			Graphics::RenderQuad(width * scale, height * scale, textureOffset, textureScale);
 		Graphics::PopMatrix();
 
+		// show bounds, for editor/selection purposes
 		if (showBounds || isSelected)
 		{
 			if (texture != NULL)

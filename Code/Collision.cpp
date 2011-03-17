@@ -20,8 +20,10 @@ namespace Monocle
 	void Collision::RegisterColliderWithEntity(Collider *collider, Entity *entity)
 	{
 		collider->SetEntity(entity);
-		entity->SetCollider(collider);
 		instance->colliders.push_back(collider);
+
+		// old:
+		////entity->SetCollider(collider);
 	}
 
 	void Collision::RemoveCollider(Collider *collider)
