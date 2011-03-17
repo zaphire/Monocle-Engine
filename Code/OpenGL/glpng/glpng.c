@@ -28,12 +28,17 @@
 
 #include "glpng.h"
 
+/* NOTE: This should be handled by build system's include path not hardcoded. */
 #ifdef __APPLE__
     /* Mac OS X GL headers */
     #include <OpenGL/gl.h>
     #include <OpenGL/glext.h>
 #else
-    #include <gl/GL.h>
+    #include <GL/gl.h>
+#endif
+
+#ifdef __linux__
+#  undef GL_COLOR_INDEX1_EXT
 #endif
 
 #include <stdlib.h>

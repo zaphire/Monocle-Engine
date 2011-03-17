@@ -1,4 +1,7 @@
 #include "Collision.h"
+
+#include <stdio.h>
+
 #include "Entity.h"
 
 namespace Monocle

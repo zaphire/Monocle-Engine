@@ -2,6 +2,8 @@
 #include "../../Input.h"
 #include "../../Collision.h"
 
+#include <stdlib.h>
+
 namespace Pong
 {
 	/*

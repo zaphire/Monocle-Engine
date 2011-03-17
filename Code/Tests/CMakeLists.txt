@@ -1,4 +1,4 @@
 if(BUILD_TESTS)
-	add_subdirectory(Pong)
+	add_subdirectory(Jumper)
 endif(BUILD_TESTS)
 
