@@ -38,9 +38,9 @@ namespace Marian
 	{
 		Scene::Begin();
 
-		Core::SetEditor(new LevelEditor());
+		Assets::SetContentPath("../../Content/Marian/");
 
-		Assets::SetContentPath("../../../../Content/Marian/");
+		Core::SetEditor(new LevelEditor());
 
 		Sprite *sprite=NULL;
 		Entity *bg = AddSpriteEntity(Vector2(400, 300), 20, "Graphics/ReverieSky.png", 1024, 512, 1.25f);

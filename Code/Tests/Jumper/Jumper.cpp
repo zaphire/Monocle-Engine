@@ -128,7 +128,7 @@ namespace Jumper
 
 	void GameScene::Begin()
 	{
-		Assets::SetContentPath("../../../../Content/Jumper/");
+		Assets::SetContentPath("../../Content/Jumper/");
 
 		Input::DefineMaskKey("jump", KEY_UP);
 		Input::DefineMaskKey("jump", KEY_Z);
