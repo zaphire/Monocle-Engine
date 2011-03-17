@@ -34,6 +34,11 @@ namespace Monocle
 			instance->StoreAsset((Asset*)asset);
 		}
 
+		if (asset)
+		{
+			asset->AddReference();
+		}
+
 		// return whatever we found
 		return asset;
 	}

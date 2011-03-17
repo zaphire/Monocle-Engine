@@ -46,12 +46,7 @@ namespace Monocle
 			width = info.Width;
 			height = info.Height;
 
-			Debug::Log("Loaded texture:");
-			Debug::Log(filename);
-			Debug::Log((int)width);
-			Debug::Log((int)height);
-
-
+			Debug::Log("Loaded texture: " + filename);
 			//printf("Size=%i,%i Depth=%i Alpha=%i\n", info.Width, info.Height, info.Depth, info.Alpha);
 		}
 		else
@@ -65,6 +60,8 @@ namespace Monocle
 
 	void TextureAsset::Unload()
 	{
+		Debug::Log("Freeing texture memory for: " + filename);
+		glDeleteTextures(1, &texID);
 	}
 
 	void TextureAsset::Bind()

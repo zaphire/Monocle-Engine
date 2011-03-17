@@ -21,9 +21,7 @@ namespace Monocle
 	{
 		collider->SetEntity(entity);
 		instance->colliders.push_back(collider);
-
-		// old:
-		////entity->SetCollider(collider);
+		// old: //entity->SetCollider(collider);
 	}
 
 	void Collision::RemoveCollider(Collider *collider)
@@ -52,7 +50,6 @@ namespace Monocle
 				}
 			}
 		}
-
 		return NULL;
 	}
 

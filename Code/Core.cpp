@@ -56,7 +56,7 @@ namespace Monocle
 			tick = Platform::GetMilliseconds();
 			Monocle::deltaTime = ((double)(tick - lastTick))/1000.0;
 
-#ifdef FIXED_TIMESTEP
+#if defined(FIXED_TIMESTEP)
 			int updates = 0;
 			while (updates < MAX_UPDATES_PER_RENDER && (tick - lastTick) >= MILLISECONDS_PER_FRAME)
 			{

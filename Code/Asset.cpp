@@ -1,4 +1,5 @@
 #include "Asset.h"
+#include "Debug.h"
 
 namespace Monocle
 {
@@ -13,11 +14,17 @@ namespace Monocle
 	void Asset::AddReference()
 	{
 		referenceCount++;
+
+		Debug::Log("referenceCount increased for: " + filename);
+		Debug::Log(referenceCount);
 	}
 
 	void Asset::RemoveReference()
 	{
 		referenceCount--;
+
+		Debug::Log("referenceCount decreased for: " + filename);
+		Debug::Log(referenceCount);
 
 		if (referenceCount == 0)
 		{

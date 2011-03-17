@@ -10,6 +10,7 @@ namespace Monocle
 	{
 	public:
 		Sprite(const char *filename, float width=-1, float height=-1);
+		~Sprite();
 		void Render(Entity *entity);
 
 		TextureAsset *texture;

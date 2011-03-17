@@ -28,6 +28,15 @@ namespace Monocle
 		}
 	}
 
+	Sprite::~Sprite()
+	{
+		if (texture != NULL)
+		{
+			texture->RemoveReference();
+			texture = NULL;
+		}
+	}
+
 	/*
 	Sprite::Sprite()
 		: Entity(), texture(NULL), scale(1.0f), isSelected(false), angle(0.0f), width(64), height(64)

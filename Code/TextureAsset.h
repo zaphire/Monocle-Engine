@@ -4,7 +4,7 @@
 
 namespace Monocle
 {
-	class TextureAsset : Asset
+	class TextureAsset : public Asset
 	{
 	public:
 		TextureAsset();
