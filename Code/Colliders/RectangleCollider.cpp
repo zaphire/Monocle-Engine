@@ -28,7 +28,15 @@ namespace Monocle
 
 	bool RectangleCollider::IntersectsLine(const Vector2& start, const Vector2& end)
 	{
-		//TODO!
-		return false;
+		if (IntersectsPoint(start) || IntersectsPoint(end))
+			return true;
+
+		Vector2 ePos = GetEntityPosition();
+		Vector2 pA = Vector2(ePos.x + offset.x - width*0.5f, ePos.y + offset.y - height*0.5f);
+		Vector2 pB = Vector2(ePos.x + offset.x + width*0.5f, ePos.y + offset.y - height*0.5f);
+		Vector2 pC = Vector2(ePos.x + offset.x + width*0.5f, ePos.y + offset.y + height*0.5f);
+		Vector2 pD = Vector2(ePos.x + offset.x - width*0.5f, ePos.y + offset.y + height*0.5f);
+		
+		return (LinesIntersect(start, end, pA, pB) || LinesIntersect(start, end, pB, pC) || LinesIntersect(start, end, pC, pD) || LinesIntersect(start, end, pD, pA));
 	}
 }

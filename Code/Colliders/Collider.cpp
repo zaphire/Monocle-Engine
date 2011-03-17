@@ -47,6 +47,30 @@ namespace Monocle
 		return false;
 	}
 
+	bool Collider::LinesIntersect(const Vector2& aStart, const Vector2& aEnd, const Vector2& bStart, const Vector2& bEnd)
+	{
+		float d = ((bEnd.y - bStart.y) * (aEnd.x - aStart.x)) - ((bEnd.x - bStart.x) * (aEnd.y - aStart.y));
+		float nX = ((bEnd.x - bStart.x) * (aStart.y - bStart.y)) - ((bEnd.y - bStart.y) * (aStart.x - bStart.x));
+		float nY = ((aEnd.x - aStart.x) * (aStart.y - bStart.y)) - ((aEnd.y - aStart.y) * (aStart.x - bStart.x));
+
+		//Lines are parallel if d == 0, so check if they're coincident
+		if (d == 0.0f)
+		{
+			if (nX == 0.0f && nY == 0.0f)
+			{
+				//Lines are coincident, now check if they overlap
+				return ((aEnd.x > bStart.x && aStart.x < bEnd.x) || (aEnd.y > bStart.y && aStart.y < bEnd.y));
+			}
+			else
+				return false;
+		}
+		
+		float uX = nX / d;
+		float uY = nY / d;
+
+		return (uX >= 0.0f && uX <= 1.0f && uY >= 0.0f && uY <= 1.0f);
+	}
+
 	bool Collider::CollideRectRect(RectangleCollider* a, RectangleCollider* b)
 	{
 		Vector2 aOff = a->GetEntityPosition();
@@ -86,10 +110,10 @@ namespace Monocle
 			return true;
 
 		//Check the circle against the four edges of the rectangle
-		Vector2 pA = aOff + a->offset;
-		Vector2 pB = aOff + Vector2(a->offset.x + a->width, a->offset.y);
-		Vector2 pC = aOff + Vector2(a->offset.x + a->width, a->offset.y + a->height);
-		Vector2 pD = aOff + Vector2(a->offset.x, a->offset.y + a->height);
+		Vector2 pA = Vector2(aOff.x + a->offset.x - a->width*0.5f, aOff.y + a->offset.y - a->height*0.5f);
+		Vector2 pB = Vector2(aOff.x + a->offset.x + a->width*0.5f, aOff.y + a->offset.y - a->height*0.5f);
+		Vector2 pC = Vector2(aOff.x + a->offset.x + a->width*0.5f, aOff.y + a->offset.y + a->height*0.5f);
+		Vector2 pD = Vector2(aOff.x + a->offset.x - a->width*0.5f, aOff.y + a->offset.y + a->height*0.5f);
 		if (b->IntersectsLine(pA, pB) || b->IntersectsLine(pB, pC) || b->IntersectsLine(pC, pD) || b->IntersectsLine(pD, pA))
 			return true;
 
