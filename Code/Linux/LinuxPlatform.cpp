@@ -5,8 +5,10 @@
 #include<X11/X.h>
 #include<X11/extensions/Xrandr.h>
 
-#include <stdio.h>
-#include <time.h>
+#include <sys/time.h>
+
+#include <cstdio>
+#include <ctime>
 #include <unistd.h>
 
 #include "../Debug.h"
@@ -207,7 +209,9 @@ namespace Monocle
 
 	long Platform::GetMilliseconds()
 	{
-		return (long)time(0);
+		timeval ts;
+		gettimeofday(&ts, NULL);
+		return (long)((ts.tv_sec * 1000) + (ts.tv_usec/1000.0) + 0.5);
 	}
 
 	bool Platform::IsKeyPressed(KeyCode keyCode)
