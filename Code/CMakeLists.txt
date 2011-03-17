@@ -1,9 +1,11 @@
 file(GLOB CORE_SRCS *.cpp)
 file(GLOB COLLIDERS_SRCS Colliders/*.cpp)
-file(GLOB OPENAL_SRCS OpenAL/*.cpp)
-file(GLOB OPENGL_SRCS OpenGL/*.cpp OpenGL/glpng/*.c OpenGL/glpng/*/*.c)
+file(GLOB GRAPHICS_SRCS Graphics/*.cpp)
 
-set(CORE_LINK ${CORE_LINK} ${OPENGL_LIBRARIES} ${OPENAL_LIBRARY})
+set(CORE_SRCS ${CORE_SRCS}
+	${COLLIDERS_SRCS}
+	${GRAPHICS_SRCS}
+)
 
 if(WINDOWS)
 	file(GLOB WINDOWS_SRCS Windows/*.cpp)
@@ -11,21 +13,35 @@ if(WINDOWS)
 endif(WINDOWS)
 
 if(LINUX)
-	include_directories(${X11_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${OPENAL_INCLUDE_DIR})
+	include_directories(${X11_INCLUDE_DIR})
 	set(CORE_LINK ${CORE_LINK} ${X11_LIBRARIES})
 	file(GLOB LINUX_SRCS Linux/*.cpp)
 	set(PLATFORM_SRCS ${PLATFORM_SRCS} ${LINUX_SRCS})
 endif(LINUX)
 
+if(WITH_OPENGL)
+	include_directories(${OPENGL_INCLUDE_DIR})
+	file(GLOB OPENGL_SRCS
+		OpenGL/*.cpp
+		OpenGL/glpng/*.c
+		OpenGL/glpng/*/*.c
+	)
+	set(CORE_LINK ${CORE_LINK} ${OPENGL_LIBRARIES})
+	set(CORE_SRCS ${CORE_SRCS} ${OPENGL_SRCS})
+endif(WITH_OPENGL)
+
+if(WITH_OPENAL)
+	include_directories(${OPENAL_INCLUDE_DIR})
+	file(GLOB OPENAL_SRCS OpenAL/*.cpp)
+	set(CORE_LINK ${CORE_LINK} ${OPENAL_LIBRARY})
+	set(CORE_SRCS ${CORE_SRCS} ${OPENAL_SRCS})
+endif(WITH_OPENAL)
+
 add_library(MonocleCore
 	${CORE_SRCS}
-	${COLLIDERS_SRCS}
 	${PLATFORM_SRCS}
-	${OPENAL_SRCS}
-	${OPENGL_SRCS}
 )
 
-# TODO: Add proper dependency handling
 target_link_libraries(MonocleCore ${CORE_LINK})
 
 add_subdirectory(Tests)
