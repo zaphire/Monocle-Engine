@@ -91,7 +91,7 @@ namespace Monocle
 
 	int Entity::GetNumberOfTags()
 	{
-		return tags.size();
+		return static_cast<int>(tags.size());
 	}
 
 	int Entity::GetLayer()

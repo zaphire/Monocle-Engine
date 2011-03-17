@@ -3,15 +3,23 @@
 #include "../TextureAsset.h"
 #include "../Debug.h"
 
-#include "glpng\glpng.h"
+#include "glpng/glpng.h"
 
 #ifdef MONOCLE_WINDOWS
 	#define WIN32_LEAN_AND_MEAN
 	#include <Windows.h>
 #endif
 
-#include <gl/GL.h>
-#include <gl/GLu.h>
+#if defined(MONOCLE_MAC)
+	#include <OpenGL/gl.h>
+	#include <OpenGL/glext.h>
+#elif defined(MONOCLE_LINUX)
+	#include <GL/gl.h>
+	#include <GL/glu.h>
+#else
+	#include <gl/GL.h>
+	#include <gl/GLu.h>
+#endif
 
 namespace Monocle
 {

@@ -21,6 +21,7 @@ namespace Monocle
 
 		void SetEntity(Entity* entity);
 		Entity* GetEntity();
+		Vector2 GetEntityPosition();
 
 		Vector2 offset;
 
@@ -29,6 +30,7 @@ namespace Monocle
 		virtual bool IntersectsLine(const Vector2& start, const Vector2& end)=0;
 
 		static bool Collide(Collider* a, Collider* b);
+		static bool LinesIntersect(const Vector2& aStart, const Vector2& aEnd, const Vector2& bStart, const Vector2& bEnd);
 
 	private:
 		Entity *entity;

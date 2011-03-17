@@ -2,6 +2,7 @@
 
 #include "Collider.h"
 #include "../Vector2.h"
+#include "../Entity.h"
 
 namespace Monocle
 {

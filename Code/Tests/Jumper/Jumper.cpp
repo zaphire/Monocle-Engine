@@ -45,7 +45,7 @@ namespace Jumper
 		sprite->angle = velocity.x * leanAmount;
 
 		// jump
-		if(Input::IsKeyHeld(keyUp) && onGround)
+		if(Input::IsKeyMaskHeld("jump") && onGround)
 		{
 			velocity.y = -jump;
 			isJumping = true;
@@ -128,6 +128,10 @@ namespace Jumper
 
 	void GameScene::Begin()
 	{
+		Input::DefineMaskKey("jump", KEY_UP);
+		Input::DefineMaskKey("jump", KEY_Z);
+		Input::DefineMaskKey("jump", KEY_A);
+
 		Debug::Log("Jumper::GameScene::Begin()!");
 		Scene::Begin();
 

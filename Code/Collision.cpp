@@ -1,4 +1,7 @@
 #include "Collision.h"
+
+#include <stdio.h>
+
 #include "Entity.h"
 
 namespace Monocle
@@ -50,7 +53,6 @@ namespace Monocle
 
 		return NULL;
 	}
-
 
 	//OPTION: refactor to add multiple colliders? (consider carefully)
 	//FORNOW: limit to one collider per entity (simpler, makes more sense)

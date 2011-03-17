@@ -6,14 +6,25 @@
 #include "../TextureAsset.h"
 #include "../Color.h"
 
+#include <cstdio>
+
 #ifdef MONOCLE_WINDOWS
 	#define WIN32_LEAN_AND_MEAN
 	#include <Windows.h>
 
 #endif
 
-#include <gl/GL.h>
-#include <gl/GLU.h>
+#if defined(MONOCLE_MAC)
+	#include <OpenGL/gl.h>
+	#include <OpenGL/glext.h>
+	#include <OpenGL/glu.h>
+#elif defined(MONOCLE_LINUX)
+	#include <GL/gl.h>
+	#include <GL/glu.h>
+#else
+	#include <gl/GL.h>
+	#include <gl/GLU.h>
+#endif
 
 // some opengl/windows init code based on http://nehe.gamedev.net
 
