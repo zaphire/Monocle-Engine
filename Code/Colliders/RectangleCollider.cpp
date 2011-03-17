@@ -21,7 +21,9 @@ namespace Monocle
 
 	bool RectangleCollider::IntersectsPoint(const Vector2& point)
 	{
-		return (point.x > offset.x - width*0.5f && point.y > offset.y - height*0.5f && point.x < offset.x + width*0.5f && point.y < offset.y + height*0.5f);
+		Vector2 ePos = GetEntityPosition();
+
+		return (point.x > ePos.x + offset.x - width*0.5f && point.y > ePos.y + offset.y - height*0.5f && point.x < ePos.x + offset.x + width*0.5f && point.y < ePos.y + offset.y + height*0.5f);
 	}
 
 	bool RectangleCollider::IntersectsLine(const Vector2& start, const Vector2& end)

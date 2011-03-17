@@ -21,6 +21,14 @@ namespace Monocle
 		return entity;
 	}
 
+	Vector2 Collider::GetEntityPosition()
+	{
+		if (entity != NULL)
+			return entity->position;
+		else
+			return Vector2();
+	}
+
 	bool Collider::Collide(Collider* a, Collider* b)
 	{
 		ColliderType typeA = a->GetColliderType();
@@ -41,11 +49,8 @@ namespace Monocle
 
 	bool Collider::CollideRectRect(RectangleCollider* a, RectangleCollider* b)
 	{
-		Vector2 aOff, bOff;
-		if (a->entity != NULL)
-			aOff = a->entity->position;
-		if (b->entity != NULL)
-			bOff = b->entity->position;
+		Vector2 aOff = a->GetEntityPosition();
+		Vector2 bOff = b->GetEntityPosition();
 
 		if (a->offset.y + aOff.y + a->height*0.5f < b->offset.y + bOff.y - b->height*0.5f)
 			return false;
@@ -64,11 +69,8 @@ namespace Monocle
 
 	bool Collider::CollideCircleCircle(CircleCollider* a, CircleCollider* b)
 	{
-		Vector2 aOff, bOff;
-		if (a->entity != NULL)
-			aOff = a->entity->position;
-		if (b->entity != NULL)
-			bOff = b->entity->position;
+		Vector2 aOff = a->GetEntityPosition();
+		Vector2 bOff = b->GetEntityPosition();
 
 		Vector2 diff = (b->offset + bOff) - (a->offset + aOff);
 		return (diff.IsInRange(a->radius + b->radius));
@@ -76,17 +78,19 @@ namespace Monocle
 
 	bool Collider::CollideRectCircle(RectangleCollider* a, CircleCollider* b)
 	{
-		//TODO: add in entity position as offset!
+		Vector2 aOff = a->GetEntityPosition();
+		Vector2 bOff = b->GetEntityPosition();
 
 		//The center of the circle is within the rectangle
-		if (a->IntersectsPoint(b->offset))
+		if (a->IntersectsPoint(bOff + b->offset))
 			return true;
 
 		//Check the circle against the four edges of the rectangle
-		Vector2 pB = Vector2(a->offset.x + a->width, a->offset.y);
-		Vector2 pC = Vector2(a->offset.x + a->width, a->offset.y + a->height);
-		Vector2 pD = Vector2(a->offset.x, a->offset.y + a->height);
-		if (b->IntersectsLine(a->offset, pB) || b->IntersectsLine(pB, pC) || b->IntersectsLine(pC, pD) || b->IntersectsLine(pD, a->offset))
+		Vector2 pA = aOff + a->offset;
+		Vector2 pB = aOff + Vector2(a->offset.x + a->width, a->offset.y);
+		Vector2 pC = aOff + Vector2(a->offset.x + a->width, a->offset.y + a->height);
+		Vector2 pD = aOff + Vector2(a->offset.x, a->offset.y + a->height);
+		if (b->IntersectsLine(pA, pB) || b->IntersectsLine(pB, pC) || b->IntersectsLine(pC, pD) || b->IntersectsLine(pD, pA))
 			return true;
 
 		return false;
