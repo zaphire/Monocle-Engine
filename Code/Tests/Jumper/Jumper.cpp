@@ -14,7 +14,7 @@ namespace Jumper
 
 		SetCollider(new RectangleCollider(40, 64));
 
-		sprite = new Sprite("../../../../Content/Jumper/Player.png", 64, 64);
+		sprite = new Sprite("Graphics/Player.png", 64, 64);
 		SetGraphic(sprite);
 
 		speed = 100.0f;
@@ -128,6 +128,8 @@ namespace Jumper
 
 	void GameScene::Begin()
 	{
+		AssetDatabase::SetContentPath("../../../../Content/Jumper/");
+
 		Input::DefineMaskKey("jump", KEY_UP);
 		Input::DefineMaskKey("jump", KEY_Z);
 		Input::DefineMaskKey("jump", KEY_A);

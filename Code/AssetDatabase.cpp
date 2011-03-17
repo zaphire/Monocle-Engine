@@ -1,6 +1,7 @@
 #include "AssetDatabase.h"
 #include "TextureAsset.h"
 #include <stdio.h> // for NULL
+#include "Debug.h"
 
 namespace Monocle
 {
@@ -18,15 +19,18 @@ namespace Monocle
 	TextureAsset *AssetDatabase::RequestTexture(const std::string &filename)
 	{
 		TextureAsset *asset = NULL;
+		std::string fullFilename = instance->contentPath + filename;
+
+		Debug::Log("instance->contentPath + filename: " + fullFilename);
 
 		// check to see if we have one stored already
-		asset = (TextureAsset*)instance->GetAssetByFilename(filename);
+		asset = (TextureAsset*)instance->GetAssetByFilename(fullFilename);
 
 		// if not, load it and store it
 		if (!asset)
 		{
 			asset = new TextureAsset();
-			asset->Load(filename);
+			asset->Load(fullFilename);
 			instance->StoreAsset((Asset*)asset);
 		}
 
@@ -50,6 +54,18 @@ namespace Monocle
 			}
 		}
 		return NULL;
+	}
+
+	void AssetDatabase::SetContentPath(const std::string &contentPath)
+	{
+		instance->contentPath = contentPath;
+
+		/*
+		if (instance->contentPath[instance->contentPath.length()-1] != '/' && instance->contentPath[instance->contentPath.length()-1] != '\\')
+		{
+			instance->contentPath += '/';
+		}
+		*/
 	}
 
 
