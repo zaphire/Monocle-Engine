@@ -75,7 +75,7 @@ namespace Pong
 	
 	/*
 	**************************************************
-	* P a d d le
+	* P a d d l e
 	**************************************************
 	*
 	* Moves up and down, controlled by user input
@@ -92,10 +92,11 @@ namespace Pong
 
 	void Paddle::Update()
 	{
-		const float accel = 1000.0f;
+		const float accel = 2000.0f;
 		const float maxSpeed = 300.0f;
 		const float friction = 500.0f;
 		const float maxY = 600.0f;
+
 		if (Input::IsKeyHeld(keyUp))
 		{
 			speed += accel * Monocle::deltaTime;
