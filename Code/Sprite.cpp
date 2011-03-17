@@ -2,16 +2,15 @@
 #include "TextureAsset.h"
 #include "AssetDatabase.h"
 #include "Graphics.h"
+#include "Entity.h"
 
 namespace Monocle
 {
 	bool Sprite::showBounds = false;
 
-	Sprite::Sprite(Vector2 position, int layer, const char *filename, float width, float height)
-		: Entity(), texture(NULL), isSelected(false), scale(1.0f), width(width), height(height), angle(0.0f)
+	Sprite::Sprite(const char *filename, float width, float height)
+		: Graphic(), texture(NULL), isSelected(false), scale(1.0f), width(width), height(height), angle(0.0f)
 	{
-		this->position = position;
-		SetLayer(layer);
 		texture = AssetDatabase::RequestTexture(filename);
 		if (texture != NULL)
 		{
@@ -23,15 +22,16 @@ namespace Monocle
 		}
 	}
 
-
+	/*
 	Sprite::Sprite()
 		: Entity(), texture(NULL), scale(1.0f), isSelected(false), angle(0.0f), width(64), height(64)
 	{}
+	*/
 
-	void Sprite::Render()
+	void Sprite::Render(Entity *entity)
 	{
 		Graphics::PushMatrix();
-		Graphics::Translate(position.x, position.y, depth);
+		Graphics::Translate(entity->position.x, entity->position.y, entity->depth);
 		Graphics::Rotate(angle, 0, 0, 1);
 		Graphics::Blend();
 		Graphics::SetColor(color);
@@ -49,7 +49,7 @@ namespace Monocle
 				else
 					Graphics::SetColor(Color(0.5f,0.5f,0.5f,0.25f));
 				Graphics::BindTexture(NULL);
-				Graphics::RenderLineRect(position.x, position.y, width * scale, height * scale);
+				Graphics::RenderLineRect(entity->position.x, entity->position.y, width * scale, height * scale);
 			}
 		}
 	}

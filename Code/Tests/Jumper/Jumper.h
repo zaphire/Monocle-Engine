@@ -17,7 +17,7 @@ namespace Jumper
 	};
 	*/
 
-	class Player : public Sprite
+	class Player : public Entity
 	{
 	public:
 		Player(Vector2 pos);
@@ -37,6 +37,8 @@ namespace Jumper
 		bool isJumping;
 
 		float leanAmount; // how much does he lean into his left/right movement?
+
+		Sprite *sprite;
 	};
 
 	

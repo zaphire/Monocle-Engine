@@ -1,15 +1,17 @@
-#include "Entity.h"
 #include "Color.h"
 #include "TextureAsset.h"
+#include "Graphics.h"
 
 namespace Monocle
 {
-	class Sprite : public Entity
+	class Entity;
+
+	class Sprite : public Graphic
 	{
 	public:
-		Sprite(Vector2 position, int layer, const char *filename, float width=-1, float height=-1);
-		Sprite();
-		void Render();
+		Sprite(const char *filename, float width=-1, float height=-1);
+		void Render(Entity *entity);
+
 		TextureAsset *texture;
 		Color color;
 		float width, height, scale, angle;

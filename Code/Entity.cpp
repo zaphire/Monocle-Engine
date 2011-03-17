@@ -1,10 +1,11 @@
 #include "Entity.h"
 #include "Collision.h"
+#include "Graphics.h"
 
 namespace Monocle
 {
 	Entity::Entity()
-		: scene(NULL), collider(NULL), layer(0), depth(0.0f)
+		: scene(NULL), collider(NULL), graphic(NULL), layer(0), depth(0.0f)
 	{
 	}
 
@@ -30,7 +31,10 @@ namespace Monocle
 
 	void Entity::Render()
 	{
-
+		if (graphic != NULL)
+		{
+			graphic->Render(this);
+		}
 	}
 
 	const std::string& Entity::GetTag(int index)
@@ -109,7 +113,20 @@ namespace Monocle
 
 	void Entity::SetCollider(Collider *collider)
 	{
-		this->collider = collider;
+		if (collider == NULL && this->collider != NULL)
+		{
+			Collision::RemoveCollider(collider);
+			collider = NULL;
+		}
+		else if (this->collider != NULL)
+		{
+			Debug::Log("Error: Entity already has a collider.");
+		}
+		else
+		{
+			this->collider = collider;
+			Collision::RegisterColliderWithEntity(collider, this);
+		}
 	}
 
 	Collider* Entity::GetCollider()
@@ -122,10 +139,12 @@ namespace Monocle
 		return Collision::Collide(this, tag);
 	}
 
+	/*
 	RectangleCollider* Entity::AddRectangleCollider(float width, float height, const Vector2 &offset)
 	{
 		return Collision::AddRectangleCollider(this, width, height, offset);
 	}
+	*/
 
 	void Entity::SendMessageToScene(const std::string &message)
 	{
@@ -133,5 +152,29 @@ namespace Monocle
 		{
 			scene->ReceiveMessage(message);
 		}
+	}
+
+	void Entity::SetGraphic(Graphic *graphic)
+	{
+		// not sure yet
+		/*
+		if (graphic == NULL && this->graphic)
+		{
+			delete this->graphic;
+		}
+		*/
+		if (this->graphic != NULL)
+		{
+			Debug::Log("Error: Entity already has a graphic.");
+		}
+		else
+		{
+			this->graphic = graphic;
+		}
+	}
+
+	Graphic* Entity::GetGraphic()
+	{
+		return graphic;
 	}
 }

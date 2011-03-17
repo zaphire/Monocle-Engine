@@ -17,15 +17,18 @@ namespace Monocle
 	public:
 		Collision();
 		void Init();
-		static CircleCollider* AddCircleCollider(Entity *entity, float radius, Vector2 offset);
-		static RectangleCollider* AddRectangleCollider(Entity *entity, float width, float height, Vector2 offset);
-		static void Collision::RemoveCollider(Collider *collider);
+		//static CircleCollider* AddCircleCollider(Entity *entity, float radius, Vector2 offset=Vector2::zero);
+		//static RectangleCollider* AddRectangleCollider(Entity *entity, float width, float height, Vector2 offset=Vector2::zero);
+		
 
 		static Collider* Collision::Collide(Entity *entity, const std::string &tag);
 
 	private:
+		friend class Entity;
 		static void Collision::RegisterColliderWithEntity(Collider *collider, Entity *entity);
+		static void Collision::RemoveCollider(Collider *collider);
 
+	private:
 		static Collision *instance;
 		std::list<Collider*> colliders;
 	};

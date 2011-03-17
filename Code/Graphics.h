@@ -7,6 +7,13 @@
 namespace Monocle
 {
 	class TextureAsset;
+	class Entity;
+
+	class Graphic
+	{
+	public:
+		virtual void Render(Entity *entity)=0;
+	};
 
 	class Graphics
 	{

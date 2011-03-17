@@ -11,7 +11,7 @@ namespace Monocle
 	public:
 		float width;
 		float height;
-		RectangleCollider(float width, float height, Vector2 offset);
+		RectangleCollider(float width, float height, Vector2 offset=Vector2::zero);
 		ColliderType GetColliderType();
 		bool IntersectsPoint(const Vector2& point);
 		bool IntersectsLine(const Vector2& start, const Vector2& end);

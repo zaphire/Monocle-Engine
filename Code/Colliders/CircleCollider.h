@@ -9,7 +9,7 @@ namespace Monocle
 	{
 	public:
 		float radius;
-		CircleCollider(float radius, Vector2 offset);
+		CircleCollider(float radius, Vector2 offset=Vector2::zero);
 		ColliderType GetColliderType();
 		bool IntersectsPoint(const Vector2& point);
 		bool IntersectsLine(const Vector2& start, const Vector2& end);

@@ -10,9 +10,12 @@
 namespace Monocle
 {
 	class Scene;
+	class Collision;
 	class Collider;
 	class RectangleCollider;
 	class CircleCollider;
+	class Graphics;
+	class Graphic;
 
 	class Entity
 	{
@@ -40,7 +43,7 @@ namespace Monocle
 
 		//Call to check our collider against all entities that have "tag"
 		Collider* Collide(const std::string &tag);
-		RectangleCollider *AddRectangleCollider(float width, float height, const Vector2 &offset = Vector2::zero);
+		//RectangleCollider *AddRectangleCollider(float width, float height, const Vector2 &offset = Vector2::zero);
 
 		//very simple "message" sending
 		void SendMessageToScene(const std::string &message);
@@ -57,11 +60,25 @@ namespace Monocle
 		int GetLayer();
 		void SetLayer(int layer);
 
-		// only for use by Collision class
 		void SetCollider(Collider *collider);
-		Collider* GetCollider();
+		void SetGraphic(Graphic *graphic);
+
 	private:
+		// only for use by Collision class
+		friend class Collision;
+		Collider* GetCollider();
 		Collider* collider;
+
+		// only for use by graphics
+		friend class Graphics;
+		Graphic* GetGraphic();
+		Graphic* graphic;
+		
+
+		// only for use by scene
+		//friend class Scene;
+
+		
 		std::vector<std::string> tags;
 		int layer;
 	};

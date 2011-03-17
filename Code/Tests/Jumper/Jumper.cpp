@@ -5,17 +5,24 @@
 namespace Jumper
 {
 	Player::Player(Vector2 pos) 
-		: Sprite(pos, -10, "../../../../Content/Jumper/Player.png", 64, 64)
+		: Entity()
 	{
+		position = pos;
+		SetLayer(-10);
+
+		AddTag("Player");
+
+		SetCollider(new RectangleCollider(40, 64));
+
+		sprite = new Sprite("../../../../Content/Jumper/Player.png", 64, 64);
+		SetGraphic(sprite);
+
 		speed = 100.0f;
 		gravity = 0.25f;
 		velocity = Vector2(0.0f, 0.0f);
 		jump = 8.0f;
 		maxSpeed = 4.0f;
 		leanAmount = 1.5f;
-
-		AddTag("Player");
-		AddRectangleCollider(40, 64);
 	}
 
 	void Player::Update()
@@ -35,7 +42,7 @@ namespace Jumper
 		}
 
 		// lean
-		angle = velocity.x * leanAmount;
+		sprite->angle = velocity.x * leanAmount;
 
 		// jump
 		if(Input::IsKeyHeld(keyUp) && onGround)
@@ -45,9 +52,9 @@ namespace Jumper
 			onGround = false;
 
 			// stretch a bit when jumping
-			width = 64 * 1.0f;
-			height = 64 * 1.1f;
-			angle = 0;
+			sprite->width = 64 * 1.0f;
+			sprite->height = 64 * 1.1f;
+			sprite->angle = 0;
 		}
 
 		// friction
@@ -85,9 +92,9 @@ namespace Jumper
 			// get fat when we're landing
 			if (isJumping)
 			{
-				width = 64 * 1.1f;
-				height = 64 * 1.0f;
-				angle = 0;
+				sprite->width = 64 * 1.1f;
+				sprite->height = 64 * 1.0f;
+				sprite->angle = 0;
 			}
 
 			isJumping = false;
@@ -105,7 +112,7 @@ namespace Jumper
 	{
 		position = pos;
 		AddTag("Wall");
-		AddRectangleCollider(w, h);
+		SetCollider(new RectangleCollider(w, h));
 		this->width = w;
 		this->height = h;
 	}

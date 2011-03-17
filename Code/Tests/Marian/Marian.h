@@ -14,6 +14,8 @@ namespace Marian
 		bool isOn;
 		Sprite *selectedSprite;
 		int selectedSpriteIndex;
+
+		void UpdateOldSpriteMethod();
 	};
 
 	class TitleScene : public Scene

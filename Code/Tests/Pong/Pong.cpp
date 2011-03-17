@@ -18,7 +18,8 @@ namespace Pong
 	Ball::Ball() : Entity(), texture(NULL)
 	{
 		AddTag("Ball");
-		AddRectangleCollider(25.0f, 25.0f);
+		SetCollider(new RectangleCollider(25.0f, 25.0f));
+		//Collision::AddRectangleCollider(this, 25.0f, 25.0f);
 		velocity = Vector2::right * 200.0f;
 	}
 
@@ -87,7 +88,7 @@ namespace Pong
 		: Entity(), speed(0.0f)
 	{
 		AddTag("Paddle");
-		AddRectangleCollider(25.0f, 100.0f);
+		SetCollider(new RectangleCollider(25.0f, 100.0f));
 	}
 
 	void Paddle::Update()
