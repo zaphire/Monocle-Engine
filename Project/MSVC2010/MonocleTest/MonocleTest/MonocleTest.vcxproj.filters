@@ -46,6 +46,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Monocle\Graphics">
+      <UniqueIdentifier>{5fa20246-a07a-4840-9919-412e07fc3951}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Vector3.h">
@@ -97,9 +100,6 @@
       <Filter>Monocle</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Scene.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Sprite.h">
       <Filter>Monocle</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\TextureAsset.h">
@@ -171,6 +171,9 @@
     <ClInclude Include="..\..\..\..\Code\Colliders\RectangleCollider.h">
       <Filter>Monocle\Colliders</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Graphics\Sprite.h">
+      <Filter>Monocle\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp">
@@ -207,9 +210,6 @@
       <Filter>Monocle</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Scene.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Sprite.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Tween.cpp">
@@ -325,6 +325,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Main.cpp">
       <Filter>Monocle\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Graphics\Sprite.cpp">
+      <Filter>Monocle\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
