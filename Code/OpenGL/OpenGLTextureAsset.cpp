@@ -10,12 +10,16 @@
 	#include <Windows.h>
 #endif
 
-#ifdef MONOCLE_MAC
-#include <OpenGL/gl.h>
-#include <OpenGL/glext.h>
+
+#if defined(MONOCLE_MAC)
+	#include <OpenGL/gl.h>
+	#include <OpenGL/glext.h>
+#elif defined(MONOCLE_LINUX)
+	#include <GL/gl.h>
+	#include <GL/glu.h>
 #else
-#include <gl/GL.h>
-#include <gl/GLu.h>
+	#include <gl/GL.h>
+	#include <gl/GLu.h>
 #endif
 
 namespace Monocle
