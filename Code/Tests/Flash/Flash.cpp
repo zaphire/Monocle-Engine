@@ -1,5 +1,5 @@
 #include "Flash.h"
-#include "../../TinyXML/tinyxml.h"
+#include "../../XML/tinyxml.h"
 #include <math.h>
 
 namespace Flash
@@ -28,15 +28,39 @@ namespace Flash
 		return "";
 	}
 
-	Entity* Part::CreateEntity(const std::string &textureSheetName)
+	Texture* TextureSheet::GetTextureByName(const std::string &name)
 	{
-		entity = new Entity();
-		sprite = new Sprite("../../Content/Flash/" + textureSheetName + "/" + name + ".png");
-		entity->SetGraphic(sprite);
+		for (std::vector<Texture>::iterator i = textures.begin(); i != textures.end(); ++i)
+		{
+			Texture *texture = (Texture*)(&(*i)); // <- haHA! take that, Bjarne
+			if (texture->name == name)
+			{
+				return texture;
+			}
+		}
+		return NULL;
+	}
 
-		printf("size (%d, %d)", (int)sprite->width, (int)sprite->height);
+	Entity* Part::CreateEntity(TextureSheet &textureSheet)
+	{
+		Texture *texture = textureSheet.GetTextureByName(name);
+		if (texture != NULL)
+		{
+			entity = new Entity();
+			sprite = new Sprite("../../Content/Flash/" + textureSheet.name + "/" + name + ".png");
+			sprite->position = (texture->registrationPoint * -1) + Vector2(sprite->width, sprite->height)*0.5f;
+			//sprite->position = texture->registrationPoint * -1;
+			entity->SetGraphic(sprite);
 
-		return entity;
+			printf("size (%d, %d)", (int)sprite->width, (int)sprite->height);
+
+			return entity;
+		}
+		else
+		{
+			Debug::Log("Error: Part could not CreateEntity, Part named: " + name + " not found in TextureSheet. Did you remember to load the TextureSheet?");
+		}
+		return NULL;
 	}
 
 	void Part::Update(float f)
@@ -163,16 +187,20 @@ namespace Flash
 				{
 					textureSheet.name = ReadStringAttribute(eTextureSheet, "name");
 
-					/*
 					TiXmlElement* eTexture = eTextureSheet->FirstChildElement("Texture");
 					while (eTexture)
 					{
 						Texture texture;
 						texture.name = eTexture->Attribute("name");
-						texture.width = IntAttribute(eTexture, "width");
-						texture.height = IntAttribute(eTexture, "height");
+						texture.width = ReadIntAttribute(eTexture, "width");
+						texture.height = ReadIntAttribute(eTexture, "height");
+						texture.registrationPoint.x = ReadFloatAttribute(eTexture, "registrationPointX");
+						texture.registrationPoint.y = ReadFloatAttribute(eTexture, "registrationPointY");
+
+						textureSheet.textures.push_back(texture);
+
+						eTexture = eTexture->NextSiblingElement("Texture");
 					}
-					*/
 
 					eTextureSheet = eTextureSheet->NextSiblingElement("TextureSheet");
 				}
@@ -201,9 +229,17 @@ namespace Flash
 		LoadAnimation("../../Content/Flash/test.xml");
 #endif
 
-		InitAnimation(&animations[0]);
-		OffsetFramesBy(Vector2(400, 300));
+		Entity *eAnimation = new Entity();
+		eAnimation->position = Vector2(400,300);
+		Add(eAnimation);
+
+		
+		InitAnimation(&animations[0], eAnimation);
 		PlayAnimation(&animations[0], 15.0f);
+
+		// fudging:
+		eAnimation->position.x += 40;
+		eAnimation->scale = Vector2(800.0f/640.0f, 600.0f/480.0f);
 	}
 
 	void TestScene::Update()
@@ -216,11 +252,20 @@ namespace Flash
 		}
 	}
 
-	void TestScene::InitAnimation(Animation *animation)
+	// create objects required to make the animation in the entity eParent
+	// if eParent is NULL, add to the scene instead
+	void TestScene::InitAnimation(Animation *animation, Entity *eParent)
 	{
 		for (int i = 0; i < animation->parts.size(); i++)
 		{
-			Add(animation->parts[i].CreateEntity(textureSheet.name));
+			Entity *entity = animation->parts[i].CreateEntity(textureSheet);
+			if (entity)
+			{
+				if (eParent)
+					eParent->Add(entity);
+				else
+					Add(entity);
+			}
 		}
 	}
 

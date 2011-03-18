@@ -106,11 +106,11 @@
     <ClInclude Include="..\..\..\..\Code\Tests\Marian\Marian.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\Pong\Pong.h" />
     <ClInclude Include="..\..\..\..\Code\TextureAsset.h" />
-    <ClInclude Include="..\..\..\..\Code\TinyXML\tinyxml.h" />
     <ClInclude Include="..\..\..\..\Code\Tween.h" />
     <ClInclude Include="..\..\..\..\Code\Vector2.h" />
     <ClInclude Include="..\..\..\..\Code\Vector3.h" />
     <ClInclude Include="..\..\..\..\Code\Windows\WindowsPlatform.h" />
+    <ClInclude Include="..\..\..\..\Code\XML\tinyxml.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp" />
@@ -161,13 +161,13 @@
     <ClCompile Include="..\..\..\..\Code\Tests\Jumper\Jumper.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\Marian\Marian.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\Pong\Pong.cpp" />
-    <ClCompile Include="..\..\..\..\Code\TinyXML\tinyxml.cpp" />
-    <ClCompile Include="..\..\..\..\Code\TinyXML\tinyxmlerror.cpp" />
-    <ClCompile Include="..\..\..\..\Code\TinyXML\tinyxmlparser.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tween.cpp" />
     <ClCompile Include="..\..\..\..\Code\Vector2.cpp" />
     <ClCompile Include="..\..\..\..\Code\Vector3.cpp" />
     <ClCompile Include="..\..\..\..\Code\Windows\WindowsPlatform.cpp" />
+    <ClCompile Include="..\..\..\..\Code\XML\tinyxml.cpp" />
+    <ClCompile Include="..\..\..\..\Code\XML\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\..\..\Code\XML\tinyxmlparser.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

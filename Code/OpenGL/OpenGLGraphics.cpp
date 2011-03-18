@@ -160,6 +160,11 @@ namespace Monocle
 		glRotatef(r, ax, ay, az);
 	}
 
+	void Graphics::Scale(const Vector2 &scale)
+	{
+		glScalef(scale.x, scale.y, 1.0f);
+	}
+
 	void Graphics::RenderTriangle(float size)
 	{
 		float halfSize = size*0.5f;

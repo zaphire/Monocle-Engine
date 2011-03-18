@@ -54,14 +54,17 @@ namespace Marian
 	{
 		Entity *entity = new Entity();
 		entity->position = pos;
+
 		Sprite *sprite = new Sprite(filename, width, height);
-		sprite->scale = scale;
 		entity->SetGraphic(sprite);
+
 		Add(entity);
+
 		if (spriteRef != NULL)
 		{
 			*spriteRef = sprite;
 		}
+
 		return entity;
 	}
 

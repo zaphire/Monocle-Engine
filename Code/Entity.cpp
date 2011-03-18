@@ -5,7 +5,7 @@
 namespace Monocle
 {
 	Entity::Entity()
-		: scene(NULL), collider(NULL), graphic(NULL), layer(0), depth(0.0f)
+		: scene(NULL), collider(NULL), graphic(NULL), layer(0), depth(0.0f), scale(Vector2::one)
 	{
 	}
 
@@ -26,15 +26,29 @@ namespace Monocle
 
 	void Entity::Update()
 	{
-
+		for(std::vector<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
+		{
+			(*i)->Update();
+		}
 	}
 
 	void Entity::Render()
 	{
+		Graphics::PushMatrix();
+		Graphics::Translate(position.x, position.y, depth);
+		Graphics::Scale(scale);
+
+		for(std::vector<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
+		{
+			(*i)->Render();
+		}
+
 		if (graphic != NULL)
 		{
-			graphic->Render(this);
+			graphic->Render();
 		}
+
+		Graphics::PopMatrix();
 	}
 
 	const std::string& Entity::GetTag(int index)
@@ -109,6 +123,12 @@ namespace Monocle
 	bool Entity::IsLayer(int layer)
 	{
 		return this->layer == layer;
+	}
+
+	// add an entity as a child
+	void Entity::Add(Entity *entity)
+	{
+		children.push_back(entity);
 	}
 
 	void Entity::SetCollider(Collider *collider)

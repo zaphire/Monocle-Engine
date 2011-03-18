@@ -8,6 +8,26 @@ using namespace Monocle;
 
 namespace Flash
 {
+	class Texture
+	{
+	public:
+		Texture(){}
+		std::string name;
+		std::string path;
+		int width, height;
+		Vector2 registrationPoint;
+	};
+
+	class TextureSheet
+	{
+	public:
+		TextureSheet(){}
+		Texture* GetTextureByName(const std::string &name);
+
+		std::string name;
+		std::vector<Texture> textures;
+	};
+
 	class Frame
 	{
 	public:
@@ -29,7 +49,7 @@ namespace Flash
 		std::string name;
 		std::vector<Frame> frames;
 
-		Entity *CreateEntity(const std::string &textureSheetName);
+		Entity *CreateEntity(TextureSheet &textureSheet);
 		void Update(float frame);
 
 		Entity *entity;
@@ -46,23 +66,7 @@ namespace Flash
 		int frameCount;
 		std::vector<Part> parts;
 	};
-	
-	class Texture
-	{
-	public:
-		Texture(){}
-		std::string name;
-		std::string path;
-		int width, height;
-	};
 
-	class TextureSheet
-	{
-	public:
-		TextureSheet(){}
-		std::string name;
-		std::vector<Texture> textures;
-	};
 
 	class TestScene : public Scene
 	{
@@ -73,7 +77,7 @@ namespace Flash
 	private:
 		void LoadAnimation(const std::string &filename);
 		void LoadTextureSheet(const std::string &filename);
-		void InitAnimation(Animation *animation);
+		void InitAnimation(Animation *animation, Entity *eParent);
 		void PlayAnimation(Animation *animation, float fps);
 		void UpdateAnimation(Animation *animation);
 		void OffsetFramesBy(const Vector2 &offset);

@@ -13,7 +13,7 @@ namespace Monocle
 	{
 	public:
 		Vector2 position;
-		virtual void Render(Entity *entity)=0;
+		virtual void Render()=0;
 	};
 
 	class Graphics
@@ -35,9 +35,12 @@ namespace Monocle
 
 		static void BindTexture(TextureAsset* textureAsset);
 		static void SetCameraPosition(const Vector2 &position);
+
 		static void Translate(float x, float y, float z);
 		static void Translate(Vector2 pos);
+		static void Scale(const Vector2 &pos);
 		static void Rotate(float ax, float ay, float az, float r);
+
 		static void RenderTriangle(float size);
 		//static void RenderQuad(float size);
 		static void RenderQuad(float width, float height, Vector2 textureOffset=Vector2::zero, Vector2 textureScale=Vector2::one);

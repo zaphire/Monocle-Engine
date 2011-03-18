@@ -10,7 +10,6 @@ namespace Monocle
 		: Graphic(),
 		texture(NULL),
 		isSelected(false),
-		scale(1.0f),
 		width(width),
 		height(height),
 		angle(0.0f),
@@ -46,19 +45,18 @@ namespace Monocle
 	// store color info in entity?
 	// that would bloat entity... hmm.
 	// or make materials system...
-	void Sprite::Render(Entity *entity)
+	void Sprite::Render()
 	{
-		Graphics::PushMatrix();
-		Graphics::Translate(entity->position.x, entity->position.y, entity->depth);
 		Graphics::Rotate(angle, 0, 0, 1);
 		Graphics::Translate(position.x, position.y, 0.0f);
 		Graphics::Blend();
 		Graphics::SetColor(color);
 		Graphics::BindTexture(texture);
 		if (texture != NULL)
-			Graphics::RenderQuad(width * scale, height * scale, textureOffset, textureScale);
-		Graphics::PopMatrix();
+			Graphics::RenderQuad(width, height, textureOffset, textureScale);
+		//Graphics::PopMatrix();
 
+		/*
 		// show bounds, for editor/selection purposes
 		if (showBounds || isSelected)
 		{
@@ -72,5 +70,6 @@ namespace Monocle
 				Graphics::RenderLineRect(entity->position.x, entity->position.y, width * scale, height * scale);
 			}
 		}
+		*/
 	}
 }

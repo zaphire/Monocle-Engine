@@ -12,11 +12,11 @@ namespace Monocle
 	public:
 		Sprite(const std::string &filename, float width=-1, float height=-1);
 		~Sprite();
-		void Render(Entity *entity);
+		void Render();
 
 		TextureAsset *texture;
 		Color color;
-		float width, height, scale, angle;
+		float width, height, angle;
 		Vector2 textureOffset;
 		Vector2 textureScale;
 

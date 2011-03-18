@@ -24,6 +24,7 @@ namespace Monocle
 		~Entity();
 
 		Vector2 position;
+		Vector2 scale;
 		float depth;
 
 		//The scene that contains the entity
@@ -63,6 +64,8 @@ namespace Monocle
 		void SetCollider(Collider *collider);
 		void SetGraphic(Graphic *graphic);
 
+		void Add(Entity *entity);
+
 	private:
 		// only for use by Collision class
 		friend class Collision;
@@ -77,7 +80,8 @@ namespace Monocle
 
 		// only for use by scene
 		//friend class Scene;
-
+		
+		std::vector<Entity*> children;
 		
 		std::vector<std::string> tags;
 		int layer;
