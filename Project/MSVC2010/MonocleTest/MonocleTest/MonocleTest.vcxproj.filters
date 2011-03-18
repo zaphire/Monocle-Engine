@@ -90,9 +90,6 @@
     <ClInclude Include="..\..\..\..\Code\Input.h">
       <Filter>Monocle</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Math.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Monocle.h">
       <Filter>Monocle</Filter>
     </ClInclude>
@@ -210,9 +207,6 @@
       <Filter>Monocle</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Input.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Math.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Monocle.cpp">

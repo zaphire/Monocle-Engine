@@ -111,11 +111,11 @@ namespace Monocle
 				if((td/2) < 1) return (c/2)*(td*td) + b;
 				return (-c/2) * ((--td)*(td-2) - 1) + b;
 			case EASE_INSIN:
-				return -c * cos(t/d * (Math::PI/2)) + c + b;
+				return -c * cos(t/d * (Monocle::pi/2)) + c + b;
 			case EASE_OUTSIN:
-				return c * sin(t/d * (Math::PI/2)) + b;
+				return c * sin(t/d * (Monocle::pi/2)) + b;
 			case EASE_INOUTSIN:
-				return -c/2 * (cos(Math::PI*t/d) - 1) + b;
+				return -c/2 * (cos(Monocle::pi*t/d) - 1) + b;
 
 			case EASE_INBOUNCE:
 				return c - Ease(1-t, EASE_OUTBOUNCE) + b;
