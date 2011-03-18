@@ -12,6 +12,7 @@ namespace Monocle
 	class Graphic
 	{
 	public:
+		Vector2 position;
 		virtual void Render(Entity *entity)=0;
 	};
 

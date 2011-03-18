@@ -1,6 +1,7 @@
 #include "../Color.h"
 #include "../TextureAsset.h"
 #include "../Graphics.h"
+#include <string>
 
 namespace Monocle
 {
@@ -9,7 +10,7 @@ namespace Monocle
 	class Sprite : public Graphic
 	{
 	public:
-		Sprite(const char *filename, float width=-1, float height=-1);
+		Sprite(const std::string &filename, float width=-1, float height=-1);
 		~Sprite();
 		void Render(Entity *entity);
 

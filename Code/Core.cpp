@@ -1,7 +1,7 @@
 #include "Core.h"
 
 //If you want to use fixed timestep, uncomment the following three lines:
-#define FIXED_TIMESTEP
+//#define FIXED_TIMESTEP
 #define MILLISECONDS_PER_FRAME 1000/60
 #define MAX_UPDATES_PER_RENDER 4
 

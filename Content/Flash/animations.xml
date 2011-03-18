@@ -1,0 +1,510 @@
+<Animations>
+  <Animation name="LogoIn" frameCount="12">
+    <Part name="Hat">
+      <Frame x="-40.0" y="-303.9" index="0" />
+      <Frame x="-40.0" y="-286.1" index="1" />
+      <Frame x="-40.0" y="-268.3" index="2" />
+      <Frame x="-40.0" y="-250.4" index="3" />
+      <Frame x="-40.0" y="-232.7" index="4" />
+      <Frame x="-40.0" y="-214.8" index="5" />
+      <Frame x="-40.0" y="-196.9" index="6" />
+      <Frame x="-40.0" y="-179.2" index="7" />
+      <Frame x="-40.0" y="-161.3" index="8" />
+      <Frame x="-40.0" y="-143.5" index="9" />
+      <Frame x="-40.0" y="-125.7" index="10" />
+      <Frame x="-40.0" y="-107.8" index="11" />
+    </Part>
+    <Part name="LeftStache">
+      <Frame x="-115.0" y="378.2" index="0" />
+      <Frame x="-115.0" y="352.4" index="1" />
+      <Frame x="-115.0" y="326.6" index="2" />
+      <Frame x="-115.0" y="300.7" index="3" />
+      <Frame x="-115.0" y="274.9" index="4" />
+      <Frame x="-115.0" y="249.1" index="5" />
+      <Frame x="-115.0" y="223.2" index="6" />
+      <Frame x="-115.0" y="197.4" index="7" />
+      <Frame x="-115.0" y="171.6" index="8" />
+      <Frame x="-115.0" y="145.8" index="9" />
+      <Frame x="-115.0" y="119.9" index="10" />
+      <Frame x="-115.0" y="94.1" index="11" />
+    </Part>
+    <Part name="MainText">
+      <Frame x="-22.7" y="308.1" index="0" />
+      <Frame x="-22.7" y="282.3" index="1" />
+      <Frame x="-22.7" y="256.4" index="2" />
+      <Frame x="-22.7" y="230.6" index="3" />
+      <Frame x="-22.7" y="204.8" index="4" />
+      <Frame x="-22.7" y="178.9" index="5" />
+      <Frame x="-22.7" y="153.1" index="6" />
+      <Frame x="-22.7" y="127.3" index="7" />
+      <Frame x="-22.7" y="101.5" index="8" />
+      <Frame x="-22.7" y="75.7" index="9" />
+      <Frame x="-22.7" y="49.8" index="10" />
+      <Frame x="-22.7" y="24.0" index="11" />
+    </Part>
+    <Part name="Monocle">
+      <Frame x="-145.3" y="307.9" index="0" />
+      <Frame x="-145.3" y="281.9" index="1" />
+      <Frame x="-145.3" y="256.0" index="2" />
+      <Frame x="-145.3" y="230.1" index="3" />
+      <Frame x="-145.3" y="204.2" index="4" />
+      <Frame x="-145.3" y="178.3" index="5" />
+      <Frame x="-145.3" y="152.3" index="6" />
+      <Frame x="-145.3" y="126.5" index="7" />
+      <Frame x="-145.3" y="100.5" index="8" />
+      <Frame x="-145.3" y="74.7" index="9" />
+      <Frame x="-145.3" y="48.8" index="10" />
+      <Frame x="-145.3" y="22.8" index="11" />
+    </Part>
+    <Part name="RightStache">
+      <Frame x="-37.0" y="372.8" index="0" />
+      <Frame x="-37.0" y="346.9" index="1" />
+      <Frame x="-37.0" y="321.1" index="2" />
+      <Frame x="-37.0" y="295.3" index="3" />
+      <Frame x="-37.0" y="269.4" index="4" />
+      <Frame x="-37.0" y="243.6" index="5" />
+      <Frame x="-37.0" y="217.8" index="6" />
+      <Frame x="-37.0" y="191.9" index="7" />
+      <Frame x="-37.0" y="166.1" index="8" />
+      <Frame x="-37.0" y="140.3" index="9" />
+      <Frame x="-37.0" y="114.5" index="10" />
+      <Frame x="-37.0" y="88.7" index="11" />
+    </Part>
+    <Part name="SmallText">
+      <Frame x="157.3" y="362.1" index="0" />
+      <Frame x="157.3" y="336.3" index="1" />
+      <Frame x="157.3" y="310.5" index="2" />
+      <Frame x="157.3" y="284.6" index="3" />
+      <Frame x="157.3" y="258.9" index="4" />
+      <Frame x="157.3" y="233.0" index="5" />
+      <Frame x="157.3" y="207.2" index="6" />
+      <Frame x="157.3" y="181.3" index="7" />
+      <Frame x="157.3" y="155.5" index="8" />
+      <Frame x="157.3" y="129.7" index="9" />
+      <Frame x="157.3" y="103.8" index="10" />
+      <Frame x="157.3" y="78.0" index="11" />
+    </Part>
+  </Animation>
+  <Animation name="LogoOut" frameCount="23">
+    <Part name="Hat">
+      <Frame x="-40.0" y="-90.0" index="0" />
+      <Frame x="-40.0" y="-102.5" index="1" />
+      <Frame x="-40.0" y="-115.0" index="2" />
+      <Frame x="-40.0" y="-127.6" index="3" />
+      <Frame x="-40.0" y="-140.2" index="4" />
+      <Frame x="-40.0" y="-152.7" index="5" />
+      <Frame x="-40.0" y="-165.2" index="6" />
+      <Frame x="-40.0" y="-121.8" index="7" />
+      <Frame x="-40.0" y="-78.5" index="8" />
+      <Frame x="-40.0" y="-35.1" index="9" />
+      <Frame x="-40.0" y="8.2" index="10" />
+      <Frame x="-40.0" y="51.5" index="11" />
+      <Frame x="-40.0" y="94.9" index="12" />
+      <Frame x="-40.0" y="138.3" index="13" />
+      <Frame x="-40.0" y="181.6" index="14" />
+      <Frame x="-40.0" y="224.9" index="15" />
+      <Frame x="-40.0" y="268.3" index="16" />
+      <Frame x="-40.0" y="311.6" index="17" />
+      <Frame x="-40.0" y="311.6" index="18" />
+      <Frame x="-40.0" y="311.6" index="19" />
+      <Frame x="-40.0" y="311.6" index="20" />
+      <Frame x="-40.0" y="311.6" index="21" />
+      <Frame x="-40.0" y="311.6" index="22" />
+    </Part>
+    <Part name="LeftStache">
+      <Frame x="-115.0" y="68.3" index="0" />
+      <Frame x="-115.0" y="55.7" index="1" />
+      <Frame x="-115.0" y="43.2" index="2" />
+      <Frame x="-115.0" y="30.6" index="3" />
+      <Frame x="-115.0" y="18.1" index="4" />
+      <Frame x="-115.0" y="5.6" index="5" />
+      <Frame x="-115.0" y="-7.0" index="6" />
+      <Frame x="-115.0" y="36.4" index="7" />
+      <Frame x="-115.0" y="79.8" index="8" />
+      <Frame x="-115.0" y="123.1" index="9" />
+      <Frame x="-115.0" y="166.4" index="10" />
+      <Frame x="-115.0" y="209.8" index="11" />
+      <Frame x="-115.0" y="253.2" index="12" />
+      <Frame x="-115.0" y="296.5" index="13" />
+      <Frame x="-115.0" y="339.9" index="14" />
+      <Frame x="-115.0" y="383.2" index="15" />
+      <Frame x="-115.0" y="426.6" index="16" />
+      <Frame x="-115.0" y="469.9" index="17" />
+      <Frame x="-115.0" y="469.9" index="18" />
+      <Frame x="-115.0" y="469.9" index="19" />
+      <Frame x="-115.0" y="469.9" index="20" />
+      <Frame x="-115.0" y="469.9" index="21" />
+      <Frame x="-115.0" y="469.9" index="22" />
+    </Part>
+    <Part name="MainText">
+      <Frame x="-22.7" y="-1.9" index="0" />
+      <Frame x="-22.7" y="-14.4" index="1" />
+      <Frame x="-22.7" y="-26.9" index="2" />
+      <Frame x="-22.7" y="-39.5" index="3" />
+      <Frame x="-22.7" y="-52.0" index="4" />
+      <Frame x="-22.7" y="-64.5" index="5" />
+      <Frame x="-22.7" y="-77.0" index="6" />
+      <Frame x="-22.7" y="-33.7" index="7" />
+      <Frame x="-22.7" y="9.7" index="8" />
+      <Frame x="-22.7" y="53.0" index="9" />
+      <Frame x="-22.7" y="96.3" index="10" />
+      <Frame x="-22.7" y="139.7" index="11" />
+      <Frame x="-22.7" y="183.1" index="12" />
+      <Frame x="-22.7" y="226.4" index="13" />
+      <Frame x="-22.7" y="269.8" index="14" />
+      <Frame x="-22.7" y="313.1" index="15" />
+      <Frame x="-22.7" y="356.4" index="16" />
+      <Frame x="-22.7" y="399.8" index="17" />
+      <Frame x="-22.7" y="399.8" index="18" />
+      <Frame x="-22.7" y="399.8" index="19" />
+      <Frame x="-22.7" y="399.8" index="20" />
+      <Frame x="-22.7" y="399.8" index="21" />
+      <Frame x="-22.7" y="399.8" index="22" />
+    </Part>
+    <Part name="Monocle">
+      <Frame x="-145.3" y="-3.1" index="0" />
+      <Frame x="-145.3" y="-15.7" index="1" />
+      <Frame x="-145.3" y="-28.1" index="2" />
+      <Frame x="-145.3" y="-40.7" index="3" />
+      <Frame x="-145.3" y="-53.3" index="4" />
+      <Frame x="-145.3" y="-65.8" index="5" />
+      <Frame x="-145.3" y="-78.3" index="6" />
+      <Frame x="-145.3" y="-35.0" index="7" />
+      <Frame x="-145.3" y="8.4" index="8" />
+      <Frame x="-145.3" y="51.8" index="9" />
+      <Frame x="-145.3" y="95.1" index="10" />
+      <Frame x="-145.3" y="138.4" index="11" />
+      <Frame x="-145.3" y="181.8" index="12" />
+      <Frame x="-145.3" y="225.2" index="13" />
+      <Frame x="-145.3" y="268.5" index="14" />
+      <Frame x="-145.3" y="311.9" index="15" />
+      <Frame x="-145.3" y="355.2" index="16" />
+      <Frame x="-145.3" y="398.6" index="17" />
+      <Frame x="-145.3" y="398.6" index="18" />
+      <Frame x="-145.3" y="398.6" index="19" />
+      <Frame x="-145.3" y="398.6" index="20" />
+      <Frame x="-145.3" y="398.6" index="21" />
+      <Frame x="-145.3" y="398.6" index="22" />
+    </Part>
+    <Part name="RightStache">
+      <Frame x="-37.0" y="62.8" index="0" />
+      <Frame x="-37.0" y="50.3" index="1" />
+      <Frame x="-37.0" y="37.8" index="2" />
+      <Frame x="-37.0" y="25.2" index="3" />
+      <Frame x="-37.0" y="12.7" index="4" />
+      <Frame x="-37.0" y="0.1" index="5" />
+      <Frame x="-37.0" y="-12.4" index="6" />
+      <Frame x="-37.0" y="30.9" index="7" />
+      <Frame x="-37.0" y="74.3" index="8" />
+      <Frame x="-37.0" y="117.7" index="9" />
+      <Frame x="-37.0" y="161.0" index="10" />
+      <Frame x="-37.0" y="204.3" index="11" />
+      <Frame x="-37.0" y="247.7" index="12" />
+      <Frame x="-37.0" y="291.1" index="13" />
+      <Frame x="-37.0" y="334.4" index="14" />
+      <Frame x="-37.0" y="377.8" index="15" />
+      <Frame x="-37.0" y="421.1" index="16" />
+      <Frame x="-37.0" y="464.4" index="17" />
+      <Frame x="-37.0" y="464.4" index="18" />
+      <Frame x="-37.0" y="464.4" index="19" />
+      <Frame x="-37.0" y="464.4" index="20" />
+      <Frame x="-37.0" y="464.4" index="21" />
+      <Frame x="-37.0" y="464.4" index="22" />
+    </Part>
+    <Part name="SmallText">
+      <Frame x="157.3" y="52.2" index="0" />
+      <Frame x="157.3" y="39.6" index="1" />
+      <Frame x="157.3" y="27.1" index="2" />
+      <Frame x="157.3" y="14.6" index="3" />
+      <Frame x="157.3" y="2.0" index="4" />
+      <Frame x="157.3" y="-10.4" index="5" />
+      <Frame x="157.3" y="-23.0" index="6" />
+      <Frame x="157.3" y="20.4" index="7" />
+      <Frame x="157.3" y="63.7" index="8" />
+      <Frame x="157.3" y="107.0" index="9" />
+      <Frame x="157.3" y="150.4" index="10" />
+      <Frame x="157.3" y="193.8" index="11" />
+      <Frame x="157.3" y="237.1" index="12" />
+      <Frame x="157.3" y="280.4" index="13" />
+      <Frame x="157.3" y="323.8" index="14" />
+      <Frame x="157.3" y="367.1" index="15" />
+      <Frame x="157.3" y="410.5" index="16" />
+      <Frame x="157.3" y="453.9" index="17" />
+      <Frame x="157.3" y="453.9" index="18" />
+      <Frame x="157.3" y="453.9" index="19" />
+      <Frame x="157.3" y="453.9" index="20" />
+      <Frame x="157.3" y="453.9" index="21" />
+      <Frame x="157.3" y="453.9" index="22" />
+    </Part>
+  </Animation>
+  <Animation name="LogoRest1" frameCount="10">
+    <Part name="Hat">
+      <Frame x="-40.0" y="-90.0" index="0" />
+      <Frame x="-40.0" y="-90.0" index="1" />
+      <Frame x="-40.0" y="-90.0" index="2" />
+      <Frame x="-40.0" y="-90.0" index="3" />
+      <Frame x="-40.0" y="-90.0" index="4" />
+      <Frame x="-40.0" y="-90.0" index="5" />
+      <Frame x="-40.0" y="-90.0" index="6" />
+      <Frame x="-40.0" y="-90.0" index="7" />
+      <Frame x="-40.0" y="-90.0" index="8" />
+      <Frame x="-40.0" y="-90.0" index="9" />
+    </Part>
+    <Part name="LeftStache">
+      <Frame x="-115.0" y="68.3" index="0" />
+      <Frame x="-115.0" y="68.3" index="1" />
+      <Frame x="-115.0" y="68.3" index="2" />
+      <Frame x="-115.0" y="68.3" index="3" />
+      <Frame x="-115.0" y="68.3" index="4" />
+      <Frame x="-115.0" y="68.3" index="5" />
+      <Frame x="-115.0" y="68.3" index="6" />
+      <Frame x="-115.0" y="68.3" index="7" />
+      <Frame x="-115.0" y="68.3" index="8" />
+      <Frame x="-115.0" y="68.3" index="9" />
+    </Part>
+    <Part name="MainText">
+      <Frame x="-22.7" y="-1.9" index="0" />
+      <Frame x="-22.7" y="-1.9" index="1" />
+      <Frame x="-22.7" y="-1.9" index="2" />
+      <Frame x="-22.7" y="-1.9" index="3" />
+      <Frame x="-22.7" y="-1.9" index="4" />
+      <Frame x="-22.7" y="-1.9" index="5" />
+      <Frame x="-22.7" y="-1.9" index="6" />
+      <Frame x="-22.7" y="-1.9" index="7" />
+      <Frame x="-22.7" y="-1.9" index="8" />
+      <Frame x="-22.7" y="-1.9" index="9" />
+    </Part>
+    <Part name="Monocle">
+      <Frame x="-145.3" y="-3.1" index="0" />
+      <Frame x="-145.3" y="-3.1" index="1" />
+      <Frame x="-145.3" y="-3.1" index="2" />
+      <Frame x="-145.3" y="-3.1" index="3" />
+      <Frame x="-145.3" y="-3.1" index="4" />
+      <Frame x="-145.3" y="-3.1" index="5" />
+      <Frame x="-145.3" y="-3.1" index="6" />
+      <Frame x="-145.3" y="-3.1" index="7" />
+      <Frame x="-145.3" y="-3.1" index="8" />
+      <Frame x="-145.3" y="-3.1" index="9" />
+    </Part>
+    <Part name="RightStache">
+      <Frame x="-37.0" y="62.8" index="0" />
+      <Frame x="-37.0" y="62.8" index="1" />
+      <Frame x="-37.0" y="62.8" index="2" />
+      <Frame x="-37.0" y="62.8" index="3" />
+      <Frame x="-37.0" y="62.8" index="4" />
+      <Frame x="-37.0" y="62.8" index="5" />
+      <Frame x="-37.0" y="62.8" index="6" />
+      <Frame x="-37.0" y="62.8" index="7" />
+      <Frame x="-37.0" y="62.8" index="8" />
+      <Frame x="-37.0" y="62.8" index="9" />
+    </Part>
+    <Part name="SmallText">
+      <Frame x="157.3" y="52.2" index="0" />
+      <Frame x="157.3" y="52.2" index="1" />
+      <Frame x="157.3" y="52.2" index="2" />
+      <Frame x="157.3" y="52.2" index="3" />
+      <Frame x="157.3" y="52.2" index="4" />
+      <Frame x="157.3" y="52.2" index="5" />
+      <Frame x="157.3" y="52.2" index="6" />
+      <Frame x="157.3" y="52.2" index="7" />
+      <Frame x="157.3" y="52.2" index="8" />
+      <Frame x="157.3" y="52.2" index="9" />
+    </Part>
+  </Animation>
+  <Animation name="LogoRest2" frameCount="12">
+    <Part name="Hat">
+      <Frame x="-40.0" y="-90.0" index="0" />
+      <Frame x="-40.0" y="-90.0" index="1" />
+      <Frame x="-40.0" y="-90.0" index="2" />
+      <Frame x="-40.0" y="-90.0" index="3" />
+      <Frame x="-40.0" y="-90.0" index="4" />
+      <Frame x="-40.0" y="-90.0" index="5" />
+      <Frame x="-40.0" y="-90.0" index="6" />
+      <Frame x="-40.0" y="-90.0" index="7" />
+      <Frame x="-40.0" y="-90.0" index="8" />
+      <Frame x="-40.0" y="-90.0" index="9" />
+      <Frame x="-40.0" y="-90.0" index="10" />
+      <Frame x="-40.0" y="-90.0" index="11" />
+    </Part>
+    <Part name="LeftStache">
+      <Frame x="-115.0" y="68.3" index="0" />
+      <Frame x="-115.0" y="68.3" index="1" />
+      <Frame x="-115.0" y="68.3" index="2" />
+      <Frame x="-115.0" y="68.3" index="3" />
+      <Frame x="-115.0" y="68.3" index="4" />
+      <Frame x="-115.0" y="68.3" index="5" />
+      <Frame x="-115.0" y="68.3" index="6" />
+      <Frame x="-115.0" y="68.3" index="7" />
+      <Frame x="-115.0" y="68.3" index="8" />
+      <Frame x="-115.0" y="68.3" index="9" />
+      <Frame x="-115.0" y="68.3" index="10" />
+      <Frame x="-115.0" y="68.3" index="11" />
+    </Part>
+    <Part name="MainText">
+      <Frame x="-22.7" y="-1.9" index="0" />
+      <Frame x="-22.7" y="-1.9" index="1" />
+      <Frame x="-22.7" y="-1.9" index="2" />
+      <Frame x="-22.7" y="-1.9" index="3" />
+      <Frame x="-22.7" y="-1.9" index="4" />
+      <Frame x="-22.7" y="-1.9" index="5" />
+      <Frame x="-22.7" y="-1.9" index="6" />
+      <Frame x="-22.7" y="-1.9" index="7" />
+      <Frame x="-22.7" y="-1.9" index="8" />
+      <Frame x="-22.7" y="-1.9" index="9" />
+      <Frame x="-22.7" y="-1.9" index="10" />
+      <Frame x="-22.7" y="-1.9" index="11" />
+    </Part>
+    <Part name="Monocle">
+      <Frame x="-145.3" y="-3.1" index="0" />
+      <Frame x="-145.3" y="-3.1" index="1" />
+      <Frame x="-145.3" y="-3.1" index="2" />
+      <Frame x="-145.3" y="-3.1" index="3" />
+      <Frame x="-145.3" y="-3.1" index="4" />
+      <Frame x="-145.3" y="-3.1" index="5" />
+      <Frame x="-145.3" y="-3.1" index="6" />
+      <Frame x="-145.3" y="-3.1" index="7" />
+      <Frame x="-145.3" y="-3.1" index="8" />
+      <Frame x="-145.3" y="-3.1" index="9" />
+      <Frame x="-145.3" y="-3.1" index="10" />
+      <Frame x="-145.3" y="-3.1" index="11" />
+    </Part>
+    <Part name="RightStache">
+      <Frame x="-37.0" y="62.8" index="0" />
+      <Frame x="-37.0" y="62.8" index="1" />
+      <Frame x="-37.0" y="62.8" index="2" />
+      <Frame x="-37.0" y="62.8" index="3" />
+      <Frame x="-37.0" y="62.8" index="4" />
+      <Frame x="-37.0" y="62.8" index="5" />
+      <Frame x="-37.0" y="62.8" index="6" />
+      <Frame x="-37.0" y="62.8" index="7" />
+      <Frame x="-37.0" y="62.8" index="8" />
+      <Frame x="-37.0" y="62.8" index="9" />
+      <Frame x="-37.0" y="62.8" index="10" />
+      <Frame x="-37.0" y="62.8" index="11" />
+    </Part>
+    <Part name="SmallText">
+      <Frame x="157.3" y="52.2" index="0" />
+      <Frame x="157.3" y="52.2" index="1" />
+      <Frame x="157.3" y="52.2" index="2" />
+      <Frame x="157.3" y="52.2" index="3" />
+      <Frame x="157.3" y="52.2" index="4" />
+      <Frame x="157.3" y="52.2" index="5" />
+      <Frame x="157.3" y="52.2" index="6" />
+      <Frame x="157.3" y="52.2" index="7" />
+      <Frame x="157.3" y="52.2" index="8" />
+      <Frame x="157.3" y="52.2" index="9" />
+      <Frame x="157.3" y="52.2" index="10" />
+      <Frame x="157.3" y="52.2" index="11" />
+    </Part>
+  </Animation>
+  <Animation name="LogoStacheTweak" frameCount="16">
+    <Part name="Hat">
+      <Frame x="-40.0" y="-90.0" index="0" />
+      <Frame x="-40.0" y="-90.0" index="1" />
+      <Frame x="-40.0" y="-90.0" index="2" />
+      <Frame x="-40.0" y="-90.0" index="3" />
+      <Frame x="-40.0" y="-90.0" index="4" />
+      <Frame x="-40.0" y="-90.0" index="5" />
+      <Frame x="-40.0" y="-90.0" index="6" />
+      <Frame x="-40.0" y="-90.0" index="7" />
+      <Frame x="-40.0" y="-90.0" index="8" />
+      <Frame x="-40.0" y="-90.0" index="9" />
+      <Frame x="-40.0" y="-90.0" index="10" />
+      <Frame x="-40.0" y="-90.0" index="11" />
+      <Frame x="-40.0" y="-90.0" index="12" />
+      <Frame x="-40.0" y="-90.0" index="13" />
+      <Frame x="-40.0" y="-90.0" index="14" />
+      <Frame x="-40.0" y="-90.0" index="15" />
+    </Part>
+    <Part name="LeftStache">
+      <Frame x="-115.0" y="68.3" index="0" />
+      <Frame x="-115.0" y="70.7" rotation="-3.56" index="1" />
+      <Frame x="-114.8" y="73.3" rotation="-7.32" index="2" />
+      <Frame x="-114.3" y="75.8" rotation="-11.07" index="3" />
+      <Frame x="-113.7" y="78.5" rotation="-15.00" index="4" />
+      <Frame x="-114.2" y="75.8" rotation="-11.07" index="5" />
+      <Frame x="-114.8" y="73.3" rotation="-7.32" index="6" />
+      <Frame x="-114.8" y="70.8" rotation="-3.56" index="7" />
+      <Frame x="-115.0" y="68.3" index="8" />
+      <Frame x="-115.0" y="70.7" rotation="-3.56" index="9" />
+      <Frame x="-114.8" y="73.3" rotation="-7.32" index="10" />
+      <Frame x="-114.3" y="75.8" rotation="-11.07" index="11" />
+      <Frame x="-113.7" y="78.5" rotation="-15.00" index="12" />
+      <Frame x="-114.2" y="75.8" rotation="-11.07" index="13" />
+      <Frame x="-114.8" y="73.3" rotation="-7.32" index="14" />
+      <Frame x="-114.8" y="70.8" rotation="-3.56" index="15" />
+    </Part>
+    <Part name="MainText">
+      <Frame x="-22.7" y="-1.9" index="0" />
+      <Frame x="-22.7" y="-1.9" index="1" />
+      <Frame x="-22.7" y="-1.9" index="2" />
+      <Frame x="-22.7" y="-1.9" index="3" />
+      <Frame x="-22.7" y="-1.9" index="4" />
+      <Frame x="-22.7" y="-1.9" index="5" />
+      <Frame x="-22.7" y="-1.9" index="6" />
+      <Frame x="-22.7" y="-1.9" index="7" />
+      <Frame x="-22.7" y="-1.9" index="8" />
+      <Frame x="-22.7" y="-1.9" index="9" />
+      <Frame x="-22.7" y="-1.9" index="10" />
+      <Frame x="-22.7" y="-1.9" index="11" />
+      <Frame x="-22.7" y="-1.9" index="12" />
+      <Frame x="-22.7" y="-1.9" index="13" />
+      <Frame x="-22.7" y="-1.9" index="14" />
+      <Frame x="-22.7" y="-1.9" index="15" />
+    </Part>
+    <Part name="Monocle">
+      <Frame x="-145.3" y="-3.1" index="0" />
+      <Frame x="-145.3" y="-3.1" index="1" />
+      <Frame x="-145.3" y="-3.1" index="2" />
+      <Frame x="-145.3" y="-3.1" index="3" />
+      <Frame x="-145.3" y="-3.1" index="4" />
+      <Frame x="-145.3" y="-3.1" index="5" />
+      <Frame x="-145.3" y="-3.1" index="6" />
+      <Frame x="-145.3" y="-3.1" index="7" />
+      <Frame x="-145.3" y="-3.1" index="8" />
+      <Frame x="-145.3" y="-3.1" index="9" />
+      <Frame x="-145.3" y="-3.1" index="10" />
+      <Frame x="-145.3" y="-3.1" index="11" />
+      <Frame x="-145.3" y="-3.1" index="12" />
+      <Frame x="-145.3" y="-3.1" index="13" />
+      <Frame x="-145.3" y="-3.1" index="14" />
+      <Frame x="-145.3" y="-3.1" index="15" />
+    </Part>
+    <Part name="RightStache">
+      <Frame x="-37.0" y="62.8" index="0" />
+      <Frame x="-37.1" y="66.6" rotation="5.53" index="1" />
+      <Frame x="-37.6" y="70.3" rotation="11.06" index="2" />
+      <Frame x="-38.6" y="74.2" rotation="16.79" index="3" />
+      <Frame x="-40.0" y="77.8" rotation="22.44" index="4" />
+      <Frame x="-38.7" y="74.2" rotation="16.79" index="5" />
+      <Frame x="-37.8" y="70.3" rotation="11.06" index="6" />
+      <Frame x="-37.2" y="66.6" rotation="5.53" index="7" />
+      <Frame x="-37.0" y="62.8" index="8" />
+      <Frame x="-37.1" y="66.6" rotation="5.53" index="9" />
+      <Frame x="-37.7" y="70.3" rotation="11.06" index="10" />
+      <Frame x="-38.6" y="74.2" rotation="16.79" index="11" />
+      <Frame x="-40.0" y="77.8" rotation="22.44" index="12" />
+      <Frame x="-38.7" y="74.2" rotation="16.79" index="13" />
+      <Frame x="-37.8" y="70.3" rotation="11.06" index="14" />
+      <Frame x="-37.1" y="66.6" rotation="5.53" index="15" />
+    </Part>
+    <Part name="SmallText">
+      <Frame x="157.3" y="52.2" index="0" />
+      <Frame x="157.3" y="52.2" index="1" />
+      <Frame x="157.3" y="52.2" index="2" />
+      <Frame x="157.3" y="52.2" index="3" />
+      <Frame x="157.3" y="52.2" index="4" />
+      <Frame x="157.3" y="52.2" index="5" />
+      <Frame x="157.3" y="52.2" index="6" />
+      <Frame x="157.3" y="52.2" index="7" />
+      <Frame x="157.3" y="52.2" index="8" />
+      <Frame x="157.3" y="52.2" index="9" />
+      <Frame x="157.3" y="52.2" index="10" />
+      <Frame x="157.3" y="52.2" index="11" />
+      <Frame x="157.3" y="52.2" index="12" />
+      <Frame x="157.3" y="52.2" index="13" />
+      <Frame x="157.3" y="52.2" index="14" />
+      <Frame x="157.3" y="52.2" index="15" />
+    </Part>
+  </Animation>
+</Animations>

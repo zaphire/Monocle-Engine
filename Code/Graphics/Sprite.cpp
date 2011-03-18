@@ -6,7 +6,7 @@ namespace Monocle
 {
 	bool Sprite::showBounds = false;
 
-	Sprite::Sprite(const char *filename, float width, float height)
+	Sprite::Sprite(const std::string &filename, float width, float height)
 		: Graphic(),
 		texture(NULL),
 		isSelected(false),
@@ -22,8 +22,8 @@ namespace Monocle
 		{
 			if (width == -1 || height == -1)
 			{
-				width = texture->width;
-				height = texture->height;
+				this->width = texture->width;
+				this->height = texture->height;
 			}
 		}
 	}
@@ -51,6 +51,7 @@ namespace Monocle
 		Graphics::PushMatrix();
 		Graphics::Translate(entity->position.x, entity->position.y, entity->depth);
 		Graphics::Rotate(angle, 0, 0, 1);
+		Graphics::Translate(position.x, position.y, 0.0f);
 		Graphics::Blend();
 		Graphics::SetColor(color);
 		Graphics::BindTexture(texture);

@@ -8,18 +8,23 @@
 //#define TEST_CORE
 //#define TEST_PONG
 //#define TEST_MARIAN
-#define TEST_JUMPER
+//#define TEST_JUMPER
+#define TEST_FLASH
 
 #ifdef TEST_PONG
-#include "Tests/Pong/Pong.h"
+	#include "Tests/Pong/Pong.h"
 #endif
 
 #ifdef TEST_MARIAN
-#include "Tests/Marian/Marian.h"
+	#include "Tests/Marian/Marian.h"
 #endif
 
 #ifdef TEST_JUMPER
-#include "Tests/Jumper/Jumper.h"
+	#include "Tests/Jumper/Jumper.h"
+#endif
+
+#ifdef TEST_FLASH
+	#include "Tests/Flash/Flash.h"
 #endif
 
 using namespace Monocle;
@@ -40,6 +45,10 @@ int main(void)
 
 #ifdef TEST_JUMPER
 	core->SetScene(new Jumper::GameScene());
+#endif
+
+#ifdef TEST_FLASH
+	core->SetScene(new Flash::TestScene());
 #endif
 
 	core->Main();

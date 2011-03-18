@@ -49,6 +49,12 @@
     <Filter Include="Monocle\Graphics">
       <UniqueIdentifier>{5fa20246-a07a-4840-9919-412e07fc3951}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Monocle\Tests\Flash">
+      <UniqueIdentifier>{e9cd7ea2-96d7-44a3-914e-4d3e4c08e98d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\TinyXML">
+      <UniqueIdentifier>{d0da0306-c7a3-4393-8191-1d763d3e0f49}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Vector3.h">
@@ -176,6 +182,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Graphics\SpriteAnimation.h">
       <Filter>Monocle\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Tests\Flash\Flash.h">
+      <Filter>Monocle\Tests\Flash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\TinyXML\tinyxml.h">
+      <Filter>Monocle\TinyXML</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -334,6 +346,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Graphics\SpriteAnimation.cpp">
       <Filter>Monocle\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Tests\Flash\Flash.cpp">
+      <Filter>Monocle\Tests\Flash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\TinyXML\tinyxml.cpp">
+      <Filter>Monocle\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\TinyXML\tinyxmlerror.cpp">
+      <Filter>Monocle\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\TinyXML\tinyxmlparser.cpp">
+      <Filter>Monocle\TinyXML</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

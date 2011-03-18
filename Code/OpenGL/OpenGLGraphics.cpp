@@ -47,12 +47,12 @@ namespace Monocle
 		glEnable(GL_BLEND);
 		glDisable(GL_LIGHTING);
 		glEnable(GL_TEXTURE_2D);
-		glShadeModel(GL_SMOOTH);	
+		//glShadeModel(GL_SMOOTH);	
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClearDepth(1.0f);
 		glDisable(GL_DEPTH_TEST);
 		//glDepthFunc(GL_LEQUAL); 
-		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+		//glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
 		Set2D(800,600);
 
@@ -222,11 +222,11 @@ namespace Monocle
 
 		glBegin(GL_QUADS);
 			glVertex3f(-halfWidth, -halfHeight, 0.0f);
-			glTexCoord2f(textureScale.x, textureOffset.y);
+			glTexCoord2f(textureOffset.x + textureScale.x, textureOffset.y);
 			glVertex3f(halfWidth, -halfHeight, 0.0f);
-			glTexCoord2f(textureScale.x, textureScale.y);
+			glTexCoord2f(textureOffset.x + textureScale.x, textureOffset.y + textureScale.y);
 			glVertex3f(halfWidth, halfHeight, 0.0f);
-			glTexCoord2f(textureOffset.x, textureScale.y);
+			glTexCoord2f(textureOffset.x, textureOffset.y + textureScale.y);
 			glVertex3f(-halfWidth, halfHeight, 0.0f);
 			glTexCoord2f(textureOffset.x, textureOffset.y);
 		glEnd();

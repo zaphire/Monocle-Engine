@@ -1,0 +1,11 @@
+<Animations>
+	<Animation name="guydance" frameCount="5">
+		<Part name="guy">
+			<Frame x="200" y="400" scaleX="512" scaleY="800" index="0"/>
+			<Frame x="400" y="400" scaleX="1024" scaleY="512" alpha="0.5" index="1"/>
+			<Frame x="300" y="500" scaleX="512" scaleY="512" alpha="1.0" index="2"/>
+			<Frame x="300" y="100" scaleX="512" scaleY="256" alpha="0.6" index="3"/>
+			<Frame x="100" y="100" scaleX="1024" scaleY="128" index="4"/>
+		</Part>
+	</Animation>
+</Animations>

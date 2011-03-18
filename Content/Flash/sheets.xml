@@ -1,0 +1,10 @@
+<Textures>
+  <TextureSheet name="monoclelogo">
+    <Texture name="SmallText" width="172" height="38" path="monoclelogo/SmallText.png" registrationPointX="109.00" registrationPointY="12.00" />
+    <Texture name="MainText" width="506" height="76" path="monoclelogo/MainText.png" registrationPointX="253.00" registrationPointY="38.00" />
+    <Texture name="Monocle" width="98" height="98" path="monoclelogo/Monocle.png" registrationPointX="49.00" registrationPointY="49.00" />
+    <Texture name="RightStache" width="84" height="52" path="monoclelogo/RightStache.png" registrationPointX="42.00" registrationPointY="26.00" />
+    <Texture name="LeftStache" width="84" height="50" path="monoclelogo/LeftStache.png" registrationPointX="42.00" registrationPointY="25.00" />
+    <Texture name="Hat" width="176" height="104" path="monoclelogo/Hat.png" registrationPointX="88.00" registrationPointY="52.00" />
+  </TextureSheet>
+</Textures>
