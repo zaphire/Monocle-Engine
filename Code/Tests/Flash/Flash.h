@@ -62,11 +62,20 @@ namespace Flash
 		Animation(const std::string &name, int frameCount)
 			: name(name), frameCount(frameCount)
 		{}
+		int GetMaxFrames();
 		std::string name;
 		int frameCount;
 		std::vector<Part> parts;
+		
 	};
 
+	/*
+	class OnionSkinning
+	{
+	public:
+		OnionSkinning();
+	};
+	*/
 
 	class TestScene : public Scene
 	{
@@ -78,14 +87,28 @@ namespace Flash
 		void LoadAnimation(const std::string &filename);
 		void LoadTextureSheet(const std::string &filename);
 		void InitAnimation(Animation *animation, Entity *eParent);
-		void PlayAnimation(Animation *animation, float fps);
+		void Play(Animation *animation, float fps);
+		void Pause();
+		void Resume();
 		void UpdateAnimation(Animation *animation);
 		void OffsetFramesBy(const Vector2 &offset);
+		void GoPrevFrame(int num=1);
+		void GoNextFrame(int num=1);
+		void ApplyFrame();
+		void SelectPrevPart();
+		void SelectNextPart();
 
 		std::vector<Animation> animations;
 		TextureSheet textureSheet;
 		Animation *playingAnimation;
+		bool isPlaying;
+		bool isEditing;
+		bool isRecording;
+		int selectedPartIndex;
 		float animationFrame;
 		float fps;
+
+
+		
 	};
 }

@@ -39,7 +39,7 @@ namespace Monocle
 		static void Translate(float x, float y, float z);
 		static void Translate(Vector2 pos);
 		static void Scale(const Vector2 &pos);
-		static void Rotate(float ax, float ay, float az, float r);
+		static void Rotate(float r, float ax, float ay, float az);
 
 		static void RenderTriangle(float size);
 		//static void RenderQuad(float size);

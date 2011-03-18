@@ -41,6 +41,19 @@ namespace Flash
 		return NULL;
 	}
 
+	int Animation::GetMaxFrames()
+	{
+		int max = -1;
+		for (int i = 0; i < parts.size(); i++)
+		{
+			if (max == -1 || parts[i].frames.size() > max)
+			{
+				max = parts[i].frames.size();
+			}
+		}
+		return max;
+	}
+
 	Entity* Part::CreateEntity(TextureSheet &textureSheet)
 	{
 		Texture *texture = textureSheet.GetTextureByName(name);
@@ -220,7 +233,11 @@ namespace Flash
 
 		Graphics::SetBackgroundColor(Color::black);
 
+		selectedPartIndex = 0;
+		isRecording = false;
+		isPlaying = false;
 		playingAnimation = NULL;
+		isEditing = false;
 		
 #ifdef ANIM_MONOCLE_LOGO
 		LoadAnimation("../../Content/Flash/animations.xml");
@@ -233,13 +250,36 @@ namespace Flash
 		eAnimation->position = Vector2(400,300);
 		Add(eAnimation);
 
-		
 		InitAnimation(&animations[0], eAnimation);
-		PlayAnimation(&animations[0], 15.0f);
+		Play(&animations[0], 15.0f);
 
 		// fudging:
 		eAnimation->position.x += 40;
 		eAnimation->scale = Vector2(800.0f/640.0f, 600.0f/480.0f);
+
+		//editor
+		//Pause();
+		isEditing = true;
+		isRecording = true;
+		Sprite::showBounds = true;
+	}
+
+	void TestScene::SelectPrevPart()
+	{
+		selectedPartIndex --;
+		if (selectedPartIndex < 0)
+		{
+			selectedPartIndex = 0;
+		}
+	}
+
+	void TestScene::SelectNextPart()
+	{
+		selectedPartIndex ++;
+		if (selectedPartIndex > playingAnimation->parts.size()-1)
+		{
+			selectedPartIndex = playingAnimation->parts.size()-1;
+		}
 	}
 
 	void TestScene::Update()
@@ -248,7 +288,95 @@ namespace Flash
 
 		if (playingAnimation)
 		{
-			UpdateAnimation(playingAnimation);
+			if (isPlaying)
+			{
+				UpdateAnimation(playingAnimation);
+			}
+		}
+
+		if (true)
+		{
+			if (isPlaying)
+			{
+				if (Input::IsKeyPressed(KEY_SPACE))
+				{
+					Pause();
+				}
+			}
+			else if (!isPlaying)
+			{
+				if (Input::IsKeyPressed(KEY_LEFT))
+				{
+					GoPrevFrame();
+				}
+				if (Input::IsKeyPressed(KEY_RIGHT))
+				{
+					GoNextFrame();
+				}
+				if (Input::IsKeyPressed(KEY_Q))
+				{
+					SelectPrevPart();
+				}
+				if (Input::IsKeyPressed(KEY_E))
+				{
+					SelectNextPart();
+				}
+			
+				const float moveSpeed = 40.0f;
+				float moveAmount = moveSpeed * Monocle::deltaTime;
+				
+				const float rotateSpeed = 25.0f;
+				float rotateAmount = rotateSpeed * Monocle::deltaTime;
+
+				if (Input::IsKeyHeld(KEY_LSHIFT))
+				{
+					moveAmount *= 4.0f;
+					rotateAmount *= 5.0f;
+				}
+
+				Part *editPart = &playingAnimation->parts[selectedPartIndex];
+				Entity *editEntity = editPart->entity;
+				Sprite *editSprite = editPart->sprite;
+
+				Sprite::selectedSprite = editSprite;
+			
+				if (Input::IsKeyHeld(KEY_A))
+				{
+					editEntity->position.x -= moveAmount;
+				}
+				if (Input::IsKeyHeld(KEY_D))
+				{
+					editEntity->position.x += moveAmount;
+				}
+				if (Input::IsKeyHeld(KEY_W))
+				{
+					editEntity->position.y -= moveAmount;
+				}
+				if (Input::IsKeyHeld(KEY_S))
+				{
+					editEntity->position.y += moveAmount;
+				}
+
+				if (Input::IsKeyHeld(KEY_J))
+				{
+					editEntity->rotation -= rotateAmount;
+				}
+
+				if (Input::IsKeyHeld(KEY_L))
+				{
+					editEntity->rotation += rotateAmount;
+				}
+
+				if (isRecording)
+				{
+					editPart->frames[floor(animationFrame)].pos = editEntity->position;
+				}
+
+				if (Input::IsKeyPressed(KEY_SPACE))
+				{
+					Resume();
+				}
+			}
 		}
 	}
 
@@ -269,11 +397,43 @@ namespace Flash
 		}
 	}
 
-	void TestScene::PlayAnimation(Animation *animation, float fps)
+	void TestScene::Play(Animation *animation, float fps)
 	{
 		this->fps = fps;
 		playingAnimation = animation;
 		animationFrame = 0.0f;
+		isPlaying = true;
+		ApplyFrame();
+	}
+
+	void TestScene::Pause()
+	{
+		isPlaying = false;
+	}
+
+	void TestScene::Resume()
+	{
+		isPlaying = true;
+	}
+
+	void TestScene::GoNextFrame(int num)
+	{
+		animationFrame = floor(animationFrame) + num;
+		if (animationFrame > playingAnimation->GetMaxFrames()-1)
+		{
+			animationFrame = playingAnimation->GetMaxFrames()-1;
+		}
+		ApplyFrame();
+	}
+
+	void TestScene::GoPrevFrame(int num)
+	{
+		animationFrame = floor(animationFrame) - num;
+		if (animationFrame < 0)
+		{
+			animationFrame = 0;
+		}
+		ApplyFrame();
 	}
 
 	void TestScene::OffsetFramesBy(const Vector2 &offset)
@@ -292,11 +452,28 @@ namespace Flash
 
 	void TestScene::UpdateAnimation(Animation *animation)
 	{
-		animationFrame += Monocle::deltaTime * fps;
-
-		for (int i = 0; i < animation->parts.size(); i++)
+		if (isPlaying)
 		{
-			animation->parts[i].Update(animationFrame);
+			animationFrame += Monocle::deltaTime * fps;
+
+			if (animationFrame > animation->GetMaxFrames()-1)
+			{
+				animationFrame = animation->GetMaxFrames()-1;
+				Pause();
+			}
+
+			ApplyFrame();
+		}
+	}
+
+	void TestScene::ApplyFrame()
+	{
+		if (playingAnimation != NULL)
+		{
+			for (int i = 0; i < playingAnimation->parts.size(); i++)
+			{
+				playingAnimation->parts[i].Update(animationFrame);
+			}
 		}
 	}
 

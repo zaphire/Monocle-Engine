@@ -5,7 +5,7 @@
 namespace Monocle
 {
 	Entity::Entity()
-		: scene(NULL), collider(NULL), graphic(NULL), layer(0), depth(0.0f), scale(Vector2::one)
+		: scene(NULL), collider(NULL), graphic(NULL), layer(0), depth(0.0f), scale(Vector2::one), rotation(0.0f)
 	{
 	}
 
@@ -37,6 +37,7 @@ namespace Monocle
 		Graphics::PushMatrix();
 		Graphics::Translate(position.x, position.y, depth);
 		Graphics::Scale(scale);
+		Graphics::Rotate(rotation, 0, 0, 1);
 
 		for(std::vector<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
 		{

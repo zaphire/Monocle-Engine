@@ -22,7 +22,6 @@ namespace Marian
 			{
 				if (selectedSprite)
 				{
-					selectedSprite->isSelected = false;
 					selectedSprite = NULL;
 				}
 			}

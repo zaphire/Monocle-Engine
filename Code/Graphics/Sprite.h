@@ -16,11 +16,11 @@ namespace Monocle
 
 		TextureAsset *texture;
 		Color color;
-		float width, height, angle;
+		float width, height;//,angle;
 		Vector2 textureOffset;
 		Vector2 textureScale;
 
-		bool isSelected;
+		static Sprite *selectedSprite;
 
 		static bool showBounds;
 	};

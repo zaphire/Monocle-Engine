@@ -42,7 +42,7 @@ namespace Jumper
 		}
 
 		// lean
-		sprite->angle = velocity.x * leanAmount;
+		rotation += velocity.x * leanAmount;
 
 		// jump
 		if(Input::IsKeyMaskHeld("jump") && onGround)
@@ -54,7 +54,7 @@ namespace Jumper
 			// stretch a bit when jumping
 			sprite->width = 64 * 1.0f;
 			sprite->height = 64 * 1.1f;
-			sprite->angle = 0;
+			rotation = 0;
 		}
 
 		// friction
@@ -94,7 +94,7 @@ namespace Jumper
 			{
 				sprite->width = 64 * 1.1f;
 				sprite->height = 64 * 1.0f;
-				sprite->angle = 0;
+				rotation = 0;
 			}
 
 			isJumping = false;

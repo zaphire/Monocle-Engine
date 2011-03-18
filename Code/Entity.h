@@ -25,7 +25,9 @@ namespace Monocle
 
 		Vector2 position;
 		Vector2 scale;
+		float rotation;
 		float depth;
+		
 
 		//The scene that contains the entity
 		Scene* scene;

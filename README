@@ -1,1 +1,29 @@
-The Monocle Engine
+T H E  M O N O C L E  E N G I N E
+
+NOTE:
+To run on Windows, make sure working directory is set to:
+
+$(SolutionDir)..\..\..\Build\bin\
+
+Otherwise Monocle won't be able to find the content dir.
+
+
+Change the #defined TEST_* values in main.cpp to try out different demos.
+
+D E M O  C O N T R O L S
+
+TEST_JUMPER
+	Arrow Keys = Move, Jump
+	Space = Spawn New Player
+	
+TEST_FLASH
+	Space = toggle play/pause
+	Left/Right Arrow Keys = prev/next frame
+	Q/E = select prev/next part
+	ASDW = move part (hold shift to move faster)
+	JL = rotate part (hold shift to rotate faster)
+
+TEST_PONG
+	W/S = player 1
+	I/K = player 2
+	

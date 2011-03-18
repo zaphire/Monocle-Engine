@@ -5,14 +5,14 @@
 namespace Monocle
 {
 	bool Sprite::showBounds = false;
+	Sprite *Sprite::selectedSprite = NULL;
 
 	Sprite::Sprite(const std::string &filename, float width, float height)
 		: Graphic(),
 		texture(NULL),
-		isSelected(false),
 		width(width),
 		height(height),
-		angle(0.0f),
+		//angle(0.0f),
 		textureOffset(Vector2::zero),
 		textureScale(Vector2::one)
 	{
@@ -47,7 +47,7 @@ namespace Monocle
 	// or make materials system...
 	void Sprite::Render()
 	{
-		Graphics::Rotate(angle, 0, 0, 1);
+		//Graphics::Rotate(angle, 0, 0, 1);
 		Graphics::Translate(position.x, position.y, 0.0f);
 		Graphics::Blend();
 		Graphics::SetColor(color);
@@ -56,20 +56,20 @@ namespace Monocle
 			Graphics::RenderQuad(width, height, textureOffset, textureScale);
 		//Graphics::PopMatrix();
 
-		/*
+
 		// show bounds, for editor/selection purposes
-		if (showBounds || isSelected)
+		if (showBounds || selectedSprite == this)
 		{
 			if (texture != NULL)
 			{
-				if (isSelected)
+				if (selectedSprite == this)
 					Graphics::SetColor(Color::red);
 				else
-					Graphics::SetColor(Color(0.5f,0.5f,0.5f,0.25f));
+					Graphics::SetColor(Color(1.0f,1.0f,1.0f,0.5f));
+
 				Graphics::BindTexture(NULL);
-				Graphics::RenderLineRect(entity->position.x, entity->position.y, width * scale, height * scale);
+				Graphics::RenderLineRect(0, 0, width, height);
 			}
 		}
-		*/
 	}
 }
