@@ -2,8 +2,9 @@
 
 #include "LinuxPlatform.h"
 
-#include<X11/X.h>
-#include<X11/extensions/Xrandr.h>
+#include <X11/extensions/Xrandr.h>
+#include <X11/X.h>
+#include <X11/keysymdef.h>
 
 #include <sys/time.h>
 
@@ -15,67 +16,21 @@
 #include "../Core.h"
 #include "../Graphics.h"
 
-// opengl/windows init code baesd on http://nehe.gamedev.net
-// keyboard code based on SDL http://www.libsdl.org/
-
-#ifndef VK_0
-#define VK_0	'0'
-#define VK_1	'1'
-#define VK_2	'2'
-#define VK_3	'3'
-#define VK_4	'4'
-#define VK_5	'5'
-#define VK_6	'6'
-#define VK_7	'7'
-#define VK_8	'8'
-#define VK_9	'9'
-#define VK_A	'A'
-#define VK_B	'B'
-#define VK_C	'C'
-#define VK_D	'D'
-#define VK_E	'E'
-#define VK_F	'F'
-#define VK_G	'G'
-#define VK_H	'H'
-#define VK_I	'I'
-#define VK_J	'J'
-#define VK_K	'K'
-#define VK_L	'L'
-#define VK_M	'M'
-#define VK_N	'N'
-#define VK_O	'O'
-#define VK_P	'P'
-#define VK_Q	'Q'
-#define VK_R	'R'
-#define VK_S	'S'
-#define VK_T	'T'
-#define VK_U	'U'
-#define VK_V	'V'
-#define VK_W	'W'
-#define VK_X	'X'
-#define VK_Y	'Y'
-#define VK_Z	'Z'
-#endif /* VK_0 */
-
-#define VK_SEMICOLON		0xBA
-#define VK_EQUALS		0xBB
-#define VK_COMMA			0xBC
-#define VK_MINUS			0xBD
-#define VK_PERIOD		0xBE
-#define VK_SLASH		0xBF
-#define VK_GRAVE		0xC0
-#define VK_LBRACKET		0xDB
-#define VK_BACKSLASH	0xDC
-#define VK_RBRACKET		0xDD
-#define VK_APOSTROPHE	0xDE
-#define VK_BACKTICK		0xDF
-#define VK_OEM_102		0xE2
-
-#define REPEATED_KEYMASK	(1<<30)
-#define EXTENDED_KEYMASK	(1<<24)
-
 namespace Monocle
 {
+	struct KeySymParts {
+		union Data {
+			uint16_t bits;
+			struct { uint8_t low, high; };
+		};
+
+		static Data data;
+		
+		static Data & Get(KeySym ks)
+		{ data.bits = ks; return data; }
+	};
+	KeySymParts::Data KeySymParts::data;
+
 	LinuxPlatform *LinuxPlatform::instance = NULL;
 
 	//TODO: cleanup code, replace message boxes
@@ -108,7 +63,7 @@ namespace Monocle
 		cmap = XCreateColormap(hDisplay, hRootWindow, vi->visual, AllocNone);
 
 		swa.colormap = cmap;
-		swa.event_mask = ExposureMask | KeyPressMask;
+		swa.event_mask = ExposureMask | KeyPressMask | KeyReleaseMask;
 
 		hWindow = XCreateWindow(
 		    hDisplay,                 // display
@@ -175,6 +130,129 @@ namespace Monocle
 
 	void Platform::Init()
 	{
+		localKeymap[KeySymParts::Get(XK_Up).low] = KEY_UP;
+		localKeymap[KeySymParts::Get(XK_Down).low] = KEY_DOWN;
+		localKeymap[KeySymParts::Get(XK_Left).low] = KEY_LEFT;
+		localKeymap[KeySymParts::Get(XK_Right).low] = KEY_RIGHT;
+
+		localKeymap[KeySymParts::Get(XK_BackSpace).low] = KEY_BACKSPACE;
+		localKeymap[KeySymParts::Get(XK_Tab).low] = KEY_TAB;
+		localKeymap[KeySymParts::Get(XK_Clear).low] = KEY_CLEAR;
+		localKeymap[KeySymParts::Get(XK_Return).low] = KEY_RETURN;
+		localKeymap[KeySymParts::Get(XK_Pause).low] = KEY_PAUSE;
+		localKeymap[KeySymParts::Get(XK_Escape).low] = KEY_ESCAPE;
+
+		localKeymap[XK_space] = KEY_SPACE;
+		localKeymap[XK_quotedbl] = KEY_QUOTE;
+		localKeymap[XK_comma] = KEY_COMMA;
+		localKeymap[XK_minus] = KEY_MINUS;
+		localKeymap[XK_period] = KEY_PERIOD;
+		localKeymap[XK_slash] = KEY_SLASH;
+
+		localKeymap[XK_0] = KEY_0;
+		localKeymap[XK_1] = KEY_1;
+		localKeymap[XK_2] = KEY_2;
+		localKeymap[XK_3] = KEY_3;
+		localKeymap[XK_4] = KEY_4;
+		localKeymap[XK_5] = KEY_5;
+		localKeymap[XK_6] = KEY_6;
+		localKeymap[XK_7] = KEY_7;
+		localKeymap[XK_8] = KEY_8;
+		localKeymap[XK_9] = KEY_9;
+
+		localKeymap[XK_a] = KEY_A;
+		localKeymap[XK_b] = KEY_B;
+		localKeymap[XK_c] = KEY_C;
+		localKeymap[XK_d] = KEY_D;
+		localKeymap[XK_e] = KEY_E;
+		localKeymap[XK_f] = KEY_F;
+		localKeymap[XK_g] = KEY_G;
+		localKeymap[XK_h] = KEY_H;
+		localKeymap[XK_i] = KEY_I;
+		localKeymap[XK_j] = KEY_J;
+		localKeymap[XK_k] = KEY_K;
+		localKeymap[XK_l] = KEY_L;
+		localKeymap[XK_m] = KEY_M;
+		localKeymap[XK_n] = KEY_N;
+		localKeymap[XK_o] = KEY_O;
+		localKeymap[XK_p] = KEY_P;
+		localKeymap[XK_q] = KEY_Q;
+		localKeymap[XK_r] = KEY_R;
+		localKeymap[XK_s] = KEY_S;
+		localKeymap[XK_t] = KEY_T;
+		localKeymap[XK_u] = KEY_U;
+		localKeymap[XK_v] = KEY_V;
+		localKeymap[XK_w] = KEY_W;
+		localKeymap[XK_x] = KEY_X;
+		localKeymap[XK_y] = KEY_Y;
+		localKeymap[XK_z] = KEY_Z;
+
+		localKeymap[XK_semicolon] = KEY_SEMICOLON;
+		localKeymap[XK_equal] = KEY_EQUALS;
+		localKeymap[XK_bracketleft] = KEY_LEFTBRACKET;
+		localKeymap[XK_backslash] = KEY_BACKSLASH;
+		localKeymap[XK_less] = KEY_LESS;
+		localKeymap[XK_bracketright] = KEY_RIGHTBRACKET;
+		localKeymap[XK_grave] = KEY_BACKQUOTE;
+
+		localKeymap[KeySymParts::Get(XK_Delete).low] = KEY_DELETE;
+
+		localKeymap[KeySymParts::Get(XK_KP_0).low] = KEY_KP0;
+		localKeymap[KeySymParts::Get(XK_KP_1).low] = KEY_KP1;
+		localKeymap[KeySymParts::Get(XK_KP_2).low] = KEY_KP2;
+		localKeymap[KeySymParts::Get(XK_KP_3).low] = KEY_KP3;
+		localKeymap[KeySymParts::Get(XK_KP_4).low] = KEY_KP4;
+		localKeymap[KeySymParts::Get(XK_KP_5).low] = KEY_KP5;
+		localKeymap[KeySymParts::Get(XK_KP_6).low] = KEY_KP6;
+		localKeymap[KeySymParts::Get(XK_KP_7).low] = KEY_KP7;
+		localKeymap[KeySymParts::Get(XK_KP_8).low] = KEY_KP8;
+		localKeymap[KeySymParts::Get(XK_KP_9).low] = KEY_KP9;
+		localKeymap[KeySymParts::Get(XK_KP_Decimal).low] = KEY_KP_PERIOD;
+		localKeymap[KeySymParts::Get(XK_KP_Divide).low] = KEY_KP_DIVIDE;
+		localKeymap[KeySymParts::Get(XK_KP_Multiply).low] = KEY_KP_MULTIPLY;
+		localKeymap[XK_minus] = KEY_KP_MINUS;
+		localKeymap[XK_plus] = KEY_KP_PLUS;
+
+		localKeymap[KeySymParts::Get(XK_Insert).low] = KEY_INSERT;
+		localKeymap[KeySymParts::Get(XK_Home).low] = KEY_HOME;
+		localKeymap[KeySymParts::Get(XK_End).low] = KEY_END;
+		localKeymap[KeySymParts::Get(XK_Page_Up).low] = KEY_PAGEUP;
+		localKeymap[KeySymParts::Get(XK_Page_Down).low] = KEY_PAGEDOWN;
+
+		localKeymap[KeySymParts::Get(XK_Num_Lock).low] = KEY_NUMLOCK;
+		localKeymap[KeySymParts::Get(XK_Caps_Lock).low] = KEY_CAPSLOCK;
+		localKeymap[KeySymParts::Get(XK_Scroll_Lock).low] = KEY_SCROLLOCK;
+		localKeymap[KeySymParts::Get(XK_Shift_R).low] = KEY_RSHIFT;
+		localKeymap[KeySymParts::Get(XK_Shift_L).low] = KEY_LSHIFT;
+		localKeymap[KeySymParts::Get(XK_Control_R).low] = KEY_RCTRL;
+		localKeymap[KeySymParts::Get(XK_Control_L).low] = KEY_LCTRL;
+		localKeymap[KeySymParts::Get(XK_Alt_R).low] = KEY_RALT;
+		localKeymap[KeySymParts::Get(XK_Alt_L).low] = KEY_LALT;
+		localKeymap[KeySymParts::Get(XK_Meta_R).low] = KEY_RMETA;
+		localKeymap[KeySymParts::Get(XK_Meta_L).low] = KEY_LMETA;
+
+		localKeymap[KeySymParts::Get(XK_Help).low] = KEY_HELP;
+
+		localKeymap[KeySymParts::Get(XK_Print).low] = KEY_PRINT;
+		localKeymap[KeySymParts::Get(XK_Break).low] = KEY_BREAK;
+		localKeymap[KeySymParts::Get(XK_Menu).low] = KEY_MENU;
+
+		localKeymap[KeySymParts::Get(XK_F1).low] = KEY_F1;
+		localKeymap[KeySymParts::Get(XK_F2).low] = KEY_F2;
+		localKeymap[KeySymParts::Get(XK_F3).low] = KEY_F3;
+		localKeymap[KeySymParts::Get(XK_F4).low] = KEY_F4;
+		localKeymap[KeySymParts::Get(XK_F5).low] = KEY_F5;
+		localKeymap[KeySymParts::Get(XK_F6).low] = KEY_F6;
+		localKeymap[KeySymParts::Get(XK_F7).low] = KEY_F7;
+		localKeymap[KeySymParts::Get(XK_F8).low] = KEY_F8;
+		localKeymap[KeySymParts::Get(XK_F9).low] = KEY_F9;
+		localKeymap[KeySymParts::Get(XK_F10).low] = KEY_F10;
+		localKeymap[KeySymParts::Get(XK_F11).low] = KEY_F11;
+		localKeymap[KeySymParts::Get(XK_F12).low] = KEY_F12;
+		localKeymap[KeySymParts::Get(XK_F13).low] = KEY_F13;
+		localKeymap[KeySymParts::Get(XK_F14).low] = KEY_F14;
+		localKeymap[KeySymParts::Get(XK_F15).low] = KEY_F15;
+
 		Init(800, 600, 24, false);
 	}
 
@@ -192,12 +270,17 @@ namespace Monocle
 		while (XPending(LinuxPlatform::instance->hDisplay)) {
 			XNextEvent(LinuxPlatform::instance->hDisplay, &event);
 			switch(event.type) {
-			case Expose:
-				glViewport(0, 0, width, height);
+			case Expose: {
+				XExposeEvent &expose = event.xexpose;
+				glViewport(0, 0, expose.width, expose.height);
 				ShowBuffer();
-				break;
+				} break;
 			case KeyPress:
-				break;
+			case KeyRelease: {
+				KeySym keysym = XLookupKeysym(&event.xkey, 0);
+				Platform::SetLocalKey(KeySymParts::Get(keysym).low,
+				    event.type == KeyPress ? true : false);
+				} break;
 			}
 		}
 	}
@@ -243,6 +326,16 @@ namespace Monocle
 
 	void Platform::SetLocalKey(int key, bool on)
 	{
+		KeyCode keyCode = (KeyCode)instance->localKeymap[key];
+		if (keyCode == KEY_UNDEFINED)
+		{
+			Debug::Log("Received undefined KeyCode");
+			Debug::Log(key);
+		}
+		else
+		{
+			instance->keys[instance->localKeymap[key]] = on;
+		}
 	}
 }
 
