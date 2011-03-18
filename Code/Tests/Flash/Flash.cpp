@@ -1,5 +1,6 @@
 #include "Flash.h"
 #include "../../TinyXML/tinyxml.h"
+#include <math.h>
 
 namespace Flash
 {
