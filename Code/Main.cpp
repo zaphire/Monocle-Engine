@@ -5,11 +5,16 @@
 #include "Math.h"
 
 
-//#define TEST_CORE
-//#define TEST_PONG
-//#define TEST_MARIAN
-//#define TEST_JUMPER
-#define TEST_FLASH
+#if defined(MONOCLE_LINUX)
+	// cmake for other tests isn't working yet
+	#define TEST_JUMPER
+#else
+	//#define TEST_CORE
+	//#define TEST_PONG
+	//#define TEST_MARIAN
+	//#define TEST_JUMPER
+	#define TEST_FLASH
+#endif
 
 #ifdef TEST_PONG
 	#include "Tests/Pong/Pong.h"
