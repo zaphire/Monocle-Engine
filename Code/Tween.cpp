@@ -1,7 +1,6 @@
 #include "Tween.h"
 #include "Monocle.h"
 #include <math.h>
-#include "Math.h"
 
 namespace Monocle
 {
