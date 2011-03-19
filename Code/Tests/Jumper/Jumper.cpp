@@ -143,12 +143,12 @@ namespace Jumper
 		Add(new Wall(Vector2(600.0f, 400.0), 100.0f, 10.0f));
 		Add(new Wall(Vector2(200.0f, 400.0), 20.0f, 150.0f));
 
-		SpawnPlayer();
+		SpawnPlayer(Vector2(400.0f, 300.0f));
 	}
 
-	void GameScene::SpawnPlayer()
+	void GameScene::SpawnPlayer(Vector2 pos)
 	{
-		player = new Player(Vector2(400.0f, 300.0f));
+		player = new Player(pos);
 		player->keyUp = KEY_UP;
 		player->keyLeft = KEY_LEFT;
 		player->keyRight = KEY_RIGHT;
@@ -161,8 +161,12 @@ namespace Jumper
 
 		if (Input::IsKeyPressed(KEY_SPACE))
 		{
-			SpawnPlayer();
+			SpawnPlayer(Vector2(400.0f, 300.0f));
 		}
+        if(Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+        {
+            SpawnPlayer(Platform::mousePosition);
+        }
 	}
 
 	void GameScene::End()

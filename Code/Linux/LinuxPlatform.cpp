@@ -63,7 +63,8 @@ namespace Monocle
 		cmap = XCreateColormap(hDisplay, hRootWindow, vi->visual, AllocNone);
 
 		swa.colormap = cmap;
-		swa.event_mask = ExposureMask | KeyPressMask | KeyReleaseMask;
+		swa.event_mask = ExposureMask | KeyPressMask | KeyReleaseMask |
+            ButtonPressMask | ButtonReleaseMask | PointerMotionMask;
 
 		hWindow = XCreateWindow(
 		    hDisplay,                 // display
@@ -281,13 +282,41 @@ namespace Monocle
 				Platform::SetLocalKey(KeySymParts::Get(keysym).low,
 				    event.type == KeyPress ? true : false);
 				} break;
+            case ButtonPress:
+            case ButtonRelease: {
+                int button = MOUSE_BUTTON_UNDEFINED;
+
+                switch(event.xbutton.button) {
+                case Button1: // left click
+                    button = MOUSE_BUTTON_LEFT; break;
+                case Button2: // middle click
+                    button = MOUSE_BUTTON_MIDDLE; break;
+                case Button3: // right click
+                    button = MOUSE_BUTTON_RIGHT; break;
+                }
+
+                Platform::SetMouseButton(button,
+                    event.type == ButtonPress);
+                Platform::mousePosition = Vector2(event.xbutton.x,
+                    event.xbutton.y);
+                } break;
+            case MotionNotify: {
+                Platform::mousePosition = Vector2(event.xmotion.x,
+                    event.xmotion.y);
+                } break;
 			}
 		}
 	}
 
 	void Platform::SetMouseButton(int button, bool on)
 	{
-		mouseButtons[button] = on;
+        if(button == MOUSE_BUTTON_UNDEFINED)
+        {
+            Debug::Log("Received unknown button");
+            Debug::Log(button);
+        } else {
+            mouseButtons[button] = on;
+        }
 	}
 
 	long Platform::GetMilliseconds()

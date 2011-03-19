@@ -63,6 +63,6 @@ namespace Jumper
 		void End();
 		void Update();
 
-		void SpawnPlayer();
+		void SpawnPlayer(Vector2 pos);
 	};
 }
