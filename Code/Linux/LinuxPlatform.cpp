@@ -92,14 +92,31 @@ namespace Monocle
 	
 	void LinuxPlatform::GetDesktopSize(int *width, int *height)
 	{
-		*width = 800;
-		*height = 600;
-		// TODO: IMPLEMENT
+		Window hRootWindow = DefaultRootWindow(LinuxPlatform::instance->hDisplay);
+        XWindowAttributes attrs;
+        XGetWindowAttributes(LinuxPlatform::instance->hDisplay, hRootWindow, &attrs);
+
+		*width = attrs.width;
+		*height = attrs.height;
 	}
 
 	void LinuxPlatform::CenterWindow()
 	{
-		// TODO: IMPLEMENT
+        int desktop_width;
+        int desktop_height;
+        LinuxPlatform::GetDesktopSize(&desktop_width, &desktop_height);
+
+        XWindowAttributes attrs;
+        XGetWindowAttributes(LinuxPlatform::instance->hDisplay, hWindow, &attrs);
+        int window_width = attrs.width;
+        int window_height = attrs.height;
+
+        XWindowChanges changes;
+        changes.x = (desktop_width-window_width)/2;
+        changes.y = (desktop_height-window_height)/2;
+
+        XConfigureWindow(LinuxPlatform::instance->hDisplay, hWindow,
+                CWX | CWY, &changes);
 	}
 
 	void LinuxPlatform::KillPlatformWindow()
