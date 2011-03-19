@@ -186,6 +186,9 @@
     <ClInclude Include="..\..\..\..\Code\XML\tinyxml.h">
       <Filter>Monocle\XML</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\GUI.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp">
@@ -352,6 +355,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\XML\tinyxmlparser.cpp">
       <Filter>Monocle\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\GUI.cpp">
+      <Filter>Monocle</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

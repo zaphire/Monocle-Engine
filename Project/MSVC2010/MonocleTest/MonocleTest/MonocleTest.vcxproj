@@ -83,6 +83,7 @@
     <ClInclude Include="..\..\..\..\Code\Graphics.h" />
     <ClInclude Include="..\..\..\..\Code\Graphics\Sprite.h" />
     <ClInclude Include="..\..\..\..\Code\Graphics\SpriteAnimation.h" />
+    <ClInclude Include="..\..\..\..\Code\GUI.h" />
     <ClInclude Include="..\..\..\..\Code\Input.h" />
     <ClInclude Include="..\..\..\..\Code\Monocle.h" />
     <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\glpng.h" />
@@ -125,6 +126,7 @@
     <ClCompile Include="..\..\..\..\Code\Entity.cpp" />
     <ClCompile Include="..\..\..\..\Code\Graphics\Sprite.cpp" />
     <ClCompile Include="..\..\..\..\Code\Graphics\SpriteAnimation.cpp" />
+    <ClCompile Include="..\..\..\..\Code\GUI.cpp" />
     <ClCompile Include="..\..\..\..\Code\Input.cpp" />
     <ClCompile Include="..\..\..\..\Code\Main.cpp" />
     <ClCompile Include="..\..\..\..\Code\Monocle.cpp" />
