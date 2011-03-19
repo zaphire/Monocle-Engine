@@ -122,6 +122,7 @@ namespace Monocle
 
 	enum MouseButton
 	{
+        MOUSE_BUTTON_UNDEFINED=-1,
 		MOUSE_BUTTON_LEFT=0,
 		MOUSE_BUTTON_RIGHT,
 		MOUSE_BUTTON_MIDDLE,
