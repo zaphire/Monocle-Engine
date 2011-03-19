@@ -63,7 +63,8 @@ namespace Monocle
 		cmap = XCreateColormap(hDisplay, hRootWindow, vi->visual, AllocNone);
 
 		swa.colormap = cmap;
-		swa.event_mask = ExposureMask | KeyPressMask | KeyReleaseMask | ButtonPressMask | ButtonReleaseMask;
+		swa.event_mask = ExposureMask | KeyPressMask | KeyReleaseMask |
+            ButtonPressMask | ButtonReleaseMask | PointerMotionMask;
 
 		hWindow = XCreateWindow(
 		    hDisplay,                 // display
@@ -298,6 +299,10 @@ namespace Monocle
                     event.type == ButtonPress);
                 Platform::mousePosition = Vector2(event.xbutton.x,
                     event.xbutton.y);
+                } break;
+            case MotionNotify: {
+                Platform::mousePosition = Vector2(event.xmotion.x,
+                    event.xmotion.y);
                 } break;
 			}
 		}
