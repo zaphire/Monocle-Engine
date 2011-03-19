@@ -50,7 +50,7 @@ namespace Monocle
 		//Graphics::Rotate(angle, 0, 0, 1);
 		Graphics::Translate(position.x, position.y, 0.0f);
 		Graphics::Blend();
-		Graphics::SetColor(color);
+		//Graphics::SetColor(color);
 		Graphics::BindTexture(texture);
 		if (texture != NULL)
 			Graphics::RenderQuad(width, height, textureOffset, textureScale);

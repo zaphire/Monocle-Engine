@@ -21,7 +21,7 @@ namespace Monocle
 		TextureAsset *asset = NULL;
 		std::string fullFilename = instance->contentPath + filename;
 
-		Debug::Log("instance->contentPath + filename: " + fullFilename);
+		//Debug::Log("instance->contentPath + filename: " + fullFilename);
 
 		// check to see if we have one stored already
 		asset = (TextureAsset*)instance->GetAssetByFilename(fullFilename);

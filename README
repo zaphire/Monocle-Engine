@@ -17,11 +17,16 @@ TEST_JUMPER
 	Space = Spawn New Player
 	
 TEST_FLASH
-	Space = toggle play/pause
-	Left/Right Arrow Keys = prev/next frame
-	Q/E = select prev/next part
-	ASDW = move part (hold shift to move faster)
-	JL = rotate part (hold shift to rotate faster)
+	space - toggle play/pause
+	left/right arrow - prev/next frame
+	up arrow - clone a new end frame and jump to it
+	ASDW - move
+	Q,E - rotate
+	[,] - select part
+	JKLI - scale
+	minus - copy the part frame data from the previous frame to the current frame
+	equals - copy the part frame data from the next frame to the current frame
+	backspace - undo changes up to when part/frame was entered
 
 TEST_PONG
 	W/S = player 1

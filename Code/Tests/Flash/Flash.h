@@ -32,12 +32,12 @@ namespace Flash
 	{
 	public:
 		Frame()
-			: pos(pos), scale(scale), alpha(1.0f), hasScaleData(false)
+			: pos(Vector2::zero), scale(Vector2::one), alpha(1.0f), rotation(0.0f)
 		{}
 		Vector2 pos;
 		Vector2 scale;
+		float rotation;
 		float alpha;
-		bool hasScaleData;
 	};
 
 	class Part
@@ -46,11 +46,14 @@ namespace Flash
 		Part(const std::string &name)
 			: name(name), entity(NULL), sprite(NULL)
 		{}
-		std::string name;
-		std::vector<Frame> frames;
 
 		Entity *CreateEntity(TextureSheet &textureSheet);
 		void Update(float frame);
+		void ApplyFrameToEntity(int frame, Entity *entity=NULL);
+		void CloneNewEndFrame();
+
+		std::string name;
+		std::vector<Frame> frames;
 
 		Entity *entity;
 		Sprite *sprite;
@@ -69,14 +72,19 @@ namespace Flash
 		
 	};
 
-	/*
 	class OnionSkinning
 	{
 	public:
 		OnionSkinning();
-	};
-	*/
 
+		void Make(Scene* scene);
+		void CleanUp();
+
+		std::vector<Entity*> entities;
+	};
+
+	// will eventually be split off into separate animation + animationEditor objects
+	// temporary home here for testing/building
 	class TestScene : public Scene
 	{
 	public:
@@ -97,10 +105,22 @@ namespace Flash
 		void ApplyFrame();
 		void SelectPrevPart();
 		void SelectNextPart();
+		void CreateOnionSkins();
+		void DeleteOnionSkins();
+		int SafeFrameRange(int frame);
+		void ApplyPrevPartFrame();
+		void ApplyNextPartFrame();
+		void RevertToBackupPartFrame();
+		void StoreBackupPartFrame();
+		void CloneNewEndFrame();
+		void UpdateFrameNumberDisplay();
 
+		std::vector<Entity*> onionSkins;
 		std::vector<Animation> animations;
+		Frame backupPartFrame;
 		TextureSheet textureSheet;
-		Animation *playingAnimation;
+		Animation *currentAnimation;
+		Entity *eAnimation;
 		bool isPlaying;
 		bool isEditing;
 		bool isRecording;
@@ -108,7 +128,5 @@ namespace Flash
 		float animationFrame;
 		float fps;
 
-
-		
 	};
 }

@@ -15,7 +15,6 @@ namespace Monocle
 		void Render();
 
 		TextureAsset *texture;
-		Color color;
 		float width, height;//,angle;
 		Vector2 textureOffset;
 		Vector2 textureScale;

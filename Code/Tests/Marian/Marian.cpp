@@ -45,7 +45,7 @@ namespace Marian
 		Entity *bg = AddSpriteEntity(Vector2(400, 300), 20, "Graphics/ReverieSky.png", 1024, 512, 1.25f);
 		Entity *title = AddSpriteEntity(Vector2(400, 300), -20, "Graphics/Title.png", 512, 512, 1.5f, &sprite);
 
-		Tween::FromTo(&sprite->color.a, 0.0f, 1.0f, 8.0f, EASE_OUTSIN);
+		Tween::FromTo(&title->color.a, 0.0f, 1.0f, 8.0f, EASE_OUTSIN);
 		Tween::FromTo(&title->position, Vector2(400, 1024), Vector2(400, 300), 4.0f, EASE_OUTSIN);
 	}
 

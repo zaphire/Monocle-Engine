@@ -15,8 +15,8 @@ namespace Monocle
 	{
 		referenceCount++;
 
-		Debug::Log("referenceCount increased for: " + filename);
-		Debug::Log(referenceCount);
+		//Debug::Log("referenceCount increased for: " + filename);
+		//Debug::Log(referenceCount);
 	}
 
 	void Asset::RemoveReference()

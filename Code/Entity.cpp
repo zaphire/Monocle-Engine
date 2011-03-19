@@ -5,7 +5,7 @@
 namespace Monocle
 {
 	Entity::Entity()
-		: scene(NULL), collider(NULL), graphic(NULL), layer(0), depth(0.0f), scale(Vector2::one), rotation(0.0f)
+		: scene(NULL), collider(NULL), graphic(NULL), layer(0), depth(0.0f), scale(Vector2::one), rotation(0.0f), color(Color::white)
 	{
 	}
 
@@ -26,7 +26,7 @@ namespace Monocle
 
 	void Entity::Update()
 	{
-		for(std::vector<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
+		for(std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
 		{
 			(*i)->Update();
 		}
@@ -36,16 +36,17 @@ namespace Monocle
 	{
 		Graphics::PushMatrix();
 		Graphics::Translate(position.x, position.y, depth);
-		Graphics::Scale(scale);
 		Graphics::Rotate(rotation, 0, 0, 1);
+		Graphics::Scale(scale);
 
-		for(std::vector<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
+		for(std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
 		{
 			(*i)->Render();
 		}
 
 		if (graphic != NULL)
 		{
+			Graphics::SetColor(color);
 			graphic->Render();
 		}
 
@@ -126,10 +127,17 @@ namespace Monocle
 		return this->layer == layer;
 	}
 
+	///TODO: enqueue for safety
 	// add an entity as a child
 	void Entity::Add(Entity *entity)
 	{
 		children.push_back(entity);
+	}
+
+	///TODO: enqueue for safety
+	void Entity::Remove(Entity *entity)
+	{
+		children.remove(entity);
 	}
 
 	void Entity::SetCollider(Collider *collider)

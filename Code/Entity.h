@@ -2,6 +2,7 @@
 
 #include "Vector2.h"
 #include "Scene.h"
+#include "Color.h"
 
 #include <string>
 #include <vector>
@@ -27,6 +28,8 @@ namespace Monocle
 		Vector2 scale;
 		float rotation;
 		float depth;
+
+		Color color; // <- may move this later (material system?)
 		
 
 		//The scene that contains the entity
@@ -67,6 +70,7 @@ namespace Monocle
 		void SetGraphic(Graphic *graphic);
 
 		void Add(Entity *entity);
+		void Remove(Entity *entity);
 
 	private:
 		// only for use by Collision class
@@ -83,7 +87,7 @@ namespace Monocle
 		// only for use by scene
 		//friend class Scene;
 		
-		std::vector<Entity*> children;
+		std::list<Entity*> children;
 		
 		std::vector<std::string> tags;
 		int layer;
