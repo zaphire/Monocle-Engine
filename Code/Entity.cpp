@@ -1,3 +1,4 @@
+#include <cstdio>
 #include "Entity.h"
 #include "Collision.h"
 #include "Graphics.h"
