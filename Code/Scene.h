@@ -65,8 +65,6 @@ namespace Monocle
 		virtual void ReceiveNote(const std::string &note, Entity *fromEntity);
 
 	private:
-
-		friend class Entity;
 		void RelayNoteTo(const std::string &tag, const std::string &note, Entity *fromEntity);
 
 	private:
