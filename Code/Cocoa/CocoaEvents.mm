@@ -1,5 +1,6 @@
 #include "CocoaEvents.h"
 #include "CocoaPlatform.h"
+#include "CocoaWindowListener.h"
 
 #if !defined(UsrActivity) && defined(__LP64__) && !defined(__POWER__)
 /*
@@ -26,7 +27,12 @@ using Monocle::CocoaPlatform;
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
 	// SDL_SendQuit();
-	return NSTerminateCancel;
+    WindowData* data = CocoaPlatform::instance->windowData;
+    if (data->created) {
+        Cocoa_DestroyWindow(data);
+    }
+	// return NSTerminateCancel;
+    return NSTerminateNow;
 }
 @end
 
@@ -147,16 +153,7 @@ Cocoa_PumpEvents()
 {
 	NSAutoreleasePool *pool;
 
-	/* Update activity every 30 seconds to prevent screensaver */
-	//	if (_this->suspend_screensaver) {
-	//		Monocle_VideoData *data = (Monocle_VideoData *)_this->driverData;
-	//		long now = Monocle::Platform::GetMilliseconds();
-	//		if (!data->screensaver_activity ||
-	//				(int)(now-data->screensaver_activity) >= 30000) {
-	//			UpdateSystemActivity(UsrActivity);
-	//			data->screensaver_activity = now;
-	//		}
-	//	}
+	/* TODO Update activity every 30 seconds to prevent screensaver */
 
 	pool = [[NSAutoreleasePool alloc] init];
 	for ( ; ; ) {
@@ -166,33 +163,17 @@ Cocoa_PumpEvents()
 		}
 
 		switch ([event type]) {
-			case NSLeftMouseDown:
-			case NSOtherMouseDown:
-			case NSRightMouseDown:
-			case NSLeftMouseUp:
-			case NSOtherMouseUp:
-			case NSRightMouseUp:
-			case NSLeftMouseDragged:
-			case NSRightMouseDragged:
-			case NSOtherMouseDragged: /* usually middle mouse dragged */
-			case NSMouseMoved:
-			case NSScrollWheel:
-				// XXX handle mouse event
-				// Cocoa_HandleMouseEvent(_this, event);
-				/* Pass through to NSApp to make sure everything stays in sync */
-				[NSApp sendEvent:event];
-				break;
 			case NSKeyDown:
 			case NSKeyUp:
 			case NSFlagsChanged:
 				// XXX handle key event
-				// Cocoa_HandleKeyEvent(_this, event);
 				[NSApp sendEvent:event];
-				/* Fall through to pass event to NSApp; er, nevermind... */
-
-				/* Add to support system-wide keyboard shortcuts like CMD+Space */
-				if (([event modifierFlags] & NSCommandKeyMask) || [event type] == NSFlagsChanged)
-					[NSApp sendEvent: event];
+                
+//				/* Fall through to pass event to NSApp; er, nevermind... */
+//
+//				/* Add to support system-wide keyboard shortcuts like CMD+Space */
+//				if (([event modifierFlags] & NSCommandKeyMask) || [event type] == NSFlagsChanged)
+//					[NSApp sendEvent: event];
 				break;
 			default:
 				[NSApp sendEvent:event];

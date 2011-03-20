@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Platform.h"
+#include "CocoaWindowListener.h"
 
 #include <sys/time.h>
 
@@ -10,6 +11,7 @@ namespace Monocle
 	{
 	public:
 		static CocoaPlatform* instance;
+		static Platform* platform;
 
 		CocoaPlatform();
 		~CocoaPlatform();
@@ -17,6 +19,7 @@ namespace Monocle
 		bool Init(int w, int h, int bits, bool fullscreen);
 
 		NSWindow* window;
+        WindowData* windowData;
 	};
 }
 

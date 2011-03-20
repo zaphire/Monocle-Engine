@@ -1,14 +1,43 @@
 #include "CocoaPlatform.h"
 #include "../Graphics.h"
-#include "Debug.h"
+#include "../Debug.h"
 
 #include "CocoaEvents.h"
 #include "CocoaOpenGL.h"
-//#include "CocoaWindow.h"
 
 #include <time.h> // nanosleep
 
-static struct timeval startTime;
+using Monocle::Debug;
+
+@interface MonocleWindow : NSWindow
+/* These are needed for borderless/fullscreen windows */
+- (BOOL)canBecomeKeyWindow;
+- (BOOL)canBecomeMainWindow;
+@end
+
+@implementation MonocleWindow
+- (BOOL)canBecomeKeyWindow
+{
+    return YES;
+}
+
+- (BOOL)canBecomeMainWindow
+{
+    return YES;
+}
+@end
+
+@interface MonocleView : NSView
+/* The default implementation doesn't pass rightMouseDown to responder chain */
+- (void)rightMouseDown:(NSEvent *)theEvent;
+@end
+
+@implementation MonocleView
+- (void)rightMouseDown:(NSEvent *)theEvent
+{
+    [[self nextResponder] rightMouseDown:theEvent];
+}
+@end
 
 static NSWindow* CreateWindowCocoa(int w, int h)
 {
@@ -27,8 +56,14 @@ static NSWindow* CreateWindowCocoa(int w, int h)
 
 	style = (NSTitledWindowMask|NSClosableWindowMask|NSMiniaturizableWindowMask);
 
-	nswindow = [[NSWindow alloc] initWithContentRect:rect styleMask:style backing:NSBackingStoreBuffered defer:FALSE];
+	//  Create window
+	nswindow = [[MonocleWindow alloc] initWithContentRect:rect styleMask:style backing:NSBackingStoreBuffered defer:FALSE];
 	[nswindow makeKeyAndOrderFront:nil];
+
+	//  Set content view
+	NSView *contentView = [[MonocleView alloc] initWithFrame:rect];
+	[nswindow setContentView: contentView];
+	[contentView release];
 
 	[pool release];
 
@@ -44,9 +79,31 @@ static void DestroyWindowCocoa(void *window)
     [pool release];
 }
 
+static WindowData* AttachWindowListener(NSWindow* window)
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+	WindowData* data = (WindowData*) calloc(1, sizeof(WindowData));
+	if (!data) {
+		Debug::Log("Error allocating window data");
+		return false;
+	}
+    data->created = true;
+	data->nswindow = window;
+	data->listener = [[CocoaWindowListener alloc] init];
+	[data->listener listen:data];
+
+	[pool release];
+    
+    return data;
+}
+
 namespace Monocle
 {	
+    static struct timeval startTime;
+    
 	CocoaPlatform* CocoaPlatform::instance;
+	Platform*	   CocoaPlatform::platform;
     
 	CocoaPlatform::CocoaPlatform()
 	{
@@ -67,6 +124,8 @@ namespace Monocle
 			return false;
 		}
 
+		windowData = AttachWindowListener(window);
+
 		//  Set swap interval sync to vblank
 		Cocoa_GL_SetSwapInterval(1);
 
@@ -84,6 +143,7 @@ namespace Monocle
 	Platform::Platform()
 	{
 		CocoaPlatform::instance = new CocoaPlatform();
+		CocoaPlatform::platform = this;
 		instance = this;
 	}
 
@@ -97,9 +157,10 @@ namespace Monocle
 		if (!CocoaPlatform::instance->Init(w, h, bits, fullscreen))
 			Debug::Log("Error initializing Monocle window/context");
 
-		// XXX temporary hack
-		instance->width  = w;
-		instance->height = h;
+		WindowData* data = CocoaPlatform::instance->windowData;
+		NSRect rect = [data->nswindow contentRectForFrameRect:[data->nswindow frame]];
+		instance->width  = (int)rect.size.width;
+		instance->height = (int)rect.size.height;
 	}
 
 	void Platform::Update()

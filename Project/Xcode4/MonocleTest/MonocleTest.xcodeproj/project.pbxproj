@@ -16,6 +16,7 @@
 		37B1929F13359C9D00D2D264 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37B1929C13359C9D00D2D264 /* tinyxmlparser.cpp */; };
 		37B192B41335A9C200D2D264 /* CocoaOpenGL.mm in Sources */ = {isa = PBXBuildFile; fileRef = 37B192B31335A9C200D2D264 /* CocoaOpenGL.mm */; };
 		37B192B71335B0E800D2D264 /* CocoaEvents.mm in Sources */ = {isa = PBXBuildFile; fileRef = 37B192B61335B0E800D2D264 /* CocoaEvents.mm */; };
+		37B192C013361FDA00D2D264 /* CocoaWindowListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 37B192BF13361FDA00D2D264 /* CocoaWindowListener.mm */; };
 		37CAD629133259DD009BC5F3 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37CAD627133259DD009BC5F3 /* Sprite.cpp */; };
 		37EA249B132F986900D216B0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EA249A132F986900D216B0 /* Cocoa.framework */; };
 		37EA24A5132F986900D216B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37EA24A3132F986900D216B0 /* InfoPlist.strings */; };
@@ -84,6 +85,8 @@
 		37B192B31335A9C200D2D264 /* CocoaOpenGL.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CocoaOpenGL.mm; path = ../../../Code/Cocoa/CocoaOpenGL.mm; sourceTree = "<group>"; };
 		37B192B51335B0E800D2D264 /* CocoaEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CocoaEvents.h; path = ../../../Code/Cocoa/CocoaEvents.h; sourceTree = "<group>"; };
 		37B192B61335B0E800D2D264 /* CocoaEvents.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CocoaEvents.mm; path = ../../../Code/Cocoa/CocoaEvents.mm; sourceTree = "<group>"; };
+		37B192BE13361FD900D2D264 /* CocoaWindowListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CocoaWindowListener.h; path = ../../../Code/Cocoa/CocoaWindowListener.h; sourceTree = "<group>"; };
+		37B192BF13361FDA00D2D264 /* CocoaWindowListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CocoaWindowListener.mm; path = ../../../Code/Cocoa/CocoaWindowListener.mm; sourceTree = "<group>"; };
 		37CAD627133259DD009BC5F3 /* Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Sprite.cpp; path = ../../../Code/Graphics/Sprite.cpp; sourceTree = "<group>"; };
 		37CAD628133259DD009BC5F3 /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sprite.h; path = ../../../Code/Graphics/Sprite.h; sourceTree = "<group>"; };
 		37EA2496132F986900D216B0 /* MonocleTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonocleTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -223,6 +226,8 @@
 				37B192B31335A9C200D2D264 /* CocoaOpenGL.mm */,
 				37B192911335995600D2D264 /* CocoaPlatform.h */,
 				37B192921335995600D2D264 /* CocoaPlatform.mm */,
+				37B192BE13361FD900D2D264 /* CocoaWindowListener.h */,
+				37B192BF13361FDA00D2D264 /* CocoaWindowListener.mm */,
 			);
 			name = Cocoa;
 			sourceTree = "<group>";
@@ -303,8 +308,8 @@
 				37FB696F13317693008963C1 /* Tests */,
 				37B1929813359C9D00D2D264 /* XML */,
 				37FB691413317693008963C1 /* Asset.cpp */,
-				37AABF3413333E29004E2D56 /* Assets.cpp */,
 				37FB691513317693008963C1 /* Asset.h */,
+				37AABF3413333E29004E2D56 /* Assets.cpp */,
 				37AABF3513333E29004E2D56 /* Assets.h */,
 				37FB691813317693008963C1 /* Audio.h */,
 				37FB692013317693008963C1 /* Collision.cpp */,
@@ -590,6 +595,7 @@
 				37B1929F13359C9D00D2D264 /* tinyxmlparser.cpp in Sources */,
 				37B192B41335A9C200D2D264 /* CocoaOpenGL.mm in Sources */,
 				37B192B71335B0E800D2D264 /* CocoaEvents.mm in Sources */,
+				37B192C013361FDA00D2D264 /* CocoaWindowListener.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

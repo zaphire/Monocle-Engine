@@ -76,11 +76,11 @@ Cocoa_GL_MakeCurrent(NSWindow* window, NSOpenGLContext* context)
 
     pool = [[NSAutoreleasePool alloc] init];
 
-    if (context) {
+	if (context) {
 		[context setView:[window contentView]];
 		[context update];
-        [context makeCurrentContext];
-    } else {
+		[context makeCurrentContext];
+	} else {
         [NSOpenGLContext clearCurrentContext];
     }
 
