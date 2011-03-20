@@ -13,6 +13,7 @@ namespace Monocle
 		Sprite(const std::string &filename, float width=-1, float height=-1);
 		~Sprite();
 		void Render();
+		void GetWidthHeight(int *width, int *height);
 
 		TextureAsset *texture;
 		float width, height;//,angle;

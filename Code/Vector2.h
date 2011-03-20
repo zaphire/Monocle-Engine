@@ -58,6 +58,6 @@ namespace Monocle
 	Vector2 operator*(const Vector2& lhs, float rhs);		// right scalar multiplication
 	Vector2 operator/(const Vector2& lhs, float rhs);		// right scalar inverse multiplication
 	
-	float operator*(const Vector2& lhs, const Vector2& rhs);	// dot product
-	float operator^(const Vector2& lhs, const Vector2& rhs);	// cross product
+	Vector2 operator*(const Vector2& lhs, const Vector2& rhs);	// multiply components (scale)
+	//float operator^(const Vector2& lhs, const Vector2& rhs);	// cross product
 }

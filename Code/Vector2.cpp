@@ -171,13 +171,15 @@ namespace Monocle
 		return Vector2(lhs.x / rhs, lhs.y / rhs);
 	}
 	
-	float operator*(const Vector2& lhs, const Vector2& rhs)		// dot product
+	Vector2 operator*(const Vector2& lhs, const Vector2& rhs)		// multiply component (scale)
 	{
-		return lhs.x * rhs.x + lhs.y * rhs.y;
+		return Vector2(lhs.x * rhs.x, lhs.y * rhs.y);
 	}
 	
+	/*
 	float operator^(const Vector2& lhs, const Vector2& rhs)		// cross product
 	{
 		return lhs.x * rhs.y - lhs.y * rhs.x;
 	}
+	*/
 }

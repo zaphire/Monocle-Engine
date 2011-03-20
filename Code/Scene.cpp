@@ -247,4 +247,31 @@ namespace Monocle
 				(*i)->ReceiveNote(tag, note, fromEntity);
 		}
 	}
+
+	Entity* Scene::GetEntityAtPosition(const Vector2 &position, SearchType searchType)
+	{
+		if (searchType == SEARCH_TOP)
+		{
+			for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+			{
+				if ((*i)->IsPositionInGraphic(position))
+				{
+					return *i;
+				}
+			}
+		}
+		else if (searchType == SEARCH_RECURSIVE)
+		{
+			Debug::Log("recursive");
+			for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+			{
+				Entity *entity = (*i)->GetChildEntityAtPosition(position);
+				if (entity)
+				{
+					return entity;
+				}
+			}
+		}
+		return NULL;
+	}
 }

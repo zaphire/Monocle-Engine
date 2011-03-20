@@ -240,10 +240,15 @@ namespace Monocle
 	void Graphics::BeginFrame()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
+		SceneMatrix();
+	}
+
+	void Graphics::SceneMatrix()
+	{
 		glLoadIdentity();									// Reset The Current Modelview Matrix
 
-		glTranslatef(cameraPosition.x - screenCenter.x, cameraPosition.y - screenCenter.y, 0.0f);
-		glScalef(resolutionScale.x, resolutionScale.y, 0.0f);
+		glTranslatef(instance->cameraPosition.x - instance->screenCenter.x, instance->cameraPosition.y - instance->screenCenter.y, 0.0f);
+		glScalef(instance->resolutionScale.x, instance->resolutionScale.y, 0.0f);
 	}
 
 	void Graphics::EndFrame()
@@ -273,6 +278,16 @@ namespace Monocle
 				instance->lastBoundTextureID = 0;
 			}
 		}
+	}
+
+	Vector2 Graphics::GetMatrixPosition()
+	{
+		float m[16];
+		glGetFloatv(GL_MODELVIEW_MATRIX, m);
+		float x = m[12];
+		float y = m[13];
+		//float z = m[14];
+		return Vector2(x, y);
 	}
 }
 

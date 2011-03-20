@@ -72,4 +72,13 @@ namespace Monocle
 			}
 		}
 	}
+	
+	void Sprite::GetWidthHeight(int *width, int *height)
+	{
+		if (texture)
+		{
+			*width = texture->width;
+			*height = texture->height;
+		}
+	}
 }

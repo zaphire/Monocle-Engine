@@ -114,6 +114,7 @@ namespace Flash
 		void StoreBackupPartFrame();
 		void CloneNewEndFrame();
 		void UpdateFrameNumberDisplay();
+		Part *GetPartForEntity(Entity *entity);
 
 		std::vector<Entity*> onionSkins;
 		std::vector<Animation> animations;
@@ -128,5 +129,9 @@ namespace Flash
 		float animationFrame;
 		float fps;
 
+		Part *editPart;
+
+		std::string state;
+		Vector2 offset;
 	};
 }

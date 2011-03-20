@@ -69,7 +69,13 @@ namespace Monocle
 		// add or remove entities from list of children
 		void Add(Entity *entity);
 		void Remove(Entity *entity);
-		
+
+		// used by editors
+		bool IsPositionInGraphic(const Vector2 &position);
+		Entity* GetChildEntityAtPosition(const Vector2 &position);
+		Vector2 GetWorldPosition(const Vector2 &position);
+		Vector2 GetWorldScale(const Vector2 &scale);
+
 		// enqueue destruction of this entity
 		//void Die();
 
@@ -82,7 +88,7 @@ namespace Monocle
 		virtual void ReceiveNote(const std::string &tag, const std::string &note, Entity *fromEntity);
 
 	private:
-
+		Entity *parent;
 		// only for use by Collision class
 		friend class Collision;
 		Collider* GetCollider();

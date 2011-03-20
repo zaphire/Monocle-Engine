@@ -257,6 +257,7 @@ namespace Flash
 
 		Graphics::SetBackgroundColor(Color::black);
 
+		editPart = NULL;
 		selectedPartIndex = 0;
 		isRecording = false;
 		isPlaying = false;
@@ -304,6 +305,8 @@ namespace Flash
 			CreateOnionSkins();
 			StoreBackupPartFrame();
 		}
+
+		editPart = &currentAnimation->parts[selectedPartIndex];
 	}
 
 	void TestScene::SelectNextPart()
@@ -322,6 +325,8 @@ namespace Flash
 			CreateOnionSkins();
 			StoreBackupPartFrame();
 		}
+
+		editPart = &currentAnimation->parts[selectedPartIndex];
 	}
 
 	void TestScene::UpdateFrameNumberDisplay()
@@ -330,6 +335,21 @@ namespace Flash
 			printf("moved to frame: %d/%d\n", (int)floor(animationFrame), (int)currentAnimation->GetMaxFrames()-1);
 		else
 			printf("no animation\n");
+	}
+
+	Part *TestScene::GetPartForEntity(Entity *entity)
+	{
+		if (currentAnimation)
+		{
+			for (int i = 0; i < currentAnimation->parts.size(); i++)
+			{
+				if (currentAnimation->parts[i].entity == entity)
+				{
+					return &currentAnimation->parts[i];
+				}
+			}
+		}
+		return NULL;
 	}
 
 	void TestScene::Update()
@@ -355,20 +375,14 @@ namespace Flash
 			}
 			else if (!isPlaying)
 			{
-				if (Input::IsKeyPressed(KEY_LEFT))
+				if (Input::IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
 				{
-					GoPrevFrame();
-					UpdateFrameNumberDisplay();
-				}
-				if (Input::IsKeyPressed(KEY_RIGHT))
-				{
-					GoNextFrame();
-					UpdateFrameNumberDisplay();
-				}
-				if (Input::IsKeyPressed(KEY_UP))
-				{
-					CloneNewEndFrame();
-					UpdateFrameNumberDisplay();
+					Entity *clickedEntity = GetEntityAtPosition(Input::GetMousePosition(), SEARCH_RECURSIVE);
+					if (clickedEntity)
+					{
+						Debug::Log("clicked entity!");
+						editPart = GetPartForEntity(clickedEntity);
+					}
 				}
 
 				if (Input::IsKeyPressed(KEY_LEFTBRACKET))
@@ -379,6 +393,56 @@ namespace Flash
 				{
 					SelectNextPart();
 				}
+
+				Entity *editEntity = NULL;
+				Sprite *editSprite = NULL;
+
+				if (editPart)
+				{
+					editEntity = editPart->entity;
+					editSprite = editPart->sprite;
+				}
+
+				if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+				{
+					if (editEntity)
+					{
+						state = "moving";
+						offset = editEntity->position - Input::GetMousePosition();
+					}
+				}
+				if (Input::IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+				{
+					state = "";
+				}
+
+				if (state == "moving")
+				{
+					editEntity->position = Input::GetMousePosition() + offset;
+				}
+
+				Sprite::selectedSprite = editSprite;
+				
+				if (Input::IsKeyPressed(KEY_LEFT))
+				{
+					state = "";
+					GoPrevFrame();
+					UpdateFrameNumberDisplay();
+				}
+				if (Input::IsKeyPressed(KEY_RIGHT))
+				{
+					state = "";
+					GoNextFrame();
+					UpdateFrameNumberDisplay();
+				}
+				if (Input::IsKeyPressed(KEY_UP))
+				{
+					state = "";
+					CloneNewEndFrame();
+					UpdateFrameNumberDisplay();
+				}
+
+
 			
 				const float moveSpeed = 40.0f;
 				float moveAmount = moveSpeed * Monocle::deltaTime;
@@ -395,55 +459,52 @@ namespace Flash
 					rotateAmount *= 5.0f;
 					scaleAmount *= 4.0f;
 				}
+				
+				if (editEntity)
+				{
+					if (Input::IsKeyHeld(KEY_A))
+					{
+						editEntity->position.x -= moveAmount;
+					}
+					if (Input::IsKeyHeld(KEY_D))
+					{
+						editEntity->position.x += moveAmount;
+					}
+					if (Input::IsKeyHeld(KEY_W))
+					{
+						editEntity->position.y -= moveAmount;
+					}
+					if (Input::IsKeyHeld(KEY_S))
+					{
+						editEntity->position.y += moveAmount;
+					}
 
-				Part *editPart = &currentAnimation->parts[selectedPartIndex];
-				Entity *editEntity = editPart->entity;
-				Sprite *editSprite = editPart->sprite;
+					if (Input::IsKeyHeld(KEY_Q))
+					{
+						editEntity->rotation -= rotateAmount;
+					}
+					if (Input::IsKeyHeld(KEY_E))
+					{
+						editEntity->rotation += rotateAmount;
+					}
 
-				Sprite::selectedSprite = editSprite;
-			
-				if (Input::IsKeyHeld(KEY_A))
-				{
-					editEntity->position.x -= moveAmount;
-				}
-				if (Input::IsKeyHeld(KEY_D))
-				{
-					editEntity->position.x += moveAmount;
-				}
-				if (Input::IsKeyHeld(KEY_W))
-				{
-					editEntity->position.y -= moveAmount;
-				}
-				if (Input::IsKeyHeld(KEY_S))
-				{
-					editEntity->position.y += moveAmount;
-				}
-
-				if (Input::IsKeyHeld(KEY_Q))
-				{
-					editEntity->rotation -= rotateAmount;
-				}
-				if (Input::IsKeyHeld(KEY_E))
-				{
-					editEntity->rotation += rotateAmount;
-				}
-
-				// flip when rotation is in certain quadrants
-				if (Input::IsKeyHeld(KEY_J))
-				{
-					editEntity->scale.x -= scaleAmount;
-				}
-				if (Input::IsKeyHeld(KEY_L))
-				{
-					editEntity->scale.x += scaleAmount;
-				}
-				if (Input::IsKeyHeld(KEY_I))
-				{
-					editEntity->scale.y += scaleAmount;
-				}
-				if (Input::IsKeyHeld(KEY_K))
-				{
-					editEntity->scale.y -= scaleAmount;
+					// flip when rotation is in certain quadrants
+					if (Input::IsKeyHeld(KEY_J))
+					{
+						editEntity->scale.x -= scaleAmount;
+					}
+					if (Input::IsKeyHeld(KEY_L))
+					{
+						editEntity->scale.x += scaleAmount;
+					}
+					if (Input::IsKeyHeld(KEY_I))
+					{
+						editEntity->scale.y += scaleAmount;
+					}
+					if (Input::IsKeyHeld(KEY_K))
+					{
+						editEntity->scale.y -= scaleAmount;
+					}
 				}
 
 
@@ -469,9 +530,12 @@ namespace Flash
 
 				if (isRecording)
 				{
-					editPart->frames[floor(animationFrame)].pos = editEntity->position;
-					editPart->frames[floor(animationFrame)].scale = editEntity->scale;
-					editPart->frames[floor(animationFrame)].rotation = editEntity->rotation;
+					if (editPart)
+					{
+						editPart->frames[floor(animationFrame)].pos = editEntity->position;
+						editPart->frames[floor(animationFrame)].scale = editEntity->scale;
+						editPart->frames[floor(animationFrame)].rotation = editEntity->rotation;
+					}
 				}
 
 				if (Input::IsKeyPressed(KEY_SPACE))
@@ -489,9 +553,11 @@ namespace Flash
 			int currentFrame = floor(animationFrame);
 			int prevFrame = SafeFrameRange(currentFrame-1);
 			///TODO: build functions to make this prettier
-			Part *part = &currentAnimation->parts[selectedPartIndex];
-			part->frames[currentFrame] = part->frames[prevFrame];
-			part->ApplyFrameToEntity(currentFrame, part->entity);
+			if (editPart)
+			{
+				editPart->frames[currentFrame] = editPart->frames[prevFrame];
+				editPart->ApplyFrameToEntity(currentFrame, editPart->entity);
+			}
 		}
 	}
 
@@ -502,9 +568,11 @@ namespace Flash
 			int currentFrame = floor(animationFrame);
 			int nextFrame = SafeFrameRange(currentFrame+1);
 			///TODO: build functions to make this prettier
-			Part *part = &currentAnimation->parts[selectedPartIndex];
-			part->frames[currentFrame] = part->frames[nextFrame];
-			part->ApplyFrameToEntity(currentFrame, part->entity);
+			if (editPart)
+			{
+				editPart->frames[currentFrame] = editPart->frames[nextFrame];
+				editPart->ApplyFrameToEntity(currentFrame, editPart->entity);
+			}
 		}
 	}
 
@@ -512,19 +580,21 @@ namespace Flash
 	{
 		Debug::Log("RevertToBackupPartFrame");
 
-		Part *part = &currentAnimation->parts[selectedPartIndex];
-		if (part)
+		if (editPart)
 		{
 			int currentFrame = floor(animationFrame);
-			part->frames[currentFrame] = backupPartFrame;
-			part->ApplyFrameToEntity(currentFrame);
+			editPart->frames[currentFrame] = backupPartFrame;
+			editPart->ApplyFrameToEntity(currentFrame);
 		}
 	}
 
 	void TestScene::StoreBackupPartFrame()
 	{
 		Debug::Log("StoreBackupPartFrame");
-		backupPartFrame = currentAnimation->parts[selectedPartIndex].frames[floor(animationFrame)];
+		if (editPart)
+		{
+			backupPartFrame = editPart->frames[floor(animationFrame)];
+		}
 	}
 
 	void TestScene::CloneNewEndFrame()

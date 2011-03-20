@@ -11,6 +11,12 @@ namespace Monocle
 {
 	class Entity;
 
+	enum SearchType
+	{
+		SEARCH_TOP = 0,
+		SEARCH_RECURSIVE
+	};
+
 	class Scene
 	{
 	public:
@@ -52,6 +58,10 @@ namespace Monocle
 
 		Entity* GetEntityNearestTo(const Vector2 &position);
 
+		Entity* GetEntityAtPosition(const Vector2 &position, SearchType searchType=SEARCH_TOP);
+
+	protected:
+		friend class Entity;
 		virtual void ReceiveNote(const std::string &note, Entity *fromEntity);
 
 	private:

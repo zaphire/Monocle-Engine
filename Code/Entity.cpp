@@ -5,7 +5,7 @@
 namespace Monocle
 {
 	Entity::Entity()
-		: scene(NULL), collider(NULL), graphic(NULL), layer(0), depth(0.0f), scale(Vector2::one), rotation(0.0f), color(Color::white)
+		: scene(NULL), collider(NULL), graphic(NULL), layer(0), depth(0.0f), scale(Vector2::one), rotation(0.0f), color(Color::white), parent(NULL)
 		//, willDie(false)
 	{
 	}
@@ -132,12 +132,14 @@ namespace Monocle
 	// add an entity as a child
 	void Entity::Add(Entity *entity)
 	{
+		entity->parent = this;
 		children.push_back(entity);
 	}
 
 	///TODO: enqueue for safety
 	void Entity::Remove(Entity *entity)
 	{
+		entity->parent = NULL;
 		children.remove(entity);
 	}
 
@@ -219,6 +221,67 @@ namespace Monocle
 	Graphic* Entity::GetGraphic()
 	{
 		return graphic;
+	}
+
+	bool Entity::IsPositionInGraphic(const Vector2 &point)
+	{
+		Graphic* graphic = GetGraphic();
+		if (graphic != NULL)
+		{
+			int width, height;
+			graphic->GetWidthHeight(&width, &height);
+			Vector2 ul = GetWorldPosition(Vector2( - width * 0.5f, - height * 0.5f));
+			Vector2 lr = GetWorldPosition(Vector2( + width * 0.5f, + height * 0.5f));
+			printf("p(%d, %d) ul(%d, %d) lr(%d, %d)\n", (int)point.x, (int)point.y, (int)ul.x, (int)ul.y, (int)lr.x, (int)lr.y);
+			return (point.x > ul.x && point.x < lr.x && point.y > ul.y && point.y < lr.y);
+		}
+		return false;
+	}
+
+	Vector2 Entity::GetWorldPosition(const Vector2 &position)
+	{
+		Vector2 returnPos;
+		Graphics::PushMatrix();
+		Graphics::SceneMatrix();
+
+		std::list<Entity*> entityChain;
+		
+		Entity *current = this;
+		while (current)
+		{
+			entityChain.push_back(current);
+			current = current->parent;
+		}
+
+		for (std::list<Entity*>::iterator i = entityChain.begin(); i != entityChain.end(); ++i)
+		{
+			Graphics::Translate((*i)->position);
+			Graphics::Rotate((*i)->rotation, 0, 0, 1);
+			Graphics::Scale((*i)->scale);
+		}
+
+		Graphics::Translate(position);
+
+		returnPos = Graphics::GetMatrixPosition();
+
+		Graphics::PopMatrix();
+
+		return returnPos;
+	}
+
+	Entity* Entity::GetChildEntityAtPosition(const Vector2 &position)
+	{
+		for (std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
+		{
+			Entity *entity = (*i)->GetChildEntityAtPosition(position);
+			if (entity)
+				return entity;
+		}
+		
+		if (IsPositionInGraphic(position))
+			return this;
+
+		return NULL;
 	}
 
 	/*

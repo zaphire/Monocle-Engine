@@ -28,11 +28,11 @@ namespace Jumper
 	void Player::Update()
 	{
 		// increase acceleration
-		if (Input::IsKeyHeld(keyLeft))
+		if (Input::IsKeyMaskHeld("left"))
 		{
 			if(velocity.x > -maxSpeed) { velocity.x -= speed * Monocle::deltaTime; }
 		}
-		else if (Input::IsKeyHeld(keyRight))
+		else if (Input::IsKeyMaskHeld("right"))
 		{
 			if(velocity.x < maxSpeed) { velocity.x += speed * Monocle::deltaTime; }
 		}
@@ -62,7 +62,6 @@ namespace Jumper
 		// gravity
 		velocity.y += gravity;
 
-		
 		//move
 		Vector2 lastPosition = position;
 		float temp = 0.001f;
@@ -134,6 +133,9 @@ namespace Jumper
 		Input::DefineMaskKey("jump", KEY_Z);
 		Input::DefineMaskKey("jump", KEY_A);
 
+		Input::DefineMaskKey("left", KEY_LEFT);
+		Input::DefineMaskKey("right", KEY_RIGHT);
+
 		Debug::Log("Jumper::GameScene::Begin()!");
 		Scene::Begin();
 
@@ -149,9 +151,6 @@ namespace Jumper
 	void GameScene::SpawnPlayer(Vector2 pos)
 	{
 		player = new Player(pos);
-		player->keyUp = KEY_UP;
-		player->keyLeft = KEY_LEFT;
-		player->keyRight = KEY_RIGHT;
 		Add(player);
 	}
 

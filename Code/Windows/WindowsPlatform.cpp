@@ -6,6 +6,7 @@
 
 #include "WindowsPlatform.h"
 #include "Mmsystem.h"
+#include <WindowsX.h>
 
 // opengl/windows init code baesd on http://nehe.gamedev.net
 // keyboard code based on SDL http://www.libsdl.org/
@@ -487,6 +488,13 @@ namespace Monocle
 				instance->platform->WindowSizeChanged(LOWORD(lParam), HIWORD(lParam));
 				return 0;
 			}
+
+			case WM_MOUSEMOVE:
+			{
+				instance->platform->mousePosition.x = GET_X_LPARAM(lParam); 
+				instance->platform->mousePosition.y = GET_Y_LPARAM(lParam);
+				return 0;
+			}
 		}
 
 		// Pass All Unhandled Messages To DefWindowProc
@@ -663,6 +671,7 @@ namespace Monocle
 			}
 		}
 
+		/*
 		POINT mouse;
 		// get current mouse position
 		GetCursorPos(&mouse);
@@ -675,6 +684,7 @@ namespace Monocle
 		// TODO: this might need refining
 		mousePosition.x = mouse.x - (desktopWidth/2 - width/2);
 		mousePosition.y = mouse.y - (desktopHeight/2 - height/2);
+		*/
 
 		/*
 		printf("mouse (%d, %d)\n", mouse.x, mouse.y);
