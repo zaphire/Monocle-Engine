@@ -6,6 +6,7 @@ namespace Monocle
 {
 	Entity::Entity()
 		: scene(NULL), collider(NULL), graphic(NULL), layer(0), depth(0.0f), scale(Vector2::one), rotation(0.0f), color(Color::white)
+		//, willDie(false)
 	{
 	}
 
@@ -175,12 +176,25 @@ namespace Monocle
 	}
 	*/
 
-	void Entity::SendMessageToScene(const std::string &message)
+	void Entity::SendNoteToScene(const std::string &note)
 	{
 		if (scene)
 		{
-			scene->ReceiveMessage(message);
+			scene->ReceiveNote(note, this);
 		}
+	}
+
+	void Entity::SendNote(const std::string &tag, const std::string &note)
+	{
+		if (scene)
+		{
+			scene->RelayNoteTo(tag, note, this);
+		}
+	}
+
+	void Entity::ReceiveNote(const std::string &tag, const std::string &note, Entity *fromEntity)
+	{
+
 	}
 
 	void Entity::SetGraphic(Graphic *graphic)
@@ -206,4 +220,39 @@ namespace Monocle
 	{
 		return graphic;
 	}
+
+	/*
+	void Entity::Die()
+	{
+		if (scene)
+		{
+			willDie = true;
+			scene->Remove(this);
+		}
+		else
+		{
+			Debug::Log("Error: Entity is not in a scene. 'Die' will not function.");
+		}
+	}
+	*/
+
+	/*
+	void Entity::CleanUp()
+	{
+		std::list<Entity*> toKill;
+		for (std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
+		{
+			if ((*i)->willDie)
+			{
+				toKill.push_back(*i);
+			}
+			(*i)->CleanUp();
+		}
+
+		for (std::list<Entity*>::iterator i = toKill.begin(); i != toKill.end(); ++i)
+		{
+			children.remove(*i);
+		}
+	}
+	*/
 }

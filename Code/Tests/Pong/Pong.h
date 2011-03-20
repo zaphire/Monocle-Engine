@@ -40,6 +40,6 @@ namespace Pong
 		void End();
 		//void Update();
 		
-		void ReceiveMessage(const std::string &message);
+		void ReceiveNote(const std::string &note, Entity *fromEntity);
 	};
 }
