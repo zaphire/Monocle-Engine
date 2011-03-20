@@ -42,7 +42,7 @@ namespace Jumper
 		}
 
 		// lean
-		rotation += velocity.x * leanAmount;
+		rotation = velocity.x * leanAmount;
 
 		// jump
 		if(Input::IsKeyMaskHeld("jump") && onGround)

@@ -51,9 +51,6 @@ namespace Monocle
 		Collider* Collide(const std::string &tag);
 		//RectangleCollider *AddRectangleCollider(float width, float height, const Vector2 &offset = Vector2::zero);
 
-		//very simple "message" sending
-		void SendMessageToScene(const std::string &message);
-
 		//Tagging API
 		void AddTag(const std::string& tag);
 		bool HasTag(const std::string& tag);
@@ -69,10 +66,23 @@ namespace Monocle
 		void SetCollider(Collider *collider);
 		void SetGraphic(Graphic *graphic);
 
+		// add or remove entities from list of children
 		void Add(Entity *entity);
 		void Remove(Entity *entity);
+		
+		// enqueue destruction of this entity
+		//void Die();
+
+	protected:
+		friend class Scene;
+		// notes are very simple "messages"
+		void SendNoteToScene(const std::string &note);
+		// send a note to all entites with tag "tag"
+		void SendNote(const std::string &tag, const std::string &note);
+		virtual void ReceiveNote(const std::string &tag, const std::string &note, Entity *fromEntity);
 
 	private:
+
 		// only for use by Collision class
 		friend class Collision;
 		Collider* GetCollider();
@@ -91,5 +101,8 @@ namespace Monocle
 		
 		std::vector<std::string> tags;
 		int layer;
+
+		// is Death enqueued? scene will clean up if so
+		//bool willDie;
 	};
 }

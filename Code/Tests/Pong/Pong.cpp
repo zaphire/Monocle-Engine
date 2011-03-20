@@ -56,13 +56,13 @@ namespace Pong
 		// if we go off the left side of the screen
 		if (position.x < 0)
 		{
-			SendMessageToScene("BallOffLeft");
+			SendNoteToScene("BallOffLeft");
 		}
 
 		// if we go off the right side of the screen
 		if (position.x > 800)
 		{
-			SendMessageToScene("BallOffRight");
+			SendNoteToScene("BallOffRight");
 		}
 	}
 
@@ -185,13 +185,13 @@ namespace Pong
 		Add(paddle2);
 	}
 
-	void GameScene::ReceiveMessage(const std::string &message)
+	void GameScene::ReceiveNote(const std::string &note, Entity *entity)
 	{
-		if (message == "BallOffLeft")
+		if (note == "BallOffLeft")
 		{
 			ResetBall();
 		}
-		else if (message == "BallOffRight")
+		else if (note == "BallOffRight")
 		{
 			ResetBall();
 		}

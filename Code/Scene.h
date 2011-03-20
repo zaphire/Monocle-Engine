@@ -52,7 +52,12 @@ namespace Monocle
 
 		Entity* GetEntityNearestTo(const Vector2 &position);
 
-		virtual void ReceiveMessage(const std::string &message);
+		virtual void ReceiveNote(const std::string &note, Entity *fromEntity);
+
+	private:
+
+		friend class Entity;
+		void RelayNoteTo(const std::string &tag, const std::string &note, Entity *fromEntity);
 
 	private:
 		//Holds all the entities currently in the scene

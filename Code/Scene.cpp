@@ -135,12 +135,20 @@ namespace Monocle
 		for (std::list<Entity*>::iterator i = toRemove.begin(); i != toRemove.end(); ++i)
 		{
 			entities.remove(*i);
-			(*i)->scene = NULL;
-			(*i)->Removed();
 
 			//If the tag is set, remove the entity from the tag map
 			for (int j = 0; j < (*i)->GetNumberOfTags(); ++j)
-				EntityAddTag(*i, (*i)->GetTag(j));
+				EntityRemoveTag(*i, (*i)->GetTag(j));
+
+			(*i)->scene = NULL;
+			(*i)->Removed();
+
+			/*
+			if ((*i)->willDie)
+			{
+				delete (*i);
+			}
+			*/
 		}
 		toRemove.clear();
 
@@ -148,12 +156,13 @@ namespace Monocle
 		for (std::list<Entity*>::iterator i = toAdd.begin(); i != toAdd.end(); ++i)
 		{
 			entities.push_back(*i);
-			(*i)->scene = this;
-			(*i)->Added();
 
 			//If the tag is set, add the entity to the tag map
 			for (int j = 0; j < (*i)->GetNumberOfTags(); ++j)
-				EntityRemoveTag(*i, (*i)->GetTag(j));
+				EntityAddTag(*i, (*i)->GetTag(j));
+
+			(*i)->scene = this;
+			(*i)->Added();
 		}
 		toAdd.clear();
 
@@ -219,13 +228,23 @@ namespace Monocle
 
 	int Scene::GetAmountTag(const std::string& tag)
 	{
-		if (tagMap.count(tag) == 0)
+		if (tagMap.count(tag) == 0) 
 			return 0;
 		
 		return static_cast<int>(tagMap[tag].size());
 	}
 
-	void Scene::ReceiveMessage(const std::string &message)
+	void Scene::ReceiveNote(const std::string &note, Entity *fromEntity)
 	{
+	}
+
+	void Scene::RelayNoteTo(const std::string &tag, const std::string &note, Entity *fromEntity)
+	{
+		std::list<Entity*>* taggedEntities = GetAllTag(tag);
+		for (std::list<Entity*>::iterator i = (*taggedEntities).begin(); i != (*taggedEntities).end(); ++i)
+		{
+			if ((*i) != fromEntity)
+				(*i)->ReceiveNote(tag, note, fromEntity);
+		}
 	}
 }
