@@ -12,27 +12,27 @@ static struct timeval startTime;
 
 static NSWindow* CreateWindowCocoa(int w, int h)
 {
-    NSAutoreleasePool *pool;
-    NSWindow *nswindow;
-    NSRect rect;
-    unsigned int style;
+	NSAutoreleasePool *pool;
+	NSWindow *nswindow;
+	NSRect rect;
+	unsigned int style;
 
-    pool = [[NSAutoreleasePool alloc] init];
+	pool = [[NSAutoreleasePool alloc] init];
 
-    rect.origin.x = 0;
-    rect.origin.y = 0;
-    rect.size.width = w;
-    rect.size.height = h;
-    rect.origin.y = CGDisplayPixelsHigh(kCGDirectMainDisplay) - rect.origin.y - rect.size.height;
+	rect.origin.x = 0;
+	rect.origin.y = 0;
+	rect.size.width = w;
+	rect.size.height = h;
+	rect.origin.y = CGDisplayPixelsHigh(kCGDirectMainDisplay) - rect.origin.y - rect.size.height;
 
-    style = (NSTitledWindowMask|NSClosableWindowMask|NSMiniaturizableWindowMask);
+	style = (NSTitledWindowMask|NSClosableWindowMask|NSMiniaturizableWindowMask);
 
-    nswindow = [[NSWindow alloc] initWithContentRect:rect styleMask:style backing:NSBackingStoreBuffered defer:FALSE];
-    [nswindow makeKeyAndOrderFront:nil];
+	nswindow = [[NSWindow alloc] initWithContentRect:rect styleMask:style backing:NSBackingStoreBuffered defer:FALSE];
+	[nswindow makeKeyAndOrderFront:nil];
 
-    [pool release];
+	[pool release];
 
-    return nswindow;
+	return nswindow;
 }
 
 static void DestroyWindowCocoa(void *window)
@@ -46,11 +46,11 @@ static void DestroyWindowCocoa(void *window)
 
 namespace Monocle
 {	
-    CocoaPlatform* CocoaPlatform::instance;
+	CocoaPlatform* CocoaPlatform::instance;
     
-    CocoaPlatform::CocoaPlatform()
-    {
-    }
+	CocoaPlatform::CocoaPlatform()
+	{
+	}
 
 	bool CocoaPlatform::Init(int w, int h, int bits, bool fullscreen)
 	{
@@ -58,7 +58,7 @@ namespace Monocle
 		Cocoa_RegisterApp();
 
 		//  Create window
-        window = CreateWindowCocoa(w, h);        
+		window = CreateWindowCocoa(w, h);        
 
 		//  Create and attach GL context
 		NSOpenGLContext* context = Cocoa_GL_CreateContext();
@@ -71,19 +71,19 @@ namespace Monocle
 		Cocoa_GL_SetSwapInterval(1);
 
 		//  Init internal timer
-        gettimeofday(&startTime, NULL);
+		gettimeofday(&startTime, NULL);
 
 		return true;
 	}
-    
-    Platform* Platform::instance;
+
+	Platform* Platform::instance;
 	bool Platform::keys[KEY_MAX];
 	bool Platform::mouseButtons[3];
 	Vector2 Platform::mousePosition;
 
 	Platform::Platform()
 	{
-        CocoaPlatform::instance = new CocoaPlatform();
+		CocoaPlatform::instance = new CocoaPlatform();
 		instance = this;
 	}
 
@@ -104,7 +104,7 @@ namespace Monocle
 
 	void Platform::Update()
 	{
-        Cocoa_PumpEvents();
+		Cocoa_PumpEvents();
 	}
 
 	void Platform::SetMouseButton(int button, bool on)
@@ -129,17 +129,17 @@ namespace Monocle
 	void Platform::ShowBuffer()
 	{
 		// XXX fill in args
-        Cocoa_GL_SwapWindow();
+		Cocoa_GL_SwapWindow();
 	}
 
 	int Platform::GetWidth()
 	{
-        return instance->width;
+		return instance->width;
 	}
 
 	int Platform::GetHeight()
 	{
-        return instance->height;
+		return instance->height;
 	}
 
 	void Platform::WindowSizeChanged(int w, int h)
@@ -162,5 +162,4 @@ namespace Monocle
 			instance->keys[instance->localKeymap[key]] = on;			
 		}
 	}
-
 }

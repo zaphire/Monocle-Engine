@@ -2,10 +2,6 @@
 
 #include <OpenGL/CGLTypes.h>
 
-namespace Monocle {
-    class CocoaPlatform;
-}
-
 extern NSOpenGLContext* Cocoa_GL_CreateContext();
 extern int Cocoa_GL_MakeCurrent(NSWindow* window, NSOpenGLContext* context);
 extern void Cocoa_GL_SwapWindow();

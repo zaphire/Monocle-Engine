@@ -6,18 +6,18 @@
 
 namespace Monocle
 {
-    class CocoaPlatform
-    {
+	class CocoaPlatform
+	{
 	public:
 		static CocoaPlatform* instance;
 
-        CocoaPlatform();
-        ~CocoaPlatform();
+		CocoaPlatform();
+		~CocoaPlatform();
 
 		bool Init(int w, int h, int bits, bool fullscreen);
 
 		NSWindow* window;
-    };
+	};
 }
 
 /* vi: set ts=4 sw=4 noexpandtab: */

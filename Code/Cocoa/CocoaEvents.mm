@@ -148,15 +148,15 @@ Cocoa_PumpEvents()
 	NSAutoreleasePool *pool;
 
 	/* Update activity every 30 seconds to prevent screensaver */
-//	if (_this->suspend_screensaver) {
-//		Monocle_VideoData *data = (Monocle_VideoData *)_this->driverData;
-//		long now = Monocle::Platform::GetMilliseconds();
-//		if (!data->screensaver_activity ||
-//				(int)(now-data->screensaver_activity) >= 30000) {
-//			UpdateSystemActivity(UsrActivity);
-//			data->screensaver_activity = now;
-//		}
-//	}
+	//	if (_this->suspend_screensaver) {
+	//		Monocle_VideoData *data = (Monocle_VideoData *)_this->driverData;
+	//		long now = Monocle::Platform::GetMilliseconds();
+	//		if (!data->screensaver_activity ||
+	//				(int)(now-data->screensaver_activity) >= 30000) {
+	//			UpdateSystemActivity(UsrActivity);
+	//			data->screensaver_activity = now;
+	//		}
+	//	}
 
 	pool = [[NSAutoreleasePool alloc] init];
 	for ( ; ; ) {
@@ -177,7 +177,7 @@ Cocoa_PumpEvents()
 			case NSOtherMouseDragged: /* usually middle mouse dragged */
 			case NSMouseMoved:
 			case NSScrollWheel:
-                // XXX handle mouse event
+				// XXX handle mouse event
 				// Cocoa_HandleMouseEvent(_this, event);
 				/* Pass through to NSApp to make sure everything stays in sync */
 				[NSApp sendEvent:event];
@@ -185,9 +185,9 @@ Cocoa_PumpEvents()
 			case NSKeyDown:
 			case NSKeyUp:
 			case NSFlagsChanged:
-                // XXX handle key event
+				// XXX handle key event
 				// Cocoa_HandleKeyEvent(_this, event);
-                [NSApp sendEvent:event];
+				[NSApp sendEvent:event];
 				/* Fall through to pass event to NSApp; er, nevermind... */
 
 				/* Add to support system-wide keyboard shortcuts like CMD+Space */
