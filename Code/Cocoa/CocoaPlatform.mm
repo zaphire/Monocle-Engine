@@ -18,12 +18,12 @@ using Monocle::Debug;
 @implementation MonocleWindow
 - (BOOL)canBecomeKeyWindow
 {
-    return YES;
+	return YES;
 }
 
 - (BOOL)canBecomeMainWindow
 {
-    return YES;
+	return YES;
 }
 @end
 
@@ -35,7 +35,7 @@ using Monocle::Debug;
 @implementation MonocleView
 - (void)rightMouseDown:(NSEvent *)theEvent
 {
-    [[self nextResponder] rightMouseDown:theEvent];
+	[[self nextResponder] rightMouseDown:theEvent];
 }
 @end
 
@@ -70,37 +70,28 @@ static NSWindow* CreateWindowCocoa(int w, int h)
 	return nswindow;
 }
 
-static void DestroyWindowCocoa(void *window)
-{
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    NSWindow *nswindow = (NSWindow *)window;
-
-    [nswindow close];
-    [pool release];
-}
-
 static WindowData* AttachWindowListener(NSWindow* window)
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
 	WindowData* data = (WindowData*) calloc(1, sizeof(WindowData));
 	if (!data) {
 		Debug::Log("Error allocating window data");
 		return false;
 	}
-    data->created = true;
+	data->created = true;
 	data->nswindow = window;
 	data->listener = [[CocoaWindowListener alloc] init];
 	[data->listener listen:data];
 
 	[pool release];
-    
-    return data;
+
+	return data;
 }
 
 namespace Monocle
 {	
-    static struct timeval startTime;
+	static struct timeval startTime;
     
 	CocoaPlatform* CocoaPlatform::instance;
 	Platform*	   CocoaPlatform::platform;

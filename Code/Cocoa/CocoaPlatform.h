@@ -19,7 +19,7 @@ namespace Monocle
 		bool Init(int w, int h, int bits, bool fullscreen);
 
 		NSWindow* window;
-        WindowData* windowData;
+		WindowData* windowData;
 	};
 }
 
