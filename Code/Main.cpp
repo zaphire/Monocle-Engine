@@ -9,10 +9,10 @@
 	#define TEST_JUMPER
 #else
 	//#define TEST_CORE
-	//#define TEST_PONG
+	#define TEST_PONG
 	//#define TEST_MARIAN
 	//#define TEST_JUMPER
-	#define TEST_FLASH
+	//#define TEST_FLASH
 #endif
 
 #ifdef TEST_PONG
