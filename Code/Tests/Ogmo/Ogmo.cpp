@@ -1,6 +1,7 @@
 #include "Ogmo.h"
 #include "../../Input.h"
 #include "../../Level.h"
+#include "../../Monocle.h"
 
 namespace Ogmo
 {
@@ -15,7 +16,7 @@ namespace Ogmo
 		AddTag(tag);
 		SetCollider(new RectangleCollider(8, 8));
 
-		sprite = new Sprite("player.png", 8,8);
+		sprite = new Sprite("player.png", FILTER_NONE, 8, 8);
 		SetGraphic(sprite);
 	}
 
@@ -31,17 +32,24 @@ namespace Ogmo
 			if(cling < 0) { velocity.x += ACCELERATION * Monocle::deltaTime; }
 		}
 
-		if (Input::IsKeyMaskPressed("jump") && (onGround || !doubleJump || cling > 0))
+		if (Input::IsKeyMaskPressed("jump") && onGround)
 		{
 			//jump
 			velocity.y = - JUMP;
-
-			//if we're not on the ground, and we're not clinging - double jump
-			if(!onGround && cling < 0) { doubleJump = true; }
-
-			//we're not on the ground, but we are clinging - wall jump
-			if(!onGround && cling > 0) { velocity.x = clingDir * 2; }
 		}
+		else if (Input::IsKeyMaskPressed("jump") && cling > 0)
+		{
+			//jump
+			velocity.y = - JUMP;
+			velocity.x = clingDir * 2;
+			cling = -1;
+		}
+		else if (Input::IsKeyMaskPressed("jump") && !doubleJump)
+		{
+			velocity.y = - JUMP;
+			doubleJump = false;
+		}
+
 
 		// maxspeed
 		// REMOVED - Friction acts as a maxspeed, in this case
@@ -69,7 +77,7 @@ namespace Ogmo
 				// if we're not on the ground, we cling to the wall (SMB-style)
 				// this way, if the user wants to preform a wall-jump, they don't
 				// get moved away from the wall
-				cling = 20;
+				cling = 10;
 				if(velocity.x > 0) {clingDir = -1; }
 				else { clingDir = 1; }
 			}

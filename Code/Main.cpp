@@ -13,7 +13,8 @@
 	//#define TEST_game
 	//#define TEST_PONG
 	//#define TEST_MARIAN
-	#define TEST_JUMPER
+	//#define TEST_JUMPER
+	#define TEST_OGMO
 	//#define TEST_FLASH
 #endif
 
@@ -27,6 +28,10 @@
 
 #ifdef TEST_JUMPER
 	#include "Tests/Jumper/Jumper.h"
+#endif
+
+#ifdef TEST_OGMO
+	#include "Tests/Ogmo/Ogmo.h"
 #endif
 
 #ifdef TEST_FLASH
@@ -44,6 +49,10 @@ int main(void)
 
 #ifdef TEST_PONG
 	game->SetScene(new Pong::GameScene());
+#endif
+
+#ifdef TEST_OGMO
+	game->SetScene(new Ogmo::World());
 #endif
 
 #ifdef TEST_MARIAN
