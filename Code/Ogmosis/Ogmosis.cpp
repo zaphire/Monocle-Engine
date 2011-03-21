@@ -80,7 +80,13 @@ namespace Monocle
 		{
 			for (int ty = 0; ty < height; ty++)
 			{
-				// get index, 
+				int tileID = tiles[ty*width + tx];
+				
+				// get x/y coords of tile into tilemap
+				
+				// convert to texture coordinates
+
+				// render quad with texture coords set
 			}
 		}
 	}
