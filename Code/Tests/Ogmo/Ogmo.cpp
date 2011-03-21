@@ -48,7 +48,7 @@ namespace Ogmo
 		else if (Input::IsKeyMaskPressed("jump") && !doubleJump)
 		{
 			velocity.y = - JUMP;
-			doubleJump = false;
+			doubleJump = true;
 		}
 
 
