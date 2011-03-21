@@ -198,6 +198,15 @@
     <ClInclude Include="..\..\..\..\Code\Level.h">
       <Filter>Monocle</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Graphics\Tilemap.h">
+      <Filter>Monocle\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Tileset.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Macros.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp">
@@ -372,6 +381,12 @@
       <Filter>Monocle</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Level.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Graphics\Tilemap.cpp">
+      <Filter>Monocle\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Tileset.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
   </ItemGroup>
