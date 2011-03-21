@@ -147,6 +147,11 @@ namespace Ogmo
 		Input::DefineMaskKey("left", KEY_LEFT);
 		Input::DefineMaskKey("right", KEY_RIGHT);
 
+		//eventually this will load the level
+		Level::SetScene(this);
+		Level::LoadProject("project.xml");
+		Level::Load("level01.xml");
+
 		//add player
 		player = new Player(120, 8);
 		Add(player);

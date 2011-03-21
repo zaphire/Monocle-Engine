@@ -142,9 +142,11 @@ namespace Jumper
 		Input::DefineMaskKey("left", KEY_LEFT);
 		Input::DefineMaskKey("right", KEY_RIGHT);
 
+		/*
 		Level::SetScene(this);
 		Level::LoadProject("project.xml");
 		Level::Load("level01.xml");
+		*/
 
 		Graphics::SetBackgroundColor(Color::blue * 0.1f);
 
