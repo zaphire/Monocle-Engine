@@ -1,10 +1,12 @@
 file(GLOB CORE_SRCS *.cpp)
 file(GLOB COLLIDERS_SRCS Colliders/*.cpp)
 file(GLOB GRAPHICS_SRCS Graphics/*.cpp)
+file(GLOB OGMOSIS_SRCS Ogmosis/*.cpp)
 
 set(CORE_SRCS ${CORE_SRCS}
 	${COLLIDERS_SRCS}
 	${GRAPHICS_SRCS}
+	${OGMOSIS_SRCS}
 )
 
 if(WINDOWS)
