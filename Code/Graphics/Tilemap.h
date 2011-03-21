@@ -29,6 +29,8 @@ class Tilemap : public Graphic
 		void Update();
 		void Render();
 
+		void Clear(int tileID=-1);
+
 		TextureAsset *texture;
 
 	private:

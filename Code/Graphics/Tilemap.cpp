@@ -1,5 +1,6 @@
 #include "Tilemap.h"
 #include "../Macros.h"
+#include "../Graphics.h"
 #include "../Debug.h"
 
 namespace Monocle
@@ -10,7 +11,8 @@ namespace Monocle
 		this->tileset = tileset;
 		this->tileWidth = tileWidth;
 		this->tileHeight = tileHeight;
-		tiles.resize(width*height);
+		this->Resize(width, height);
+		this->Clear();
 	}
 
 	void Tilemap::Resize(int width, int height)
@@ -19,6 +21,9 @@ namespace Monocle
 		this->height = height;
 
 		std::vector<int> newTiles = std::vector<int>(width*height);
+
+		///TODO: the following crashes, fix
+		/*
 		int maxX = MIN(width, this->width);
 		int maxY = MIN(height, this->height);
 		for(int x=0;x<maxX;++x)
@@ -28,7 +33,21 @@ namespace Monocle
 				newTiles[y*width+x] = tiles[y*this->width+x];
 			}
 		}
+		*/
+
 		tiles = newTiles;
+	}
+
+	// defaults to -1 (no tile)
+	void Tilemap::Clear(int tileID)
+	{
+		for (int x = 0; x < width; x++)
+		{
+			for (int y = 0; y < height; y++)
+			{
+				tiles[y * width + x] = tileID;
+			}
+		}
 	}
 
 	void Tilemap::GetWidthHeight(int *width, int *height)
@@ -86,25 +105,21 @@ namespace Monocle
 			Graphics::BindTexture(tileset->texture);
 			//Graphics::RenderQuad(400, 400);
 
-			// TODO: divide width by tilew/h
+			Vector2 texScale = Vector2(tileset->tileWidth / (float)tileset->texture->width, tileset->tileHeight / (float)tileset->texture->height);
+			int tilesPerRow = tileset->texture->width / tileset->tileWidth;
+
 			for (int tx = 0; tx < width; tx ++)
 			{
 				for (int ty = 0; ty < height; ty++)
 				{
 					int tileID = tiles[ty*width + tx];
 
-
-				
 					// get x/y coords of tile in tileset
-				
-					// convert to texture coordinates
-					//float tex_x, tex_y;
-					//tex_x = tileID/
+					int tileX = (tileID % tilesPerRow) * tileset->tileWidth;
+					int tileY = (tileID / tilesPerRow) * tileset->tileHeight;
 				
 					// render quad with texture coords set
-					Debug::Log(tileset->tileWidth);
-
-					Graphics::RenderQuad(tileset->tileWidth, tileset->tileHeight, Vector2(0,0), Vector2(1,1), Vector2(tx * tileset->tileWidth, ty * tileset->tileHeight));
+					Graphics::RenderQuad(tileWidth, tileHeight, Vector2((float)tileX, (float)tileY), texScale, Vector2(tx * tileWidth, ty * tileHeight));
 				}
 			}
 		}
