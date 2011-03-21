@@ -50,6 +50,7 @@ namespace Ogmo
 	public:
 		void Begin();
 		void End();
+		void Update();
 
 		Player *player;
 		Wall *wall;

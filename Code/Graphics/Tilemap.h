@@ -8,38 +8,41 @@
 
 namespace Monocle
 {
-class Tilemap : public Graphic
-{
-	public:
-		Tilemap(Tileset *tileset, int width, int height, int tileWidth, int tileHeight);
+	class Level;
 
-		void Resize(int width, int height);
+	class Tilemap : public Graphic
+	{
+		public:
+			Tilemap(Tileset *tileset, int width, int height, int tileWidth, int tileHeight);
 
-		void GetWidthHeight(int *width, int *height);
+			void Resize(int width, int height);
 
-		bool IsTile(int tx, int ty, int tileID);
-		int GetTile(int tx, int ty);
-		void SetTile(int tx, int ty, int tileID);
+			void GetWidthHeight(int *width, int *height);
 
-		int GetTileAtWorldPosition(const Vector2 &position);
-		void SetTileAtWorldPosition(const Vector2 &position, int tileID);
+			bool IsTile(int tx, int ty, int tileID);
+			int GetTile(int tx, int ty);
+			void SetTile(int tx, int ty, int tileID);
 
-		void WorldToTile(const Vector2 &position, int *tx, int *ty);
+			int GetTileAtWorldPosition(const Vector2 &position);
+			void SetTileAtWorldPosition(const Vector2 &position, int tileID);
 
-		void Render();
+			void WorldToTile(const Vector2 &position, int *tx, int *ty);
 
-		void Clear(int tileID=-1);
+			void Render();
 
-		TextureAsset *texture;
+			void Clear(int tileID=-1);
 
-	private:
-		Tileset *tileset;
-		int width, height;
-		int tileWidth, tileHeight;
-		std::vector<int> tiles;
+			TextureAsset *texture;
 
-		void UpdateEditor();
+		private:
+			friend class Level;
+			Tileset *tileset;
+			int width, height;
+			int tileWidth, tileHeight;
+			std::vector<int> tiles;
 
-		int selectedTile;
+			void UpdateEditor();
+
+			int selectedTile;
 	};
 }

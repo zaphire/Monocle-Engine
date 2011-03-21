@@ -35,5 +35,6 @@ namespace Monocle
 		Tileset *GetTileset(const std::string &name);
 		Scene *scene;
 		static Level *instance;
+		std::string filename;
 	};
 }

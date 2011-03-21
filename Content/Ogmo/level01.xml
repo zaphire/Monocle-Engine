@@ -1,5 +1,3 @@
 <Level width="160" height="120">
-	<Tilemap set="tiles" tileWidth="8" tileHeight="8">
-		<Tile tx="0" ty="0" tileID="0"/>
-	</Tilemap>
+    <Tilemap set="tiles" tileWidth="8" tileHeight="8" />
 </Level>

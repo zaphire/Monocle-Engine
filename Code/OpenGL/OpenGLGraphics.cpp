@@ -239,25 +239,18 @@ namespace Monocle
 			// UL
 			glTexCoord2f(textureOffset.x, textureOffset.y);
 			glVertex3f(-halfWidth + offset.x, -halfHeight + offset.y, 0.0f);
-			//glTexCoord2f(0, 0);
 			
-
 			//UR
 			glTexCoord2f(textureOffset.x + textureScale.x, textureOffset.y);
 			glVertex3f(halfWidth + offset.x, -halfHeight + offset.y, 0.0f);
-			//glTexCoord2f(0, 1);
 			
-
 			//LR
 			glTexCoord2f(textureOffset.x + textureScale.x, textureOffset.y + textureScale.y);
 			glVertex3f(halfWidth + offset.x, halfHeight + offset.y, 0.0f);
-			//glTexCoord2f(1, 1);
 			
-
 			//LL
 			glTexCoord2f(textureOffset.x, textureOffset.y + textureScale.y);
 			glVertex3f(-halfWidth + offset.x, halfHeight + offset.y, 0.0f);
-			//glTexCoord2f(1, 0);
 		glEnd();
 	}
 
