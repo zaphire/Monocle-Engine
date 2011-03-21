@@ -70,7 +70,6 @@ namespace Monocle
 	private:
 		void RelayNoteTo(const std::string &tag, const std::string &note);
 
-	private:
 		//Holds all the entities currently in the scene
 		std::list<Entity*> entities;
 
