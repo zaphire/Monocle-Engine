@@ -11,7 +11,7 @@ namespace Monocle
 		this->tileset = tileset;
 		this->tileWidth = tileWidth;
 		this->tileHeight = tileHeight;
-		this->Resize(width, height);
+		tiles.resize(width*height);
 		this->Clear();
 	}
 
