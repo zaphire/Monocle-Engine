@@ -12,6 +12,7 @@ namespace Monocle
 		this->tileWidth = tileWidth;
 		this->tileHeight = tileHeight;
 		this->Resize(width, height);
+		this->Clear();
 	}
 
 	void Tilemap::Resize(int width, int height)
@@ -20,6 +21,9 @@ namespace Monocle
 		this->height = height;
 
 		std::vector<int> newTiles = std::vector<int>(width*height);
+
+		///TODO: the following crashes, fix
+		/*
 		int maxX = MIN(width, this->width);
 		int maxY = MIN(height, this->height);
 		for(int x=0;x<maxX;++x)
@@ -29,7 +33,21 @@ namespace Monocle
 				newTiles[y*width+x] = tiles[y*this->width+x];
 			}
 		}
+		*/
+
 		tiles = newTiles;
+	}
+
+	// defaults to -1 (no tile)
+	void Tilemap::Clear(int tileID)
+	{
+		for (int x = 0; x < width; x++)
+		{
+			for (int y = 0; y < height; y++)
+			{
+				tiles[y * width + x] = tileID;
+			}
+		}
 	}
 
 	void Tilemap::GetWidthHeight(int *width, int *height)
@@ -87,6 +105,7 @@ namespace Monocle
 			Graphics::BindTexture(tileset->texture);
 			//Graphics::RenderQuad(400, 400);
 
+			Vector2 texScale = Vector2(tileset->tileWidth / (float)tileset->texture->width, tileset->tileHeight / (float)tileset->texture->height);
 			int tilesPerRow = tileset->texture->width / tileset->tileWidth;
 
 			for (int tx = 0; tx < width; tx ++)
@@ -100,7 +119,7 @@ namespace Monocle
 					int tileY = (tileID / tilesPerRow) * tileset->tileHeight;
 				
 					// render quad with texture coords set
-					Graphics::RenderQuad(tileWidth, tileHeight, Vector2((float)tileX, (float)tileY));
+					Graphics::RenderQuad(tileWidth, tileHeight, Vector2((float)tileX, (float)tileY), texScale, Vector2(tx * tileWidth, ty * tileHeight));
 				}
 			}
 		}
