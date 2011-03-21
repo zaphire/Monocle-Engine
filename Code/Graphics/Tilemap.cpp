@@ -17,13 +17,8 @@ namespace Monocle
 
 	void Tilemap::Resize(int width, int height)
 	{
-		this->width = width;
-		this->height = height;
-
 		std::vector<int> newTiles = std::vector<int>(width*height);
 
-		///TODO: the following crashes, fix
-		/*
 		int maxX = MIN(width, this->width);
 		int maxY = MIN(height, this->height);
 		for(int x=0;x<maxX;++x)
@@ -33,7 +28,9 @@ namespace Monocle
 				newTiles[y*width+x] = tiles[y*this->width+x];
 			}
 		}
-		*/
+
+		this->width = width;
+		this->height = height;
 
 		tiles = newTiles;
 	}
