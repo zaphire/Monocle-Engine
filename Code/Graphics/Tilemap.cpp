@@ -116,7 +116,6 @@ namespace Monocle
 		{
 			SetTile(tx, ty, selectedTile);
 		}
-
 		if (Input::IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
 		{
 			selectedTile = GetTile(tx, ty);
