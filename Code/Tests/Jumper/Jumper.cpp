@@ -1,7 +1,7 @@
 #include "Jumper.h"
 #include "../../Input.h"
+#include "../../Level.h"
 
-// by @NoelFB
 namespace Jumper
 {
 	Player::Player(Vector2 pos) 
@@ -139,8 +139,9 @@ namespace Jumper
 		Input::DefineMaskKey("left", KEY_LEFT);
 		Input::DefineMaskKey("right", KEY_RIGHT);
 
-		//Level::LoadProject("project.xml");
-		//Level::Load("level01.xml", this);
+		Level::SetScene(this);
+		Level::LoadProject("project.xml");
+		Level::Load("level01.xml");
 
 		Graphics::SetBackgroundColor(Color::blue * 0.1f);
 
@@ -170,19 +171,22 @@ namespace Jumper
             SpawnPlayer(Platform::mousePosition);
         }
 
-
 		if (Input::IsKeyPressed(KEY_TAB))
 		{
-			// switch to editor	
+			// switch to editor
+			//SendNoteToGame("SwitchToEditor");
+			Game::SetScene(&ogmosis);
 		}
 	}
 
 	void GameScene::End()
 	{
+		Level::End();
 		delete player;
 		//walls.clear();
 	}
 
+	/*
 	// G A M E
 
 	void JumperGame::Init()
@@ -202,4 +206,5 @@ namespace Jumper
 			Game::SetScene(&gameScene);
 		}
 	}
+	*/
 }

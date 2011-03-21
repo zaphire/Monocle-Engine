@@ -234,17 +234,17 @@ namespace Monocle
 		return static_cast<int>(tagMap[tag].size());
 	}
 
-	void Scene::ReceiveNote(const std::string &note, Entity *fromEntity)
+	void Scene::ReceiveNote(const std::string &note)
 	{
 	}
 
-	void Scene::RelayNoteTo(const std::string &tag, const std::string &note, Entity *fromEntity)
+	void Scene::RelayNoteTo(const std::string &tag, const std::string &note)
 	{
 		std::list<Entity*>* taggedEntities = GetAllTag(tag);
 		for (std::list<Entity*>::iterator i = (*taggedEntities).begin(); i != (*taggedEntities).end(); ++i)
 		{
-			if ((*i) != fromEntity)
-				(*i)->ReceiveNote(tag, note, fromEntity);
+			//if ((*i) != fromEntity)
+			(*i)->ReceiveNote(tag, note);//, fromEntity);
 		}
 	}
 
@@ -274,4 +274,14 @@ namespace Monocle
 		}
 		return NULL;
 	}
+
+	/*
+	void Scene::SendNoteToGame(const std::string &note)
+	{
+		if (game)
+		{
+			game->ReceiveNote(note);
+		}
+	}
+	*/
 }

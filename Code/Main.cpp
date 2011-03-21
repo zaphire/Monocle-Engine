@@ -38,35 +38,29 @@ using namespace Monocle;
 int main(void)
 {
 
-#ifdef TEST_JUMPER
+	Game *game = new Game();
 
-		Game *game = new Jumper::JumperGame();
-		game->Init();
-		game->Main();
-		delete game;
+	game->Init();
 
-#else
-
-		Game *game = new Game();
-
-		game->Init();
-
-	#ifdef TEST_PONG
-		game->SetScene(new Pong::GameScene());
-	#endif
-
-	#ifdef TEST_MARIAN
-		game->SetScene(new Marian::TitleScene());
-	#endif
-
-	#ifdef TEST_FLASH
-		game->SetScene(new Flash::TestScene());
-	#endif
-
-		game->Main();
-	
-		delete game;
+#ifdef TEST_PONG
+	game->SetScene(new Pong::GameScene());
 #endif
+
+#ifdef TEST_MARIAN
+	game->SetScene(new Marian::TitleScene());
+#endif
+
+#ifdef TEST_FLASH
+	game->SetScene(new Flash::TestScene());
+#endif
+
+#ifdef TEST_JUMPER
+	game->SetScene(&Jumper::gameScene);
+#endif
+
+	game->Main();
 	
+	delete game;
+
 	return 0;
 }

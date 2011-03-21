@@ -183,7 +183,7 @@ namespace Monocle
 	{
 		if (scene)
 		{
-			scene->ReceiveNote(note, this);
+			scene->ReceiveNote(note);
 		}
 	}
 
@@ -191,11 +191,11 @@ namespace Monocle
 	{
 		if (scene)
 		{
-			scene->RelayNoteTo(tag, note, this);
+			scene->RelayNoteTo(tag, note);
 		}
 	}
 
-	void Entity::ReceiveNote(const std::string &tag, const std::string &note, Entity *fromEntity)
+	void Entity::ReceiveNote(const std::string &tag, const std::string &note)
 	{
 
 	}

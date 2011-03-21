@@ -1,6 +1,7 @@
 #include "../../Monocle.h"
 #include "../../Graphics/Sprite.h"
 #include "../../Ogmosis/Ogmosis.h"
+#include "../../Level.h"
 
 // by @NoelFB
 using namespace Monocle;
@@ -65,17 +66,8 @@ namespace Jumper
 		void Update();
 
 		void SpawnPlayer(Vector2 pos);
-
-		Level level;
 	};
 
-	class JumperGame : public Game
-	{
-	public:
-		void Init();
-		void ReceiveNote(const std::string &note);
-		GameScene gameScene;
-		Ogmosis ogmosis;
-		Level level;
-	};
+	static GameScene gameScene;
+	static Ogmosis ogmosis;
 }

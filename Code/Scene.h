@@ -53,19 +53,22 @@ namespace Monocle
 		std::list<Entity*>* GetAllTag(const std::string& tag);
 		int GetAmountTag(const std::string& tag);
 
-		//HACK: test function
+		///HACK: test function
 		Entity *GetEntity(int index);
 
 		Entity* GetEntityNearestTo(const Vector2 &position);
-
 		Entity* GetEntityAtPosition(const Vector2 &position, SearchType searchType=SEARCH_TOP);
 
 	protected:
+		// not sure if we need to pass scene or not yet
+		// or if we'll use this later
+		//void SendNoteToGame(const std::string &note);
+
 		friend class Entity;
-		virtual void ReceiveNote(const std::string &note, Entity *fromEntity);
+		virtual void ReceiveNote(const std::string &note);
 
 	private:
-		void RelayNoteTo(const std::string &tag, const std::string &note, Entity *fromEntity);
+		void RelayNoteTo(const std::string &tag, const std::string &note);
 
 	private:
 		//Holds all the entities currently in the scene

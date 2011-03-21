@@ -26,7 +26,7 @@ namespace Monocle
 		graphics.Init();
 		collision.Init();
 		audio.Init();
-		//level.Init();
+		level.Init();
 	}
 
 	void Game::Main()
@@ -113,6 +113,10 @@ namespace Monocle
 	Scene* Game::GetScene()
 	{
 		return instance->scene;
+	}
+
+	void Game::ReceiveNote(const std::string &note)
+	{
 	}
 
 	/*

@@ -11,6 +11,7 @@
 #include "Collision.h"
 #include "Random.h"
 #include "Audio.h"
+#include "Level.h"
 
 namespace Monocle
 {
@@ -28,6 +29,8 @@ namespace Monocle
 		//static void SetEditor(Editor *editor);
 
 		static void Quit();
+
+		virtual void ReceiveNote(const std::string &note);
 
 	private:
 		static Game *instance;
@@ -50,7 +53,7 @@ namespace Monocle
 		Collision collision;
 		Random random;
 		Audio audio;
-		//Level level;
+		Level level;
 
 		//Editor *editor;
 	};

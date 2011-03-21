@@ -85,7 +85,7 @@ namespace Monocle
 		void SendNoteToScene(const std::string &note);
 		// send a note to all entites with tag "tag"
 		void SendNote(const std::string &tag, const std::string &note);
-		virtual void ReceiveNote(const std::string &tag, const std::string &note, Entity *fromEntity);
+		virtual void ReceiveNote(const std::string &tag, const std::string &note);
 
 	private:
 		Entity *parent;

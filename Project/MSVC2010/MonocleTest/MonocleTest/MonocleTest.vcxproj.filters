@@ -195,6 +195,9 @@
     <ClInclude Include="..\..\..\..\Code\Game.h">
       <Filter>Monocle</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Level.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp">
@@ -366,6 +369,9 @@
       <Filter>Monocle\Ogmosis</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Game.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Level.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
   </ItemGroup>
