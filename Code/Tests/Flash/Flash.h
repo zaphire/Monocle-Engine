@@ -83,6 +83,18 @@ namespace Flash
 		std::vector<Entity*> entities;
 	};
 
+	/*
+	class EntityEditor
+	{
+	public:
+		void Update();
+
+		Entity *currentEntity;
+		std::string state;
+		Vector2 offset;
+	};
+	*/
+
 	// will eventually be split off into separate animation + animationEditor objects
 	// temporary home here for testing/building
 	class TestScene : public Scene
@@ -116,21 +128,23 @@ namespace Flash
 		void UpdateFrameNumberDisplay();
 		Part *GetPartForEntity(Entity *entity);
 
-		std::vector<Entity*> onionSkins;
-		std::vector<Animation> animations;
-		Frame backupPartFrame;
-		TextureSheet textureSheet;
-		Animation *currentAnimation;
-		Entity *eAnimation;
-		bool isPlaying;
-		bool isEditing;
-		bool isRecording;
-		int selectedPartIndex;
-		float animationFrame;
-		float fps;
+		std::vector<Entity*> onionSkins;	// list of entities used to create onion skin effect
+		std::vector<Animation> animations;	// list of animations
+		Frame backupPartFrame;				// store a backup of one frame of one part
+		TextureSheet textureSheet;			// the texture sheet, defines png files in the animation
+		Animation *currentAnimation;		// stores current animation (for playing and editing)
+		Entity *eAnimation;					// contains the animation
+		bool isPlaying;						// are we currently playing the animation?
+		bool isEditing;						// are we currently editing the animation?
+		bool isRecording;					// are we recording the animation?
+		int selectedPartIndex;				// current selected part index (only used for keyboard input selection now)
+		float animationFrame;				// current animation frame
+		float fps;							// frame rate at which animation updates
 
-		Part *editPart;
+		Part *editPart;						// currently selected part
 
+		// move into common object eventually
+		Entity *currentEntity;
 		std::string state;
 		Vector2 offset;
 	};

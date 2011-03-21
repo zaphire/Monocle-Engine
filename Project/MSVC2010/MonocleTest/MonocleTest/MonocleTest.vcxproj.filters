@@ -55,6 +55,9 @@
     <Filter Include="Monocle\XML">
       <UniqueIdentifier>{d0da0306-c7a3-4393-8191-1d763d3e0f49}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Monocle\Ogmosis">
+      <UniqueIdentifier>{bbc21fce-4b4f-4566-9f94-f58bc48da817}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Vector3.h">
@@ -188,6 +191,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\GUI.h">
       <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Ogmosis\Ogmosis.h">
+      <Filter>Monocle\Ogmosis</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -358,6 +364,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\GUI.cpp">
       <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Ogmosis\Ogmosis.cpp">
+      <Filter>Monocle\Ogmosis</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
