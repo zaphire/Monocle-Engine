@@ -8,6 +8,7 @@
 	// cmake for other tests isn't working yet
 	#define TEST_JUMPER
 	//#define TEST_FLASH
+	//#define TEST_OGMO
 #elif defined(MONOCLE_MAC)
     #define TEST_PONG
 #else
