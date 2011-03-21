@@ -119,6 +119,7 @@ namespace Ogmo
 		position = Vector2(x, y);
 		AddTag("WALL");
 		SetCollider(new RectangleCollider(8, 8));
+		SetLayer(5);
 	}
 
 	void Wall::Render()
