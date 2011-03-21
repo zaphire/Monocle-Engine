@@ -1,6 +1,7 @@
 #include "Tilemap.h"
 #include "../Macros.h"
 #include "../Graphics.h"
+#include "../Debug.h"
 
 namespace Monocle
 {
@@ -84,7 +85,7 @@ namespace Monocle
 			Graphics::Translate(Vector2(400, 300));
 
 			Graphics::BindTexture(tileset->texture);
-			Graphics::RenderQuad(400, 400);
+			//Graphics::RenderQuad(400, 400);
 
 			int tilesPerRow = tileset->texture->width / tileset->tileWidth;
 
