@@ -14,7 +14,7 @@ namespace Monocle
 		Assets();
 		void Init();
 		//static Asset *RequestAsset(AssetType assetType, const char *filename);
-		static TextureAsset *RequestTexture(const std::string &filename);
+		static TextureAsset *RequestTexture(const std::string &filename, FilterType filter = FILTER_LINEAR, bool repeatX = false, bool repeatY = false);
 		//static AudioAsset *RequestAudio(const std::string &filename);
 
 		void StoreAsset(Asset *asset); // TODO: make private

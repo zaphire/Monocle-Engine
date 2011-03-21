@@ -16,7 +16,7 @@ namespace Monocle
 	Tileset::Tileset(const std::string &name, const std::string &filename, float tileWidth, float tileHeight)
 		: texture(NULL), tileWidth(tileWidth), tileHeight(tileHeight)
 	{
-		texture = Assets::RequestTexture(filename);
+		texture = Assets::RequestTexture(filename, FILTER_NONE);
 	}
 
 	// T I L E M A P
@@ -95,20 +95,31 @@ namespace Monocle
 
 	void Tilemap::Render()
 	{
-		for (int tx = 0; tx < width; tx ++)
+		if (this->tileset)
 		{
-			for (int ty = 0; ty < height; ty++)
+			//hack: make graphics::center?
+			Graphics::Translate(Vector2(400, 300));
+
+			Graphics::BindTexture(tileset->texture);
+			Graphics::RenderQuad(400, 400);
+
+			for (int tx = 0; tx < width; tx ++)
 			{
-				int tileID = tiles[ty*width + tx];
+				for (int ty = 0; ty < height; ty++)
+				{
+					int tileID = tiles[ty*width + tx];
+
+
 				
-				// get x/y coords of tile in tileset
+					// get x/y coords of tile in tileset
 				
-				// convert to texture coordinates
-				//float tex_x, tex_y;
-				//tex_x = tileID/
+					// convert to texture coordinates
+					//float tex_x, tex_y;
+					//tex_x = tileID/
 				
-				// render quad with texture coords set
-				//Graphics::RenderQuad(tileWidth, tileHeight, Vector2(0,0), Vector2(0.125f,0.125f));
+					// render quad with texture coords set
+					//Graphics::RenderQuad(tileWidth, tileHeight, Vector2(0,0), Vector2(0.125f,0.125f));
+				}
 			}
 		}
 	}
@@ -166,7 +177,7 @@ namespace Monocle
 
 		if (instance->scene)
 		{
-			TiXmlDocument xml(filename);
+			TiXmlDocument xml(Assets::GetContentPath() + filename);
 			bool isLoaded = xml.LoadFile();
 
 			if (isLoaded)
@@ -180,6 +191,7 @@ namespace Monocle
 					TiXmlElement *eTilemap = eLevel->FirstChildElement("Tilemap");
 					while (eTilemap)
 					{
+						Debug::Log("********************** adding tilemap entity");
 						Entity *entity = new Entity();
 						entity->SetGraphic(new Tilemap(instance->GetTileset(XMLString(eTilemap, "name")), instance->width, instance->height, 16, 16));
 						instance->scene->Add(entity);
@@ -204,6 +216,7 @@ namespace Monocle
 			if ((*i).name == name)
 				return &(*i);
 		}
+		Debug::Log("Error: Could not find tileset with name: " + name);
 		return NULL;
 	}
 

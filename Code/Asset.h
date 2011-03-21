@@ -6,11 +6,18 @@ namespace Monocle
 {
 	enum AssetType
 	{
-		AT_UNDEFINED,
-		AT_TEXTURE,
-		AT_AUDIO,
-		AT_MAX
+		ASSET_UNDEFINED,
+		ASSET_TEXTURE,
+		ASSET_AUDIO,
+		ASSET_MAX
 	};
+
+	enum FilterType
+	{
+		FILTER_NONE,
+		FILTER_LINEAR
+	};
+
 
 	class Asset
 	{
@@ -28,7 +35,8 @@ namespace Monocle
 		void AddReference();
 		void RemoveReference();
 
-		virtual void Load(const std::string &filename) = 0;
+		// allow derived classes to add whatever params they want to load
+		//virtual void Load(const std::string &filename)=0;
 		virtual void Unload() = 0;
 	};
 }

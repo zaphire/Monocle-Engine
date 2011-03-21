@@ -3,10 +3,10 @@
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Color.h"
+#include "TextureAsset.h"
 
 namespace Monocle
 {
-	class TextureAsset;
 	class Entity;
 
 	class Graphic

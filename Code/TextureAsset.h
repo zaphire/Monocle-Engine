@@ -8,7 +8,7 @@ namespace Monocle
 	{
 	public:
 		TextureAsset();
-		void Load(const std::string &filename);
+		void Load(const std::string &filename, FilterType filter, bool repeatX, bool repeatY);
 		void Unload();
 		void Bind();
 

@@ -1838,7 +1838,7 @@ bool TiXmlPrinter::Visit( const TiXmlUnknown& unknown )
 }
 
 
-const std::string &XMLString(TiXmlElement *elem, const std::string &att)
+std::string XMLString(TiXmlElement *elem, const std::string &att)
 {
 	const std::string *read = elem->Attribute(att);
 	if (read != NULL)

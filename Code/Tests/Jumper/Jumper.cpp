@@ -17,7 +17,7 @@ namespace Jumper
 
 		SetCollider(new RectangleCollider(40, 64));
 
-		sprite = new Sprite("Graphics/Player.png", 64, 64);
+		sprite = new Sprite("Graphics/Player.png", FILTER_NONE, 64, 64);
 		SetGraphic(sprite);
 
 		speed = 100.0f;
@@ -152,7 +152,7 @@ namespace Jumper
 		Add(new Wall(Vector2(600.0f, 400.0), 100.0f, 10.0f));
 		Add(new Wall(Vector2(200.0f, 400.0), 20.0f, 150.0f));
 
-		SpawnPlayer(Vector2(400.0f, 300.0f));
+		SpawnPlayer(Vector2(400, 300));
 	}
 
 	void GameScene::SpawnPlayer(Vector2 pos)

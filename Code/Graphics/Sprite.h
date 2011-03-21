@@ -11,6 +11,7 @@ namespace Monocle
 	{
 	public:
 		Sprite(const std::string &filename, float width=-1, float height=-1);
+		Sprite(const std::string &filename, FilterType filter, float width=-1, float height=-1);
 		~Sprite();
 		void Render();
 		void GetWidthHeight(int *width, int *height);

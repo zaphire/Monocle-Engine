@@ -93,7 +93,7 @@ class TiXmlDeclaration;
 class TiXmlParsingData;
 
 /// MODIFIED
-const std::string &XMLString(TiXmlElement *elem, const std::string &att);
+std::string XMLString(TiXmlElement *elem, const std::string &att);
 float XMLFloat(TiXmlElement* elem, const std::string &att);
 int XMLInt(TiXmlElement* elem, const std::string &att);
 
