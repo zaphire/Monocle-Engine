@@ -1,7 +1,7 @@
 #ifdef MONOCLE_WINDOWS
 
 #include "../Debug.h"
-#include "../Core.h"
+#include "../Game.h"
 #include "../Graphics.h"
 
 #include "WindowsPlatform.h"
@@ -660,7 +660,7 @@ namespace Monocle
 		{
 			if (msg.message==WM_QUIT)
 			{
-				Core::Quit();
+				Game::Quit();
 				break;
 			}
 

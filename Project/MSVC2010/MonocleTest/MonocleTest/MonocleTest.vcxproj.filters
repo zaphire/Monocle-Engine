@@ -75,9 +75,6 @@
     <ClInclude Include="..\..\..\..\Code\Color.h">
       <Filter>Monocle</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Core.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Debug.h">
       <Filter>Monocle</Filter>
     </ClInclude>
@@ -195,6 +192,9 @@
     <ClInclude Include="..\..\..\..\Code\Ogmosis\Ogmosis.h">
       <Filter>Monocle\Ogmosis</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Game.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp">
@@ -204,9 +204,6 @@
       <Filter>Monocle</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Color.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Core.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Debug.cpp">
@@ -367,6 +364,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Ogmosis\Ogmosis.cpp">
       <Filter>Monocle\Ogmosis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Game.cpp">
+      <Filter>Monocle</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

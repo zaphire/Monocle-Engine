@@ -7,17 +7,17 @@
 #include "Scene.h"
 #include "Assets.h"
 #include "Tween.h"
-#include "Editor.h"
+//#include "Editor.h"
 #include "Collision.h"
 #include "Random.h"
 #include "Audio.h"
 
 namespace Monocle
 {
-	class Core
+	class Game
 	{
 	public:
-		Core();
+		Game();
 		virtual void Init();
 
 		void Main();
@@ -25,12 +25,12 @@ namespace Monocle
 		static void SetScene(Scene* scene);
 		static Scene* GetScene();
 
-		static void SetEditor(Editor *editor);
+		//static void SetEditor(Editor *editor);
 
 		static void Quit();
 
 	private:
-		static Core *instance;
+		static Game *instance;
 
 		bool isDone;
 
@@ -52,6 +52,6 @@ namespace Monocle
 		Audio audio;
 		//Level level;
 
-		Editor *editor;
+		//Editor *editor;
 	};
 }

@@ -183,18 +183,23 @@ namespace Jumper
 		//walls.clear();
 	}
 
+	// G A M E
 
-	void Game::Init()
+	void JumperGame::Init()
 	{
-		Core::Init();
+		Game::Init();
 		SetScene(&gameScene);
 	}
 
-	void Game::ReceiveNote(const std::string &note)
+	void JumperGame::ReceiveNote(const std::string &note)
 	{
 		if (note == "SwitchToEditor")
 		{
-			Core::SetScene(&ogmosis);
+			Game::SetScene(&ogmosis);
+		}
+		if (note == "SwitchToGame")
+		{
+			Game::SetScene(&gameScene);
 		}
 	}
 }

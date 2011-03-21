@@ -6,6 +6,7 @@ using namespace Monocle;
 
 namespace Marian
 {
+	/*
 	class LevelEditor : public Editor
 	{
 	public:
@@ -17,6 +18,7 @@ namespace Marian
 
 		void UpdateOldSpriteMethod();
 	};
+	*/
 
 	class TitleScene : public Scene
 	{

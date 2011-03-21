@@ -10,11 +10,11 @@
 #elif defined(MONOCLE_MAC)
     #define TEST_PONG
 #else
-	//#define TEST_CORE
+	//#define TEST_game
 	//#define TEST_PONG
 	//#define TEST_MARIAN
-	//#define TEST_JUMPER
-	#define TEST_FLASH
+	#define TEST_JUMPER
+	//#define TEST_FLASH
 #endif
 
 #ifdef TEST_PONG
@@ -37,29 +37,36 @@ using namespace Monocle;
 
 int main(void)
 {
-	Core *core = new Core();
-
-	core->Init();
-
-#ifdef TEST_PONG
-	core->SetScene(new Pong::GameScene());
-#endif
-
-#ifdef TEST_MARIAN
-	core->SetScene(new Marian::TitleScene());
-#endif
 
 #ifdef TEST_JUMPER
-	core->SetScene(new Jumper::GameScene());
-#endif
 
-#ifdef TEST_FLASH
-	core->SetScene(new Flash::TestScene());
-#endif
+		Game *game = new Jumper::JumperGame();
+		game->Init();
+		game->Main();
+		delete game;
 
-	core->Main();
+#else
+
+		Game *game = new Game();
+
+		game->Init();
+
+	#ifdef TEST_PONG
+		game->SetScene(new Pong::GameScene());
+	#endif
+
+	#ifdef TEST_MARIAN
+		game->SetScene(new Marian::TitleScene());
+	#endif
+
+	#ifdef TEST_FLASH
+		game->SetScene(new Flash::TestScene());
+	#endif
+
+		game->Main();
 	
-	delete core;
+		delete game;
+#endif
 	
 	return 0;
 }

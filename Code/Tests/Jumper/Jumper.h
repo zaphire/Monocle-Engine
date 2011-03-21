@@ -69,12 +69,13 @@ namespace Jumper
 		Level level;
 	};
 
-	class Game : public Core
+	class JumperGame : public Game
 	{
 	public:
 		void Init();
 		void ReceiveNote(const std::string &note);
 		GameScene gameScene;
 		Ogmosis ogmosis;
+		Level level;
 	};
 }

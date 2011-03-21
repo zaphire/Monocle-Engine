@@ -3,6 +3,7 @@
 
 namespace Marian
 {
+	/*
 	LevelEditor::LevelEditor()
 		: isOn(false), selectedSprite(NULL)
 	{
@@ -32,57 +33,6 @@ namespace Marian
 			UpdateOldSpriteMethod();
 		}
 	}
-
-	void TitleScene::Begin()
-	{
-		Scene::Begin();
-
-		Assets::SetContentPath("../../Content/Marian/");
-
-		Core::SetEditor(new LevelEditor());
-
-		Sprite *sprite=NULL;
-		Entity *bg = AddSpriteEntity(Vector2(400, 300), 20, "Graphics/ReverieSky.png", 1024, 512, 1.25f);
-		Entity *title = AddSpriteEntity(Vector2(400, 300), -20, "Graphics/Title.png", 512, 512, 1.5f, &sprite);
-
-		Tween::FromTo(&title->color.a, 0.0f, 1.0f, 8.0f, EASE_OUTSIN);
-		Tween::FromTo(&title->position, Vector2(400, 1024), Vector2(400, 300), 4.0f, EASE_OUTSIN);
-	}
-
-	Entity* TitleScene::AddSpriteEntity(Vector2 pos, int layer, const char *filename, int width, int height, float scale, Sprite **spriteRef)
-	{
-		Entity *entity = new Entity();
-		entity->position = pos;
-
-		Sprite *sprite = new Sprite(filename, width, height);
-		entity->SetGraphic(sprite);
-
-		Add(entity);
-
-		if (spriteRef != NULL)
-		{
-			*spriteRef = sprite;
-		}
-
-		return entity;
-	}
-
-	void TitleScene::Update()
-	{
-		Scene::Update();
-
-		if (Input::IsKeyPressed(KEY_ESCAPE))
-		{
-			Core::Quit();
-		}
-	}
-
-	void TitleScene::End()
-	{
-		Scene::End();
-	}
-
-
 	void LevelEditor::UpdateOldSpriteMethod()
 	{
 #ifdef MARIAN_EDITOR_OLDSPRITEMETHOD
@@ -96,7 +46,7 @@ namespace Marian
 			if (selectedSprite)
 				selectedSprite->isSelected = false;
 
-			selectedSprite = (Sprite*)Core::GetScene()->GetEntity(selectedSpriteIndex);
+			selectedSprite = (Sprite*)Game::GetScene()->GetEntity(selectedSpriteIndex);
 
 			if (selectedSprite)
 			{
@@ -116,7 +66,7 @@ namespace Marian
 			if (selectedSprite)
 				selectedSprite->isSelected = false;
 
-			selectedSprite = (Sprite*)Core::GetScene()->GetEntity(selectedSpriteIndex);
+			selectedSprite = (Sprite*)Game::GetScene()->GetEntity(selectedSpriteIndex);
 
 			if (selectedSprite)
 			{
@@ -128,24 +78,6 @@ namespace Marian
 			}
 		}
 
-		/*
-		if (Input::IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE))
-		{
-			// need to get mouse position into world coordinates somehow
-			Entity *entity = Core::GetScene()->GetEntityNearestTo(Input::GetMousePosition());
-			if (entity)
-			{
-				if (selectedSprite)
-					selectedSprite->isSelected = false;
-
-				selectedSprite = ((Sprite*)entity);
-
-				if (selectedSprite)
-					selectedSprite->isSelected = true;
-			}
-		}
-		*/
-
 		// add new sprite
 		if (Input::IsKeyPressed(KEY_SPACE))
 		{
@@ -154,7 +86,7 @@ namespace Marian
 
 			selectedSprite = new Sprite(Vector2(400, 300), 0, "../../../../Content/Marian/Title.png", 512, 512);
 			Tween::FromTo(&selectedSprite->color.a, 0.0f, 1.0f, 0.5f, EASE_LINEAR);
-			Core::GetScene()->Add(selectedSprite);
+			Game::GetScene()->Add(selectedSprite);
 
 			if (selectedSprite)
 				selectedSprite->isSelected = true;
@@ -164,7 +96,7 @@ namespace Marian
 		{
 			if (selectedSprite)
 			{
-				Core::GetScene()->Remove(selectedSprite);
+				Game::GetScene()->Remove(selectedSprite);
 				// hmm... i think Scene::Remove is gonna have to delete this guy for us
 				// we're probably leaking memory right now :)
 				//delete selectedSprite;
@@ -213,4 +145,57 @@ namespace Marian
 		}
 #endif
 	}
+	*/
+
+	void TitleScene::Begin()
+	{
+		Scene::Begin();
+
+		Assets::SetContentPath("../../Content/Marian/");
+
+		//Game::SetEditor(new LevelEditor());
+
+		Sprite *sprite=NULL;
+		Entity *bg = AddSpriteEntity(Vector2(400, 300), 20, "Graphics/ReverieSky.png", 1024, 512, 1.25f);
+		Entity *title = AddSpriteEntity(Vector2(400, 300), -20, "Graphics/Title.png", 512, 512, 1.5f, &sprite);
+
+		Tween::FromTo(&title->color.a, 0.0f, 1.0f, 8.0f, EASE_OUTSIN);
+		Tween::FromTo(&title->position, Vector2(400, 1024), Vector2(400, 300), 4.0f, EASE_OUTSIN);
+	}
+
+	Entity* TitleScene::AddSpriteEntity(Vector2 pos, int layer, const char *filename, int width, int height, float scale, Sprite **spriteRef)
+	{
+		Entity *entity = new Entity();
+		entity->position = pos;
+
+		Sprite *sprite = new Sprite(filename, width, height);
+		entity->SetGraphic(sprite);
+
+		Add(entity);
+
+		if (spriteRef != NULL)
+		{
+			*spriteRef = sprite;
+		}
+
+		return entity;
+	}
+
+	void TitleScene::Update()
+	{
+		Scene::Update();
+
+		if (Input::IsKeyPressed(KEY_ESCAPE))
+		{
+			Game::Quit();
+		}
+	}
+
+	void TitleScene::End()
+	{
+		Scene::End();
+	}
+
+
+
 }

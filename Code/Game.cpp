@@ -1,4 +1,4 @@
-#include "Core.h"
+#include "Game.h"
 
 //If you want to use fixed timestep, uncomment the following three lines:
 //#define FIXED_TIMESTEP
@@ -7,16 +7,17 @@
 
 namespace Monocle
 {
-	Core *Core::instance = NULL;
+	Game *Game::instance = NULL;
 
-	Core::Core()
-		:  scene(NULL), switchTo(NULL), isDone(false), editor(NULL)
+	Game::Game()
+		:  scene(NULL), switchTo(NULL), isDone(false)
+		//, editor(NULL)
 	{
 		instance = this;
 		Monocle::deltaTime	= 0.0f;
 	}
 
-	void Core::Init()
+	void Game::Init()
 	{
 		debug.Init();
 		platform.Init();
@@ -28,7 +29,7 @@ namespace Monocle
 		//level.Init();
 	}
 
-	void Core::Main()
+	void Game::Main()
 	{
 		long lastTick = Platform::GetMilliseconds();
 		long tick;
@@ -38,10 +39,12 @@ namespace Monocle
 			platform.Update();
 			tween.Update();
 
+			/*
 			if (editor != NULL)
 			{
 				editor->Update();
 			}
+			*/
 
 			//Switch scenes if necessary
 			if (switchTo != NULL)
@@ -97,23 +100,25 @@ namespace Monocle
 		}
 	}
 
-	void Core::Quit()
+	void Game::Quit()
 	{
 		instance->isDone = true;
 	}
 
-	void Core::SetScene(Scene* scene)
+	void Game::SetScene(Scene* scene)
 	{
 		instance->switchTo = scene;
 	}
 
-	Scene* Core::GetScene()
+	Scene* Game::GetScene()
 	{
 		return instance->scene;
 	}
 
-	void Core::SetEditor(Editor *editor)
+	/*
+	void Game::SetEditor(Editor *editor)
 	{
 		instance->editor = editor;
 	}
+	*/
 }
