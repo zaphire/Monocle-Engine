@@ -1,4 +1,4 @@
-<Level width="12" height="10">
+<Level width="16" height="16" tileWidth="8" tileHeight="8">
 	<Tilemap set="tiles">
 		<Tile tx="0" ty="0" tileID="0"/>
 	</Tilemap>

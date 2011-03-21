@@ -13,6 +13,11 @@ namespace Monocle
 		this->tileHeight = tileHeight;
 		this->Resize(width, height);
 		this->Clear();
+
+
+		/// TEST:
+		for (int x = 0; x < width; x++)
+			SetTile(x, 3, x);
 	}
 
 	void Tilemap::Resize(int width, int height)
@@ -97,11 +102,13 @@ namespace Monocle
 		if (this->tileset)
 		{
 			//hack: make graphics::center?
-			Graphics::Translate(Vector2(400, 300));
+			//Graphics::Translate(Vector2(400, 300));
 
+			//Graphics::BindTexture(NULL);
 			Graphics::BindTexture(tileset->texture);
 			//Graphics::RenderQuad(400, 400);
 
+			Vector2 texOffset;
 			Vector2 texScale = Vector2(tileset->tileWidth / (float)tileset->texture->width, tileset->tileHeight / (float)tileset->texture->height);
 			int tilesPerRow = tileset->texture->width / tileset->tileWidth;
 
@@ -111,12 +118,18 @@ namespace Monocle
 				{
 					int tileID = tiles[ty*width + tx];
 
-					// get x/y coords of tile in tileset
-					int tileX = (tileID % tilesPerRow) * tileset->tileWidth;
-					int tileY = (tileID / tilesPerRow) * tileset->tileHeight;
+					if (tileID != -1)
+					{
+
+						// get x/y coords of tile in tileset
+						int tileX = (tileID % tilesPerRow) * tileset->tileWidth;
+						int tileY = (tileID / tilesPerRow) * tileset->tileHeight;
+
+						texOffset = Vector2(tileX/(float)tileset->texture->width, tileY/(tileX/(float)tileset->texture->width));
 				
-					// render quad with texture coords set
-					Graphics::RenderQuad(tileWidth, tileHeight, Vector2((float)tileX, (float)tileY), texScale, Vector2(tx * tileWidth, ty * tileHeight));
+						// render quad with texture coords set
+						Graphics::RenderQuad(tileWidth, tileHeight, texOffset, texScale, Vector2(tx * tileWidth + tileWidth*0.5f, ty * tileHeight + tileHeight*0.5f));
+					}
 				}
 			}
 		}
