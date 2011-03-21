@@ -24,9 +24,17 @@ namespace Monocle
 		this->width = width;
 		this->height = height;
 
-		/// TODO: resize array
-		//std::vector<int> newTiles = std::vector<int>();
-		//tiles.resize(width*height);
+		std::vector<int> newTiles = std::vector<int>(width*height);
+		int maxX = min(width, this->width);
+		int maxY = min(height, this->height);
+		for(int x=0;x<maxX;++x)
+		{
+			for(int y=0;y<maxY;++y)
+			{
+				newTiles[y*width+x] = tiles[y*this->width+x];
+			}
+		}
+		tiles = newTiles;
 	}
 
 	void Tilemap::GetWidthHeight(int *width, int *height)
