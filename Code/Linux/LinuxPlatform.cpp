@@ -13,7 +13,7 @@
 #include <unistd.h>
 
 #include "../Debug.h"
-#include "../Core.h"
+#include "../Game.h"
 #include "../Graphics.h"
 
 namespace Monocle
