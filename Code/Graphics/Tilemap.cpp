@@ -7,16 +7,14 @@
 namespace Monocle
 {
 	Tilemap::Tilemap(Tileset *tileset, int width, int height, int tileWidth, int tileHeight)
-		: Graphic()
+		: Graphic(), width(0), height(0), tileWidth(tileWidth), tileHeight(tileHeight)
 	{
 		this->tileset = tileset;
-		this->tileWidth = tileWidth;
-		this->tileHeight = tileHeight;
-		tiles.resize(width*height);
-		this->Clear();
+
+		Resize(width, height);
+		Clear();
 
 		this->selectedTile = 0;
-
 
 		/// TEST:
 		for (int y = 0; y < height/tileHeight; y++)
@@ -129,6 +127,7 @@ namespace Monocle
 
 		if (this->tileset)
 		{
+			//Debug::Log("rendering!");
 			Graphics::BindTexture(tileset->texture);
 
 			Vector2 texOffset;
@@ -141,8 +140,11 @@ namespace Monocle
 				{
 					int tileID = tiles[(ty*width) + tx];
 
+					//printf("%d, %d = %d", tx, ty, tileID);
 					if (tileID != -1)
 					{
+						//printf("%d, %d = %d", tx, ty, tileID);
+
 						// get x/y coords of tile in tileset
 						int tileX = (tileID % tilesPerRow) * tileset->tileWidth;
 						int tileY = (tileID / tilesPerRow) * tileset->tileHeight;
