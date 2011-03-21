@@ -7,6 +7,7 @@
 #if defined(MONOCLE_LINUX)
 	// cmake for other tests isn't working yet
 	#define TEST_JUMPER
+	//#define TEST_FLASH
 #elif defined(MONOCLE_MAC)
     #define TEST_PONG
 #else
