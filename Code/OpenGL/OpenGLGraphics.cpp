@@ -220,6 +220,16 @@ namespace Monocle
 		glColor4f(color.r, color.g, color.b, color.a);
 	}
 
+	int Graphics::GetVirtualWidth()
+	{
+		return instance->virtualWidth;
+	}
+
+	int Graphics::GetVirtualHeight()
+	{
+		return instance->virtualHeight;
+	}
+
 	void Graphics::RenderQuad(float width, float height, Vector2 textureOffset, Vector2 textureScale, Vector2 offset)
 	{
 		float halfWidth = width*0.5f;

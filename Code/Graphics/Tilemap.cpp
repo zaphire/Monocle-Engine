@@ -2,6 +2,7 @@
 #include "../Macros.h"
 #include "../Graphics.h"
 #include "../Debug.h"
+#include "../Input.h"
 
 namespace Monocle
 {
@@ -13,6 +14,8 @@ namespace Monocle
 		this->tileHeight = tileHeight;
 		this->Resize(width, height);
 		this->Clear();
+
+		this->selectedTile = 0;
 
 
 		/// TEST:
@@ -70,12 +73,14 @@ namespace Monocle
 
 	int Tilemap::GetTile(int tx, int ty)
 	{
+		printf("GetTile(%d, %d) = %d\n", tx, ty, tiles[ty*width + tx]);
 		return tiles[ty*width + tx];
 	}
 
 	void Tilemap::SetTile(int tx, int ty, int tileID)
 	{
 		tiles[ty*width + tx] = tileID;
+		printf("SetTile(%d, %d, %d)\n", tx, ty, tileID);
 	}
 
 	int Tilemap::GetTileAtWorldPosition(const Vector2 &position)
@@ -98,12 +103,31 @@ namespace Monocle
 		*ty = (int)(position.y / (float)tileHeight);
 	}
 
-	void Tilemap::Update()
+	void Tilemap::UpdateEditor()
 	{
+		// hack editor
+		Vector2 mousePosition = Input::GetMousePosition();
+		int tx = mousePosition.x / tileWidth;
+		int ty = mousePosition.y / tileWidth;
+
+		//printf("mp (%d, %d)\n", tx, ty);
+
+		if (Input::IsMouseButtonHeld(MOUSE_BUTTON_LEFT))
+		{
+			SetTile(tx, ty, selectedTile);
+		}
+
+		if (Input::IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
+		{
+			selectedTile = GetTile(tx, ty);
+		}
 	}
 
 	void Tilemap::Render()
 	{
+		///HACK:
+		UpdateEditor();
+
 		if (this->tileset)
 		{
 			Graphics::BindTexture(tileset->texture);
