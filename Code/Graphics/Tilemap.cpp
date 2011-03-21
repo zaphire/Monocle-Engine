@@ -1,5 +1,6 @@
 #include "Tilemap.h"
 #include "../Macros.h"
+#include "../Debug.h"
 
 namespace Monocle
 {
@@ -83,8 +84,9 @@ namespace Monocle
 			Graphics::Translate(Vector2(400, 300));
 
 			Graphics::BindTexture(tileset->texture);
-			Graphics::RenderQuad(400, 400);
+			//Graphics::RenderQuad(400, 400);
 
+			// TODO: divide width by tilew/h
 			for (int tx = 0; tx < width; tx ++)
 			{
 				for (int ty = 0; ty < height; ty++)
@@ -100,7 +102,9 @@ namespace Monocle
 					//tex_x = tileID/
 				
 					// render quad with texture coords set
-					//Graphics::RenderQuad(tileWidth, tileHeight, Vector2(0,0), Vector2(0.125f,0.125f));
+					Debug::Log(tileset->tileWidth);
+
+					Graphics::RenderQuad(tileset->tileWidth, tileset->tileHeight, Vector2(0,0), Vector2(1,1), Vector2(tx * tileset->tileWidth, ty * tileset->tileHeight));
 				}
 			}
 		}

@@ -220,19 +220,19 @@ namespace Monocle
 		glColor4f(color.r, color.g, color.b, color.a);
 	}
 
-	void Graphics::RenderQuad(float width, float height, Vector2 textureOffset, Vector2 textureScale)
+	void Graphics::RenderQuad(float width, float height, Vector2 textureOffset, Vector2 textureScale, Vector2 offset)
 	{
 		float halfWidth = width*0.5f;
 		float halfHeight = height*0.5f;
 
 		glBegin(GL_QUADS);
-			glVertex3f(-halfWidth, -halfHeight, 0.0f);
+			glVertex3f(-halfWidth + offset.x, -halfHeight + offset.y, 0.0f);
 			glTexCoord2f(textureOffset.x + textureScale.x, textureOffset.y);
-			glVertex3f(halfWidth, -halfHeight, 0.0f);
+			glVertex3f(halfWidth + offset.x, -halfHeight + offset.y, 0.0f);
 			glTexCoord2f(textureOffset.x + textureScale.x, textureOffset.y + textureScale.y);
-			glVertex3f(halfWidth, halfHeight, 0.0f);
+			glVertex3f(halfWidth + offset.x, halfHeight + offset.y, 0.0f);
 			glTexCoord2f(textureOffset.x, textureOffset.y + textureScale.y);
-			glVertex3f(-halfWidth, halfHeight, 0.0f);
+			glVertex3f(-halfWidth + offset.x, halfHeight + offset.y, 0.0f);
 			glTexCoord2f(textureOffset.x, textureOffset.y);
 		glEnd();
 	}
