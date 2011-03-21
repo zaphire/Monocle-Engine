@@ -25,6 +25,7 @@ namespace Monocle
 		graphics.Init();
 		collision.Init();
 		audio.Init();
+		//level.Init();
 	}
 
 	void Core::Main()

@@ -18,7 +18,7 @@ namespace Monocle
 	{
 	public:
 		Core();
-		void Init();
+		virtual void Init();
 
 		void Main();
 
@@ -50,6 +50,7 @@ namespace Monocle
 		Collision collision;
 		Random random;
 		Audio audio;
+		//Level level;
 
 		Editor *editor;
 	};

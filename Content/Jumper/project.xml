@@ -1,0 +1,5 @@
+<project>
+	<tilesets>
+		<tileset name="tiles" image="tiles.png" tileWidth="16" tileHeight="16"/>
+	</tilesets>
+</project>

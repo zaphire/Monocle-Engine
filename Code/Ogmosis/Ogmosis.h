@@ -3,21 +3,25 @@
 #include "../Scene.h"
 #include "../Graphics.h"
 
+// NOTE: all this stuff is one file just for now, will refactor later
+
 namespace Monocle
 {
 
 	class Tileset
 	{
 	public:
-		Tileset(const std::string &name, const std::string &filename);
-		std::string name;
-		TextureAsset *texture;
+		Tileset(const std::string &name, const std::string &filename, float tileWidth, float tileHeight);
+		
+		std::string name;				// name of the set
+		float tileWidth, tileHeight;		// how big is a tile in the set
+		TextureAsset *texture;			// texture ref for the set
 	};
 
 	class Tilemap : public Graphic
 	{
 	public:
-		Tilemap(const std::string &filename, int width, int height, int tileWidth, int tileHeight);
+		Tilemap(Tileset *tileset, int width, int height, int tileWidth, int tileHeight);
 
 		void Resize(int width, int height);
 
@@ -38,6 +42,7 @@ namespace Monocle
 		TextureAsset *texture;
 
 	private:
+		Tileset *tileset;
 		int width, height;
 		int tileWidth, tileHeight;
 		std::vector<int> tiles;
@@ -68,7 +73,5 @@ namespace Monocle
 		void Begin();
 		void Update();
 		void End();
-
-		Level level;
 	};
 }

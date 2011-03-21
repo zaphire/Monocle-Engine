@@ -1,0 +1,7 @@
+<level>
+	<width>640</width>
+	<height>480</height>
+	<tilemap set="tiles">
+		<tile tx="0" ty="0" tileID="1"/>
+	</tilemap>
+</level>

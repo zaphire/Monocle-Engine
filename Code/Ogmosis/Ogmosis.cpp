@@ -1,19 +1,23 @@
 #include "Ogmosis.h"
+#include "../XML/tinyxml.h"
+#include "../Assets.h"
 
 namespace Monocle
 {
 	// T I L E S E T
 
-	Tileset::Tileset(const std::string &name, const std::string &filename)
-		: texture(NULL)
+	Tileset::Tileset(const std::string &name, const std::string &filename, float tileWidth, float tileHeight)
+		: texture(NULL), tileWidth(tileWidth), tileHeight(tileHeight)
 	{
+		texture = Assets::RequestTexture(filename);
 	}
 
 	// T I L E M A P
 
-	Tilemap::Tilemap(const std::string &filename, int width, int height, int tileWidth, int tileHeight)
+	Tilemap::Tilemap(Tileset *tileset, int width, int height, int tileWidth, int tileHeight)
 		: Graphic()
 	{
+		this->tileset = tileset;
 		this->tileWidth = tileWidth;
 		this->tileHeight = tileHeight;
 		tiles.resize(width*height);
@@ -82,11 +86,14 @@ namespace Monocle
 			{
 				int tileID = tiles[ty*width + tx];
 				
-				// get x/y coords of tile into tilemap
+				// get x/y coords of tile in tileset
 				
 				// convert to texture coordinates
-
+				//float tex_x, tex_y;
+				//tex_x = tileID/
+				
 				// render quad with texture coords set
+				//Graphics::RenderQuad(tileWidth, tileHeight, Vector2(0,0), Vector2(0.125f,0.125f));
 			}
 		}
 	}
@@ -129,8 +136,7 @@ namespace Monocle
 	{
 		Scene::Begin();
 
-		level.SetScene(this);
-		level.Load("test");
+		//Level::Load("HappyLandLevel");
 	}
 
 	void Ogmosis::Update()

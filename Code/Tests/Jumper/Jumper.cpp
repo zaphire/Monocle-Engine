@@ -127,6 +127,9 @@ namespace Jumper
 
 	void GameScene::Begin()
 	{
+		Debug::Log("Jumper::GameScene::Begin()!");
+		Scene::Begin();
+
 		Assets::SetContentPath("../../Content/Jumper/");
 
 		Input::DefineMaskKey("jump", KEY_UP);
@@ -136,8 +139,8 @@ namespace Jumper
 		Input::DefineMaskKey("left", KEY_LEFT);
 		Input::DefineMaskKey("right", KEY_RIGHT);
 
-		Debug::Log("Jumper::GameScene::Begin()!");
-		Scene::Begin();
+		//Level::LoadProject("project.xml");
+		//Level::Load("level01.xml", this);
 
 		Graphics::SetBackgroundColor(Color::blue * 0.1f);
 
@@ -162,15 +165,36 @@ namespace Jumper
 		{
 			SpawnPlayer(Vector2(400.0f, 300.0f));
 		}
-        if(Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+        if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
         {
             SpawnPlayer(Platform::mousePosition);
         }
+
+
+		if (Input::IsKeyPressed(KEY_TAB))
+		{
+			// switch to editor	
+		}
 	}
 
 	void GameScene::End()
 	{
 		delete player;
 		//walls.clear();
+	}
+
+
+	void Game::Init()
+	{
+		Core::Init();
+		SetScene(&gameScene);
+	}
+
+	void Game::ReceiveNote(const std::string &note)
+	{
+		if (note == "SwitchToEditor")
+		{
+			Core::SetScene(&ogmosis);
+		}
 	}
 }
