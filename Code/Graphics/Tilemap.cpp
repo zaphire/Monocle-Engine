@@ -1,5 +1,6 @@
 #include "Tilemap.h"
 #include "../Macros.h"
+#include "../Graphics.h"
 
 namespace Monocle
 {
@@ -9,7 +10,7 @@ namespace Monocle
 		this->tileset = tileset;
 		this->tileWidth = tileWidth;
 		this->tileHeight = tileHeight;
-		tiles.resize(width*height);
+		this->Resize(width, height);
 	}
 
 	void Tilemap::Resize(int width, int height)
@@ -85,22 +86,20 @@ namespace Monocle
 			Graphics::BindTexture(tileset->texture);
 			Graphics::RenderQuad(400, 400);
 
+			int tilesPerRow = tileset->texture->width / tileset->tileWidth;
+
 			for (int tx = 0; tx < width; tx ++)
 			{
 				for (int ty = 0; ty < height; ty++)
 				{
 					int tileID = tiles[ty*width + tx];
 
-
-				
 					// get x/y coords of tile in tileset
-				
-					// convert to texture coordinates
-					//float tex_x, tex_y;
-					//tex_x = tileID/
+					int tileX = (tileID % tilesPerRow) * tileset->tileWidth;
+					int tileY = (tileID / tilesPerRow) * tileset->tileHeight;
 				
 					// render quad with texture coords set
-					//Graphics::RenderQuad(tileWidth, tileHeight, Vector2(0,0), Vector2(0.125f,0.125f));
+					Graphics::RenderQuad(tileWidth, tileHeight, Vector2((float)tileX, (float)tileY));
 				}
 			}
 		}
