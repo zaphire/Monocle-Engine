@@ -3,6 +3,7 @@
 #include "XML/tinyxml.h"
 #include <iostream>
 #include <fstream>
+#include "Entity.h"
 
 /// TODO: move this somewhere common
 #define min(a, b) (((a) < (b)) ? (a) : (b)) 
@@ -120,6 +121,7 @@ namespace Monocle
 		: scene(NULL)
 	{
 		instance = this;
+		width = height = 0;
 	}
 
 	void Level::Init()
@@ -169,9 +171,40 @@ namespace Monocle
 
 			if (isLoaded)
 			{
+				TiXmlElement* eLevel = xml.FirstChildElement("Level");
+				if (eLevel)
+				{
+					instance->width = XMLInt(eLevel, "width");
+					instance->height = XMLInt(eLevel, "height");
+
+					TiXmlElement *eTilemap = eLevel->FirstChildElement("Tilemap");
+					while (eTilemap)
+					{
+						Entity *entity = new Entity();
+						entity->SetGraphic(new Tilemap(instance->GetTileset(XMLString(eTilemap, "name")), instance->width, instance->height, 16, 16));
+						instance->scene->Add(entity);
+
+						TiXmlElement *eTile = eTilemap->FirstChildElement("Tile");
+						while (eTile)
+						{
+							eTile = eTilemap->NextSiblingElement("Tile");
+						}
+						eTilemap = eLevel->NextSiblingElement("Tilemap");
+					}
+				}
 			}
 					
 		}
+	}
+
+	Tileset *Level::GetTileset(const std::string &name)
+	{
+		for (std::list<Tileset>::iterator i = tilesets.begin(); i != tilesets.end(); ++i)
+		{
+			if ((*i).name == name)
+				return &(*i);
+		}
+		return NULL;
 	}
 
 	void Level::Save()

@@ -1,5 +1,5 @@
 <Project>
 	<Tilesets>
-		<Tileset name="tiles" image="tiles.png" tileWidth="16" tileHeight="16"/>
+		<Tileset name="tiles" image="Graphics/tiles.png" tileWidth="16" tileHeight="16"/>
 	</Tilesets>
 </Project>

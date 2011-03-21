@@ -65,10 +65,12 @@ namespace Monocle
 
 		std::string name;
 
-		std::list<Tilemap> tilemaps;
+		std::list<Tilemap*> tilemaps;
 		std::list<Tileset> tilesets;
 
+		int width, height;
 	private:
+		Tileset *GetTileset(const std::string &name);
 		Scene *scene;
 		static Level *instance;
 	};
