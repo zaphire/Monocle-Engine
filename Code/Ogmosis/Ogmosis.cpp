@@ -1,6 +1,4 @@
 #include "Ogmosis.h"
-#include "../XML/tinyxml.h"
-#include "../Assets.h"
 
 namespace Monocle
 {

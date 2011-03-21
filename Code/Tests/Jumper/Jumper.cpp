@@ -4,6 +4,9 @@
 
 namespace Jumper
 {
+	GameScene gameScene;
+	Ogmosis ogmosis;
+
 	Player::Player(Vector2 pos) 
 		: Entity()
 	{

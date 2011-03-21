@@ -1,5 +1,6 @@
 #include "Level.h"
 #include "Assets.h"
+#include "XML/tinyxml.h"
 
 /// TODO: move this somewhere common
 #define min(a, b) (((a) < (b)) ? (a) : (b)) 

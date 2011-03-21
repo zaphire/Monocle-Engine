@@ -68,6 +68,6 @@ namespace Jumper
 		void SpawnPlayer(Vector2 pos);
 	};
 
-	static GameScene gameScene;
-	static Ogmosis ogmosis;
+	extern GameScene gameScene;
+	extern Ogmosis ogmosis;
 }
