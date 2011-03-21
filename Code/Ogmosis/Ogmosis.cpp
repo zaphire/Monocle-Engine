@@ -2,6 +2,10 @@
 #include "../XML/tinyxml.h"
 #include "../Assets.h"
 
+/// TODO: move this somewhere
+#define min(a, b) (((a) < (b)) ? (a) : (b)) 
+#define max(a, b) (((a) > (b)) ? (a) : (b)) 
+
 namespace Monocle
 {
 	// T I L E S E T
