@@ -17,6 +17,7 @@ namespace Ogmo
 		SetCollider(new RectangleCollider(8, 8));
 
 		sprite = new Sprite("player.png", FILTER_NONE, 8, 8);
+		SetLayer(-1);
 		SetGraphic(sprite);
 	}
 
@@ -118,6 +119,7 @@ namespace Ogmo
 		position = Vector2(x, y);
 		AddTag("WALL");
 		SetCollider(new RectangleCollider(8, 8));
+		SetLayer(5);
 	}
 
 	void Wall::Render()

@@ -26,7 +26,6 @@ class Tilemap : public Graphic
 
 		void WorldToTile(const Vector2 &position, int *tx, int *ty);
 
-		void Update();
 		void Render();
 
 		void Clear(int tileID=-1);
@@ -38,5 +37,9 @@ class Tilemap : public Graphic
 		int width, height;
 		int tileWidth, tileHeight;
 		std::vector<int> tiles;
+
+		void UpdateEditor();
+
+		int selectedTile;
 	};
 }

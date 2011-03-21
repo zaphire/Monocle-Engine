@@ -56,6 +56,9 @@ namespace Monocle
 		static Vector2 GetMatrixPosition();
 
 		static Vector2 screenCenter;
+		
+		static int GetVirtualWidth();
+		static int GetVirtualHeight();
 
 	private:
 		static Graphics *instance;
