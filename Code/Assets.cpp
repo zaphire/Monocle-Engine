@@ -73,6 +73,11 @@ namespace Monocle
 		*/
 	}
 
+	const std::string &Assets::GetContentPath()
+	{
+		return instance->contentPath;
+	}
+
 
 	//generic request asset, not sure if we need this yet
 	/*

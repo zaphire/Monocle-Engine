@@ -21,6 +21,8 @@ namespace Monocle
 
 		static void SetContentPath(const std::string &contentPath);
 
+		static const std::string &GetContentPath();
+
 	private:
 		Asset* GetAssetByFilename(const std::string &filename);
 

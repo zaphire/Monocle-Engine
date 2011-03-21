@@ -1837,3 +1837,27 @@ bool TiXmlPrinter::Visit( const TiXmlUnknown& unknown )
 	return true;
 }
 
+
+const std::string &XMLString(TiXmlElement *elem, const std::string &att)
+{
+	const std::string *read = elem->Attribute(att);
+	if (read != NULL)
+		return *read;
+	return "";
+}
+
+float XMLFloat(TiXmlElement* elem, const std::string &att)
+{
+	const std::string *read = elem->Attribute(att);
+	if (read != NULL)
+		return atof((*read).c_str());
+	return 0.0f;
+}
+
+int XMLInt(TiXmlElement* elem, const std::string &att)
+{
+	const std::string *read = elem->Attribute(att);
+	if (read != NULL)
+		return atoi((*read).c_str());
+	return 0.0f;
+}

@@ -1,6 +1,8 @@
 #include "Level.h"
 #include "Assets.h"
 #include "XML/tinyxml.h"
+#include <iostream>
+#include <fstream>
 
 /// TODO: move this somewhere common
 #define min(a, b) (((a) < (b)) ? (a) : (b)) 
@@ -132,6 +134,28 @@ namespace Monocle
 	void Level::LoadProject(const std::string &filename)
 	{
 		// load the project data from an xml file
+		instance->tilesets.clear();
+
+		TiXmlDocument xml(Assets::GetContentPath() + filename);
+		bool isLoaded = xml.LoadFile();
+		if (isLoaded)
+		{
+			TiXmlElement* eProject = xml.FirstChildElement("Project");
+			if (eProject)
+			{
+				TiXmlElement* eTilesets = eProject->FirstChildElement("Tilesets");
+				if (eTilesets)
+				{
+					TiXmlElement* eTileset = eTilesets->FirstChildElement("Tileset");
+					while (eTileset)
+					{
+						instance->tilesets.push_back(Tileset(XMLString(eTileset, "name"), XMLString(eTileset, "image"), XMLInt(eTileset, "tileWidth"), XMLInt(eTileset, "tileHeight")));
+
+						eTileset = eTilesets->NextSiblingElement("Tileset");
+					}
+				}
+			}
+		}
 	}
 
 	void Level::Load(const std::string &filename)
@@ -140,7 +164,13 @@ namespace Monocle
 
 		if (instance->scene)
 		{
+			TiXmlDocument xml(filename);
+			bool isLoaded = xml.LoadFile();
 
+			if (isLoaded)
+			{
+			}
+					
 		}
 	}
 

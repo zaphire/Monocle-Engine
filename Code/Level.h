@@ -65,8 +65,8 @@ namespace Monocle
 
 		std::string name;
 
-		std::list<Tilemap*> tilemaps;
-		std::list<Tileset*> tilesets;
+		std::list<Tilemap> tilemaps;
+		std::list<Tileset> tilesets;
 
 	private:
 		Scene *scene;
