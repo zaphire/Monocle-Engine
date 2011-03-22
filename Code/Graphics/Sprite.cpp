@@ -60,6 +60,12 @@ namespace Monocle
 	{}
 	*/
 
+	/*
+	void Sprite::Update()
+	{
+	}
+	*/
+
 	// store color info in entity?
 	// that would bloat entity... hmm.
 	// or make materials system...

@@ -32,6 +32,13 @@ namespace Monocle
 		{
 			(*i)->Update();
 		}
+		
+		/*
+		if (graphic != NULL)
+		{
+			graphic->Update();
+		}
+		*/
 	}
 
 	void Entity::Render()

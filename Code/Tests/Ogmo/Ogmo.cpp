@@ -26,10 +26,12 @@ namespace Ogmo
 		// GRAB INPUT AND ACCELERATE
 		if (Input::IsKeyMaskHeld("left"))
 		{
+			scale.x = -1;
 			if(cling < 0) { velocity.x -= ACCELERATION * Monocle::deltaTime; }
 		}
 		else if (Input::IsKeyMaskHeld("right"))
 		{
+			scale.x = 1;
 			if(cling < 0) { velocity.x += ACCELERATION * Monocle::deltaTime; }
 		}
 
