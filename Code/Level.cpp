@@ -62,9 +62,9 @@ namespace Monocle
 						TiXmlElement* eFringeTile = eFringeTileset->FirstChildElement("FringeTile");
 						while (eFringeTile)
 						{
-							if (eFringeTile->Attribute("tileID") && eFringeTile->Attribute("image"))
+							if (eFringeTile->Attribute("id") && eFringeTile->Attribute("image"))
 							{
-								int tileID = XMLInt(eFringeTile, "tileID");
+								int tileID = XMLInt(eFringeTile, "id");
 								std::string image = XMLString(eFringeTile, "image");
 								int width = -1;
 								int height = -1;
@@ -153,7 +153,7 @@ namespace Monocle
 							TiXmlElement *eFringeTile = eFringeTiles->FirstChildElement("FringeTile");
 							while (eFringeTile)
 							{
-								int tileID = XMLInt(eFringeTile, "tileID");
+								int tileID = XMLInt(eFringeTile, "id");
 								int layer = XMLInt(eFringeTile, "layer");
 								Vector2 position = Vector2(XMLFloat(eFringeTile, "x"), XMLFloat(eFringeTile, "y"));
 								Vector2 scale = Vector2::one;
@@ -220,6 +220,8 @@ namespace Monocle
 				if (!instance->tilemaps.empty())
 				{
 					//TiXmlElement eTilemaps("Tilemaps");
+
+					// save tilemaps
 					for (std::list<Tilemap*>::iterator i = instance->tilemaps.begin(); i != instance->tilemaps.end(); ++i)
 					{
 						TiXmlElement eTilemap("Tilemap");
@@ -242,7 +244,12 @@ namespace Monocle
 
 						eLevel.InsertEndChild(eTilemap);
 					}
-					//eLevel.LinkEndChild(&eTilemaps);
+
+					// save fringe tiles
+					{
+						// go through the sets
+						// save fringeTiles that belong to a given set
+					}
 				}
 				xml.InsertEndChild(eLevel);
 
