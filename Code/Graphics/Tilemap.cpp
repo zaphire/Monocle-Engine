@@ -71,14 +71,14 @@ namespace Monocle
 
 	int Tilemap::GetTile(int tx, int ty)
 	{
-		printf("GetTile(%d, %d) = %d\n", tx, ty, tiles[ty*width + tx]);
+		//printf("GetTile(%d, %d) = %d\n", tx, ty, tiles[ty*width + tx]);
 		return tiles[ty*width + tx];
 	}
 
 	void Tilemap::SetTile(int tx, int ty, int tileID)
 	{
 		tiles[ty*width + tx] = tileID;
-		printf("SetTile(%d, %d, %d)\n", tx, ty, tileID);
+		//printf("SetTile(%d, %d, %d)\n", tx, ty, tileID);
 	}
 
 	int Tilemap::GetTileAtWorldPosition(const Vector2 &position)

@@ -206,6 +206,27 @@ namespace Ogmo
 		}
 	}
 
+	void World::Update()
+	{
+		Scene::Update();
+
+		///TESTEDITOR
+		if (Input::IsKeyPressed(KEY_S) && Input::IsKeyHeld(KEY_LCTRL))
+		{
+			Debug::Log("save level...");
+			Level::Save();
+		}
+
+		/*
+		if (Input::IsKeyPressed(KEY_F1))
+		{
+			// doesn't clean up properly yet
+			Debug::Log("load level...");
+			Level::Load();
+		}
+		*/
+	}
+
 	void World::End()
 	{
 		delete player;

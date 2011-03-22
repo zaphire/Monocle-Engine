@@ -55,7 +55,7 @@ namespace Monocle
 	//Mouse API
 	Vector2 Input::GetMousePosition()
 	{
-		///HACK: optimize this later
+		///HACK: optimize this later, probably don't need so many function calls
 		return Vector2((Platform::mousePosition.x / Platform::GetWidth()) * Graphics::GetVirtualWidth(), (Platform::mousePosition.y / Platform::GetHeight()) * Graphics::GetVirtualHeight());
 	}
 

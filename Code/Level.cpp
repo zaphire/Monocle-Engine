@@ -58,7 +58,10 @@ namespace Monocle
 
 		if (instance->scene)
 		{
+			instance->tilemaps.clear();
+
 			TiXmlDocument xml(Assets::GetContentPath() + filename);
+			instance->filename = filename;
 			bool isLoaded = xml.LoadFile();
 
 			if (isLoaded)
@@ -73,15 +76,19 @@ namespace Monocle
 					while (eTilemap)
 					{
 						Entity *entity = new Entity();
-						entity->SetGraphic(new Tilemap(instance->GetTileset(XMLString(eTilemap, "name")), instance->width, instance->height, XMLInt(eTilemap, "tileWidth"), XMLInt(eTilemap, "tileHeight")));
+						Tilemap *tilemap = new Tilemap(instance->GetTileset(XMLString(eTilemap, "set")), instance->width, instance->height, XMLInt(eTilemap, "tileWidth"), XMLInt(eTilemap, "tileHeight"));
+						instance->tilemaps.push_back(tilemap);
+						entity->SetGraphic(tilemap);
 						instance->scene->Add(entity);
 
 						TiXmlElement *eTile = eTilemap->FirstChildElement("Tile");
 						while (eTile)
 						{
-							eTile = eTilemap->NextSiblingElement("Tile");
+							Debug::Log("loading... set tile");
+							tilemap->SetTile(XMLInt(eTile, "x"), XMLInt(eTile, "y"), XMLInt(eTile, "tileID"));
+							eTile = eTile->NextSiblingElement("Tile");
 						}
-						eTilemap = eLevel->NextSiblingElement("Tilemap");
+						eTilemap = eTilemap->NextSiblingElement("Tilemap");
 					}
 				}
 			}
@@ -102,7 +109,53 @@ namespace Monocle
 
 	void Level::Save()
 	{
-		// save our data out to xml file
+		if (instance->filename == "")
+		{
+			// open save as dialog or something
+		}
+		else
+		{
+			// save our data out to xml file
+			if (instance->scene)
+			{
+				TiXmlDocument xml;
+
+				TiXmlElement eLevel("Level");
+				eLevel.SetAttribute("width", instance->width);
+				eLevel.SetAttribute("height", instance->height);
+
+				if (!instance->tilemaps.empty())
+				{
+					//TiXmlElement eTilemaps("Tilemaps");
+					for (std::list<Tilemap*>::iterator i = instance->tilemaps.begin(); i != instance->tilemaps.end(); ++i)
+					{
+						TiXmlElement eTilemap("Tilemap");
+						if ((*i)->tileset)
+							eTilemap.SetAttribute("set", (*i)->tileset->name);
+						eTilemap.SetAttribute("tileWidth", (*i)->tileWidth);
+						eTilemap.SetAttribute("tileHeight", (*i)->tileHeight);
+
+						for (int ty = 0; ty < (*i)->height / (*i)->tileHeight; ty++)
+						{
+							for (int tx = 0; tx < (*i)->width / (*i)->tileWidth; tx++)
+							{
+								TiXmlElement eTile("Tile");
+								eTile.SetAttribute("x", tx);
+								eTile.SetAttribute("y", ty);
+								eTile.SetAttribute("tileID", (*i)->GetTile(tx, ty));
+								eTilemap.InsertEndChild(eTile);
+							}
+						}
+
+						eLevel.InsertEndChild(eTilemap);
+					}
+					//eLevel.LinkEndChild(&eTilemaps);
+				}
+				xml.InsertEndChild(eLevel);
+
+				xml.SaveFile(Assets::GetContentPath() + instance->filename);  
+			}
+		}
 	}
 
 	void Level::SaveAs(const std::string &filename)

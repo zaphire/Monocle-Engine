@@ -1,4 +1,5 @@
 #include "Ogmosis.h"
+#include "../Input.h"
 
 namespace Monocle
 {
@@ -14,6 +15,12 @@ namespace Monocle
 	void Ogmosis::Update()
 	{
 		Scene::Update();
+
+		if (Input::IsKeyPressed(KEY_S))
+		{
+			Debug::Log("save...");
+			Level::Save();
+		}
 	}
 
 	void Ogmosis::End()
