@@ -16,9 +16,20 @@ namespace Ogmo
 		AddTag(tag);
 		SetCollider(new RectangleCollider(8, 8));
 
-		sprite = new Sprite("player.png", FILTER_NONE, 8, 8);
+		sprite = new SpriteAnimation("player.png", FILTER_NONE, 8, 8);
+		sprite->Add("standRight", 0, 0, 0);
+		sprite->Add("standLeft", 4, 4, 0);
+		sprite->Add("runRight", 0, 3, 12.0f);
+		sprite->Add("runLeft", 4, 7, 12.0f);
+		sprite->Add("jumpRight", 8, 8, 0);
+		sprite->Add("jumpLeft", 10, 10, 0);
+		sprite->Add("jumpRightDown", 9, 9, 0);
+		sprite->Add("jumpLeftDown", 11, 11, 0);
+		sprite->Play("runRight");
 		SetLayer(-1);
 		SetGraphic(sprite);
+
+		direction = true;
 	}
 
 	void Player::Update()
@@ -27,10 +38,18 @@ namespace Ogmo
 		if (Input::IsKeyMaskHeld("left"))
 		{
 			if(cling < 0) { velocity.x -= ACCELERATION * Monocle::deltaTime; }
+			sprite->Play("runLeft");
+			direction = false;
 		}
 		else if (Input::IsKeyMaskHeld("right"))
 		{
 			if(cling < 0) { velocity.x += ACCELERATION * Monocle::deltaTime; }
+			sprite->Play("runRight");
+			direction = true;
+		}
+		else
+		{
+			if(direction) { sprite->Play("standRight"); } else { sprite->Play("standLeft"); }
 		}
 
 		// JUMP INPUT
@@ -94,10 +113,22 @@ namespace Ogmo
 				cling = 10; 
 				clingDir = 1; 
 			}
+
+			//change sprite
+			if(velocity.y < 0)
+			{
+				if(direction) { sprite->Play("jumpRight"); } else { sprite->Play("jumpLeft"); }
+			}
+			else
+			{
+				if(direction) { sprite->Play("jumpRightDown"); } else { sprite->Play("jumpLeftDown"); }
+			}
 		}
 
 		//decrease how long we can cling to a wall for
 		cling --;
+
+	
 	}
 
 	bool Player::Motion(float &speed, float &to)

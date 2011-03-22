@@ -1,5 +1,6 @@
 #include "../../Monocle.h"
 #include "../../Graphics/Sprite.h"
+#include "../../Graphics/SpriteAnimation.h"
 #include "../../Ogmosis/Ogmosis.h"
 #include "../../Level.h"
 
@@ -17,7 +18,7 @@ namespace Ogmo
 		Vector2 velocity;
 
 		//details
-		Sprite *sprite;
+		SpriteAnimation *sprite;
 		std::string tag;
 
 		//moving stuff
@@ -32,6 +33,7 @@ namespace Ogmo
 		int cling;
 		int clingDir;
 		bool onGround;
+		bool direction;
 
 		//other/util
 		float Sign(float i, float to);

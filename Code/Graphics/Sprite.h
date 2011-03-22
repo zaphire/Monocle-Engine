@@ -3,6 +3,8 @@
 #include "../Graphics.h"
 #include <string>
 
+#pragma once
+
 namespace Monocle
 {
 	class Entity;
