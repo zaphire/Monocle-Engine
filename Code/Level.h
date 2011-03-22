@@ -7,7 +7,7 @@
 #include "Graphics.h"
 #include "Tileset.h"
 #include "Graphics/Tilemap.h"
-#include "FringeTile.h"
+#include "Graphics/FringeTile.h"
 
 namespace Monocle
 {
@@ -26,7 +26,7 @@ namespace Monocle
 		static void SaveAs(const std::string &filename);
 		static void End(); // called on scene end
 
-		static FringeTile *AddFringeTile(FringeTileset *fringeTileset, int tileID, int layer, const Vector2 &position, const Vector2 &scale, int rotation);
+		static FringeTile* AddFringeTile(FringeTileset *fringeTileset, int tileID, int layer, const Vector2 &position, const Vector2 &scale, int rotation);
 		static FringeTile* GetFringeTileForEntity(Entity *entity);
 
 		std::string name;

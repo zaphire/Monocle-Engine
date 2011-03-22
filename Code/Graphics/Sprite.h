@@ -1,9 +1,9 @@
+#pragma once
+
 #include "../Color.h"
 #include "../TextureAsset.h"
 #include "../Graphics.h"
 #include <string>
-
-#pragma once
 
 namespace Monocle
 {

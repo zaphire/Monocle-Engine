@@ -1,8 +1,8 @@
 #include "FringeTileEditor.h"
+#include "../Graphics/FringeTile.h"
 #include "../Level.h"
 #include "../Scene.h"
 #include "../Input.h"
-#include "../FringeTile.h"
 #include "../Monocle.h"
 
 namespace Monocle

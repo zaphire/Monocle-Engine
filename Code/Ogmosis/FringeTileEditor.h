@@ -6,6 +6,7 @@ namespace Monocle
 	class Scene;
 	class Entity;
 
+
 	enum FringeTileEditorState
 	{
 		FTES_NONE=0,

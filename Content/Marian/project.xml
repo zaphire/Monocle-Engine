@@ -1,7 +1,7 @@
 <Project>
 	<FringeTilesets>
 		<FringeTileset name="balcony">
-			<FringeTile tileID="0" image="graphics/reverie-sky.png" width="1024" height="512"/>
+			<FringeTile tileID="0" image="graphics/reverie-sky.png" width="1024" height="512" filter="0"/>
 			<FringeTile tileID="1" image="graphics/title.png" width="512" height="512"/>
 		</FringeTileset>
 		<FringeTileset name="spring">

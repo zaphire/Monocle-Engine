@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Graphics/Sprite.h"
+#include "Sprite.h"
 #include <string>
 #include <map>
 
@@ -10,15 +10,17 @@ namespace Monocle
 	{
 	public:
 		FringeTileData()
-			: width(-1), height(-1)
+			: width(-1), height(-1), repeatX(false), repeatY(false)
 		{}
 
-		FringeTileData(const std::string &imageFilename, int width=-1, int height=-1)
-			: imageFilename(imageFilename), width(width), height(height)
+		FringeTileData(const std::string &imageFilename, int width=-1, int height=-1,  bool repeatX=false, bool repeatY=false)
+			: imageFilename(imageFilename), repeatX(repeatX), repeatY(repeatY), width(width), height(height)
 		{}
 
 		std::string imageFilename;
 		int width, height;
+		bool repeatX, repeatY;
+		// bool useFiltering;
 	};
 
 	class FringeTileset

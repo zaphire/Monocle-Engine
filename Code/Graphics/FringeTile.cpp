@@ -1,5 +1,5 @@
 #include "FringeTile.h"
-#include "Assets.h"
+#include "../Assets.h"
 
 namespace Monocle
 {
