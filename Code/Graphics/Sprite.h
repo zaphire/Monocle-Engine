@@ -3,6 +3,8 @@
 #include "../Graphics.h"
 #include <string>
 
+#pragma once
+
 namespace Monocle
 {
 	class Entity;
@@ -11,7 +13,9 @@ namespace Monocle
 	{
 	public:
 		Sprite(const std::string &filename, float width=-1, float height=-1);
+		Sprite(const std::string &filename, FilterType filter, float width=-1, float height=-1);
 		~Sprite();
+		//void Update();
 		void Render();
 		void GetWidthHeight(int *width, int *height);
 

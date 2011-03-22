@@ -139,7 +139,6 @@ namespace Monocle
 
 		AdjustWindowRectEx(&WindowRect, dwStyle, FALSE, dwExStyle);		// Adjust Window To True Requested Size
 
-		// Create The Window
 		if (!(hWnd=CreateWindowEx(	dwExStyle,							// Extended Style For The Window
 									windowName,							// Class Name
 									title,								// Window Title
@@ -218,10 +217,24 @@ namespace Monocle
 
 		ShowWindow(hWnd,SW_SHOW);						// Show The Window
 
+		CenterWindow();
+
 		SetForegroundWindow(hWnd);
 		SetFocus(hWnd);
 
-		CenterWindow();
+		
+
+		/*
+		if (fullscreen)
+		{
+			DEVMODE settings;
+			settings.dmBitsPerPel = bits;
+			settings.dmPelsWidth = width;
+			settings.dmPelsHeight = height;
+			settings.dmFields = DM_PELSWIDTH | DM_PELSHEIGHT | DM_BITSPERPEL;
+			bool changed = (ChangeDisplaySettings(&settings, CDS_FULLSCREEN) == DISP_CHANGE_SUCCESSFUL);
+		}
+		*/
 
 		return true;
 	}
@@ -512,6 +525,9 @@ namespace Monocle
 		WindowsPlatform::instance = new WindowsPlatform();
 		instance = this;
 		WindowsPlatform::instance->platform = this;
+
+		// 1ms timer
+		timeBeginPeriod(1);
 
 		for (int i = 0; i < KEY_MAX; i++)
 		{

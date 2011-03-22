@@ -7,12 +7,30 @@ namespace Monocle
 	bool Sprite::showBounds = false;
 	Sprite *Sprite::selectedSprite = NULL;
 
+	Sprite::Sprite(const std::string &filename, FilterType filter, float width, float height)
+		: Graphic(),
+		texture(NULL),
+		width(width),
+		height(height),
+		textureOffset(Vector2::zero),
+		textureScale(Vector2::one)
+	{
+		texture = Assets::RequestTexture(filename, filter);
+		if (texture != NULL)
+		{
+			if (width == -1 || height == -1)
+			{
+				this->width = texture->width;
+				this->height = texture->height;
+			}
+		}
+	}
+
 	Sprite::Sprite(const std::string &filename, float width, float height)
 		: Graphic(),
 		texture(NULL),
 		width(width),
 		height(height),
-		//angle(0.0f),
 		textureOffset(Vector2::zero),
 		textureScale(Vector2::one)
 	{
@@ -40,6 +58,12 @@ namespace Monocle
 	Sprite::Sprite()
 		: Entity(), texture(NULL), scale(1.0f), isSelected(false), angle(0.0f), width(64), height(64)
 	{}
+	*/
+
+	/*
+	void Sprite::Update()
+	{
+	}
 	*/
 
 	// store color info in entity?

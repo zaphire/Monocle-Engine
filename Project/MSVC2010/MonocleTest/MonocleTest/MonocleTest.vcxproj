@@ -83,9 +83,11 @@
     <ClInclude Include="..\..\..\..\Code\Graphics.h" />
     <ClInclude Include="..\..\..\..\Code\Graphics\Sprite.h" />
     <ClInclude Include="..\..\..\..\Code\Graphics\SpriteAnimation.h" />
+    <ClInclude Include="..\..\..\..\Code\Graphics\Tilemap.h" />
     <ClInclude Include="..\..\..\..\Code\GUI.h" />
     <ClInclude Include="..\..\..\..\Code\Input.h" />
     <ClInclude Include="..\..\..\..\Code\Level.h" />
+    <ClInclude Include="..\..\..\..\Code\Macros.h" />
     <ClInclude Include="..\..\..\..\Code\Monocle.h" />
     <ClInclude Include="..\..\..\..\Code\Ogmosis\Ogmosis.h" />
     <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\glpng.h" />
@@ -107,8 +109,10 @@
     <ClInclude Include="..\..\..\..\Code\Tests\Flash\Flash.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\Jumper\Jumper.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\Marian\Marian.h" />
+    <ClInclude Include="..\..\..\..\Code\Tests\Ogmo\Ogmo.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\Pong\Pong.h" />
     <ClInclude Include="..\..\..\..\Code\TextureAsset.h" />
+    <ClInclude Include="..\..\..\..\Code\Tileset.h" />
     <ClInclude Include="..\..\..\..\Code\Tween.h" />
     <ClInclude Include="..\..\..\..\Code\Vector2.h" />
     <ClInclude Include="..\..\..\..\Code\Vector3.h" />
@@ -128,6 +132,7 @@
     <ClCompile Include="..\..\..\..\Code\Entity.cpp" />
     <ClCompile Include="..\..\..\..\Code\Graphics\Sprite.cpp" />
     <ClCompile Include="..\..\..\..\Code\Graphics\SpriteAnimation.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Graphics\Tilemap.cpp" />
     <ClCompile Include="..\..\..\..\Code\GUI.cpp" />
     <ClCompile Include="..\..\..\..\Code\Input.cpp" />
     <ClCompile Include="..\..\..\..\Code\Level.cpp" />
@@ -166,7 +171,9 @@
     <ClCompile Include="..\..\..\..\Code\Tests\Flash\Flash.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\Jumper\Jumper.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\Marian\Marian.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Tests\Ogmo\Ogmo.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\Pong\Pong.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Tileset.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tween.cpp" />
     <ClCompile Include="..\..\..\..\Code\Vector2.cpp" />
     <ClCompile Include="..\..\..\..\Code\Vector3.cpp" />

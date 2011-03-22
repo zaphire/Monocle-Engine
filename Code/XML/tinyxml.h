@@ -92,6 +92,13 @@ class TiXmlText;
 class TiXmlDeclaration;
 class TiXmlParsingData;
 
+/// MODIFIED
+std::string XMLString(TiXmlElement *elem, const std::string &att);
+float XMLFloat(TiXmlElement* elem, const std::string &att);
+int XMLInt(TiXmlElement* elem, const std::string &att);
+
+
+
 const int TIXML_MAJOR_VERSION = 2;
 const int TIXML_MINOR_VERSION = 6;
 const int TIXML_PATCH_VERSION = 1;

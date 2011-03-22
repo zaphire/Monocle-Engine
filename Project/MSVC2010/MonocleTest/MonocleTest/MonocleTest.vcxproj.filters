@@ -58,6 +58,9 @@
     <Filter Include="Monocle\Ogmosis">
       <UniqueIdentifier>{bbc21fce-4b4f-4566-9f94-f58bc48da817}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Monocle\Tests\Ogmo">
+      <UniqueIdentifier>{12a8ee66-4cba-4d3c-9b2c-5e16fe6b9487}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Vector3.h">
@@ -197,6 +200,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Level.h">
       <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Graphics\Tilemap.h">
+      <Filter>Monocle\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Tileset.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Macros.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Tests\Ogmo\Ogmo.h">
+      <Filter>Monocle\Tests\Ogmo</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -373,6 +388,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Level.cpp">
       <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Graphics\Tilemap.cpp">
+      <Filter>Monocle\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Tileset.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Tests\Ogmo\Ogmo.cpp">
+      <Filter>Monocle\Tests\Ogmo</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

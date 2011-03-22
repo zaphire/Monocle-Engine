@@ -1,6 +1,7 @@
 #include "Input.h"
 #include <stdio.h> // for null :P
 #include "Debug.h"
+#include "Graphics.h"
 
 namespace Monocle
 {
@@ -54,7 +55,8 @@ namespace Monocle
 	//Mouse API
 	Vector2 Input::GetMousePosition()
 	{
-		return Platform::mousePosition;
+		///HACK: optimize this later, probably don't need so many function calls
+		return Vector2((Platform::mousePosition.x / Platform::GetWidth()) * Graphics::GetVirtualWidth(), (Platform::mousePosition.y / Platform::GetHeight()) * Graphics::GetVirtualHeight());
 	}
 
 	bool Input::IsMouseButtonHeld(MouseButton mouseButton)

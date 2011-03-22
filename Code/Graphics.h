@@ -3,16 +3,17 @@
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Color.h"
+#include "TextureAsset.h"
 
 namespace Monocle
 {
-	class TextureAsset;
 	class Entity;
 
 	class Graphic
 	{
 	public:
 		Vector2 position;
+		//virtual void Update()=0;
 		virtual void Render()=0;
 		virtual void GetWidthHeight(int *width, int *height)=0;
 	};
@@ -44,7 +45,7 @@ namespace Monocle
 
 		static void RenderTriangle(float size);
 		//static void RenderQuad(float size);
-		static void RenderQuad(float width, float height, Vector2 textureOffset=Vector2::zero, Vector2 textureScale=Vector2::one);
+		static void RenderQuad(float width, float height, const Vector2 &textureOffset=Vector2::zero, const Vector2 &textureScale=Vector2::one, const Vector2 &position=Vector2::zero);
 		static void RenderLineRect(float x, float y, float w, float h);
 		static void PushMatrix();
 		static void PopMatrix();
@@ -56,6 +57,9 @@ namespace Monocle
 		static Vector2 GetMatrixPosition();
 
 		static Vector2 screenCenter;
+		
+		static int GetVirtualWidth();
+		static int GetVirtualHeight();
 
 	private:
 		static Graphics *instance;

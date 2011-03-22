@@ -32,13 +32,21 @@ namespace Monocle
 		{
 			(*i)->Update();
 		}
+		
+		/*
+		if (graphic != NULL)
+		{
+			graphic->Update();
+		}
+		*/
 	}
 
 	void Entity::Render()
 	{
 		Graphics::PushMatrix();
 		Graphics::Translate(position.x, position.y, depth);
-		Graphics::Rotate(rotation, 0, 0, 1);
+		if (rotation != 0.0f)
+			Graphics::Rotate(rotation, 0, 0, 1);
 		Graphics::Scale(scale);
 
 		for(std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)

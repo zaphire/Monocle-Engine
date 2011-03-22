@@ -16,7 +16,7 @@ namespace Monocle
 	{
 	}
 
-	TextureAsset *Assets::RequestTexture(const std::string &filename)
+	TextureAsset *Assets::RequestTexture(const std::string &filename, FilterType filter, bool repeatX, bool repeatY)
 	{
 		TextureAsset *asset = NULL;
 		std::string fullFilename = instance->contentPath + filename;
@@ -30,7 +30,7 @@ namespace Monocle
 		if (!asset)
 		{
 			asset = new TextureAsset();
-			asset->Load(fullFilename);
+			asset->Load(fullFilename, filter, repeatX, repeatY);
 			instance->StoreAsset((Asset*)asset);
 		}
 
@@ -71,6 +71,11 @@ namespace Monocle
 			instance->contentPath += '/';
 		}
 		*/
+	}
+
+	const std::string &Assets::GetContentPath()
+	{
+		return instance->contentPath;
 	}
 
 

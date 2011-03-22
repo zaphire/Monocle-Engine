@@ -2,6 +2,7 @@ file(GLOB CORE_SRCS *.cpp)
 file(GLOB COLLIDERS_SRCS Colliders/*.cpp)
 file(GLOB GRAPHICS_SRCS Graphics/*.cpp)
 file(GLOB OGMOSIS_SRCS Ogmosis/*.cpp)
+file(GLOB XML_SRCS XML/*.cpp)
 
 set(CORE_SRCS ${CORE_SRCS}
 	${COLLIDERS_SRCS}
@@ -43,8 +44,9 @@ add_library(MonocleCore
 	${CORE_SRCS}
 	${PLATFORM_SRCS}
 )
+add_library(TinyXML ${XML_SRCS})
 
-target_link_libraries(MonocleCore ${CORE_LINK})
+target_link_libraries(MonocleCore TinyXML ${CORE_LINK})
 
 add_subdirectory(Tests)
 

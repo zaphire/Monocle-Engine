@@ -7,13 +7,16 @@
 #if defined(MONOCLE_LINUX)
 	// cmake for other tests isn't working yet
 	#define TEST_JUMPER
-#elif defined(MONOCLE_MAC)
-    #define TEST_PONG
+	//#define TEST_FLASH
+	//#define TEST_OGMO
+//#elif defined(MONOCLE_MAC)
+//    #define TEST_PONG
 #else
 	//#define TEST_game
 	//#define TEST_PONG
 	//#define TEST_MARIAN
-	#define TEST_JUMPER
+	//#define TEST_JUMPER
+	#define TEST_OGMO
 	//#define TEST_FLASH
 #endif
 
@@ -27,6 +30,10 @@
 
 #ifdef TEST_JUMPER
 	#include "Tests/Jumper/Jumper.h"
+#endif
+
+#ifdef TEST_OGMO
+	#include "Tests/Ogmo/Ogmo.h"
 #endif
 
 #ifdef TEST_FLASH
@@ -44,6 +51,10 @@ int main(void)
 
 #ifdef TEST_PONG
 	game->SetScene(new Pong::GameScene());
+#endif
+
+#ifdef TEST_OGMO
+	game->SetScene(new Ogmo::World());
 #endif
 
 #ifdef TEST_MARIAN

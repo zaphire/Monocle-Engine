@@ -47,6 +47,7 @@ namespace Monocle
 		glEnable(GL_BLEND);
 		glDisable(GL_LIGHTING);
 		glEnable(GL_TEXTURE_2D);
+		glCullFace(GL_BACK);
 		//glShadeModel(GL_SMOOTH);	
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClearDepth(1.0f);
@@ -220,20 +221,37 @@ namespace Monocle
 		glColor4f(color.r, color.g, color.b, color.a);
 	}
 
-	void Graphics::RenderQuad(float width, float height, Vector2 textureOffset, Vector2 textureScale)
+	int Graphics::GetVirtualWidth()
+	{
+		return instance->virtualWidth;
+	}
+
+	int Graphics::GetVirtualHeight()
+	{
+		return instance->virtualHeight;
+	}
+
+	void Graphics::RenderQuad(float width, float height, const Vector2 &textureOffset, const Vector2 &textureScale, const Vector2 &position)
 	{
 		float halfWidth = width*0.5f;
 		float halfHeight = height*0.5f;
 
 		glBegin(GL_QUADS);
-			glVertex3f(-halfWidth, -halfHeight, 0.0f);
-			glTexCoord2f(textureOffset.x + textureScale.x, textureOffset.y);
-			glVertex3f(halfWidth, -halfHeight, 0.0f);
-			glTexCoord2f(textureOffset.x + textureScale.x, textureOffset.y + textureScale.y);
-			glVertex3f(halfWidth, halfHeight, 0.0f);
-			glTexCoord2f(textureOffset.x, textureOffset.y + textureScale.y);
-			glVertex3f(-halfWidth, halfHeight, 0.0f);
+			// UL
 			glTexCoord2f(textureOffset.x, textureOffset.y);
+			glVertex3f(-halfWidth + position.x, -halfHeight + position.y, 0.0f);
+			
+			//UR
+			glTexCoord2f(textureOffset.x + textureScale.x, textureOffset.y);
+			glVertex3f(halfWidth + position.x, -halfHeight + position.y, 0.0f);
+			
+			//LR
+			glTexCoord2f(textureOffset.x + textureScale.x, textureOffset.y + textureScale.y);
+			glVertex3f(halfWidth + position.x, halfHeight + position.y, 0.0f);
+			
+			//LL
+			glTexCoord2f(textureOffset.x, textureOffset.y + textureScale.y);
+			glVertex3f(-halfWidth + position.x, halfHeight + position.y, 0.0f);
 		glEnd();
 	}
 

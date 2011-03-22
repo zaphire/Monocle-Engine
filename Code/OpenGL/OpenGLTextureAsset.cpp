@@ -24,22 +24,32 @@
 namespace Monocle
 {
 	TextureAsset::TextureAsset()
-		: Asset(AT_TEXTURE)
+		: Asset(ASSET_TEXTURE)
 	{
 	}
 
-	void TextureAsset::Load(const std::string &filename)
+	void TextureAsset::Load(const std::string &filename, FilterType filter, bool repeatX, bool repeatY)
 	{
 		this->filename = filename;
 		// only load png for now
 		pngInfo info;
 		glGenTextures(1, &texID);
 		glBindTexture(GL_TEXTURE_2D, texID);
+
 		// choose GL_NEAREST or PNG_NOMIPMAPS
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+		unsigned int glFilter = GL_NEAREST;
+
+		if (filter == FILTER_LINEAR)
+			glFilter = GL_LINEAR;
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, glFilter);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, glFilter);
+
+		unsigned int glRepeatX = repeatX?GL_REPEAT:GL_CLAMP;
+		unsigned int glRepeatY = repeatY?GL_REPEAT:GL_CLAMP;
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, glRepeatX);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, glRepeatY);
 
 		if (pngLoad(filename.c_str(), PNG_BUILDMIPMAPS, PNG_ALPHA, &info))
 		{

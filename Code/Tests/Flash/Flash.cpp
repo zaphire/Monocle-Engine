@@ -6,30 +6,6 @@
 
 namespace Flash
 {
-	float ReadFloatAttribute(TiXmlElement* elem, const std::string &att)
-	{
-		const std::string *read = elem->Attribute(att);
-		if (read != NULL)
-			return atof((*read).c_str());
-		return 0.0f;
-	}
-
-	float ReadIntAttribute(TiXmlElement* elem, const std::string &att)
-	{
-		const std::string *read = elem->Attribute(att);
-		if (read != NULL)
-			return atoi((*read).c_str());
-		return 0.0f;
-	}
-
-	std::string ReadStringAttribute(TiXmlElement *elem, const std::string &att)
-	{
-		const std::string *read = elem->Attribute(att);
-		if (read != NULL)
-			return *read;
-		return "";
-	}
-
 	Texture* TextureSheet::GetTextureByName(const std::string &name)
 	{
 		for (std::vector<Texture>::iterator i = textures.begin(); i != textures.end(); ++i)
@@ -98,7 +74,7 @@ namespace Flash
 
 	void Part::Update(float f)
 	{
-		int frame = floor(f);
+		int frame = int(f);
 		if (frame >= 0 && frame < frames.size())
 		{
 			// lerp!
@@ -158,7 +134,7 @@ namespace Flash
 				TiXmlElement* eAnimation = eAnimations->FirstChildElement("Animation");
 				while (eAnimation)
 				{
-					Animation animation(eAnimation->Attribute("name"), ReadIntAttribute(eAnimation, "frameCount"));
+					Animation animation(XMLString(eAnimation, "name"), XMLInt(eAnimation, "frameCount"));
 					
 					TiXmlElement* ePart = eAnimation->FirstChildElement("Part");
 					while (ePart)
@@ -169,16 +145,16 @@ namespace Flash
 						while (eFrame)
 						{
 							Frame frame;
-							frame.pos = Vector2(ReadFloatAttribute(eFrame, "x"), ReadFloatAttribute(eFrame, "y"));
+							frame.pos = Vector2(XMLFloat(eFrame, "x"), XMLFloat(eFrame, "y"));
 							
 							if (eFrame->Attribute("scaleX"))
 							{
-								frame.scale.x = ReadFloatAttribute(eFrame, "scaleX");
+								frame.scale.x = XMLFloat(eFrame, "scaleX");
 							}
 
 							if (eFrame->Attribute("scaleY"))
 							{
-								frame.scale.y = ReadFloatAttribute(eFrame, "scaleY");
+								frame.scale.y = XMLFloat(eFrame, "scaleY");
 							}
 
 							if (eFrame->Attribute("alpha") != NULL)
@@ -222,17 +198,17 @@ namespace Flash
 				TiXmlElement* eTextureSheet = eTextures->FirstChildElement("TextureSheet");
 				while (eTextureSheet)
 				{
-					textureSheet.name = ReadStringAttribute(eTextureSheet, "name");
+					textureSheet.name = XMLString(eTextureSheet, "name");
 
 					TiXmlElement* eTexture = eTextureSheet->FirstChildElement("Texture");
 					while (eTexture)
 					{
 						Texture texture;
 						texture.name = eTexture->Attribute("name");
-						texture.width = ReadIntAttribute(eTexture, "width");
-						texture.height = ReadIntAttribute(eTexture, "height");
-						texture.registrationPoint.x = ReadFloatAttribute(eTexture, "registrationPointX");
-						texture.registrationPoint.y = ReadFloatAttribute(eTexture, "registrationPointY");
+						texture.width = XMLInt(eTexture, "width");
+						texture.height = XMLInt(eTexture, "height");
+						texture.registrationPoint.x = XMLFloat(eTexture, "registrationPointX");
+						texture.registrationPoint.y = XMLFloat(eTexture, "registrationPointY");
 
 						textureSheet.textures.push_back(texture);
 
@@ -332,7 +308,7 @@ namespace Flash
 	void TestScene::UpdateFrameNumberDisplay()
 	{
 		if (currentAnimation)
-			printf("moved to frame: %d/%d\n", (int)floor(animationFrame), (int)currentAnimation->GetMaxFrames()-1);
+			printf("moved to frame: %d/%d\n", (int)(animationFrame), (int)currentAnimation->GetMaxFrames()-1);
 		else
 			printf("no animation\n");
 	}
@@ -532,9 +508,10 @@ namespace Flash
 				{
 					if (editPart)
 					{
-						editPart->frames[floor(animationFrame)].pos = editEntity->position;
-						editPart->frames[floor(animationFrame)].scale = editEntity->scale;
-						editPart->frames[floor(animationFrame)].rotation = editEntity->rotation;
+						int currentFrame = int(animationFrame);
+						editPart->frames[currentFrame].pos = editEntity->position;
+						editPart->frames[currentFrame].scale = editEntity->scale;
+						editPart->frames[currentFrame].rotation = editEntity->rotation;
 					}
 				}
 
@@ -550,7 +527,7 @@ namespace Flash
 	{
 		if (currentAnimation)
 		{
-			int currentFrame = floor(animationFrame);
+			int currentFrame = int(animationFrame);
 			int prevFrame = SafeFrameRange(currentFrame-1);
 			///TODO: build functions to make this prettier
 			if (editPart)
@@ -565,7 +542,7 @@ namespace Flash
 	{
 		if (currentAnimation)
 		{
-			int currentFrame = floor(animationFrame);
+			int currentFrame = int(animationFrame);
 			int nextFrame = SafeFrameRange(currentFrame+1);
 			///TODO: build functions to make this prettier
 			if (editPart)
@@ -582,7 +559,7 @@ namespace Flash
 
 		if (editPart)
 		{
-			int currentFrame = floor(animationFrame);
+			int currentFrame = int(animationFrame);
 			editPart->frames[currentFrame] = backupPartFrame;
 			editPart->ApplyFrameToEntity(currentFrame);
 		}
@@ -593,7 +570,7 @@ namespace Flash
 		Debug::Log("StoreBackupPartFrame");
 		if (editPart)
 		{
-			backupPartFrame = editPart->frames[floor(animationFrame)];
+			backupPartFrame = editPart->frames[int(animationFrame)];
 		}
 	}
 
@@ -648,7 +625,7 @@ namespace Flash
 	{
 		DeleteOnionSkins();
 
-		animationFrame = floor(animationFrame) + num;
+		animationFrame = int(animationFrame) + num;
 		if (animationFrame > currentAnimation->GetMaxFrames()-1)
 		{
 			animationFrame = currentAnimation->GetMaxFrames()-1;
@@ -664,7 +641,7 @@ namespace Flash
 	{
 		DeleteOnionSkins();
 
-		animationFrame = floor(animationFrame) - num;
+		animationFrame = int(animationFrame) - num;
 		if (animationFrame < 0)
 		{
 			animationFrame = 0;
@@ -726,7 +703,7 @@ namespace Flash
 			Entity *editEntity = editPart->entity;
 			Sprite *editSprite = editPart->sprite;
 
-			int currentFrame = floor(animationFrame);
+			int currentFrame = int(animationFrame);
 			
 			const int numFramesToPreview = 5;
 
