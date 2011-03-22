@@ -4,6 +4,7 @@
 #include "../Scene.h"
 #include "../Input.h"
 #include "../Monocle.h"
+#include <cstdio>
 
 namespace Monocle
 {

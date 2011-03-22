@@ -1,6 +1,8 @@
 #include "FringeTile.h"
 #include "../Assets.h"
 
+#include <cstdio>
+
 namespace Monocle
 {
 	FringeTileset::FringeTileset(const std::string &name)
