@@ -132,6 +132,11 @@ namespace Monocle
 		//TODO: get scene to re-sort me
 	}
 
+	void Entity::AdjustLayer(int layerAdjustAmount)
+	{
+		this->layer += layerAdjustAmount;
+	}
+
 	bool Entity::IsLayer(int layer)
 	{
 		return this->layer == layer;

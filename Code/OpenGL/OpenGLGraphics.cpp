@@ -136,6 +136,11 @@ namespace Monocle
 		instance->cameraPosition = position;
 	}
 
+	void Graphics::AdjustCameraPosition(const Vector2 &adjustment)
+	{
+		instance->cameraPosition += adjustment;
+	}
+
 	void Graphics::Translate(float x, float y, float z)
 	{
 		glTranslatef(x, y, z);
@@ -265,7 +270,7 @@ namespace Monocle
 	{
 		glLoadIdentity();									// Reset The Current Modelview Matrix
 
-		glTranslatef(instance->cameraPosition.x - instance->screenCenter.x, instance->cameraPosition.y - instance->screenCenter.y, 0.0f);
+		glTranslatef(instance->screenCenter.x - instance->cameraPosition.x, instance->screenCenter.y - instance->cameraPosition.y, 0.0f);
 		glScalef(instance->resolutionScale.x, instance->resolutionScale.y, 0.0f);
 	}
 

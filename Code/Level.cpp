@@ -121,7 +121,7 @@ namespace Monocle
 					while (eTilemap)
 					{
 						Entity *entity = new Entity();
-						Tilemap *tilemap = new Tilemap(instance->GetTileset(XMLString(eTilemap, "set")), instance->width, instance->height, XMLInt(eTilemap, "tileWidth"), XMLInt(eTilemap, "tileHeight"));
+						Tilemap *tilemap = new Tilemap(instance->GetTilesetByName(XMLString(eTilemap, "set")), instance->width, instance->height, XMLInt(eTilemap, "tileWidth"), XMLInt(eTilemap, "tileHeight"));
 						instance->tilemaps.push_back(tilemap);
 						entity->SetGraphic(tilemap);
 						instance->scene->Add(entity);
@@ -138,7 +138,7 @@ namespace Monocle
 					TiXmlElement *eFringeTiles = eLevel->FirstChildElement("FringeTiles");
 					while (eFringeTiles)
 					{
-						FringeTileset *fringeTileset = instance->GetFringeTileset(XMLString(eFringeTiles, "set"));
+						FringeTileset *fringeTileset = instance->GetFringeTilesetByName(XMLString(eFringeTiles, "set"));
 
 						/*
 						Entity *entity = new Entity();
@@ -189,7 +189,7 @@ namespace Monocle
 		return fringeTile;
 	}
 
-	Tileset *Level::GetTileset(const std::string &name)
+	Tileset *Level::GetTilesetByName(const std::string &name)
 	{
 		for (std::list<Tileset>::iterator i = tilesets.begin(); i != tilesets.end(); ++i)
 		{
@@ -263,11 +263,15 @@ namespace Monocle
 		instance->scene = NULL;
 	}
 
-	FringeTileset *Level::GetFringeTileset(const std::string &name)
+	FringeTileset *Level::GetFringeTilesetByName(const std::string &name)
 	{
 		for (std::list<FringeTileset>::iterator i = fringeTilesets.begin(); i != fringeTilesets.end(); ++i)
 		{
-			return &(*i);
+			if ((*i).IsName(name))
+			{
+				return &(*i);
+
+			}
 		}
 		return NULL;
 	}

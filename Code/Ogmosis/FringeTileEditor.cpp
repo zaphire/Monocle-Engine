@@ -3,6 +3,7 @@
 #include "../Scene.h"
 #include "../Input.h"
 #include "../FringeTile.h"
+#include "../Monocle.h"
 
 namespace Monocle
 {
@@ -35,6 +36,7 @@ namespace Monocle
 	{
 		if (isOn)
 		{
+			UpdateCamera();
 			if (state == FTES_NONE)
 			{
 				UpdateSelect();
@@ -61,6 +63,19 @@ namespace Monocle
 					break;
 				}
 			}
+		}
+	}
+
+	void FringeTileEditor::UpdateCamera()
+	{
+		const float speed = 100.0f;
+		if (Input::IsKeyHeld(KEY_D))
+		{
+			Graphics::AdjustCameraPosition(Vector2::right * speed * Monocle::deltaTime);
+		}
+		if (Input::IsKeyHeld(KEY_A))
+		{
+			Graphics::AdjustCameraPosition(Vector2::left * speed * Monocle::deltaTime);
 		}
 	}
 
@@ -120,6 +135,17 @@ namespace Monocle
 			{
 				Clone();
 			}
+		}
+
+		if (Input::IsKeyPressed(KEY_I))
+		{
+			selectedEntity->AdjustLayer(1);
+			printf("layer is now: %d\n", selectedEntity->GetLayer());
+		}
+		if (Input::IsKeyPressed(KEY_K))
+		{
+			selectedEntity->AdjustLayer(-1);
+			printf("layer is now: %d\n", selectedEntity->GetLayer());
 		}
 
 		if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT))

@@ -40,8 +40,8 @@ namespace Monocle
 		int width, height;
 
 	private:
-		Tileset *GetTileset(const std::string &name);
-		FringeTileset *GetFringeTileset(const std::string &name);
+		Tileset *GetTilesetByName(const std::string &name);
+		FringeTileset *GetFringeTilesetByName(const std::string &name);
 
 		Scene *scene;
 		static Level *instance;

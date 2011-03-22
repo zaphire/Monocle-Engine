@@ -26,6 +26,8 @@ namespace Monocle
 	public:
 		FringeTileset(const std::string &name);
 		~FringeTileset();
+		
+		bool IsName(const std::string &name);
 
 		const FringeTileData *GetFringeTileDataByID(int tileID);
 		void SetFringeTileData(int tileID, FringeTileData *fringeTileData);

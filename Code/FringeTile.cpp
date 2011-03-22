@@ -13,6 +13,11 @@ namespace Monocle
 		// delete
 	}
 
+	bool FringeTileset::IsName(const std::string &name)
+	{
+		return this->name == name;
+	}
+
 	const FringeTileData *FringeTileset::GetFringeTileDataByID(int tileID)
 	{
 		return fringeTileData[tileID];
@@ -33,11 +38,8 @@ namespace Monocle
 			tileID++;
 			if (tileID >= maxTileID)
 				tileID = 0;
-			printf("%d, %d\n", tileID, maxTileID);
 		}
 		while (!fringeTileData[tileID]);
-
-		printf("%d, %d\n", tileID, maxTileID);
 		return tileID;
 	}
 

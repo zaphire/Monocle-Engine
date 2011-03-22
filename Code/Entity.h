@@ -62,6 +62,7 @@ namespace Monocle
 		bool IsLayer(int layer);
 		int GetLayer();
 		void SetLayer(int layer);
+		void AdjustLayer(int layerAdjustAmount);
 
 		void SetCollider(Collider *collider);
 		void SetGraphic(Graphic *graphic);

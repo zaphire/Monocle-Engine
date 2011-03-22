@@ -25,6 +25,7 @@ namespace Monocle
 		void Update();
 
 	protected:
+		void UpdateCamera();
 		void UpdateSelect();
 		void UpdateOpportunity();
 		void UpdateMove();
