@@ -68,7 +68,12 @@ namespace Monocle
 
 	void FringeTileEditor::UpdateCamera()
 	{
-		const float speed = 100.0f;
+		float speed = 200.0f;
+
+		if (Input::IsKeyHeld(KEY_LSHIFT))
+		{
+			speed *= 5.0f;
+		}
 		if (Input::IsKeyHeld(KEY_D))
 		{
 			Graphics::AdjustCameraPosition(Vector2::right * speed * Monocle::deltaTime);
@@ -76,6 +81,14 @@ namespace Monocle
 		if (Input::IsKeyHeld(KEY_A))
 		{
 			Graphics::AdjustCameraPosition(Vector2::left * speed * Monocle::deltaTime);
+		}
+		if (Input::IsKeyHeld(KEY_W))
+		{
+			Graphics::AdjustCameraPosition(Vector2::up * speed * Monocle::deltaTime);
+		}
+		if (Input::IsKeyHeld(KEY_S))
+		{
+			Graphics::AdjustCameraPosition(Vector2::down * speed * Monocle::deltaTime);
 		}
 	}
 

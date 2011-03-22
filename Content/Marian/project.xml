@@ -6,7 +6,8 @@
 		</FringeTileset>
 		<FringeTileset name="spring">
 			<FringeTile tileID="0" image="graphics/spring-sky.png" width="1024" height="1024"/>
-			<FringeTile tileID="1" image="graphics/plant-harp.png" width="1024" height="1024"/>
+			<FringeTile tileID="1" image="graphics/spring-bg-grass.png" width="2048" height="1024"/>
+			<FringeTile tileID="2" image="graphics/plant-harp.png" width="1024" height="1024"/>
 		</FringeTileset>
 	</FringeTilesets>
 </Project>
