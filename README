@@ -1,12 +1,16 @@
 T H E  M O N O C L E  E N G I N E
 
-NOTE:
+BUILD HELP
+
+=WINDOWS=
 To run on Windows, make sure working directory is set to:
 
 $(SolutionDir)..\..\..\Build\bin\
 
-Otherwise Monocle won't be able to find the content dir.
-
+=MAC OSX=
+In XCode: Executables->MonocleTest RightClick->GetInfo or CMD+I
+General Tab -> Set Working Directory to... Custom directory
+(YourUserPath)-> "Monocle-Engine/Build/bin"
 
 Change the #defined TEST_* values in main.cpp to try out different demos.
 

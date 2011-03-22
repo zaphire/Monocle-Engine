@@ -513,6 +513,9 @@ namespace Monocle
 		instance = this;
 		WindowsPlatform::instance->platform = this;
 
+		// 1ms timer
+		timeBeginPeriod(1);
+
 		for (int i = 0; i < KEY_MAX; i++)
 		{
 			keys[i] = false;
