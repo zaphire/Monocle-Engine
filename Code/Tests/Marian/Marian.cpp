@@ -220,6 +220,11 @@ namespace Marian
 	{
 		Scene::Update();
 		fringeTileEditor.Update();
+
+		if (Input::IsKeyPressed(KEY_S) && Input::IsKeyHeld(KEY_LCTRL))
+		{
+			Level::Save();
+		}
 	}
 
 	void LevelScene::End()

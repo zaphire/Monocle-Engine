@@ -1,8 +1,8 @@
 <Level width="1600" height="600">
-	<FringeTiles set="balcony">
-		<FringeTile id="0" layer="0" x="400" y="300" rotation="0" scaleX="1.25" scaleY="1.25"/>
-		<FringeTile id="1" layer="-1" x="400" y="300" rotation="0" scaleX="1" scaleY="1"/>
-		<FringeTile id="2" layer="-1" x="400" y="300" rotation="0" scaleX="1" scaleY="1"/>
-		<FringeTile id="3" layer="-1" x="400" y="300" rotation="0" scaleX="1" scaleY="1"/>
-	</FringeTiles>
+    <FringeTiles set="balcony">
+        <FringeTile id="0" layer="0" x="400" y="300" rotation="0" scaleX="1.25" scaleY="1.25" />
+        <FringeTile id="1" layer="-1" x="1252" y="278" rotation="0" scaleX="1" scaleY="1" />
+        <FringeTile id="2" layer="-3" x="181" y="300" rotation="0" scaleX="1" scaleY="1" />
+        <FringeTile id="3" layer="-1" x="190" y="342" rotation="0" scaleX="1" scaleY="1" />
+    </FringeTiles>
 </Level>

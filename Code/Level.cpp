@@ -154,11 +154,16 @@ namespace Monocle
 							while (eFringeTile)
 							{
 								int tileID = XMLInt(eFringeTile, "id");
+
 								int layer = XMLInt(eFringeTile, "layer");
+
 								Vector2 position = Vector2(XMLFloat(eFringeTile, "x"), XMLFloat(eFringeTile, "y"));
+
 								Vector2 scale = Vector2::one;
-								if (eFringeTile->Attribute("scaleX") && eFringeTile->Attribute("scaleY"))
+
+								if (eFringeTile->Attribute("scaleX") != NULL && eFringeTile->Attribute("scaleY") != NULL)
 									scale = Vector2(XMLFloat(eFringeTile, "scaleX"), XMLFloat(eFringeTile, "scaleY"));
+
 								int rotation = XMLFloat(eFringeTile, "rotation");
 
 								AddFringeTile(fringeTileset, tileID, layer, position, scale, rotation);
@@ -244,13 +249,43 @@ namespace Monocle
 
 						eLevel.InsertEndChild(eTilemap);
 					}
+				}
 
-					// save fringe tiles
+				// save fringe tiles
+				// go through the sets
+				for (std::list<FringeTileset>::iterator i = instance->fringeTilesets.begin(); i != instance->fringeTilesets.end(); ++i)
+				{
+					bool savedAny = false;
+					TiXmlElement eFringeTiles("FringeTiles");
+					eFringeTiles.SetAttribute("set", (*i).GetName());
+
+					// save fringeTiles that belong to the set
+					for (std::list<FringeTile*>::iterator j = instance->fringeTiles.begin(); j != instance->fringeTiles.end(); ++j)
 					{
-						// go through the sets
-						// save fringeTiles that belong to a given set
+						if ((*j)->GetFringeTileset() == &(*i))
+						{
+							savedAny = true;
+
+							TiXmlElement eFringeTile("FringeTile");
+
+							eFringeTile.SetAttribute("id", (*j)->GetTileID());
+							eFringeTile.SetAttribute("layer", (*j)->entity->GetLayer());
+							eFringeTile.SetAttribute("x", (*j)->entity->position.x);
+							eFringeTile.SetAttribute("y", (*j)->entity->position.y);
+							eFringeTile.SetAttribute("rotation", (*j)->entity->rotation);
+							eFringeTile.SetAttribute("scaleX", (*j)->entity->scale.x);
+							eFringeTile.SetAttribute("scaleY", (*j)->entity->scale.y);
+
+							eFringeTiles.InsertEndChild(eFringeTile);
+						}
+					}
+
+					if (savedAny)
+					{
+						eLevel.InsertEndChild(eFringeTiles);
 					}
 				}
+
 				xml.InsertEndChild(eLevel);
 
 				xml.SaveFile(Assets::GetContentPath() + instance->filename);  

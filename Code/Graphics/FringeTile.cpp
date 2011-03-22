@@ -18,6 +18,11 @@ namespace Monocle
 		return this->name == name;
 	}
 
+	const std::string &FringeTileset::GetName()
+	{
+		return this->name;
+	}
+
 	const FringeTileData *FringeTileset::GetFringeTileDataByID(int tileID)
 	{
 		return fringeTileData[tileID];

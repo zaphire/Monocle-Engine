@@ -10,7 +10,6 @@ namespace Monocle
 	FringeTileEditor::FringeTileEditor()
 		: scene(NULL), selectedEntity(NULL), selectedFringeTile(NULL), isOn(false), state(FTES_NONE)
 	{
-
 	}
 
 	void FringeTileEditor::Init(Scene *scene)
@@ -68,37 +67,40 @@ namespace Monocle
 
 	void FringeTileEditor::UpdateCamera()
 	{
-		float moveSpeed = 200.0f;
-		float zoomSpeed = 0.5f;
+		if (!Input::IsKeyHeld(KEY_LCTRL))
+		{
+			float moveSpeed = 200.0f;
+			float zoomSpeed = 0.5f;
 
-		if (Input::IsKeyHeld(KEY_LSHIFT))
-		{
-			moveSpeed *= 5.0f;
-			zoomSpeed *= 2.0f;
-		}
-		if (Input::IsKeyHeld(KEY_D))
-		{
-			Graphics::AdjustCameraPosition(Vector2::right * moveSpeed * Monocle::deltaTime);
-		}
-		if (Input::IsKeyHeld(KEY_A))
-		{
-			Graphics::AdjustCameraPosition(Vector2::left * moveSpeed * Monocle::deltaTime);
-		}
-		if (Input::IsKeyHeld(KEY_W))
-		{
-			Graphics::AdjustCameraPosition(Vector2::up * moveSpeed * Monocle::deltaTime);
-		}
-		if (Input::IsKeyHeld(KEY_S))
-		{
-			Graphics::AdjustCameraPosition(Vector2::down * moveSpeed * Monocle::deltaTime);
-		}
-		if (Input::IsKeyHeld(KEY_Q))
-		{
-			Graphics::AdjustCameraZoom(-1*Vector2::one * zoomSpeed * Monocle::deltaTime);
-		}
-		if (Input::IsKeyHeld(KEY_E))
-		{
-			Graphics::AdjustCameraZoom(Vector2::one * zoomSpeed * Monocle::deltaTime);
+			if (Input::IsKeyHeld(KEY_LSHIFT))
+			{
+				moveSpeed *= 5.0f;
+				zoomSpeed *= 2.0f;
+			}
+			if (Input::IsKeyHeld(KEY_D))
+			{
+				Graphics::AdjustCameraPosition(Vector2::right * moveSpeed * Monocle::deltaTime);
+			}
+			if (Input::IsKeyHeld(KEY_A))
+			{
+				Graphics::AdjustCameraPosition(Vector2::left * moveSpeed * Monocle::deltaTime);
+			}
+			if (Input::IsKeyHeld(KEY_W))
+			{
+				Graphics::AdjustCameraPosition(Vector2::up * moveSpeed * Monocle::deltaTime);
+			}
+			if (Input::IsKeyHeld(KEY_S))
+			{
+				Graphics::AdjustCameraPosition(Vector2::down * moveSpeed * Monocle::deltaTime);
+			}
+			if (Input::IsKeyHeld(KEY_Q))
+			{
+				Graphics::AdjustCameraZoom(-1*Vector2::one * zoomSpeed * Monocle::deltaTime);
+			}
+			if (Input::IsKeyHeld(KEY_E))
+			{
+				Graphics::AdjustCameraZoom(Vector2::one * zoomSpeed * Monocle::deltaTime);
+			}
 		}
 	}
 
