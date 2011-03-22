@@ -11,7 +11,7 @@ namespace Monocle
 	public:
 		Anim(const std::string &name, int start, int end, float speed);
 		Anim();
-		bool playing;
+		bool isPlaying;
 		const std::string name;
 		float frame;
 		float speed;

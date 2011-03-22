@@ -47,6 +47,7 @@ namespace Monocle
 		glEnable(GL_BLEND);
 		glDisable(GL_LIGHTING);
 		glEnable(GL_TEXTURE_2D);
+		glCullFace(GL_BACK);
 		//glShadeModel(GL_SMOOTH);	
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClearDepth(1.0f);
@@ -230,7 +231,7 @@ namespace Monocle
 		return instance->virtualHeight;
 	}
 
-	void Graphics::RenderQuad(float width, float height, Vector2 textureOffset, Vector2 textureScale, Vector2 position)
+	void Graphics::RenderQuad(float width, float height, const Vector2 &textureOffset, const Vector2 &textureScale, const Vector2 &position)
 	{
 		float halfWidth = width*0.5f;
 		float halfHeight = height*0.5f;

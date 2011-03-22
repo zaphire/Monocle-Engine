@@ -5,7 +5,14 @@
 namespace Monocle
 {
 
-	SpriteAnimation::SpriteAnimation(const std::string &filename, FilterType filter, float width, float height) : Sprite(filename, filter, width, height)
+	Anim::Anim(const std::string &name, int start, int end, float speed)
+		: name(name), start(start), end(end), speed(speed), frame(start), isPlaying(false)
+	{
+
+	}
+
+	SpriteAnimation::SpriteAnimation(const std::string &filename, FilterType filter, float width, float height)
+		: Sprite(filename, filter, width, height)
 	{
 
 	}
@@ -19,12 +26,20 @@ namespace Monocle
 	void SpriteAnimation::Play(const std::string &name)
 	{
 		animation = GetAnim(name);
-		animation->playing = true;
+		if (animation)
+		{
+			animation->isPlaying = true;
+		}
+
 	}
 
 	void SpriteAnimation::Stop(const std::string &name)
 	{
-		GetAnim(name)->playing = false;
+		animation = GetAnim(name);
+		if (animation)
+		{
+			animation->isPlaying = false;
+		}
 	}
 
 	void SpriteAnimation::Render()
@@ -34,7 +49,7 @@ namespace Monocle
 
 		if(animation)
 		{
-			if(animation->playing)
+			if(animation->isPlaying)
 			{
 				animation->frame += animation->speed * Monocle::deltaTime;
 				if(animation->frame > animation->end + 1) { animation->frame = animation->start; }
@@ -57,13 +72,11 @@ namespace Monocle
 			if(i->name == name)
 			{
 				return &(*i);
-				break;
 			}
 		}
+		Debug::Log("Warning: Could not find animation named: " + name);
+		return NULL;
 	}
 
-	Anim::Anim(const std::string &name, int start, int end, float speed) : name(name), start(start), end(end), speed(speed), frame(start)
-	{
 
-	}
 }

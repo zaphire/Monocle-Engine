@@ -45,7 +45,7 @@ namespace Monocle
 
 		static void RenderTriangle(float size);
 		//static void RenderQuad(float size);
-		static void RenderQuad(float width, float height, Vector2 textureOffset=Vector2::zero, Vector2 textureScale=Vector2::one, Vector2 position=Vector2::zero);
+		static void RenderQuad(float width, float height, const Vector2 &textureOffset=Vector2::zero, const Vector2 &textureScale=Vector2::one, const Vector2 &position=Vector2::zero);
 		static void RenderLineRect(float x, float y, float w, float h);
 		static void PushMatrix();
 		static void PopMatrix();
