@@ -23,7 +23,7 @@ namespace Ogmo
 
 	void Player::Update()
 	{
-		//input
+		// GRAB INPUT AND ACCELERATE
 		if (Input::IsKeyMaskHeld("left"))
 		{
 			if(cling < 0) { velocity.x -= ACCELERATION * Monocle::deltaTime; }
@@ -33,28 +33,28 @@ namespace Ogmo
 			if(cling < 0) { velocity.x += ACCELERATION * Monocle::deltaTime; }
 		}
 
-		if (Input::IsKeyMaskPressed("jump") && onGround)
+		// JUMP INPUT
+		if (Input::IsKeyMaskPressed("jump") && (onGround || cling > 0 || !doubleJump))
 		{
-			//jump
+			// jump
 			velocity.y = - JUMP;
-		}
-		else if (Input::IsKeyMaskPressed("jump") && cling > 0)
-		{
-			//jump
-			velocity.y = - JUMP;
-			velocity.x = clingDir * 2;
-			cling = -1;
-		}
-		else if (Input::IsKeyMaskPressed("jump") && !doubleJump)
-		{
-			velocity.y = - JUMP;
-			doubleJump = true;
-		}
 
+			if(!onGround)
+			{
+				// wall jump
+				if(cling > 0)
+				{
+					velocity.x = clingDir * 2;
+					cling = -1;
+				}
 
-		// maxspeed
-		// REMOVED - Friction acts as a maxspeed, in this case
-		//if(abs(velocity.x) > 0.20) { velocity.x = Sign(velocity.x, 0.20); }
+				// double jump
+				if(cling < 0)
+				{
+					doubleJump = true;
+				}
+			}
+		}
 		
 		// friction
 		if(onGround) { velocity.x *= FRICTION_GROUND; }
@@ -63,49 +63,72 @@ namespace Ogmo
 		// gravity
 		velocity.y += GRAVITY * Monocle::deltaTime;
 
-		//move right/left
-		position.x += velocity.x;
-
-		//did we just hit a wall? Move back until we aren't
-		bool col = false;
-		while(Collide("WALL")) { position.x -= Sign(velocity.x, 0.1); col = true; }
-
-		//so.. we hit a wall ...
-		if(col) 
-		{ 
-			if(!onGround) 
-			{
-				// if we're not on the ground, we cling to the wall (SMB-style)
-				// this way, if the user wants to preform a wall-jump, they don't
-				// get moved away from the wall
-				cling = 10;
-				if(velocity.x > 0) {clingDir = -1; }
-				else { clingDir = 1; }
-			}
-
-			//stop moving
-			velocity.x = 0;
-			
-		}
-
-		//move up/down
-		position.y += velocity.y;
-
-		//did we just hit a wall? Move back until we aren't any more
-		col = false;
-		while(Collide("WALL")) { position.y -= Sign(velocity.y, 0.1); col = true; }
-		if(col) { velocity.y = 0; }
+		// Motion
+		Motion(velocity.x, position.x);
+		Motion(velocity.y, position.y);
 
 		//check for ground
 		if(velocity.y != 0)
 		{
-			position.y += 1;
-			if(Collide("WALL")) { onGround = true; doubleJump = false; }
-			else { onGround = false; }
-			position.y -= 1;
+			if(CollideAt("WALL", position.x, position.y + 1))
+			{
+				onGround = true;
+				doubleJump = false;
+			}
+			else
+			{
+				onGround = false;
+			}
 		}
 
+		//check for wall jump
+		if(!onGround)
+		{
+			if(CollideAt("WALL", position.x + 1, position.y) && Input::IsKeyMaskHeld("right")) 
+			{ 
+				cling = 10; 
+				clingDir = -1; 
+			}
+			if(CollideAt("WALL", position.x - 1, position.y) && Input::IsKeyMaskHeld("left")) 
+			{ 
+				cling = 10; 
+				clingDir = 1; 
+			}
+		}
+
+		//decrease how long we can cling to a wall for
 		cling --;
+	}
+
+	bool Player::Motion(float &speed, float &to)
+	{
+		// move
+		to += speed;
+
+		// collide
+		bool col = false;
+		while(Collide("WALL")) { to -= Sign(speed, 0.1); col = true; }
+		
+		// stop motion on collision
+		if(col) { speed = 0; }
+
+		// return
+		return col;
+	}
+
+
+	bool Player::CollideAt(const std::string &tag, float x, float y)
+	{
+		Vector2 pre = Vector2(position.x, position.y);
+		bool collide = false;
+
+		position.x = x;
+		position.y = y;
+
+		if(Collide(tag)) { collide = true; }
+
+		position = Vector2(pre.x, pre.y);
+		return collide;
 	}
 
 	float Player::Sign(float i, float to)

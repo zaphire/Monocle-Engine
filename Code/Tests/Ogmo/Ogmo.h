@@ -35,6 +35,9 @@ namespace Ogmo
 
 		//other/util
 		float Sign(float i, float to);
+		bool Motion(float &speed, float &to);
+		bool Ground();
+		bool CollideAt(const std::string &tag, float x, float y);
 
 	};
 
