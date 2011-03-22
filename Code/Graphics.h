@@ -16,6 +16,8 @@ namespace Monocle
 		//virtual void Update()=0;
 		virtual void Render()=0;
 		virtual void GetWidthHeight(int *width, int *height)=0;
+
+		Entity *entity;
 	};
 
 	class Graphics

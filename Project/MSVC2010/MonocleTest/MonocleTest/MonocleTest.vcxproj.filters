@@ -213,6 +213,9 @@
     <ClInclude Include="..\..\..\..\Code\Tests\Ogmo\Ogmo.h">
       <Filter>Monocle\Tests\Ogmo</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\FringeTile.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp">
@@ -397,6 +400,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Tests\Ogmo\Ogmo.cpp">
       <Filter>Monocle\Tests\Ogmo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\FringeTile.cpp">
+      <Filter>Monocle</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

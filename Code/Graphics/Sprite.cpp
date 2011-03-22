@@ -45,6 +45,16 @@ namespace Monocle
 		}
 	}
 
+	Sprite::Sprite()
+		: Graphic(),
+		texture(NULL),
+		width(0),
+		height(0),
+		textureOffset(Vector2::zero),
+		textureScale(Vector2::one)
+	{
+	}
+
 	Sprite::~Sprite()
 	{
 		if (texture != NULL)

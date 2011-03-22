@@ -76,6 +76,7 @@
     <ClInclude Include="..\..\..\..\Code\Colliders\RectangleCollider.h" />
     <ClInclude Include="..\..\..\..\Code\Collision.h" />
     <ClInclude Include="..\..\..\..\Code\Color.h" />
+    <ClInclude Include="..\..\..\..\Code\FringeTile.h" />
     <ClInclude Include="..\..\..\..\Code\Game.h" />
     <ClInclude Include="..\..\..\..\Code\Debug.h" />
     <ClInclude Include="..\..\..\..\Code\Editor.h" />
@@ -127,6 +128,7 @@
     <ClCompile Include="..\..\..\..\Code\Colliders\RectangleCollider.cpp" />
     <ClCompile Include="..\..\..\..\Code\Collision.cpp" />
     <ClCompile Include="..\..\..\..\Code\Color.cpp" />
+    <ClCompile Include="..\..\..\..\Code\FringeTile.cpp" />
     <ClCompile Include="..\..\..\..\Code\Game.cpp" />
     <ClCompile Include="..\..\..\..\Code\Debug.cpp" />
     <ClCompile Include="..\..\..\..\Code\Entity.cpp" />

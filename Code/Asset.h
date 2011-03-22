@@ -35,6 +35,8 @@ namespace Monocle
 		void AddReference();
 		void RemoveReference();
 
+	protected:
+		friend class Assets;
 		// allow derived classes to add whatever params they want to load
 		//virtual void Load(const std::string &filename)=0;
 		virtual void Unload() = 0;

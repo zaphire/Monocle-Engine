@@ -14,6 +14,7 @@ namespace Monocle
 	public:
 		Sprite(const std::string &filename, float width=-1, float height=-1);
 		Sprite(const std::string &filename, FilterType filter, float width=-1, float height=-1);
+		Sprite();
 		~Sprite();
 		//void Update();
 		void Render();

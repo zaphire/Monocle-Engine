@@ -35,7 +35,10 @@ namespace Ogmo
 		if (Input::IsKeyMaskHeld("left"))
 		{
 			scale.x = -1;
-			if(cling < 0) { velocity.x -= ACCELERATION * Monocle::deltaTime; }
+			if(cling < 0)
+			{
+				velocity.x -= ACCELERATION * Monocle::deltaTime;
+			}
 			sprite->Play("run");
 			direction = false;
 			scale.x = -1;
@@ -43,7 +46,10 @@ namespace Ogmo
 		else if (Input::IsKeyMaskHeld("right"))
 		{
 			scale.x = 1;
-			if(cling < 0) { velocity.x += ACCELERATION * Monocle::deltaTime; }
+			if(cling < 0)
+			{
+				velocity.x += ACCELERATION * Monocle::deltaTime;
+			}
 			sprite->Play("run");
 			direction = true;
 			scale.x = 1;
@@ -77,8 +83,14 @@ namespace Ogmo
 		}
 		
 		// friction
-		if(onGround) { velocity.x *= FRICTION_GROUND; }
-		else { velocity.x *= FRICTION_AIR; }
+		if(onGround)
+		{
+			velocity.x *= FRICTION_GROUND;
+		}
+		else
+		{
+			velocity.x *= FRICTION_AIR;
+		}
 
 		// gravity
 		velocity.y += GRAVITY * Monocle::deltaTime;
@@ -139,10 +151,17 @@ namespace Ogmo
 
 		// collide
 		bool col = false;
-		while(Collide("WALL")) { to -= Sign(speed, 0.1); col = true; }
+		while(Collide("WALL"))
+		{
+			to -= Sign(speed, 0.1);
+			col = true;
+		}
 		
 		// stop motion on collision
-		if(col) { speed = 0; }
+		if(col)
+		{
+			speed = 0;
+		}
 
 		// return
 		return col;
@@ -157,7 +176,10 @@ namespace Ogmo
 		position.x = x;
 		position.y = y;
 
-		if(Collide(tag)) { collide = true; }
+		if(Collide(tag))
+		{
+			collide = true;
+		}
 
 		position = Vector2(pre.x, pre.y);
 		return collide;

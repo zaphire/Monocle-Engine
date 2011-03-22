@@ -1,0 +1,8 @@
+<Project>
+	<FringeTilesets>
+		<FringeTileset name="Balcony">
+			<FringeTile tileID="0" image="Graphics/ReverieSky.png" width="1024" height="512"/>
+			<FringeTile tileID="1" image="Graphics/Title.png" width="512" height="512"/>
+		</FringeTileset>
+	</FringeTilesets>
+</Project>

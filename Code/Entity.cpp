@@ -217,6 +217,14 @@ namespace Monocle
 			delete this->graphic;
 		}
 		*/
+		
+		// not sure if we want this yet, sets our graphic's entity pointer to NULL
+		// if we're about to set the graphic pointer to NULL
+		if (graphic == NULL && this->graphic != NULL)
+		{
+			this->graphic->entity = NULL;
+		}
+
 		if (this->graphic != NULL)
 		{
 			Debug::Log("Error: Entity already has a graphic.");
@@ -224,6 +232,7 @@ namespace Monocle
 		else
 		{
 			this->graphic = graphic;
+			graphic->entity = this;
 		}
 	}
 

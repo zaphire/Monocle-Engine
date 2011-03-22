@@ -197,5 +197,30 @@ namespace Marian
 	}
 
 
+	class FringeTileEditor
+	{
+	public:
+	};
+
+
+	void LevelScene::Begin()
+	{
+		Scene::Begin();
+
+		Assets::SetContentPath("../../Content/Marian/");
+
+		Level::LoadProject("project.xml");
+		Level::Load("balcony.xml", this);
+	}
+
+	void LevelScene::Update()
+	{
+		Scene::Update();
+	}
+
+	void LevelScene::End()
+	{
+		Scene::End();
+	}
 
 }
