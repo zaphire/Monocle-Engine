@@ -230,7 +230,7 @@ namespace Monocle
 		return instance->virtualHeight;
 	}
 
-	void Graphics::RenderQuad(float width, float height, Vector2 textureOffset, Vector2 textureScale, Vector2 offset)
+	void Graphics::RenderQuad(float width, float height, Vector2 textureOffset, Vector2 textureScale, Vector2 position)
 	{
 		float halfWidth = width*0.5f;
 		float halfHeight = height*0.5f;
@@ -238,19 +238,19 @@ namespace Monocle
 		glBegin(GL_QUADS);
 			// UL
 			glTexCoord2f(textureOffset.x, textureOffset.y);
-			glVertex3f(-halfWidth + offset.x, -halfHeight + offset.y, 0.0f);
+			glVertex3f(-halfWidth + position.x, -halfHeight + position.y, 0.0f);
 			
 			//UR
 			glTexCoord2f(textureOffset.x + textureScale.x, textureOffset.y);
-			glVertex3f(halfWidth + offset.x, -halfHeight + offset.y, 0.0f);
+			glVertex3f(halfWidth + position.x, -halfHeight + position.y, 0.0f);
 			
 			//LR
 			glTexCoord2f(textureOffset.x + textureScale.x, textureOffset.y + textureScale.y);
-			glVertex3f(halfWidth + offset.x, halfHeight + offset.y, 0.0f);
+			glVertex3f(halfWidth + position.x, halfHeight + position.y, 0.0f);
 			
 			//LL
 			glTexCoord2f(textureOffset.x, textureOffset.y + textureScale.y);
-			glVertex3f(-halfWidth + offset.x, halfHeight + offset.y, 0.0f);
+			glVertex3f(-halfWidth + position.x, halfHeight + position.y, 0.0f);
 		glEnd();
 	}
 
