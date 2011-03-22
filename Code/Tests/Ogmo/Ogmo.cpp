@@ -17,15 +17,12 @@ namespace Ogmo
 		SetCollider(new RectangleCollider(8, 8));
 
 		sprite = new SpriteAnimation("player.png", FILTER_NONE, 8, 8);
-		sprite->Add("standRight", 0, 0, 0);
-		sprite->Add("standLeft", 4, 4, 0);
-		sprite->Add("runRight", 0, 3, 12.0f);
-		sprite->Add("runLeft", 4, 7, 12.0f);
-		sprite->Add("jumpRight", 8, 8, 0);
-		sprite->Add("jumpLeft", 10, 10, 0);
-		sprite->Add("jumpRightDown", 9, 9, 0);
-		sprite->Add("jumpLeftDown", 11, 11, 0);
-		sprite->Play("runRight");
+		sprite->Add("stand", 0, 0, 0);
+		sprite->Add("run", 0, 3, 12.0f);
+		sprite->Add("jumpUp", 8, 8, 0);
+		sprite->Add("jumpDown", 9, 9, 0);
+		sprite->Play("run");
+
 		SetLayer(-1);
 		SetGraphic(sprite);
 
@@ -39,19 +36,21 @@ namespace Ogmo
 		{
 			scale.x = -1;
 			if(cling < 0) { velocity.x -= ACCELERATION * Monocle::deltaTime; }
-			sprite->Play("runLeft");
+			sprite->Play("run");
 			direction = false;
+			scale.x = -1;
 		}
 		else if (Input::IsKeyMaskHeld("right"))
 		{
 			scale.x = 1;
 			if(cling < 0) { velocity.x += ACCELERATION * Monocle::deltaTime; }
-			sprite->Play("runRight");
+			sprite->Play("run");
 			direction = true;
+			scale.x = 1;
 		}
 		else
 		{
-			if(direction) { sprite->Play("standRight"); } else { sprite->Play("standLeft"); }
+			sprite->Play("stand");
 		}
 
 		// JUMP INPUT
@@ -119,11 +118,11 @@ namespace Ogmo
 			//change sprite
 			if(velocity.y < 0)
 			{
-				if(direction) { sprite->Play("jumpRight"); } else { sprite->Play("jumpLeft"); }
+				sprite->Play("jumpUp");
 			}
 			else
 			{
-				if(direction) { sprite->Play("jumpRightDown"); } else { sprite->Play("jumpLeftDown"); }
+				sprite->Play("jumpDown");
 			}
 		}
 
