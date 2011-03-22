@@ -6,6 +6,8 @@
 
 namespace Monocle
 {
+	int Tilemap::selectedTile = 0;
+
 	Tilemap::Tilemap(Tileset *tileset, int width, int height, int tileWidth, int tileHeight)
 		: Graphic(), width(0), height(0), tileWidth(tileWidth), tileHeight(tileHeight)
 	{

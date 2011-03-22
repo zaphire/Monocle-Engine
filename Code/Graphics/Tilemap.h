@@ -43,6 +43,6 @@ namespace Monocle
 
 			void UpdateEditor();
 
-			int selectedTile;
+			static int selectedTile;
 	};
 }

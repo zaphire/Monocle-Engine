@@ -74,7 +74,7 @@ namespace Flash
 
 	void Part::Update(float f)
 	{
-		int frame = floor(f);
+		int frame = int(f);
 		if (frame >= 0 && frame < frames.size())
 		{
 			// lerp!
@@ -308,7 +308,7 @@ namespace Flash
 	void TestScene::UpdateFrameNumberDisplay()
 	{
 		if (currentAnimation)
-			printf("moved to frame: %d/%d\n", (int)floor(animationFrame), (int)currentAnimation->GetMaxFrames()-1);
+			printf("moved to frame: %d/%d\n", (int)(animationFrame), (int)currentAnimation->GetMaxFrames()-1);
 		else
 			printf("no animation\n");
 	}
@@ -508,9 +508,10 @@ namespace Flash
 				{
 					if (editPart)
 					{
-						editPart->frames[floor(animationFrame)].pos = editEntity->position;
-						editPart->frames[floor(animationFrame)].scale = editEntity->scale;
-						editPart->frames[floor(animationFrame)].rotation = editEntity->rotation;
+						int currentFrame = int(animationFrame);
+						editPart->frames[currentFrame].pos = editEntity->position;
+						editPart->frames[currentFrame].scale = editEntity->scale;
+						editPart->frames[currentFrame].rotation = editEntity->rotation;
 					}
 				}
 
@@ -526,7 +527,7 @@ namespace Flash
 	{
 		if (currentAnimation)
 		{
-			int currentFrame = floor(animationFrame);
+			int currentFrame = int(animationFrame);
 			int prevFrame = SafeFrameRange(currentFrame-1);
 			///TODO: build functions to make this prettier
 			if (editPart)
@@ -541,7 +542,7 @@ namespace Flash
 	{
 		if (currentAnimation)
 		{
-			int currentFrame = floor(animationFrame);
+			int currentFrame = int(animationFrame);
 			int nextFrame = SafeFrameRange(currentFrame+1);
 			///TODO: build functions to make this prettier
 			if (editPart)
@@ -558,7 +559,7 @@ namespace Flash
 
 		if (editPart)
 		{
-			int currentFrame = floor(animationFrame);
+			int currentFrame = int(animationFrame);
 			editPart->frames[currentFrame] = backupPartFrame;
 			editPart->ApplyFrameToEntity(currentFrame);
 		}
@@ -569,7 +570,7 @@ namespace Flash
 		Debug::Log("StoreBackupPartFrame");
 		if (editPart)
 		{
-			backupPartFrame = editPart->frames[floor(animationFrame)];
+			backupPartFrame = editPart->frames[int(animationFrame)];
 		}
 	}
 
@@ -624,7 +625,7 @@ namespace Flash
 	{
 		DeleteOnionSkins();
 
-		animationFrame = floor(animationFrame) + num;
+		animationFrame = int(animationFrame) + num;
 		if (animationFrame > currentAnimation->GetMaxFrames()-1)
 		{
 			animationFrame = currentAnimation->GetMaxFrames()-1;
@@ -640,7 +641,7 @@ namespace Flash
 	{
 		DeleteOnionSkins();
 
-		animationFrame = floor(animationFrame) - num;
+		animationFrame = int(animationFrame) - num;
 		if (animationFrame < 0)
 		{
 			animationFrame = 0;
@@ -702,7 +703,7 @@ namespace Flash
 			Entity *editEntity = editPart->entity;
 			Sprite *editSprite = editPart->sprite;
 
-			int currentFrame = floor(animationFrame);
+			int currentFrame = int(animationFrame);
 			
 			const int numFramesToPreview = 5;
 

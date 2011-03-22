@@ -84,7 +84,7 @@ namespace Monocle
 						TiXmlElement *eTile = eTilemap->FirstChildElement("Tile");
 						while (eTile)
 						{
-							Debug::Log("loading... set tile");
+							//Debug::Log("loading... set tile");
 							tilemap->SetTile(XMLInt(eTile, "x"), XMLInt(eTile, "y"), XMLInt(eTile, "tileID"));
 							eTile = eTile->NextSiblingElement("Tile");
 						}
