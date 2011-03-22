@@ -273,8 +273,8 @@ namespace Monocle
 							eFringeTile.SetAttribute("x", (*j)->entity->position.x);
 							eFringeTile.SetAttribute("y", (*j)->entity->position.y);
 							eFringeTile.SetAttribute("rotation", (*j)->entity->rotation);
-							eFringeTile.SetAttribute("scaleX", (*j)->entity->scale.x);
-							eFringeTile.SetAttribute("scaleY", (*j)->entity->scale.y);
+							eFringeTile.SetDoubleAttribute("scaleX", (*j)->entity->scale.x);
+							eFringeTile.SetDoubleAttribute("scaleY", (*j)->entity->scale.y);
 
 							eFringeTiles.InsertEndChild(eFringeTile);
 						}
