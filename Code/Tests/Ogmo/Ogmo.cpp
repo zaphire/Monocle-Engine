@@ -188,7 +188,7 @@ namespace Ogmo
 		Scene::Update();
 
 		///TESTEDITOR
-		if (Input::IsKeyPressed(KEY_F2))
+		if (Input::IsKeyPressed(KEY_S) && Input::IsKeyHeld(KEY_LCTRL))
 		{
 			Debug::Log("save level...");
 			Level::Save();

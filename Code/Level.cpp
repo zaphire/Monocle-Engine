@@ -80,14 +80,15 @@ namespace Monocle
 						instance->tilemaps.push_back(tilemap);
 						entity->SetGraphic(tilemap);
 						instance->scene->Add(entity);
-						
 
 						TiXmlElement *eTile = eTilemap->FirstChildElement("Tile");
 						while (eTile)
 						{
-							eTile = eTilemap->NextSiblingElement("Tile");
+							Debug::Log("loading... set tile");
+							tilemap->SetTile(XMLInt(eTile, "x"), XMLInt(eTile, "y"), XMLInt(eTile, "tileID"));
+							eTile = eTile->NextSiblingElement("Tile");
 						}
-						eTilemap = eLevel->NextSiblingElement("Tilemap");
+						eTilemap = eTilemap->NextSiblingElement("Tilemap");
 					}
 				}
 			}
@@ -133,6 +134,19 @@ namespace Monocle
 							eTilemap.SetAttribute("set", (*i)->tileset->name);
 						eTilemap.SetAttribute("tileWidth", (*i)->tileWidth);
 						eTilemap.SetAttribute("tileHeight", (*i)->tileHeight);
+
+						for (int ty = 0; ty < (*i)->height / (*i)->tileHeight; ty++)
+						{
+							for (int tx = 0; tx < (*i)->width / (*i)->tileWidth; tx++)
+							{
+								TiXmlElement eTile("Tile");
+								eTile.SetAttribute("x", tx);
+								eTile.SetAttribute("y", ty);
+								eTile.SetAttribute("tileID", (*i)->GetTile(tx, ty));
+								eTilemap.InsertEndChild(eTile);
+							}
+						}
+
 						eLevel.InsertEndChild(eTilemap);
 					}
 					//eLevel.LinkEndChild(&eTilemaps);
