@@ -26,7 +26,6 @@
 		37FB698413317693008963C1 /* RectangleCollider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB691E13317693008963C1 /* RectangleCollider.cpp */; };
 		37FB698513317693008963C1 /* Collision.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB692013317693008963C1 /* Collision.cpp */; };
 		37FB698613317693008963C1 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB692213317693008963C1 /* Color.cpp */; };
-		37FB698713317693008963C1 /* Core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB692413317693008963C1 /* Core.cpp */; };
 		37FB698813317693008963C1 /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB692613317693008963C1 /* Debug.cpp */; };
 		37FB698913317693008963C1 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB692913317693008963C1 /* Entity.cpp */; };
 		37FB698A13317693008963C1 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB692C13317693008963C1 /* Input.cpp */; };
@@ -67,6 +66,13 @@
 		37FB69B513317693008963C1 /* Vector2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB697C13317693008963C1 /* Vector2.cpp */; };
 		37FB69B613317693008963C1 /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB697E13317693008963C1 /* Vector3.cpp */; };
 		37FB69B813319030008963C1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FB69B713319030008963C1 /* OpenGL.framework */; };
+		F9257DC81338235100A47E00 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DC61338235100A47E00 /* Game.cpp */; };
+		F9257DCD1338236300A47E00 /* Level.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DCB1338236300A47E00 /* Level.cpp */; };
+		F9257DD41338237600A47E00 /* SpriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DD01338237600A47E00 /* SpriteAnimation.cpp */; };
+		F9257DD51338237600A47E00 /* Tilemap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DD21338237600A47E00 /* Tilemap.cpp */; };
+		F9257DDC1338239D00A47E00 /* Ogmosis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DDA1338239D00A47E00 /* Ogmosis.cpp */; };
+		F9257DE1133823AA00A47E00 /* Tileset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DDF133823AA00A47E00 /* Tileset.cpp */; };
+		F9257DFB133823E100A47E00 /* Ogmo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DF9133823E100A47E00 /* Ogmo.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,8 +116,6 @@
 		37FB692113317693008963C1 /* Collision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Collision.h; path = ../../../Code/Collision.h; sourceTree = "<group>"; };
 		37FB692213317693008963C1 /* Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Color.cpp; path = ../../../Code/Color.cpp; sourceTree = "<group>"; };
 		37FB692313317693008963C1 /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Color.h; path = ../../../Code/Color.h; sourceTree = "<group>"; };
-		37FB692413317693008963C1 /* Core.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Core.cpp; path = ../../../Code/Core.cpp; sourceTree = "<group>"; };
-		37FB692513317693008963C1 /* Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Core.h; path = ../../../Code/Core.h; sourceTree = "<group>"; };
 		37FB692613317693008963C1 /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Debug.cpp; path = ../../../Code/Debug.cpp; sourceTree = "<group>"; };
 		37FB692713317693008963C1 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Debug.h; path = ../../../Code/Debug.h; sourceTree = "<group>"; };
 		37FB692813317693008963C1 /* Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Editor.h; path = ../../../Code/Editor.h; sourceTree = "<group>"; };
@@ -181,6 +185,20 @@
 		37FB697E13317693008963C1 /* Vector3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Vector3.cpp; path = ../../../Code/Vector3.cpp; sourceTree = "<group>"; };
 		37FB697F13317693008963C1 /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vector3.h; path = ../../../Code/Vector3.h; sourceTree = "<group>"; };
 		37FB69B713319030008963C1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		F9257DC61338235100A47E00 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Game.cpp; path = ../../../Code/Game.cpp; sourceTree = SOURCE_ROOT; };
+		F9257DC71338235100A47E00 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Game.h; path = ../../../Code/Game.h; sourceTree = SOURCE_ROOT; };
+		F9257DCB1338236300A47E00 /* Level.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Level.cpp; path = ../../../Code/Level.cpp; sourceTree = SOURCE_ROOT; };
+		F9257DCC1338236300A47E00 /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Level.h; path = ../../../Code/Level.h; sourceTree = SOURCE_ROOT; };
+		F9257DD01338237600A47E00 /* SpriteAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SpriteAnimation.cpp; path = ../../../Code/Graphics/SpriteAnimation.cpp; sourceTree = SOURCE_ROOT; };
+		F9257DD11338237600A47E00 /* SpriteAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpriteAnimation.h; path = ../../../Code/Graphics/SpriteAnimation.h; sourceTree = SOURCE_ROOT; };
+		F9257DD21338237600A47E00 /* Tilemap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tilemap.cpp; path = ../../../Code/Graphics/Tilemap.cpp; sourceTree = SOURCE_ROOT; };
+		F9257DD31338237600A47E00 /* Tilemap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tilemap.h; path = ../../../Code/Graphics/Tilemap.h; sourceTree = SOURCE_ROOT; };
+		F9257DDA1338239D00A47E00 /* Ogmosis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Ogmosis.cpp; path = ../../../Code/Ogmosis/Ogmosis.cpp; sourceTree = SOURCE_ROOT; };
+		F9257DDB1338239D00A47E00 /* Ogmosis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ogmosis.h; path = ../../../Code/Ogmosis/Ogmosis.h; sourceTree = SOURCE_ROOT; };
+		F9257DDF133823AA00A47E00 /* Tileset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tileset.cpp; path = ../../../Code/Tileset.cpp; sourceTree = SOURCE_ROOT; };
+		F9257DE0133823AA00A47E00 /* Tileset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tileset.h; path = ../../../Code/Tileset.h; sourceTree = SOURCE_ROOT; };
+		F9257DF9133823E100A47E00 /* Ogmo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Ogmo.cpp; path = Ogmo/Ogmo.cpp; sourceTree = "<group>"; };
+		F9257DFA133823E100A47E00 /* Ogmo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ogmo.h; path = Ogmo/Ogmo.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +253,10 @@
 		37CAD626133259BE009BC5F3 /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				F9257DD01338237600A47E00 /* SpriteAnimation.cpp */,
+				F9257DD11338237600A47E00 /* SpriteAnimation.h */,
+				F9257DD21338237600A47E00 /* Tilemap.cpp */,
+				F9257DD31338237600A47E00 /* Tilemap.h */,
 				37CAD627133259DD009BC5F3 /* Sprite.cpp */,
 				37CAD628133259DD009BC5F3 /* Sprite.h */,
 			);
@@ -303,6 +325,7 @@
 				37CAD62513325648009BC5F3 /* Cocoa */,
 				37FB691913317693008963C1 /* Colliders */,
 				37CAD626133259BE009BC5F3 /* Graphics */,
+				F9257DD91338238200A47E00 /* Ogmosis */,
 				37FB693B13317693008963C1 /* OpenAL */,
 				37FB693D13317693008963C1 /* OpenGL */,
 				37FB696F13317693008963C1 /* Tests */,
@@ -316,16 +339,18 @@
 				37FB692113317693008963C1 /* Collision.h */,
 				37FB692213317693008963C1 /* Color.cpp */,
 				37FB692313317693008963C1 /* Color.h */,
-				37FB692413317693008963C1 /* Core.cpp */,
-				37FB692513317693008963C1 /* Core.h */,
 				37FB692613317693008963C1 /* Debug.cpp */,
 				37FB692713317693008963C1 /* Debug.h */,
 				37FB692813317693008963C1 /* Editor.h */,
 				37FB692913317693008963C1 /* Entity.cpp */,
 				37FB692A13317693008963C1 /* Entity.h */,
+				F9257DC61338235100A47E00 /* Game.cpp */,
+				F9257DC71338235100A47E00 /* Game.h */,
 				37FB692B13317693008963C1 /* Graphics.h */,
 				37FB692C13317693008963C1 /* Input.cpp */,
 				37FB692D13317693008963C1 /* Input.h */,
+				F9257DCB1338236300A47E00 /* Level.cpp */,
+				F9257DCC1338236300A47E00 /* Level.h */,
 				37AABF371333478A004E2D56 /* Main.cpp */,
 				37FB693913317693008963C1 /* Monocle.cpp */,
 				37FB693A13317693008963C1 /* Monocle.h */,
@@ -335,6 +360,8 @@
 				37FB696B13317693008963C1 /* Scene.cpp */,
 				37FB696C13317693008963C1 /* Scene.h */,
 				37FB697913317693008963C1 /* TextureAsset.h */,
+				F9257DDF133823AA00A47E00 /* Tileset.cpp */,
+				F9257DE0133823AA00A47E00 /* Tileset.h */,
 				37FB697A13317693008963C1 /* Tween.cpp */,
 				37FB697B13317693008963C1 /* Tween.h */,
 				37FB697C13317693008963C1 /* Vector2.cpp */,
@@ -445,6 +472,7 @@
 				37B1929413359BE600D2D264 /* Flash */,
 				37FB697013317693008963C1 /* Jumper */,
 				37FB697313317693008963C1 /* Marian */,
+				F9257DF3133823D600A47E00 /* Ogmo */,
 				37FB697613317693008963C1 /* Pong */,
 			);
 			name = Tests;
@@ -476,6 +504,24 @@
 				37FB697813317693008963C1 /* Pong.h */,
 			);
 			path = Pong;
+			sourceTree = "<group>";
+		};
+		F9257DD91338238200A47E00 /* Ogmosis */ = {
+			isa = PBXGroup;
+			children = (
+				F9257DDA1338239D00A47E00 /* Ogmosis.cpp */,
+				F9257DDB1338239D00A47E00 /* Ogmosis.h */,
+			);
+			name = Ogmosis;
+			sourceTree = "<group>";
+		};
+		F9257DF3133823D600A47E00 /* Ogmo */ = {
+			isa = PBXGroup;
+			children = (
+				F9257DF9133823E100A47E00 /* Ogmo.cpp */,
+				F9257DFA133823E100A47E00 /* Ogmo.h */,
+			);
+			name = Ogmo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -545,7 +591,6 @@
 				37FB698413317693008963C1 /* RectangleCollider.cpp in Sources */,
 				37FB698513317693008963C1 /* Collision.cpp in Sources */,
 				37FB698613317693008963C1 /* Color.cpp in Sources */,
-				37FB698713317693008963C1 /* Core.cpp in Sources */,
 				37FB698813317693008963C1 /* Debug.cpp in Sources */,
 				37FB698913317693008963C1 /* Entity.cpp in Sources */,
 				37FB698A13317693008963C1 /* Input.cpp in Sources */,
@@ -596,6 +641,13 @@
 				37B192B41335A9C200D2D264 /* CocoaOpenGL.mm in Sources */,
 				37B192B71335B0E800D2D264 /* CocoaEvents.mm in Sources */,
 				37B192C013361FDA00D2D264 /* CocoaWindowListener.mm in Sources */,
+				F9257DC81338235100A47E00 /* Game.cpp in Sources */,
+				F9257DCD1338236300A47E00 /* Level.cpp in Sources */,
+				F9257DD41338237600A47E00 /* SpriteAnimation.cpp in Sources */,
+				F9257DD51338237600A47E00 /* Tilemap.cpp in Sources */,
+				F9257DDC1338239D00A47E00 /* Ogmosis.cpp in Sources */,
+				F9257DE1133823AA00A47E00 /* Tileset.cpp in Sources */,
+				F9257DFB133823E100A47E00 /* Ogmo.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
