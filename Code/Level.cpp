@@ -37,6 +37,7 @@ namespace Monocle
 			TiXmlElement* eProject = xml.FirstChildElement("Project");
 			if (eProject)
 			{
+				// Load Tileset data (for tiles on a grid)
 				TiXmlElement* eTilesets = eProject->FirstChildElement("Tilesets");
 				if (eTilesets)
 				{
@@ -49,6 +50,7 @@ namespace Monocle
 					}
 				}
 
+				// Load FringeTileset data (for abitrarily sized 'n placed tiles)
 				TiXmlElement* eFringeTilesets = eProject->FirstChildElement("FringeTilesets");
 				if (eFringeTilesets)
 				{
@@ -73,7 +75,7 @@ namespace Monocle
 								}
 								if (image != "")
 								{
-									fringeTileset.SetFringeTileData(tileID, FringeTileData(image, width, height));
+									fringeTileset.SetFringeTileData(tileID, new FringeTileData(image, width, height));
 								}
 							}
 							eFringeTile = eFringeTile->NextSiblingElement("FringeTile");
@@ -153,19 +155,13 @@ namespace Monocle
 							{
 								int tileID = XMLInt(eFringeTile, "tileID");
 								int layer = XMLInt(eFringeTile, "layer");
-								Entity *entity = new Entity();
-								entity->SetLayer(layer);
-								entity->position = Vector2(XMLFloat(eFringeTile, "x"), XMLFloat(eFringeTile, "y"));
-								entity->rotation = XMLFloat(eFringeTile, "rotation");
+								Vector2 position = Vector2(XMLFloat(eFringeTile, "x"), XMLFloat(eFringeTile, "y"));
+								Vector2 scale = Vector2::one;
 								if (eFringeTile->Attribute("scaleX") && eFringeTile->Attribute("scaleY"))
-									entity->scale = Vector2(XMLFloat(eFringeTile, "scaleX"), XMLFloat(eFringeTile, "scaleY"));
-								FringeTile *fringeTile = new FringeTile(fringeTileset, tileID);
-								instance->fringeTiles.push_back(fringeTile);
-								entity->SetGraphic(fringeTile);
-								instance->scene->Add(entity);
+									scale = Vector2(XMLFloat(eFringeTile, "scaleX"), XMLFloat(eFringeTile, "scaleY"));
+								int rotation = XMLFloat(eFringeTile, "rotation");
 
-								//Debug::Log("loading... set tile");
-								//tilemap->SetTile(XMLInt(eFringeTile, "x"), XMLInt(eFringeTile, "y"), XMLInt(eFringeTile, "tileID"));
+								AddFringeTile(fringeTileset, tileID, layer, position, scale, rotation);
 
 								eFringeTile = eFringeTile->NextSiblingElement("FringeTile");
 							}
@@ -177,6 +173,20 @@ namespace Monocle
 			}
 					
 		}
+	}
+
+	FringeTile* Level::AddFringeTile(FringeTileset *fringeTileset, int tileID, int layer, const Vector2 &position, const Vector2 &scale, int rotation)
+	{
+		Entity *entity = new Entity();
+		entity->SetLayer(layer);
+		entity->position = position;
+		entity->rotation = rotation;
+		entity->scale = scale;
+		FringeTile *fringeTile = new FringeTile(fringeTileset, tileID);
+		instance->fringeTiles.push_back(fringeTile);
+		entity->SetGraphic(fringeTile);
+		instance->scene->Add(entity);
+		return fringeTile;
 	}
 
 	Tileset *Level::GetTileset(const std::string &name)
@@ -258,6 +268,18 @@ namespace Monocle
 		for (std::list<FringeTileset>::iterator i = fringeTilesets.begin(); i != fringeTilesets.end(); ++i)
 		{
 			return &(*i);
+		}
+		return NULL;
+	}
+
+	FringeTile* Level::GetFringeTileForEntity(Entity *entity)
+	{
+		for (std::list<FringeTile*>::iterator i = instance->fringeTiles.begin(); i != instance->fringeTiles.end(); ++i)
+		{
+			if ((*i)->entity == entity)
+			{
+				return (*i);
+			}
 		}
 		return NULL;
 	}

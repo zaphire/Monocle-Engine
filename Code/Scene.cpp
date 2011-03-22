@@ -191,7 +191,7 @@ namespace Monocle
 		return NULL;
 	}
 
-	Entity* Scene::GetEntityNearestTo(const Vector2 &position)
+	Entity* Scene::GetNearestEntity(const Vector2 &position, Entity *ignoreEntity)
 	{
 		float smallestSqrMag = -1.0f;
 
@@ -199,11 +199,39 @@ namespace Monocle
 
 		for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 		{
-			Vector2 diff = (*i)->position - position;
-			float sqrMag = diff.GetSquaredMagnitude();
-			if (smallestSqrMag == -1 || sqrMag < smallestSqrMag)
+			if ((*i) != ignoreEntity)
 			{
-				nearestEntity = (*i);
+				Vector2 diff = (*i)->position - position;
+				float sqrMag = diff.GetSquaredMagnitude();
+				if (smallestSqrMag == -1 || sqrMag < smallestSqrMag)
+				{
+					nearestEntity = (*i);
+				}
+			}
+		}
+
+		return nearestEntity;
+	}
+
+	Entity* Scene::GetNearestEntityContaining(const Vector2 &position, Entity *ignoreEntity)
+	{
+		float smallestSqrMag = -1.0f;
+
+		Entity *nearestEntity = NULL;
+
+		for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+		{
+			if ((*i) != ignoreEntity)
+			{
+				if ((*i)->IsPositionInGraphic(position))
+				{
+					Vector2 diff = (*i)->position - position;
+					float sqrMag = diff.GetSquaredMagnitude();
+					if (smallestSqrMag == -1 || sqrMag < smallestSqrMag)
+					{
+						nearestEntity = (*i);
+					}
+				}
 			}
 		}
 

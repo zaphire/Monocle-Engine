@@ -397,7 +397,7 @@ namespace Flash
 					editEntity->position = Input::GetMousePosition() + offset;
 				}
 
-				Sprite::selectedSprite = editSprite;
+				Sprite::selectedSpriteEntity = editEntity;
 				
 				if (Input::IsKeyPressed(KEY_LEFT))
 				{

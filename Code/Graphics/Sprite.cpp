@@ -5,7 +5,7 @@
 namespace Monocle
 {
 	bool Sprite::showBounds = false;
-	Sprite *Sprite::selectedSprite = NULL;
+	Entity *Sprite::selectedSpriteEntity = NULL;
 
 	Sprite::Sprite(const std::string &filename, FilterType filter, float width, float height)
 		: Graphic(),
@@ -92,11 +92,11 @@ namespace Monocle
 
 
 		// show bounds, for editor/selection purposes
-		if (showBounds || selectedSprite == this)
+		if (showBounds || selectedSpriteEntity == this->entity)
 		{
 			if (texture != NULL)
 			{
-				if (selectedSprite == this)
+				if (selectedSpriteEntity == this->entity)
 					Graphics::SetColor(Color::red);
 				else
 					Graphics::SetColor(Color(1.0f,1.0f,1.0f,0.5f));

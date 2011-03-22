@@ -1,5 +1,6 @@
 #include "Asset.h"
 #include "Debug.h"
+#include "Assets.h"
 
 namespace Monocle
 {
@@ -31,6 +32,7 @@ namespace Monocle
 			if (!isCached)
 			{
 				Unload();
+				Assets::RemoveAsset(this);
 			}
 		}
 	}

@@ -1,6 +1,7 @@
 #include "../../Monocle.h"
 #include "../../Tween.h"
 #include "../../Graphics/Sprite.h"
+#include "../../Ogmosis/FringeTileEditor.h"
 
 using namespace Monocle;
 
@@ -36,5 +37,7 @@ namespace Marian
 		void Begin();
 		void Update();
 		void End();
+
+		FringeTileEditor fringeTileEditor;
 	};
 }

@@ -56,7 +56,9 @@ namespace Monocle
 		///HACK: test function
 		Entity *GetEntity(int index);
 
-		Entity* GetEntityNearestTo(const Vector2 &position);
+		Entity* GetNearestEntity(const Vector2 &position, Entity *ignoreEntity=NULL);
+		Entity* GetNearestEntityContaining(const Vector2 &position, Entity *ignoreEntity=NULL);
+
 		Entity* GetEntityAtPosition(const Vector2 &position, SearchType searchType=SEARCH_TOP);
 
 	protected:

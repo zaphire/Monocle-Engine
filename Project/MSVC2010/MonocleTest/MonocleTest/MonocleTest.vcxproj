@@ -90,6 +90,7 @@
     <ClInclude Include="..\..\..\..\Code\Level.h" />
     <ClInclude Include="..\..\..\..\Code\Macros.h" />
     <ClInclude Include="..\..\..\..\Code\Monocle.h" />
+    <ClInclude Include="..\..\..\..\Code\Ogmosis\FringeTileEditor.h" />
     <ClInclude Include="..\..\..\..\Code\Ogmosis\Ogmosis.h" />
     <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\glpng.h" />
     <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\png\png.h" />
@@ -140,6 +141,7 @@
     <ClCompile Include="..\..\..\..\Code\Level.cpp" />
     <ClCompile Include="..\..\..\..\Code\Main.cpp" />
     <ClCompile Include="..\..\..\..\Code\Monocle.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Ogmosis\FringeTileEditor.cpp" />
     <ClCompile Include="..\..\..\..\Code\Ogmosis\Ogmosis.cpp" />
     <ClCompile Include="..\..\..\..\Code\OpenAL\OpenALAudio.cpp" />
     <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\glpng.c" />

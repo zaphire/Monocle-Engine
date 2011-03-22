@@ -25,7 +25,7 @@ namespace Monocle
 		Vector2 textureOffset;
 		Vector2 textureScale;
 
-		static Sprite *selectedSprite;
+		static Entity *selectedSpriteEntity;
 
 		static bool showBounds;
 	};

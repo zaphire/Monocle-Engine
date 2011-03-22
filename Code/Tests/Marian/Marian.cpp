@@ -209,6 +209,9 @@ namespace Marian
 
 		Assets::SetContentPath("../../Content/Marian/");
 
+		fringeTileEditor.Init(this);
+		fringeTileEditor.Enable();
+
 		Level::LoadProject("project.xml");
 		Level::Load("balcony.xml", this);
 	}
@@ -216,6 +219,7 @@ namespace Marian
 	void LevelScene::Update()
 	{
 		Scene::Update();
+		fringeTileEditor.Update();
 	}
 
 	void LevelScene::End()

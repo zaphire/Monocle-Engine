@@ -49,6 +49,11 @@ namespace Monocle
 		assets.push_back(asset);
 	}
 
+	void Assets::RemoveAsset(Asset *asset)
+	{
+		instance->assets.remove(asset);
+	}
+
 	Asset *Assets::GetAssetByFilename(const std::string &filename)
 	{
 		for(std::list<Asset*>::iterator i = assets.begin(); i != assets.end(); ++i)

@@ -25,12 +25,17 @@ namespace Monocle
 	{
 	public:
 		FringeTileset(const std::string &name);
+		~FringeTileset();
+
 		const FringeTileData *GetFringeTileDataByID(int tileID);
-		void SetFringeTileData(int tileID, const FringeTileData &fringeTileData);
+		void SetFringeTileData(int tileID, FringeTileData *fringeTileData);
+		int GetNextTileID(int tileID);
+		int GetPrevTileID(int tileID);
 
 	private:
+		int maxTileID;
 		std::string name;
-		std::map<int, FringeTileData> textures;
+		std::map<int, FringeTileData*> fringeTileData;
 	};
 
 	class FringeTile : public Sprite
@@ -38,6 +43,10 @@ namespace Monocle
 	public:
 		FringeTile(FringeTileset *fringeTileset, int tileID);
 		void SetTileID(int tileID);
+		int GetTileID();
+		void PrevTile();
+		void NextTile();
+		FringeTileset *GetFringeTileset();
 
 	private:
 		void RefreshTexture();
