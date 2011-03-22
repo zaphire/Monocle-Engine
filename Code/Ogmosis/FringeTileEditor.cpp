@@ -68,33 +68,43 @@ namespace Monocle
 
 	void FringeTileEditor::UpdateCamera()
 	{
-		float speed = 200.0f;
+		float moveSpeed = 200.0f;
+		float zoomSpeed = 0.5f;
 
 		if (Input::IsKeyHeld(KEY_LSHIFT))
 		{
-			speed *= 5.0f;
+			moveSpeed *= 5.0f;
+			zoomSpeed *= 2.0f;
 		}
 		if (Input::IsKeyHeld(KEY_D))
 		{
-			Graphics::AdjustCameraPosition(Vector2::right * speed * Monocle::deltaTime);
+			Graphics::AdjustCameraPosition(Vector2::right * moveSpeed * Monocle::deltaTime);
 		}
 		if (Input::IsKeyHeld(KEY_A))
 		{
-			Graphics::AdjustCameraPosition(Vector2::left * speed * Monocle::deltaTime);
+			Graphics::AdjustCameraPosition(Vector2::left * moveSpeed * Monocle::deltaTime);
 		}
 		if (Input::IsKeyHeld(KEY_W))
 		{
-			Graphics::AdjustCameraPosition(Vector2::up * speed * Monocle::deltaTime);
+			Graphics::AdjustCameraPosition(Vector2::up * moveSpeed * Monocle::deltaTime);
 		}
 		if (Input::IsKeyHeld(KEY_S))
 		{
-			Graphics::AdjustCameraPosition(Vector2::down * speed * Monocle::deltaTime);
+			Graphics::AdjustCameraPosition(Vector2::down * moveSpeed * Monocle::deltaTime);
+		}
+		if (Input::IsKeyHeld(KEY_Q))
+		{
+			Graphics::AdjustCameraZoom(-1*Vector2::one * zoomSpeed * Monocle::deltaTime);
+		}
+		if (Input::IsKeyHeld(KEY_E))
+		{
+			Graphics::AdjustCameraZoom(Vector2::one * zoomSpeed * Monocle::deltaTime);
 		}
 	}
 
 	void FringeTileEditor::UpdateSelect()
 	{
-		if (Input::IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
+		if (Input::IsMouseButtonPressed(MOUSE_BUTTON_RIGHT) || Input::IsKeyPressed(KEY_Z))
 		{
 			Debug::Log("select");
 

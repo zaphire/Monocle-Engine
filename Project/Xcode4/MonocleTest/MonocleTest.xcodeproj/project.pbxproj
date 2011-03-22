@@ -74,6 +74,8 @@
 		F9257DDC1338239D00A47E00 /* Ogmosis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DDA1338239D00A47E00 /* Ogmosis.cpp */; };
 		F9257DE1133823AA00A47E00 /* Tileset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DDF133823AA00A47E00 /* Tileset.cpp */; };
 		F9257DFB133823E100A47E00 /* Ogmo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DF9133823E100A47E00 /* Ogmo.cpp */; };
+		F9257E2C1339406200A47E00 /* FringeTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257E2A1339406200A47E00 /* FringeTile.cpp */; };
+		F9257E311339407B00A47E00 /* FringeTileEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257E2F1339407B00A47E00 /* FringeTileEditor.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -204,6 +206,10 @@
 		F9257DE0133823AA00A47E00 /* Tileset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tileset.h; path = ../../../Code/Tileset.h; sourceTree = SOURCE_ROOT; };
 		F9257DF9133823E100A47E00 /* Ogmo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Ogmo.cpp; path = Ogmo/Ogmo.cpp; sourceTree = "<group>"; };
 		F9257DFA133823E100A47E00 /* Ogmo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ogmo.h; path = Ogmo/Ogmo.h; sourceTree = "<group>"; };
+		F9257E2A1339406200A47E00 /* FringeTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FringeTile.cpp; path = ../../../Code/Graphics/FringeTile.cpp; sourceTree = SOURCE_ROOT; };
+		F9257E2B1339406200A47E00 /* FringeTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FringeTile.h; path = ../../../Code/Graphics/FringeTile.h; sourceTree = SOURCE_ROOT; };
+		F9257E2F1339407B00A47E00 /* FringeTileEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FringeTileEditor.cpp; path = ../../../Code/Ogmosis/FringeTileEditor.cpp; sourceTree = SOURCE_ROOT; };
+		F9257E301339407B00A47E00 /* FringeTileEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FringeTileEditor.h; path = ../../../Code/Ogmosis/FringeTileEditor.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +266,8 @@
 		37CAD626133259BE009BC5F3 /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				F9257E2A1339406200A47E00 /* FringeTile.cpp */,
+				F9257E2B1339406200A47E00 /* FringeTile.h */,
 				F9257DD01338237600A47E00 /* SpriteAnimation.cpp */,
 				F9257DD11338237600A47E00 /* SpriteAnimation.h */,
 				F9257DD21338237600A47E00 /* Tilemap.cpp */,
@@ -518,6 +526,8 @@
 		F9257DD91338238200A47E00 /* Ogmosis */ = {
 			isa = PBXGroup;
 			children = (
+				F9257E2F1339407B00A47E00 /* FringeTileEditor.cpp */,
+				F9257E301339407B00A47E00 /* FringeTileEditor.h */,
 				F9257DDA1338239D00A47E00 /* Ogmosis.cpp */,
 				F9257DDB1338239D00A47E00 /* Ogmosis.h */,
 			);
@@ -658,6 +668,8 @@
 				F9257DE1133823AA00A47E00 /* Tileset.cpp in Sources */,
 				F9257DFB133823E100A47E00 /* Ogmo.cpp in Sources */,
 				3782F004133864AD0042BAE7 /* CocoaKeys.mm in Sources */,
+				F9257E2C1339406200A47E00 /* FringeTile.cpp in Sources */,
+				F9257E311339407B00A47E00 /* FringeTileEditor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

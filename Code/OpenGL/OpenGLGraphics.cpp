@@ -58,6 +58,7 @@ namespace Monocle
 		Set2D(800,600);
 
 		cameraPosition = screenCenter;
+		cameraZoom = Vector2::one;
 	}
 
 	void Graphics::SetBackgroundColor(const Color &color)
@@ -139,6 +140,11 @@ namespace Monocle
 	void Graphics::AdjustCameraPosition(const Vector2 &adjustment)
 	{
 		instance->cameraPosition += adjustment;
+	}
+	
+	void Graphics::AdjustCameraZoom(const Vector2 &adjustment)
+	{
+		instance->cameraZoom += adjustment;
 	}
 
 	void Graphics::Translate(float x, float y, float z)
@@ -268,10 +274,11 @@ namespace Monocle
 
 	void Graphics::SceneMatrix()
 	{
-		glLoadIdentity();									// Reset The Current Modelview Matrix
-
-		glTranslatef(instance->screenCenter.x - instance->cameraPosition.x, instance->screenCenter.y - instance->cameraPosition.y, 0.0f);
+		glLoadIdentity();
 		glScalef(instance->resolutionScale.x, instance->resolutionScale.y, 0.0f);
+		glTranslatef(instance->screenCenter.x, instance->screenCenter.y, 0.0f);
+		glScalef(instance->cameraZoom.x, instance->cameraZoom.y, 0.0f);
+		glTranslatef(-1.0f * instance->cameraPosition.x, -1.0f * instance->cameraPosition.y, 0.0f);
 	}
 
 	void Graphics::EndFrame()
