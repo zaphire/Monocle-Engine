@@ -136,6 +136,11 @@ namespace Monocle
 		CocoaPlatform::instance = new CocoaPlatform();
 		CocoaPlatform::platform = this;
 		instance = this;
+
+        for (int ic = 0; ic < (int) KEY_MAX; ++ic) {
+            KeyCode kc = (KeyCode) ic;
+            localKeymap[kc] = kc;
+        }
 	}
 
 	void Platform::Init()

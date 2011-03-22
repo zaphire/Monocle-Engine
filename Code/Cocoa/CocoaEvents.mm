@@ -1,6 +1,7 @@
 #include "CocoaEvents.h"
 #include "CocoaPlatform.h"
 #include "CocoaWindowListener.h"
+#include "CocoaKeys.h"
 
 #if !defined(UsrActivity) && defined(__LP64__) && !defined(__POWER__)
 /*
@@ -165,15 +166,15 @@ Cocoa_PumpEvents()
 		switch ([event type]) {
 			case NSKeyDown:
 			case NSKeyUp:
-			case NSFlagsChanged:
+//			case NSFlagsChanged:
 				// XXX handle key event
-				[NSApp sendEvent:event];
+				Cocoa_HandleKeyEvent(event);
                 
-//				/* Fall through to pass event to NSApp; er, nevermind... */
-//
-//				/* Add to support system-wide keyboard shortcuts like CMD+Space */
-//				if (([event modifierFlags] & NSCommandKeyMask) || [event type] == NSFlagsChanged)
-//					[NSApp sendEvent: event];
+				/* Fall through to pass event to NSApp; er, nevermind... */
+
+				/* Add to support system-wide keyboard shortcuts like CMD+Space */
+				if (([event modifierFlags] & NSCommandKeyMask) || [event type] == NSFlagsChanged)
+					[NSApp sendEvent: event];
 				break;
 			default:
 				[NSApp sendEvent:event];

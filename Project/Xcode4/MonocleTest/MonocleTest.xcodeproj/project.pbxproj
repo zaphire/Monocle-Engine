@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3763773513385C08003608BB /* CocoaKeys.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3763773413385C08003608BB /* CocoaKeys.mm */; };
+		3763773D13385C7B003608BB /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3763773713385C7B003608BB /* Game.cpp */; };
+		3763773E13385C7B003608BB /* GUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3763773913385C7B003608BB /* GUI.cpp */; };
+		3763773F13385C7B003608BB /* Level.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3763773B13385C7B003608BB /* Level.cpp */; };
+		3763774813385F39003608BB /* Ogmosis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3763774613385F39003608BB /* Ogmosis.cpp */; };
 		37AABF3613333E29004E2D56 /* Assets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37AABF3413333E29004E2D56 /* Assets.cpp */; };
 		37AABF381333478A004E2D56 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37AABF371333478A004E2D56 /* Main.cpp */; };
 		37B192931335995600D2D264 /* CocoaPlatform.mm in Sources */ = {isa = PBXBuildFile; fileRef = 37B192921335995600D2D264 /* CocoaPlatform.mm */; };
@@ -26,7 +31,6 @@
 		37FB698413317693008963C1 /* RectangleCollider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB691E13317693008963C1 /* RectangleCollider.cpp */; };
 		37FB698513317693008963C1 /* Collision.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB692013317693008963C1 /* Collision.cpp */; };
 		37FB698613317693008963C1 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB692213317693008963C1 /* Color.cpp */; };
-		37FB698713317693008963C1 /* Core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB692413317693008963C1 /* Core.cpp */; };
 		37FB698813317693008963C1 /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB692613317693008963C1 /* Debug.cpp */; };
 		37FB698913317693008963C1 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB692913317693008963C1 /* Entity.cpp */; };
 		37FB698A13317693008963C1 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB692C13317693008963C1 /* Input.cpp */; };
@@ -70,6 +74,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3763773313385C08003608BB /* CocoaKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CocoaKeys.h; path = ../../../Code/Cocoa/CocoaKeys.h; sourceTree = "<group>"; };
+		3763773413385C08003608BB /* CocoaKeys.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CocoaKeys.mm; path = ../../../Code/Cocoa/CocoaKeys.mm; sourceTree = "<group>"; };
+		3763773713385C7B003608BB /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Game.cpp; path = ../../../Code/Game.cpp; sourceTree = "<group>"; };
+		3763773813385C7B003608BB /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Game.h; path = ../../../Code/Game.h; sourceTree = "<group>"; };
+		3763773913385C7B003608BB /* GUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUI.cpp; path = ../../../Code/GUI.cpp; sourceTree = "<group>"; };
+		3763773A13385C7B003608BB /* GUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GUI.h; path = ../../../Code/GUI.h; sourceTree = "<group>"; };
+		3763773B13385C7B003608BB /* Level.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Level.cpp; path = ../../../Code/Level.cpp; sourceTree = "<group>"; };
+		3763773C13385C7B003608BB /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Level.h; path = ../../../Code/Level.h; sourceTree = "<group>"; };
+		3763774613385F39003608BB /* Ogmosis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ogmosis.cpp; sourceTree = "<group>"; };
+		3763774713385F39003608BB /* Ogmosis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ogmosis.h; sourceTree = "<group>"; };
 		37AABF3413333E29004E2D56 /* Assets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Assets.cpp; path = ../../../Code/Assets.cpp; sourceTree = "<group>"; };
 		37AABF3513333E29004E2D56 /* Assets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assets.h; path = ../../../Code/Assets.h; sourceTree = "<group>"; };
 		37AABF371333478A004E2D56 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Main.cpp; path = ../../../Code/Main.cpp; sourceTree = "<group>"; };
@@ -110,8 +124,6 @@
 		37FB692113317693008963C1 /* Collision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Collision.h; path = ../../../Code/Collision.h; sourceTree = "<group>"; };
 		37FB692213317693008963C1 /* Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Color.cpp; path = ../../../Code/Color.cpp; sourceTree = "<group>"; };
 		37FB692313317693008963C1 /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Color.h; path = ../../../Code/Color.h; sourceTree = "<group>"; };
-		37FB692413317693008963C1 /* Core.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Core.cpp; path = ../../../Code/Core.cpp; sourceTree = "<group>"; };
-		37FB692513317693008963C1 /* Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Core.h; path = ../../../Code/Core.h; sourceTree = "<group>"; };
 		37FB692613317693008963C1 /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Debug.cpp; path = ../../../Code/Debug.cpp; sourceTree = "<group>"; };
 		37FB692713317693008963C1 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Debug.h; path = ../../../Code/Debug.h; sourceTree = "<group>"; };
 		37FB692813317693008963C1 /* Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Editor.h; path = ../../../Code/Editor.h; sourceTree = "<group>"; };
@@ -196,6 +208,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3763774513385F39003608BB /* Ogmosis */ = {
+			isa = PBXGroup;
+			children = (
+				3763774613385F39003608BB /* Ogmosis.cpp */,
+				3763774713385F39003608BB /* Ogmosis.h */,
+			);
+			name = Ogmosis;
+			path = ../../../Code/Ogmosis;
+			sourceTree = "<group>";
+		};
 		37B1929413359BE600D2D264 /* Flash */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +250,8 @@
 				37B192921335995600D2D264 /* CocoaPlatform.mm */,
 				37B192BE13361FD900D2D264 /* CocoaWindowListener.h */,
 				37B192BF13361FDA00D2D264 /* CocoaWindowListener.mm */,
+				3763773313385C08003608BB /* CocoaKeys.h */,
+				3763773413385C08003608BB /* CocoaKeys.mm */,
 			);
 			name = Cocoa;
 			sourceTree = "<group>";
@@ -303,6 +327,7 @@
 				37CAD62513325648009BC5F3 /* Cocoa */,
 				37FB691913317693008963C1 /* Colliders */,
 				37CAD626133259BE009BC5F3 /* Graphics */,
+				3763774513385F39003608BB /* Ogmosis */,
 				37FB693B13317693008963C1 /* OpenAL */,
 				37FB693D13317693008963C1 /* OpenGL */,
 				37FB696F13317693008963C1 /* Tests */,
@@ -316,16 +341,20 @@
 				37FB692113317693008963C1 /* Collision.h */,
 				37FB692213317693008963C1 /* Color.cpp */,
 				37FB692313317693008963C1 /* Color.h */,
-				37FB692413317693008963C1 /* Core.cpp */,
-				37FB692513317693008963C1 /* Core.h */,
 				37FB692613317693008963C1 /* Debug.cpp */,
 				37FB692713317693008963C1 /* Debug.h */,
 				37FB692813317693008963C1 /* Editor.h */,
 				37FB692913317693008963C1 /* Entity.cpp */,
 				37FB692A13317693008963C1 /* Entity.h */,
+				3763773713385C7B003608BB /* Game.cpp */,
+				3763773813385C7B003608BB /* Game.h */,
 				37FB692B13317693008963C1 /* Graphics.h */,
+				3763773913385C7B003608BB /* GUI.cpp */,
+				3763773A13385C7B003608BB /* GUI.h */,
 				37FB692C13317693008963C1 /* Input.cpp */,
 				37FB692D13317693008963C1 /* Input.h */,
+				3763773B13385C7B003608BB /* Level.cpp */,
+				3763773C13385C7B003608BB /* Level.h */,
 				37AABF371333478A004E2D56 /* Main.cpp */,
 				37FB693913317693008963C1 /* Monocle.cpp */,
 				37FB693A13317693008963C1 /* Monocle.h */,
@@ -545,7 +574,6 @@
 				37FB698413317693008963C1 /* RectangleCollider.cpp in Sources */,
 				37FB698513317693008963C1 /* Collision.cpp in Sources */,
 				37FB698613317693008963C1 /* Color.cpp in Sources */,
-				37FB698713317693008963C1 /* Core.cpp in Sources */,
 				37FB698813317693008963C1 /* Debug.cpp in Sources */,
 				37FB698913317693008963C1 /* Entity.cpp in Sources */,
 				37FB698A13317693008963C1 /* Input.cpp in Sources */,
@@ -596,6 +624,11 @@
 				37B192B41335A9C200D2D264 /* CocoaOpenGL.mm in Sources */,
 				37B192B71335B0E800D2D264 /* CocoaEvents.mm in Sources */,
 				37B192C013361FDA00D2D264 /* CocoaWindowListener.mm in Sources */,
+				3763773513385C08003608BB /* CocoaKeys.mm in Sources */,
+				3763773D13385C7B003608BB /* Game.cpp in Sources */,
+				3763773E13385C7B003608BB /* GUI.cpp in Sources */,
+				3763773F13385C7B003608BB /* Level.cpp in Sources */,
+				3763774813385F39003608BB /* Ogmosis.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
