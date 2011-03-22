@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3782F004133864AD0042BAE7 /* CocoaKeys.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3782F003133864AD0042BAE7 /* CocoaKeys.mm */; };
 		37AABF3613333E29004E2D56 /* Assets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37AABF3413333E29004E2D56 /* Assets.cpp */; };
 		37AABF381333478A004E2D56 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37AABF371333478A004E2D56 /* Main.cpp */; };
 		37B192931335995600D2D264 /* CocoaPlatform.mm in Sources */ = {isa = PBXBuildFile; fileRef = 37B192921335995600D2D264 /* CocoaPlatform.mm */; };
@@ -76,6 +77,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3763773913385C7B003608BB /* GUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUI.cpp; path = ../../../Code/GUI.cpp; sourceTree = "<group>"; };
+		3763773A13385C7B003608BB /* GUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GUI.h; path = ../../../Code/GUI.h; sourceTree = "<group>"; };
+		3782F002133864AD0042BAE7 /* CocoaKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CocoaKeys.h; path = ../../../Code/Cocoa/CocoaKeys.h; sourceTree = "<group>"; };
+		3782F003133864AD0042BAE7 /* CocoaKeys.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CocoaKeys.mm; path = ../../../Code/Cocoa/CocoaKeys.mm; sourceTree = "<group>"; };
 		37AABF3413333E29004E2D56 /* Assets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Assets.cpp; path = ../../../Code/Assets.cpp; sourceTree = "<group>"; };
 		37AABF3513333E29004E2D56 /* Assets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assets.h; path = ../../../Code/Assets.h; sourceTree = "<group>"; };
 		37AABF371333478A004E2D56 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Main.cpp; path = ../../../Code/Main.cpp; sourceTree = "<group>"; };
@@ -240,6 +245,8 @@
 			children = (
 				37B192B51335B0E800D2D264 /* CocoaEvents.h */,
 				37B192B61335B0E800D2D264 /* CocoaEvents.mm */,
+				3782F002133864AD0042BAE7 /* CocoaKeys.h */,
+				3782F003133864AD0042BAE7 /* CocoaKeys.mm */,
 				37B192B21335A9C200D2D264 /* CocoaOpenGL.h */,
 				37B192B31335A9C200D2D264 /* CocoaOpenGL.mm */,
 				37B192911335995600D2D264 /* CocoaPlatform.h */,
@@ -347,6 +354,8 @@
 				F9257DC61338235100A47E00 /* Game.cpp */,
 				F9257DC71338235100A47E00 /* Game.h */,
 				37FB692B13317693008963C1 /* Graphics.h */,
+				3763773913385C7B003608BB /* GUI.cpp */,
+				3763773A13385C7B003608BB /* GUI.h */,
 				37FB692C13317693008963C1 /* Input.cpp */,
 				37FB692D13317693008963C1 /* Input.h */,
 				F9257DCB1338236300A47E00 /* Level.cpp */,
@@ -648,6 +657,7 @@
 				F9257DDC1338239D00A47E00 /* Ogmosis.cpp in Sources */,
 				F9257DE1133823AA00A47E00 /* Tileset.cpp in Sources */,
 				F9257DFB133823E100A47E00 /* Ogmo.cpp in Sources */,
+				3782F004133864AD0042BAE7 /* CocoaKeys.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
