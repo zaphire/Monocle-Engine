@@ -2,14 +2,14 @@
 #include "../../Input.h"
 #include "../../Level.h"
 #include "../../Monocle.h"
+#include "../../Macros.h"
 
 namespace Ogmo
 {
 	// T H E   P L A Y E R (entity)
-	Player::Player(int x, int y) : Entity(),
-		FRICTION_GROUND(0.90f), FRICTION_AIR(0.95f), GRAVITY(4.0f),
-		JUMP(1.40f), ACCELERATION(10.0f), doubleJump(false), cling(0),
-		tag("PLAYER"), onGround(false)
+	Player::Player(int x, int y) : Entity(), 
+		FRICTION_GROUND(800), FRICTION_AIR(400), GRAVITY(300), JUMP(6000), MAXSPEED_GROUND(60.0f), MAXSPEED_AIR(100.0f),
+		ACCELERATION(800), WALLJUMP(8000), doubleJump(false), cling(0), tag("PLAYER"), onGround(false)
 	{
 		position = Vector2(x, y);
 
@@ -57,20 +57,30 @@ namespace Ogmo
 		else
 		{
 			sprite->Play("stand");
+
+			// friction
+			if(onGround)
+			{
+				velocity.x = APPROACH(velocity.x, 0, FRICTION_GROUND * Monocle::deltaTime);
+			}
+			else
+			{
+				velocity.x = APPROACH(velocity.x, 0, FRICTION_AIR * Monocle::deltaTime);
+			}
 		}
 
 		// JUMP INPUT
 		if (Input::IsKeyMaskPressed("jump") && (onGround || cling > 0 || !doubleJump))
 		{
 			// jump
-			velocity.y = - JUMP;
+			velocity.y = - JUMP * Monocle::deltaTime;
 
 			if(!onGround)
 			{
 				// wall jump
 				if(cling > 0)
 				{
-					velocity.x = clingDir * 2;
+					velocity.x = clingDir * WALLJUMP * Monocle::deltaTime;
 					cling = -1;
 				}
 
@@ -81,51 +91,28 @@ namespace Ogmo
 				}
 			}
 		}
-		
-		// friction
-		if(onGround)
-		{
-			velocity.x *= FRICTION_GROUND;
-		}
-		else
-		{
-			velocity.x *= FRICTION_AIR;
-		}
 
 		// gravity
 		velocity.y += GRAVITY * Monocle::deltaTime;
+
+		// maxspeed
+		int maxspeed = onGround ? MAXSPEED_GROUND : MAXSPEED_AIR;
+		if(abs(velocity.x) > maxspeed) { velocity.x = SIGN(velocity.x, 1) * maxspeed; } 
 
 		// Motion
 		Motion(velocity.x, position.x);
 		Motion(velocity.y, position.y);
 
 		//check for ground
-		if(velocity.y != 0)
-		{
-			if(CollideAt("WALL", position.x, position.y + 1))
-			{
-				onGround = true;
-				doubleJump = false;
-			}
-			else
-			{
-				onGround = false;
-			}
-		}
 
-		//check for wall jump
-		if(!onGround)
+		if(CollideAt("WALL", position.x, position.y + 1))
 		{
-			if(CollideAt("WALL", position.x + 1, position.y) && Input::IsKeyMaskHeld("right")) 
-			{ 
-				cling = 10; 
-				clingDir = -1; 
-			}
-			if(CollideAt("WALL", position.x - 1, position.y) && Input::IsKeyMaskHeld("left")) 
-			{ 
-				cling = 10; 
-				clingDir = 1; 
-			}
+			onGround = true;
+			doubleJump = false;
+		}
+		else
+		{
+			onGround = false;
 
 			//change sprite
 			if(velocity.y < 0)
@@ -136,24 +123,41 @@ namespace Ogmo
 			{
 				sprite->Play("jumpDown");
 			}
+
+			//check for wall jump
+			if(CollideAt("WALL", position.x + 1, position.y) && Input::IsKeyMaskHeld("right")) 
+			{ 
+				cling = 10; 
+				clingDir = -1; 
+			}
+			if(CollideAt("WALL", position.x - 1, position.y) && Input::IsKeyMaskHeld("left")) 
+			{ 
+				cling = 10; 
+				clingDir = 1;
+			}
 		}
 
 		//decrease how long we can cling to a wall for
 		cling --;
 
+		//and at the end of the day, are we dead?
+		if(Collide("SPIKE"))
+		{
+			World::ResetCoins();
+		}
 	
 	}
 
 	bool Player::Motion(float &speed, float &to)
 	{
 		// move
-		to += speed;
+		to += speed * Monocle::deltaTime;
 
 		// collide
 		bool col = false;
 		while(Collide("WALL"))
 		{
-			to -= Sign(speed, 0.1);
+			to -= SIGN(speed, 0.1);
 			col = true;
 		}
 		
@@ -185,11 +189,6 @@ namespace Ogmo
 		return collide;
 	}
 
-	float Player::Sign(float i, float to)
-	{
-		return i < 0 ? - to : (i > 0 ? to : 0);
-	}
-
 	// T H E   W A L L (entity)
 	Wall::Wall(int x, int y) : Entity()
 	{
@@ -208,15 +207,114 @@ namespace Ogmo
 		Graphics::PopMatrix();
 	}
 
+
+	// T H E   C O I N (entity)
+	Coin::Coin(int x, int y, Sprite *sprite) : Entity(), collected(false), start(x, y), reset(false)
+	{
+		position = Vector2(x, y);
+		SetLayer(-1);
+		SetGraphic(sprite);
+
+		AddTag("COIN");
+		SetCollider(new RectangleCollider(8, 8));
+
+		while(Collide("WALL"))
+		{
+			position = Vector2(((int) rand() % 160 / 8) * 8 + 4, ((int) rand() % 120 / 8) * 8 + 4);
+			start = Vector2(position.x, position.y);
+		}
+	}
+
+	void Coin::Update()
+	{
+		//we hit the player!
+		if(Collide("PLAYER") && !reset)
+		{
+			collected = true;
+		}
+
+		if(collected && visible)
+		{
+			//scale out
+			scale.x -= 0.1;
+			scale.y -= 0.1;
+
+			//follow player
+			position.x -= (position.x - World::player->position.x) / 10;
+			position.y -= (position.y - World::player->position.y) / 10;
+
+			//we can't be seen no more
+			if(scale.x < 0)
+			{
+				visible = false;
+			}
+		}
+		
+		if(reset)
+		{
+			//we can see you!
+			visible = true;
+
+			//scale in
+			if(scale.x != 1)
+			{
+				scale.x += 0.1;
+				scale.y += 0.1;
+			}
+
+			//slide to start position
+			position.x -= (position.x - start.x) / 10;
+			position.y -= (position.y - start.y) / 10;
+
+			//hop to start position
+			if(abs(position.x - start.x) < 0.2 && abs(position.y - start.y) < 0.2)
+			{
+				reset = false;
+				position.x = start.x;
+				position.y = start.y;
+			}
+		}
+	}
+
+	// T H E   S P I K E (entity)
+	Spike::Spike(int x, int y, Sprite *sprite) : Entity()
+	{
+		position = Vector2(x, y);
+
+		SetLayer(-1);
+		SetGraphic(sprite);
+
+		AddTag("SPIKE");
+		SetCollider(new RectangleCollider(8, 8));
+
+		if(position.x == -1 && position.y == -1)
+		{
+			position = Vector2(((int) rand() % 160 / 8) * 8 + 4, ((int) rand() % 120 / 8) * 8 + 4);
+			while(Collide("WALL"))
+			{
+				position = Vector2(((int) rand() % 160 / 8) * 8 + 4, ((int) rand() % 120 / 8) * 8 + 4);
+			}
+
+			while(!Collide("WALL")) { position.y += 1; }
+		}
+	}
+
 	// T H E   W O R L D (scene)
+	Player *World::player;
+	World *World::instance;
+
 	void World::Begin()
 	{
+		instance = this;
+
 		//set screen size
 		Graphics::Set2D(160, 120);
 		Graphics::SetCameraPosition(Vector2(80, 60));
 
 		//assets
 		Assets::SetContentPath("../../Content/Ogmo/");
+		atCoin = new Sprite("coin.png", FILTER_NONE, 8, 8);
+		atSpike = new Sprite("spike.png", FILTER_NONE, 8, 8);
 
 		//controls
 		Input::DefineMaskKey("jump", KEY_UP);
@@ -225,6 +323,7 @@ namespace Ogmo
 
 		Input::DefineMaskKey("left", KEY_LEFT);
 		Input::DefineMaskKey("right", KEY_RIGHT);
+		Input::DefineMaskKey("kill", KEY_K);
 
 		//eventually this will load the level
 		Level::SetScene(this);
@@ -258,6 +357,20 @@ namespace Ogmo
 			wall = new Wall(12 + i, 28);
 			Add(wall);
 		}
+
+		//add a few random coins
+		for(int i = 0; i < 10; i ++)
+		{
+			Coin *c = new Coin(((int) rand() % 160 / 8) * 8 + 4, ((int) rand() % 120 / 8) * 8 + 4, atCoin);
+			coins.push_back(c);
+			Add(c);
+		}
+
+		//add spikes
+		for(int i = 0; i < 8; i ++)
+		{
+			Add(new Spike(-1, -1, atSpike));
+		}
 	}
 
 	void World::Update()
@@ -281,8 +394,24 @@ namespace Ogmo
 		*/
 	}
 
+	void World::ResetCoins()
+	{
+		
+		for (std::list<Coin*>::iterator i = instance->coins.begin(); i != instance->coins.end(); ++i)
+		{
+			if((*i)->collected)
+			{
+				(*i)->collected = false;
+				(*i)->position = Vector2(player->position.x, player->position.y);
+				(*i)->reset = true;
+			}
+		}
+		
+	}
+
 	void World::End()
 	{
 		delete player;
+		delete wall;
 	}
 }

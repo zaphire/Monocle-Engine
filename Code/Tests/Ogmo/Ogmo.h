@@ -22,11 +22,14 @@ namespace Ogmo
 		std::string tag;
 
 		//moving stuff
-		float const FRICTION_GROUND;
-		float const FRICTION_AIR;
-		float const GRAVITY;
-		float const JUMP;
-		float const ACCELERATION;
+		int const FRICTION_GROUND;
+		int const FRICTION_AIR;
+		float const MAXSPEED_GROUND;
+		float const MAXSPEED_AIR;
+		int const GRAVITY;
+		int const JUMP;
+		int const ACCELERATION;
+		int const WALLJUMP;
 
 		//double jump / clinging to wall
 		bool doubleJump;
@@ -36,9 +39,7 @@ namespace Ogmo
 		bool direction;
 
 		//other/util
-		float Sign(float i, float to);
 		bool Motion(float &speed, float &to);
-		bool Ground();
 		bool CollideAt(const std::string &tag, float x, float y);
 
 	};
@@ -50,15 +51,38 @@ namespace Ogmo
 		void Render();
 	};
 
+	class Coin : public Entity
+	{
+	public:
+		Coin(int x, int y, Sprite *sprite);
+		void Update();
+		
+		bool collected;
+		Vector2 start;
+		bool reset;
+	};
+
+	class Spike : public Entity
+	{
+	public:
+		Spike(int x, int y, Sprite *sprite);
+	};
+
 	class World : public Scene
 	{
 	public:
 		void Begin();
 		void End();
 		void Update();
+		static void ResetCoins();
+		static World* instance;
 
-		Player *player;
+		static Player *player;
 		Wall *wall;
+		Spike *spike;
+		Sprite *atCoin;
+		Sprite *atSpike;
+		std::list<Coin*> coins;
 
 	};
 }
