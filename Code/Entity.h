@@ -28,7 +28,7 @@ namespace Monocle
 		Vector2 scale;
 		float rotation;
 		float depth;
-		bool visible;
+		bool isVisible;
 
 		Color color; // <- may move this later (material system?)
 		

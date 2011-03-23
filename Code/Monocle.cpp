@@ -1,10 +1,12 @@
 #include "Monocle.h"
 
+/*
 #if defined(MONOCLE_WINDOWS)
 	#define WIN32_LEAN_AND_MEAN
 	#include <Windows.h>
 	#include <ShellAPI.h>
 #endif
+*/
 
 namespace Monocle
 {
@@ -16,6 +18,7 @@ namespace Monocle
 
 	const float deg2Rad = 0.01745329f;
 
+	/*
 	void OpenURL(const std::string &url)
 	{
 	#if defined(MONOCLE_WINDOWS)
@@ -34,6 +37,7 @@ namespace Monocle
 		system(cmd.c_str());
 	#endif
 	}
+	*/
 
 	/*
 	void OpenProgramWithFile(const std::string &program, const std::string &filename)

@@ -233,7 +233,7 @@ namespace Ogmo
 			collected = true;
 		}
 
-		if(collected && visible)
+		if(collected && isVisible)
 		{
 			//scale out
 			scale.x -= 0.1;
@@ -246,14 +246,14 @@ namespace Ogmo
 			//we can't be seen no more
 			if(scale.x < 0)
 			{
-				visible = false;
+				isVisible = false;
 			}
 		}
 		
 		if(reset)
 		{
 			//we can see you!
-			visible = true;
+			isVisible = true;
 
 			//scale in
 			if(scale.x != 1)

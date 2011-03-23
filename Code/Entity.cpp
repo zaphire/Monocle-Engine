@@ -6,7 +6,7 @@
 namespace Monocle
 {
 	Entity::Entity()
-		: scene(NULL), collider(NULL), graphic(NULL), layer(0), depth(0.0f), scale(Vector2::one), rotation(0.0f), color(Color::white), parent(NULL), visible(true)
+		: scene(NULL), collider(NULL), graphic(NULL), layer(0), depth(0.0f), scale(Vector2::one), rotation(0.0f), color(Color::white), parent(NULL), isVisible(true)
 		//, willDie(false)
 	{
 	}
