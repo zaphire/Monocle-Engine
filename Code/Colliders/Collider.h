@@ -13,6 +13,7 @@ namespace Monocle
 
 	class RectangleCollider;
 	class CircleCollider;
+	class PolygonCollider;
 	class Entity;
 
 	class Collider
@@ -37,6 +38,10 @@ namespace Monocle
 		Entity *entity;
 		static bool CollideRectRect(RectangleCollider* a, RectangleCollider* b);
 		static bool CollideCircleCircle(CircleCollider* a, CircleCollider* b);
+		static bool CollidePolygonPolygon(PolygonCollider* a, PolygonCollider* b);
+
 		static bool CollideRectCircle(RectangleCollider* a, CircleCollider* b);
+		static bool CollideRectPolygon(RectangleCollider* a, PolygonCollider* b);
+		static bool CollideCirclePolygon(CircleCollider* a, PolygonCollider* b);
 	};
 }

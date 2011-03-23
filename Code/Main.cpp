@@ -3,7 +3,6 @@
 // test
 #include "Vector2.h"
 
-
 #if defined(MONOCLE_LINUX)
 	// cmake for other tests isn't working yet
 	#define TEST_JUMPER
@@ -44,7 +43,6 @@ using namespace Monocle;
 
 int main(void)
 {
-
 	Game *game = new Game();
 
 	game->Init();
