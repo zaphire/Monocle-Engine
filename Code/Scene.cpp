@@ -50,7 +50,7 @@ namespace Monocle
 		{
 			for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 			{
-				if ((*i)->IsLayer(layer))
+				if ((*i)->IsLayer(layer) && (*i)->visible)
 				{
 					//printf("rendering layer -> %d\n", layer);
 					(*i)->Render();
