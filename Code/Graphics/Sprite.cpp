@@ -87,7 +87,17 @@ namespace Monocle
 		//Graphics::SetColor(color);
 		Graphics::BindTexture(texture);
 		if (texture != NULL)
+		{
+			// fade out sprite if it's selected (so we can see behind it)
+			if (showBounds && (selectedSpriteEntity == this->entity || (selectedSpriteEntity != NULL && selectedSpriteEntity->GetLayer() > this->entity->GetLayer())))
+			{
+				Color copyColor = this->entity->color;
+				copyColor.a *= 0.75f;
+				Graphics::SetColor(copyColor);
+			}
+			
 			Graphics::RenderQuad(width, height, textureOffset, textureScale);
+		}
 		//Graphics::PopMatrix();
 
 
@@ -99,14 +109,14 @@ namespace Monocle
 				if (selectedSpriteEntity == this->entity)
 					Graphics::SetColor(Color::orange);
 				else
-					Graphics::SetColor(Color(1.0f,1.0f,1.0f,0.25f));
+					Graphics::SetColor(Color(0.5f,0.5f,0.75f,0.5f));
 
 				Graphics::BindTexture(NULL);
 				Graphics::RenderLineRect(0, 0, width, height);
 
 
 				if (selectedSpriteEntity != this->entity)
-					Graphics::SetColor(Color(1.0f,1.0f,1.0f,0.5f));
+					Graphics::SetColor(Color(0.5f,0.5f,0.75f,0.5f));
 
 				Graphics::RenderLineRect(0, 0, 20, 20);
 
