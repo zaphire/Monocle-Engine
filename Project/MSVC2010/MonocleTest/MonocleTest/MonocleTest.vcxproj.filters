@@ -219,6 +219,9 @@
     <ClInclude Include="..\..\..\..\Code\Graphics\FringeTile.h">
       <Filter>Monocle\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Colliders\PolygonCollider.h">
+      <Filter>Monocle\Colliders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp">
@@ -409,6 +412,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Graphics\FringeTile.cpp">
       <Filter>Monocle\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Colliders\PolygonCollider.cpp">
+      <Filter>Monocle\Colliders</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

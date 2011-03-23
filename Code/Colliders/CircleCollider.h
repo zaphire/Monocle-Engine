@@ -14,5 +14,9 @@ namespace Monocle
 		ColliderType GetColliderType();
 		bool IntersectsPoint(const Vector2& point);
 		bool IntersectsLine(const Vector2& start, const Vector2& end);
+
+		float GetCenterX(bool relativeToEntity = false);
+		float GetCenterY(bool relativeToEntity = false);
+		const Vector2& GetCenter(bool relativeToEntity = false);
 	};
 }

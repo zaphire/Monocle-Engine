@@ -23,7 +23,7 @@ namespace Monocle
 	{
 		Vector2 ePos = GetEntityPosition();
 
-		return (point.x > ePos.x + offset.x - width*0.5f && point.y > ePos.y + offset.y - height*0.5f && point.x < ePos.x + offset.x + width*0.5f && point.y < ePos.y + offset.y + height*0.5f);
+		return (point.x > GetLeft() && point.y > GetTop() && point.x < GetRight() && point.y < GetBottom());
 	}
 
 	bool RectangleCollider::IntersectsLine(const Vector2& start, const Vector2& end)
@@ -31,12 +31,63 @@ namespace Monocle
 		if (IntersectsPoint(start) || IntersectsPoint(end))
 			return true;
 
-		Vector2 ePos = GetEntityPosition();
-		Vector2 pA = Vector2(ePos.x + offset.x - width*0.5f, ePos.y + offset.y - height*0.5f);
-		Vector2 pB = Vector2(ePos.x + offset.x + width*0.5f, ePos.y + offset.y - height*0.5f);
-		Vector2 pC = Vector2(ePos.x + offset.x + width*0.5f, ePos.y + offset.y + height*0.5f);
-		Vector2 pD = Vector2(ePos.x + offset.x - width*0.5f, ePos.y + offset.y + height*0.5f);
+		Vector2 pA = GetTopLeft();
+		Vector2 pB = GetTopRight();
+		Vector2 pC = GetBottomRight();
+		Vector2 pD = GetBottomLeft();
 		
 		return (LinesIntersect(start, end, pA, pB) || LinesIntersect(start, end, pB, pC) || LinesIntersect(start, end, pC, pD) || LinesIntersect(start, end, pD, pA));
+	}
+
+	float RectangleCollider::GetRight(bool relativeToEntity)
+	{
+		if (relativeToEntity)
+			return offset.x + width*0.5;
+		else
+			return GetEntityPosition().x + offset.x + width*0.5;
+	}
+
+	float RectangleCollider::GetLeft(bool relativeToEntity)
+	{
+		if (relativeToEntity)
+			return offset.x - width*0.5f;		
+		else
+			return GetEntityPosition().x + offset.x - width*0.5;
+	}
+
+	float RectangleCollider::GetTop(bool relativeToEntity)
+	{
+		if (relativeToEntity)
+			return offset.y - height*0.5f;
+		else
+			return GetEntityPosition().y + offset.y - height*0.5f;	
+	}
+
+	float RectangleCollider::GetBottom(bool relativeToEntity)
+	{
+		if (relativeToEntity)
+			return offset.y + height*0.5f;	
+		else
+			return GetEntityPosition().y + offset.y + height*0.5f;
+	}
+
+	const Vector2& RectangleCollider::GetTopLeft(bool relativeToEntity)
+	{
+		return Vector2(GetLeft(relativeToEntity), GetTop(relativeToEntity));
+	}
+
+	const Vector2& RectangleCollider::GetTopRight(bool relativeToEntity)
+	{
+		return Vector2(GetRight(relativeToEntity), GetTop(relativeToEntity));
+	}
+
+	const Vector2& RectangleCollider::GetBottomLeft(bool relativeToEntity)
+	{
+		return Vector2(GetLeft(relativeToEntity), GetBottom(relativeToEntity));
+	}
+
+	const Vector2& RectangleCollider::GetBottomRight(bool relativeToEntity)
+	{
+		return Vector2(GetRight(relativeToEntity), GetBottom(relativeToEntity));
 	}
 }

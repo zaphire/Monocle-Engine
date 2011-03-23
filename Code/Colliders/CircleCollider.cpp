@@ -39,4 +39,25 @@ namespace Monocle
 		Vector2 d = (ePos + offset) - closest;
 		return d.GetSquaredMagnitude() <= radius * radius;
 	}
+
+	float CircleCollider::GetCenterX(bool relativeToEntity)
+	{
+		if (relativeToEntity)
+			return offset.x;
+		else
+			return GetEntityPosition().x + offset.x;
+	}
+
+	float CircleCollider::GetCenterY(bool relativeToEntity)
+	{
+		if (relativeToEntity)
+			return offset.y;
+		else
+			return GetEntityPosition().y + offset.y;
+	}
+
+	const Vector2& CircleCollider::GetCenter(bool relativeToEntity)
+	{
+		return Vector2(GetCenterX(relativeToEntity), GetCenterY(relativeToEntity));
+	}
 }

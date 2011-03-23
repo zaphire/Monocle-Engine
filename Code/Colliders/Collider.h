@@ -7,7 +7,8 @@ namespace Monocle
 	enum ColliderType
 	{
 		CT_RECT=0,
-		CT_CIRCLE
+		CT_CIRCLE,
+		CT_POLYGON
 	};
 
 	class RectangleCollider;
@@ -21,7 +22,7 @@ namespace Monocle
 
 		void SetEntity(Entity* entity);
 		Entity* GetEntity();
-		Vector2 GetEntityPosition();
+		const Vector2& GetEntityPosition();
 
 		Vector2 offset;
 
