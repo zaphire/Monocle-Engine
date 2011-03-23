@@ -1,4 +1,5 @@
 #include "../Vector2.h"
+#include "../Entity.h"
 
 namespace Monocle
 {
@@ -15,6 +16,16 @@ namespace Monocle
 		FTES_SCALE,
 		FTES_MAX
 	};
+
+	/*
+	class Cursor : public Entity
+	{
+	public:
+		Cursor();
+		void Update();
+		void Render();
+	};
+	*/
 
 	class FringeTileEditor
 	{
@@ -51,5 +62,7 @@ namespace Monocle
 		bool waitForLMBRelease;
 
 		FringeTileEditorState state;
+
+		//Cursor *cursor;
 	};
 }

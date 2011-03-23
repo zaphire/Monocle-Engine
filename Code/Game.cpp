@@ -32,6 +32,7 @@ namespace Monocle
 	void Game::Main()
 	{
 		long lastTick = Platform::GetMilliseconds();
+		long firstTick = Platform::GetMilliseconds();
 		long tick;
 
 		while (!isDone)
@@ -59,6 +60,7 @@ namespace Monocle
 
 			tick = Platform::GetMilliseconds();
 			Monocle::deltaTime = ((double)(tick - lastTick))/1000.0;
+			Monocle::timeSinceStart = ((double)tick - firstTick)/1000.0;
 
 #if defined(FIXED_TIMESTEP)
 			int updates = 0;

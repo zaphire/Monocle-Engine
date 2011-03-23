@@ -8,14 +8,45 @@
 
 namespace Monocle
 {
+	/*
+	Cursor::Cursor()
+		: Entity()
+	{
+		SetLayer(-50);
+		color = Color::orange;
+		color.a = 0.5f;
+	}
+
+	void Cursor::Update()
+	{
+		position = Input::GetWorldMousePosition();
+	}
+
+	void Cursor::Render()
+	{
+		Graphics::Translate(position);
+		Graphics::BindTexture(NULL);
+		//Debug::Log("cursor, render");
+		//Graphics::RenderQuad(50, 50);
+		Graphics::SetColor(color);
+		Graphics::Rotate(Monocle::timeSinceStart * 180, 0, 0, 1);
+		Graphics::RenderLineRect(0, 0, 10,10);
+		Graphics::RenderLineRect(0, 0, 2,2);
+	}
+	*/
+
 	FringeTileEditor::FringeTileEditor()
 		: scene(NULL), selectedEntity(NULL), selectedFringeTile(NULL), isOn(false), state(FTES_NONE), waitForLMBRelease(false)
+		//, cursor(NULL)
 	{
 	}
 
 	void FringeTileEditor::Init(Scene *scene)
 	{
 		this->scene = scene;
+
+		//cursor = new Cursor();
+		//scene->Add(cursor);
 	}
 
 	void FringeTileEditor::Enable()
@@ -37,6 +68,7 @@ namespace Monocle
 		if (isOn)
 		{
 			UpdateCamera();
+
 			if (state == FTES_NONE)
 			{
 				UpdateSelect();
@@ -123,8 +155,6 @@ namespace Monocle
 					//Debug::Log("select");
 
 					Vector2 worldMousePosition = Input::GetWorldMousePosition();
-					//printf("mouse position: %d, %d\n", (int)worldMousePosition.x, (int)worldMousePosition.y);
-
 					Entity *entity = scene->GetNearestEntityByControlPoint(worldMousePosition, selectedEntity);
 					if (entity)
 					{
@@ -148,6 +178,8 @@ namespace Monocle
 
 	void FringeTileEditor::Select(Entity *entity)
 	{
+		if (entity == NULL)
+			Debug::Log("select none");
 		selectedEntity = entity;
 		Sprite::selectedSpriteEntity = selectedEntity;
 
@@ -282,6 +314,7 @@ namespace Monocle
 
 		if (!waitForLMBRelease && Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
+			Debug::Log("move start");
 			moveStartPosition = selectedEntity->position;
 			moveOffset = selectedEntity->position - Input::GetWorldMousePosition();
 			SetState(FTES_MOVE);
