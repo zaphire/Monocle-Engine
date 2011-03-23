@@ -161,6 +161,10 @@ namespace Monocle
 			{
 				Clone();
 			}
+			if (Input::IsKeyPressed(KEY_1))
+			{
+				Monocle::OpenURL("C:\\Program Files (x86)\\Adobe\\Adobe Photoshop CS5\\Photoshop.exe " + selectedFringeTile->texture->filename);
+			}
 		}
 
 		if (Input::IsKeyPressed(KEY_I))
