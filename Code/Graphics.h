@@ -66,6 +66,9 @@ namespace Monocle
 		static int GetVirtualWidth();
 		static int GetVirtualHeight();
 
+		static const Vector2 &GetCameraPosition();
+		static void ResolutionMatrix();
+
 	private:
 		static Graphics *instance;
 		Vector2 cameraPosition;

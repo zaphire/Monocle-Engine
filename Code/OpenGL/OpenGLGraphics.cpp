@@ -55,6 +55,9 @@ namespace Monocle
 		//glDepthFunc(GL_LEQUAL); 
 		//glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
+		//clear screen
+		ShowBuffer();
+
 		Set2D(800,600);
 
 		cameraPosition = screenCenter;
@@ -272,6 +275,13 @@ namespace Monocle
 		SceneMatrix();
 	}
 
+	void Graphics::ResolutionMatrix()
+	{
+		glLoadIdentity();
+		glScalef(instance->resolutionScale.x, instance->resolutionScale.y, 0.0f);
+		//glTranslatef(instance->screenCenter.x, instance->screenCenter.y, 0.0f);
+	}
+
 	void Graphics::SceneMatrix()
 	{
 		glLoadIdentity();
@@ -318,6 +328,11 @@ namespace Monocle
 		float y = m[13];
 		//float z = m[14];
 		return Vector2(x, y);
+	}
+
+	const Vector2 &Graphics::GetCameraPosition()
+	{
+		return instance->cameraPosition;
 	}
 }
 

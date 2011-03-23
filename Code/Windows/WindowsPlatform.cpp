@@ -657,7 +657,7 @@ namespace Monocle
 
 	void Platform::Init()
 	{
-		Init(1024, 768, 32, false);
+		Init(800, 600, 32, false);
 	}
 
 	void Platform::Init(int w, int h, int bits, bool fullscreen)

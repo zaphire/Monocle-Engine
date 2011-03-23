@@ -36,6 +36,8 @@ namespace Monocle
 		static bool IsKeyMaskReleased(const std::string& mask);
 		static bool IsKeyMaskPressed(const std::string& mask);
 
+		static Vector2 GetWorldMousePosition();
+
 		void Update();
 		
 	private:

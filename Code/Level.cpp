@@ -205,17 +205,25 @@ namespace Monocle
 		return NULL;
 	}
 
+	void Level::RemoveFringeTile(FringeTile* fringeTile)
+	{
+		instance->fringeTiles.remove(fringeTile);
+	}
+
 	void Level::Save()
 	{
 		if (instance->filename == "")
 		{
 			// open save as dialog or something
+			Debug::Log("Warning: Won't save level, no filename set");
 		}
 		else
 		{
 			// save our data out to xml file
 			if (instance->scene)
 			{
+				Debug::Log("Saving scene...");
+
 				TiXmlDocument xml;
 
 				TiXmlElement eLevel("Level");
@@ -289,6 +297,8 @@ namespace Monocle
 				xml.InsertEndChild(eLevel);
 
 				xml.SaveFile(Assets::GetContentPath() + instance->filename);  
+
+				Debug::Log("...done");
 			}
 		}
 	}

@@ -237,6 +237,32 @@ namespace Monocle
 		return nearestEntity;
 	}
 
+	Entity* Scene::GetNearestEntityByControlPoint(const Vector2 &position, Entity *ignoreEntity)
+	{
+		float smallestSqrMag = -1.0f;
+
+		Entity *nearestEntity = NULL;
+
+		for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+		{
+			if ((*i) != ignoreEntity)
+			{
+				Vector2 diff = (*i)->position - position;
+				if (diff.IsInRange(20))
+				{
+					Vector2 diff = (*i)->position - position;
+					float sqrMag = diff.GetSquaredMagnitude();
+					if (smallestSqrMag == -1 || sqrMag < smallestSqrMag)
+					{
+						nearestEntity = (*i);
+					}
+				}
+			}
+		}
+
+		return nearestEntity;
+	}
+
 	Entity* Scene::GetFirstTag(const std::string& tag)
 	{
 		if (tagMap.count(tag) == 0 || tagMap[tag].size() == 0)

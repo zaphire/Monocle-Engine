@@ -144,4 +144,11 @@ namespace Monocle
 		}
 		return false;
 	}
+
+	Vector2 Input::GetWorldMousePosition()
+	{
+		//core->cameraPos + mouse.position * Vector(1/core->globalScale.x, 1/core->globalScale.y, 1);
+		return (Graphics::GetCameraPosition() - Graphics::screenCenter) + Platform::mousePosition;// * Vector2(1/Graphics::cameraZoom.x, 1/Graphics::cameraZoom.y);
+	}
+
 }

@@ -46,6 +46,7 @@ namespace Monocle
 
 		Vector2 moveOffset;
 		Vector2 moveStartPosition;
+		float startRotation;
 
 		FringeTileEditorState state;
 	};

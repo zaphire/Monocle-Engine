@@ -6,6 +6,8 @@
 			<FringeTile id="2" image="graphics/balcony-fg.png" width="512" height="512"/>
 			<FringeTile id="3" image="graphics/balcony-bg.png" width="256" height="256"/>
 			<FringeTile id="4" image="graphics/marian.png" width="128" height="128"/>
+			<FringeTile id="5" image="graphics/wall-exposed.png" width="256" height="256"/>
+			<FringeTile id="6" image="graphics/beams-fg.png" width="512" height="512"/>
 		</FringeTileset>
 		<FringeTileset name="spring">
 			<FringeTile id="0" image="graphics/spring-sky.png" width="1024" height="1024"/>

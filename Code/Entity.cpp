@@ -265,7 +265,8 @@ namespace Monocle
 	{
 		Vector2 returnPos;
 		Graphics::PushMatrix();
-		Graphics::SceneMatrix();
+		Graphics::ResolutionMatrix();
+		//Graphics::SceneMatrix();
 
 		std::list<Entity*> entityChain;
 		

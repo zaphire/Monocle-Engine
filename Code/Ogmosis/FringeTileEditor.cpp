@@ -109,11 +109,12 @@ namespace Monocle
 	{
 		if (Input::IsMouseButtonPressed(MOUSE_BUTTON_RIGHT) || Input::IsKeyPressed(KEY_Z))
 		{
-			Debug::Log("select");
+			//Debug::Log("select");
 
-			printf("mouse position: %d, %d", (int)Input::GetMousePosition().x, (int)Input::GetMousePosition().y);
+			Vector2 worldMousePosition = Input::GetWorldMousePosition();
+			//printf("mouse position: %d, %d\n", (int)worldMousePosition.x, (int)worldMousePosition.y);
 
-			Entity *entity = scene->GetNearestEntityContaining(Input::GetMousePosition(), selectedEntity);//scene->GetEntityAtPosition(Input::GetMousePosition());
+			Entity *entity = scene->GetNearestEntityByControlPoint(worldMousePosition, selectedEntity);
 			if (entity)
 			{
 				Select(entity);
@@ -125,7 +126,8 @@ namespace Monocle
 	{
 		if (selectedEntity && selectedFringeTile)
 		{
-			FringeTile *fringeTile = Level::AddFringeTile(selectedFringeTile->GetFringeTileset(), selectedFringeTile->GetTileID(), selectedEntity->GetLayer(), Input::GetMousePosition(), selectedEntity->scale, selectedEntity->rotation);
+			FringeTile *fringeTile = Level::AddFringeTile(selectedFringeTile->GetFringeTileset(), selectedFringeTile->GetTileID(), selectedEntity->GetLayer(), Input::GetWorldMousePosition(), selectedEntity->scale, selectedEntity->rotation);
+			Tween::FromTo(&fringeTile->entity->color.a, 0.0f, 1.0f, 0.25f, EASE_LINEAR);
 			Select(fringeTile->entity);
 		}
 	}
@@ -149,6 +151,21 @@ namespace Monocle
 	{
 		if (selectedFringeTile)
 		{
+			if (Input::IsKeyPressed(KEY_BACKSPACE))
+			{
+				///HACK: need to delete graphic and entity at some point
+				/// doesn't happen automatically (yet)
+				Level::RemoveFringeTile(selectedFringeTile);
+				//selectedEntity->SetGraphic(NULL);
+				//delete selectedFringeTile;
+				scene->Remove(selectedEntity);
+				// enqueue deletion of entity?
+				//delete selectedEntity;
+				selectedFringeTile = NULL;
+				selectedEntity = NULL;
+				return;
+			}
+
 			if (Input::IsKeyPressed(KEY_MINUS))
 			{
 				selectedFringeTile->PrevTile();
@@ -161,13 +178,60 @@ namespace Monocle
 			{
 				Clone();
 			}
-			if (Input::IsKeyPressed(KEY_1))
+			if (Input::IsKeyPressed(KEY_TAB))
 			{
-				Monocle::OpenURL(Monocle::GetWorkingDirectory() + selectedFringeTile->texture->filename);
+				std::string path = Monocle::GetWorkingDirectory() + selectedFringeTile->texture->filename;
+				Debug::Log("Opening: " + path + " ...");
+				Monocle::OpenURL(path);
 			}
 			if (Input::IsKeyPressed(KEY_R))
 			{
 				selectedFringeTile->texture->Reload();
+			}
+
+			if (Input::IsKeyHeld(KEY_LSHIFT) && Input::IsKeyPressed(KEY_0))
+			{
+				selectedEntity->rotation = 0;
+			}
+
+			const float moveSpeed = 10.0f;
+			if (Input::IsKeyHeld(KEY_LEFT))
+			{
+				selectedEntity->position += Vector2::left * moveSpeed * Monocle::deltaTime;
+			}
+			if (Input::IsKeyHeld(KEY_RIGHT))
+			{
+				selectedEntity->position += Vector2::right * moveSpeed * Monocle::deltaTime;
+			}
+			if (Input::IsKeyHeld(KEY_UP))
+			{
+				selectedEntity->position += Vector2::up * moveSpeed * Monocle::deltaTime;
+			}
+			if (Input::IsKeyHeld(KEY_DOWN))
+			{
+				selectedEntity->position += Vector2::down * moveSpeed * Monocle::deltaTime;
+			}
+
+			if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Input::IsKeyHeld(KEY_LSHIFT))
+			{
+				moveStartPosition = Input::GetWorldMousePosition();
+				startRotation = selectedEntity->rotation;
+				SetState(FTES_ROTATE);
+				return;
+				/*
+				Vector2 mp = Input::GetWorldMousePosition();
+				Vector2 sp = selectedEntity->GetWorldPosition(Vector2(selectedFringeTile->texture->width*0.25f, -1 * (selectedFringeTile->texture->height*0.25f)));
+				Vector2 diff = mp - sp;
+				printf("mp: %d, %d sp: %d, %d diff: %d, %d\n", (int)mp.x, (int)mp.y, (int)sp.x, (int)sp.y, (int)diff.x, (int)diff.y);
+				if (diff.IsInRange(25))
+				{
+					Debug::Log("rotate!");
+					moveStartPosition = Input::GetWorldMousePosition();
+					startRotation = selectedEntity->rotation;
+					SetState(FTES_ROTATE);
+					return;
+				}
+				*/
 			}
 		}
 
@@ -185,7 +249,7 @@ namespace Monocle
 		if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
 			moveStartPosition = selectedEntity->position;
-			moveOffset = selectedEntity->position - Input::GetMousePosition();
+			moveOffset = selectedEntity->position - Input::GetWorldMousePosition();
 			SetState(FTES_MOVE);
 			return;
 		}
@@ -193,7 +257,7 @@ namespace Monocle
 
 	void FringeTileEditor::UpdateMove()
 	{
-		selectedEntity->position = Input::GetMousePosition() + moveOffset;
+		selectedEntity->position = Input::GetWorldMousePosition() + moveOffset;
 		
 		// cancel out of move by hitting escape
 		if (Input::IsKeyPressed(KEY_ESCAPE))
@@ -217,6 +281,26 @@ namespace Monocle
 		if (Input::IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
 		{
 			SetState(FTES_NONE);
+		}
+		else
+		{
+			if (Input::IsKeyPressed(KEY_0))
+			{
+				selectedEntity->rotation = 0;
+				SetState(FTES_NONE);
+				return;
+			}
+			else if (Input::IsKeyPressed(KEY_ESCAPE))
+			{
+				selectedEntity->rotation = startRotation;
+				SetState(FTES_NONE);
+				return;
+			}
+			else
+			{
+				float add = (Input::GetWorldMousePosition().x - moveStartPosition.x)/2.4f;
+				selectedEntity->rotation = startRotation + add;
+			}
 		}
 	}
 

@@ -97,12 +97,33 @@ namespace Monocle
 			if (texture != NULL)
 			{
 				if (selectedSpriteEntity == this->entity)
-					Graphics::SetColor(Color::red);
+					Graphics::SetColor(Color::orange);
 				else
-					Graphics::SetColor(Color(1.0f,1.0f,1.0f,0.5f));
+					Graphics::SetColor(Color(1.0f,1.0f,1.0f,0.25f));
 
 				Graphics::BindTexture(NULL);
 				Graphics::RenderLineRect(0, 0, width, height);
+
+
+				if (selectedSpriteEntity != this->entity)
+					Graphics::SetColor(Color(1.0f,1.0f,1.0f,0.5f));
+
+				Graphics::RenderLineRect(0, 0, 20, 20);
+
+				/*
+				if (selectedSpriteEntity == this->entity)
+					Graphics::RenderLineRect(0, 0, 10, 10);
+				*/
+
+				/*
+				if (selectedSpriteEntity == this->entity)
+				{
+					Graphics::RenderLineRect(width*0.5f+5, -height*0.5f-5, 10, 10);
+					Graphics::RenderLineRect(width*0.5f+5, height*0.5f+5, 10, 10);
+					Graphics::RenderLineRect(-width*0.5f-5, -height*0.5f-5, 10, 10);
+					Graphics::RenderLineRect(-width*0.5f-5, height*0.5f+5, 10, 10);
+				}
+				*/
 			}
 		}
 	}
