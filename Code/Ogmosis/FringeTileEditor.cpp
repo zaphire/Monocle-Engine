@@ -107,18 +107,31 @@ namespace Monocle
 
 	void FringeTileEditor::UpdateSelect()
 	{
-		if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT))// || Input::IsKeyPressed(KEY_Z))
+		if (Input::IsKeyPressed(KEY_ESCAPE))
 		{
-			//Debug::Log("select");
-
-			Vector2 worldMousePosition = Input::GetWorldMousePosition();
-			//printf("mouse position: %d, %d\n", (int)worldMousePosition.x, (int)worldMousePosition.y);
-
-			Entity *entity = scene->GetNearestEntityByControlPoint(worldMousePosition, selectedEntity);
-			if (entity)
+			if (selectedEntity == NULL)
 			{
-				Select(entity);
-				waitForLMBRelease = true;
+				Sprite::showBounds = !Sprite::showBounds;
+			}
+		}
+		else
+		{
+			if (Sprite::showBounds == true)
+			{
+				if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT))// || Input::IsKeyPressed(KEY_Z))
+				{
+					//Debug::Log("select");
+
+					Vector2 worldMousePosition = Input::GetWorldMousePosition();
+					//printf("mouse position: %d, %d\n", (int)worldMousePosition.x, (int)worldMousePosition.y);
+
+					Entity *entity = scene->GetNearestEntityByControlPoint(worldMousePosition, selectedEntity);
+					if (entity)
+					{
+						Select(entity);
+						waitForLMBRelease = true;
+					}
+				}
 			}
 		}
 	}
@@ -153,6 +166,12 @@ namespace Monocle
 		if (waitForLMBRelease && Input::IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
 		{
 			waitForLMBRelease = false;
+		}
+
+		if (Input::IsKeyPressed(KEY_ESCAPE))
+		{
+			Select(NULL);
+			return;
 		}
 
 		if (selectedFringeTile)

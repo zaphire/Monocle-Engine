@@ -89,11 +89,21 @@ namespace Monocle
 		if (texture != NULL)
 		{
 			// fade out sprite if it's selected (so we can see behind it)
-			if (showBounds && (selectedSpriteEntity == this->entity || (selectedSpriteEntity != NULL && selectedSpriteEntity->GetLayer() > this->entity->GetLayer())))
+			//selectedSpriteEntity == this->entity || 
+			if (showBounds)
 			{
-				Color copyColor = this->entity->color;
-				copyColor.a *= 0.75f;
-				Graphics::SetColor(copyColor);
+				if (selectedSpriteEntity == this->entity)
+				{
+					Color copyColor = this->entity->color;
+					copyColor.a *= 0.95f;
+					Graphics::SetColor(copyColor);
+				}
+				else if (selectedSpriteEntity != NULL && selectedSpriteEntity->GetLayer() > this->entity->GetLayer())
+				{
+					Color copyColor = this->entity->color;
+					copyColor.a *= 0.75f;
+					Graphics::SetColor(copyColor);
+				}
 			}
 			
 			Graphics::RenderQuad(width, height, textureOffset, textureScale);
@@ -109,16 +119,21 @@ namespace Monocle
 				if (selectedSpriteEntity == this->entity)
 					Graphics::SetColor(Color::orange);
 				else
-					Graphics::SetColor(Color(0.5f,0.5f,0.75f,0.5f));
+					Graphics::SetColor(Color(0.9f,0.9f,1.0f,0.25f));
 
 				Graphics::BindTexture(NULL);
 				Graphics::RenderLineRect(0, 0, width, height);
 
 
 				if (selectedSpriteEntity != this->entity)
-					Graphics::SetColor(Color(0.5f,0.5f,0.75f,0.5f));
+					Graphics::SetColor(Color(0.9f,0.9f,1.0f,0.5f));
 
 				Graphics::RenderLineRect(0, 0, 20, 20);
+
+				if (selectedSpriteEntity != this->entity)
+					Graphics::SetColor(Color(0.0f,0.0f,0.25f,0.25f));
+
+				Graphics::RenderLineRect(0, 0, 15, 15);
 
 				/*
 				if (selectedSpriteEntity == this->entity)
