@@ -17,8 +17,8 @@ namespace Monocle
 	//Convert degrees to radians
 	extern const float deg2Rad;
 
-	/*
 	// open a local file or remote URL
 	void OpenURL(const std::string &url);
-	*/
+
+	std::string GetWorkingDirectory();
 }

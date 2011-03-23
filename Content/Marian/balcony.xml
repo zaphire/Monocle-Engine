@@ -4,6 +4,6 @@
         <FringeTile id="1" layer="-1" x="1585" y="300" rotation="0" scaleX="1" scaleY="1" />
         <FringeTile id="2" layer="-3" x="174" y="298" rotation="0" scaleX="1" scaleY="1" />
         <FringeTile id="3" layer="-1" x="180" y="348" rotation="0" scaleX="1" scaleY="1" />
-        <FringeTile id="4" layer="-2" x="256" y="388" rotation="0" scaleX="1" scaleY="1" />
+        <FringeTile id="4" layer="-2" x="245" y="383" rotation="0" scaleX="1" scaleY="1" />
     </FringeTiles>
 </Level>

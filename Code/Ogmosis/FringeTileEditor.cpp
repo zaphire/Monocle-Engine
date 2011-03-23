@@ -163,7 +163,11 @@ namespace Monocle
 			}
 			if (Input::IsKeyPressed(KEY_1))
 			{
-				//Monocle::OpenURL("C:\\Program Files (x86)\\Adobe\\Adobe Photoshop CS5\\Photoshop.exe " + selectedFringeTile->texture->filename);
+				Monocle::OpenURL(Monocle::GetWorkingDirectory() + selectedFringeTile->texture->filename);
+			}
+			if (Input::IsKeyPressed(KEY_R))
+			{
+				selectedFringeTile->texture->Reload();
 			}
 		}
 

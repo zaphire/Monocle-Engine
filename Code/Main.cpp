@@ -14,9 +14,9 @@
 #else
 	//#define TEST_game
 	//#define TEST_PONG
-	//#define TEST_MARIAN
+	#define TEST_MARIAN
 	//#define TEST_JUMPER
-	#define TEST_OGMO
+	//#define TEST_OGMO
 	//#define TEST_FLASH
 #endif
 

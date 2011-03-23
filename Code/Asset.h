@@ -34,6 +34,7 @@ namespace Monocle
 
 		void AddReference();
 		void RemoveReference();
+		virtual void Reload()=0;
 
 	protected:
 		friend class Assets;

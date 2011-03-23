@@ -30,6 +30,9 @@ namespace Monocle
 
 	void TextureAsset::Load(const std::string &filename, FilterType filter, bool repeatX, bool repeatY)
 	{
+		this->filter = filter;
+		this->repeatX = repeatX;
+		this->repeatY = repeatY;
 		this->filename = filename;
 		// only load png for now
 		pngInfo info;
@@ -66,6 +69,12 @@ namespace Monocle
 
 			width = height = 64;
 		}
+	}
+
+	void TextureAsset::Reload()
+	{
+		Unload();
+		Load(filename, filter, repeatX, repeatY);
 	}
 
 	void TextureAsset::Unload()
