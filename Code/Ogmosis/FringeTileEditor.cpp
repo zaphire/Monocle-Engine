@@ -150,6 +150,7 @@ namespace Monocle
 	{
 		selectedEntity = entity;
 		Sprite::selectedSpriteEntity = selectedEntity;
+
 		if (entity)
 		{
 			// unhappy with this so far:
@@ -186,8 +187,7 @@ namespace Monocle
 				scene->Remove(selectedEntity);
 				// enqueue deletion of entity?
 				//delete selectedEntity;
-				selectedFringeTile = NULL;
-				selectedEntity = NULL;
+				Select(NULL);
 				return;
 			}
 
@@ -217,6 +217,15 @@ namespace Monocle
 			if (Input::IsKeyHeld(KEY_LSHIFT) && Input::IsKeyPressed(KEY_0))
 			{
 				selectedEntity->rotation = 0;
+			}
+
+			if (Input::IsKeyPressed(KEY_F))
+			{
+				selectedEntity->scale.x *= -1;
+			}
+			if (Input::IsKeyPressed(KEY_V))
+			{
+				selectedEntity->scale.y *= -1;
 			}
 
 			const float moveSpeed = 10.0f;

@@ -27,6 +27,7 @@ namespace Monocle
 
 	void Level::LoadProject(const std::string &filename)
 	{
+		Debug::Log("Loading Level...");
 		// load the project data from an xml file
 		instance->tilesets.clear();
 
@@ -88,6 +89,7 @@ namespace Monocle
 				}
 			}
 		}
+		Debug::Log("...done");
 	}
 
 	void Level::Load(const std::string &filename, Scene* scene)

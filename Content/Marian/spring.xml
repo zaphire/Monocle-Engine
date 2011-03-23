@@ -1,7 +1,10 @@
 <Level width="1600" height="600">
-	<FringeTiles set="spring">
-		<FringeTile tileID="0" layer="50" x="400" y="300" rotation="0" scaleX="1.25" scaleY="1.25"/>
-		<FringeTile tileID="1" layer="20" x="400" y="300" rotation="0" scaleX="1" scaleY="1"/>
-		<FringeTile tileID="2" layer="10" x="400" y="300" rotation="0" scaleX="1" scaleY="1"/>
-	</FringeTiles>
+    <FringeTiles set="spring">
+        <FringeTile id="0" layer="20" x="400" y="300" rotation="0" scaleX="1.25" scaleY="1.25" />
+        <FringeTile id="1" layer="5" x="502" y="210" rotation="0" scaleX="1" scaleY="1" />
+        <FringeTile id="2" layer="5" x="681" y="75" rotation="0" scaleX="1" scaleY="1" />
+        <FringeTile id="2" layer="-10" x="-35" y="450" rotation="-5" scaleX="-1" scaleY="1" />
+        <FringeTile id="2" layer="-10" x="935" y="562" rotation="15" scaleX="1" scaleY="1" />
+        <FringeTile id="3" layer="0" x="350" y="532" rotation="0" scaleX="1" scaleY="1" />
+    </FringeTiles>
 </Level>

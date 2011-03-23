@@ -95,13 +95,13 @@ namespace Monocle
 				if (selectedSpriteEntity == this->entity)
 				{
 					Color copyColor = this->entity->color;
-					copyColor.a *= 0.95f;
+					copyColor.a *= 0.8f;
 					Graphics::SetColor(copyColor);
 				}
 				else if (selectedSpriteEntity != NULL && selectedSpriteEntity->GetLayer() > this->entity->GetLayer())
 				{
 					Color copyColor = this->entity->color;
-					copyColor.a *= 0.75f;
+					copyColor.a *= 0.6f;
 					Graphics::SetColor(copyColor);
 				}
 			}
@@ -126,12 +126,12 @@ namespace Monocle
 
 
 				if (selectedSpriteEntity != this->entity)
-					Graphics::SetColor(Color(0.9f,0.9f,1.0f,0.5f));
+					Graphics::SetColor(Color(0.9f,0.9f,1.0f,0.8f));
 
 				Graphics::RenderLineRect(0, 0, 20, 20);
 
 				if (selectedSpriteEntity != this->entity)
-					Graphics::SetColor(Color(0.0f,0.0f,0.25f,0.25f));
+					Graphics::SetColor(Color(0.0f,0.0f,0.25f,0.8f));
 
 				Graphics::RenderLineRect(0, 0, 15, 15);
 

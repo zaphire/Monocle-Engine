@@ -2,12 +2,12 @@
     <FringeTiles set="balcony">
         <FringeTile id="0" layer="5" x="650" y="295" rotation="0" scaleX="1.25" scaleY="1.25" />
         <FringeTile id="1" layer="-1" x="1665" y="297" rotation="0" scaleX="1" scaleY="1" />
-        <FringeTile id="2" layer="-3" x="174" y="298" rotation="0" scaleX="1" scaleY="1" />
+        <FringeTile id="2" layer="-3" x="174" y="304" rotation="0" scaleX="1" scaleY="1" />
         <FringeTile id="3" layer="1" x="180" y="348" rotation="0" scaleX="1" scaleY="1" />
         <FringeTile id="4" layer="0" x="249" y="381" rotation="0" scaleX="1" scaleY="1" />
-        <FringeTile id="5" layer="0" x="-359" y="333" rotation="0" scaleX="1" scaleY="1" />
-        <FringeTile id="5" layer="0" x="-103" y="332" rotation="0" scaleX="1" scaleY="1" />
-        <FringeTile id="6" layer="-2" x="-241" y="327" rotation="0" scaleX="1" scaleY="1" />
+        <FringeTile id="5" layer="0" x="-359" y="350" rotation="0" scaleX="1" scaleY="1" />
+        <FringeTile id="5" layer="0" x="-103" y="349" rotation="0" scaleX="1" scaleY="1" />
+        <FringeTile id="6" layer="-2" x="-241" y="334" rotation="0" scaleX="1" scaleY="1" />
         <FringeTile id="6" layer="-4" x="-746" y="330" rotation="0" scaleX="1" scaleY="1" />
         <FringeTile id="5" layer="0" x="-608" y="335" rotation="0" scaleX="1" scaleY="1" />
         <FringeTile id="5" layer="0" x="-861" y="337" rotation="0" scaleX="1" scaleY="1" />

@@ -13,6 +13,7 @@
 			<FringeTile id="0" image="graphics/spring-sky.png" width="1024" height="1024"/>
 			<FringeTile id="1" image="graphics/spring-bg-grass.png" width="2048" height="1024"/>
 			<FringeTile id="2" image="graphics/plant-harp.png" width="1024" height="1024"/>
+			<FringeTile id="3" image="graphics/marian.png" width="128" height="128"/>
 		</FringeTileset>
 	</FringeTilesets>
 </Project>
