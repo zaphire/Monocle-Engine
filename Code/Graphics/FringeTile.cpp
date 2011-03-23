@@ -1,6 +1,8 @@
 #include "FringeTile.h"
 #include "../Assets.h"
 
+#include <cstdio>
+
 namespace Monocle
 {
 	FringeTileset::FringeTileset(const std::string &name)
@@ -16,6 +18,11 @@ namespace Monocle
 	bool FringeTileset::IsName(const std::string &name)
 	{
 		return this->name == name;
+	}
+
+	const std::string &FringeTileset::GetName()
+	{
+		return this->name;
 	}
 
 	const FringeTileData *FringeTileset::GetFringeTileDataByID(int tileID)

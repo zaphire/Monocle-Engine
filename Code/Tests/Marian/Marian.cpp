@@ -213,13 +213,18 @@ namespace Marian
 		fringeTileEditor.Enable();
 
 		Level::LoadProject("project.xml");
-		Level::Load("spring.xml", this);
+		Level::Load("balcony.xml", this);
 	}
 
 	void LevelScene::Update()
 	{
 		Scene::Update();
 		fringeTileEditor.Update();
+
+		if (Input::IsKeyPressed(KEY_S) && Input::IsKeyHeld(KEY_LCTRL))
+		{
+			Level::Save();
+		}
 	}
 
 	void LevelScene::End()

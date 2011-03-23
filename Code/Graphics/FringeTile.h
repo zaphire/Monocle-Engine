@@ -30,11 +30,13 @@ namespace Monocle
 		~FringeTileset();
 		
 		bool IsName(const std::string &name);
+		const std::string &GetName();
 
 		const FringeTileData *GetFringeTileDataByID(int tileID);
 		void SetFringeTileData(int tileID, FringeTileData *fringeTileData);
 		int GetNextTileID(int tileID);
 		int GetPrevTileID(int tileID);
+
 
 	private:
 		int maxTileID;

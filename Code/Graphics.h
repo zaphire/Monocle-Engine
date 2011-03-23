@@ -40,6 +40,8 @@ namespace Monocle
 		static void BindTexture(TextureAsset* textureAsset);
 		static void SetCameraPosition(const Vector2 &position);
 		static void AdjustCameraPosition(const Vector2 &adjustment);
+		
+		static void AdjustCameraZoom(const Vector2 &adjustment);
 
 		static void Translate(float x, float y, float z);
 		static void Translate(Vector2 pos);
@@ -67,6 +69,7 @@ namespace Monocle
 	private:
 		static Graphics *instance;
 		Vector2 cameraPosition;
+		Vector2 cameraZoom;
 		Vector2 resolutionScale;
 		int virtualWidth, virtualHeight;
 		unsigned int lastBoundTextureID;

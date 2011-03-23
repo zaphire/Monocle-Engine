@@ -1,13 +1,16 @@
 <Project>
 	<FringeTilesets>
 		<FringeTileset name="balcony">
-			<FringeTile tileID="0" image="graphics/reverie-sky.png" width="1024" height="512" filter="0"/>
-			<FringeTile tileID="1" image="graphics/title.png" width="512" height="512"/>
+			<FringeTile id="0" image="graphics/reverie-sky.png" width="1024" height="512" filter="0"/>
+			<FringeTile id="1" image="graphics/title.png" width="512" height="512"/>
+			<FringeTile id="2" image="graphics/balcony-fg.png" width="512" height="512"/>
+			<FringeTile id="3" image="graphics/balcony-bg.png" width="256" height="256"/>
+			<FringeTile id="4" image="graphics/marian.png" width="128" height="128"/>
 		</FringeTileset>
 		<FringeTileset name="spring">
-			<FringeTile tileID="0" image="graphics/spring-sky.png" width="1024" height="1024"/>
-			<FringeTile tileID="1" image="graphics/spring-bg-grass.png" width="2048" height="1024"/>
-			<FringeTile tileID="2" image="graphics/plant-harp.png" width="1024" height="1024"/>
+			<FringeTile id="0" image="graphics/spring-sky.png" width="1024" height="1024"/>
+			<FringeTile id="1" image="graphics/spring-bg-grass.png" width="2048" height="1024"/>
+			<FringeTile id="2" image="graphics/plant-harp.png" width="1024" height="1024"/>
 		</FringeTileset>
 	</FringeTilesets>
 </Project>
