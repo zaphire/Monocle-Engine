@@ -48,6 +48,8 @@ namespace Monocle
 		Vector2 moveStartPosition;
 		float startRotation;
 
+		bool waitForLMBRelease;
+
 		FringeTileEditorState state;
 	};
 }
