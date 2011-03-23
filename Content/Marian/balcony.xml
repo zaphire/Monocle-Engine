@@ -8,8 +8,8 @@
         <FringeTile id="5" layer="0" x="-359" y="350" rotation="0" scaleX="1" scaleY="1" />
         <FringeTile id="5" layer="0" x="-103" y="349" rotation="0" scaleX="1" scaleY="1" />
         <FringeTile id="6" layer="-2" x="-241" y="334" rotation="0" scaleX="1" scaleY="1" />
-        <FringeTile id="6" layer="-4" x="-746" y="330" rotation="0" scaleX="1" scaleY="1" />
-        <FringeTile id="5" layer="0" x="-608" y="335" rotation="0" scaleX="1" scaleY="1" />
-        <FringeTile id="5" layer="0" x="-861" y="337" rotation="0" scaleX="1" scaleY="1" />
+        <FringeTile id="6" layer="-4" x="-746" y="343" rotation="0" scaleX="1" scaleY="1" />
+        <FringeTile id="5" layer="0" x="-608" y="350" rotation="0" scaleX="1" scaleY="1" />
+        <FringeTile id="5" layer="0" x="-861" y="352" rotation="0" scaleX="1" scaleY="1" />
     </FringeTiles>
 </Level>

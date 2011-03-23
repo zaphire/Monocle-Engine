@@ -147,8 +147,9 @@ namespace Monocle
 
 	Vector2 Input::GetWorldMousePosition()
 	{
-		//core->cameraPos + mouse.position * Vector(1/core->globalScale.x, 1/core->globalScale.y, 1);
-		return (Graphics::GetCameraPosition() - Graphics::screenCenter) + Platform::mousePosition;// * Vector2(1/Graphics::cameraZoom.x, 1/Graphics::cameraZoom.y);
+		Vector2 diff = Platform::mousePosition - Graphics::screenCenter;
+		Vector2 cameraZoom = Graphics::GetCameraZoom();
+		return Graphics::GetCameraPosition() + (diff * Vector2(1/cameraZoom.x, 1/cameraZoom.y));
 	}
 
 }

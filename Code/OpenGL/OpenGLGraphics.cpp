@@ -334,6 +334,11 @@ namespace Monocle
 	{
 		return instance->cameraPosition;
 	}
+
+	const Vector2 &Graphics::GetCameraZoom()
+	{
+		return instance->cameraZoom;
+	}
 }
 
 #endif

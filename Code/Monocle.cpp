@@ -9,13 +9,14 @@
 
 namespace Monocle
 {
-	double deltaTime;
+	double deltaTime			= 0.0;
+	double timeSinceStart	= 0.0;
 
-	const float pi = 3.14159265358979f;
+	const float pi			= 3.14159265358979f;
 
-	const float rad2Deg = 57.29578f;
+	const float rad2Deg		= 57.29578f;
 
-	const float deg2Rad = 0.01745329f;
+	const float deg2Rad		= 0.01745329f;
 
 	void OpenURL(const std::string &url)
 	{
