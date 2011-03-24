@@ -153,7 +153,7 @@ namespace Marian
 	{
 		SetCollider(new RectangleCollider(256, 32));
 		SetGraphic(new Sprite("", 256, 32));
-		AddTag("obstruction");
+		AddTag("Obstruction");
 	}
 
 	Player::Player()
@@ -163,7 +163,7 @@ namespace Marian
 
 		SetGraphic(new Sprite("graphics/marian.png", 128, 128));
 		SetCollider(new CircleCollider(32, Vector2::down*32));
-		AddTag("player");
+		AddTag("Player");
 
 	}
 
@@ -173,7 +173,7 @@ namespace Marian
 
 		Vector2 lastPosition = position;
 
-		const float walkSpeed = 128;
+		const float walkSpeed = 200;
 		const float maxFallSpeed = 50.0f;
 		const float gravity = 980.0f;
 
@@ -181,7 +181,7 @@ namespace Marian
 
 		position += velocity * Monocle::deltaTime;
 
-		if (Collide("obstruction"))
+		if (Collide("Obstruction"))
 		{
 			position.y = lastPosition.y;
 			velocity.y = 0;
@@ -197,7 +197,7 @@ namespace Marian
 			scale.x = -1;
 			position.x -= walkSpeed * Monocle::deltaTime;
 		}
-		if (Collide("obstruction"))
+		if (Collide("Obstruction"))
 		{
 			position.x = lastPosition.x;
 			velocity.x = 0;
@@ -270,7 +270,7 @@ namespace Marian
 		fringeTileEditor.Enable();
 
 		Level::LoadProject("project.xml");
-		Level::Load("balcony.xml", this);
+		Level::Load("tower.xml", this);
 
 		player = new Player();
 		player->position = Graphics::screenCenter;

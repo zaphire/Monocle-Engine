@@ -5,6 +5,7 @@
 #include "../Platform.h"
 #include "../TextureAsset.h"
 #include "../Color.h"
+#include "../Tween.h"
 
 #include <cstdio>
 
@@ -338,6 +339,11 @@ namespace Monocle
 	const Vector2 &Graphics::GetCameraZoom()
 	{
 		return instance->cameraZoom;
+	}
+
+	void Graphics::MoveCameraPosition(const Vector2 &position, float time, EaseType easeType)
+	{
+		Tween::To(&instance->cameraPosition, position, time, easeType);
 	}
 }
 

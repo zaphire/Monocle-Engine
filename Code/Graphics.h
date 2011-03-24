@@ -4,6 +4,7 @@
 #include "Vector3.h"
 #include "Color.h"
 #include "TextureAsset.h"
+#include "Tween.h"
 
 namespace Monocle
 {
@@ -69,6 +70,8 @@ namespace Monocle
 		static const Vector2 &GetCameraPosition();
 		static const Vector2 &GetCameraZoom();
 		static void ResolutionMatrix();
+
+		static void MoveCameraPosition(const Vector2 &position, float time, EaseType easeType);
 
 	private:
 		static Graphics *instance;

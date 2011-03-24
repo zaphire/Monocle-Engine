@@ -508,6 +508,12 @@ namespace Monocle
 				instance->platform->mousePosition.y = GET_Y_LPARAM(lParam);
 				return 0;
 			}
+
+			case WM_MOUSEWHEEL:
+			{
+				instance->platform->mouseWheel = (short)HIWORD(wParam);
+			}
+			return(0);
 		}
 
 		// Pass All Unhandled Messages To DefWindowProc
@@ -519,6 +525,7 @@ namespace Monocle
 	bool Platform::keys[KEY_MAX];
 	bool Platform::mouseButtons[3];
 	Vector2 Platform::mousePosition;
+	int Platform::mouseWheel = 0;
 
 	Platform::Platform()
 	{
@@ -670,6 +677,7 @@ namespace Monocle
 
 	void Platform::Update()
 	{
+		mouseWheel = 0;
 		// Pump messages
 		MSG msg;	
 		while (PeekMessage(&msg,NULL,0,0,PM_NOREMOVE))

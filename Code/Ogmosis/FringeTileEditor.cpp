@@ -83,6 +83,10 @@ namespace Monocle
 					UpdateOpportunity();
 					break;
 
+				case FTES_COMMAND:
+					UpdateCommand();
+					break;
+
 				case FTES_MOVE:
 					UpdateMove();
 					break;
@@ -97,6 +101,11 @@ namespace Monocle
 				}
 			}
 		}
+	}
+
+	void FringeTileEditor::UpdateCommand()
+	{
+
 	}
 
 	void FringeTileEditor::UpdateCamera()
@@ -134,6 +143,19 @@ namespace Monocle
 			if (Input::IsKeyHeld(KEY_E))
 			{
 				Graphics::AdjustCameraZoom(Vector2::one * zoomSpeed * Monocle::deltaTime);
+			}
+			if (Platform::mouseWheel != 0)
+			{
+				Graphics::AdjustCameraZoom(Platform::mouseWheel * Vector2::one * 0.0005f);
+			}
+			if (Input::IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE))
+			{
+				startCameraMovePosition = Input::GetMousePosition();
+			}
+			if (Input::IsMouseButtonHeld(MOUSE_BUTTON_MIDDLE))
+			{
+				const float camPanSpeed = 8.0f;
+				Graphics::AdjustCameraPosition((Input::GetMousePosition() - startCameraMovePosition)*camPanSpeed*Monocle::deltaTime);//(Input::GetWorldMousePosition() - Graphics::GetCameraPosition()));
 			}
 		}
 	}
@@ -201,6 +223,16 @@ namespace Monocle
 		}
 	}
 
+	void FringeTileEditor::ApplyGrid(Entity *entity, int gridSize)
+	{
+		int x = (entity->position.x / gridSize);
+		entity->position.x = (x * gridSize) + gridSize*0.5f;
+		int y = (entity->position.y / gridSize);
+		entity->position.y = (y * gridSize) + gridSize*0.5f;
+
+		printf("applied grid %d now (%d, %d)\n", gridSize, (int)entity->position.x, (int)entity->position.y);
+	}
+
 	void FringeTileEditor::UpdateOpportunity()
 	{
 		if (waitForLMBRelease && Input::IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
@@ -212,6 +244,33 @@ namespace Monocle
 		{
 			Select(NULL);
 			return;
+		}
+
+		if (Input::IsKeyPressed(KEY_1))
+		{
+			ApplyGrid(selectedEntity, 32);
+		}
+		if (Input::IsKeyPressed(KEY_2))
+		{
+			ApplyGrid(selectedEntity, 64);
+		}
+		if (Input::IsKeyPressed(KEY_3))
+		{
+			ApplyGrid(selectedEntity, 128);
+		}
+		if (Input::IsKeyPressed(KEY_4))
+		{
+			ApplyGrid(selectedEntity, 256);
+		}
+		if (Input::IsKeyPressed(KEY_5))
+		{
+			ApplyGrid(selectedEntity, 512);
+		}
+
+		if (Input::IsKeyPressed(KEY_F))
+		{
+			Graphics::MoveCameraPosition(selectedEntity->position, 0.125f, EASE_OUTSIN);
+			//Graphics::SetCameraPosition(selectedEntity->position);
 		}
 
 		if (selectedFringeTile)
@@ -242,7 +301,7 @@ namespace Monocle
 			{
 				Clone();
 			}
-			if (Input::IsKeyPressed(KEY_P))
+			if (Input::IsKeyPressed(KEY_M))
 			{
 				std::string path = Monocle::GetWorkingDirectory() + selectedFringeTile->texture->filename;
 				Debug::Log("Opening: " + path + " ...");
@@ -258,7 +317,7 @@ namespace Monocle
 				selectedEntity->rotation = 0;
 			}
 
-			if (Input::IsKeyPressed(KEY_F))
+			if (Input::IsKeyPressed(KEY_H))
 			{
 				selectedEntity->scale.x *= -1;
 			}
@@ -284,28 +343,17 @@ namespace Monocle
 			{
 				selectedEntity->position += Vector2::down * moveSpeed * Monocle::deltaTime;
 			}
+		}
 
-			if (!waitForLMBRelease && (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Input::IsKeyHeld(KEY_LSHIFT)))
-			{
-				moveStartPosition = Input::GetWorldMousePosition();
-				startRotation = selectedEntity->rotation;
-				SetState(FTES_ROTATE);
-				return;
-				/*
-				Vector2 mp = Input::GetWorldMousePosition();
-				Vector2 sp = selectedEntity->GetWorldPosition(Vector2(selectedFringeTile->texture->width*0.25f, -1 * (selectedFringeTile->texture->height*0.25f)));
-				Vector2 diff = mp - sp;
-				printf("mp: %d, %d sp: %d, %d diff: %d, %d\n", (int)mp.x, (int)mp.y, (int)sp.x, (int)sp.y, (int)diff.x, (int)diff.y);
-				if (diff.IsInRange(25))
-				{
-					Debug::Log("rotate!");
-					moveStartPosition = Input::GetWorldMousePosition();
-					startRotation = selectedEntity->rotation;
-					SetState(FTES_ROTATE);
-					return;
-				}
-				*/
-			}
+		if (Input::IsKeyPressed(KEY_O))
+		{
+			Vector2 add = Vector2(SIGN(selectedEntity->scale.x), SIGN(selectedEntity->scale.y)) * 0.125f;
+			selectedEntity->scale += add;
+			printf("add(%f, %f)\n", add.x, add.y);
+		}
+		if (Input::IsKeyPressed(KEY_U))
+		{
+			selectedEntity->scale -= Vector2(SIGN(selectedEntity->scale.x), SIGN(selectedEntity->scale.y)) * 0.125f;
 		}
 
 		if (Input::IsKeyPressed(KEY_I))
@@ -317,6 +365,14 @@ namespace Monocle
 		{
 			selectedEntity->AdjustLayer(-1);
 			printf("layer is now: %d\n", selectedEntity->GetLayer());
+		}
+
+		if (!waitForLMBRelease && (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Input::IsKeyHeld(KEY_LSHIFT)))
+		{
+			moveStartPosition = Input::GetWorldMousePosition();
+			startRotation = selectedEntity->rotation;
+			SetState(FTES_ROTATE);
+			return;
 		}
 
 		if (!waitForLMBRelease && Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT))

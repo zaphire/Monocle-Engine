@@ -162,6 +162,7 @@ namespace Monocle
 		static bool keys[KEY_MAX];
 		static bool mouseButtons[MOUSE_BUTTON_MAX];
 		static Vector2 mousePosition;
+		static int mouseWheel;
 
 		static void SetLocalKey(int key, bool on);
 		static void SetMouseButton(int button, bool on);

@@ -14,6 +14,7 @@ namespace Monocle
 		FTES_MOVE,
 		FTES_ROTATE,
 		FTES_SCALE,
+		FTES_COMMAND,
 		FTES_MAX
 	};
 
@@ -43,6 +44,9 @@ namespace Monocle
 		void UpdateMove();
 		void UpdateRotate();
 		void UpdateScale();
+		void UpdateCommand();
+
+		void ApplyGrid(Entity *entity, int gridSize);
 
 		void Clone();
 
@@ -62,6 +66,7 @@ namespace Monocle
 		bool waitForLMBRelease;
 
 		FringeTileEditorState state;
+		Vector2 startCameraMovePosition;
 
 		//Cursor *cursor;
 	};

@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Game.h"
+#include "Macros.h"
 #include <string>
+
 
 namespace Monocle
 {

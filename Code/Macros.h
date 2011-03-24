@@ -20,6 +20,12 @@
 */
 #define SIGN(value, to) ((value < 0) ? -to : ((value > 0) ? to : 0))
 
+/* SIGN
+		If value is positive or zero, return 1
+		If negative return -1
+*/
+#define SIGN(value) ((value >= 0) ? 1 : -1)
+
 /*	APPROACH
 		Returns value shifted toward target by amount, without crossing target.
 		For example, APPROACH(2, 0, 3) will perform 2 - 3 = -1, but return 0 because -1 crossed the target of 0.
