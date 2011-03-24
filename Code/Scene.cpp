@@ -3,6 +3,7 @@
 namespace Monocle
 {
 	Scene::Scene()
+		: isVisible(true), isPaused(false)
 	{
 
 	}
@@ -25,10 +26,13 @@ namespace Monocle
 
 	void Scene::Update()
 	{
-		//Update all the entities
-		for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+		if (!isPaused)
 		{
-			(*i)->Update();
+			//Update all the entities
+			for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+			{
+				(*i)->Update();
+			}
 		}
 
 		//Resolve adds and removes
@@ -37,22 +41,25 @@ namespace Monocle
 
 	void Scene::Render()
 	{
-		//Render all the entities
-		// sort by layer?
-
-		const int MAX_LAYER = 100;
-		const int MIN_LAYER = -100;
-
-		//printf("\n\n****\n");
-
-		///HACK: this next line is a hack - temporary only
-		for (int layer = MAX_LAYER; layer >= MIN_LAYER; layer--)
+		if (isVisible)
 		{
-			for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+			//Render all the entities
+			// sort by layer?
+
+			const int MAX_LAYER = 100;
+			const int MIN_LAYER = -100;
+
+			//printf("\n\n****\n");
+
+			///HACK: this next line is a hack - temporary only
+			for (int layer = MAX_LAYER; layer >= MIN_LAYER; layer--)
 			{
-				if ((*i)->IsLayer(layer) && (*i)->isVisible)
+				for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 				{
-					(*i)->Render();
+					if ((*i)->IsLayer(layer) && (*i)->isVisible)
+					{
+						(*i)->Render();
+					}
 				}
 			}
 		}
