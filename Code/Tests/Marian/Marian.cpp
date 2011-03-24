@@ -270,7 +270,7 @@ namespace Marian
 		fringeTileEditor.Enable();
 
 		Level::LoadProject("project.xml");
-		Level::Load("tower.xml", this);
+		Level::Load("spring.xml", this);
 
 		player = new Player();
 		player->position = Graphics::screenCenter;

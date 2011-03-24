@@ -66,7 +66,7 @@ namespace Monocle
 		bool waitForLMBRelease;
 
 		FringeTileEditorState state;
-		Vector2 startCameraMovePosition;
+		Vector2 lastWorldMousePosition;
 
 		//Cursor *cursor;
 	};

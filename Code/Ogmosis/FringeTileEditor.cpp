@@ -150,12 +150,15 @@ namespace Monocle
 			}
 			if (Input::IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE))
 			{
-				startCameraMovePosition = Input::GetMousePosition();
+				lastWorldMousePosition = Input::GetWorldMousePosition();
 			}
 			if (Input::IsMouseButtonHeld(MOUSE_BUTTON_MIDDLE))
 			{
-				const float camPanSpeed = 8.0f;
-				Graphics::AdjustCameraPosition((Input::GetMousePosition() - startCameraMovePosition)*camPanSpeed*Monocle::deltaTime);//(Input::GetWorldMousePosition() - Graphics::GetCameraPosition()));
+				Vector2 diff = Input::GetWorldMousePosition() - lastWorldMousePosition;
+				Graphics::AdjustCameraPosition(-1*diff);
+				lastWorldMousePosition = Input::GetWorldMousePosition();
+				//const float camPanSpeed = 8.0f;
+				//Graphics::AdjustCameraPosition((Input::GetMousePosition() - startCameraMovePosition)*camPanSpeed*Monocle::deltaTime);//(Input::GetWorldMousePosition() - Graphics::GetCameraPosition()));
 			}
 		}
 	}
