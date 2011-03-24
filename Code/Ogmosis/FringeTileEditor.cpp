@@ -350,13 +350,13 @@ namespace Monocle
 
 		if (Input::IsKeyPressed(KEY_O))
 		{
-			Vector2 add = Vector2(SIGN(selectedEntity->scale.x), SIGN(selectedEntity->scale.y)) * 0.125f;
+			Vector2 add = Vector2(SIGNOF(selectedEntity->scale.x), SIGNOF(selectedEntity->scale.y)) * 0.125f;
 			selectedEntity->scale += add;
 			printf("add(%f, %f)\n", add.x, add.y);
 		}
 		if (Input::IsKeyPressed(KEY_U))
 		{
-			selectedEntity->scale -= Vector2(SIGN(selectedEntity->scale.x), SIGN(selectedEntity->scale.y)) * 0.125f;
+			selectedEntity->scale -= Vector2(SIGNOF(selectedEntity->scale.x), SIGNOF(selectedEntity->scale.y)) * 0.125f;
 		}
 
 		if (Input::IsKeyPressed(KEY_I))
