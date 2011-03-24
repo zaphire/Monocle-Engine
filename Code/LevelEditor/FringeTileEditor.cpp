@@ -45,8 +45,10 @@ namespace Monocle
 		keySelect = KEY_SPACE;
 		keyFocus = KEY_F;
 		keyClone = KEY_T;
-		keyFlipV = KEY_C;
-		keyFlipH = KEY_V;
+		keyFlipH = KEY_C;
+		keyFlipV = KEY_V;
+		keyPrevTile = KEY_LEFTBRACKET;
+		keyNextTile = KEY_RIGHTBRACKET;
 	}
 
 	void FringeTileEditor::Init(Scene *scene)
@@ -309,11 +311,11 @@ namespace Monocle
 				return;
 			}
 
-			if (Input::IsKeyPressed(KEY_MINUS))
+			if (Input::IsKeyPressed(KEY_LEFTBRACKET))
 			{
 				selectedFringeTile->PrevTile();
 			}
-			if (Input::IsKeyPressed(KEY_EQUALS))
+			if (Input::IsKeyPressed(KEY_RIGHTBRACKET))
 			{
 				selectedFringeTile->NextTile();
 			}

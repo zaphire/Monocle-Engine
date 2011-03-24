@@ -83,5 +83,7 @@ namespace Monocle
 		KeyCode keyClone;
 		KeyCode keyFlipH;
 		KeyCode keyFlipV;
+		KeyCode keyPrevTile;
+		KeyCode keyNextTile;
 	};
 }

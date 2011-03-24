@@ -21,6 +21,14 @@ namespace Marian
 	};
 	*/
 
+	class TriggerLevel : public Entity
+	{
+	public:
+		TriggerLevel(const std::string &level);
+		void Update();
+		void Render();
+	};
+
 	class Obstruction : public Entity
 	{
 	public:

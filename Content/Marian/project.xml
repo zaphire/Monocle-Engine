@@ -18,7 +18,7 @@
 		<FringeTileset name="tower">
 			<FringeTile id="0" image="graphics/tower-wall-rep.png" width="256" height="256"/>
 			<FringeTile id="1" image="graphics/tower-wall-rep-window.png" width="512" height="512"/>
-			<FringeTile id="2" image="graphics/tower-door-rep.png" width="256" height="256"/>
+			<FringeTile id="2" image="graphics/tower-wall-door.png" width="256" height="512"/>
 		</FringeTileset>
 		<Entities>
 			<Entity name="Player" script="scripts/player.nut" image="graphics/player.png">

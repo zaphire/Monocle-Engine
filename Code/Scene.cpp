@@ -140,6 +140,8 @@ namespace Monocle
 		//Resolve removes
 		for (std::list<Entity*>::iterator i = toRemove.begin(); i != toRemove.end(); ++i)
 		{
+			(*i)->Destroy();
+
 			entities.remove(*i);
 
 			//If the tag is set, remove the entity from the tag map
@@ -149,12 +151,7 @@ namespace Monocle
 			(*i)->scene = NULL;
 			(*i)->Removed();
 
-			/*
-			if ((*i)->willDie)
-			{
-				delete (*i);
-			}
-			*/
+			delete (*i);
 		}
 		toRemove.clear();
 
