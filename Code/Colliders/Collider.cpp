@@ -166,7 +166,39 @@ namespace Monocle
 
 	bool Collider::CollideRectPolygon(RectangleCollider* a, PolygonCollider* b)
 	{
-		//TODO!
+		//Check if it's even possible for them to collide
+		if (a->GetLeft() > b->GetRightmost())
+			return false;
+		if (a->GetRight() < b->GetLeftmost())
+			return false;
+		if (a->GetTop() > b->GetBottommost())
+			return false;
+		if (a->GetBottom() < b->GetTopmost())
+			return false;
+
+		//Check if the first point of either is inside the other
+		//(accounts for the case where one is completely inside the other)
+		if (a->IntersectsPoint(b->GetPoint(0)) || b->IntersectsPoint(a->GetTopLeft()))
+			return true;
+
+		//Compare lines for intersections
+		Vector2 rectPoints[4];
+		rectPoints[0] = a->GetTopLeft();
+		rectPoints[1] = a->GetTopRight();
+		rectPoints[2] = a->GetBottomRight();
+		rectPoints[3] = a->GetBottomLeft();
+
+		int totalB = b->GetPointCount();
+		for (int i = 0; i < totalB; ++i)
+		{
+			Vector2 startB	= b->GetPoint(i);
+			Vector2 endB	= b->GetPoint((i + 1) % totalB);
+			for (int j = 0; j < 4; ++j)
+			{
+				if (LinesIntersect(startB, endB, rectPoints[j], rectPoints[(j + 1) % 4]))
+					return true;
+			}
+		}
 
 		return false;
 	}
