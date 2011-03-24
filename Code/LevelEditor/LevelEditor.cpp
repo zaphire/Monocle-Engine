@@ -1,18 +1,18 @@
-#include "Ogmosis.h"
+#include "LevelEditor.h"
 #include "../Input.h"
 
 namespace Monocle
 {
 	// O G M O S I S
 
-	void Ogmosis::Begin()
+	void LevelEditor::Begin()
 	{
 		Scene::Begin();
 
 		//Level::Load("HappyLandLevel");
 	}
 
-	void Ogmosis::Update()
+	void LevelEditor::Update()
 	{
 		Scene::Update();
 
@@ -23,7 +23,7 @@ namespace Monocle
 		}
 	}
 
-	void Ogmosis::End()
+	void LevelEditor::End()
 	{
 		Scene::End();
 	}

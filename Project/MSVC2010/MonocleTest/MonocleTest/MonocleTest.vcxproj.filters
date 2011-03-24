@@ -55,11 +55,11 @@
     <Filter Include="Monocle\XML">
       <UniqueIdentifier>{d0da0306-c7a3-4393-8191-1d763d3e0f49}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Monocle\Ogmosis">
-      <UniqueIdentifier>{bbc21fce-4b4f-4566-9f94-f58bc48da817}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Monocle\Tests\Ogmo">
       <UniqueIdentifier>{12a8ee66-4cba-4d3c-9b2c-5e16fe6b9487}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\LevelEditor">
+      <UniqueIdentifier>{bbc21fce-4b4f-4566-9f94-f58bc48da817}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -192,9 +192,6 @@
     <ClInclude Include="..\..\..\..\Code\GUI.h">
       <Filter>Monocle</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Ogmosis\Ogmosis.h">
-      <Filter>Monocle\Ogmosis</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Game.h">
       <Filter>Monocle</Filter>
     </ClInclude>
@@ -213,14 +210,17 @@
     <ClInclude Include="..\..\..\..\Code\Tests\Ogmo\Ogmo.h">
       <Filter>Monocle\Tests\Ogmo</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Ogmosis\FringeTileEditor.h">
-      <Filter>Monocle\Ogmosis</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Graphics\FringeTile.h">
-      <Filter>Monocle\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Colliders\PolygonCollider.h">
       <Filter>Monocle\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\LevelEditor\FringeTile.h">
+      <Filter>Monocle\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\LevelEditor\FringeTileEditor.h">
+      <Filter>Monocle\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\LevelEditor\LevelEditor.h">
+      <Filter>Monocle\LevelEditor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -389,9 +389,6 @@
     <ClCompile Include="..\..\..\..\Code\GUI.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Ogmosis\Ogmosis.cpp">
-      <Filter>Monocle\Ogmosis</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Game.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
@@ -407,14 +404,17 @@
     <ClCompile Include="..\..\..\..\Code\Tests\Ogmo\Ogmo.cpp">
       <Filter>Monocle\Tests\Ogmo</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Ogmosis\FringeTileEditor.cpp">
-      <Filter>Monocle\Ogmosis</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Graphics\FringeTile.cpp">
-      <Filter>Monocle\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Colliders\PolygonCollider.cpp">
       <Filter>Monocle\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\LevelEditor\FringeTile.cpp">
+      <Filter>Monocle\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\LevelEditor\FringeTileEditor.cpp">
+      <Filter>Monocle\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\LevelEditor\LevelEditor.cpp">
+      <Filter>Monocle\LevelEditor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

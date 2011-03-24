@@ -66,8 +66,13 @@ namespace Monocle
 	}
 
 	FringeTile::FringeTile(FringeTileset *fringeTileset, int tileID)
-		: Sprite(), fringeTileset(fringeTileset), tileID(tileID)
+		: Entity(), fringeTileset(fringeTileset), tileID(tileID), sprite(NULL)
 	{
+		AddTag("FringeTile");
+
+		sprite = new Sprite();
+		SetGraphic(sprite);
+				
 		RefreshTexture();
 	}
 	
@@ -112,25 +117,25 @@ namespace Monocle
 			printf("RefreshTexture to tileID: %d\n", tileID);
 
 			// free old texture here somehow:
-			if (texture)
+			if (sprite->texture)
 			{
-				texture->RemoveReference();
-				texture = NULL;
+				sprite->texture->RemoveReference();
+				sprite->texture = NULL;
 			}
 
 			const FringeTileData *fringeTileData = fringeTileset->GetFringeTileDataByID(tileID);
 			if (fringeTileData)
 			{
-				texture = Assets::RequestTexture(fringeTileData->imageFilename);
-				if (fringeTileData->width == -1 && fringeTileData->height == -1 && texture)
+				sprite->texture = Assets::RequestTexture(fringeTileData->imageFilename);
+				if (fringeTileData->width == -1 && fringeTileData->height == -1 && sprite->texture)
 				{
-					width = texture->width;
-					height = texture->height;
+					sprite->width = sprite->texture->width;
+					sprite->height = sprite->texture->height;
 				}
 				else
 				{
-					width = fringeTileData->width;
-					height = fringeTileData->height;
+					sprite->width = fringeTileData->width;
+					sprite->height = fringeTileData->height;
 				}
 			}
 		}

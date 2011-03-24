@@ -18,12 +18,24 @@ namespace Monocle
 
 	void Entity::Added()
 	{
-
 	}
 
 	void Entity::Removed()
 	{
+	}
 
+	void Entity::Destroy()
+	{
+		if (collider)
+		{
+			delete collider;
+			collider = NULL;
+		}
+		if (graphic)
+		{
+			delete graphic;
+			graphic = NULL;
+		}
 	}
 
 	void Entity::Update()
@@ -57,7 +69,7 @@ namespace Monocle
 		if (graphic != NULL)
 		{
 			Graphics::SetColor(color);
-			graphic->Render();
+			graphic->Render(this);
 		}
 
 		Graphics::PopMatrix();
@@ -227,7 +239,7 @@ namespace Monocle
 		// if we're about to set the graphic pointer to NULL
 		if (graphic == NULL && this->graphic != NULL)
 		{
-			this->graphic->entity = NULL;
+			//this->graphic->entity = NULL;
 		}
 
 		if (this->graphic != NULL)
@@ -237,7 +249,7 @@ namespace Monocle
 		else
 		{
 			this->graphic = graphic;
-			graphic->entity = this;
+			//graphic->entity = this;
 		}
 	}
 

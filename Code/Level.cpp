@@ -184,16 +184,13 @@ namespace Monocle
 
 	FringeTile* Level::AddFringeTile(FringeTileset *fringeTileset, int tileID, int layer, const Vector2 &position, const Vector2 &scale, int rotation)
 	{
-		Entity *entity = new Entity();
-		entity->AddTag("FringeTile");
-		entity->SetLayer(layer);
-		entity->position = position;
-		entity->rotation = rotation;
-		entity->scale = scale;
 		FringeTile *fringeTile = new FringeTile(fringeTileset, tileID);
+		fringeTile->SetLayer(layer);
+		fringeTile->position = position;
+		fringeTile->rotation = rotation;
+		fringeTile->scale = scale;
 		instance->fringeTiles.push_back(fringeTile);
-		entity->SetGraphic(fringeTile);
-		instance->scene->Add(entity);
+		instance->scene->Add(fringeTile);
 		return fringeTile;
 	}
 
@@ -279,13 +276,14 @@ namespace Monocle
 
 							TiXmlElement eFringeTile("FringeTile");
 
+							// TODO: use tags instead
 							eFringeTile.SetAttribute("id", (*j)->GetTileID());
-							eFringeTile.SetAttribute("layer", (*j)->entity->GetLayer());
-							eFringeTile.SetAttribute("x", (*j)->entity->position.x);
-							eFringeTile.SetAttribute("y", (*j)->entity->position.y);
-							eFringeTile.SetAttribute("rotation", (*j)->entity->rotation);
-							eFringeTile.SetDoubleAttribute("scaleX", (*j)->entity->scale.x);
-							eFringeTile.SetDoubleAttribute("scaleY", (*j)->entity->scale.y);
+							eFringeTile.SetAttribute("layer", (*j)->GetLayer());
+							eFringeTile.SetAttribute("x", (*j)->position.x);
+							eFringeTile.SetAttribute("y", (*j)->position.y);
+							eFringeTile.SetAttribute("rotation", (*j)->rotation);
+							eFringeTile.SetDoubleAttribute("scaleX", (*j)->scale.x);
+							eFringeTile.SetDoubleAttribute("scaleY", (*j)->scale.y);
 
 							eFringeTiles.InsertEndChild(eFringeTile);
 						}
@@ -326,18 +324,6 @@ namespace Monocle
 			{
 				return &(*i);
 
-			}
-		}
-		return NULL;
-	}
-
-	FringeTile* Level::GetFringeTileForEntity(Entity *entity)
-	{
-		for (std::list<FringeTile*>::iterator i = instance->fringeTiles.begin(); i != instance->fringeTiles.end(); ++i)
-		{
-			if ((*i)->entity == entity)
-			{
-				return (*i);
 			}
 		}
 		return NULL;

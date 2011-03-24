@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Sprite.h"
+#include "../Graphics/Sprite.h"
+#include "../Entity.h"
 #include <string>
 #include <map>
 
@@ -44,7 +45,7 @@ namespace Monocle
 		std::map<int, FringeTileData*> fringeTileData;
 	};
 
-	class FringeTile : public Sprite
+	class FringeTile : public Entity
 	{
 	public:
 		FringeTile(FringeTileset *fringeTileset, int tileID);
@@ -53,6 +54,7 @@ namespace Monocle
 		void PrevTile();
 		void NextTile();
 		FringeTileset *GetFringeTileset();
+		Sprite *sprite;
 
 	private:
 		void RefreshTexture();

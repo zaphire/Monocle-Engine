@@ -1,5 +1,5 @@
 #include "FringeTileEditor.h"
-#include "../Graphics/FringeTile.h"
+#include "FringeTile.h"
 #include "../Level.h"
 #include "../Scene.h"
 #include "../Input.h"
@@ -186,6 +186,7 @@ namespace Monocle
 		{
 			if (Sprite::showBounds == true)
 			{
+				//
 				if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || Input::IsKeyPressed(keySelect))
 				{
 					Vector2 worldMousePosition = Input::GetWorldMousePosition();
@@ -194,7 +195,8 @@ namespace Monocle
 					if (entity)
 					{
 						Select(entity);
-						//waitForLMBRelease = true;
+						if(Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+							waitForLMBRelease = true;
 					}
 				}
 			}
@@ -205,9 +207,10 @@ namespace Monocle
 	{
 		if (selectedEntity && selectedFringeTile)
 		{
-			FringeTile *fringeTile = Level::AddFringeTile(selectedFringeTile->GetFringeTileset(), selectedFringeTile->GetTileID(), selectedEntity->GetLayer(), Input::GetWorldMousePosition(), selectedEntity->scale, selectedEntity->rotation);
-			Tween::FromTo(&fringeTile->entity->color.a, 0.0f, 1.0f, 0.25f, EASE_LINEAR);
-			Select(fringeTile->entity);
+			// TODO: avoid using graphic -> entity
+			FringeTile *newFringeTile = Level::AddFringeTile(selectedFringeTile->GetFringeTileset(), selectedFringeTile->GetTileID(), selectedEntity->GetLayer(), Input::GetWorldMousePosition(), selectedEntity->scale, selectedEntity->rotation);
+			//Tween::FromTo(&fringeTile->entity->color.a, 0.0f, 1.0f, 0.25f, EASE_LINEAR);
+			Select(newFringeTile);
 		}
 	}
 
@@ -215,13 +218,17 @@ namespace Monocle
 	{
 		if (entity == NULL)
 			Debug::Log("select none");
+
 		selectedEntity = entity;
+
 		Sprite::selectedSpriteEntity = selectedEntity;
 
 		if (entity)
 		{
-			// unhappy with this so far:
-			selectedFringeTile = Level::GetFringeTileForEntity(selectedEntity);
+			if (entity->HasTag("FringeTile"))
+			{
+				selectedFringeTile = (FringeTile*)entity;
+			}
 		}
 		else
 		{
@@ -316,13 +323,13 @@ namespace Monocle
 			}
 			if (Input::IsKeyPressed(KEY_M))
 			{
-				std::string path = Monocle::GetWorkingDirectory() + selectedFringeTile->texture->filename;
+				std::string path = Monocle::GetWorkingDirectory() + selectedFringeTile->sprite->texture->filename;
 				Debug::Log("Opening: " + path + " ...");
 				Monocle::OpenURL(path);
 			}
 			if (Input::IsKeyPressed(KEY_R))
 			{
-				selectedFringeTile->texture->Reload();
+				selectedFringeTile->sprite->texture->Reload();
 			}
 
 			if (Input::IsKeyHeld(KEY_LSHIFT) && Input::IsKeyPressed(KEY_0))
@@ -338,8 +345,6 @@ namespace Monocle
 			{
 				selectedEntity->scale.y *= -1;
 			}
-
-
 		}
 
 		const float moveSpeed = 10.0f;
@@ -390,7 +395,7 @@ namespace Monocle
 			return;
 		}
 
-		if (!waitForLMBRelease && Input::IsKeyPressed(keyMove))//Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		if (!waitForLMBRelease && Input::IsKeyPressed(keyMove))//Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) //
 		{
 			Debug::Log("move start");
 			moveStartPosition = selectedEntity->position;
@@ -404,9 +409,19 @@ namespace Monocle
 	void FringeTileEditor::UpdateMove()
 	{
 		if (Input::IsKeyPressed(KEY_X))
-			moveAxisLock = 1;
+		{
+			if (moveAxisLock == 1)
+				moveAxisLock = 0;
+			else
+				moveAxisLock = 1;
+		}
 		else if (Input::IsKeyPressed(KEY_Y))
-			moveAxisLock = 2;
+		{
+			if (moveAxisLock == 2)
+				moveAxisLock = 0;
+			else
+				moveAxisLock = 2;
+		}
 
 		selectedEntity->position = Input::GetWorldMousePosition() + moveOffset;
 

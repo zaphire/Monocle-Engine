@@ -148,11 +148,11 @@ namespace Marian
 	}
 	*/
 
-	Obstruction::Obstruction()
+	Obstruction::Obstruction(int w, int h)
 		: Entity()
 	{
-		SetCollider(new RectangleCollider(256, 32));
-		SetGraphic(new Sprite("", 256, 32));
+		SetCollider(new RectangleCollider(w, h));
+		SetGraphic(new Sprite("", w, h));
 		AddTag("Obstruction");
 	}
 
@@ -276,7 +276,7 @@ namespace Marian
 		player->position = Graphics::screenCenter;
 		Add(player);
 
-		Obstruction* obstruction = new Obstruction();
+		Obstruction* obstruction = new Obstruction(2048, 32);
 		obstruction->position = Graphics::screenCenter + Vector2::down * 128;
 		Add(obstruction);
 

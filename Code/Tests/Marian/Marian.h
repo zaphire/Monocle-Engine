@@ -1,7 +1,7 @@
 #include "../../Monocle.h"
 #include "../../Tween.h"
 #include "../../Graphics/Sprite.h"
-#include "../../Ogmosis/FringeTileEditor.h"
+#include "../../LevelEditor/FringeTileEditor.h"
 
 using namespace Monocle;
 
@@ -24,7 +24,7 @@ namespace Marian
 	class Obstruction : public Entity
 	{
 	public:
-		Obstruction();
+		Obstruction(int w, int h);
 	};
 
 	class Player : public Entity

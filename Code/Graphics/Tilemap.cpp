@@ -122,7 +122,7 @@ namespace Monocle
 		}
 	}
 
-	void Tilemap::Render()
+	void Tilemap::Render(Entity *entity)
 	{
 		///HACK:
 		UpdateEditor();

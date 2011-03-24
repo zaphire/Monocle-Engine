@@ -42,7 +42,7 @@ namespace Monocle
 		}
 	}
 
-	void SpriteAnimation::Render()
+	void SpriteAnimation::Render(Entity *entity)
 	{
 		int x = 0;
 		int y = 0;
@@ -62,7 +62,7 @@ namespace Monocle
 		textureOffset = Vector2((x * width) / texture->width, (y * height) / texture->height);
 		textureScale = Vector2(width / texture->width, height / texture->height);
 
-		Sprite::Render();
+		Sprite::Render(entity);
 	}
 
 	Anim* SpriteAnimation::GetAnim(const std::string &name)

@@ -20,5 +20,11 @@
 			<FringeTile id="1" image="graphics/tower-wall-rep-window.png" width="512" height="512"/>
 			<FringeTile id="2" image="graphics/tower-door-rep.png" width="256" height="256"/>
 		</FringeTileset>
+		<Entities>
+			<Entity name="Player" script="scripts/player.nut" image="graphics/player.png">
+				<Variable type="int" name="health" default="10" min="0" max="10"/>
+			</Entity>
+			<Entity name="Enemy" scripts="scripts/enemy.nut"/>
+		</Entities>
 	</FringeTilesets>
 </Project>

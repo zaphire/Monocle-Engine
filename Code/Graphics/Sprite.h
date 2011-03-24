@@ -17,7 +17,7 @@ namespace Monocle
 		Sprite();
 		~Sprite();
 		//void Update();
-		void Render();
+		void Render(Entity *entity);
 		void GetWidthHeight(int *width, int *height);
 
 		TextureAsset *texture;

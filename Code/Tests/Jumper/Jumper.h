@@ -1,6 +1,5 @@
 #include "../../Monocle.h"
 #include "../../Graphics/Sprite.h"
-#include "../../Ogmosis/Ogmosis.h"
 #include "../../Level.h"
 
 // by @NoelFB
@@ -69,5 +68,4 @@ namespace Jumper
 	};
 
 	extern GameScene gameScene;
-	extern Ogmosis ogmosis;
 }

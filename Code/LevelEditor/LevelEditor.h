@@ -9,7 +9,7 @@
 namespace Monocle
 {
 
-	class Ogmosis : public Scene
+	class LevelEditor : public Scene
 	{
 	public:
 		void Begin();

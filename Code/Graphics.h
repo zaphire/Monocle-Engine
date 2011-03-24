@@ -15,10 +15,8 @@ namespace Monocle
 	public:
 		Vector2 position;
 		//virtual void Update()=0;
-		virtual void Render()=0;
+		virtual void Render(Entity *entity)=0;
 		virtual void GetWidthHeight(int *width, int *height)=0;
-
-		Entity *entity;
 	};
 
 	class Graphics

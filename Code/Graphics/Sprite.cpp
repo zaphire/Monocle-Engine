@@ -79,7 +79,7 @@ namespace Monocle
 	// store color info in entity?
 	// that would bloat entity... hmm.
 	// or make materials system...
-	void Sprite::Render()
+	void Sprite::Render(Entity *entity)
 	{
 		//Graphics::Rotate(angle, 0, 0, 1);
 		Graphics::Translate(position.x, position.y, 0.0f);
@@ -92,15 +92,15 @@ namespace Monocle
 			//selectedSpriteEntity == this->entity || 
 			if (showBounds)
 			{
-				if (selectedSpriteEntity == this->entity)
+				if (selectedSpriteEntity == entity)
 				{
-					Color copyColor = this->entity->color;
+					Color copyColor = entity->color;
 					copyColor.a *= 0.8f;
 					Graphics::SetColor(copyColor);
 				}
-				else if (selectedSpriteEntity != NULL && selectedSpriteEntity->GetLayer() > this->entity->GetLayer())
+				else if (selectedSpriteEntity != NULL && selectedSpriteEntity->GetLayer() > entity->GetLayer())
 				{
-					Color copyColor = this->entity->color;
+					Color copyColor = entity->color;
 					copyColor.a *= 0.6f;
 					Graphics::SetColor(copyColor);
 				}
@@ -112,11 +112,11 @@ namespace Monocle
 
 
 		// show bounds, for editor/selection purposes
-		if (showBounds || selectedSpriteEntity == this->entity)
+		if (showBounds || selectedSpriteEntity == entity)
 		{
 			if (texture != NULL)
 			{
-				if (selectedSpriteEntity == this->entity)
+				if (selectedSpriteEntity == entity)
 					Graphics::SetColor(Color::orange);
 				else
 					Graphics::SetColor(Color(0.9f,0.9f,1.0f,0.25f));
@@ -125,12 +125,12 @@ namespace Monocle
 				Graphics::RenderLineRect(0, 0, width, height);
 
 
-				if (selectedSpriteEntity != this->entity)
+				if (selectedSpriteEntity != entity)
 					Graphics::SetColor(Color(0.9f,0.9f,1.0f,0.8f));
 
 				Graphics::RenderLineRect(0, 0, 20, 20);
 
-				if (selectedSpriteEntity != this->entity)
+				if (selectedSpriteEntity != entity)
 					Graphics::SetColor(Color(0.0f,0.0f,0.25f,0.8f));
 
 				Graphics::RenderLineRect(0, 0, 15, 15);

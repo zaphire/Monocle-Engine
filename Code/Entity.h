@@ -35,6 +35,8 @@ namespace Monocle
 
 		//The scene that contains the entity
 		Scene* scene;
+		
+		virtual void Destroy();
 
 		//Called by the scene when the entity should update its game logic
 		virtual void Update();

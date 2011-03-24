@@ -1,7 +1,7 @@
 #include "../../Monocle.h"
 #include "../../Graphics/Sprite.h"
 #include "../../Graphics/SpriteAnimation.h"
-#include "../../Ogmosis/Ogmosis.h"
+#include "../../LevelEditor/LevelEditor.h"
 #include "../../Level.h"
 
 // by @NoelFB

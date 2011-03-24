@@ -5,7 +5,6 @@
 namespace Jumper
 {
 	GameScene gameScene;
-	Ogmosis ogmosis;
 
 	Player::Player(Vector2 pos) 
 		: Entity()
@@ -175,13 +174,6 @@ namespace Jumper
         {
             SpawnPlayer(Platform::mousePosition);
         }
-
-		if (Input::IsKeyPressed(KEY_TAB))
-		{
-			// switch to editor
-			//SendNoteToGame("SwitchToEditor");
-			Game::SetScene(&ogmosis);
-		}
 	}
 
 	void GameScene::End()
