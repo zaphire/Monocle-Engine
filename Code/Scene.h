@@ -23,6 +23,11 @@ namespace Monocle
 		Scene();
 		~Scene();
 
+		// render?
+		bool isVisible;
+		// update?
+		bool isPaused;
+
 		//Called when this scene becomes the currently active scene
 		virtual void Begin();
 
