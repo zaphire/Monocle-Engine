@@ -113,7 +113,36 @@ namespace Monocle
 
 	bool Collider::CollidePolygonPolygon(PolygonCollider* a, PolygonCollider* b)
 	{
-		//TODO!
+		//If the polygons aren't even close to eachother, don't bother
+		if (a->GetLeftmost() > b->GetRightmost())
+			return false;
+		if (a->GetRightmost() < b->GetLeftmost())
+			return false;
+		if (a->GetTopmost() > b->GetBottommost())
+			return false;
+		if (a->GetBottommost() < b->GetTopmost())
+			return false;
+
+		//Check if the first point of either polygon is inside the other
+		//(accounts for the case where one poly is completely inside the other)
+		if (a->IntersectsPoint(b->GetPoint(0)) || b->IntersectsPoint(a->GetPoint(0)))
+			return true;
+
+		//Compare lines, looking for an intersection
+		int totalA = a->GetPointCount();
+		int totalB = b->GetPointCount();
+		for (int i = 0; i < totalA; ++i)
+		{
+			Vector2 startA = a->GetPoint(i);
+			Vector2 endA = a->GetPoint((i + 1) % totalA);
+			for (int j = 0; j < totalB; ++j)
+			{
+				Vector2 startB = b->GetPoint(j);
+				Vector2 endB = b->GetPoint((j + 1) % totalB);
+				if (LinesIntersect(startA, endA, startB, endB))
+					return true;
+			}
+		}
 
 		return false;
 	}

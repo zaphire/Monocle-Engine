@@ -2,6 +2,8 @@
 
 // test
 #include "Vector2.h"
+#include "Colliders\PolygonCollider.h"
+#include "Colliders\Collider.h"
 
 #if defined(MONOCLE_LINUX)
 	// cmake for other tests isn't working yet
