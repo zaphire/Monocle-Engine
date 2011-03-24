@@ -1,5 +1,6 @@
 #include "../Vector2.h"
 #include "../Entity.h"
+#include "../Input.h"
 
 namespace Monocle
 {
@@ -36,6 +37,10 @@ namespace Monocle
 		void Enable();
 		void Disable();
 		void Update();
+		FringeTileEditorState GetState()
+		{
+			return state;
+		}
 
 	protected:
 		void UpdateCamera();
@@ -67,7 +72,14 @@ namespace Monocle
 
 		FringeTileEditorState state;
 		Vector2 lastWorldMousePosition;
-
 		//Cursor *cursor;
+		int moveAxisLock;
+
+		KeyCode keyMove;
+		KeyCode keyRotate;
+		KeyCode keyScale;
+		KeyCode keySelect;
+		KeyCode keyFocus;
+		KeyCode keyClone;
 	};
 }

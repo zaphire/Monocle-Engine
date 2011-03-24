@@ -294,12 +294,15 @@ namespace Marian
 		}
 		if (Input::IsKeyPressed(KEY_TAB))
 		{
-			isPaused = !isPaused;
+			if (fringeTileEditor.GetState() == FTES_NONE)
+			{
+				isPaused = !isPaused;
 
-			if (isPaused)
-				fringeTileEditor.Enable();
-			else
-				fringeTileEditor.Disable();
+				if (isPaused)
+					fringeTileEditor.Enable();
+				else
+					fringeTileEditor.Disable();
+			}
 		}
 	}
 
