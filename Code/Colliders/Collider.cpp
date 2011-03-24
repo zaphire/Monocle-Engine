@@ -22,7 +22,7 @@ namespace Monocle
 		return entity;
 	}
 
-	const Vector2& Collider::GetEntityPosition()
+	Vector2 Collider::GetEntityPosition()
 	{
 		if (entity != NULL)
 			return entity->position;
@@ -35,7 +35,7 @@ namespace Monocle
 		ColliderType typeA = a->GetColliderType();
 		ColliderType typeB = b->GetColliderType();
 
-		//Big nasty if/else for deciding which collision function to use *puke*
+		//Big nasty if/else for deciding which collision function to use
 		if (typeA == CT_RECT && typeB == CT_RECT)									//Rectangle - Rectangle
 			return CollideRectRect((RectangleCollider*)a, (RectangleCollider*)b);
 
@@ -120,9 +120,6 @@ namespace Monocle
 
 	bool Collider::CollideRectCircle(RectangleCollider* a, CircleCollider* b)
 	{
-		Vector2 aOff = a->GetEntityPosition();
-		Vector2 bOff = b->GetEntityPosition();
-
 		//The center of the circle is within the rectangle
 		if (a->IntersectsPoint(b->GetCenter()))
 			return true;
@@ -147,7 +144,19 @@ namespace Monocle
 
 	bool Collider::CollideCirclePolygon(CircleCollider* a, PolygonCollider* b)
 	{
-		//TODO!
+		//If the center is inside the polygon, there's a collision
+		if (b->IntersectsPoint(a->GetCenter()))
+			return true;
+
+		//Otherwise, try the circle against every line of the polygon
+		int points = b->GetPointCount();
+		for (int i = 0; i < points; ++i)
+		{
+			Vector2 start = b->GetPoint(i);
+			Vector2 end = b->GetPoint((i + 1) % points);
+			if (a->IntersectsLine(start, end))
+				return true;
+		}
 
 		return false;
 	}
