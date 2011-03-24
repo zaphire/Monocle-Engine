@@ -81,5 +81,7 @@ namespace Monocle
 		KeyCode keySelect;
 		KeyCode keyFocus;
 		KeyCode keyClone;
+		KeyCode keyFlipH;
+		KeyCode keyFlipV;
 	};
 }

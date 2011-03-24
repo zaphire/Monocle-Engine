@@ -45,6 +45,8 @@ namespace Monocle
 		keySelect = KEY_SPACE;
 		keyFocus = KEY_F;
 		keyClone = KEY_T;
+		keyFlipV = KEY_C;
+		keyFlipH = KEY_V;
 	}
 
 	void FringeTileEditor::Init(Scene *scene)
@@ -328,11 +330,11 @@ namespace Monocle
 				selectedEntity->rotation = 0;
 			}
 
-			if (Input::IsKeyPressed(KEY_H))
+			if (Input::IsKeyPressed(keyFlipH))
 			{
 				selectedEntity->scale.x *= -1;
 			}
-			if (Input::IsKeyPressed(KEY_V))
+			if (Input::IsKeyPressed(keyFlipV))
 			{
 				selectedEntity->scale.y *= -1;
 			}
