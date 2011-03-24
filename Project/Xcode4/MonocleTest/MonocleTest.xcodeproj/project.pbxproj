@@ -76,6 +76,7 @@
 		F9257DFB133823E100A47E00 /* Ogmo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DF9133823E100A47E00 /* Ogmo.cpp */; };
 		F9257E2C1339406200A47E00 /* FringeTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257E2A1339406200A47E00 /* FringeTile.cpp */; };
 		F9257E311339407B00A47E00 /* FringeTileEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257E2F1339407B00A47E00 /* FringeTileEditor.cpp */; };
+		F9F7D5D4133B0D57002953B0 /* PolygonCollider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7D5D2133B0D57002953B0 /* PolygonCollider.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -210,6 +211,8 @@
 		F9257E2B1339406200A47E00 /* FringeTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FringeTile.h; path = ../../../Code/Graphics/FringeTile.h; sourceTree = SOURCE_ROOT; };
 		F9257E2F1339407B00A47E00 /* FringeTileEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FringeTileEditor.cpp; path = ../../../Code/Ogmosis/FringeTileEditor.cpp; sourceTree = SOURCE_ROOT; };
 		F9257E301339407B00A47E00 /* FringeTileEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FringeTileEditor.h; path = ../../../Code/Ogmosis/FringeTileEditor.h; sourceTree = SOURCE_ROOT; };
+		F9F7D5D2133B0D57002953B0 /* PolygonCollider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PolygonCollider.cpp; sourceTree = "<group>"; };
+		F9F7D5D3133B0D57002953B0 /* PolygonCollider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolygonCollider.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -396,6 +399,8 @@
 				37FB691B13317693008963C1 /* CircleCollider.h */,
 				37FB691C13317693008963C1 /* Collider.cpp */,
 				37FB691D13317693008963C1 /* Collider.h */,
+				F9F7D5D2133B0D57002953B0 /* PolygonCollider.cpp */,
+				F9F7D5D3133B0D57002953B0 /* PolygonCollider.h */,
 				37FB691E13317693008963C1 /* RectangleCollider.cpp */,
 				37FB691F13317693008963C1 /* RectangleCollider.h */,
 			);
@@ -670,6 +675,7 @@
 				3782F004133864AD0042BAE7 /* CocoaKeys.mm in Sources */,
 				F9257E2C1339406200A47E00 /* FringeTile.cpp in Sources */,
 				F9257E311339407B00A47E00 /* FringeTileEditor.cpp in Sources */,
+				F9F7D5D4133B0D57002953B0 /* PolygonCollider.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

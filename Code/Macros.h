@@ -24,7 +24,7 @@
 		If value is positive or zero, return 1
 		If negative return -1
 */
-#define SIGN(value) ((value >= 0) ? 1 : -1)
+#define SIGNOF(value) ((value >= 0) ? 1 : -1)
 
 /*	APPROACH
 		Returns value shifted toward target by amount, without crossing target.
