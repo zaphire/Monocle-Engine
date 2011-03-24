@@ -58,6 +58,7 @@ namespace Monocle
 
 	void FringeTileEditor::Disable()
 	{
+		Select(NULL);
 		isOn = false;
 
 		Sprite::showBounds = false;
@@ -155,7 +156,8 @@ namespace Monocle
 					//Debug::Log("select");
 
 					Vector2 worldMousePosition = Input::GetWorldMousePosition();
-					Entity *entity = scene->GetNearestEntityByControlPoint(worldMousePosition, selectedEntity);
+					//"FringeTile"
+					Entity *entity = scene->GetNearestEntityByControlPoint(worldMousePosition, "", selectedEntity);
 					if (entity)
 					{
 						Select(entity);
@@ -191,6 +193,11 @@ namespace Monocle
 		else
 		{
 			selectedFringeTile = NULL;
+		}
+
+		if (entity != NULL)
+		{
+			printf("entity (%d, %d)\n", (int)entity->position.x, (int)entity->position.y);
 		}
 	}
 
@@ -235,7 +242,7 @@ namespace Monocle
 			{
 				Clone();
 			}
-			if (Input::IsKeyPressed(KEY_TAB))
+			if (Input::IsKeyPressed(KEY_P))
 			{
 				std::string path = Monocle::GetWorkingDirectory() + selectedFringeTile->texture->filename;
 				Debug::Log("Opening: " + path + " ...");

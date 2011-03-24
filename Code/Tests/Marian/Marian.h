@@ -21,6 +21,21 @@ namespace Marian
 	};
 	*/
 
+	class Obstruction : public Entity
+	{
+	public:
+		Obstruction();
+	};
+
+	class Player : public Entity
+	{
+	public:
+		Player();
+		void Update();
+
+		Vector2 velocity;
+	};
+
 	class TitleScene : public Scene
 	{
 	public:
@@ -39,5 +54,7 @@ namespace Marian
 		void End();
 
 		FringeTileEditor fringeTileEditor;
+
+		Player *player;
 	};
 }

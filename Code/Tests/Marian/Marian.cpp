@@ -1,4 +1,5 @@
 #include "Marian.h"
+#include "../../Macros.h"
 
 
 namespace Marian
@@ -147,6 +148,62 @@ namespace Marian
 	}
 	*/
 
+	Obstruction::Obstruction()
+		: Entity()
+	{
+		SetCollider(new RectangleCollider(256, 32));
+		SetGraphic(new Sprite("", 256, 32));
+		AddTag("obstruction");
+	}
+
+	Player::Player()
+		: Entity()
+	{
+		SetLayer(0);
+
+		SetGraphic(new Sprite("graphics/marian.png", 128, 128));
+		SetCollider(new CircleCollider(32, Vector2::down*32));
+		AddTag("player");
+
+	}
+
+	void Player::Update()
+	{
+		Entity::Update();
+
+		Vector2 lastPosition = position;
+
+		const float walkSpeed = 128;
+		const float maxFallSpeed = 50.0f;
+		const float gravity = 980.0f;
+
+		velocity.y += MIN(gravity * Monocle::deltaTime, maxFallSpeed);
+
+		position += velocity * Monocle::deltaTime;
+
+		if (Collide("obstruction"))
+		{
+			position.y = lastPosition.y;
+			velocity.y = 0;
+		}
+
+		if (Input::IsKeyHeld(KEY_RIGHT))
+		{
+			scale.x = 1;
+			position.x += walkSpeed * Monocle::deltaTime;
+		}
+		if (Input::IsKeyHeld(KEY_LEFT))
+		{
+			scale.x = -1;
+			position.x -= walkSpeed * Monocle::deltaTime;
+		}
+		if (Collide("obstruction"))
+		{
+			position.x = lastPosition.x;
+			velocity.x = 0;
+		}
+	}
+
 	void TitleScene::Begin()
 	{
 		Scene::Begin();
@@ -214,6 +271,16 @@ namespace Marian
 
 		Level::LoadProject("project.xml");
 		Level::Load("balcony.xml", this);
+
+		player = new Player();
+		player->position = Graphics::screenCenter;
+		Add(player);
+
+		Obstruction* obstruction = new Obstruction();
+		obstruction->position = Graphics::screenCenter + Vector2::down * 128;
+		Add(obstruction);
+
+		isPaused = true;
 	}
 
 	void LevelScene::Update()
@@ -224,6 +291,15 @@ namespace Marian
 		if (Input::IsKeyPressed(KEY_S) && Input::IsKeyHeld(KEY_LCTRL))
 		{
 			Level::Save();
+		}
+		if (Input::IsKeyPressed(KEY_TAB))
+		{
+			isPaused = !isPaused;
+
+			if (isPaused)
+				fringeTileEditor.Enable();
+			else
+				fringeTileEditor.Disable();
 		}
 	}
 

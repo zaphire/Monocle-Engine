@@ -62,8 +62,8 @@ namespace Monocle
 		Entity *GetEntity(int index);
 
 		Entity* GetNearestEntity(const Vector2 &position, Entity *ignoreEntity=NULL);
-		Entity* GetNearestEntityContaining(const Vector2 &position, Entity *ignoreEntity=NULL);
-		Entity* GetNearestEntityByControlPoint(const Vector2 &position, Entity *ignoreEntity=NULL);
+		//Entity* GetNearestEntityContaining(const Vector2 &position, Entity *ignoreEntity=NULL);
+		Entity* GetNearestEntityByControlPoint(const Vector2 &position, const std::string &tag, Entity *ignoreEntity=NULL);
 
 		Entity* GetEntityAtPosition(const Vector2 &position, SearchType searchType=SEARCH_TOP);
 

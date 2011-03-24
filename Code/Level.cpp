@@ -185,6 +185,7 @@ namespace Monocle
 	FringeTile* Level::AddFringeTile(FringeTileset *fringeTileset, int tileID, int layer, const Vector2 &position, const Vector2 &scale, int rotation)
 	{
 		Entity *entity = new Entity();
+		entity->AddTag("FringeTile");
 		entity->SetLayer(layer);
 		entity->position = position;
 		entity->rotation = rotation;

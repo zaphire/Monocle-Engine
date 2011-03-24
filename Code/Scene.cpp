@@ -219,6 +219,7 @@ namespace Monocle
 		return nearestEntity;
 	}
 
+	/*
 	Entity* Scene::GetNearestEntityContaining(const Vector2 &position, Entity *ignoreEntity)
 	{
 		float smallestSqrMag = -1.0f;
@@ -243,29 +244,41 @@ namespace Monocle
 
 		return nearestEntity;
 	}
+	*/
 
-	Entity* Scene::GetNearestEntityByControlPoint(const Vector2 &position, Entity *ignoreEntity)
+	Entity* Scene::GetNearestEntityByControlPoint(const Vector2 &position, const std::string &tag, Entity *ignoreEntity)
 	{
 		float smallestSqrMag = -1.0f;
 
 		Entity *nearestEntity = NULL;
 
-		for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+		std::list<Entity*> *entities = &this->entities;
+
+		if (tag != "")
 		{
-			if ((*i) != ignoreEntity)
+			entities = GetAllTag(tag);
+		}
+
+		if (entities != NULL)
+		{
+			for (std::list<Entity*>::iterator i = entities->begin(); i != entities->end(); ++i)
 			{
-				Vector2 diff = (*i)->position - position;
-				if (diff.IsInRange(20))
+				if ((*i) != ignoreEntity)
 				{
 					Vector2 diff = (*i)->position - position;
-					float sqrMag = diff.GetSquaredMagnitude();
-					if (smallestSqrMag == -1 || sqrMag < smallestSqrMag)
+					if (diff.IsInRange(20))
 					{
-						nearestEntity = (*i);
+						Vector2 diff = (*i)->position - position;
+						float sqrMag = diff.GetSquaredMagnitude();
+						if (smallestSqrMag == -1 || sqrMag < smallestSqrMag)
+						{
+							nearestEntity = (*i);
+						}
 					}
 				}
 			}
 		}
+
 
 		return nearestEntity;
 	}
