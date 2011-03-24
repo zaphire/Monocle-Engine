@@ -26,5 +26,11 @@ namespace Monocle
 		float GetRightmost(bool relativeToEntity = false);
 		float GetTopmost(bool relativeToEntity = false);
 		float GetBottommost(bool relativeToEntity = false);
+
+	private:
+		float leftmost;
+		float rightmost;
+		float topmost;
+		float bottommost;
 	};
 }

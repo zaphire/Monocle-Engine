@@ -66,6 +66,26 @@ namespace Monocle
 
 	void PolygonCollider::AddPoint(Vector2 point)
 	{
+		//Update edge values
+		if (IsEmpty())
+		{
+			leftmost = rightmost = point.x;
+			topmost = bottommost = point.y;
+		}
+		else
+		{
+			if (point.x < leftmost)
+				leftmost = point.x;
+			else if (point.x > rightmost)
+				rightmost = point.x;
+
+			if (point.y < topmost)
+				topmost = point.y;
+			else if (point.y > bottommost)
+				bottommost = point.y;
+		}
+
+		//Add to the vector
 		points.push_back(point);
 	}
 
@@ -94,14 +114,10 @@ namespace Monocle
 			Debug::Log("ERROR: Getting leftmost point of an empty PolygonCollider.");
 #endif
 
-		float left = points[0].x;
-		for (int i = 1; i < points.size(); ++i)
-		{
-			if (points[i].x < left)
-				left = points[i].x;
-		}
-
-		return left;
+		if (relativeToEntity)
+			return leftmost;
+		else
+			return offset.x + leftmost;
 	}
 
 	float PolygonCollider::GetRightmost(bool relativeToEntity)
@@ -111,14 +127,10 @@ namespace Monocle
 			Debug::Log("ERROR: Getting rightmost point of an empty PolygonCollider.");
 #endif
 
-		float right = points[0].x;
-		for (int i = 1; i < points.size(); ++i)
-		{
-			if (points[i].x > right)
-				right = points[i].x;
-		}
-
-		return right;
+		if (relativeToEntity)
+			return rightmost;
+		else
+			return offset.x + rightmost;
 	}
 
 	float PolygonCollider::GetTopmost(bool relativeToEntity)
@@ -128,14 +140,10 @@ namespace Monocle
 			Debug::Log("ERROR: Getting topmost point of an empty PolygonCollider.");
 #endif
 
-		float top = points[0].y;
-		for (int i = 1; i < points.size(); ++i)
-		{
-			if (points[i].y < top)
-				top = points[i].y;
-		}
-
-		return top;
+		if (relativeToEntity)
+			return topmost;
+		else
+			return offset.y + topmost;
 	}
 
 	float PolygonCollider::GetBottommost(bool relativeToEntity)
@@ -145,13 +153,9 @@ namespace Monocle
 			Debug::Log("ERROR: Getting bottommost point of an empty PolygonCollider.");
 #endif
 
-		float bottom = points[0].y;
-		for (int i = 1; i < points.size(); ++i)
-		{
-			if (points[i].y > bottom)
-				bottom = points[i].y;
-		}
-
-		return bottom;
+		if (relativeToEntity)
+			return bottommost;
+		else
+			return offset.y + bottommost;
 	}
 }
