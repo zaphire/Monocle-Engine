@@ -21,6 +21,16 @@ namespace Marian
 	};
 	*/
 
+	class Cursor : public Entity
+	{
+	public:
+		Cursor();
+		void Update();
+		void Render();
+
+		Entity *attachedToEntity;
+	};
+
 	class TriggerLevel : public Entity
 	{
 	public:
@@ -40,8 +50,11 @@ namespace Marian
 	public:
 		Player();
 		void Update();
+		void Move(Vector2 dir, bool isWalking=false);
 
 		Vector2 velocity;
+		Vector2 moveDir;
+		bool isWalking;
 	};
 
 	class TitleScene : public Scene
@@ -64,5 +77,8 @@ namespace Marian
 		FringeTileEditor fringeTileEditor;
 
 		Player *player;
+		Cursor *cursor;
 	};
+
+	extern LevelScene *levelScene;
 }

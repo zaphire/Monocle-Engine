@@ -8,7 +8,7 @@
         <Tile x="5" y="0" tileID="176" />
         <Tile x="6" y="0" tileID="6" />
         <Tile x="7" y="0" tileID="49" />
-        <Tile x="8" y="0" tileID="53" />
+        <Tile x="8" y="0" tileID="0" />
         <Tile x="9" y="0" tileID="176" />
         <Tile x="10" y="0" tileID="10" />
         <Tile x="11" y="0" tileID="11" />
@@ -28,7 +28,7 @@
         <Tile x="5" y="1" tileID="176" />
         <Tile x="6" y="1" tileID="176" />
         <Tile x="7" y="1" tileID="49" />
-        <Tile x="8" y="1" tileID="53" />
+        <Tile x="8" y="1" tileID="0" />
         <Tile x="9" y="1" tileID="176" />
         <Tile x="10" y="1" tileID="176" />
         <Tile x="11" y="1" tileID="176" />
@@ -48,7 +48,7 @@
         <Tile x="5" y="2" tileID="176" />
         <Tile x="6" y="2" tileID="176" />
         <Tile x="7" y="2" tileID="49" />
-        <Tile x="8" y="2" tileID="53" />
+        <Tile x="8" y="2" tileID="0" />
         <Tile x="9" y="2" tileID="176" />
         <Tile x="10" y="2" tileID="176" />
         <Tile x="11" y="2" tileID="0" />
@@ -68,7 +68,7 @@
         <Tile x="5" y="3" tileID="176" />
         <Tile x="6" y="3" tileID="176" />
         <Tile x="7" y="3" tileID="49" />
-        <Tile x="8" y="3" tileID="53" />
+        <Tile x="8" y="3" tileID="0" />
         <Tile x="9" y="3" tileID="176" />
         <Tile x="10" y="3" tileID="176" />
         <Tile x="11" y="3" tileID="59" />
@@ -88,7 +88,7 @@
         <Tile x="5" y="4" tileID="176" />
         <Tile x="6" y="4" tileID="176" />
         <Tile x="7" y="4" tileID="49" />
-        <Tile x="8" y="4" tileID="53" />
+        <Tile x="8" y="4" tileID="0" />
         <Tile x="9" y="4" tileID="176" />
         <Tile x="10" y="4" tileID="176" />
         <Tile x="11" y="4" tileID="75" />
@@ -108,7 +108,7 @@
         <Tile x="5" y="5" tileID="176" />
         <Tile x="6" y="5" tileID="176" />
         <Tile x="7" y="5" tileID="49" />
-        <Tile x="8" y="5" tileID="53" />
+        <Tile x="8" y="5" tileID="0" />
         <Tile x="9" y="5" tileID="176" />
         <Tile x="10" y="5" tileID="176" />
         <Tile x="11" y="5" tileID="91" />
@@ -128,8 +128,8 @@
         <Tile x="5" y="6" tileID="176" />
         <Tile x="6" y="6" tileID="102" />
         <Tile x="7" y="6" tileID="49" />
-        <Tile x="8" y="6" tileID="53" />
-        <Tile x="9" y="6" tileID="176" />
+        <Tile x="8" y="6" tileID="0" />
+        <Tile x="9" y="6" tileID="0" />
         <Tile x="10" y="6" tileID="176" />
         <Tile x="11" y="6" tileID="176" />
         <Tile x="12" y="6" tileID="176" />
@@ -148,7 +148,7 @@
         <Tile x="5" y="7" tileID="176" />
         <Tile x="6" y="7" tileID="118" />
         <Tile x="7" y="7" tileID="49" />
-        <Tile x="8" y="7" tileID="53" />
+        <Tile x="8" y="7" tileID="0" />
         <Tile x="9" y="7" tileID="176" />
         <Tile x="10" y="7" tileID="176" />
         <Tile x="11" y="7" tileID="176" />
@@ -168,7 +168,7 @@
         <Tile x="5" y="8" tileID="176" />
         <Tile x="6" y="8" tileID="134" />
         <Tile x="7" y="8" tileID="49" />
-        <Tile x="8" y="8" tileID="53" />
+        <Tile x="8" y="8" tileID="0" />
         <Tile x="9" y="8" tileID="137" />
         <Tile x="10" y="8" tileID="176" />
         <Tile x="11" y="8" tileID="176" />
@@ -188,7 +188,7 @@
         <Tile x="5" y="9" tileID="176" />
         <Tile x="6" y="9" tileID="150" />
         <Tile x="7" y="9" tileID="49" />
-        <Tile x="8" y="9" tileID="53" />
+        <Tile x="8" y="9" tileID="0" />
         <Tile x="9" y="9" tileID="176" />
         <Tile x="10" y="9" tileID="154" />
         <Tile x="11" y="9" tileID="176" />
@@ -207,8 +207,8 @@
         <Tile x="4" y="10" tileID="176" />
         <Tile x="5" y="10" tileID="176" />
         <Tile x="6" y="10" tileID="166" />
-        <Tile x="7" y="10" tileID="81" />
-        <Tile x="8" y="10" tileID="85" />
+        <Tile x="7" y="10" tileID="0" />
+        <Tile x="8" y="10" tileID="0" />
         <Tile x="9" y="10" tileID="176" />
         <Tile x="10" y="10" tileID="176" />
         <Tile x="11" y="10" tileID="176" />

@@ -168,7 +168,13 @@ namespace Monocle
 
 								int rotation = XMLFloat(eFringeTile, "rotation");
 
-								AddFringeTile(fringeTileset, tileID, layer, position, scale, rotation);
+								Color color = Color::white;
+								if (eFringeTile->Attribute("ca"))
+								{
+									color.a = XMLFloat(eFringeTile, "ca");
+								}
+
+								AddFringeTile(fringeTileset, tileID, layer, position, scale, rotation, color);
 
 								eFringeTile = eFringeTile->NextSiblingElement("FringeTile");
 							}
@@ -182,13 +188,14 @@ namespace Monocle
 		}
 	}
 
-	FringeTile* Level::AddFringeTile(FringeTileset *fringeTileset, int tileID, int layer, const Vector2 &position, const Vector2 &scale, int rotation)
+	FringeTile* Level::AddFringeTile(FringeTileset *fringeTileset, int tileID, int layer, const Vector2 &position, const Vector2 &scale, int rotation, const Color &color)
 	{
 		FringeTile *fringeTile = new FringeTile(fringeTileset, tileID);
 		fringeTile->SetLayer(layer);
 		fringeTile->position = position;
 		fringeTile->rotation = rotation;
 		fringeTile->scale = scale;
+		fringeTile->color = color;
 		instance->fringeTiles.push_back(fringeTile);
 		instance->scene->Add(fringeTile);
 		return fringeTile;
@@ -284,6 +291,11 @@ namespace Monocle
 							eFringeTile.SetAttribute("rotation", (*j)->rotation);
 							eFringeTile.SetDoubleAttribute("scaleX", (*j)->scale.x);
 							eFringeTile.SetDoubleAttribute("scaleY", (*j)->scale.y);
+
+							if ((*j)->color.a != 1.0f)
+							{
+								eFringeTile.SetDoubleAttribute("ca", (*j)->color.a);
+							}
 
 							eFringeTiles.InsertEndChild(eFringeTile);
 						}

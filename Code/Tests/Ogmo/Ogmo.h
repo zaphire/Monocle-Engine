@@ -19,7 +19,7 @@ namespace Ogmo
 
 		//details
 		SpriteAnimation *sprite;
-		std::string tag;
+		//std::string tag;
 
 		//moving stuff
 		int const FRICTION_GROUND;

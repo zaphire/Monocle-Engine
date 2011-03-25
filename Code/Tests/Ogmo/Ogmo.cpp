@@ -8,12 +8,21 @@ namespace Ogmo
 {
 	// T H E   P L A Y E R (entity)
 	Player::Player(int x, int y) : Entity(), 
-		FRICTION_GROUND(800), FRICTION_AIR(400), GRAVITY(300), JUMP(6000), MAXSPEED_GROUND(60.0f), MAXSPEED_AIR(100.0f),
-		ACCELERATION(800), WALLJUMP(8000), doubleJump(false), cling(0), tag("PLAYER"), onGround(false)
+		FRICTION_GROUND(800),
+		FRICTION_AIR(400),
+		GRAVITY(300),
+		JUMP(6000),
+		MAXSPEED_GROUND(60.0f),
+		MAXSPEED_AIR(100.0f),
+		ACCELERATION(800),
+		WALLJUMP(8000),
+		doubleJump(false),
+		cling(0),
+		onGround(false)
 	{
 		position = Vector2(x, y);
 
-		AddTag(tag);
+		AddTag("PLAYER");
 		SetCollider(new RectangleCollider(8, 8));
 
 		sprite = new SpriteAnimation("player.png", FILTER_NONE, 8, 8);

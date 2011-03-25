@@ -36,6 +36,13 @@ namespace Monocle
 			delete graphic;
 			graphic = NULL;
 		}
+
+		// clean up children
+		for (std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
+		{
+			(*i)->Destroy();
+			delete (*i);
+		}
 	}
 
 	void Entity::Update()

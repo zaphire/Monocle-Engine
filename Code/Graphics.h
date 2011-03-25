@@ -70,6 +70,7 @@ namespace Monocle
 		static void ResolutionMatrix();
 
 		static void MoveCameraPosition(const Vector2 &position, float time, EaseType easeType);
+		static void RenderLine(const Vector2 &pos1, const Vector2 &pos2);
 
 	private:
 		static Graphics *instance;

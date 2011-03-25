@@ -67,6 +67,7 @@ namespace Monocle
 		Vector2 moveOffset;
 		Vector2 moveStartPosition;
 		float startRotation;
+		Vector2 startScale;
 
 		bool waitForLMBRelease;
 

@@ -11,6 +11,7 @@
 // opengl/windows init code baesd on http://nehe.gamedev.net
 // keyboard code based on SDL http://www.libsdl.org/
 
+
 #ifndef VK_0
 #define VK_0	'0'
 #define VK_1	'1'
@@ -48,7 +49,7 @@
 #define VK_X	'X'
 #define VK_Y	'Y'
 #define VK_Z	'Z'
-#endif /* VK_0 */
+#endif
 
 #define VK_SEMICOLON		0xBA
 #define VK_EQUALS		0xBB
@@ -374,6 +375,7 @@ namespace Monocle
 
 			//TODO: clean this up
 
+			/*
 			case WM_KEYDOWN:
 			{
 				switch (wParam)
@@ -385,7 +387,6 @@ namespace Monocle
 							wParam = VK_LCONTROL;
 						break;
 					case VK_SHIFT:
-						/* EXTENDED trick doesn't work here */
 						if ((GetKeyState(VK_LSHIFT) & 0x8000))
 						{
 							wParam = VK_LSHIFT;
@@ -428,7 +429,6 @@ namespace Monocle
 							wParam = VK_LCONTROL;
 						break;
 					case VK_SHIFT:
-						/* EXTENDED trick doesn't work here */
 						if (!(GetKeyState(VK_LSHIFT) & 0x8000))
 						{
 							wParam = VK_LSHIFT;
@@ -459,53 +459,11 @@ namespace Monocle
 				}
 				return 0;
 			}
-
-			case WM_LBUTTONDOWN:
-			{
-				Platform::SetMouseButton(0, true);
-				return 0;
-			}
-
-			case WM_LBUTTONUP:
-			{
-				Platform::SetMouseButton(0, false);
-				return 0;
-			}
-
-			case WM_RBUTTONDOWN:
-			{
-				Platform::SetMouseButton(1, true);
-				return 0;
-			}
-			
-			case WM_RBUTTONUP:
-			{
-				Platform::SetMouseButton(1, false);
-				return 0;
-			}
-
-			case WM_MBUTTONDOWN:
-			{
-				Platform::SetMouseButton(2, true);
-				return 0;
-			}
-			
-			case WM_MBUTTONUP:
-			{
-				Platform::SetMouseButton(2, false);
-				return 0;
-			}
+			*/
 
 			case WM_SIZE:
 			{
 				instance->platform->WindowSizeChanged(LOWORD(lParam), HIWORD(lParam));
-				return 0;
-			}
-
-			case WM_MOUSEMOVE:
-			{
-				instance->platform->mousePosition.x = GET_X_LPARAM(lParam); 
-				instance->platform->mousePosition.y = GET_Y_LPARAM(lParam);
 				return 0;
 			}
 
@@ -542,124 +500,124 @@ namespace Monocle
 			localKeymap[i] = KEY_UNDEFINED;
 		}
 
-		localKeymap[VK_BACK] = KEY_BACKSPACE;
-		localKeymap[VK_TAB] = KEY_TAB;
-		localKeymap[VK_CLEAR] = KEY_CLEAR;
-		localKeymap[VK_RETURN] = KEY_RETURN;
-		localKeymap[VK_PAUSE] = KEY_PAUSE;
-		localKeymap[VK_ESCAPE] = KEY_ESCAPE;
-		localKeymap[VK_SPACE] = KEY_SPACE;
-		localKeymap[VK_APOSTROPHE] = KEY_QUOTE;
-		localKeymap[VK_COMMA] = KEY_COMMA;
-		localKeymap[VK_MINUS] = KEY_MINUS;
-		localKeymap[VK_PERIOD] = KEY_PERIOD;
-		localKeymap[VK_SLASH] = KEY_SLASH;
-		localKeymap[VK_0] = KEY_0;
-		localKeymap[VK_1] = KEY_1;
-		localKeymap[VK_2] = KEY_2;
-		localKeymap[VK_3] = KEY_3;
-		localKeymap[VK_4] = KEY_4;
-		localKeymap[VK_5] = KEY_5;
-		localKeymap[VK_6] = KEY_6;
-		localKeymap[VK_7] = KEY_7;
-		localKeymap[VK_8] = KEY_8;
-		localKeymap[VK_9] = KEY_9;
-		localKeymap[VK_SEMICOLON] = KEY_SEMICOLON;
-		localKeymap[VK_EQUALS] = KEY_EQUALS;
-		localKeymap[VK_LBRACKET] = KEY_LEFTBRACKET;
-		localKeymap[VK_BACKSLASH] = KEY_BACKSLASH;
-		localKeymap[VK_OEM_102] = KEY_LESS;
-		localKeymap[VK_RBRACKET] = KEY_RIGHTBRACKET;
-		localKeymap[VK_GRAVE] = KEY_BACKQUOTE;
-		localKeymap[VK_BACKTICK] = KEY_BACKQUOTE;
-		localKeymap[VK_A] = KEY_A;
-		localKeymap[VK_B] = KEY_B;
-		localKeymap[VK_C] = KEY_C;
-		localKeymap[VK_D] = KEY_D;
-		localKeymap[VK_E] = KEY_E;
-		localKeymap[VK_F] = KEY_F;
-		localKeymap[VK_G] = KEY_G;
-		localKeymap[VK_H] = KEY_H;
-		localKeymap[VK_I] = KEY_I;
-		localKeymap[VK_J] = KEY_J;
-		localKeymap[VK_K] = KEY_K;
-		localKeymap[VK_L] = KEY_L;
-		localKeymap[VK_M] = KEY_M;
-		localKeymap[VK_N] = KEY_N;
-		localKeymap[VK_O] = KEY_O;
-		localKeymap[VK_P] = KEY_P;
-		localKeymap[VK_Q] = KEY_Q;
-		localKeymap[VK_R] = KEY_R;
-		localKeymap[VK_S] = KEY_S;
-		localKeymap[VK_T] = KEY_T;
-		localKeymap[VK_U] = KEY_U;
-		localKeymap[VK_V] = KEY_V;
-		localKeymap[VK_W] = KEY_W;
-		localKeymap[VK_X] = KEY_X;
-		localKeymap[VK_Y] = KEY_Y;
-		localKeymap[VK_Z] = KEY_Z;
-		localKeymap[VK_DELETE] = KEY_DELETE;
+		localKeymap[KEY_BACKSPACE] = VK_BACK;
+		localKeymap[KEY_TAB] = VK_TAB;
+		localKeymap[KEY_CLEAR] = VK_CLEAR;
+		localKeymap[KEY_RETURN] = VK_RETURN;
+		localKeymap[KEY_PAUSE] = VK_PAUSE;
+		localKeymap[KEY_ESCAPE] = VK_ESCAPE;
+		localKeymap[KEY_SPACE] = VK_SPACE;
+		localKeymap[KEY_QUOTE] = VK_APOSTROPHE;
+		localKeymap[KEY_COMMA] = VK_COMMA;
+		localKeymap[KEY_MINUS] = VK_MINUS;
+		localKeymap[KEY_PERIOD] = VK_PERIOD;
+		localKeymap[KEY_SLASH] = VK_SLASH;
+		localKeymap[KEY_0] = VK_0;
+		localKeymap[KEY_1] = VK_1;
+		localKeymap[KEY_2] = VK_2;
+		localKeymap[KEY_3] = VK_3;
+		localKeymap[KEY_4] = VK_4;
+		localKeymap[KEY_5] = VK_5;
+		localKeymap[KEY_6] = VK_6;
+		localKeymap[KEY_7] = VK_7;
+		localKeymap[KEY_8] = VK_8;
+		localKeymap[KEY_9] = VK_9;
+		localKeymap[KEY_SEMICOLON] = VK_SEMICOLON;
+		localKeymap[KEY_EQUALS] = VK_EQUALS;
+		localKeymap[KEY_LEFTBRACKET] = VK_LBRACKET;
+		localKeymap[KEY_BACKSLASH] = VK_BACKSLASH;
+		localKeymap[KEY_LESS] = VK_OEM_102;
+		localKeymap[KEY_RIGHTBRACKET] = VK_RBRACKET;
+		localKeymap[KEY_BACKQUOTE] = VK_GRAVE;
+		localKeymap[KEY_BACKQUOTE] = VK_BACKTICK;
+		localKeymap[KEY_A] = VK_A;
+		localKeymap[KEY_B] = VK_B;
+		localKeymap[KEY_C] = VK_C;
+		localKeymap[KEY_D] = VK_D;
+		localKeymap[KEY_E] = VK_E;
+		localKeymap[KEY_F] = VK_F;
+		localKeymap[KEY_G] = VK_G;
+		localKeymap[KEY_H] = VK_H;
+		localKeymap[KEY_I] = VK_I;
+		localKeymap[KEY_J] = VK_J;
+		localKeymap[KEY_K] = VK_K;
+		localKeymap[KEY_L] = VK_L;
+		localKeymap[KEY_M] = VK_M;
+		localKeymap[KEY_N] = VK_N;
+		localKeymap[KEY_O] = VK_O;
+		localKeymap[KEY_P] = VK_P;
+		localKeymap[KEY_Q] = VK_Q;
+		localKeymap[KEY_R] = VK_R;
+		localKeymap[KEY_S] = VK_S;
+		localKeymap[KEY_T] = VK_T;
+		localKeymap[KEY_U] = VK_U;
+		localKeymap[KEY_V] = VK_V;
+		localKeymap[KEY_W] = VK_W;
+		localKeymap[KEY_X] = VK_X;
+		localKeymap[KEY_Y] = VK_Y;
+		localKeymap[KEY_Z] = VK_Z;
+		localKeymap[KEY_DELETE] = VK_DELETE;
 
-		localKeymap[VK_NUMPAD0] = KEY_KP0;
-		localKeymap[VK_NUMPAD1] = KEY_KP1;
-		localKeymap[VK_NUMPAD2] = KEY_KP2;
-		localKeymap[VK_NUMPAD3] = KEY_KP3;
-		localKeymap[VK_NUMPAD4] = KEY_KP4;
-		localKeymap[VK_NUMPAD5] = KEY_KP5;
-		localKeymap[VK_NUMPAD6] = KEY_KP6;
-		localKeymap[VK_NUMPAD7] = KEY_KP7;
-		localKeymap[VK_NUMPAD8] = KEY_KP8;
-		localKeymap[VK_NUMPAD9] = KEY_KP9;
-		localKeymap[VK_DECIMAL] = KEY_KP_PERIOD;
-		localKeymap[VK_DIVIDE] = KEY_KP_DIVIDE;
-		localKeymap[VK_MULTIPLY] = KEY_KP_MULTIPLY;
-		localKeymap[VK_SUBTRACT] = KEY_KP_MINUS;
-		localKeymap[VK_ADD] = KEY_KP_PLUS;
+		localKeymap[KEY_KP0] = VK_NUMPAD0;
+		localKeymap[KEY_KP1] = VK_NUMPAD1;
+		localKeymap[KEY_KP2] = VK_NUMPAD2;
+		localKeymap[KEY_KP3] = VK_NUMPAD3;
+		localKeymap[KEY_KP4] = VK_NUMPAD4;
+		localKeymap[KEY_KP5] = VK_NUMPAD5;
+		localKeymap[KEY_KP6] = VK_NUMPAD6;
+		localKeymap[KEY_KP7] = VK_NUMPAD7;
+		localKeymap[KEY_KP8] = VK_NUMPAD8;
+		localKeymap[KEY_KP9] = VK_NUMPAD9;
+		localKeymap[KEY_KP_PERIOD] = VK_DECIMAL;
+		localKeymap[KEY_KP_DIVIDE] = VK_DIVIDE;
+		localKeymap[KEY_KP_MULTIPLY] = VK_MULTIPLY;
+		localKeymap[KEY_KP_MINUS] = VK_SUBTRACT;
+		localKeymap[KEY_KP_PLUS] = VK_ADD;
 
-		localKeymap[VK_UP] = KEY_UP;
-		localKeymap[VK_DOWN] = KEY_DOWN;
-		localKeymap[VK_RIGHT] = KEY_RIGHT;
-		localKeymap[VK_LEFT] = KEY_LEFT;
-		localKeymap[VK_INSERT] = KEY_INSERT;
-		localKeymap[VK_HOME] = KEY_HOME;
-		localKeymap[VK_END] = KEY_END;
-		localKeymap[VK_PRIOR] = KEY_PAGEUP;
-		localKeymap[VK_NEXT] = KEY_PAGEDOWN;
+		localKeymap[KEY_UP] = VK_UP;
+		localKeymap[KEY_DOWN] = VK_DOWN;
+		localKeymap[KEY_RIGHT] = VK_RIGHT;
+		localKeymap[KEY_LEFT] = VK_LEFT;
+		localKeymap[KEY_INSERT] = VK_INSERT;
+		localKeymap[KEY_HOME] = VK_HOME;
+		localKeymap[KEY_END] = VK_END;
+		localKeymap[KEY_PAGEUP] = VK_PRIOR;
+		localKeymap[KEY_PAGEDOWN] = VK_NEXT;
 
-		localKeymap[VK_F1] = KEY_F1;
-		localKeymap[VK_F2] = KEY_F2;
-		localKeymap[VK_F3] = KEY_F3;
-		localKeymap[VK_F4] = KEY_F4;
-		localKeymap[VK_F5] = KEY_F5;
-		localKeymap[VK_F6] = KEY_F6;
-		localKeymap[VK_F7] = KEY_F7;
-		localKeymap[VK_F8] = KEY_F8;
-		localKeymap[VK_F9] = KEY_F9;
-		localKeymap[VK_F10] = KEY_F10;
-		localKeymap[VK_F11] = KEY_F11;
-		localKeymap[VK_F12] = KEY_F12;
-		localKeymap[VK_F13] = KEY_F13;
-		localKeymap[VK_F14] = KEY_F14;
-		localKeymap[VK_F15] = KEY_F15;
+		localKeymap[KEY_F1] = VK_F1;
+		localKeymap[KEY_F2] = VK_F2;
+		localKeymap[KEY_F3] = VK_F3;
+		localKeymap[KEY_F4] = VK_F4;
+		localKeymap[KEY_F5] = VK_F5;
+		localKeymap[KEY_F6] = VK_F6;
+		localKeymap[KEY_F7] = VK_F7;
+		localKeymap[KEY_F8] = VK_F8;
+		localKeymap[KEY_F9] = VK_F9;
+		localKeymap[KEY_F10] = VK_F10;
+		localKeymap[KEY_F11] = VK_F11;
+		localKeymap[KEY_F12] = VK_F12;
+		localKeymap[KEY_F13] = VK_F13;
+		localKeymap[KEY_F14] = VK_F14;
+		localKeymap[KEY_F15] = VK_F15;
 
-		localKeymap[VK_NUMLOCK] = KEY_NUMLOCK;
-		localKeymap[VK_CAPITAL] = KEY_CAPSLOCK;
-		localKeymap[VK_SCROLL] = KEY_SCROLLOCK;
-		localKeymap[VK_RSHIFT] = KEY_RSHIFT;
-		localKeymap[VK_LSHIFT] = KEY_LSHIFT;
-		localKeymap[VK_RCONTROL] = KEY_RCTRL;
-		localKeymap[VK_LCONTROL] = KEY_LCTRL;
-		localKeymap[VK_RMENU] = KEY_RALT;
-		localKeymap[VK_LMENU] = KEY_LALT;
-		localKeymap[VK_RWIN] = KEY_RMETA;
-		localKeymap[VK_LWIN] = KEY_LMETA;
+		localKeymap[KEY_NUMLOCK] = VK_NUMLOCK;
+		localKeymap[KEY_CAPSLOCK] = VK_CAPITAL;
+		localKeymap[KEY_SCROLLOCK] = VK_SCROLL;
+		localKeymap[KEY_RSHIFT] = VK_RSHIFT;
+		localKeymap[KEY_LSHIFT] = VK_LSHIFT;
+		localKeymap[KEY_RCTRL] = VK_RCONTROL;
+		localKeymap[KEY_LCTRL] = VK_LCONTROL;
+		localKeymap[KEY_RALT] = VK_RMENU;
+		localKeymap[KEY_LALT] = VK_LMENU;
+		localKeymap[KEY_RMETA] = VK_RWIN;
+		localKeymap[KEY_LMETA] = VK_LWIN;
 
-		localKeymap[VK_HELP] = KEY_HELP;
+		localKeymap[KEY_HELP] = VK_HELP;
 
 		//localKeymap[VK_PRINT] = KEY_PRINT;
-		localKeymap[VK_SNAPSHOT] = KEY_PRINT;
-		localKeymap[VK_CANCEL] = KEY_BREAK;
-		localKeymap[VK_APPS] = KEY_MENU;
+		localKeymap[KEY_PRINT] = VK_SNAPSHOT;
+		localKeymap[KEY_BREAK] = VK_CANCEL;
+		localKeymap[KEY_MENU] = VK_APPS;
 	}
 
 	void Platform::Init()
@@ -695,32 +653,20 @@ namespace Monocle
 			}
 		}
 
-		/*
-		POINT mouse;
-		// get current mouse position
-		GetCursorPos(&mouse);
+		mouseButtons[0] = GetAsyncKeyState(VK_LBUTTON);
+		mouseButtons[1] = GetAsyncKeyState(VK_RBUTTON);
+		mouseButtons[2] = GetAsyncKeyState(VK_MBUTTON);
 
-		// get current size of the desktop
-		int desktopWidth, desktopHeight;
-		WindowsPlatform::GetDesktopSize(&desktopWidth, &desktopHeight);
+		for (int i = 0; i < KEY_MAX; i++)
+		{
+			keys[i] = GetAsyncKeyState(localKeymap[i]);
+		}
 
-		// adjust mouse position to fit into window
-		// TODO: this might need refining
-		mousePosition.x = mouse.x - (desktopWidth/2 - width/2);
-		mousePosition.y = mouse.y - (desktopHeight/2 - height/2);
-		*/
-
-		/*
-		printf("mouse (%d, %d)\n", mouse.x, mouse.y);
-		printf("desktop (%d, %d)\n", desktopWidth, desktopHeight);
-		printf("mousePosition (%f, %f)\n", mousePosition.x, mousePosition.y);
-		printf("mouseButtons: %d, %d, %d", mouseButtons[0], mouseButtons[1], mouseButtons[2]);
-		*/
-	}
-
-	void Platform::SetMouseButton(int button, bool on)
-	{
-		mouseButtons[button] = on;
+		POINT mousePoint;
+		GetCursorPos(&mousePoint);
+		ScreenToClient(WindowsPlatform::instance->hWnd, &mousePoint);
+		mousePosition.x = mousePoint.x;
+		mousePosition.y = mousePoint.y;
 	}
 
 	long Platform::GetMilliseconds()
@@ -753,6 +699,11 @@ namespace Monocle
 		instance->width = w;
 		instance->height = h;
 		Graphics::Resize(w, h);
+	}
+
+	void Platform::SetMouseButton(int button, bool on)
+	{
+		mouseButtons[button] = on;
 	}
 
 	void Platform::SetLocalKey(int key, bool on)

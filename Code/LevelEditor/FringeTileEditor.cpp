@@ -210,7 +210,7 @@ namespace Monocle
 		if (selectedEntity && selectedFringeTile)
 		{
 			// TODO: avoid using graphic -> entity
-			FringeTile *newFringeTile = Level::AddFringeTile(selectedFringeTile->GetFringeTileset(), selectedFringeTile->GetTileID(), selectedEntity->GetLayer(), Input::GetWorldMousePosition(), selectedEntity->scale, selectedEntity->rotation);
+			FringeTile *newFringeTile = Level::AddFringeTile(selectedFringeTile->GetFringeTileset(), selectedFringeTile->GetTileID(), selectedEntity->GetLayer(), Input::GetWorldMousePosition(), selectedEntity->scale, selectedEntity->rotation, selectedEntity->color);
 			//Tween::FromTo(&fringeTile->entity->color.a, 0.0f, 1.0f, 0.25f, EASE_LINEAR);
 			Select(newFringeTile);
 		}
@@ -397,6 +397,15 @@ namespace Monocle
 			return;
 		}
 
+		if (!waitForLMBRelease && Input::IsKeyHeld(keyScale))
+		{
+			Debug::Log("scale start");
+			moveStartPosition = Input::GetWorldMousePosition();
+			startScale = selectedEntity->scale;
+			SetState(FTES_SCALE);
+			return;
+		}
+
 		if (!waitForLMBRelease && Input::IsKeyPressed(keyMove))//Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) //
 		{
 			Debug::Log("move start");
@@ -499,9 +508,60 @@ namespace Monocle
 
 	void FringeTileEditor::UpdateScale()
 	{
-		if (Input::IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+		if (Input::IsKeyPressed(KEY_X))
+		{
+			if (moveAxisLock == 1)
+				moveAxisLock = 0;
+			else
+				moveAxisLock = 1;
+		}
+		else if (Input::IsKeyPressed(KEY_Y))
+		{
+			if (moveAxisLock == 2)
+				moveAxisLock = 0;
+			else
+				moveAxisLock = 2;
+		}
+
+		Vector2 dir = (Input::GetWorldMousePosition() - moveStartPosition);
+		float mag = fabs(dir.y);
+		if (fabs(dir.x) > fabs(dir.y))
+			mag = fabs(dir.x);
+
+		Vector2 add = Vector2(SIGNOF(selectedEntity->scale.x), SIGNOF(selectedEntity->scale.y)) * mag;
+
+		selectedEntity->scale = startScale + add * 0.01f;
+
+		switch(moveAxisLock)
+		{
+		case 1:
+			selectedEntity->scale.y = startScale.y;
+			break;
+		case 2:
+			selectedEntity->scale.x = startScale.x;
+			break;
+		}
+		
+		if (Input::IsKeyPressed(KEY_0))
+		{
+			selectedEntity->scale = Vector2::one;
+			SetState(FTES_NONE);
+			return;
+		}
+
+		// cancel out of move by hitting escape or rmb
+		if (Input::IsKeyPressed(KEY_ESCAPE) || Input::IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
+		{
+			selectedEntity->scale = startScale;
+			SetState(FTES_NONE);
+			return;
+		}
+
+		// if let go, return to none state
+		if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || Input::IsKeyPressed(keyScale) || Input::IsKeyPressed(keySelect))
 		{
 			SetState(FTES_NONE);
+			return;
 		}
 	}
 

@@ -26,7 +26,7 @@ namespace Monocle
 		static void SaveAs(const std::string &filename);
 		static void End(); // called on scene end
 
-		static FringeTile* AddFringeTile(FringeTileset *fringeTileset, int tileID, int layer, const Vector2 &position, const Vector2 &scale, int rotation);
+		static FringeTile* AddFringeTile(FringeTileset *fringeTileset, int tileID, int layer, const Vector2 &position, const Vector2 &scale, int rotation, const Color &color);
 		static void RemoveFringeTile(FringeTile* fringeTile);
 
 		std::string name;
