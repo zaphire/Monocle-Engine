@@ -2,7 +2,6 @@
 #include "../../Macros.h"
 #include <cmath>
 
-
 namespace Marian
 {
 	const float maxThreadRange = 600;
@@ -11,12 +10,33 @@ namespace Marian
 
 	LevelScene *levelScene = NULL;
 
+	/// TEST
+	Threadable::Threadable()
+		: Entity()
+	{
+		AddTag("Threadable");
+		SetGraphic(new Sprite("graphics/marian.png"));
+		SetCollider(new CircleCollider(32));
+	}
+
+	void Threadable::Update()
+	{
+		Entity::Update();
+	}
+
+	void Threadable::Thread()
+	{
+		Debug::Log("calling thread");
+	}
+
+	/// CURSOR
 	Cursor::Cursor()
 		: Entity()
 	{
-		SetGraphic(new Sprite("graphics/butterfly.png", 96, 96));
-		SetLayer(-2);
 		AddTag("Cursor");
+		SetLayer(-2);
+		SetGraphic(new Sprite("graphics/butterfly.png", 96, 96));
+		SetCollider(new RectangleCollider(32, 32));
 	}
 
 	void Cursor::Update()
@@ -27,10 +47,15 @@ namespace Marian
 		{
 			if (Input::IsMouseButtonHeld(MOUSE_BUTTON_LEFT) || Input::IsMouseButtonHeld(MOUSE_BUTTON_RIGHT)  || Input::IsKeyHeld(KEY_SPACE))
 			{
-				
+				// get position to the cursor from player
 				Vector2 dir = Input::GetWorldMousePosition() - levelScene->player->position;
+				// limit to maxThreadRange
 				dir.Clamp(maxThreadRange);
+
+				// the position we would like to get to
 				Vector2 wantPosition = levelScene->player->position + dir;
+
+				///TODO: raycast
 				position = wantPosition;
 
 				if (!dir.IsInRange(stopRange) && !Input::IsMouseButtonHeld(MOUSE_BUTTON_RIGHT))
@@ -45,6 +70,13 @@ namespace Marian
 			{
 				//Tween::To(&position, levelScene->player->position, 0.1f, EASE_LINEAR);
 				position = levelScene->player->position;
+			}
+
+			if (Collider *collider = Collide("Threadable"))
+			{
+				Debug::Log("hit a threadable object");
+				Threadable *threadable = (Threadable*)collider->GetEntity();
+				threadable->Thread();
 			}
 		}
 	}
@@ -62,6 +94,7 @@ namespace Marian
 		}
 	}
 
+	/// TRIGGER LEVEL (test)
 	TriggerLevel::TriggerLevel(const std::string &level)
 		: Entity()
 	{
@@ -84,6 +117,7 @@ namespace Marian
 		Graphics::RenderLineRect(0, 0, 32, 32);
 	}
 
+	/// OBSTRUCTION
 	Obstruction::Obstruction(int w, int h)
 		: Entity()
 	{
@@ -92,6 +126,7 @@ namespace Marian
 		AddTag("Obstruction");
 	}
 
+	/// PLAYER
 	Player::Player()
 		: Entity()
 	{
@@ -112,12 +147,12 @@ namespace Marian
 		const float maxFallSpeed = 50.0f;
 		const float gravity = 980.0f;
 
+		// fall, cap at maxFallSpeed
 		velocity.y += MIN(gravity * Monocle::deltaTime, maxFallSpeed);
 
 		position += velocity * Monocle::deltaTime;
 
 		float useSpeed = isWalking?walkSpeed:runSpeed;
-
 
 		if (Collide("Obstruction"))
 		{
@@ -125,16 +160,16 @@ namespace Marian
 			velocity.y = 0;
 		}
 
-		if (Input::IsKeyHeld(KEY_RIGHT))
-		{
-			scale.x = 1;
-			position.x += useSpeed * Monocle::deltaTime;
-		}
-		if (Input::IsKeyHeld(KEY_LEFT))
-		{
-			scale.x = -1;
-			position.x -= useSpeed * Monocle::deltaTime;
-		}
+		//if (Input::IsKeyHeld(KEY_RIGHT))
+		//{
+		//	scale.x = 1;
+		//	position.x += useSpeed * Monocle::deltaTime;
+		//}
+		//if (Input::IsKeyHeld(KEY_LEFT))
+		//{
+		//	scale.x = -1;
+		//	position.x -= useSpeed * Monocle::deltaTime;
+		//}
 
 		const float turnThresh = 0.25f;
 		if (moveDir.x > turnThresh)
@@ -166,6 +201,83 @@ namespace Marian
 		this->isWalking = isWalking;
 	}
 
+	/// LEVEL SCENE
+	void LevelScene::Begin()
+	{
+		levelScene = this;
+
+		Scene::Begin();
+
+		// set the base content path (used by everything)
+		Assets::SetContentPath("../../Content/Marian/");
+
+		fringeTileEditor.Init(this);
+		fringeTileEditor.Enable();
+		isPaused = true;
+
+		// load project file that defines our tilesets
+		Level::LoadProject("project.xml");
+		// load the actual level
+		Level::Load("tower-open.xml", this);
+		// "spring.xml"
+		// "balcony.xml"
+
+		player = new Player();
+		player->position = Graphics::screenCenter;
+		Add(player);
+
+		Obstruction* obstruction = new Obstruction(2048, 32);
+		obstruction->position = Graphics::screenCenter + Vector2::down * 128;
+		Add(obstruction);
+
+		Threadable *threadable = new Threadable();
+		threadable->position = Vector2(-800, 300);
+		Add(threadable);
+
+		cursor = new Cursor();
+		cursor->position = Graphics::screenCenter;
+		Add(cursor);
+	}
+
+	void LevelScene::Update()
+	{
+		Scene::Update();
+
+		// update the FTE
+		fringeTileEditor.Update();
+
+		// CTRL+S = save
+		if (isPaused)
+		{
+			if (Input::IsKeyPressed(KEY_S) && Input::IsKeyHeld(KEY_LCTRL))
+			{
+				Level::Save();
+			}
+		}
+
+		// if we hit tab...
+		if (Input::IsKeyPressed(KEY_TAB))
+		{
+			// if we're not doing anything in the FTE...
+			if (fringeTileEditor.GetState() == FTES_NONE)
+			{
+				// toggle pause state
+				isPaused = !isPaused;
+
+				if (isPaused)
+					fringeTileEditor.Enable();
+				else
+					fringeTileEditor.Disable();
+			}
+		}
+	}
+
+	void LevelScene::End()
+	{
+		Scene::End();
+	}
+
+	/// TITLE SCENE
 	void TitleScene::Begin()
 	{
 		Scene::Begin();
@@ -211,70 +323,6 @@ namespace Marian
 	}
 
 	void TitleScene::End()
-	{
-		Scene::End();
-	}
-
-
-	class FringeTileEditor
-	{
-	public:
-	};
-
-
-	void LevelScene::Begin()
-	{
-		levelScene = this;
-
-		Scene::Begin();
-
-		Assets::SetContentPath("../../Content/Marian/");
-
-		fringeTileEditor.Init(this);
-		fringeTileEditor.Enable();
-
-		Level::LoadProject("project.xml");
-		Level::Load("tower.xml", this);
-
-		player = new Player();
-		player->position = Graphics::screenCenter;
-		Add(player);
-
-		Obstruction* obstruction = new Obstruction(2048, 32);
-		obstruction->position = Graphics::screenCenter + Vector2::down * 128;
-		Add(obstruction);
-
-		cursor = new Cursor();
-		cursor->position = Graphics::screenCenter;
-		Add(cursor);
-
-		isPaused = true;
-	}
-
-	void LevelScene::Update()
-	{
-		Scene::Update();
-		fringeTileEditor.Update();
-
-		if (Input::IsKeyPressed(KEY_S) && Input::IsKeyHeld(KEY_LCTRL))
-		{
-			Level::Save();
-		}
-		if (Input::IsKeyPressed(KEY_TAB))
-		{
-			if (fringeTileEditor.GetState() == FTES_NONE)
-			{
-				isPaused = !isPaused;
-
-				if (isPaused)
-					fringeTileEditor.Enable();
-				else
-					fringeTileEditor.Disable();
-			}
-		}
-	}
-
-	void LevelScene::End()
 	{
 		Scene::End();
 	}

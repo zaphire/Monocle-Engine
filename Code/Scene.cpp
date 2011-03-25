@@ -52,6 +52,7 @@ namespace Monocle
 			//printf("\n\n****\n");
 
 			///HACK: this next line is a hack - temporary only
+			// TODO sort entities into layer buckets? or one big sorted list?
 			for (int layer = MAX_LAYER; layer >= MIN_LAYER; layer--)
 			{
 				for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)

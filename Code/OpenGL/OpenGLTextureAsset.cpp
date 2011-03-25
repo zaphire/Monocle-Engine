@@ -82,11 +82,6 @@ namespace Monocle
 		Debug::Log("Freeing texture memory for: " + filename);
 		glDeleteTextures(1, &texID);
 	}
-
-	void TextureAsset::Bind()
-	{
-
-	}
 }
 
 #endif

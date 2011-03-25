@@ -45,7 +45,7 @@ namespace Monocle
 					TiXmlElement* eTileset = eTilesets->FirstChildElement("Tileset");
 					while (eTileset)
 					{
-						instance->tilesets.push_back(Tileset(XMLString(eTileset, "name"), XMLString(eTileset, "image"), XMLInt(eTileset, "tileWidth"), XMLInt(eTileset, "tileHeight")));
+						instance->tilesets.push_back(Tileset(XMLReadString(eTileset, "name"), XMLReadString(eTileset, "image"), XMLReadInt(eTileset, "tileWidth"), XMLReadInt(eTileset, "tileHeight")));
 
 						eTileset = eTilesets->NextSiblingElement("Tileset");
 					}
@@ -58,25 +58,31 @@ namespace Monocle
 					TiXmlElement* eFringeTileset = eFringeTilesets->FirstChildElement("FringeTileset");
 					while (eFringeTileset)
 					{
-						FringeTileset fringeTileset = FringeTileset(XMLString(eFringeTileset, "name"));
+						FringeTileset fringeTileset = FringeTileset(XMLReadString(eFringeTileset, "name"));
 						
 						TiXmlElement* eFringeTile = eFringeTileset->FirstChildElement("FringeTile");
 						while (eFringeTile)
 						{
 							if (eFringeTile->Attribute("id") && eFringeTile->Attribute("image"))
 							{
-								int tileID = XMLInt(eFringeTile, "id");
-								std::string image = XMLString(eFringeTile, "image");
+								int tileID = XMLReadInt(eFringeTile, "id");
+								std::string image = XMLReadString(eFringeTile, "image");
 								int width = -1;
 								int height = -1;
 								if (eFringeTile->Attribute("width") && eFringeTile->Attribute("height"))
 								{
-									width = XMLInt(eFringeTile, "width");
-									height = XMLInt(eFringeTile, "height");
+									width = XMLReadInt(eFringeTile, "width");
+									height = XMLReadInt(eFringeTile, "height");
 								}
+
+								FilterType filter = FILTER_LINEAR;
+
+								bool repeatX = XMLReadBool(eFringeTile, "repeatX");
+								bool repeatY = XMLReadBool(eFringeTile, "repeatY");
+
 								if (image != "")
 								{
-									fringeTileset.SetFringeTileData(tileID, new FringeTileData(image, width, height));
+									fringeTileset.SetFringeTileData(tileID, new FringeTileData(image, width, height, filter, repeatX, repeatY));
 								}
 							}
 							eFringeTile = eFringeTile->NextSiblingElement("FringeTile");
@@ -116,14 +122,14 @@ namespace Monocle
 				TiXmlElement* eLevel = xml.FirstChildElement("Level");
 				if (eLevel)
 				{
-					instance->width = XMLInt(eLevel, "width");
-					instance->height = XMLInt(eLevel, "height");
+					instance->width = XMLReadInt(eLevel, "width");
+					instance->height = XMLReadInt(eLevel, "height");
 
 					TiXmlElement *eTilemap = eLevel->FirstChildElement("Tilemap");
 					while (eTilemap)
 					{
 						Entity *entity = new Entity();
-						Tilemap *tilemap = new Tilemap(instance->GetTilesetByName(XMLString(eTilemap, "set")), instance->width, instance->height, XMLInt(eTilemap, "tileWidth"), XMLInt(eTilemap, "tileHeight"));
+						Tilemap *tilemap = new Tilemap(instance->GetTilesetByName(XMLReadString(eTilemap, "set")), instance->width, instance->height, XMLReadInt(eTilemap, "tileWidth"), XMLReadInt(eTilemap, "tileHeight"));
 						instance->tilemaps.push_back(tilemap);
 						entity->SetGraphic(tilemap);
 						instance->scene->Add(entity);
@@ -131,7 +137,7 @@ namespace Monocle
 						TiXmlElement *eTile = eTilemap->FirstChildElement("Tile");
 						while (eTile)
 						{
-							tilemap->SetTile(XMLInt(eTile, "x"), XMLInt(eTile, "y"), XMLInt(eTile, "tileID"));
+							tilemap->SetTile(XMLReadInt(eTile, "x"), XMLReadInt(eTile, "y"), XMLReadInt(eTile, "tileID"));
 							eTile = eTile->NextSiblingElement("Tile");
 						}
 						eTilemap = eTilemap->NextSiblingElement("Tilemap");
@@ -140,7 +146,7 @@ namespace Monocle
 					TiXmlElement *eFringeTiles = eLevel->FirstChildElement("FringeTiles");
 					while (eFringeTiles)
 					{
-						FringeTileset *fringeTileset = instance->GetFringeTilesetByName(XMLString(eFringeTiles, "set"));
+						FringeTileset *fringeTileset = instance->GetFringeTilesetByName(XMLReadString(eFringeTiles, "set"));
 
 						/*
 						Entity *entity = new Entity();
@@ -155,23 +161,23 @@ namespace Monocle
 							TiXmlElement *eFringeTile = eFringeTiles->FirstChildElement("FringeTile");
 							while (eFringeTile)
 							{
-								int tileID = XMLInt(eFringeTile, "id");
+								int tileID = XMLReadInt(eFringeTile, "id");
 
-								int layer = XMLInt(eFringeTile, "layer");
+								int layer = XMLReadInt(eFringeTile, "layer");
 
-								Vector2 position = Vector2(XMLFloat(eFringeTile, "x"), XMLFloat(eFringeTile, "y"));
+								Vector2 position = Vector2(XMLReadFloat(eFringeTile, "x"), XMLReadFloat(eFringeTile, "y"));
 
 								Vector2 scale = Vector2::one;
 
 								if (eFringeTile->Attribute("scaleX") != NULL && eFringeTile->Attribute("scaleY") != NULL)
-									scale = Vector2(XMLFloat(eFringeTile, "scaleX"), XMLFloat(eFringeTile, "scaleY"));
+									scale = Vector2(XMLReadFloat(eFringeTile, "scaleX"), XMLReadFloat(eFringeTile, "scaleY"));
 
-								int rotation = XMLFloat(eFringeTile, "rotation");
+								int rotation = XMLReadFloat(eFringeTile, "rotation");
 
 								Color color = Color::white;
 								if (eFringeTile->Attribute("ca"))
 								{
-									color.a = XMLFloat(eFringeTile, "ca");
+									color.a = XMLReadFloat(eFringeTile, "ca");
 								}
 
 								AddFringeTile(fringeTileset, tileID, layer, position, scale, rotation, color);

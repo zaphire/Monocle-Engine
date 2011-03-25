@@ -134,7 +134,7 @@ namespace Flash
 				TiXmlElement* eAnimation = eAnimations->FirstChildElement("Animation");
 				while (eAnimation)
 				{
-					Animation animation(XMLString(eAnimation, "name"), XMLInt(eAnimation, "frameCount"));
+					Animation animation(XMLReadString(eAnimation, "name"), XMLReadInt(eAnimation, "frameCount"));
 					
 					TiXmlElement* ePart = eAnimation->FirstChildElement("Part");
 					while (ePart)
@@ -145,16 +145,16 @@ namespace Flash
 						while (eFrame)
 						{
 							Frame frame;
-							frame.pos = Vector2(XMLFloat(eFrame, "x"), XMLFloat(eFrame, "y"));
+							frame.pos = Vector2(XMLReadFloat(eFrame, "x"), XMLReadFloat(eFrame, "y"));
 							
 							if (eFrame->Attribute("scaleX"))
 							{
-								frame.scale.x = XMLFloat(eFrame, "scaleX");
+								frame.scale.x = XMLReadFloat(eFrame, "scaleX");
 							}
 
 							if (eFrame->Attribute("scaleY"))
 							{
-								frame.scale.y = XMLFloat(eFrame, "scaleY");
+								frame.scale.y = XMLReadFloat(eFrame, "scaleY");
 							}
 
 							if (eFrame->Attribute("alpha") != NULL)
@@ -198,17 +198,17 @@ namespace Flash
 				TiXmlElement* eTextureSheet = eTextures->FirstChildElement("TextureSheet");
 				while (eTextureSheet)
 				{
-					textureSheet.name = XMLString(eTextureSheet, "name");
+					textureSheet.name = XMLReadString(eTextureSheet, "name");
 
 					TiXmlElement* eTexture = eTextureSheet->FirstChildElement("Texture");
 					while (eTexture)
 					{
 						Texture texture;
 						texture.name = eTexture->Attribute("name");
-						texture.width = XMLInt(eTexture, "width");
-						texture.height = XMLInt(eTexture, "height");
-						texture.registrationPoint.x = XMLFloat(eTexture, "registrationPointX");
-						texture.registrationPoint.y = XMLFloat(eTexture, "registrationPointY");
+						texture.width = XMLReadInt(eTexture, "width");
+						texture.height = XMLReadInt(eTexture, "height");
+						texture.registrationPoint.x = XMLReadFloat(eTexture, "registrationPointX");
+						texture.registrationPoint.y = XMLReadFloat(eTexture, "registrationPointY");
 
 						textureSheet.textures.push_back(texture);
 
@@ -417,8 +417,6 @@ namespace Flash
 					CloneNewEndFrame();
 					UpdateFrameNumberDisplay();
 				}
-
-
 			
 				const float moveSpeed = 40.0f;
 				float moveAmount = moveSpeed * Monocle::deltaTime;

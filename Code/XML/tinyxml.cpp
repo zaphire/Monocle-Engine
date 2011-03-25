@@ -1837,8 +1837,8 @@ bool TiXmlPrinter::Visit( const TiXmlUnknown& unknown )
 	return true;
 }
 
-
-std::string XMLString(TiXmlElement *elem, const std::string &att)
+/// MODIFIED
+std::string XMLReadString(TiXmlElement *elem, const std::string &att)
 {
 	const std::string *read = elem->Attribute(att);
 	if (read != NULL)
@@ -1846,7 +1846,7 @@ std::string XMLString(TiXmlElement *elem, const std::string &att)
 	return "";
 }
 
-float XMLFloat(TiXmlElement* elem, const std::string &att)
+float XMLReadFloat(TiXmlElement* elem, const std::string &att)
 {
 	const std::string *read = elem->Attribute(att);
 	if (read != NULL)
@@ -1854,10 +1854,18 @@ float XMLFloat(TiXmlElement* elem, const std::string &att)
 	return 0.0f;
 }
 
-int XMLInt(TiXmlElement* elem, const std::string &att)
+int XMLReadInt(TiXmlElement* elem, const std::string &att)
 {
 	const std::string *read = elem->Attribute(att);
 	if (read != NULL)
 		return atoi((*read).c_str());
 	return 0.0f;
+}
+
+bool XMLReadBool(TiXmlElement* elem, const std::string &att)
+{
+	const std::string *read = elem->Attribute(att);
+	if (read != NULL)
+		return bool(atoi((*read).c_str()));
+	return false;
 }

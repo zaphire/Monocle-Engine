@@ -1,7 +1,7 @@
 #include "Game.h"
 
 //If you want to use fixed timestep, uncomment the following three lines:
-//#define FIXED_TIMESTEP
+#define FIXED_TIMESTEP
 #define MILLISECONDS_PER_FRAME 1000/60
 #define MAX_UPDATES_PER_RENDER 4
 
@@ -51,21 +51,33 @@ namespace Monocle
 			if (switchTo != NULL)
 			{
 				if (scene != NULL)
+				{
 					scene->End();
+					scene->game = NULL;
+					// delete scene?
+				}
+
 				scene = switchTo;
+				
 				switchTo = NULL;
+
 				if (scene != NULL)
+				{
+					scene->game = this;
 					scene->Begin();
+				}
 			}
 
 			tick = Platform::GetMilliseconds();
-			Monocle::deltaTime = ((double)(tick - lastTick))/1000.0;
-			Monocle::timeSinceStart = ((double)tick - firstTick)/1000.0;
 
 #if defined(FIXED_TIMESTEP)
 			int updates = 0;
 			while (updates < MAX_UPDATES_PER_RENDER && (tick - lastTick) >= MILLISECONDS_PER_FRAME)
 			{
+				Monocle::deltaTime = MILLISECONDS_PER_FRAME/1000.0;
+				Monocle::timeSinceStart += Monocle::deltaTime;
+				printf("ms: %f\n", Monocle::deltaTime);
+
 				input.Update();	
 				//Update
 				if (scene != NULL)
@@ -85,6 +97,10 @@ namespace Monocle
 			graphics.EndFrame();
 			graphics.ShowBuffer();
 #else
+			Monocle::deltaTime = ((double)(tick - lastTick))/1000.0;
+			Monocle::timeSinceStart += Monocle::deltaTime;
+			printf("ms: %f\n", Monocle::deltaTime);
+
 			//Update
 			input.Update();
 			if (scene != NULL)

@@ -76,6 +76,11 @@ namespace Monocle
 		virtual void ReceiveNote(const std::string &note);
 
 	private:
+		friend class Game;
+		// scene has a game pointer
+		// so that it can request scene switches
+		Game *game;
+
 		void RelayNoteTo(const std::string &tag, const std::string &note);
 
 		//Holds all the entities currently in the scene

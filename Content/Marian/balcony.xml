@@ -1,4 +1,6 @@
 <Level width="1600" height="600">
+	<Music flag="intro" compare="<" value="1" track="music/intro.ogg"/>
+	<Music flag="intro" compare=">=" value="1" track="music/normal.ogg"/>
     <FringeTiles set="balcony">
         <FringeTile id="0" layer="5" x="1020" y="284" rotation="0" scaleX="2" scaleY="2" />
         <FringeTile id="2" layer="-3" x="174" y="304" rotation="0" scaleX="1" scaleY="1" />

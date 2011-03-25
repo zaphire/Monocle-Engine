@@ -2,6 +2,7 @@
 
 #include "../Graphics/Sprite.h"
 #include "../Entity.h"
+#include "../Asset.h"
 #include <string>
 #include <map>
 
@@ -14,12 +15,13 @@ namespace Monocle
 			: width(-1), height(-1), repeatX(false), repeatY(false)
 		{}
 
-		FringeTileData(const std::string &imageFilename, int width=-1, int height=-1,  bool repeatX=false, bool repeatY=false)
-			: imageFilename(imageFilename), repeatX(repeatX), repeatY(repeatY), width(width), height(height)
+		FringeTileData(const std::string &imageFilename, int width=-1, int height=-1, FilterType filter=FILTER_LINEAR, bool repeatX=false, bool repeatY=false)
+			: imageFilename(imageFilename), repeatX(repeatX), repeatY(repeatY), filter(filter), width(width), height(height)
 		{}
 
 		std::string imageFilename;
 		int width, height;
+		FilterType filter;
 		bool repeatX, repeatY;
 		// bool useFiltering;
 	};

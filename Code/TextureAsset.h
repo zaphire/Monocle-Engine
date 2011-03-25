@@ -11,7 +11,6 @@ namespace Monocle
 		void Load(const std::string &filename, FilterType filter, bool repeatX, bool repeatY);
 		void Reload();
 		void Unload();
-		void Bind();
 
 		FilterType filter;
 		bool repeatX, repeatY;

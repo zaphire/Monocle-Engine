@@ -93,10 +93,10 @@ class TiXmlDeclaration;
 class TiXmlParsingData;
 
 /// MODIFIED
-std::string XMLString(TiXmlElement *elem, const std::string &att);
-float XMLFloat(TiXmlElement* elem, const std::string &att);
-int XMLInt(TiXmlElement* elem, const std::string &att);
-
+std::string XMLReadString(TiXmlElement *elem, const std::string &att);
+float XMLReadFloat(TiXmlElement* elem, const std::string &att);
+int XMLReadInt(TiXmlElement* elem, const std::string &att);
+bool XMLReadBool(TiXmlElement* elem, const std::string &att);
 
 
 const int TIXML_MAJOR_VERSION = 2;

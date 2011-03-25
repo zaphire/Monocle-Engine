@@ -126,7 +126,7 @@ namespace Monocle
 			const FringeTileData *fringeTileData = fringeTileset->GetFringeTileDataByID(tileID);
 			if (fringeTileData)
 			{
-				sprite->texture = Assets::RequestTexture(fringeTileData->imageFilename);
+				sprite->texture = Assets::RequestTexture(fringeTileData->imageFilename, fringeTileData->filter, fringeTileData->repeatX, fringeTileData->repeatY);
 				if (fringeTileData->width == -1 && fringeTileData->height == -1 && sprite->texture)
 				{
 					sprite->width = sprite->texture->width;

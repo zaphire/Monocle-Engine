@@ -21,6 +21,26 @@ namespace Marian
 	};
 	*/
 
+	enum Flag
+	{
+		FLAG_NONE=0,
+		FLAG_INTRO,
+		FLAG_MAX
+	};
+
+	class Continuity
+	{
+	public:
+		void SetMaxFlags(int maxFlags);
+
+		void SetFlag(int flag, int value);
+		int GetFlag(int flag);
+		bool IsFlag(int flag, int value);
+		
+	private:
+		std::map<int, int> flags;
+	};
+
 	class Cursor : public Entity
 	{
 	public:
@@ -29,6 +49,14 @@ namespace Marian
 		void Render();
 
 		Entity *attachedToEntity;
+	};
+
+	class Threadable : public Entity
+	{
+	public:
+		Threadable();
+		void Update();
+		void Thread();
 	};
 
 	class TriggerLevel : public Entity
