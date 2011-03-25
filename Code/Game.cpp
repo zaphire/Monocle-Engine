@@ -1,9 +1,11 @@
 #include "Game.h"
 
 //If you want to use fixed timestep, uncomment the following three lines:
-#define FIXED_TIMESTEP
+//#define FIXED_TIMESTEP
 #define MILLISECONDS_PER_FRAME 1000/60
 #define MAX_UPDATES_PER_RENDER 4
+// prevent updates from getting too big on non-fixed time
+#define MAX_DELTA_TIME 1.0/30.0
 
 namespace Monocle
 {
@@ -98,6 +100,10 @@ namespace Monocle
 			graphics.ShowBuffer();
 #else
 			Monocle::deltaTime = ((double)(tick - lastTick))/1000.0;
+			if (Monocle::deltaTime > MAX_DELTA_TIME)
+			{
+				Monocle::deltaTime = MAX_DELTA_TIME;
+			}
 			Monocle::timeSinceStart += Monocle::deltaTime;
 			printf("ms: %f\n", Monocle::deltaTime);
 

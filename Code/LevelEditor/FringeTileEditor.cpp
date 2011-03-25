@@ -5,6 +5,7 @@
 #include "../Input.h"
 #include "../Monocle.h"
 #include <cstdio>
+#include <cmath>
 
 namespace Monocle
 {

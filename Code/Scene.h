@@ -9,6 +9,7 @@
 
 namespace Monocle
 {
+	class Game;
 	class Entity;
 
 	enum SearchType
