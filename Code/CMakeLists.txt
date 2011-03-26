@@ -1,12 +1,14 @@
 file(GLOB CORE_SRCS *.cpp)
 file(GLOB COLLIDERS_SRCS Colliders/*.cpp)
 file(GLOB GRAPHICS_SRCS Graphics/*.cpp)
+file(GLOB LEVELEDITOR_SRCS LevelEditor/*.cpp)
 file(GLOB OGMOSIS_SRCS Ogmosis/*.cpp)
 file(GLOB XML_SRCS XML/*.cpp)
 
 set(CORE_SRCS ${CORE_SRCS}
 	${COLLIDERS_SRCS}
 	${GRAPHICS_SRCS}
+	${LEVELEDITOR_SRCS}
 	${OGMOSIS_SRCS}
 )
 
