@@ -1,19 +1,18 @@
 #!/bin/sh
 
 mkdir -p Build
-pushd Build
+cd Build
 
 echo "Do you want to build tests? (y/n) : "
 read ANSWER
 
-if [[ "${ANSWER}" == y* || "${ANSWER}" == Y* ]]; then
-	CMAKEOPTS="${CMAKEOPTS} -DBUILD_TESTS:BOOL=ON"
-else
-	CMAKEOPTS="${CMAKEOPTS} -DBUILD_TESTS:BOOL=OFF"
-fi
+case "$ANSWER" in
+	y*|Y*) CMAKEOPTS="${CMAKEOPTS} -DBUILD_TESTS:BOOL=ON" ;;
+	*)     CMAKEOPTS="${CMAKEOPTS} -DBUILD_TESTS:BOOL=OFF" ;;
+esac
 
 cmake ${CMAKEOPTS} ..
 
-popd
+cd ..
 make -C Build/ all
 

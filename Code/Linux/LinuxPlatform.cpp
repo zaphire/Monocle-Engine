@@ -3,6 +3,7 @@
 #include "LinuxPlatform.h"
 
 #include <X11/extensions/Xrandr.h>
+#include <X11/extensions/XInput2.h>
 #include <X11/X.h>
 #include <X11/keysymdef.h>
 
