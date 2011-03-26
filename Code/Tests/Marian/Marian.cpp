@@ -26,7 +26,7 @@ namespace Marian
 
 	void Threadable::Thread()
 	{
-		Debug::Log("calling thread");
+		Debug::Log("inside Thread");
 	}
 
 	/// CURSOR
@@ -72,11 +72,23 @@ namespace Marian
 				position = levelScene->player->position;
 			}
 
-			if (Collider *collider = Collide("Threadable"))
+			Collider *collider = NULL;
+
+			// if we hit something tagged with "Threadable"
+			if (collider = Collide("Threadable"))
 			{
+				/// ugly or not? hmm
 				Debug::Log("hit a threadable object");
-				Threadable *threadable = (Threadable*)collider->GetEntity();
-				threadable->Thread();
+
+				Threadable *threadable = dynamic_cast<Threadable*>(collider->GetEntity());
+				if (threadable)
+				{
+					threadable->Thread();
+				}
+				else
+				{
+					Debug::Log("Error: Could not cast to Threadable");
+				}
 			}
 		}
 	}

@@ -78,7 +78,7 @@ namespace Monocle
 			{
 				Monocle::deltaTime = MILLISECONDS_PER_FRAME/1000.0;
 				Monocle::timeSinceStart += Monocle::deltaTime;
-				printf("ms: %f\n", Monocle::deltaTime);
+				//printf("ms: %f\n", Monocle::deltaTime);
 
 				input.Update();	
 				//Update
@@ -99,11 +99,7 @@ namespace Monocle
 			graphics.EndFrame();
 			graphics.ShowBuffer();
 #else
-			Monocle::deltaTime = ((double)(tick - lastTick))/1000.0;
-			if (Monocle::deltaTime > MAX_DELTA_TIME)
-			{
-				Monocle::deltaTime = MAX_DELTA_TIME;
-			}
+			Monocle::deltaTime = MIN(((double)(tick - lastTick))/1000.0, MAX_DELTA_TIME);
 			Monocle::timeSinceStart += Monocle::deltaTime;
 			printf("ms: %f\n", Monocle::deltaTime);
 
