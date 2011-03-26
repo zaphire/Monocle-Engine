@@ -50,5 +50,6 @@ add_library(TinyXML ${XML_SRCS})
 
 target_link_libraries(MonocleCore TinyXML ${CORE_LINK})
 
-add_subdirectory(Tests)
-
+if(BUILD_TESTS)
+	add_subdirectory(Tests)
+endif(BUILD_TESTS)
