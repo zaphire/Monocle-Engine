@@ -4,10 +4,8 @@
 
 #include "../Platform.h"
 
-#define LINUX_LEAN_AND_MEAN
-
 #include <X11/Xlib.h>
-#include<GL/glx.h>
+#include <GL/glx.h>
 
 namespace Monocle
 {

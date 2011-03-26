@@ -1,7 +1,5 @@
 add_subdirectory(Flash)
 add_subdirectory(Jumper)
-if(!LINUX)
-	add_subdirectory(Marian)
-endif(!LINUX)
+add_subdirectory(Marian)
 add_subdirectory(Ogmo)
 add_subdirectory(Pong)
