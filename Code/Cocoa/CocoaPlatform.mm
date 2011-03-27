@@ -100,13 +100,14 @@ namespace Monocle
 	{
 	}
 
-	bool CocoaPlatform::Init(int w, int h, int bits, bool fullscreen)
+	bool CocoaPlatform::Init(const std::string &name, int w, int h, int bits, bool fullscreen)
 	{
 		//  Init event loop
 		Cocoa_RegisterApp();
 
 		//  Create window
-		window = CreateWindowCocoa(w, h);        
+		window = CreateWindowCocoa(w, h);
+        [window setTitle:[NSString stringWithCString:name.c_str() encoding:NSUTF8StringEncoding]];
 
 		//  Create and attach GL context
 		NSOpenGLContext* context = Cocoa_GL_CreateContext();
@@ -146,12 +147,12 @@ namespace Monocle
 
 	void Platform::Init()
 	{
-		Init(800, 600, 32, false);
+		Init("Monocle Powered", 1024, 768, 32, false);
 	}
 
-	void Platform::Init(int w, int h, int bits, bool fullscreen)
+	void Platform::Init(const std::string &name, int w, int h, int bits, bool fullscreen)
 	{
-		if (!CocoaPlatform::instance->Init(w, h, bits, fullscreen))
+		if (!CocoaPlatform::instance->Init(name, w, h, bits, fullscreen))
 			Debug::Log("Error initializing Monocle window/context");
 
 		WindowData* data = CocoaPlatform::instance->windowData;

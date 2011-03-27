@@ -61,12 +61,12 @@
 		37FB69AE13317693008963C1 /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB696913317693008963C1 /* Random.cpp */; };
 		37FB69AF13317693008963C1 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB696B13317693008963C1 /* Scene.cpp */; };
 		37FB69B113317693008963C1 /* Jumper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB697113317693008963C1 /* Jumper.cpp */; };
-		37FB69B213317693008963C1 /* Marian.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB697413317693008963C1 /* Marian.cpp */; };
 		37FB69B313317693008963C1 /* Pong.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB697713317693008963C1 /* Pong.cpp */; };
 		37FB69B413317693008963C1 /* Tween.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB697A13317693008963C1 /* Tween.cpp */; };
 		37FB69B513317693008963C1 /* Vector2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB697C13317693008963C1 /* Vector2.cpp */; };
 		37FB69B613317693008963C1 /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB697E13317693008963C1 /* Vector3.cpp */; };
 		37FB69B813319030008963C1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FB69B713319030008963C1 /* OpenGL.framework */; };
+		6657ED15133F9E8F00ACA1E2 /* FTE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6657ED13133F9E8F00ACA1E2 /* FTE.cpp */; };
 		F9257DC81338235100A47E00 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DC61338235100A47E00 /* Game.cpp */; };
 		F9257DCD1338236300A47E00 /* Level.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DCB1338236300A47E00 /* Level.cpp */; };
 		F9257DD41338237600A47E00 /* SpriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DD01338237600A47E00 /* SpriteAnimation.cpp */; };
@@ -181,8 +181,6 @@
 		37FB696C13317693008963C1 /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Scene.h; path = ../../../Code/Scene.h; sourceTree = "<group>"; };
 		37FB697113317693008963C1 /* Jumper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Jumper.cpp; sourceTree = "<group>"; };
 		37FB697213317693008963C1 /* Jumper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Jumper.h; sourceTree = "<group>"; };
-		37FB697413317693008963C1 /* Marian.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Marian.cpp; sourceTree = "<group>"; };
-		37FB697513317693008963C1 /* Marian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Marian.h; sourceTree = "<group>"; };
 		37FB697713317693008963C1 /* Pong.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pong.cpp; sourceTree = "<group>"; };
 		37FB697813317693008963C1 /* Pong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pong.h; sourceTree = "<group>"; };
 		37FB697913317693008963C1 /* TextureAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextureAsset.h; path = ../../../Code/TextureAsset.h; sourceTree = "<group>"; };
@@ -193,6 +191,8 @@
 		37FB697E13317693008963C1 /* Vector3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Vector3.cpp; path = ../../../Code/Vector3.cpp; sourceTree = "<group>"; };
 		37FB697F13317693008963C1 /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vector3.h; path = ../../../Code/Vector3.h; sourceTree = "<group>"; };
 		37FB69B713319030008963C1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		6657ED13133F9E8F00ACA1E2 /* FTE.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FTE.cpp; sourceTree = "<group>"; };
+		6657ED14133F9E8F00ACA1E2 /* FTE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTE.h; sourceTree = "<group>"; };
 		F9257DC61338235100A47E00 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Game.cpp; path = ../../../Code/Game.cpp; sourceTree = SOURCE_ROOT; };
 		F9257DC71338235100A47E00 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Game.h; path = ../../../Code/Game.h; sourceTree = SOURCE_ROOT; };
 		F9257DCB1338236300A47E00 /* Level.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Level.cpp; path = ../../../Code/Level.cpp; sourceTree = SOURCE_ROOT; };
@@ -489,9 +489,9 @@
 		37FB696F13317693008963C1 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				6657ED12133F9E8F00ACA1E2 /* FTE */,
 				37B1929413359BE600D2D264 /* Flash */,
 				37FB697013317693008963C1 /* Jumper */,
-				37FB697313317693008963C1 /* Marian */,
 				F9257DF3133823D600A47E00 /* Ogmo */,
 				37FB697613317693008963C1 /* Pong */,
 			);
@@ -508,15 +508,6 @@
 			path = Jumper;
 			sourceTree = "<group>";
 		};
-		37FB697313317693008963C1 /* Marian */ = {
-			isa = PBXGroup;
-			children = (
-				37FB697413317693008963C1 /* Marian.cpp */,
-				37FB697513317693008963C1 /* Marian.h */,
-			);
-			path = Marian;
-			sourceTree = "<group>";
-		};
 		37FB697613317693008963C1 /* Pong */ = {
 			isa = PBXGroup;
 			children = (
@@ -524,6 +515,15 @@
 				37FB697813317693008963C1 /* Pong.h */,
 			);
 			path = Pong;
+			sourceTree = "<group>";
+		};
+		6657ED12133F9E8F00ACA1E2 /* FTE */ = {
+			isa = PBXGroup;
+			children = (
+				6657ED13133F9E8F00ACA1E2 /* FTE.cpp */,
+				6657ED14133F9E8F00ACA1E2 /* FTE.h */,
+			);
+			path = FTE;
 			sourceTree = "<group>";
 		};
 		F9257DD91338238200A47E00 /* LevelEditor */ = {
@@ -649,7 +649,6 @@
 				37FB69AE13317693008963C1 /* Random.cpp in Sources */,
 				37FB69AF13317693008963C1 /* Scene.cpp in Sources */,
 				37FB69B113317693008963C1 /* Jumper.cpp in Sources */,
-				37FB69B213317693008963C1 /* Marian.cpp in Sources */,
 				37FB69B313317693008963C1 /* Pong.cpp in Sources */,
 				37FB69B413317693008963C1 /* Tween.cpp in Sources */,
 				37FB69B513317693008963C1 /* Vector2.cpp in Sources */,
@@ -676,6 +675,7 @@
 				F9F7D600133D3F3C002953B0 /* FringeTile.cpp in Sources */,
 				F9F7D601133D3F3C002953B0 /* FringeTileEditor.cpp in Sources */,
 				F9F7D602133D3F3C002953B0 /* LevelEditor.cpp in Sources */,
+				6657ED15133F9E8F00ACA1E2 /* FTE.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

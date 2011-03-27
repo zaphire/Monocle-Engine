@@ -2,6 +2,7 @@
 #include "CocoaWindowListener.h"
 
 #include "../Vector2.h"
+#include "../Game.h"
 
 using Monocle::CocoaPlatform;
 using Monocle::Vector2;
@@ -74,6 +75,7 @@ static __inline__ void ConvertNSRect(NSRect *r)
 
 - (BOOL)windowShouldClose:(id)sender
 {
+    Monocle::Game::Quit();
 	Cocoa_DestroyWindow(_data);
 	return NO;
 }
