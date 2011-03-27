@@ -273,12 +273,12 @@ namespace Monocle
 		localKeymap[KeySymParts::Get(XK_F14).low] = KEY_F14;
 		localKeymap[KeySymParts::Get(XK_F15).low] = KEY_F15;
 
-		Init(800, 600, 24, false);
+		Init("Monocle Powered", 800, 600, 24, false);
 	}
 
-	void Platform::Init(int w, int h, int bits, bool fullscreen)
+	void Platform::Init(const std::string &name, int w, int h, int bits, bool fullscreen)
 	{
-		LinuxPlatform::instance->CreatePlatformWindow("Monocle Powered", w, h, bits, fullscreen);
+		LinuxPlatform::instance->CreatePlatformWindow(name.c_str(), w, h, bits, fullscreen);
 		width = w;
 		height = h;
 	}
