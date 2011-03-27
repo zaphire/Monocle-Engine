@@ -13,18 +13,13 @@
 #else
 	//#define TEST_game
 	//#define TEST_PONG
-	//#define TEST_MARIAN
 	//#define TEST_JUMPER
-	#define TEST_OGMO
 	//#define TEST_FLASH
+	#define TEST_OGMO
 #endif
 
 #ifdef TEST_PONG
 	#include "Tests/Pong/Pong.h"
-#endif
-
-#ifdef TEST_MARIAN
-	#include "Tests/Marian/Marian.h"
 #endif
 
 #ifdef TEST_JUMPER
@@ -53,10 +48,6 @@ int main(void)
 
 #ifdef TEST_OGMO
 	game->SetScene(new Ogmo::World());
-#endif
-
-#ifdef TEST_MARIAN
-	game->SetScene(new Marian::LevelScene());
 #endif
 
 #ifdef TEST_FLASH

@@ -101,7 +101,7 @@ namespace Monocle
 #else
 			Monocle::deltaTime = MIN(((double)(tick - lastTick))/1000.0, MAX_DELTA_TIME);
 			Monocle::timeSinceStart += Monocle::deltaTime;
-			printf("ms: %f\n", Monocle::deltaTime);
+			//printf("ms: %f\n", Monocle::deltaTime);
 
 			//Update
 			input.Update();

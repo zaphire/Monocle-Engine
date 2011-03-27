@@ -30,9 +30,6 @@
     <Filter Include="Monocle\OpenGL\glpng\png">
       <UniqueIdentifier>{8c91ded5-8070-41a1-95b8-81a4d0f3e504}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Monocle\Tests\Marian">
-      <UniqueIdentifier>{60c815d5-9b47-4995-b41f-f9133f42cf64}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Monocle\Colliders">
       <UniqueIdentifier>{a834cc3d-7677-41d6-a8ec-d21b830b4b57}</UniqueIdentifier>
     </Filter>
@@ -119,9 +116,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Tests\Jumper\Jumper.h">
       <Filter>Monocle\Tests\Jumper</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Tests\Marian\Marian.h">
-      <Filter>Monocle\Tests\Marian</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Tests\Pong\Pong.h">
       <Filter>Monocle\Tests\Pong</Filter>
@@ -265,9 +259,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Tests\Jumper\Jumper.cpp">
       <Filter>Monocle\Tests\Jumper</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Tests\Marian\Marian.cpp">
-      <Filter>Monocle\Tests\Marian</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Tests\Pong\Pong.cpp">
       <Filter>Monocle\Tests\Pong</Filter>

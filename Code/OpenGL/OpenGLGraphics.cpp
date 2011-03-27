@@ -146,6 +146,11 @@ namespace Monocle
 	{
 		instance->cameraPosition += adjustment;
 	}
+
+	void Graphics::SetCameraZoom(const Vector2 &zoom)
+	{
+		instance->cameraZoom = zoom;
+	}
 	
 	void Graphics::AdjustCameraZoom(const Vector2 &adjustment)
 	{
@@ -255,6 +260,27 @@ namespace Monocle
 		return instance->virtualHeight;
 	}
 
+	void Graphics::RenderQuadCustom(const Vector2 &ul, const Vector2 &ur, const Vector2 &lr, const Vector2 &ll, const Vector2 &textureOffset, const Vector2 &textureScale)
+	{
+		glBegin(GL_QUADS);
+			// UL
+			glTexCoord2f(textureOffset.x, textureOffset.y);
+			glVertex3f(ul.x, ul.y, 0.0f);
+
+			//UR
+			glTexCoord2f(textureOffset.x + textureScale.x, textureOffset.y);
+			glVertex3f(ur.x, ur.y, 0.0f);
+
+			//LR
+			glTexCoord2f(textureOffset.x + textureScale.x, textureOffset.y + textureScale.y);
+			glVertex3f(lr.x, lr.y, 0.0f);
+
+			//LL
+			glTexCoord2f(textureOffset.x, textureOffset.y + textureScale.y);
+			glVertex3f(ll.x, ll.y, 0.0f);
+		glEnd();
+	}
+
 	void Graphics::RenderQuad(float width, float height, const Vector2 &textureOffset, const Vector2 &textureScale, const Vector2 &position)
 	{
 		float halfWidth = width*0.5f;
@@ -350,9 +376,34 @@ namespace Monocle
 		return instance->cameraZoom;
 	}
 
+	const Vector2 &Graphics::GetResolutionScale()
+	{
+		return instance->resolutionScale;
+	}
+
 	void Graphics::MoveCameraPosition(const Vector2 &position, float time, EaseType easeType)
 	{
 		Tween::To(&instance->cameraPosition, position, time, easeType);
+	}
+
+	void Graphics::BeginLine()
+	{
+		glBegin(GL_LINES);
+	}
+
+	void Graphics::BeginLineStrip()
+	{
+		glBegin(GL_LINE_STRIP);
+	}
+
+	void Graphics::Vertex(Vector2 vertex)
+	{
+		glVertex2f(vertex.x, vertex.y);
+	}
+
+	void Graphics::EndLine()
+	{
+		glEnd();
 	}
 }
 

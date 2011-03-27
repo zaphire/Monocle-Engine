@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Vector2.h"
+#include <string>
 
 namespace Monocle
 {
@@ -150,7 +151,7 @@ namespace Monocle
 		Platform();
 
 		void Init();
-		void Init(int w, int h, int bits, bool fullscreen);
+		void Init(const std::string &name, int w, int h, int bits, bool fullscreen);
 		void Update();
 
 		static long GetMilliseconds();

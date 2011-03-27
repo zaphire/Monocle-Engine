@@ -622,12 +622,12 @@ namespace Monocle
 
 	void Platform::Init()
 	{
-		Init(800, 600, 32, false);
+		Init("Monocle Powered", 1024, 768, 32, false);
 	}
 
-	void Platform::Init(int w, int h, int bits, bool fullscreen)
+	void Platform::Init(const std::string &name, int w, int h, int bits, bool fullscreen)
 	{
-		WindowsPlatform::instance->CreatePlatformWindow("Monocle Powered", w, h, bits, fullscreen);
+		WindowsPlatform::instance->CreatePlatformWindow(name.c_str(), w, h, bits, fullscreen);
 		//TEMP: hack
 		//width = w;
 		//height = h;

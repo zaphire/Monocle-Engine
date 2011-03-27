@@ -4,8 +4,11 @@
 
 namespace Monocle
 {
+	bool Debug::render = false;
+	
 	void Debug::Init()
 	{
+		render = false;
 	}
 
 	void Debug::Log(const char *outputString)
