@@ -1,5 +1,5 @@
 #include "Monocle.h"
-#include "Marian.h"
+#include "FTE.h"
 
 using namespace Monocle;
 
@@ -7,7 +7,7 @@ int main(void)
 {
 	Game *game = new Game();
 	game->Init();
-	game->SetScene(new Marian::LevelScene());
+	game->SetScene(new FTE::LevelScene());
 	game->Main();
 	delete game;
 	return 0;

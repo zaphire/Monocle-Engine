@@ -135,6 +135,13 @@ namespace Monocle
 
 				Graphics::RenderLineRect(0, 0, 15, 15);
 
+				if (selectedSpriteEntity == entity)
+				{
+					Graphics::SetColor(Color::orange - Color(0,0,0,0.5f));
+					Graphics::RenderLine(Vector2(-width*0.5f, -height*0.5f), Vector2(width*0.5f, height*0.5f));
+					Graphics::RenderLine(Vector2(width*0.5f, -height*0.5f), Vector2(-width*0.5f, height*0.5f));
+				}
+
 				/*
 				if (selectedSpriteEntity == this->entity)
 					Graphics::RenderLineRect(0, 0, 10, 10);

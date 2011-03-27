@@ -110,8 +110,8 @@
     <ClInclude Include="..\..\..\..\Code\Random.h" />
     <ClInclude Include="..\..\..\..\Code\Scene.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\Flash\Flash.h" />
+    <ClInclude Include="..\..\..\..\Code\Tests\FTE\FTE.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\Jumper\Jumper.h" />
-    <ClInclude Include="..\..\..\..\Code\Tests\Marian\Marian.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\Ogmo\Ogmo.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\Pong\Pong.h" />
     <ClInclude Include="..\..\..\..\Code\TextureAsset.h" />
@@ -175,8 +175,8 @@
     <ClCompile Include="..\..\..\..\Code\Random.cpp" />
     <ClCompile Include="..\..\..\..\Code\Scene.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\Flash\Flash.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Tests\FTE\FTE.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\Jumper\Jumper.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Tests\Marian\Marian.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\Ogmo\Ogmo.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\Pong\Pong.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tileset.cpp" />

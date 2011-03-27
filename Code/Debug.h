@@ -19,5 +19,6 @@ namespace Monocle
 		static void Log(const Vector2& vec);
 		static void Log(const Vector3& vec);
 		static void Log(const std::string& string);
+		static bool render;
 	};
 }

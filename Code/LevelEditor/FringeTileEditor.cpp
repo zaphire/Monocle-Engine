@@ -65,6 +65,7 @@ namespace Monocle
 		isOn = true;
 
 		Sprite::showBounds = true;
+		Debug::render = true;
 	}
 
 	void FringeTileEditor::Disable()
@@ -73,6 +74,7 @@ namespace Monocle
 		isOn = false;
 
 		Sprite::showBounds = false;
+		Debug::render = false;
 	}
 
 	void FringeTileEditor::Update()
@@ -160,6 +162,8 @@ namespace Monocle
 			if (Platform::mouseWheel != 0)
 			{
 				Graphics::AdjustCameraZoom(Platform::mouseWheel * Vector2::one * 0.0005f);
+				Vector2 camZoom = Graphics::GetCameraZoom();
+				printf("camZoom (%f, %f)\n", camZoom.x, camZoom.y);
 			}
 			if (Input::IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE))
 			{
@@ -170,6 +174,9 @@ namespace Monocle
 				Vector2 diff = Input::GetWorldMousePosition() - lastWorldMousePosition;
 				Graphics::AdjustCameraPosition(-1*diff);
 				lastWorldMousePosition = Input::GetWorldMousePosition();
+
+				Vector2 camPos = Graphics::GetCameraPosition();
+				printf("camPos (%d, %d)\n", (int)camPos.x, (int)camPos.y);
 				//const float camPanSpeed = 8.0f;
 				//Graphics::AdjustCameraPosition((Input::GetMousePosition() - startCameraMovePosition)*camPanSpeed*Monocle::deltaTime);//(Input::GetWorldMousePosition() - Graphics::GetCameraPosition()));
 			}
@@ -466,6 +473,7 @@ namespace Monocle
 		if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || Input::IsKeyPressed(keyMove) || Input::IsKeyPressed(keySelect))
 		{
 			SetState(FTES_NONE);
+			printf("position: (%d, %d)\n", (int)selectedEntity->position.x, (int)selectedEntity->position.y);
 			return;
 		}
 	}

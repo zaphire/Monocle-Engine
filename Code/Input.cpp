@@ -59,6 +59,15 @@ namespace Monocle
 		return Vector2((Platform::mousePosition.x / Platform::GetWidth()) * Graphics::GetVirtualWidth(), (Platform::mousePosition.y / Platform::GetHeight()) * Graphics::GetVirtualHeight());
 	}
 
+	Vector2 Input::GetWorldMousePosition()
+	{
+		Vector2 resScale = Graphics::GetResolutionScale();
+		Vector2 invResScale = Vector2(1.0f/resScale.x, 1.0f/resScale.y);
+		Vector2 diff = (Platform::mousePosition*invResScale) - Graphics::screenCenter;
+		Vector2 cameraZoom = Graphics::GetCameraZoom();
+		return Graphics::GetCameraPosition() + (diff * Vector2(1/cameraZoom.x, 1/cameraZoom.y));
+	}
+
 	bool Input::IsMouseButtonHeld(MouseButton mouseButton)
 	{
 		return Platform::mouseButtons[(int)mouseButton];
@@ -144,12 +153,4 @@ namespace Monocle
 		}
 		return false;
 	}
-
-	Vector2 Input::GetWorldMousePosition()
-	{
-		Vector2 diff = Platform::mousePosition - Graphics::screenCenter;
-		Vector2 cameraZoom = Graphics::GetCameraZoom();
-		return Graphics::GetCameraPosition() + (diff * Vector2(1/cameraZoom.x, 1/cameraZoom.y));
-	}
-
 }
