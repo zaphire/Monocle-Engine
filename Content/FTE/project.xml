@@ -1,0 +1,16 @@
+<Project>
+	<FringeTilesets>
+		<FringeTileset name="aquaria">
+			<FringeTile id="0" image="graphics/bg-rock-0001.png" width="512" height="512"/>
+			<FringeTile id="1" image="graphics/bg-rock-0002.png" width="512" height="512"/>
+			<FringeTile id="2" image="graphics/starfish-0001.png" width="512" height="512"/>
+			<FringeTile id="3" image="graphics/fish-0001.png" width="128" height="128"/>
+		</FringeTileset>
+		<Entities>
+			<Entity name="Player" script="scripts/player.nut" image="graphics/player.png">
+				<Variable type="int" name="health" default="10" min="0" max="10"/>
+			</Entity>
+			<Entity name="Enemy" scripts="scripts/enemy.nut" image="graphics/enemy.png"/>
+		</Entities>
+	</FringeTilesets>
+</Project>

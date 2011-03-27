@@ -1,0 +1,11 @@
+<Level width="1600" height="600">
+    <FringeTiles set="aquaria">
+        <FringeTile id="0" layer="2" x="559" y="-180" rotation="-180" scaleX="1" scaleY="1" />
+        <FringeTile id="0" layer="0" x="160" y="330" rotation="-1" scaleX="1" scaleY="1" />
+        <FringeTile id="2" layer="3" x="973" y="-44" rotation="-11" scaleX="1" scaleY="1" />
+        <FringeTile id="0" layer="2" x="155" y="-230" rotation="-170" scaleX="1" scaleY="1" />
+        <FringeTile id="1" layer="2" x="613" y="329" rotation="0" scaleX="1" scaleY="1" />
+        <FringeTile id="3" layer="-4" x="687" y="33" rotation="-7" scaleX="1" scaleY="1" />
+        <FringeTile id="3" layer="-4" x="30" y="33" rotation="12" scaleX="1" scaleY="1" />
+    </FringeTiles>
+</Level>
