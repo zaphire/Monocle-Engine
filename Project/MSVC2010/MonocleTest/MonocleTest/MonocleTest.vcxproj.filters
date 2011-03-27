@@ -58,6 +58,9 @@
     <Filter Include="Monocle\LevelEditor">
       <UniqueIdentifier>{bbc21fce-4b4f-4566-9f94-f58bc48da817}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Monocle\Tests\FTE">
+      <UniqueIdentifier>{f5cb9620-ef8b-41ac-ac96-cd2a8828c016}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Vector3.h">
@@ -215,6 +218,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\LevelEditor\LevelEditor.h">
       <Filter>Monocle\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Tests\FTE\FTE.h">
+      <Filter>Monocle\Tests\FTE</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -406,6 +412,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\LevelEditor\LevelEditor.cpp">
       <Filter>Monocle\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Tests\FTE\FTE.cpp">
+      <Filter>Monocle\Tests\FTE</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

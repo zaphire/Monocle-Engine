@@ -16,6 +16,7 @@
 	//#define TEST_JUMPER
 	//#define TEST_FLASH
 	#define TEST_OGMO
+	//#define TEST_FTE
 #endif
 
 #ifdef TEST_PONG
@@ -26,12 +27,16 @@
 	#include "Tests/Jumper/Jumper.h"
 #endif
 
+#ifdef TEST_FLASH
+	#include "Tests/Flash/Flash.h"
+#endif
+
 #ifdef TEST_OGMO
 	#include "Tests/Ogmo/Ogmo.h"
 #endif
 
-#ifdef TEST_FLASH
-	#include "Tests/Flash/Flash.h"
+#ifdef TEST_FTE
+	#include "Tests/FTE/FTE.h"
 #endif
 
 using namespace Monocle;
@@ -46,16 +51,20 @@ int main(void)
 	game->SetScene(new Pong::GameScene());
 #endif
 
-#ifdef TEST_OGMO
-	game->SetScene(new Ogmo::World());
+#ifdef TEST_JUMPER
+	game->SetScene(&Jumper::gameScene);
 #endif
 
 #ifdef TEST_FLASH
 	game->SetScene(new Flash::TestScene());
 #endif
 
-#ifdef TEST_JUMPER
-	game->SetScene(&Jumper::gameScene);
+#ifdef TEST_OGMO
+	game->SetScene(new Ogmo::World());
+#endif
+
+#ifdef TEST_FTE
+	game->SetScene(new FTE::LevelScene());
 #endif
 
 	game->Main();
