@@ -5,6 +5,7 @@
 #include "Color.h"
 #include "TextureAsset.h"
 #include "Tween.h"
+#include <vector>
 
 namespace Monocle
 {
@@ -78,6 +79,8 @@ namespace Monocle
 		static void BeginLineStrip();
 		static void Vertex(Vector2 vertex);
 		static void EndLine();
+
+		static void RenderPathMesh(const std::vector<Vector2> &points, int width);
 
 	private:
 		static Graphics *instance;

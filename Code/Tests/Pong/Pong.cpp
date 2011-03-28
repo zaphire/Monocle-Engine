@@ -185,7 +185,7 @@ namespace Pong
 		Add(paddle2);
 	}
 
-	void GameScene::ReceiveNote(const std::string &note, Entity *entity)
+	void GameScene::ReceiveNote(const std::string &note)
 	{
 		if (note == "BallOffLeft")
 		{

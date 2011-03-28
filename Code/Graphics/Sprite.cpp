@@ -4,8 +4,6 @@
 
 namespace Monocle
 {
-	bool Sprite::showBounds = false;
-	Entity *Sprite::selectedSpriteEntity = NULL;
 
 	Sprite::Sprite(const std::string &filename, FilterType filter, float width, float height)
 		: Graphic(),
@@ -90,15 +88,15 @@ namespace Monocle
 		{
 			// fade out sprite if it's selected (so we can see behind it)
 			//selectedSpriteEntity == this->entity || 
-			if (showBounds)
+			if (Debug::showBounds)
 			{
-				if (selectedSpriteEntity == entity)
+				if (Debug::selectedEntity == entity)
 				{
 					Color copyColor = entity->color;
 					copyColor.a *= 0.8f;
 					Graphics::SetColor(copyColor);
 				}
-				else if (selectedSpriteEntity != NULL && selectedSpriteEntity->GetLayer() > entity->GetLayer())
+				else if (Debug::selectedEntity != NULL && Debug::selectedEntity->GetLayer() > entity->GetLayer())
 				{
 					Color copyColor = entity->color;
 					copyColor.a *= 0.6f;
@@ -112,11 +110,11 @@ namespace Monocle
 
 
 		// show bounds, for editor/selection purposes
-		if (showBounds || selectedSpriteEntity == entity)
+		if (Debug::showBounds || Debug::selectedEntity == entity)
 		{
 			if (texture != NULL)
 			{
-				if (selectedSpriteEntity == entity)
+				if (Debug::selectedEntity == entity)
 					Graphics::SetColor(Color::orange);
 				else
 					Graphics::SetColor(Color(0.9f,0.9f,1.0f,0.25f));
@@ -124,18 +122,7 @@ namespace Monocle
 				Graphics::BindTexture(NULL);
 				Graphics::RenderLineRect(0, 0, width, height);
 
-
-				if (selectedSpriteEntity != entity)
-					Graphics::SetColor(Color(0.9f,0.9f,1.0f,0.8f));
-
-				Graphics::RenderLineRect(0, 0, 20, 20);
-
-				if (selectedSpriteEntity != entity)
-					Graphics::SetColor(Color(0.0f,0.0f,0.25f,0.8f));
-
-				Graphics::RenderLineRect(0, 0, 15, 15);
-
-				if (selectedSpriteEntity == entity)
+				if (Debug::selectedEntity == entity)
 				{
 					Graphics::SetColor(Color::orange - Color(0,0,0,0.5f));
 					Graphics::RenderLine(Vector2(-width*0.5f, -height*0.5f), Vector2(width*0.5f, height*0.5f));

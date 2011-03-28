@@ -50,6 +50,7 @@ namespace Monocle
 		keyFlipV = KEY_V;
 		keyPrevTile = KEY_LEFTBRACKET;
 		keyNextTile = KEY_RIGHTBRACKET;
+		keyDelete = KEY_BACKSPACE;
 	}
 
 	void FringeTileEditor::Init(Scene *scene)
@@ -64,7 +65,7 @@ namespace Monocle
 	{
 		isOn = true;
 
-		Sprite::showBounds = true;
+		Debug::showBounds = true;
 		Debug::render = true;
 	}
 
@@ -73,7 +74,7 @@ namespace Monocle
 		Select(NULL);
 		isOn = false;
 
-		Sprite::showBounds = false;
+		Debug::showBounds = false;
 		Debug::render = false;
 	}
 
@@ -189,12 +190,12 @@ namespace Monocle
 		{
 			if (selectedEntity == NULL)
 			{
-				Sprite::showBounds = !Sprite::showBounds;
+				Debug::showBounds = !Debug::showBounds;
 			}
 		}
 		else
 		{
-			if (Sprite::showBounds == true)
+			if (Debug::showBounds == true)
 			{
 				if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || Input::IsKeyPressed(keySelect))
 				{
@@ -223,6 +224,17 @@ namespace Monocle
 		}
 	}
 
+	void FringeTileEditor::CloneNode()
+	{
+		if (selectedEntity && selectedNode)
+		{
+			Node *newNode = new Node(Input::GetWorldMousePosition());
+			scene->Add(newNode);
+			selectedNode->SetNext(newNode);
+			Select(newNode);
+		}
+	}
+
 	void FringeTileEditor::Select(Entity *entity)
 	{
 		if (entity == NULL)
@@ -230,14 +242,12 @@ namespace Monocle
 
 		selectedEntity = entity;
 
-		Sprite::selectedSpriteEntity = selectedEntity;
+		Debug::selectedEntity = selectedEntity;
 
 		if (entity)
 		{
-			if (entity->HasTag("FringeTile"))
-			{
-				selectedFringeTile = (FringeTile*)entity;
-			}
+			selectedFringeTile = dynamic_cast<FringeTile*>(entity);
+			selectedNode = dynamic_cast<Node*>(entity);
 		}
 		else
 		{
@@ -302,18 +312,27 @@ namespace Monocle
 			//Graphics::SetCameraPosition(selectedEntity->position);
 		}
 
+		if (selectedNode)
+		{
+			if (Input::IsKeyPressed(keyClone))
+			{
+				CloneNode();
+			}
+			if (Input::IsKeyPressed(keyDelete))
+			{
+				Node *lastSelectedNode = selectedNode;
+				Select(selectedNode->GetPrev());
+				lastSelectedNode->TakeOut();
+				scene->Remove(lastSelectedNode);
+				return;
+			}
+		}
 		if (selectedFringeTile)
 		{
-			if (Input::IsKeyPressed(KEY_BACKSPACE))
+			if (Input::IsKeyPressed(keyDelete))
 			{
-				///HACK: need to delete graphic and entity at some point
-				/// doesn't happen automatically (yet)
 				Level::RemoveFringeTile(selectedFringeTile);
-				//selectedEntity->SetGraphic(NULL);
-				//delete selectedFringeTile;
 				scene->Remove(selectedEntity);
-				// enqueue deletion of entity?
-				//delete selectedEntity;
 				Select(NULL);
 				return;
 			}

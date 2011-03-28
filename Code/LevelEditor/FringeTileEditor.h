@@ -1,6 +1,7 @@
 #include "../Vector2.h"
 #include "../Entity.h"
 #include "../Input.h"
+#include "Node.h"
 
 namespace Monocle
 {
@@ -60,7 +61,10 @@ namespace Monocle
 		void Select(Entity *entity);
 
 		Entity *selectedEntity;
+
 		FringeTile *selectedFringeTile;
+		Node *selectedNode;
+
 		Scene *scene;
 		bool isOn;
 
@@ -86,5 +90,10 @@ namespace Monocle
 		KeyCode keyFlipV;
 		KeyCode keyPrevTile;
 		KeyCode keyNextTile;
+		KeyCode keyDelete;
+
+
+		/// NODE
+		void CloneNode();
 	};
 }

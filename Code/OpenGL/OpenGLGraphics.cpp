@@ -410,6 +410,56 @@ namespace Monocle
 	{
 		glEnd();
 	}
+
+	void Graphics::RenderPathMesh(const std::vector<Vector2> &points, int width)
+	{
+		glBegin(GL_QUADS);
+		for (int i = 0; i < points.size()-1; i++)
+		{
+			Vector2 diff1;
+			Vector2 perp1;
+
+			/*
+			if (i-1 >= 0)
+			{
+				diff1 = points[i] - points[i-1];
+				perp1 = diff1.GetNormalized().GetPerpendicularLeft();
+				//diff1 = points[i + 1] - points[i];
+				//perp1 = perp1*0.5f + diff1.GetNormalized().GetPerpendicularLeft()*0.5f;
+			}
+			else
+			{
+				diff1 = points[i + 1] - points[i];
+				perp1 = diff1.GetNormalized().GetPerpendicularLeft();
+			}
+			*/
+
+			diff1 = points[i + 1] - points[i];
+			perp1 = diff1.GetNormalized().GetPerpendicularLeft();
+
+			Vector2 diff2;
+			Vector2 perp2 = perp1;
+			
+			if (i+2 < points.size())
+			{
+				diff2 = points[i+2] - points[i+1];
+				perp2 = diff2.GetNormalized().GetPerpendicularLeft();
+			}
+			else
+			{
+				perp2 = perp1;
+			}
+			
+			Vector2 pos1 = points[i];
+			Vector2 pos2 = points[i+1];
+			Vertex(pos1 - perp1 * width * 0.5f);
+			Vertex(pos2 - perp2 * width * 0.5f);
+			Vertex(pos2 + perp2 * width * 0.5f);
+			Vertex(pos1 + perp1 * width * 0.5f);
+			//RenderLine(pos - perp * width * 0.5f, pos + perp * width * 0.5f);
+		}
+		glEnd();
+	}
 }
 
 #endif

@@ -79,6 +79,21 @@ namespace Monocle
 			graphic->Render(this);
 		}
 
+		if (Debug::showBounds)
+		{
+			if (Debug::selectedEntity == this)
+				Graphics::SetColor(Color::orange);
+			else
+				Graphics::SetColor(Color(0.9f,0.9f,1.0f,0.8f));
+
+			Graphics::RenderLineRect(0, 0, 20, 20);
+
+			if (Debug::selectedEntity != this)
+				Graphics::SetColor(Color(0.0f,0.0f,0.25f,0.8f));
+
+			Graphics::RenderLineRect(0, 0, 15, 15);
+		}
+
 		Graphics::PopMatrix();
 	}
 

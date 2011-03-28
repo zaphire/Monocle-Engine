@@ -1,10 +1,13 @@
 #include "Debug.h"
 
 #include <iostream>
+#include "Entity.h"
 
 namespace Monocle
 {
 	bool Debug::render = false;
+	bool Debug::showBounds = false;
+	Entity *Debug::selectedEntity;
 	
 	void Debug::Init()
 	{

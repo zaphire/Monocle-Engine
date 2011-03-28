@@ -172,7 +172,7 @@ namespace Jumper
 		}
         if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
         {
-            SpawnPlayer(Platform::mousePosition);
+            SpawnPlayer(Input::GetWorldMousePosition());
         }
 	}
 
