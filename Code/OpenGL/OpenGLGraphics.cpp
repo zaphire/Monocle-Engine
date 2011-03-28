@@ -155,6 +155,11 @@ namespace Monocle
 	void Graphics::AdjustCameraZoom(const Vector2 &adjustment)
 	{
 		instance->cameraZoom += adjustment;
+
+		if (instance->cameraZoom.x < 0.0f)
+			instance->cameraZoom.x = 0.0f;
+		if (instance->cameraZoom.y < 0.0f)
+			instance->cameraZoom.y = 0.0f;
 	}
 
 	void Graphics::Translate(float x, float y, float z)

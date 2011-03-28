@@ -6,6 +6,15 @@ using namespace Monocle;
 // Test the FringeTileEditor
 namespace FTE
 {
+	class Player : public Entity
+	{
+	public:
+		Player();
+		void Update();
+		Vector2 velocity;
+		float force;
+	};
+
 	class LevelScene : public Scene
 	{
 	public:

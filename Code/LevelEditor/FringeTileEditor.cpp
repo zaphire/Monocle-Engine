@@ -196,7 +196,6 @@ namespace Monocle
 		{
 			if (Sprite::showBounds == true)
 			{
-				//
 				if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || Input::IsKeyPressed(keySelect))
 				{
 					Vector2 worldMousePosition = Input::GetWorldMousePosition();

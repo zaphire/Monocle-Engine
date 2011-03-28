@@ -2,6 +2,31 @@
 
 namespace FTE
 {
+
+	Player::Player()
+		: Entity(), force(200.0f)
+	{
+		SetGraphic(new Sprite("graphics/player.png"));
+		scale = Vector2::one * 0.5f;
+	}
+
+	void Player::Update()
+	{
+		Entity::Update();
+
+		if (Input::IsMouseButtonHeld(MOUSE_BUTTON_LEFT))
+		{
+			Vector2 dir = Input::GetWorldMousePosition() - position;
+			dir.Normalize();
+			velocity += force * dir * Monocle::deltaTime;
+		}
+
+		position += velocity * Monocle::deltaTime;
+
+		Graphics::SetCameraPosition(position);
+	}
+
+
 	LevelScene *levelScene = NULL;
 
 	void LevelScene::Begin()
@@ -24,6 +49,12 @@ namespace FTE
 		Level::LoadProject("project.xml");
 		// load the actual level
 		Level::Load("level.xml", this);
+
+
+		// create the player
+		Player *player = new Player();
+		player->position = Graphics::screenCenter;
+		Add(player);
 	}
 
 	void LevelScene::Update()
