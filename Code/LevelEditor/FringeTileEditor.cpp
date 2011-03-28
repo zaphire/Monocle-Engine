@@ -161,7 +161,7 @@ namespace Monocle
 			*/
 			if (Platform::mouseWheel != 0)
 			{
-				Graphics::AdjustCameraZoom(Platform::mouseWheel * Vector2::one * 0.0005f);
+				Graphics::AdjustCameraZoom(Platform::mouseWheel * Vector2::one * 0.00025f);
 				Vector2 camZoom = Graphics::GetCameraZoom();
 				printf("camZoom (%f, %f)\n", camZoom.x, camZoom.y);
 			}

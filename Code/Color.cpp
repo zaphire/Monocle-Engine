@@ -11,6 +11,7 @@ namespace Monocle
 	Color Color::blue	= Color(0,0,1,1);
 	Color Color::yellow = Color(1,1,0,1);
 	Color Color::orange = Color(1.0f,0.5f,0.0f,1.0f);
+	Color Color::purple = Color(0.5f, 0.0f, 1.0f, 1.0f);
 
 	Color::Color()
 		: r(1), g(1), b(1), a(1)

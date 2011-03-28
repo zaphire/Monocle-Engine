@@ -38,6 +38,8 @@ namespace FTE
 		// set the base content path (used by everything)
 		Assets::SetContentPath("../../Content/FTE/");
 
+		Graphics::SetBackgroundColor(Color::blue*0.1f + Color::black*0.9f);
+
 		// tell the FTE what scene it is working in
 		fringeTileEditor.Init(this);
 		// enable it
@@ -49,7 +51,6 @@ namespace FTE
 		Level::LoadProject("project.xml");
 		// load the actual level
 		Level::Load("level.xml", this);
-
 
 		// create the player
 		Player *player = new Player();

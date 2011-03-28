@@ -171,6 +171,8 @@ namespace Monocle
 		// does this platform support touches?
 		static bool IsTouchEnabled();
 
+		static bool IsActive();
+
 		void WindowSizeChanged(int w, int h);
 
 	private:

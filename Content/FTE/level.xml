@@ -1,14 +1,17 @@
 <Level width="1600" height="600">
     <FringeTiles set="aquaria">
         <FringeTile id="0" layer="2" x="575" y="-259" rotation="-180" scaleX="1" scaleY="1" />
-        <FringeTile id="0" layer="0" x="192" y="516" rotation="-1" scaleX="1" scaleY="1" />
-        <FringeTile id="2" layer="3" x="973" y="-44" rotation="-11" scaleX="1" scaleY="1" />
+        <FringeTile id="0" layer="-6" x="192" y="516" rotation="-1" scaleX="1" scaleY="1" />
+        <FringeTile id="2" layer="3" x="932" y="505" rotation="-11" scaleX="1" scaleY="1" />
         <FringeTile id="0" layer="2" x="149" y="-303" rotation="-170" scaleX="1" scaleY="1" />
-        <FringeTile id="1" layer="2" x="635" y="512" rotation="0" scaleX="1" scaleY="1" />
+        <FringeTile id="1" layer="2" x="567" y="511" rotation="0" scaleX="1" scaleY="1" />
         <FringeTile id="3" layer="-4" x="678" y="-1" rotation="-7" scaleX="1" scaleY="1" />
         <FringeTile id="3" layer="-4" x="43" y="3" rotation="12" scaleX="1" scaleY="1" />
-        <FringeTile id="3" layer="-4" x="350" y="119" rotation="-1" scaleX="1" scaleY="1" />
+        <FringeTile id="3" layer="-4" x="350" y="119" rotation="0" scaleX="1" scaleY="1" />
         <FringeTile id="2" layer="3" x="-466" y="-115" rotation="22" scaleX="1" scaleY="1" />
         <FringeTile id="2" layer="3" x="-1441" y="-1065" rotation="-22" scaleX="1" scaleY="1" />
+        <FringeTile id="0" layer="-6" x="924" y="532" rotation="-1" scaleX="1" scaleY="1" />
+        <FringeTile id="3" layer="-4" x="1039" y="439" rotation="-1" scaleX="1" scaleY="1" />
+        <FringeTile id="1" layer="4" x="335" y="-159" rotation="180" scaleX="1" scaleY="1" />
     </FringeTiles>
 </Level>

@@ -40,6 +40,12 @@ namespace Monocle
 		while (!isDone)
 		{
 			platform.Update();
+
+			while (!platform.IsActive())
+			{
+				platform.Update();
+			}
+
 			tween.Update();
 
 			/*

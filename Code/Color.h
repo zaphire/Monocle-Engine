@@ -18,6 +18,7 @@ namespace Monocle
 		static Color blue;
 		static Color yellow;
 		static Color orange;
+		static Color purple;
 	};
 
 	Color operator+(const Color& lhs, const Color& rhs);	

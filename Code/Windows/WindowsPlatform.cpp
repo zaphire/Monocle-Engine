@@ -725,6 +725,11 @@ namespace Monocle
 	{
 		return false;
 	}
+
+	bool Platform::IsActive()
+	{
+		return WindowsPlatform::instance->active;
+	}
 }
 
 #endif
