@@ -222,6 +222,9 @@
     <ClInclude Include="..\..\..\..\Code\Tests\FTE\FTE.h">
       <Filter>Monocle\Tests\FTE</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\LevelEditor\Node.h">
+      <Filter>Monocle\LevelEditor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp">
@@ -415,6 +418,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Tests\FTE\FTE.cpp">
       <Filter>Monocle\Tests\FTE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\LevelEditor\Node.cpp">
+      <Filter>Monocle\LevelEditor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

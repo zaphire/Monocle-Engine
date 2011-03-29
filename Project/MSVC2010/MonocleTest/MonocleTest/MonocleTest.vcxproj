@@ -91,6 +91,7 @@
     <ClInclude Include="..\..\..\..\Code\LevelEditor\FringeTile.h" />
     <ClInclude Include="..\..\..\..\Code\LevelEditor\FringeTileEditor.h" />
     <ClInclude Include="..\..\..\..\Code\LevelEditor\LevelEditor.h" />
+    <ClInclude Include="..\..\..\..\Code\LevelEditor\Node.h" />
     <ClInclude Include="..\..\..\..\Code\Macros.h" />
     <ClInclude Include="..\..\..\..\Code\Monocle.h" />
     <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\glpng.h" />
@@ -143,6 +144,7 @@
     <ClCompile Include="..\..\..\..\Code\LevelEditor\FringeTile.cpp" />
     <ClCompile Include="..\..\..\..\Code\LevelEditor\FringeTileEditor.cpp" />
     <ClCompile Include="..\..\..\..\Code\LevelEditor\LevelEditor.cpp" />
+    <ClCompile Include="..\..\..\..\Code\LevelEditor\Node.cpp" />
     <ClCompile Include="..\..\..\..\Code\Main.cpp" />
     <ClCompile Include="..\..\..\..\Code\Monocle.cpp" />
     <ClCompile Include="..\..\..\..\Code\OpenAL\OpenALAudio.cpp" />

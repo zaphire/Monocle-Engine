@@ -262,7 +262,7 @@ namespace Flash
 		//Pause();
 		isEditing = true;
 		isRecording = true;
-		Sprite::showBounds = true;
+		Debug::showBounds = true;
 	}
 
 	void TestScene::SelectPrevPart()
@@ -397,7 +397,7 @@ namespace Flash
 					editEntity->position = Input::GetMousePosition() + offset;
 				}
 
-				Sprite::selectedSpriteEntity = editEntity;
+				Debug::selectedEntity = editEntity;
 				
 				if (Input::IsKeyPressed(KEY_LEFT))
 				{
