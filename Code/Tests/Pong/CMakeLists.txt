@@ -1,5 +1,5 @@
 set(PONG_SRCS
-  Pong.cpp
+	Main.cpp Pong.cpp
 )
 
 add_executable(TestPong ${PONG_SRCS})
