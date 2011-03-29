@@ -385,6 +385,11 @@ namespace Monocle
 			instance->keys[instance->localKeymap[key]] = on;
 		}
 	}
+
+	bool Platform::IsActive()
+	{
+		return LinuxPlatform::instance->active;
+	}
 }
 
 #endif
