@@ -98,6 +98,7 @@ namespace Monocle
     
 	CocoaPlatform::CocoaPlatform()
 	{
+		active = true;
 	}
 
 	bool CocoaPlatform::Init(const std::string &name, int w, int h, int bits, bool fullscreen)
@@ -220,5 +221,10 @@ namespace Monocle
 		{
 			instance->keys[instance->localKeymap[key]] = on;			
 		}
+	}
+    
+	bool Platform::IsActive()
+	{
+		return CocoaPlatform::instance->active;
 	}
 }
