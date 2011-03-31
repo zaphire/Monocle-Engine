@@ -3,6 +3,7 @@
 #include "LinuxPlatform.h"
 
 #include <X11/extensions/Xrandr.h>
+#include <X11/extensions/XInput2.h>
 #include <X11/X.h>
 #include <X11/keysymdef.h>
 
@@ -132,6 +133,7 @@ namespace Monocle
 	bool Platform::keys[KEY_MAX];
 	bool Platform::mouseButtons[3];
 	Vector2 Platform::mousePosition;
+	int Platform::mouseWheel = 0;
 
 	Platform::Platform()
 	{
@@ -271,12 +273,12 @@ namespace Monocle
 		localKeymap[KeySymParts::Get(XK_F14).low] = KEY_F14;
 		localKeymap[KeySymParts::Get(XK_F15).low] = KEY_F15;
 
-		Init(800, 600, 24, false);
+		Init("Monocle Powered", 800, 600, 24, false);
 	}
 
-	void Platform::Init(int w, int h, int bits, bool fullscreen)
+	void Platform::Init(const std::string &name, int w, int h, int bits, bool fullscreen)
 	{
-		LinuxPlatform::instance->CreatePlatformWindow("Monocle Powered", w, h, bits, fullscreen);
+		LinuxPlatform::instance->CreatePlatformWindow(name.c_str(), w, h, bits, fullscreen);
 		width = w;
 		height = h;
 	}
@@ -382,6 +384,11 @@ namespace Monocle
 		{
 			instance->keys[instance->localKeymap[key]] = on;
 		}
+	}
+
+	bool Platform::IsActive()
+	{
+		return LinuxPlatform::instance->active;
 	}
 }
 

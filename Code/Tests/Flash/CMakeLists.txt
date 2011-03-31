@@ -1,5 +1,5 @@
 set(FLASH_SRCS
-  Flash.cpp
+	Main.cpp Flash.cpp
 )
 
 add_executable(TestFlash ${FLASH_SRCS})
