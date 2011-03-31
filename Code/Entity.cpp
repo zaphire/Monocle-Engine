@@ -89,6 +89,10 @@ namespace Monocle
 
 		if (Debug::showBounds)
 		{
+			Vector2 offset;
+			if (parent)
+				offset = Vector2::one * 2;
+
 			Graphics::BindTexture(NULL);
 
 			Graphics::PushMatrix();
@@ -99,12 +103,12 @@ namespace Monocle
 			else
 				Graphics::SetColor(Color(0.9f,0.9f,1.0f,0.8f));
 
-			Graphics::RenderLineRect(0, 0, 20, 20);
+			Graphics::RenderLineRect(offset.x, offset.y, 20, 20);
 
 			if (Debug::selectedEntity != this)
 				Graphics::SetColor(Color(0.0f,0.0f,0.25f,0.8f));
 
-			Graphics::RenderLineRect(0, 0, 15, 15);
+			Graphics::RenderLineRect(offset.x, offset.y, 15, 15);
 
 			Graphics::PopMatrix();
 		}

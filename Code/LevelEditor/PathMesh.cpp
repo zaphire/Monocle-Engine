@@ -47,6 +47,8 @@ namespace Monocle
 		Graphics::BindTexture(texture);
 		Graphics::PushMatrix();
 		Graphics::Translate(position);
+		Graphics::Rotate(rotation, 0, 0, 1);
+		Graphics::Scale(scale);
 		if (nodes.size() > 0)
 			Graphics::RenderPathMesh(nodes, cells, size);
 		Graphics::PopMatrix();
