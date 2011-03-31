@@ -8,4 +8,4 @@ Makefile
 monocle.files
 monocle.includes
 monocle.config
-monocle.creator
+monocle.creator.*
