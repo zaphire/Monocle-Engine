@@ -12,6 +12,11 @@ namespace Monocle
 	Vector2 Vector2::left = Vector2(-1, 0);
 	Vector2 Vector2::right = Vector2(1, 0);
 
+	Vector2::Vector2(const Vector2 &vector2)
+		: x(vector2.x), y(vector2.y)
+	{
+	}
+
 	Vector2::Vector2()
 		: x(0.0f), y(0.0f)
 	{

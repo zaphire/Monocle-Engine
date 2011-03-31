@@ -4,6 +4,12 @@
 namespace Monocle
 {
 	/// NODE
+
+	Node::Node(const Node &node)
+		: Entity(node), variant(node.variant), next(node.next), prev(node.prev)
+	{
+	}
+
 	Node::Node()
 		: Entity(), next(NULL), prev(NULL), variant(0)
 	{

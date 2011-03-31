@@ -36,6 +36,8 @@ namespace Monocle
 		void RemoveReference();
 		virtual void Reload()=0;
 
+		std::string GetName();
+
 	protected:
 		friend class Assets;
 		// allow derived classes to add whatever params they want to load

@@ -9,6 +9,9 @@
 #include "Graphics/Tilemap.h"
 #include "LevelEditor/FringeTile.h"
 
+// temp, replace with generic file interface later
+class TiXmlElement;
+
 namespace Monocle
 {
 	class Scene;
@@ -26,15 +29,13 @@ namespace Monocle
 		static void SaveAs(const std::string &filename);
 		static void End(); // called on scene end
 
-		static FringeTile* AddFringeTile(FringeTileset *fringeTileset, int tileID, int layer, const Vector2 &position, const Vector2 &scale, int rotation, const Color &color);
-		static void RemoveFringeTile(FringeTile* fringeTile);
+		static FringeTileset* GetCurrentFringeTileset();
 
 		std::string name;
 
 		std::list<Tilemap*> tilemaps;
 		std::list<Tileset> tilesets;
 
-		std::list<FringeTile*> fringeTiles;
 		std::list<FringeTileset> fringeTilesets;
 
 		int width, height;
@@ -46,5 +47,13 @@ namespace Monocle
 		Scene *scene;
 		static Level *instance;
 		std::string filename;
+
+		FringeTileset *fringeTileset;
+
+		void SaveEntities(TiXmlElement *element, Entity *fromEntity=NULL);
+		void LoadEntities(TiXmlElement *element, Entity *intoEntity=NULL);
+
+		template <class T> void SaveEntitiesOfType(const std::string &name, TiXmlElement *element, Entity *fromEntity=NULL);
+		template <class T> void LoadEntitiesOfType(const std::string &name, TiXmlElement *element, Entity *intoEntity=NULL);
 	};
 }

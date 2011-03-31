@@ -12,10 +12,10 @@
 //    #define TEST_PONG
 #else
 	//#define TEST_game
-	#define TEST_PONG
+	//#define TEST_PONG
 	//#define TEST_JUMPER
 	//#define TEST_FLASH
-	//#define TEST_OGMO
+	#define TEST_OGMO
 	//#define TEST_FTE
 #endif
 

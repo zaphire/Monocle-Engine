@@ -2,9 +2,15 @@
 #include "Entity.h"
 #include "Collision.h"
 #include "Graphics.h"
+#include "FileNode.h"
 
 namespace Monocle
 {
+	Entity::Entity(const Entity &entity)
+		: scene(NULL), collider(NULL), graphic(NULL), position(entity.position), scale(entity.scale), rotation(entity.rotation), depth(entity.depth), isVisible(entity.isVisible), color(entity.color), layer(entity.layer), tags(entity.tags)
+	{
+	}
+
 	Entity::Entity()
 		: scene(NULL), collider(NULL), graphic(NULL), layer(0), depth(0.0f), scale(Vector2::one), rotation(0.0f), color(Color::white), parent(NULL), isVisible(true)
 		//, willDie(false)
@@ -68,21 +74,25 @@ namespace Monocle
 			Graphics::Rotate(rotation, 0, 0, 1);
 		Graphics::Scale(scale);
 
-		for(std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
-		{
-			(*i)->Render();
-		}
-
 		if (graphic != NULL)
 		{
 			Graphics::SetColor(color);
 			graphic->Render(this);
 		}
 
+		for(std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
+		{
+			(*i)->Render();
+		}
+
 		Graphics::PopMatrix();
 
 		if (Debug::showBounds)
 		{
+			Vector2 offset;
+			if (parent)
+				offset = Vector2::one * 2;
+
 			Graphics::BindTexture(NULL);
 
 			Graphics::PushMatrix();
@@ -93,12 +103,12 @@ namespace Monocle
 			else
 				Graphics::SetColor(Color(0.9f,0.9f,1.0f,0.8f));
 
-			Graphics::RenderLineRect(0, 0, 20, 20);
+			Graphics::RenderLineRect(offset.x, offset.y, 20, 20);
 
 			if (Debug::selectedEntity != this)
 				Graphics::SetColor(Color(0.0f,0.0f,0.25f,0.8f));
 
-			Graphics::RenderLineRect(0, 0, 15, 15);
+			Graphics::RenderLineRect(offset.x, offset.y, 15, 15);
 
 			Graphics::PopMatrix();
 		}
@@ -308,8 +318,7 @@ namespace Monocle
 	{
 		Vector2 returnPos;
 		Graphics::PushMatrix();
-		Graphics::ResolutionMatrix();
-		//Graphics::SceneMatrix();
+		Graphics::IdentityMatrix();
 
 		std::list<Entity*> entityChain;
 		
@@ -349,6 +358,70 @@ namespace Monocle
 			return this;
 
 		return NULL;
+	}
+
+	void Entity::Save(FileNode *fileNode)
+	{
+		if (position != Vector2::zero)
+			fileNode->Write("position", position);
+		if (rotation != 0)
+			fileNode->Write("rotation", rotation);
+		if (scale != Vector2::one)
+			fileNode->Write("scale", scale);
+		if (layer != 0)
+			fileNode->Write("layer", layer);
+		if (color != Color::white)
+			fileNode->Write("color", color);
+	}
+
+	void Entity::Load(FileNode *fileNode)
+	{
+		fileNode->Read("position", position);
+		fileNode->Read("rotation", rotation);
+		fileNode->Read("scale", scale);
+		int newLayer =0;
+		fileNode->Read("layer", newLayer);
+		SetLayer(newLayer);
+		fileNode->Read("color", color);
+	}
+
+	Entity *Entity::GetParent()
+	{
+		return parent;
+	}
+
+
+	/// TODO: make recursive
+	Entity *Entity::GetNearestEntityByControlPoint(const Vector2 &position, const std::string &tag, Entity *ignoreEntity, float &smallestSqrMag)
+	{
+		Entity *nearestChild = NULL;
+
+		for (std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
+		{
+			if ((*i) != ignoreEntity)
+			{
+				Vector2 wp = (*i)->GetWorldPosition();
+				Vector2 diff = wp - position;
+				printf("wp: %f, %f\n", wp.x, wp.y);
+				printf("diff: %f, %f\n", diff.x, diff.y);
+				if (diff.IsInRange(90))
+				{
+					float sqrMag = diff.GetSquaredMagnitude();
+					if (smallestSqrMag == -1 || sqrMag < smallestSqrMag)
+					{
+						smallestSqrMag = sqrMag;
+						nearestChild = (*i);
+					}
+				}
+			}
+		}
+
+		return nearestChild;
+	}
+
+	const std::list<Entity*>* Entity::GetChildren()
+	{
+		return &children;
 	}
 
 	/*

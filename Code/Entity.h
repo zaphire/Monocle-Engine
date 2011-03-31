@@ -3,6 +3,7 @@
 #include "Vector2.h"
 #include "Scene.h"
 #include "Color.h"
+#include "FileNode.h"
 
 #include <string>
 #include <vector>
@@ -21,6 +22,7 @@ namespace Monocle
 	class Entity
 	{
 	public:
+		Entity(const Entity &entity);
 		Entity();
 		~Entity();
 
@@ -50,6 +52,10 @@ namespace Monocle
 		//Called by the scene when the entity is removed from that scene
 		virtual void Removed();
 
+		virtual void Save(FileNode *fileNode);
+		
+		virtual void Load(FileNode *fileNode);
+
 		//Call to check our collider against all entities that have "tag"
 		Collider* Collide(const std::string &tag);
 		//RectangleCollider *AddRectangleCollider(float width, float height, const Vector2 &offset = Vector2::zero);
@@ -73,23 +79,45 @@ namespace Monocle
 		// add or remove entities from list of children
 		void Add(Entity *entity);
 		void Remove(Entity *entity);
+		Entity *GetParent();
 
 		// used by editors
 		bool IsPositionInGraphic(const Vector2 &position);
 		Entity* GetChildEntityAtPosition(const Vector2 &position);
-		Vector2 GetWorldPosition(const Vector2 &position);
+		Vector2 GetWorldPosition(const Vector2 &position=Vector2::zero);
 		Vector2 GetWorldScale(const Vector2 &scale);
 
 		// enqueue destruction of this entity
 		//void Die();
 
+		template <class T>
+		inline T *GetFirstChildOfType()
+		{
+			T *t = NULL;
+			for (std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
+			{
+				t = dynamic_cast<T*>(*i);
+				if (t)
+				{
+					return t;
+				}
+			}
+			return NULL;
+		}
+
+		const std::list<Entity*>* GetChildren(); 
+
 	protected:
 		friend class Scene;
+
+		Entity *GetNearestEntityByControlPoint(const Vector2 &position, const std::string &tag, Entity *ignoreEntity, float &smallestSqrMag);
 		// notes are very simple "messages"
 		void SendNoteToScene(const std::string &note);
 		// send a note to all entites with tag "tag"
 		void SendNote(const std::string &tag, const std::string &note);
 		virtual void ReceiveNote(const std::string &tag, const std::string &note);
+		
+		std::list<Entity*> children;
 
 	private:
 		Entity *parent;
@@ -102,12 +130,11 @@ namespace Monocle
 		friend class Graphics;
 		Graphic* GetGraphic();
 		Graphic* graphic;
-		
 
 		// only for use by scene
 		//friend class Scene;
 		
-		std::list<Entity*> children;
+		
 		
 		std::vector<std::string> tags;
 		int layer;

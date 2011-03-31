@@ -54,7 +54,8 @@ namespace Monocle
 
 		void ApplyGrid(Entity *entity, int gridSize);
 
-		void Clone();
+		template <class T>
+		void CloneEntity(T *t);
 
 		void SetState(FringeTileEditorState state);
 
@@ -93,7 +94,6 @@ namespace Monocle
 		KeyCode keyDelete;
 		KeyCode keyScaleDown;
 		KeyCode keyScaleUp;
-
 
 		/// NODE
 		void CloneNode();

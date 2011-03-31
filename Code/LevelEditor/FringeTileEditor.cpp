@@ -215,15 +215,14 @@ namespace Monocle
 		}
 	}
 
-	void FringeTileEditor::Clone()
+	template <class T>
+	void FringeTileEditor::CloneEntity(T *t)
 	{
-		if (selectedEntity && selectedFringeTile)
-		{
-			// TODO: avoid using graphic -> entity
-			FringeTile *newFringeTile = Level::AddFringeTile(selectedFringeTile->GetFringeTileset(), selectedFringeTile->GetTileID(), selectedEntity->GetLayer(), Input::GetWorldMousePosition(), selectedEntity->scale, selectedEntity->rotation, selectedEntity->color);
-			//Tween::FromTo(&fringeTile->entity->color.a, 0.0f, 1.0f, 0.25f, EASE_LINEAR);
-			Select(newFringeTile);
-		}
+		T *newT = new T(*t);
+		Entity *entity = (Entity*)newT;
+		entity->position = Input::GetWorldMousePosition();
+		scene->Add(entity);
+		Select(entity);
 	}
 
 	void FringeTileEditor::CloneNode()
@@ -232,7 +231,14 @@ namespace Monocle
 		{
 			Node *newNode = new Node(Input::GetWorldMousePosition());
 			newNode->Copy(selectedNode);
-			scene->Add(newNode);
+			if (selectedNode->GetParent())
+			{
+				///HACK: replace with "GetLocalPosition" function
+				newNode->position = Input::GetWorldMousePosition() - selectedNode->GetParent()->position;
+				selectedNode->GetParent()->Add(newNode);
+			}
+			else
+				scene->Add(newNode);
 			selectedNode->InsertNext(newNode);
 			Select(newNode);
 		}
@@ -355,14 +361,6 @@ namespace Monocle
 		}
 		if (selectedFringeTile)
 		{
-			if (Input::IsKeyPressed(keyDelete))
-			{
-				Level::RemoveFringeTile(selectedFringeTile);
-				scene->Remove(selectedEntity);
-				Select(NULL);
-				return;
-			}
-
 			if (Input::IsKeyPressed(KEY_LEFTBRACKET))
 			{
 				selectedFringeTile->PrevTile();
@@ -373,7 +371,7 @@ namespace Monocle
 			}
 			if (Input::IsKeyPressed(keyClone))
 			{
-				Clone();
+				CloneEntity(selectedFringeTile);
 			}
 			if (Input::IsKeyPressed(KEY_M))
 			{
@@ -399,6 +397,13 @@ namespace Monocle
 			{
 				selectedEntity->scale.y *= -1;
 			}
+		}
+
+		if (Input::IsKeyPressed(keyDelete))
+		{
+			scene->Remove(selectedEntity);
+			Select(NULL);
+			return;
 		}
 
 		if (Input::IsKeyPressed(keyScaleUp))
