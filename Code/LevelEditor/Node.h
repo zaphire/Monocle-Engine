@@ -15,8 +15,14 @@ namespace Monocle
 		void TakeOut();
 
 		void SetNext(Node *node);
+		void InsertNext(Node *node);
+
+		void Copy(Node *node);
+
 		Node *GetNext();
 		Node *GetPrev();
+
+		int variant;
 
 	private:
 		Node *next;

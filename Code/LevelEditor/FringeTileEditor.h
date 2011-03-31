@@ -91,6 +91,8 @@ namespace Monocle
 		KeyCode keyPrevTile;
 		KeyCode keyNextTile;
 		KeyCode keyDelete;
+		KeyCode keyScaleDown;
+		KeyCode keyScaleUp;
 
 
 		/// NODE

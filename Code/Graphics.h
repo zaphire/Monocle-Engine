@@ -9,6 +9,7 @@
 
 namespace Monocle
 {
+	class Node;
 	class Entity;
 
 	class Graphic
@@ -80,7 +81,7 @@ namespace Monocle
 		static void Vertex(Vector2 vertex);
 		static void EndLine();
 
-		static void RenderPathMesh(const std::vector<Vector2> &points, int width);
+		static void RenderPathMesh(const std::vector<Node*> &nodes, int cells, float size);
 
 	private:
 		static Graphics *instance;

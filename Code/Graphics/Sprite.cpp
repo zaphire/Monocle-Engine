@@ -122,7 +122,12 @@ namespace Monocle
 				Graphics::BindTexture(NULL);
 				Graphics::RenderLineRect(0, 0, width, height);
 
-				if (Debug::selectedEntity == entity)
+				if (Debug::selectedEntity != entity)
+				{
+					Graphics::RenderLine(Vector2(-width*0.5f, -height*0.5f), Vector2(width*0.5f, height*0.5f));
+					Graphics::RenderLine(Vector2(width*0.5f, -height*0.5f), Vector2(-width*0.5f, height*0.5f));
+				}
+				else
 				{
 					Graphics::SetColor(Color::orange - Color(0,0,0,0.5f));
 					Graphics::RenderLine(Vector2(-width*0.5f, -height*0.5f), Vector2(width*0.5f, height*0.5f));

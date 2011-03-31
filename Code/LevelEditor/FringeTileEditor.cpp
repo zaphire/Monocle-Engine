@@ -51,6 +51,8 @@ namespace Monocle
 		keyPrevTile = KEY_LEFTBRACKET;
 		keyNextTile = KEY_RIGHTBRACKET;
 		keyDelete = KEY_BACKSPACE;
+		keyScaleDown = KEY_MINUS;
+		keyScaleUp = KEY_EQUALS;
 	}
 
 	void FringeTileEditor::Init(Scene *scene)
@@ -229,8 +231,9 @@ namespace Monocle
 		if (selectedEntity && selectedNode)
 		{
 			Node *newNode = new Node(Input::GetWorldMousePosition());
+			newNode->Copy(selectedNode);
 			scene->Add(newNode);
-			selectedNode->SetNext(newNode);
+			selectedNode->InsertNext(newNode);
 			Select(newNode);
 		}
 	}
@@ -326,6 +329,29 @@ namespace Monocle
 				scene->Remove(lastSelectedNode);
 				return;
 			}
+
+			if (Input::IsKeyPressed(KEY_LEFTBRACKET))
+			{
+				selectedNode->variant--;
+			}
+			if (Input::IsKeyPressed(KEY_RIGHTBRACKET))
+			{
+				selectedNode->variant++;
+			}
+
+			/*
+			const float sizeSpeed = 32.0f;
+			if (Input::IsKeyHeld(keyScaleDown))
+			{
+				selectedNode->scale -= sizeSpeed * Monocle::deltaTime;
+			}
+			if (Input::IsKeyHeld(keyScaleUp))
+			{
+				selectedNode->size += sizeSpeed * Monocle::deltaTime;
+			}
+			*/
+
+			//printf("selectedNode->size: %f\n", selectedNode->scale.y);
 		}
 		if (selectedFringeTile)
 		{
@@ -375,6 +401,17 @@ namespace Monocle
 			}
 		}
 
+		if (Input::IsKeyPressed(keyScaleUp))
+		{
+			Vector2 add = Vector2(SIGNOF(selectedEntity->scale.x), SIGNOF(selectedEntity->scale.y)) * 0.125f;
+			selectedEntity->scale += add;
+			printf("add(%f, %f)\n", add.x, add.y);
+		}
+		if (Input::IsKeyPressed(keyScaleDown))
+		{
+			selectedEntity->scale -= Vector2(SIGNOF(selectedEntity->scale.x), SIGNOF(selectedEntity->scale.y)) * 0.125f;
+		}
+
 		const float moveSpeed = 10.0f;
 		if (Input::IsKeyHeld(KEY_LEFT))
 		{
@@ -393,16 +430,7 @@ namespace Monocle
 			selectedEntity->position += Vector2::down * moveSpeed * Monocle::deltaTime;
 		}
 
-		if (Input::IsKeyPressed(KEY_O))
-		{
-			Vector2 add = Vector2(SIGNOF(selectedEntity->scale.x), SIGNOF(selectedEntity->scale.y)) * 0.125f;
-			selectedEntity->scale += add;
-			printf("add(%f, %f)\n", add.x, add.y);
-		}
-		if (Input::IsKeyPressed(KEY_U))
-		{
-			selectedEntity->scale -= Vector2(SIGNOF(selectedEntity->scale.x), SIGNOF(selectedEntity->scale.y)) * 0.125f;
-		}
+
 
 		if (Input::IsKeyPressed(KEY_I))
 		{

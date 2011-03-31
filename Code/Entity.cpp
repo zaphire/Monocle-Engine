@@ -79,8 +79,15 @@ namespace Monocle
 			graphic->Render(this);
 		}
 
+		Graphics::PopMatrix();
+
 		if (Debug::showBounds)
 		{
+			Graphics::BindTexture(NULL);
+
+			Graphics::PushMatrix();
+			Graphics::Translate(position.x, position.y, depth);
+
 			if (Debug::selectedEntity == this)
 				Graphics::SetColor(Color::orange);
 			else
@@ -92,9 +99,11 @@ namespace Monocle
 				Graphics::SetColor(Color(0.0f,0.0f,0.25f,0.8f));
 
 			Graphics::RenderLineRect(0, 0, 15, 15);
+
+			Graphics::PopMatrix();
 		}
 
-		Graphics::PopMatrix();
+		
 	}
 
 	const std::string& Entity::GetTag(int index)
