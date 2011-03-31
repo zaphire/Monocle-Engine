@@ -57,19 +57,19 @@ namespace Monocle
 		//Tag API
 		Entity* GetFirstTag(const std::string& tag);
 		std::list<Entity*>* GetAllTag(const std::string& tag);
+
 		int GetAmountTag(const std::string& tag);
 
 		Entity *GetFirstEntity();
 		Entity *GetNextEntity();
-
-		///HACK: test function
-		Entity *GetEntity(int index);
 
 		Entity* GetNearestEntity(const Vector2 &position, Entity *ignoreEntity=NULL);
 		//Entity* GetNearestEntityContaining(const Vector2 &position, Entity *ignoreEntity=NULL);
 		Entity* GetNearestEntityByControlPoint(const Vector2 &position, const std::string &tag, Entity *ignoreEntity=NULL);
 
 		Entity* GetEntityAtPosition(const Vector2 &position, SearchType searchType=SEARCH_TOP);
+
+		const std::list<Entity*>* GetEntities();
 
 	protected:
 		// not sure if we need to pass scene or not yet

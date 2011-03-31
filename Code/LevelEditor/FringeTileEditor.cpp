@@ -231,7 +231,14 @@ namespace Monocle
 		{
 			Node *newNode = new Node(Input::GetWorldMousePosition());
 			newNode->Copy(selectedNode);
-			scene->Add(newNode);
+			if (selectedNode->GetParent())
+			{
+				///HACK: replace with "GetLocalPosition" function
+				newNode->position = Input::GetWorldMousePosition() - selectedNode->GetParent()->position;
+				selectedNode->GetParent()->Add(newNode);
+			}
+			else
+				scene->Add(newNode);
 			selectedNode->InsertNext(newNode);
 			Select(newNode);
 		}

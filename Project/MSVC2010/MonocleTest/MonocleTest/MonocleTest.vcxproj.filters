@@ -225,6 +225,15 @@
     <ClInclude Include="..\..\..\..\Code\LevelEditor\Node.h">
       <Filter>Monocle\LevelEditor</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\LevelEditor\PathMesh.h">
+      <Filter>Monocle\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\XML\XMLFileNode.h">
+      <Filter>Monocle\XML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\FileNode.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp">
@@ -421,6 +430,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\LevelEditor\Node.cpp">
       <Filter>Monocle\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\LevelEditor\PathMesh.cpp">
+      <Filter>Monocle\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\XML\XMLFileNode.cpp">
+      <Filter>Monocle\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\FileNode.cpp">
+      <Filter>Monocle</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

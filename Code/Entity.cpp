@@ -74,15 +74,15 @@ namespace Monocle
 			Graphics::Rotate(rotation, 0, 0, 1);
 		Graphics::Scale(scale);
 
-		for(std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
-		{
-			(*i)->Render();
-		}
-
 		if (graphic != NULL)
 		{
 			Graphics::SetColor(color);
 			graphic->Render(this);
+		}
+
+		for(std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
+		{
+			(*i)->Render();
 		}
 
 		Graphics::PopMatrix();
@@ -314,8 +314,7 @@ namespace Monocle
 	{
 		Vector2 returnPos;
 		Graphics::PushMatrix();
-		Graphics::ResolutionMatrix();
-		//Graphics::SceneMatrix();
+		Graphics::IdentityMatrix();
 
 		std::list<Entity*> entityChain;
 		
@@ -359,11 +358,16 @@ namespace Monocle
 
 	void Entity::Save(FileNode *fileNode)
 	{
-		fileNode->Write("position", position);
-		fileNode->Write("rotation", rotation);
-		fileNode->Write("scale", scale);
-		fileNode->Write("layer", layer);
-		fileNode->Write("color", color);
+		if (position != Vector2::zero)
+			fileNode->Write("position", position);
+		if (rotation != 0)
+			fileNode->Write("rotation", rotation);
+		if (scale != Vector2::one)
+			fileNode->Write("scale", scale);
+		if (layer != 0)
+			fileNode->Write("layer", layer);
+		if (color != Color::white)
+			fileNode->Write("color", color);
 	}
 
 	void Entity::Load(FileNode *fileNode)
@@ -375,6 +379,45 @@ namespace Monocle
 		fileNode->Read("layer", newLayer);
 		SetLayer(newLayer);
 		fileNode->Read("color", color);
+	}
+
+	Entity *Entity::GetParent()
+	{
+		return parent;
+	}
+
+
+	/// TODO: make recursive
+	Entity *Entity::GetNearestEntityByControlPoint(const Vector2 &position, const std::string &tag, Entity *ignoreEntity, float &smallestSqrMag)
+	{
+		Entity *nearestChild = NULL;
+
+		for (std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
+		{
+			if ((*i) != ignoreEntity)
+			{
+				Vector2 wp = (*i)->GetWorldPosition();
+				Vector2 diff = wp - position;
+				printf("wp: %f, %f\n", wp.x, wp.y);
+				printf("diff: %f, %f\n", diff.x, diff.y);
+				if (diff.IsInRange(90))
+				{
+					float sqrMag = diff.GetSquaredMagnitude();
+					if (smallestSqrMag == -1 || sqrMag < smallestSqrMag)
+					{
+						smallestSqrMag = sqrMag;
+						nearestChild = (*i);
+					}
+				}
+			}
+		}
+
+		return nearestChild;
+	}
+
+	const std::list<Entity*>* Entity::GetChildren()
+	{
+		return &children;
 	}
 
 	/*

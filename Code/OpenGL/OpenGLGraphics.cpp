@@ -324,6 +324,11 @@ namespace Monocle
 		//glTranslatef(instance->screenCenter.x, instance->screenCenter.y, 0.0f);
 	}
 
+	void Graphics::IdentityMatrix()
+	{
+		glLoadIdentity();
+	}
+
 	void Graphics::SceneMatrix()
 	{
 		glLoadIdentity();

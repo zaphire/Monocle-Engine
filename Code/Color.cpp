@@ -30,6 +30,11 @@ namespace Monocle
 
 	}
 
+	bool Color::operator!=(const Color& rhs)
+	{
+		return ((r != rhs.r) || (g != rhs.g) || (b != rhs.b) || (a != rhs.a));
+	}
+
 	Color operator+(const Color& lhs, const Color& rhs)
 	{
 		return Color(lhs.r + rhs.r, lhs.g + rhs.g, lhs.b + rhs.b, lhs.a + rhs.a);

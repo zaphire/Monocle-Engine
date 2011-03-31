@@ -50,10 +50,10 @@ namespace Monocle
 
 		FringeTileset *fringeTileset;
 
-		void SaveEntities(TiXmlElement *element);
-		void LoadEntities(TiXmlElement *element);
+		void SaveEntities(TiXmlElement *element, Entity *fromEntity=NULL);
+		void LoadEntities(TiXmlElement *element, Entity *intoEntity=NULL);
 
-		template <class T> void SaveEntitiesOfType(const std::string &name, TiXmlElement *element);
-		template <class T> void LoadEntitiesOfType(const std::string &name, TiXmlElement *element);
+		template <class T> void SaveEntitiesOfType(const std::string &name, TiXmlElement *element, Entity *fromEntity=NULL);
+		template <class T> void LoadEntitiesOfType(const std::string &name, TiXmlElement *element, Entity *intoEntity=NULL);
 	};
 }

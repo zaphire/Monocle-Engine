@@ -79,23 +79,45 @@ namespace Monocle
 		// add or remove entities from list of children
 		void Add(Entity *entity);
 		void Remove(Entity *entity);
+		Entity *GetParent();
 
 		// used by editors
 		bool IsPositionInGraphic(const Vector2 &position);
 		Entity* GetChildEntityAtPosition(const Vector2 &position);
-		Vector2 GetWorldPosition(const Vector2 &position);
+		Vector2 GetWorldPosition(const Vector2 &position=Vector2::zero);
 		Vector2 GetWorldScale(const Vector2 &scale);
 
 		// enqueue destruction of this entity
 		//void Die();
 
+		template <class T>
+		inline T *GetFirstChildOfType()
+		{
+			T *t = NULL;
+			for (std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
+			{
+				t = dynamic_cast<T*>(*i);
+				if (t)
+				{
+					return t;
+				}
+			}
+			return NULL;
+		}
+
+		const std::list<Entity*>* GetChildren(); 
+
 	protected:
 		friend class Scene;
+
+		Entity *GetNearestEntityByControlPoint(const Vector2 &position, const std::string &tag, Entity *ignoreEntity, float &smallestSqrMag);
 		// notes are very simple "messages"
 		void SendNoteToScene(const std::string &note);
 		// send a note to all entites with tag "tag"
 		void SendNote(const std::string &tag, const std::string &note);
 		virtual void ReceiveNote(const std::string &tag, const std::string &note);
+		
+		std::list<Entity*> children;
 
 	private:
 		Entity *parent;
@@ -108,12 +130,11 @@ namespace Monocle
 		friend class Graphics;
 		Graphic* GetGraphic();
 		Graphic* graphic;
-		
 
 		// only for use by scene
 		//friend class Scene;
 		
-		std::list<Entity*> children;
+		
 		
 		std::vector<std::string> tags;
 		int layer;

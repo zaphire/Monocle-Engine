@@ -15,7 +15,6 @@ namespace Monocle
 	Vector2::Vector2(const Vector2 &vector2)
 		: x(vector2.x), y(vector2.y)
 	{
-
 	}
 
 	Vector2::Vector2()
