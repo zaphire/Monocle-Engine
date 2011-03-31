@@ -67,6 +67,7 @@
 		37FB69B613317693008963C1 /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB697E13317693008963C1 /* Vector3.cpp */; };
 		37FB69B813319030008963C1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FB69B713319030008963C1 /* OpenGL.framework */; };
 		6657ED15133F9E8F00ACA1E2 /* FTE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6657ED13133F9E8F00ACA1E2 /* FTE.cpp */; };
+		D881B50013445142008EF89C /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D881B4FE13445142008EF89C /* Node.cpp */; };
 		F9257DC81338235100A47E00 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DC61338235100A47E00 /* Game.cpp */; };
 		F9257DCD1338236300A47E00 /* Level.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DCB1338236300A47E00 /* Level.cpp */; };
 		F9257DD41338237600A47E00 /* SpriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DD01338237600A47E00 /* SpriteAnimation.cpp */; };
@@ -193,6 +194,8 @@
 		37FB69B713319030008963C1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		6657ED13133F9E8F00ACA1E2 /* FTE.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FTE.cpp; sourceTree = "<group>"; };
 		6657ED14133F9E8F00ACA1E2 /* FTE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTE.h; sourceTree = "<group>"; };
+		D881B4FE13445142008EF89C /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Node.cpp; path = ../../../Code/LevelEditor/Node.cpp; sourceTree = "<group>"; };
+		D881B4FF13445142008EF89C /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Node.h; path = ../../../Code/LevelEditor/Node.h; sourceTree = "<group>"; };
 		F9257DC61338235100A47E00 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Game.cpp; path = ../../../Code/Game.cpp; sourceTree = SOURCE_ROOT; };
 		F9257DC71338235100A47E00 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Game.h; path = ../../../Code/Game.h; sourceTree = SOURCE_ROOT; };
 		F9257DCB1338236300A47E00 /* Level.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Level.cpp; path = ../../../Code/Level.cpp; sourceTree = SOURCE_ROOT; };
@@ -529,6 +532,8 @@
 		F9257DD91338238200A47E00 /* LevelEditor */ = {
 			isa = PBXGroup;
 			children = (
+				D881B4FE13445142008EF89C /* Node.cpp */,
+				D881B4FF13445142008EF89C /* Node.h */,
 				F9F7D5FA133D3F3C002953B0 /* FringeTile.cpp */,
 				F9F7D5FB133D3F3C002953B0 /* FringeTile.h */,
 				F9F7D5FC133D3F3C002953B0 /* FringeTileEditor.cpp */,
@@ -676,6 +681,7 @@
 				F9F7D601133D3F3C002953B0 /* FringeTileEditor.cpp in Sources */,
 				F9F7D602133D3F3C002953B0 /* LevelEditor.cpp in Sources */,
 				6657ED15133F9E8F00ACA1E2 /* FTE.cpp in Sources */,
+				D881B50013445142008EF89C /* Node.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
