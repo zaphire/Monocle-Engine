@@ -1,5 +1,6 @@
 #include "FringeTile.h"
 #include "../Assets.h"
+#include "../Level.h"
 
 #include <cstdio>
 
@@ -65,16 +66,38 @@ namespace Monocle
 		return tileID;
 	}
 
-	FringeTile::FringeTile(FringeTileset *fringeTileset, int tileID)
-		: Entity(), fringeTileset(fringeTileset), tileID(tileID), sprite(NULL)
+	FringeTile::FringeTile()
+		: Entity(), tileID(0), sprite(NULL) //fringeTileset(NULL), tileID(0), sprite(NULL)
+	{
+		AddTag("FringeTile");
+		sprite = new Sprite();
+		SetGraphic(sprite);
+
+		RefreshTexture();
+	}
+
+	FringeTile::FringeTile(const FringeTile &fringeTile)
+		: Entity(fringeTile), tileID(fringeTile.tileID), sprite(NULL)
+	{
+		AddTag("FringeTile");
+		sprite = new Sprite();
+		SetGraphic(sprite);
+		
+		RefreshTexture();
+	}
+
+	/*
+	FringeTile::FringeTile(int tileID)
+		: Entity(), tileID(tileID), sprite(NULL)
 	{
 		AddTag("FringeTile");
 
 		sprite = new Sprite();
 		SetGraphic(sprite);
-				
+
 		RefreshTexture();
 	}
+	*/
 	
 	void FringeTile::SetTileID(int tileID)
 	{
@@ -89,55 +112,62 @@ namespace Monocle
 
 	void FringeTile::NextTile()
 	{
-		if (fringeTileset)
-		{
-			tileID = fringeTileset->GetNextTileID(tileID);
-			RefreshTexture();
-		}
+		tileID = Level::GetCurrentFringeTileset()->GetNextTileID(tileID);
+		RefreshTexture();
 	}
 
 	void FringeTile::PrevTile()
 	{
-		if (fringeTileset)
-		{
-			tileID = fringeTileset->GetPrevTileID(tileID);
-			RefreshTexture();
-		}
+		tileID = Level::GetCurrentFringeTileset()->GetPrevTileID(tileID);
+		RefreshTexture();
 	}
 
+	/*
 	FringeTileset *FringeTile::GetFringeTileset()
 	{
 		return fringeTileset;
 	}
+	*/
 
 	void FringeTile::RefreshTexture()
 	{
-		if (fringeTileset)
+		printf("RefreshTexture to tileID: %d\n", tileID);
+
+		// free old texture here somehow:
+		if (sprite->texture)
 		{
-			printf("RefreshTexture to tileID: %d\n", tileID);
+			sprite->texture->RemoveReference();
+			sprite->texture = NULL;
+		}
 
-			// free old texture here somehow:
-			if (sprite->texture)
+		const FringeTileData *fringeTileData = Level::GetCurrentFringeTileset()->GetFringeTileDataByID(tileID);
+		if (fringeTileData)
+		{
+			sprite->texture = Assets::RequestTexture(fringeTileData->imageFilename, fringeTileData->filter, fringeTileData->repeatX, fringeTileData->repeatY);
+			if (fringeTileData->width == -1 && fringeTileData->height == -1 && sprite->texture)
 			{
-				sprite->texture->RemoveReference();
-				sprite->texture = NULL;
+				sprite->width = sprite->texture->width;
+				sprite->height = sprite->texture->height;
 			}
-
-			const FringeTileData *fringeTileData = fringeTileset->GetFringeTileDataByID(tileID);
-			if (fringeTileData)
+			else
 			{
-				sprite->texture = Assets::RequestTexture(fringeTileData->imageFilename, fringeTileData->filter, fringeTileData->repeatX, fringeTileData->repeatY);
-				if (fringeTileData->width == -1 && fringeTileData->height == -1 && sprite->texture)
-				{
-					sprite->width = sprite->texture->width;
-					sprite->height = sprite->texture->height;
-				}
-				else
-				{
-					sprite->width = fringeTileData->width;
-					sprite->height = fringeTileData->height;
-				}
+				sprite->width = fringeTileData->width;
+				sprite->height = fringeTileData->height;
 			}
 		}
 	}
+
+	void FringeTile::Save(FileNode *fileNode)
+	{
+		Entity::Save(fileNode);
+		fileNode->Write("id", tileID);
+	}
+
+	void FringeTile::Load(FileNode *fileNode)
+	{
+		Entity::Load(fileNode);
+		fileNode->Read("id", tileID);
+		RefreshTexture();
+	}
+
 }

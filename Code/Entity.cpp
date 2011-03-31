@@ -2,9 +2,15 @@
 #include "Entity.h"
 #include "Collision.h"
 #include "Graphics.h"
+#include "FileNode.h"
 
 namespace Monocle
 {
+	Entity::Entity(const Entity &entity)
+		: scene(NULL), collider(NULL), graphic(NULL), position(entity.position), scale(entity.scale), rotation(entity.rotation), depth(entity.depth), isVisible(entity.isVisible), color(entity.color), layer(entity.layer), tags(entity.tags)
+	{
+	}
+
 	Entity::Entity()
 		: scene(NULL), collider(NULL), graphic(NULL), layer(0), depth(0.0f), scale(Vector2::one), rotation(0.0f), color(Color::white), parent(NULL), isVisible(true)
 		//, willDie(false)
@@ -349,6 +355,26 @@ namespace Monocle
 			return this;
 
 		return NULL;
+	}
+
+	void Entity::Save(FileNode *fileNode)
+	{
+		fileNode->Write("position", position);
+		fileNode->Write("rotation", rotation);
+		fileNode->Write("scale", scale);
+		fileNode->Write("layer", layer);
+		fileNode->Write("color", color);
+	}
+
+	void Entity::Load(FileNode *fileNode)
+	{
+		fileNode->Read("position", position);
+		fileNode->Read("rotation", rotation);
+		fileNode->Read("scale", scale);
+		int newLayer =0;
+		fileNode->Read("layer", newLayer);
+		SetLayer(newLayer);
+		fileNode->Read("color", color);
 	}
 
 	/*

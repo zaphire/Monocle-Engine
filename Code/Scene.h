@@ -59,6 +59,9 @@ namespace Monocle
 		std::list<Entity*>* GetAllTag(const std::string& tag);
 		int GetAmountTag(const std::string& tag);
 
+		Entity *GetFirstEntity();
+		Entity *GetNextEntity();
+
 		///HACK: test function
 		Entity *GetEntity(int index);
 
@@ -98,5 +101,8 @@ namespace Monocle
 
 		//Resolves all entities to be added or removed
 		void ResolveEntityChanges();
+
+		// for GetFirstEntity and GetNextEntity
+		std::list<Entity*>::iterator entityIterator;
 	};
 }

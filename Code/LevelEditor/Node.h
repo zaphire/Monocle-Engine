@@ -7,6 +7,7 @@ namespace Monocle
 	class Node : public Entity
 	{
 	public:
+		Node(const Node &node);
 		Node();
 		Node(const Vector2 &position);
 		void Update();

@@ -346,6 +346,20 @@ namespace Monocle
 		return NULL;
 	}
 
+	Entity *Scene::GetFirstEntity()
+	{
+		entityIterator = entities.begin();
+		return *entityIterator;
+	}
+
+	Entity *Scene::GetNextEntity()
+	{
+		++entityIterator;
+		if (entityIterator != entities.end())
+			return *entityIterator;
+		return NULL;
+	}
+
 	/*
 	void Scene::SendNoteToGame(const std::string &note)
 	{

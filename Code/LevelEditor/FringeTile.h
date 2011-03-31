@@ -50,17 +50,22 @@ namespace Monocle
 	class FringeTile : public Entity
 	{
 	public:
-		FringeTile(FringeTileset *fringeTileset, int tileID);
+		FringeTile();
+		FringeTile(const FringeTile &fringeTile);
+		//FringeTile(FringeTileset *fringeTileset, int tileID);
 		void SetTileID(int tileID);
 		int GetTileID();
 		void PrevTile();
 		void NextTile();
-		FringeTileset *GetFringeTileset();
+		//FringeTileset *GetFringeTileset();
 		Sprite *sprite;
+
+		void Save(FileNode *fileNode);
+		void Load(FileNode *fileNode);
 
 	private:
 		void RefreshTexture();
 		int tileID;
-		FringeTileset *fringeTileset;
+		//FringeTileset *fringeTileset;
 	};
 }

@@ -3,6 +3,7 @@
 #include "Vector2.h"
 #include "Scene.h"
 #include "Color.h"
+#include "FileNode.h"
 
 #include <string>
 #include <vector>
@@ -21,6 +22,7 @@ namespace Monocle
 	class Entity
 	{
 	public:
+		Entity(const Entity &entity);
 		Entity();
 		~Entity();
 
@@ -49,6 +51,10 @@ namespace Monocle
 
 		//Called by the scene when the entity is removed from that scene
 		virtual void Removed();
+
+		virtual void Save(FileNode *fileNode);
+		
+		virtual void Load(FileNode *fileNode);
 
 		//Call to check our collider against all entities that have "tag"
 		Collider* Collide(const std::string &tag);
