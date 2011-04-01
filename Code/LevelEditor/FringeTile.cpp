@@ -81,6 +81,7 @@ namespace Monocle
 	{
 		AddTag("FringeTile");
 		sprite = new Sprite();
+		sprite->blend = fringeTile.sprite->blend;
 		SetGraphic(sprite);
 		
 		RefreshTexture();
@@ -129,6 +130,20 @@ namespace Monocle
 	}
 	*/
 
+	void FringeTile::NextBlend()
+	{
+		int spriteBlend = (int)sprite->blend;
+		spriteBlend++;
+		sprite->blend = (BlendType)spriteBlend;
+	}
+
+	void FringeTile::PrevBlend()
+	{
+		int spriteBlend = (int)sprite->blend;
+		spriteBlend--;
+		sprite->blend = (BlendType)spriteBlend;
+	}
+
 	void FringeTile::RefreshTexture()
 	{
 		printf("RefreshTexture to tileID: %d\n", tileID);
@@ -161,12 +176,20 @@ namespace Monocle
 	{
 		Entity::Save(fileNode);
 		fileNode->Write("id", tileID);
+		if (sprite->blend != BLEND_ALPHA)
+			fileNode->Write("blend", (int)sprite->blend);
 	}
 
 	void FringeTile::Load(FileNode *fileNode)
 	{
 		Entity::Load(fileNode);
+		
 		fileNode->Read("id", tileID);
+		
+		int spriteBlend = BLEND_ALPHA;
+		fileNode->Read("blend", spriteBlend);
+		sprite->blend = (BlendType)spriteBlend;
+
 		RefreshTexture();
 	}
 

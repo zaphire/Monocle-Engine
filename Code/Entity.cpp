@@ -68,6 +68,7 @@ namespace Monocle
 
 	void Entity::Render()
 	{
+
 		Graphics::PushMatrix();
 		Graphics::Translate(position.x, position.y, depth);
 		if (rotation != 0.0f)
@@ -86,7 +87,7 @@ namespace Monocle
 		}
 
 		Graphics::PopMatrix();
-
+		
 		if (Debug::showBounds)
 		{
 			Vector2 offset;
@@ -103,17 +104,15 @@ namespace Monocle
 			else
 				Graphics::SetColor(Color(0.9f,0.9f,1.0f,0.8f));
 
-			Graphics::RenderLineRect(offset.x, offset.y, 20, 20);
+			Graphics::RenderLineRect(offset.x, offset.y, ENTITY_CONTROLPOINT_SIZE, ENTITY_CONTROLPOINT_SIZE);
 
 			if (Debug::selectedEntity != this)
 				Graphics::SetColor(Color(0.0f,0.0f,0.25f,0.8f));
 
-			Graphics::RenderLineRect(offset.x, offset.y, 15, 15);
+			Graphics::RenderLineRect(offset.x, offset.y, ENTITY_CONTROLPOINT_SIZE * 0.75f, ENTITY_CONTROLPOINT_SIZE * 0.75f);
 
 			Graphics::PopMatrix();
 		}
-
-		
 	}
 
 	const std::string& Entity::GetTag(int index)
@@ -402,9 +401,9 @@ namespace Monocle
 			{
 				Vector2 wp = (*i)->GetWorldPosition();
 				Vector2 diff = wp - position;
-				printf("wp: %f, %f\n", wp.x, wp.y);
-				printf("diff: %f, %f\n", diff.x, diff.y);
-				if (diff.IsInRange(90))
+				//printf("wp: %f, %f\n", wp.x, wp.y);
+				//printf("diff: %f, %f\n", diff.x, diff.y);
+				if (diff.IsInRange(ENTITY_CONTROLPOINT_SIZE))
 				{
 					float sqrMag = diff.GetSquaredMagnitude();
 					if (smallestSqrMag == -1 || sqrMag < smallestSqrMag)
