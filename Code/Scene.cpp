@@ -266,7 +266,7 @@ namespace Monocle
 				if ((*i) != ignoreEntity)
 				{
 					Vector2 diff = (*i)->position - position;
-					if (diff.IsInRange(20))
+					if (diff.IsInRange(ENTITY_CONTROLPOINT_SIZE))
 					{
 						float sqrMag = diff.GetSquaredMagnitude();
 						if (smallestSqrMag == -1 || sqrMag < smallestSqrMag)
@@ -359,6 +359,7 @@ namespace Monocle
 		return NULL;
 	}
 
+	/*
 	Entity *Scene::GetFirstEntity()
 	{
 		entityIterator = entities.begin();
@@ -372,6 +373,7 @@ namespace Monocle
 			return *entityIterator;
 		return NULL;
 	}
+	*/
 
 	/*
 	void Scene::SendNoteToGame(const std::string &note)

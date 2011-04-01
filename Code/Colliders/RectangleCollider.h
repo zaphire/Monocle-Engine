@@ -22,9 +22,9 @@ namespace Monocle
 		float GetTop(bool relativeToEntity = false);
 		float GetBottom(bool relativeToEntity = false);
 
-		const Vector2& GetTopLeft(bool relativeToEntity = false);
-		const Vector2& GetTopRight(bool relativeToEntity = false);
-		const Vector2& GetBottomLeft(bool relativeToEntity = false);
-		const Vector2& GetBottomRight(bool relativeToEntity = false);
+		Vector2 GetTopLeft(bool relativeToEntity = false);
+		Vector2 GetTopRight(bool relativeToEntity = false);
+		Vector2 GetBottomLeft(bool relativeToEntity = false);
+		Vector2 GetBottomRight(bool relativeToEntity = false);
 	};
 }

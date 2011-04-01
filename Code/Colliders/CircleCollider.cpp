@@ -56,7 +56,7 @@ namespace Monocle
 			return GetEntityPosition().y + offset.y;
 	}
 
-	const Vector2& CircleCollider::GetCenter(bool relativeToEntity)
+	Vector2 CircleCollider::GetCenter(bool relativeToEntity)
 	{
 		return Vector2(GetCenterX(relativeToEntity), GetCenterY(relativeToEntity));
 	}

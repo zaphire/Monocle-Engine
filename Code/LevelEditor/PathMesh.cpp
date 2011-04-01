@@ -37,11 +37,6 @@ namespace Monocle
 
 	void PathMesh::Render()
 	{
-		Entity::Render();
-
-		if (startNode)
-			SetStartNode(startNode);
-
 		Graphics::SetColor(Color::white);
 		//Graphics::SetColor(Color(0,0,1,0.5f));
 		Graphics::BindTexture(texture);
@@ -52,10 +47,17 @@ namespace Monocle
 		if (nodes.size() > 0)
 			Graphics::RenderPathMesh(nodes, cells, size);
 		Graphics::PopMatrix();
+
+		Entity::Render();
+
+		if (startNode)
+			SetStartNode(startNode);
 	}
 
 	void PathMesh::Save(FileNode *fileNode)
 	{
+		Entity::Save(fileNode);
+
 		fileNode->Write("cells", cells);
 		fileNode->Write("size", size);
 		if (texture)
@@ -64,6 +66,8 @@ namespace Monocle
 
 	void PathMesh::Load(FileNode *fileNode)
 	{
+		Entity::Load(fileNode);
+
 		fileNode->Read("cells", cells);
 		fileNode->Read("size", size);
 		
