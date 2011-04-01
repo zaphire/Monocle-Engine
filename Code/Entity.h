@@ -20,6 +20,7 @@ namespace Monocle
 	class CircleCollider;
 	class Graphics;
 	class Graphic;
+	class CollisionData;
 
 	class Entity
 	{
@@ -59,7 +60,7 @@ namespace Monocle
 		virtual void Load(FileNode *fileNode);
 
 		//Call to check our collider against all entities that have "tag"
-		Collider* Collide(const std::string &tag);
+		Collider* Collide(const std::string &tag, CollisionData *collisionData=NULL);
 		//RectangleCollider *AddRectangleCollider(float width, float height, const Vector2 &offset = Vector2::zero);
 
 		//Tagging API

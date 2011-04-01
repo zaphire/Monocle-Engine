@@ -3,12 +3,18 @@
 #include "Collision.h"
 #include "Graphics.h"
 #include "FileNode.h"
+#include <sstream>
 
 namespace Monocle
 {
 	Entity::Entity(const Entity &entity)
-		: scene(NULL), collider(NULL), graphic(NULL), position(entity.position), scale(entity.scale), rotation(entity.rotation), depth(entity.depth), isVisible(entity.isVisible), color(entity.color), layer(entity.layer), tags(entity.tags)
+		: scene(NULL), collider(NULL), graphic(NULL), position(entity.position), scale(entity.scale), rotation(entity.rotation), depth(entity.depth), isVisible(entity.isVisible), color(entity.color), layer(entity.layer)//, tags(entity.tags)
 	{
+		std::vector<std::string> copyTags = entity.tags;
+		for (std::vector<std::string>::iterator i = copyTags.begin(); i != copyTags.end(); ++i)
+		{
+			AddTag(*i);
+		}
 	}
 
 	Entity::Entity()
@@ -232,9 +238,9 @@ namespace Monocle
 		return collider;
 	}
 
-	Collider* Entity::Collide(const std::string &tag)
+	Collider* Entity::Collide(const std::string &tag, CollisionData *collisionData)
 	{
-		return Collision::Collide(this, tag);
+		return Collision::Collide(this, tag, collisionData);
 	}
 
 	/*
@@ -371,6 +377,15 @@ namespace Monocle
 			fileNode->Write("layer", layer);
 		if (color != Color::white)
 			fileNode->Write("color", color);
+		if (tags.size() != 0)
+		{
+			std::ostringstream os;
+			for (std::vector<std::string>::iterator i = tags.begin(); i != tags.end(); ++i)
+			{
+				os << (*i) << " ";
+			}
+			fileNode->Write("tags", os.str());
+		}
 	}
 
 	void Entity::Load(FileNode *fileNode)
@@ -382,6 +397,18 @@ namespace Monocle
 		fileNode->Read("layer", newLayer);
 		SetLayer(newLayer);
 		fileNode->Read("color", color);
+		std::string tags;
+		fileNode->Read("tags", tags);
+		if (tags.size() > 0)
+		{
+			std::string tag;
+			std::istringstream is(tags);
+			while (is >> tag)
+			{
+				printf("loading tag: %s\n", tag);
+				AddTag(tag);
+			}
+		}
 	}
 
 	Entity *Entity::GetParent()

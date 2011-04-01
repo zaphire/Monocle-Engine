@@ -2,22 +2,32 @@
 #include "Node.h"
 #include "../Assets.h"
 #include "../Graphics.h"
+#include "../Colliders/PathCollider.h"
 
 namespace Monocle
 {
 	PathMesh::PathMesh()
-		: Entity(), size(32), startNode(NULL), cells(1), texture(NULL)
+		: Entity(), size(32), startNode(NULL), cells(1), texture(NULL), pathCollider(NULL)
 	{
 		///HACK
 		//texture = Assets::RequestTexture("graphics/wallpieces.png");
 	}
 	
 	PathMesh::PathMesh(const std::string &textureFilename, int cells, Node *startNode, int size)
-		: Entity(), size(size), cells(cells)
+		: Entity(), size(size), cells(cells), pathCollider(NULL)
 	{
 		//const std::string &textureFilename, 
 		texture = Assets::RequestTexture(textureFilename);
+		//
 		SetStartNode(startNode);
+	}
+
+	void PathMesh::MakeCollision()
+	{
+		if (pathCollider)
+			delete pathCollider;
+
+		SetCollider(pathCollider = new PathCollider(startNode));
 	}
 
 	void PathMesh::SetStartNode(Node *node)
@@ -25,6 +35,8 @@ namespace Monocle
 		nodes.clear();
 
 		this->startNode = node;
+		if (pathCollider)
+			pathCollider->startNode = node;
 
 		Node *current = this->startNode;
 		while (current)
@@ -100,5 +112,7 @@ namespace Monocle
 				lastNode = node;
 			}
 		}
+
+		MakeCollision();
 	}
 }

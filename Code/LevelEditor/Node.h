@@ -29,6 +29,7 @@ namespace Monocle
 		int variant;
 		float radius;
 
+
 	private:
 		Node *next;
 		Node *prev;

@@ -242,16 +242,16 @@ namespace Monocle
 
 	bool Collider::CollideCirclePath(CircleCollider *a, PathCollider *b, CollisionData *collisionData)
 	{
-		Node *node = b->start;
+		Node *node = b->startNode;
 		Node *prevNode = NULL;
 		Vector2 start, end;
 		while (node)
 		{
-			if (prevNode)
+			if (prevNode && prevNode->variant != -1)
 			{
 				start = prevNode->GetWorldPosition();
 				end = node->GetWorldPosition();
-				if (a->IntersectsLine(start, end, node->radius, collisionData))
+				if (a->IntersectsLine(start, end, 32, collisionData))
 				{
 					return true;
 				}

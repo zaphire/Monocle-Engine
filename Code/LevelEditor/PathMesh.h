@@ -6,6 +6,7 @@ namespace Monocle
 {
 	class TextureAsset;
 	class Node;
+	class PathCollider;
 
 	class PathMesh : public Entity
 	{
@@ -17,6 +18,8 @@ namespace Monocle
 		void Save(FileNode *fileNode);
 		void Load(FileNode *fileNode);
 
+		void MakeCollision();
+
 		int cells;
 
 	private:
@@ -24,5 +27,6 @@ namespace Monocle
 		int size;
 		Node *startNode;
 		std::vector<Node*> nodes;
+		PathCollider *pathCollider;
 	};
 }

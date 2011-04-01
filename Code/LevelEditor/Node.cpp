@@ -6,17 +6,17 @@ namespace Monocle
 	/// NODE
 
 	Node::Node(const Node &node)
-		: Entity(node), radius(node.radius), variant(node.variant), next(node.next), prev(node.prev)
+		: Entity(node), radius(node.radius), variant(node.variant), next(node.next), prev(node.prev)//, isIgnored(node.isIgnored)
 	{
 	}
 
 	Node::Node()
-		: Entity(), radius(0.0f), next(NULL), prev(NULL), variant(0)
+		: Entity(), radius(0.0f), next(NULL), prev(NULL), variant(0)//, isIgnored(false)
 	{
 	}
 
 	Node::Node(const Vector2 &position)
-		: Entity(), radius(0.0f), next(NULL), prev(NULL), variant(0)
+		: Entity(), radius(0.0f), next(NULL), prev(NULL), variant(0)//, isIgnored(false)
 	{
 		this->position = position;
 	}
@@ -51,7 +51,14 @@ namespace Monocle
 		if (Debug::showBounds)
 		{
 			Graphics::BindTexture(NULL);
-			Graphics::SetColor(Color::blue);
+			if (variant == -1)
+			{
+				Graphics::SetColor(Color::grey);
+			}
+			else
+			{
+				Graphics::SetColor(Color::blue);
+			}
 			Graphics::RenderLineRect(position.x, position.y, 64, 64);
 			if (next)
 				Graphics::RenderLine(position, next->position);
