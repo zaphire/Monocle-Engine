@@ -79,10 +79,24 @@ namespace Monocle
 		return true;
 	}
 
-	///HACK: temporary
-	void Graphics::Blend()
+	void Graphics::SetBlend(BlendType blend)
 	{
-		glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+		if (blend != instance->currentBlend)
+		{
+			switch (blend)
+			{
+			case BLEND_ALPHA:
+				glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+				break;
+			case BLEND_ADDITIVE:
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+				break;
+			case BLEND_MULTIPLY:
+				glBlendFunc(GL_ZERO, GL_SRC_COLOR);
+				break;
+			}
+			instance->currentBlend = blend;
+		}
 	}
 
 	void Graphics::Set2D(int virtualWidth, int virtualHeight)
@@ -424,6 +438,8 @@ namespace Monocle
 		{
 			if (nodes[i]->variant != -1)
 			{
+				
+
 				Vector2 diff1;
 				Vector2 perp1;
 
@@ -466,15 +482,19 @@ namespace Monocle
 				texOffset.x = (nodes[i]->variant % (cells)) * texScale.x;
 				texOffset.y = (int)(nodes[i]->variant / (cells)) * texScale.y;
 			
+				Graphics::SetColor(nodes[i]->color);
 				glTexCoord2f(texOffset.x, texOffset.y);
 				Vertex(pos1 - perp1 * nodes[i]->scale.y * size * 0.5f);
 
+				Graphics::SetColor(nodes[i+1]->color);
 				glTexCoord2f(texOffset.x + texScale.x, texOffset.y);
 				Vertex(pos2 - perp2 * nodes[i+1]->scale.y * size * 0.5f);
 
+				Graphics::SetColor(nodes[i+1]->color);
 				glTexCoord2f(texOffset.x + texScale.x, texOffset.y + texScale.y);
 				Vertex(pos2 + perp2 * nodes[i+1]->scale.y * size * 0.5f);
 
+				Graphics::SetColor(nodes[i]->color);
 				glTexCoord2f(texOffset.x, texOffset.y + texScale.y);
 				Vertex(pos1 + perp1 * nodes[i]->scale.y * size * 0.5f);
 			}

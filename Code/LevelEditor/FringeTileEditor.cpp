@@ -361,6 +361,15 @@ namespace Monocle
 		}
 		if (selectedFringeTile)
 		{
+			if (Input::IsKeyPressed(KEY_B))
+			{
+				selectedFringeTile->PrevBlend();
+			}
+			if (Input::IsKeyPressed(KEY_N))
+			{
+				selectedFringeTile->NextBlend();
+			}
+
 			if (Input::IsKeyPressed(KEY_LEFTBRACKET))
 			{
 				selectedFringeTile->PrevTile();
