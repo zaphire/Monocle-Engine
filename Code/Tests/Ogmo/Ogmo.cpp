@@ -4,6 +4,8 @@
 #include "../../Monocle.h"
 #include "../../Macros.h"
 
+#include <stdlib.h>
+
 namespace Ogmo
 {
 	// T H E   P L A Y E R (entity)

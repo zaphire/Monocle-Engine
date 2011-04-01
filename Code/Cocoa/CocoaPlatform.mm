@@ -9,6 +9,8 @@
 
 using Monocle::Debug;
 
+//#define MONOCLE_MAC_USE_BUNDLE
+
 @interface MonocleWindow : NSWindow
 /* These are needed for borderless/fullscreen windows */
 - (BOOL)canBecomeKeyWindow;
@@ -104,8 +106,15 @@ namespace Monocle
 	{
 		//  Init event loop
 		Cocoa_RegisterApp();
-        
-        this->bundleResourcesPath = [[[NSBundle mainBundle] resourcePath] fileSystemRepresentation];
+
+        NSDictionary *env = [[NSProcessInfo processInfo] environment];
+        if([[env objectForKey:@"MONOCLE_MAC_USE_BUNDLE"] isEqualToString:@"1"]) {
+            this->bundleResourcesPath = [[[NSBundle mainBundle] resourcePath] fileSystemRepresentation];
+        } else if(NSString *path = [env objectForKey:@"MONOCLE_CONTENT_PATH"]) {
+            this->bundleResourcesPath = [path fileSystemRepresentation];
+        } else {
+            this->bundleResourcesPath = [[env objectForKey:@"PWD"] fileSystemRepresentation];
+        }
 
 		//  Create window
 		window = CreateWindowCocoa(w, h);
@@ -235,6 +244,6 @@ namespace Monocle
 	}
 
     std::string Platform::GetDefaultContentPath() {
-        return CocoaPlatform::instance->bundleResourcesPath+"/Content/";
+        return CocoaPlatform::instance->bundleResourcesPath;
     }
 }

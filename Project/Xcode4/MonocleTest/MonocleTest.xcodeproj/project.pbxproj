@@ -67,9 +67,6 @@
 		37FB69B613317693008963C1 /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB697E13317693008963C1 /* Vector3.cpp */; };
 		37FB69B813319030008963C1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FB69B713319030008963C1 /* OpenGL.framework */; };
 		6657ED15133F9E8F00ACA1E2 /* FTE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6657ED13133F9E8F00ACA1E2 /* FTE.cpp */; };
-		D876F29613456E7500A021D8 /* PathMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D876F29413456E7500A021D8 /* PathMesh.cpp */; };
-		D876F29913456E9900A021D8 /* XMLFileNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D876F29713456E9900A021D8 /* XMLFileNode.cpp */; };
-		D876F2D313456F6400A021D8 /* Content in Resources */ = {isa = PBXBuildFile; fileRef = D876F2D213456F6400A021D8 /* Content */; };
 		D881B50013445142008EF89C /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D881B4FE13445142008EF89C /* Node.cpp */; };
 		F9257DC81338235100A47E00 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DC61338235100A47E00 /* Game.cpp */; };
 		F9257DCD1338236300A47E00 /* Level.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DCB1338236300A47E00 /* Level.cpp */; };
@@ -204,7 +201,6 @@
 		D876F29513456E7500A021D8 /* PathMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathMesh.h; path = ../../../Code/LevelEditor/PathMesh.h; sourceTree = "<group>"; };
 		D876F29713456E9900A021D8 /* XMLFileNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XMLFileNode.cpp; sourceTree = "<group>"; };
 		D876F29813456E9900A021D8 /* XMLFileNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLFileNode.h; sourceTree = "<group>"; };
-		D876F2D213456F6400A021D8 /* Content */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Content; path = ../../../../Content; sourceTree = "<group>"; };
 		D881B4FE13445142008EF89C /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Node.cpp; path = ../../../Code/LevelEditor/Node.cpp; sourceTree = "<group>"; };
 		D881B4FF13445142008EF89C /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Node.h; path = ../../../Code/LevelEditor/Node.h; sourceTree = "<group>"; };
 		F9257DC61338235100A47E00 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Game.cpp; path = ../../../Code/Game.cpp; sourceTree = SOURCE_ROOT; };
@@ -344,7 +340,6 @@
 		37EA24A0132F986900D216B0 /* MonocleTest */ = {
 			isa = PBXGroup;
 			children = (
-				D876F2D213456F6400A021D8 /* Content */,
 				37EA24A1132F986900D216B0 /* Supporting Files */,
 			);
 			path = MonocleTest;
@@ -591,6 +586,7 @@
 				37EA2492132F986900D216B0 /* Sources */,
 				37EA2493132F986900D216B0 /* Frameworks */,
 				37EA2494132F986900D216B0 /* Resources */,
+				D881BBFB134643D4001263BE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -632,11 +628,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				37EA24A5132F986900D216B0 /* InfoPlist.strings in Resources */,
-				D876F2D313456F6400A021D8 /* Content in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D881BBFB134643D4001263BE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if ${MONOCLE_MAC_USE_BUNDLE}\n  then\n    cp -r \"${MONOCLE_CONTENT_PATH}\" \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Content/\"\nfi";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		37EA2492132F986900D216B0 /* Sources */ = {
@@ -744,6 +756,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MONOCLE_CONTENT_PATH = "${SRCROOT}/../../../Content/";
+				MONOCLE_MAC_USE_BUNDLE = 0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -759,6 +773,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MONOCLE_CONTENT_PATH = "${SRCROOT}/../../../Content/";
+				MONOCLE_MAC_USE_BUNDLE = 1;
 				SDKROOT = macosx;
 			};
 			name = Release;
