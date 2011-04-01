@@ -26,8 +26,10 @@ namespace Monocle
 		return (point.x > GetLeft() && point.y > GetTop() && point.x < GetRight() && point.y < GetBottom());
 	}
 
-	bool RectangleCollider::IntersectsLine(const Vector2& start, const Vector2& end)
+	bool RectangleCollider::IntersectsLine(const Vector2& start, const Vector2& end, float lineRadius)
 	{
+		//TODO: Support line width!
+
 		if (IntersectsPoint(start) || IntersectsPoint(end))
 			return true;
 

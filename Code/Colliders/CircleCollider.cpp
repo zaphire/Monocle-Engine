@@ -22,7 +22,7 @@ namespace Monocle
 		return (diff.IsInRange(radius));
 	}
 
-	bool CircleCollider::IntersectsLine(const Vector2& start, const Vector2& end)
+	bool CircleCollider::IntersectsLine(const Vector2& start, const Vector2& end, float lineRadius)
 	{
 		//Algorithm stolen from: http://www.gamedev.net/topic/304578-finite-line-circle-intersection/page__view__findpost__p__2938618
 
@@ -37,7 +37,7 @@ namespace Monocle
 			t = 1.0f;
 		Vector2 closest = (t * dir) + start;
 		Vector2 d = (ePos + offset) - closest;
-		return d.GetSquaredMagnitude() <= radius * radius;
+		return d.GetSquaredMagnitude() <= (radius + lineRadius) * (radius + lineRadius);
 	}
 
 	float CircleCollider::GetCenterX(bool relativeToEntity)

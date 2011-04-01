@@ -15,7 +15,7 @@ namespace Monocle
 		RectangleCollider(float width, float height, Vector2 offset=Vector2::zero);
 		ColliderType GetColliderType();
 		bool IntersectsPoint(const Vector2& point);
-		bool IntersectsLine(const Vector2& start, const Vector2& end);
+		bool IntersectsLine(const Vector2& start, const Vector2& end, float lineRadius = 1.0f);
 
 		float GetRight(bool relativeToEntity = false);
 		float GetLeft(bool relativeToEntity = false);

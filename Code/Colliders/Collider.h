@@ -32,20 +32,20 @@ namespace Monocle
 
 		virtual ColliderType GetColliderType() = 0;
 		virtual bool IntersectsPoint(const Vector2& point)=0;
-		virtual bool IntersectsLine(const Vector2& start, const Vector2& end)=0;
+		virtual bool IntersectsLine(const Vector2& start, const Vector2& end, float lineRadius = 1.0f)=0;
 
-		static bool Collide(Collider* a, Collider* b, CollisionData *collisionData);
+		static bool Collide(Collider* a, Collider* b, CollisionData *collisionData = 0);
 		static bool LinesIntersect(const Vector2& aStart, const Vector2& aEnd, const Vector2& bStart, const Vector2& bEnd);
 
 	private:
 		Entity *entity;
-		static bool CollideRectRect(RectangleCollider* a, RectangleCollider* b);
-		static bool CollideCircleCircle(CircleCollider* a, CircleCollider* b);
-		static bool CollidePolygonPolygon(PolygonCollider* a, PolygonCollider* b);
+		static bool CollideRectRect(RectangleCollider* a, RectangleCollider* b, CollisionData *collisionData);
+		static bool CollideCircleCircle(CircleCollider* a, CircleCollider* b, CollisionData *collisionData);
+		static bool CollidePolygonPolygon(PolygonCollider* a, PolygonCollider* b, CollisionData *collisionData);
 
-		static bool CollideRectCircle(RectangleCollider* a, CircleCollider* b);
-		static bool CollideRectPolygon(RectangleCollider* a, PolygonCollider* b);
-		static bool CollideCirclePolygon(CircleCollider* a, PolygonCollider* b);
+		static bool CollideRectCircle(RectangleCollider* a, CircleCollider* b, CollisionData *collisionData);
+		static bool CollideRectPolygon(RectangleCollider* a, PolygonCollider* b, CollisionData *collisionData);
+		static bool CollideCirclePolygon(CircleCollider* a, PolygonCollider* b, CollisionData *collisionData);
 
 		static bool CollideCircleLineSegment(CircleCollider *a, LineSegmentCollider *b, CollisionData *collisionData);
 	};
