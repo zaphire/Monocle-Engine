@@ -4,6 +4,8 @@
 #include "Colliders/RectangleCollider.h"
 #include "Colliders/CircleCollider.h"
 
+#include "CollisionData.h"
+
 #include <string>
 #include <vector>
 #include <list>
@@ -11,16 +13,6 @@
 namespace Monocle
 {
 	class Entity;
-
-	class CollisionData
-	{
-	public:
-		CollisionData();
-
-		Vector2 hitPoint;
-		Vector2 normal;
-		Collider *collider;
-	};
 
 	class Collision
 	{

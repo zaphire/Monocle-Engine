@@ -19,14 +19,14 @@ namespace Monocle
 		return CT_RECT;
 	}
 
-	bool RectangleCollider::IntersectsPoint(const Vector2& point)
+	bool RectangleCollider::IntersectsPoint(const Vector2& point, CollisionData *collisionData)
 	{
 		//Vector2 ePos = GetEntityPosition();
 
 		return (point.x > GetLeft() && point.y > GetTop() && point.x < GetRight() && point.y < GetBottom());
 	}
 
-	bool RectangleCollider::IntersectsLine(const Vector2& start, const Vector2& end, float lineRadius)
+	bool RectangleCollider::IntersectsLine(const Vector2& start, const Vector2& end, float lineRadius, CollisionData *collisionData)
 	{
 		//TODO: Support line width!
 

@@ -1,6 +1,8 @@
 #pragma once
 
 #include "../Vector2.h"
+// for NULL
+#include <cstdio>
 
 namespace Monocle
 {
@@ -32,10 +34,10 @@ namespace Monocle
 		Vector2 offset;
 
 		virtual ColliderType GetColliderType() = 0;
-		virtual bool IntersectsPoint(const Vector2& point)=0;
-		virtual bool IntersectsLine(const Vector2& start, const Vector2& end, float lineRadius = 1.0f)=0;
+		virtual bool IntersectsPoint(const Vector2& point, CollisionData *collisionData=NULL)=0;
+		virtual bool IntersectsLine(const Vector2& start, const Vector2& end, float lineRadius = 0.0f, CollisionData *collisionData=NULL)=0;
 
-		static bool Collide(Collider* a, Collider* b, CollisionData *collisionData = 0);
+		static bool Collide(Collider* a, Collider* b, CollisionData *collisionData = NULL);
 		static bool LinesIntersect(const Vector2& aStart, const Vector2& aEnd, const Vector2& bStart, const Vector2& bEnd);
 
 	private:

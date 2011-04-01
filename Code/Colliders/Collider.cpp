@@ -242,7 +242,6 @@ namespace Monocle
 
 	bool Collider::CollideCirclePath(CircleCollider *a, PathCollider *b, CollisionData *collisionData)
 	{
-		// for each node
 		Node *node = b->start;
 		Node *prevNode = NULL;
 		Vector2 start, end;
@@ -252,13 +251,12 @@ namespace Monocle
 			{
 				start = prevNode->GetWorldPosition();
 				end = node->GetWorldPosition();
-				if (a->IntersectsLine(start, end))
+				if (a->IntersectsLine(start, end, node->radius, collisionData))
 				{
 					return true;
 				}
 			}
-			
-			// get line difference
+			prevNode = node;
 			node = node->GetNext();
 		}
 

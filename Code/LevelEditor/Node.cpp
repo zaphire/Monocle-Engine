@@ -6,17 +6,17 @@ namespace Monocle
 	/// NODE
 
 	Node::Node(const Node &node)
-		: Entity(node), variant(node.variant), next(node.next), prev(node.prev)
+		: Entity(node), radius(node.radius), variant(node.variant), next(node.next), prev(node.prev)
 	{
 	}
 
 	Node::Node()
-		: Entity(), next(NULL), prev(NULL), variant(0)
+		: Entity(), radius(0.0f), next(NULL), prev(NULL), variant(0)
 	{
 	}
 
 	Node::Node(const Vector2 &position)
-		: Entity(), next(NULL), prev(NULL), variant(0)
+		: Entity(), radius(0.0f), next(NULL), prev(NULL), variant(0)
 	{
 		this->position = position;
 	}
