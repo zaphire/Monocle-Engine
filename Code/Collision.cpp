@@ -29,7 +29,7 @@ namespace Monocle
 		instance->colliders.remove(collider);
 	}
 
-	Collider* Collision::Collide(Entity *entity, const std::string &tag)
+	Collider* Collision::Collide(Entity *entity, const std::string &tag, CollisionData *collisionData)
 	{
 		Collider *passedCollider = entity->GetCollider();
 		if (passedCollider != NULL)
@@ -42,7 +42,7 @@ namespace Monocle
 					Collider* otherCollider = otherEntity->GetCollider();
 					if (otherCollider != NULL && otherEntity->HasTag(tag))
 					{
-						if (Collider::Collide(passedCollider, otherCollider))
+						if (Collider::Collide(passedCollider, otherCollider, collisionData))
 						{
 							return otherCollider;
 						}

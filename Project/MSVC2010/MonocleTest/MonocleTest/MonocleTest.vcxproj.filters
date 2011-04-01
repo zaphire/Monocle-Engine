@@ -9,9 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Monocle\Windows">
-      <UniqueIdentifier>{359e2e0d-6b74-4021-9d89-0af58ffa0042}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Monocle\Tests">
       <UniqueIdentifier>{108f55c5-9ca0-4a9b-9d2c-29a184c1ac10}</UniqueIdentifier>
     </Filter>
@@ -60,6 +57,9 @@
     </Filter>
     <Filter Include="Monocle\Tests\FTE">
       <UniqueIdentifier>{f5cb9620-ef8b-41ac-ac96-cd2a8828c016}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\Tests\Windows">
+      <UniqueIdentifier>{359e2e0d-6b74-4021-9d89-0af58ffa0042}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -115,7 +115,7 @@
       <Filter>Monocle</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Windows\WindowsPlatform.h">
-      <Filter>Monocle\Windows</Filter>
+      <Filter>Monocle\Tests\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Tests\Jumper\Jumper.h">
       <Filter>Monocle\Tests\Jumper</Filter>
@@ -222,9 +222,6 @@
     <ClInclude Include="..\..\..\..\Code\Tests\FTE\FTE.h">
       <Filter>Monocle\Tests\FTE</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\LevelEditor\Node.h">
-      <Filter>Monocle\LevelEditor</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Code\LevelEditor\PathMesh.h">
       <Filter>Monocle\LevelEditor</Filter>
     </ClInclude>
@@ -232,6 +229,15 @@
       <Filter>Monocle\XML</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\FileNode.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\LevelEditor\Node.h">
+      <Filter>Monocle\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Colliders\PathCollider.h">
+      <Filter>Monocle\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\CollisionData.h">
       <Filter>Monocle</Filter>
     </ClInclude>
   </ItemGroup>
@@ -273,7 +279,7 @@
       <Filter>Monocle</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Windows\WindowsPlatform.cpp">
-      <Filter>Monocle\Windows</Filter>
+      <Filter>Monocle\Tests\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Tests\Jumper\Jumper.cpp">
       <Filter>Monocle\Tests\Jumper</Filter>
@@ -428,9 +434,6 @@
     <ClCompile Include="..\..\..\..\Code\Tests\FTE\FTE.cpp">
       <Filter>Monocle\Tests\FTE</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\LevelEditor\Node.cpp">
-      <Filter>Monocle\LevelEditor</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Code\LevelEditor\PathMesh.cpp">
       <Filter>Monocle\LevelEditor</Filter>
     </ClCompile>
@@ -438,6 +441,15 @@
       <Filter>Monocle\XML</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\FileNode.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\LevelEditor\Node.cpp">
+      <Filter>Monocle\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Colliders\PathCollider.cpp">
+      <Filter>Monocle\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\CollisionData.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
   </ItemGroup>

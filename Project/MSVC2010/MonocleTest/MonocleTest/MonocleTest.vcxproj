@@ -73,9 +73,11 @@
     <ClInclude Include="..\..\..\..\Code\Audio.h" />
     <ClInclude Include="..\..\..\..\Code\Colliders\CircleCollider.h" />
     <ClInclude Include="..\..\..\..\Code\Colliders\Collider.h" />
+    <ClInclude Include="..\..\..\..\Code\Colliders\PathCollider.h" />
     <ClInclude Include="..\..\..\..\Code\Colliders\PolygonCollider.h" />
     <ClInclude Include="..\..\..\..\Code\Colliders\RectangleCollider.h" />
     <ClInclude Include="..\..\..\..\Code\Collision.h" />
+    <ClInclude Include="..\..\..\..\Code\CollisionData.h" />
     <ClInclude Include="..\..\..\..\Code\Color.h" />
     <ClInclude Include="..\..\..\..\Code\FileNode.h" />
     <ClInclude Include="..\..\..\..\Code\Game.h" />
@@ -131,9 +133,11 @@
     <ClCompile Include="..\..\..\..\Code\Assets.cpp" />
     <ClCompile Include="..\..\..\..\Code\Colliders\CircleCollider.cpp" />
     <ClCompile Include="..\..\..\..\Code\Colliders\Collider.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Colliders\PathCollider.cpp" />
     <ClCompile Include="..\..\..\..\Code\Colliders\PolygonCollider.cpp" />
     <ClCompile Include="..\..\..\..\Code\Colliders\RectangleCollider.cpp" />
     <ClCompile Include="..\..\..\..\Code\Collision.cpp" />
+    <ClCompile Include="..\..\..\..\Code\CollisionData.cpp" />
     <ClCompile Include="..\..\..\..\Code\Color.cpp" />
     <ClCompile Include="..\..\..\..\Code\FileNode.cpp" />
     <ClCompile Include="..\..\..\..\Code\Game.cpp" />

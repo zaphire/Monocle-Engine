@@ -2,6 +2,7 @@
 #include "RectangleCollider.h"
 #include "CircleCollider.h"
 #include "PolygonCollider.h"
+#include "PathCollider.h"
 #include "../Entity.h"
 #include <stdio.h> // for NULL
 
@@ -30,35 +31,40 @@ namespace Monocle
 			return Vector2();
 	}
 
-	bool Collider::Collide(Collider* a, Collider* b)
+	bool Collider::Collide(Collider* a, Collider* b, CollisionData *collisionData)
 	{
 		ColliderType typeA = a->GetColliderType();
 		ColliderType typeB = b->GetColliderType();
 
 		//Big nasty if/else for deciding which collision function to use
 		if (typeA == CT_RECT && typeB == CT_RECT)									//Rectangle - Rectangle
-			return CollideRectRect((RectangleCollider*)a, (RectangleCollider*)b);
+			return CollideRectRect((RectangleCollider*)a, (RectangleCollider*)b, collisionData);
 
 		else if (typeA == CT_CIRCLE && typeB == CT_CIRCLE)							//Circle - Circle
-			return CollideCircleCircle((CircleCollider*)a, (CircleCollider*)b);
+			return CollideCircleCircle((CircleCollider*)a, (CircleCollider*)b, collisionData);
 
 		else if (typeA == CT_POLYGON && typeB == CT_POLYGON)						//Polygon - Polygon
-			return CollidePolygonPolygon((PolygonCollider*)a, (PolygonCollider*)b);
+			return CollidePolygonPolygon((PolygonCollider*)a, (PolygonCollider*)b, collisionData);
 
 		else if (typeA == CT_RECT && typeB == CT_CIRCLE)							//Rectangle - Circle
-			return CollideRectCircle((RectangleCollider*)a, (CircleCollider*)b);
+			return CollideRectCircle((RectangleCollider*)a, (CircleCollider*)b, collisionData);
 		else if (typeA == CT_CIRCLE && typeB == CT_RECT)
-			return CollideRectCircle((RectangleCollider*)b, (CircleCollider*)a);
+			return CollideRectCircle((RectangleCollider*)b, (CircleCollider*)a, collisionData);
 
 		else if (typeA == CT_RECT && typeB == CT_POLYGON)							//Rectangle - Polygon
-			return CollideRectPolygon((RectangleCollider*)a, (PolygonCollider*)b);
+			return CollideRectPolygon((RectangleCollider*)a, (PolygonCollider*)b, collisionData);
 		else if (typeA == CT_POLYGON && typeB == CT_RECT)
-			return CollideRectPolygon((RectangleCollider*)b, (PolygonCollider*)a);
+			return CollideRectPolygon((RectangleCollider*)b, (PolygonCollider*)a, collisionData);
 
 		else if (typeA == CT_CIRCLE && typeB == CT_POLYGON)							//Circle - Polygon
-			return CollideCirclePolygon((CircleCollider*)a, (PolygonCollider*)b);
+			return CollideCirclePolygon((CircleCollider*)a, (PolygonCollider*)b, collisionData);
 		else if (typeA == CT_POLYGON && typeB == CT_CIRCLE)
-			return CollideCirclePolygon((CircleCollider*)b, (PolygonCollider*)a);
+			return CollideCirclePolygon((CircleCollider*)b, (PolygonCollider*)a, collisionData);
+
+		else if (typeA == CT_CIRCLE && typeB == CT_PATH)
+			return CollideCirclePath((CircleCollider*)a, (PathCollider*)b, collisionData);
+		else if (typeA == CT_PATH && typeB == CT_CIRCLE)
+			return CollideCirclePath((CircleCollider*)b, (PathCollider*)a, collisionData);
 
 		// Unhandled case
 		return false;
@@ -88,8 +94,10 @@ namespace Monocle
 		return (uX >= 0.0f && uX <= 1.0f && uY >= 0.0f && uY <= 1.0f);
 	}
 
-	bool Collider::CollideRectRect(RectangleCollider* a, RectangleCollider* b)
+	bool Collider::CollideRectRect(RectangleCollider* a, RectangleCollider* b, CollisionData *collisionData)
 	{
+		//TODO: store data in collisionData!
+
 		if (a->GetBottom() < b->GetTop())
 			return false;
 
@@ -105,14 +113,18 @@ namespace Monocle
 		return true;
 	}
 
-	bool Collider::CollideCircleCircle(CircleCollider* a, CircleCollider* b)
+	bool Collider::CollideCircleCircle(CircleCollider* a, CircleCollider* b, CollisionData *collisionData)
 	{
+		//TODO: store data in collisionData!
+
 		Vector2 diff = b->GetCenter() - a->GetCenter();
 		return (diff.IsInRange(a->radius + b->radius));
 	}
 
-	bool Collider::CollidePolygonPolygon(PolygonCollider* a, PolygonCollider* b)
+	bool Collider::CollidePolygonPolygon(PolygonCollider* a, PolygonCollider* b, CollisionData *collisionData)
 	{
+		//TODO: store data in collisionData!
+
 		//If the polygons aren't even close to eachother, don't bother
 		if (a->GetLeftmost() > b->GetRightmost())
 			return false;
@@ -147,8 +159,10 @@ namespace Monocle
 		return false;
 	}
 
-	bool Collider::CollideRectCircle(RectangleCollider* a, CircleCollider* b)
+	bool Collider::CollideRectCircle(RectangleCollider* a, CircleCollider* b, CollisionData *collisionData)
 	{
+		//TODO: store data in collisionData!
+
 		//The center of the circle is within the rectangle
 		if (a->IntersectsPoint(b->GetCenter()))
 			return true;
@@ -164,8 +178,10 @@ namespace Monocle
 		return false;
 	}
 
-	bool Collider::CollideRectPolygon(RectangleCollider* a, PolygonCollider* b)
+	bool Collider::CollideRectPolygon(RectangleCollider* a, PolygonCollider* b, CollisionData *collisionData)
 	{
+		//TODO: store data in collisionData!
+
 		//Check if it's even possible for them to collide
 		if (a->GetLeft() > b->GetRightmost())
 			return false;
@@ -203,8 +219,10 @@ namespace Monocle
 		return false;
 	}
 
-	bool Collider::CollideCirclePolygon(CircleCollider* a, PolygonCollider* b)
+	bool Collider::CollideCirclePolygon(CircleCollider* a, PolygonCollider* b, CollisionData *collisionData)
 	{
+		//TODO: store data in collisionData!
+
 		//If the center is inside the polygon, there's a collision
 		if (b->IntersectsPoint(a->GetCenter()))
 			return true;
@@ -217,6 +235,29 @@ namespace Monocle
 			Vector2 end = b->GetPoint((i + 1) % points);
 			if (a->IntersectsLine(start, end))
 				return true;
+		}
+
+		return false;
+	}
+
+	bool Collider::CollideCirclePath(CircleCollider *a, PathCollider *b, CollisionData *collisionData)
+	{
+		Node *node = b->start;
+		Node *prevNode = NULL;
+		Vector2 start, end;
+		while (node)
+		{
+			if (prevNode)
+			{
+				start = prevNode->GetWorldPosition();
+				end = node->GetWorldPosition();
+				if (a->IntersectsLine(start, end, node->radius, collisionData))
+				{
+					return true;
+				}
+			}
+			prevNode = node;
+			node = node->GetNext();
 		}
 
 		return false;

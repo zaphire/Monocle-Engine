@@ -37,8 +37,10 @@ namespace Monocle
 		return (intersections % 2 == 1);
 	}
 
-	bool PolygonCollider::IntersectsLine(const Vector2& start, const Vector2& end)
+	bool PolygonCollider::IntersectsLine(const Vector2& start, const Vector2& end, float lineRadius)
 	{
+		//TODO: Support line width!
+
 		//Polygons don't collide if they have less than 3 points
 		if (points.size() <= 2)
 			return false;
