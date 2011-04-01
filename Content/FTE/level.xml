@@ -1,17 +1,17 @@
-<Level width="1600" height="600">
-    <FringeTiles set="aquaria">
-        <FringeTile id="0" layer="2" x="575" y="-259" rotation="-180" scaleX="1" scaleY="1" />
-        <FringeTile id="0" layer="-6" x="192" y="516" rotation="-1" scaleX="1" scaleY="1" />
-        <FringeTile id="2" layer="3" x="932" y="505" rotation="-11" scaleX="1" scaleY="1" />
-        <FringeTile id="0" layer="2" x="149" y="-303" rotation="-170" scaleX="1" scaleY="1" />
-        <FringeTile id="1" layer="-2" x="567" y="511" rotation="0" scaleX="1" scaleY="1" />
-        <FringeTile id="3" layer="-4" x="678" y="-1" rotation="-7" scaleX="1" scaleY="1" />
-        <FringeTile id="3" layer="-4" x="43" y="3" rotation="12" scaleX="1" scaleY="1" />
-        <FringeTile id="3" layer="-4" x="350" y="119" rotation="0" scaleX="1" scaleY="1" />
-        <FringeTile id="2" layer="5" x="382" y="-135" rotation="14" scaleX="1" scaleY="1" />
-        <FringeTile id="2" layer="3" x="-1441" y="-1065" rotation="-22" scaleX="1" scaleY="1" />
-        <FringeTile id="0" layer="-6" x="924" y="532" rotation="-1" scaleX="1" scaleY="1" />
-        <FringeTile id="3" layer="-4" x="1039" y="439" rotation="-1" scaleX="1" scaleY="1" />
-        <FringeTile id="1" layer="4" x="335" y="-159" rotation="180" scaleX="1" scaleY="1" />
-    </FringeTiles>
+<Level width="1600" height="600" fringeTileset="aquaria">
+    <Entities>
+        <FringeTile position="585.029 -116.279" rotation="-180" layer="2" id="0" />
+        <FringeTile position="972.02 641.351" rotation="-12" layer="-6" id="0" />
+        <FringeTile position="1051.96 243.459" rotation="-11" layer="3" id="2" />
+        <FringeTile position="1004.72 -125.363" rotation="-170" layer="2" id="0" />
+        <FringeTile position="575.944 626.816" layer="-2" id="1" />
+        <FringeTile position="605.468 111.607" rotation="-7" layer="-4" id="3" />
+        <FringeTile position="404.576 75.3348" rotation="12" layer="-4" id="3" />
+        <FringeTile position="904.796 301.599" layer="-4" id="3" />
+        <FringeTile position="101.744 365.189" rotation="14" layer="5" id="2" />
+        <FringeTile position="-301.599 -376.09" rotation="-22" layer="3" id="2" />
+        <FringeTile position="203.488 570.494" rotation="20" layer="-6" id="0" />
+        <FringeTile position="-323.401 270.712" rotation="-23" layer="-4" id="3" />
+        <FringeTile position="154.433 -172.602" rotation="190" layer="5" id="1" />
+    </Entities>
 </Level>
