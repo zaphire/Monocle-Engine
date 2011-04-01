@@ -12,6 +12,14 @@ namespace Monocle
 	class Node;
 	class Entity;
 
+	enum BlendType
+	{
+		BLEND_NONE=0,
+		BLEND_ALPHA,
+		BLEND_ADDITIVE,
+		BLEND_MULTIPLY,
+	};
+
 	class Graphic
 	{
 	public:
@@ -56,7 +64,7 @@ namespace Monocle
 		static void RenderLineRect(float x, float y, float w, float h);
 		static void PushMatrix();
 		static void PopMatrix();
-		static void Blend();
+		static void SetBlend(BlendType blend);
 		static void SetColor(const Color &color);
 		static void SetBackgroundColor(const Color &color);
 		static void SceneMatrix();
@@ -91,6 +99,7 @@ namespace Monocle
 		Vector2 resolutionScale;
 		int virtualWidth, virtualHeight;
 		unsigned int lastBoundTextureID;
+		BlendType currentBlend;
 	};
 
 }

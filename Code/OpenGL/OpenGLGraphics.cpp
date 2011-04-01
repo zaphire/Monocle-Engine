@@ -79,10 +79,24 @@ namespace Monocle
 		return true;
 	}
 
-	///HACK: temporary
-	void Graphics::Blend()
+	void Graphics::SetBlend(BlendType blend)
 	{
-		glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+		if (blend != instance->currentBlend)
+		{
+			switch (blend)
+			{
+			case BLEND_ALPHA:
+				glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+				break;
+			case BLEND_ADDITIVE:
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+				break;
+			case BLEND_MULTIPLY:
+				glBlendFunc(GL_ZERO, GL_SRC_COLOR);
+				break;
+			}
+			instance->currentBlend = blend;
+		}
 	}
 
 	void Graphics::Set2D(int virtualWidth, int virtualHeight)

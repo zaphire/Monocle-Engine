@@ -57,6 +57,8 @@ namespace Monocle
 		int GetTileID();
 		void PrevTile();
 		void NextTile();
+		void PrevBlend();
+		void NextBlend();
 		//FringeTileset *GetFringeTileset();
 		Sprite *sprite;
 
