@@ -320,9 +320,9 @@ namespace Monocle
                         button = MOUSE_BUTTON_RIGHT; break;
                     // TODO check if 120 is the right amount and generalise code
                     case Button4:
-                        mouseWheel -= 120; break;
-                    case Button5:
                         mouseWheel += 120; break;
+                    case Button5:
+                        mouseWheel -= 120; break;
                     }
 
                     Platform::SetMouseButton(button,
