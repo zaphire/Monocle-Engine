@@ -645,7 +645,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if ${MONOCLE_MAC_USE_BUNDLE}\n  then\n    cp -r \"${MONOCLE_CONTENT_PATH}\" \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Content/\"\nfi";
+			shellScript = "if ! ${MONOCLE_MAC_USE_CONTENT_PATH}\n  then\n    cp -r \"${MONOCLE_CONTENT_PATH}\" \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Content/\"\nfi";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -756,8 +756,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				MONOCLE_CONTENT_PATH = "${SRCROOT}/../../../Content/";
-				MONOCLE_MAC_USE_BUNDLE = 0;
+				MONOCLE_CONTENT_PATH = "${SRCROOT}/../../../";
+				MONOCLE_MAC_USE_CONTENT_PATH = true;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -773,8 +773,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				MONOCLE_CONTENT_PATH = "${SRCROOT}/../../../Content/";
-				MONOCLE_MAC_USE_BUNDLE = 1;
+				MONOCLE_CONTENT_PATH = "${SRCROOT}/../../../";
+				MONOCLE_MAC_USE_CONTENT_PATH = false;
 				SDKROOT = macosx;
 			};
 			name = Release;

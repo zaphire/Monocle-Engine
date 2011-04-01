@@ -108,12 +108,13 @@ namespace Monocle
 		Cocoa_RegisterApp();
 
         NSDictionary *env = [[NSProcessInfo processInfo] environment];
-        if([[env objectForKey:@"MONOCLE_MAC_USE_BUNDLE"] isEqualToString:@"1"]) {
-            this->bundleResourcesPath = [[[NSBundle mainBundle] resourcePath] fileSystemRepresentation];
-        } else if(NSString *path = [env objectForKey:@"MONOCLE_CONTENT_PATH"]) {
-            this->bundleResourcesPath = [path fileSystemRepresentation];
+        if([[env objectForKey:@"MONOCLE_MAC_USE_CONTENT_PATH"] isEqualToString:@"true"]) {
+            NSString *path = [env objectForKey:@"MONOCLE_CONTENT_PATH"];
+            if(path) {
+                this->bundleResourcesPath = [path fileSystemRepresentation];
+            }
         } else {
-            this->bundleResourcesPath = [[env objectForKey:@"PWD"] fileSystemRepresentation];
+            this->bundleResourcesPath = [[[NSBundle mainBundle] resourcePath] fileSystemRepresentation];
         }
 
 		//  Create window
