@@ -2,6 +2,7 @@
 #include "RectangleCollider.h"
 #include "CircleCollider.h"
 #include "PolygonCollider.h"
+#include "PathCollider.h"
 #include "../Entity.h"
 #include <stdio.h> // for NULL
 
@@ -60,10 +61,10 @@ namespace Monocle
 		else if (typeA == CT_POLYGON && typeB == CT_CIRCLE)
 			return CollideCirclePolygon((CircleCollider*)b, (PolygonCollider*)a, collisionData);
 
-		else if (typeA == CT_CIRCLE && typeB == CT_LINESEGMENT)
-			return CollideCircleLineSegment((CircleCollider*)a, (LineSegmentCollider*)b, collisionData);
-		else if (typeA == CT_LINESEGMENT && typeB == CT_CIRCLE)
-			return CollideCircleLineSegment((CircleCollider*)b, (LineSegmentCollider*)a, collisionData);
+		else if (typeA == CT_CIRCLE && typeB == CT_PATH)
+			return CollideCirclePath((CircleCollider*)a, (PathCollider*)b, collisionData);
+		else if (typeA == CT_PATH && typeB == CT_CIRCLE)
+			return CollideCirclePath((CircleCollider*)b, (PathCollider*)a, collisionData);
 
 		// Unhandled case
 		return false;
@@ -239,9 +240,28 @@ namespace Monocle
 		return false;
 	}
 
-	bool Collider::CollideCircleLineSegment(CircleCollider *a, LineSegmentCollider *b, CollisionData *collisionData)
+	bool Collider::CollideCirclePath(CircleCollider *a, PathCollider *b, CollisionData *collisionData)
 	{
-		///TODO
+		// for each node
+		Node *node = b->start;
+		Node *prevNode = NULL;
+		Vector2 start, end;
+		while (node)
+		{
+			if (prevNode)
+			{
+				start = prevNode->GetWorldPosition();
+				end = node->GetWorldPosition();
+				if (a->IntersectsLine(start, end))
+				{
+					return true;
+				}
+			}
+			
+			// get line difference
+			node = node->GetNext();
+		}
+
 		return false;
 	}
 }

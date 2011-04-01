@@ -9,13 +9,14 @@ namespace Monocle
 		CT_RECT=0,
 		CT_CIRCLE,
 		CT_POLYGON,
-		CT_LINESEGMENT
+		CT_PATH
 	};
 
 	class RectangleCollider;
 	class CircleCollider;
 	class PolygonCollider;
 	class LineSegmentCollider;
+	class PathCollider;
 	class Entity;
 	class CollisionData;
 
@@ -47,6 +48,6 @@ namespace Monocle
 		static bool CollideRectPolygon(RectangleCollider* a, PolygonCollider* b, CollisionData *collisionData);
 		static bool CollideCirclePolygon(CircleCollider* a, PolygonCollider* b, CollisionData *collisionData);
 
-		static bool CollideCircleLineSegment(CircleCollider *a, LineSegmentCollider *b, CollisionData *collisionData);
+		static bool CollideCirclePath(CircleCollider *a, PathCollider *b, CollisionData *collisionData);
 	};
 }
