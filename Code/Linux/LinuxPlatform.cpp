@@ -291,6 +291,7 @@ namespace Monocle
 
     void Platform::Update()
     {
+        mouseWheel = 0; //reset mouse wheel state
         XEvent event;
 
         while (XPending(LinuxPlatform::instance->hDisplay)) { XNextEvent(LinuxPlatform::instance->hDisplay, &event);
@@ -317,6 +318,11 @@ namespace Monocle
                         button = MOUSE_BUTTON_MIDDLE; break;
                     case Button3: // right click
                         button = MOUSE_BUTTON_RIGHT; break;
+                    // TODO check if 120 is the right amount and generalise code
+                    case Button4:
+                        mouseWheel -= 120; break;
+                    case Button5:
+                        mouseWheel += 120; break;
                     }
 
                     Platform::SetMouseButton(button,
