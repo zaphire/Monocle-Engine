@@ -178,6 +178,10 @@ static __inline__ void ConvertNSRect(NSRect *r)
 {
 }
 
+-(void) handleTouches:(cocoaTouchType)type withEvent:(NSEvent*) event {
+    
+}
+
 @end
 
 void

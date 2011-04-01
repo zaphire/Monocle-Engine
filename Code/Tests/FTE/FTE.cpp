@@ -36,7 +36,7 @@ namespace FTE
 		Scene::Begin();
 
 		// set the base content path (used by everything)
-		Assets::SetContentPath("../../Content/FTE/");
+		Assets::SetContentPath(Assets::GetContentPath()+"FTE/");
 
 		Graphics::SetBackgroundColor(Color::blue*0.1f + Color::black*0.9f);
 

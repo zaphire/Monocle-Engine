@@ -383,6 +383,11 @@ namespace Monocle
 			instance->keys[instance->localKeymap[key]] = on;
 		}
 	}
+
+  const std::string Platform::GetDefaultContentPath() {
+    return "../../Content/";
+  }
+
 }
 
 #endif

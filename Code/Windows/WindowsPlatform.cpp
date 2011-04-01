@@ -730,6 +730,10 @@ namespace Monocle
 	{
 		return WindowsPlatform::instance->active;
 	}
+
+  const std::string Platform::GetDefaultContentPath() {
+      return "../../Content/";
+  }
 }
 
 #endif

@@ -77,7 +77,7 @@ static WindowData* AttachWindowListener(NSWindow* window)
 	WindowData* data = (WindowData*) calloc(1, sizeof(WindowData));
 	if (!data) {
 		Debug::Log("Error allocating window data");
-		return false;
+		return NULL;
 	}
 	data->created = true;
 	data->nswindow = window;
@@ -104,6 +104,8 @@ namespace Monocle
 	{
 		//  Init event loop
 		Cocoa_RegisterApp();
+        
+        this->bundleResourcesPath = [[[NSBundle mainBundle] resourcePath] fileSystemRepresentation];
 
 		//  Create window
 		window = CreateWindowCocoa(w, h);
@@ -160,7 +162,7 @@ namespace Monocle
 		instance->width  = (int)rect.size.width;
 		instance->height = (int)rect.size.height;
 	}
-
+    
 	void Platform::Update()
 	{
 		Cocoa_PumpEvents();
@@ -231,4 +233,8 @@ namespace Monocle
 	{
 		return [NSApp isActive];
 	}
+
+    std::string Platform::GetDefaultContentPath() {
+        return CocoaPlatform::instance->bundleResourcesPath+"/Content/";
+    }
 }
