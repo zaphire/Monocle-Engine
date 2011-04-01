@@ -438,6 +438,8 @@ namespace Monocle
 		{
 			if (nodes[i]->variant != -1)
 			{
+				
+
 				Vector2 diff1;
 				Vector2 perp1;
 
@@ -480,15 +482,19 @@ namespace Monocle
 				texOffset.x = (nodes[i]->variant % (cells)) * texScale.x;
 				texOffset.y = (int)(nodes[i]->variant / (cells)) * texScale.y;
 			
+				Graphics::SetColor(nodes[i]->color);
 				glTexCoord2f(texOffset.x, texOffset.y);
 				Vertex(pos1 - perp1 * nodes[i]->scale.y * size * 0.5f);
 
+				Graphics::SetColor(nodes[i+1]->color);
 				glTexCoord2f(texOffset.x + texScale.x, texOffset.y);
 				Vertex(pos2 - perp2 * nodes[i+1]->scale.y * size * 0.5f);
 
+				Graphics::SetColor(nodes[i+1]->color);
 				glTexCoord2f(texOffset.x + texScale.x, texOffset.y + texScale.y);
 				Vertex(pos2 + perp2 * nodes[i+1]->scale.y * size * 0.5f);
 
+				Graphics::SetColor(nodes[i]->color);
 				glTexCoord2f(texOffset.x, texOffset.y + texScale.y);
 				Vertex(pos1 + perp1 * nodes[i]->scale.y * size * 0.5f);
 			}
