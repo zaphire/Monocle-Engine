@@ -60,8 +60,8 @@ namespace Monocle
 
 		int GetAmountTag(const std::string& tag);
 
-		Entity *GetFirstEntity();
-		Entity *GetNextEntity();
+		//Entity *GetFirstEntity();
+		//Entity *GetNextEntity();
 
 		Entity* GetNearestEntity(const Vector2 &position, Entity *ignoreEntity=NULL);
 		//Entity* GetNearestEntityContaining(const Vector2 &position, Entity *ignoreEntity=NULL);
@@ -103,6 +103,6 @@ namespace Monocle
 		void ResolveEntityChanges();
 
 		// for GetFirstEntity and GetNextEntity
-		std::list<Entity*>::iterator entityIterator;
+		//std::list<Entity*>::iterator entityIterator;
 	};
 }

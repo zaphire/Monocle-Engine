@@ -23,6 +23,9 @@ namespace Monocle
 		Node *GetNext();
 		Node *GetPrev();
 
+		void Save(FileNode *fileNode);
+		void Load(FileNode *fileNode);
+
 		int variant;
 
 	private:

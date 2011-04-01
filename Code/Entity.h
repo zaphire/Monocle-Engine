@@ -11,6 +11,8 @@
 
 namespace Monocle
 {
+	const int ENTITY_CONTROLPOINT_SIZE = 20;
+
 	class Scene;
 	class Collision;
 	class Collider;

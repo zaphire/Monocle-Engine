@@ -422,59 +422,62 @@ namespace Monocle
 		glBegin(GL_QUADS);
 		for (int i = 0; i < nodes.size()-1; i++)
 		{
-			Vector2 diff1;
-			Vector2 perp1;
-
-			/*
-			if (i-1 >= 0)
+			if (nodes[i]->variant != -1)
 			{
-				diff1 = points[i] - points[i-1];
+				Vector2 diff1;
+				Vector2 perp1;
+
+				/*
+				if (i-1 >= 0)
+				{
+					diff1 = points[i] - points[i-1];
+					perp1 = diff1.GetNormalized().GetPerpendicularLeft();
+					//diff1 = points[i + 1] - points[i];
+					//perp1 = perp1*0.5f + diff1.GetNormalized().GetPerpendicularLeft()*0.5f;
+				}
+				else
+				{
+					diff1 = points[i + 1] - points[i];
+					perp1 = diff1.GetNormalized().GetPerpendicularLeft();
+				}
+				*/
+
+				diff1 = nodes[i + 1]->position - nodes[i]->position;
 				perp1 = diff1.GetNormalized().GetPerpendicularLeft();
-				//diff1 = points[i + 1] - points[i];
-				//perp1 = perp1*0.5f + diff1.GetNormalized().GetPerpendicularLeft()*0.5f;
-			}
-			else
-			{
-				diff1 = points[i + 1] - points[i];
-				perp1 = diff1.GetNormalized().GetPerpendicularLeft();
-			}
-			*/
 
-			diff1 = nodes[i + 1]->position - nodes[i]->position;
-			perp1 = diff1.GetNormalized().GetPerpendicularLeft();
-
-			Vector2 diff2;
-			Vector2 perp2 = perp1;
+				Vector2 diff2;
+				Vector2 perp2 = perp1;
 			
-			if (i+2 < nodes.size())
-			{
-				diff2 = nodes[i+2]->position - nodes[i+1]->position;
-				perp2 = diff2.GetNormalized().GetPerpendicularLeft();
+				if (i+2 < nodes.size())
+				{
+					diff2 = nodes[i+2]->position - nodes[i+1]->position;
+					perp2 = diff2.GetNormalized().GetPerpendicularLeft();
+				}
+				else
+				{
+					perp2 = perp1;
+				}
+			
+				Vector2 pos1 = nodes[i]->position;
+				Vector2 pos2 = nodes[i+1]->position;
+			
+				Vector2 texOffset = Vector2::zero;
+				Vector2 texScale = Vector2::one * 1.0f/(float)cells;
+				texOffset.x = (nodes[i]->variant % (cells)) * texScale.x;
+				texOffset.y = (int)(nodes[i]->variant / (cells)) * texScale.y;
+			
+				glTexCoord2f(texOffset.x, texOffset.y);
+				Vertex(pos1 - perp1 * nodes[i]->scale.y * size * 0.5f);
+
+				glTexCoord2f(texOffset.x + texScale.x, texOffset.y);
+				Vertex(pos2 - perp2 * nodes[i+1]->scale.y * size * 0.5f);
+
+				glTexCoord2f(texOffset.x + texScale.x, texOffset.y + texScale.y);
+				Vertex(pos2 + perp2 * nodes[i+1]->scale.y * size * 0.5f);
+
+				glTexCoord2f(texOffset.x, texOffset.y + texScale.y);
+				Vertex(pos1 + perp1 * nodes[i]->scale.y * size * 0.5f);
 			}
-			else
-			{
-				perp2 = perp1;
-			}
-			
-			Vector2 pos1 = nodes[i]->position;
-			Vector2 pos2 = nodes[i+1]->position;
-			
-			Vector2 texOffset = Vector2::zero;
-			Vector2 texScale = Vector2::one * 1.0f/(float)cells;
-			texOffset.x = (nodes[i]->variant % (cells)) * texScale.x;
-			texOffset.y = (int)(nodes[i]->variant / (cells)) * texScale.y;
-			
-			glTexCoord2f(texOffset.x, texOffset.y);
-			Vertex(pos1 - perp1 * nodes[i]->scale.y * size * 0.5f);
-
-			glTexCoord2f(texOffset.x + texScale.x, texOffset.y);
-			Vertex(pos2 - perp2 * nodes[i+1]->scale.y * size * 0.5f);
-
-			glTexCoord2f(texOffset.x + texScale.x, texOffset.y + texScale.y);
-			Vertex(pos2 + perp2 * nodes[i+1]->scale.y * size * 0.5f);
-
-			glTexCoord2f(texOffset.x, texOffset.y + texScale.y);
-			Vertex(pos1 + perp1 * nodes[i]->scale.y * size * 0.5f);
 		}
 		glEnd();
 	}

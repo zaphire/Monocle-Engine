@@ -21,7 +21,7 @@ namespace Monocle
 
 	bool RectangleCollider::IntersectsPoint(const Vector2& point)
 	{
-		Vector2 ePos = GetEntityPosition();
+		//Vector2 ePos = GetEntityPosition();
 
 		return (point.x > GetLeft() && point.y > GetTop() && point.x < GetRight() && point.y < GetBottom());
 	}
@@ -71,22 +71,22 @@ namespace Monocle
 			return GetEntityPosition().y + offset.y + height*0.5f;
 	}
 
-	const Vector2& RectangleCollider::GetTopLeft(bool relativeToEntity)
+	Vector2 RectangleCollider::GetTopLeft(bool relativeToEntity)
 	{
 		return Vector2(GetLeft(relativeToEntity), GetTop(relativeToEntity));
 	}
 
-	const Vector2& RectangleCollider::GetTopRight(bool relativeToEntity)
+	Vector2 RectangleCollider::GetTopRight(bool relativeToEntity)
 	{
 		return Vector2(GetRight(relativeToEntity), GetTop(relativeToEntity));
 	}
 
-	const Vector2& RectangleCollider::GetBottomLeft(bool relativeToEntity)
+	Vector2 RectangleCollider::GetBottomLeft(bool relativeToEntity)
 	{
 		return Vector2(GetLeft(relativeToEntity), GetBottom(relativeToEntity));
 	}
 
-	const Vector2& RectangleCollider::GetBottomRight(bool relativeToEntity)
+	Vector2 RectangleCollider::GetBottomRight(bool relativeToEntity)
 	{
 		return Vector2(GetRight(relativeToEntity), GetBottom(relativeToEntity));
 	}

@@ -92,4 +92,19 @@ namespace Monocle
 		return prev;
 	}
 
+	void Node::Save(FileNode *fileNode)
+	{
+		Entity::Save(fileNode);
+
+		if (variant != 0)
+			fileNode->Write("variant", variant);
+	}
+
+	void Node::Load(FileNode *fileNode)
+	{
+		Entity::Load(fileNode);
+
+		fileNode->Read("variant", variant);
+	}
+
 }

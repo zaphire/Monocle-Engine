@@ -342,20 +342,6 @@ namespace Monocle
 	{
 		switch (uMsg)									// Check For Windows Messages
 		{
-			case WM_ACTIVATE:							// Watch For Window Activate Message
-			{
-				if (!HIWORD(wParam))						// Check Minimization State
-				{
-					instance->active = true;						// Program Is Active
-				}
-				else
-				{
-					instance->active = false;						// Program Is No Longer Active
-				}
-
-				return 0;								// Return To The Message Loop
-			}
-
 			case WM_SYSCOMMAND:							// Intercept System Commands
 			{
 				switch (wParam)							// Check System Calls
@@ -372,94 +358,6 @@ namespace Monocle
 				PostQuitMessage(0);
 				return 0;
 			}
-
-			//TODO: clean this up
-
-			/*
-			case WM_KEYDOWN:
-			{
-				switch (wParam)
-				{
-					case VK_CONTROL:
-						if ( lParam&EXTENDED_KEYMASK )
-							wParam = VK_RCONTROL;
-						else
-							wParam = VK_LCONTROL;
-						break;
-					case VK_SHIFT:
-						if ((GetKeyState(VK_LSHIFT) & 0x8000))
-						{
-							wParam = VK_LSHIFT;
-						}
-						else if ((GetKeyState(VK_RSHIFT) & 0x8000))
-						{
-							wParam = VK_RSHIFT;
-						}
-						break;
-					case VK_MENU:
-						if ( lParam&EXTENDED_KEYMASK )
-							wParam = VK_RMENU;
-						else
-							wParam = VK_LMENU;
-						break;
-				}
-
-				//Debug::Log("Down!");
-				//Debug::Log((int)wParam);
-				if (wParam >= KEY_MAX || wParam < 0)
-				{
-					Debug::Log("Received KeyCode out of range");
-					Debug::Log((int)wParam);
-				}
-				else
-				{
-					Platform::SetLocalKey((int)wParam, true);
-				}
-				return 0;
-			}
-
-			case WM_KEYUP:
-			{
-				switch (wParam)
-				{
-					case VK_CONTROL:
-						if ( lParam&EXTENDED_KEYMASK )
-							wParam = VK_RCONTROL;
-						else
-							wParam = VK_LCONTROL;
-						break;
-					case VK_SHIFT:
-						if (!(GetKeyState(VK_LSHIFT) & 0x8000))
-						{
-							wParam = VK_LSHIFT;
-						}
-						else if (!(GetKeyState(VK_RSHIFT) & 0x8000))
-						{
-							wParam = VK_RSHIFT;
-						}
-						break;
-					case VK_MENU:
-						if ( lParam&EXTENDED_KEYMASK )
-							wParam = VK_RMENU;
-						else
-							wParam = VK_LMENU;
-						break;
-				}
-
-				//Debug::Log("Up!");
-				//Debug::Log((int)wParam);
-				if (wParam >= KEY_MAX || wParam < 0)
-				{
-					Debug::Log("Received KeyCode out of range");
-					Debug::Log((int)wParam);
-				}
-				else
-				{
-					Platform::SetLocalKey((int)wParam, false);
-				}
-				return 0;
-			}
-			*/
 
 			case WM_SIZE:
 			{
@@ -728,7 +626,7 @@ namespace Monocle
 
 	bool Platform::IsActive()
 	{
-		return WindowsPlatform::instance->active;
+		return GetActiveWindow() == WindowsPlatform::instance->hWnd;
 	}
 }
 
