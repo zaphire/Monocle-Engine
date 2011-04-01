@@ -78,6 +78,9 @@
 		F9F7D600133D3F3C002953B0 /* FringeTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7D5FA133D3F3C002953B0 /* FringeTile.cpp */; };
 		F9F7D601133D3F3C002953B0 /* FringeTileEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7D5FC133D3F3C002953B0 /* FringeTileEditor.cpp */; };
 		F9F7D602133D3F3C002953B0 /* LevelEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7D5FE133D3F3C002953B0 /* LevelEditor.cpp */; };
+		F9F7D63A13457F3B002953B0 /* XMLFileNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7D63813457F3B002953B0 /* XMLFileNode.cpp */; };
+		F9F7D63D13457F46002953B0 /* FileNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7D63B13457F46002953B0 /* FileNode.cpp */; };
+		F9F7D64313457F5C002953B0 /* PathMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7D64113457F5C002953B0 /* PathMesh.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -216,6 +219,12 @@
 		F9F7D5FD133D3F3C002953B0 /* FringeTileEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FringeTileEditor.h; path = ../../../Code/LevelEditor/FringeTileEditor.h; sourceTree = SOURCE_ROOT; };
 		F9F7D5FE133D3F3C002953B0 /* LevelEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LevelEditor.cpp; path = ../../../Code/LevelEditor/LevelEditor.cpp; sourceTree = SOURCE_ROOT; };
 		F9F7D5FF133D3F3C002953B0 /* LevelEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LevelEditor.h; path = ../../../Code/LevelEditor/LevelEditor.h; sourceTree = SOURCE_ROOT; };
+		F9F7D63813457F3B002953B0 /* XMLFileNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XMLFileNode.cpp; sourceTree = "<group>"; };
+		F9F7D63913457F3B002953B0 /* XMLFileNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLFileNode.h; sourceTree = "<group>"; };
+		F9F7D63B13457F46002953B0 /* FileNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FileNode.cpp; path = ../../../Code/FileNode.cpp; sourceTree = SOURCE_ROOT; };
+		F9F7D63C13457F46002953B0 /* FileNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileNode.h; path = ../../../Code/FileNode.h; sourceTree = SOURCE_ROOT; };
+		F9F7D64113457F5C002953B0 /* PathMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PathMesh.cpp; path = ../../../Code/LevelEditor/PathMesh.cpp; sourceTree = SOURCE_ROOT; };
+		F9F7D64213457F5C002953B0 /* PathMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathMesh.h; path = ../../../Code/LevelEditor/PathMesh.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +252,8 @@
 		37B1929813359C9D00D2D264 /* XML */ = {
 			isa = PBXGroup;
 			children = (
+				F9F7D63813457F3B002953B0 /* XMLFileNode.cpp */,
+				F9F7D63913457F3B002953B0 /* XMLFileNode.h */,
 				37B1929913359C9D00D2D264 /* tinyxml.cpp */,
 				37B1929A13359C9D00D2D264 /* tinyxml.h */,
 				37B1929B13359C9D00D2D264 /* tinyxmlerror.cpp */,
@@ -356,6 +367,8 @@
 				37FB691813317693008963C1 /* Audio.h */,
 				37FB692013317693008963C1 /* Collision.cpp */,
 				37FB692113317693008963C1 /* Collision.h */,
+				F9F7D63B13457F46002953B0 /* FileNode.cpp */,
+				F9F7D63C13457F46002953B0 /* FileNode.h */,
 				37FB692213317693008963C1 /* Color.cpp */,
 				37FB692313317693008963C1 /* Color.h */,
 				37FB692613317693008963C1 /* Debug.cpp */,
@@ -532,6 +545,8 @@
 		F9257DD91338238200A47E00 /* LevelEditor */ = {
 			isa = PBXGroup;
 			children = (
+				F9F7D64113457F5C002953B0 /* PathMesh.cpp */,
+				F9F7D64213457F5C002953B0 /* PathMesh.h */,
 				D881B4FE13445142008EF89C /* Node.cpp */,
 				D881B4FF13445142008EF89C /* Node.h */,
 				F9F7D5FA133D3F3C002953B0 /* FringeTile.cpp */,
@@ -682,6 +697,9 @@
 				F9F7D602133D3F3C002953B0 /* LevelEditor.cpp in Sources */,
 				6657ED15133F9E8F00ACA1E2 /* FTE.cpp in Sources */,
 				D881B50013445142008EF89C /* Node.cpp in Sources */,
+				F9F7D63A13457F3B002953B0 /* XMLFileNode.cpp in Sources */,
+				F9F7D63D13457F46002953B0 /* FileNode.cpp in Sources */,
+				F9F7D64313457F5C002953B0 /* PathMesh.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
