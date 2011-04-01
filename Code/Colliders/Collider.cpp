@@ -30,7 +30,7 @@ namespace Monocle
 			return Vector2();
 	}
 
-	bool Collider::Collide(Collider* a, Collider* b)
+	bool Collider::Collide(Collider* a, Collider* b, CollisionData *collisionData)
 	{
 		ColliderType typeA = a->GetColliderType();
 		ColliderType typeB = b->GetColliderType();
@@ -59,6 +59,11 @@ namespace Monocle
 			return CollideCirclePolygon((CircleCollider*)a, (PolygonCollider*)b);
 		else if (typeA == CT_POLYGON && typeB == CT_CIRCLE)
 			return CollideCirclePolygon((CircleCollider*)b, (PolygonCollider*)a);
+
+		else if (typeA == CT_CIRCLE && typeB == CT_LINESEGMENT)
+			return CollideCircleLineSegment((CircleCollider*)a, (LineSegmentCollider*)b, collisionData);
+		else if (typeA == CT_LINESEGMENT && typeB == CT_CIRCLE)
+			return CollideCircleLineSegment((CircleCollider*)b, (LineSegmentCollider*)a, collisionData);
 
 		// Unhandled case
 		return false;
@@ -219,6 +224,12 @@ namespace Monocle
 				return true;
 		}
 
+		return false;
+	}
+
+	bool Collider::CollideCircleLineSegment(CircleCollider *a, LineSegmentCollider *b, CollisionData *collisionData)
+	{
+		///TODO
 		return false;
 	}
 }

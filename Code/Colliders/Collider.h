@@ -8,13 +8,16 @@ namespace Monocle
 	{
 		CT_RECT=0,
 		CT_CIRCLE,
-		CT_POLYGON
+		CT_POLYGON,
+		CT_LINESEGMENT
 	};
 
 	class RectangleCollider;
 	class CircleCollider;
 	class PolygonCollider;
+	class LineSegmentCollider;
 	class Entity;
+	class CollisionData;
 
 	class Collider
 	{
@@ -31,7 +34,7 @@ namespace Monocle
 		virtual bool IntersectsPoint(const Vector2& point)=0;
 		virtual bool IntersectsLine(const Vector2& start, const Vector2& end)=0;
 
-		static bool Collide(Collider* a, Collider* b);
+		static bool Collide(Collider* a, Collider* b, CollisionData *collisionData);
 		static bool LinesIntersect(const Vector2& aStart, const Vector2& aEnd, const Vector2& bStart, const Vector2& bEnd);
 
 	private:
@@ -43,5 +46,7 @@ namespace Monocle
 		static bool CollideRectCircle(RectangleCollider* a, CircleCollider* b);
 		static bool CollideRectPolygon(RectangleCollider* a, PolygonCollider* b);
 		static bool CollideCirclePolygon(CircleCollider* a, PolygonCollider* b);
+
+		static bool CollideCircleLineSegment(CircleCollider *a, LineSegmentCollider *b, CollisionData *collisionData);
 	};
 }

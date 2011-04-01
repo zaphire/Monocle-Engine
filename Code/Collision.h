@@ -12,6 +12,16 @@ namespace Monocle
 {
 	class Entity;
 
+	class CollisionData
+	{
+	public:
+		CollisionData();
+
+		Vector2 hitPoint;
+		Vector2 normal;
+		Collider *collider;
+	};
+
 	class Collision
 	{
 	public:
@@ -20,7 +30,7 @@ namespace Monocle
 		//static CircleCollider* AddCircleCollider(Entity *entity, float radius, Vector2 offset=Vector2::zero);
 		//static RectangleCollider* AddRectangleCollider(Entity *entity, float width, float height, Vector2 offset=Vector2::zero);
 
-		static Collider* Collide(Entity *entity, const std::string &tag);
+		static Collider* Collide(Entity *entity, const std::string &tag, CollisionData *collisionData=NULL);
 
 	private:
 		friend class Entity;
