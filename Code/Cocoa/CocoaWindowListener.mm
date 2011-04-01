@@ -91,8 +91,12 @@ static __inline__ void ConvertNSRect(NSRect *r)
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-	int buttonNumber = [theEvent buttonNumber];
-	CocoaPlatform::platform->SetMouseButton(buttonNumber, true);
+	NSInteger buttonNumber = [theEvent buttonNumber];
+    if([theEvent modifierFlags] & NSControlKeyMask)
+    {
+        buttonNumber = 1;
+    }
+	CocoaPlatform::platform->SetMouseButton((int)buttonNumber, true);
 }
 
 - (void)rightMouseDown:(NSEvent *)theEvent
@@ -107,8 +111,12 @@ static __inline__ void ConvertNSRect(NSRect *r)
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
-	int buttonNumber = [theEvent buttonNumber];
-	CocoaPlatform::platform->SetMouseButton(buttonNumber, false);
+	NSInteger buttonNumber = [theEvent buttonNumber];
+    if([theEvent modifierFlags] & NSControlKeyMask)
+    {
+        buttonNumber = 1;
+    }
+	CocoaPlatform::platform->SetMouseButton((int)buttonNumber, false);
 }
 
 - (void)rightMouseUp:(NSEvent *)theEvent
