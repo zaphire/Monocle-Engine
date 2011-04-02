@@ -5,6 +5,7 @@
 #include "PathCollider.h"
 #include "../Entity.h"
 #include <stdio.h> // for NULL
+#include "../CollisionData.h"
 
 namespace Monocle
 {
@@ -65,6 +66,15 @@ namespace Monocle
 			return CollideCirclePath((CircleCollider*)a, (PathCollider*)b, collisionData);
 		else if (typeA == CT_PATH && typeB == CT_CIRCLE)
 			return CollideCirclePath((CircleCollider*)b, (PathCollider*)a, collisionData);
+
+		else if ((typeA == CT_RECT && typeB == CT_PATH) || (typeA == CT_PATH && typeB == CT_RECT))
+		{
+			Debug::Log("Warning: Collisions between Rectangle and Path not yet supported.");
+		}
+		else
+		{
+			Debug::Log("Warning: Unhandled collider pair.");
+		}
 
 		// Unhandled case
 		return false;
@@ -253,6 +263,8 @@ namespace Monocle
 				end = node->GetWorldPosition();
 				if (a->IntersectsLine(start, end, 32, collisionData))
 				{
+					if (collisionData)
+						collisionData->normal = (end-start).GetNormalized().GetPerpendicularRight();
 					return true;
 				}
 			}
