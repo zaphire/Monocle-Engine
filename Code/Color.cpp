@@ -13,6 +13,11 @@ namespace Monocle
 	Color Color::orange = Color(1.0f,0.5f,0.0f,1.0f);
 	Color Color::purple = Color(0.5f, 0.0f, 1.0f, 1.0f);
 
+	Color::Color(const Color &color)
+		: r(color.r), g(color.g), b(color.b), a(color.a)
+	{
+	}
+
 	Color::Color()
 		: r(1), g(1), b(1), a(1)
 	{
@@ -23,6 +28,11 @@ namespace Monocle
 		: r(r), g(g), b(b), a(a)
 	{
 
+	}
+
+	bool Color::operator!=(const Color& rhs)
+	{
+		return ((r != rhs.r) || (g != rhs.g) || (b != rhs.b) || (a != rhs.a));
 	}
 
 	Color operator+(const Color& lhs, const Color& rhs)

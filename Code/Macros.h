@@ -39,3 +39,5 @@
 		LERP(0, -4, 0.75) = -3, because -3 is 75% between 0 and -4.
 */
 #define LERP(a, b, t) (a + (b - a) * t)
+
+#define WEIGHTED_AVERAGE(current, target, slowdown) ((current * (slowdown - 1)) + target) / slowdown;

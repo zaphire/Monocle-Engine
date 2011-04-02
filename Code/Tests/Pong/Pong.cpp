@@ -215,9 +215,5 @@ namespace Pong
 	void GameScene::End()
 	{
 		Scene::End();
-
-		delete ball;
-		delete paddle1;
-		delete paddle2;
 	}
 }

@@ -11,7 +11,8 @@ namespace Monocle
 		width(width),
 		height(height),
 		textureOffset(Vector2::zero),
-		textureScale(Vector2::one)
+		textureScale(Vector2::one),
+		blend(BLEND_ALPHA)
 	{
 		texture = Assets::RequestTexture(filename, filter);
 		if (texture != NULL)
@@ -30,7 +31,8 @@ namespace Monocle
 		width(width),
 		height(height),
 		textureOffset(Vector2::zero),
-		textureScale(Vector2::one)
+		textureScale(Vector2::one),
+		blend(BLEND_ALPHA)
 	{
 		texture = Assets::RequestTexture(filename);
 		if (texture != NULL)
@@ -49,7 +51,8 @@ namespace Monocle
 		width(0),
 		height(0),
 		textureOffset(Vector2::zero),
-		textureScale(Vector2::one)
+		textureScale(Vector2::one),
+		blend(BLEND_ALPHA)
 	{
 	}
 
@@ -81,9 +84,11 @@ namespace Monocle
 	{
 		//Graphics::Rotate(angle, 0, 0, 1);
 		Graphics::Translate(position.x, position.y, 0.0f);
-		Graphics::Blend();
 		//Graphics::SetColor(color);
 		Graphics::BindTexture(texture);
+
+		Graphics::SetBlend(blend);
+
 		if (texture != NULL)
 		{
 			// fade out sprite if it's selected (so we can see behind it)
@@ -103,6 +108,8 @@ namespace Monocle
 					Graphics::SetColor(copyColor);
 				}
 			}
+
+
 			
 			Graphics::RenderQuad(width, height, textureOffset, textureScale);
 		}
@@ -122,7 +129,12 @@ namespace Monocle
 				Graphics::BindTexture(NULL);
 				Graphics::RenderLineRect(0, 0, width, height);
 
-				if (Debug::selectedEntity == entity)
+				if (Debug::selectedEntity != entity)
+				{
+					Graphics::RenderLine(Vector2(-width*0.5f, -height*0.5f), Vector2(width*0.5f, height*0.5f));
+					Graphics::RenderLine(Vector2(width*0.5f, -height*0.5f), Vector2(-width*0.5f, height*0.5f));
+				}
+				else
 				{
 					Graphics::SetColor(Color::orange - Color(0,0,0,0.5f));
 					Graphics::RenderLine(Vector2(-width*0.5f, -height*0.5f), Vector2(width*0.5f, height*0.5f));

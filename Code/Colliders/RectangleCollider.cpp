@@ -19,15 +19,17 @@ namespace Monocle
 		return CT_RECT;
 	}
 
-	bool RectangleCollider::IntersectsPoint(const Vector2& point)
+	bool RectangleCollider::IntersectsPoint(const Vector2& point, CollisionData *collisionData)
 	{
-		Vector2 ePos = GetEntityPosition();
+		//Vector2 ePos = GetEntityPosition();
 
 		return (point.x > GetLeft() && point.y > GetTop() && point.x < GetRight() && point.y < GetBottom());
 	}
 
-	bool RectangleCollider::IntersectsLine(const Vector2& start, const Vector2& end)
+	bool RectangleCollider::IntersectsLine(const Vector2& start, const Vector2& end, float lineRadius, CollisionData *collisionData)
 	{
+		//TODO: Support line width!
+
 		if (IntersectsPoint(start) || IntersectsPoint(end))
 			return true;
 
@@ -71,22 +73,22 @@ namespace Monocle
 			return GetEntityPosition().y + offset.y + height*0.5f;
 	}
 
-	const Vector2& RectangleCollider::GetTopLeft(bool relativeToEntity)
+	Vector2 RectangleCollider::GetTopLeft(bool relativeToEntity)
 	{
 		return Vector2(GetLeft(relativeToEntity), GetTop(relativeToEntity));
 	}
 
-	const Vector2& RectangleCollider::GetTopRight(bool relativeToEntity)
+	Vector2 RectangleCollider::GetTopRight(bool relativeToEntity)
 	{
 		return Vector2(GetRight(relativeToEntity), GetTop(relativeToEntity));
 	}
 
-	const Vector2& RectangleCollider::GetBottomLeft(bool relativeToEntity)
+	Vector2 RectangleCollider::GetBottomLeft(bool relativeToEntity)
 	{
 		return Vector2(GetLeft(relativeToEntity), GetBottom(relativeToEntity));
 	}
 
-	const Vector2& RectangleCollider::GetBottomRight(bool relativeToEntity)
+	Vector2 RectangleCollider::GetBottomRight(bool relativeToEntity)
 	{
 		return Vector2(GetRight(relativeToEntity), GetBottom(relativeToEntity));
 	}

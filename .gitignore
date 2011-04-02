@@ -1,1 +1,11 @@
 Build
+CMakeCache.txt
+CMakeFiles
+Makefile
+*.cmake
+
+#Qt creator project files
+monocle.files
+monocle.includes
+monocle.config
+monocle.creator.*

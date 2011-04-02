@@ -9,7 +9,16 @@
 
 namespace Monocle
 {
+	class Node;
 	class Entity;
+
+	enum BlendType
+	{
+		BLEND_NONE=0,
+		BLEND_ALPHA,
+		BLEND_ADDITIVE,
+		BLEND_MULTIPLY,
+	};
 
 	class Graphic
 	{
@@ -55,7 +64,7 @@ namespace Monocle
 		static void RenderLineRect(float x, float y, float w, float h);
 		static void PushMatrix();
 		static void PopMatrix();
-		static void Blend();
+		static void SetBlend(BlendType blend);
 		static void SetColor(const Color &color);
 		static void SetBackgroundColor(const Color &color);
 		static void SceneMatrix();
@@ -71,6 +80,7 @@ namespace Monocle
 		static const Vector2 &GetCameraZoom();
 		static const Vector2 &GetResolutionScale();
 		static void ResolutionMatrix();
+		static void IdentityMatrix();
 
 		static void MoveCameraPosition(const Vector2 &position, float time, EaseType easeType);
 		static void RenderLine(const Vector2 &pos1, const Vector2 &pos2);
@@ -80,7 +90,7 @@ namespace Monocle
 		static void Vertex(Vector2 vertex);
 		static void EndLine();
 
-		static void RenderPathMesh(const std::vector<Vector2> &points, int width);
+		static void RenderPathMesh(const std::vector<Node*> &nodes, int cells, float size);
 
 	private:
 		static Graphics *instance;
@@ -89,6 +99,7 @@ namespace Monocle
 		Vector2 resolutionScale;
 		int virtualWidth, virtualHeight;
 		unsigned int lastBoundTextureID;
+		BlendType currentBlend;
 	};
 
 }

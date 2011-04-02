@@ -222,9 +222,14 @@ namespace Monocle
 			instance->keys[instance->localKeymap[key]] = on;			
 		}
 	}
-    
+	
+	bool Platform::IsTouchEnabled()
+	{
+		return false;
+	}
+	
 	bool Platform::IsActive()
 	{
-		return CocoaPlatform::instance->active;
+		return [NSApp isActive];
 	}
 }

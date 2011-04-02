@@ -14,6 +14,7 @@ namespace Monocle
 		static Vector2 left;
 		static Vector2 right;
 		
+		Vector2(const Vector2 &vector2);
 		Vector2();
 		Vector2(float x, float y);
 

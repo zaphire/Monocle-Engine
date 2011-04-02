@@ -1,4 +1,5 @@
 #include "CircleCollider.h"
+#include "../CollisionData.h"
 
 namespace Monocle
 {
@@ -14,7 +15,7 @@ namespace Monocle
 		return CT_CIRCLE;
 	}
 
-	bool CircleCollider::IntersectsPoint(const Vector2& point)
+	bool CircleCollider::IntersectsPoint(const Vector2& point, CollisionData *collisionData)
 	{
 		Vector2 ePos = GetEntityPosition();
 
@@ -22,7 +23,7 @@ namespace Monocle
 		return (diff.IsInRange(radius));
 	}
 
-	bool CircleCollider::IntersectsLine(const Vector2& start, const Vector2& end)
+	bool CircleCollider::IntersectsLine(const Vector2& start, const Vector2& end, float lineRadius, CollisionData *collisionData)
 	{
 		//Algorithm stolen from: http://www.gamedev.net/topic/304578-finite-line-circle-intersection/page__view__findpost__p__2938618
 
@@ -37,7 +38,13 @@ namespace Monocle
 			t = 1.0f;
 		Vector2 closest = (t * dir) + start;
 		Vector2 d = (ePos + offset) - closest;
-		return d.GetSquaredMagnitude() <= radius * radius;
+
+		if (collisionData)
+		{
+			collisionData->hitPoint = closest;
+		}
+
+		return d.GetSquaredMagnitude() <= (radius + lineRadius) * (radius + lineRadius);
 	}
 
 	float CircleCollider::GetCenterX(bool relativeToEntity)
@@ -56,7 +63,7 @@ namespace Monocle
 			return GetEntityPosition().y + offset.y;
 	}
 
-	const Vector2& CircleCollider::GetCenter(bool relativeToEntity)
+	Vector2 CircleCollider::GetCenter(bool relativeToEntity)
 	{
 		return Vector2(GetCenterX(relativeToEntity), GetCenterY(relativeToEntity));
 	}

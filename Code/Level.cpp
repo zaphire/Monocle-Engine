@@ -1,16 +1,19 @@
 #include "Level.h"
 #include "Assets.h"
 #include "XML/tinyxml.h"
+#include "XML/XMLFileNode.h"
 #include <iostream>
 #include <fstream>
 #include "Entity.h"
+#include "LevelEditor/Node.h"
+#include "LevelEditor/PathMesh.h"
 
 namespace Monocle
 {
 	Level *Level::instance = NULL;
 
 	Level::Level()
-		: scene(NULL)
+		: scene(NULL), fringeTileset(NULL)
 	{
 		instance = this;
 		width = height = 0;
@@ -124,6 +127,12 @@ namespace Monocle
 				{
 					instance->width = XMLReadInt(eLevel, "width");
 					instance->height = XMLReadInt(eLevel, "height");
+					std::string fringeTilesetName = XMLReadString(eLevel, "fringeTileset");
+
+					if (fringeTilesetName != "")
+					{
+						instance->fringeTileset = instance->GetFringeTilesetByName(fringeTilesetName);
+					}
 
 					TiXmlElement *eTilemap = eLevel->FirstChildElement("Tilemap");
 					while (eTilemap)
@@ -143,50 +152,10 @@ namespace Monocle
 						eTilemap = eTilemap->NextSiblingElement("Tilemap");
 					}
 
-					TiXmlElement *eFringeTiles = eLevel->FirstChildElement("FringeTiles");
-					while (eFringeTiles)
+					TiXmlElement *eEntities = eLevel->FirstChildElement("Entities");
+					if (eEntities)
 					{
-						FringeTileset *fringeTileset = instance->GetFringeTilesetByName(XMLReadString(eFringeTiles, "set"));
-
-						/*
-						Entity *entity = new Entity();
-						Tilemap *tilemap = new Tilemap(instance->GetTileset(XMLString(eTilemap, "set")), instance->width, instance->height, XMLInt(eTilemap, "tileWidth"), XMLInt(eTilemap, "tileHeight"));
-						instance->tilemaps.push_back(tilemap);
-						entity->SetGraphic(tilemap);
-						instance->scene->Add(entity);
-						*/
-
-						if (fringeTileset)
-						{
-							TiXmlElement *eFringeTile = eFringeTiles->FirstChildElement("FringeTile");
-							while (eFringeTile)
-							{
-								int tileID = XMLReadInt(eFringeTile, "id");
-
-								int layer = XMLReadInt(eFringeTile, "layer");
-
-								Vector2 position = Vector2(XMLReadFloat(eFringeTile, "x"), XMLReadFloat(eFringeTile, "y"));
-
-								Vector2 scale = Vector2::one;
-
-								if (eFringeTile->Attribute("scaleX") != NULL && eFringeTile->Attribute("scaleY") != NULL)
-									scale = Vector2(XMLReadFloat(eFringeTile, "scaleX"), XMLReadFloat(eFringeTile, "scaleY"));
-
-								int rotation = XMLReadFloat(eFringeTile, "rotation");
-
-								Color color = Color::white;
-								if (eFringeTile->Attribute("ca"))
-								{
-									color.a = XMLReadFloat(eFringeTile, "ca");
-								}
-
-								AddFringeTile(fringeTileset, tileID, layer, position, scale, rotation, color);
-
-								eFringeTile = eFringeTile->NextSiblingElement("FringeTile");
-							}
-						}
-
-						eFringeTiles = eFringeTiles->NextSiblingElement("FringeTiles");
+						instance->LoadEntities(eEntities);
 					}
 				}
 			}
@@ -194,17 +163,76 @@ namespace Monocle
 		}
 	}
 
-	FringeTile* Level::AddFringeTile(FringeTileset *fringeTileset, int tileID, int layer, const Vector2 &position, const Vector2 &scale, int rotation, const Color &color)
+
+	template <class T>
+	void Level::SaveEntitiesOfType(const std::string &name, TiXmlElement *element, Entity *fromEntity)
 	{
-		FringeTile *fringeTile = new FringeTile(fringeTileset, tileID);
-		fringeTile->SetLayer(layer);
-		fringeTile->position = position;
-		fringeTile->rotation = rotation;
-		fringeTile->scale = scale;
-		fringeTile->color = color;
-		instance->fringeTiles.push_back(fringeTile);
-		instance->scene->Add(fringeTile);
-		return fringeTile;
+		XMLFileNode xmlFileNode;
+
+		const std::list<Entity*> *entities;
+		if (fromEntity)
+			entities = fromEntity->GetChildren();
+		else
+			entities = scene->GetEntities();
+
+		for (std::list<Entity*>::const_iterator i = entities->begin(); i != entities->end(); ++i)
+		{
+			Entity *entity = *i;
+			T *t = dynamic_cast<T*>(entity);
+			if (t)
+			{
+				TiXmlElement saveElement(name);
+				xmlFileNode.element = &saveElement;
+
+				SaveEntities(&saveElement, entity);
+
+				entity->Save(&xmlFileNode);
+
+				element->InsertEndChild(saveElement);
+			}
+
+		}
+	}
+
+	template <class T>
+	void Level::LoadEntitiesOfType(const std::string &name, TiXmlElement *element, Entity *intoEntity)
+	{
+		XMLFileNode xmlFileNode;
+
+		TiXmlElement *eEntity = element->FirstChildElement(name);
+		while (eEntity)
+		{
+			T *t = new T();
+			Entity *entity = dynamic_cast<Entity*>(t);
+			if (intoEntity == NULL)
+				scene->Add(entity);
+			else
+				intoEntity->Add(entity);
+
+			LoadEntities(eEntity, entity);
+
+			xmlFileNode.element = eEntity;
+			entity->Load(&xmlFileNode);
+
+			eEntity = eEntity->NextSiblingElement(name);
+		}
+	}
+
+	void Level::LoadEntities(TiXmlElement *element, Entity *intoEntity)
+	{
+		if (element)
+		{
+			LoadEntitiesOfType<PathMesh>("PathMesh", element, intoEntity);
+			LoadEntitiesOfType<FringeTile>("FringeTile", element, intoEntity);
+			LoadEntitiesOfType<Node>("Node", element, intoEntity);
+		}
+	}
+
+	void Level::SaveEntities(TiXmlElement *element, Entity *fromEntity)
+	{
+		SaveEntitiesOfType<PathMesh>("PathMesh", element, fromEntity);
+		SaveEntitiesOfType<FringeTile>("FringeTile", element, fromEntity);
+		SaveEntitiesOfType<Node>("Node", element, fromEntity);
 	}
 
 	Tileset *Level::GetTilesetByName(const std::string &name)
@@ -216,11 +244,6 @@ namespace Monocle
 		}
 		Debug::Log("Error: Could not find tileset with name: " + name);
 		return NULL;
-	}
-
-	void Level::RemoveFringeTile(FringeTile* fringeTile)
-	{
-		instance->fringeTiles.remove(fringeTile);
 	}
 
 	void Level::Save()
@@ -242,6 +265,10 @@ namespace Monocle
 				TiXmlElement eLevel("Level");
 				eLevel.SetAttribute("width", instance->width);
 				eLevel.SetAttribute("height", instance->height);
+				if (instance->fringeTileset)
+				{
+					eLevel.SetAttribute("fringeTileset", instance->fringeTileset->GetName());
+				}
 
 				if (!instance->tilemaps.empty())
 				{
@@ -272,6 +299,11 @@ namespace Monocle
 					}
 				}
 
+				TiXmlElement eEntities("Entities");
+				instance->SaveEntities(&eEntities);
+				eLevel.InsertEndChild(eEntities);
+
+				/*
 				// save fringe tiles
 				// go through the sets
 				for (std::list<FringeTileset>::iterator i = instance->fringeTilesets.begin(); i != instance->fringeTilesets.end(); ++i)
@@ -312,6 +344,7 @@ namespace Monocle
 						eLevel.InsertEndChild(eFringeTiles);
 					}
 				}
+				*/
 
 				xml.InsertEndChild(eLevel);
 
@@ -345,5 +378,10 @@ namespace Monocle
 			}
 		}
 		return NULL;
+	}
+
+	FringeTileset* Level::GetCurrentFringeTileset()
+	{
+		return instance->fringeTileset;
 	}
 }

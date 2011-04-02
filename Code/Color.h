@@ -5,8 +5,11 @@ namespace Monocle
 	class Color
 	{
 	public:
+		Color(const Color &color);
 		Color();
 		Color(float r, float g, float b, float a);
+
+		bool operator!=(const Color& rhs);
 
 		float r, g, b, a;
 

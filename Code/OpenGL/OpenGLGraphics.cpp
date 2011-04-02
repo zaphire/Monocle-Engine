@@ -6,6 +6,7 @@
 #include "../TextureAsset.h"
 #include "../Color.h"
 #include "../Tween.h"
+#include "../LevelEditor/Node.h"
 
 #include <cstdio>
 
@@ -78,10 +79,24 @@ namespace Monocle
 		return true;
 	}
 
-	///HACK: temporary
-	void Graphics::Blend()
+	void Graphics::SetBlend(BlendType blend)
 	{
-		glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+		if (blend != instance->currentBlend)
+		{
+			switch (blend)
+			{
+			case BLEND_ALPHA:
+				glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+				break;
+			case BLEND_ADDITIVE:
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+				break;
+			case BLEND_MULTIPLY:
+				glBlendFunc(GL_ZERO, GL_SRC_COLOR);
+				break;
+			}
+			instance->currentBlend = blend;
+		}
 	}
 
 	void Graphics::Set2D(int virtualWidth, int virtualHeight)
@@ -323,6 +338,11 @@ namespace Monocle
 		//glTranslatef(instance->screenCenter.x, instance->screenCenter.y, 0.0f);
 	}
 
+	void Graphics::IdentityMatrix()
+	{
+		glLoadIdentity();
+	}
+
 	void Graphics::SceneMatrix()
 	{
 		glLoadIdentity();
@@ -411,52 +431,73 @@ namespace Monocle
 		glEnd();
 	}
 
-	void Graphics::RenderPathMesh(const std::vector<Vector2> &points, int width)
+	void Graphics::RenderPathMesh(const std::vector<Node*> &nodes, int cells, float size)
 	{
 		glBegin(GL_QUADS);
-		for (int i = 0; i < points.size()-1; i++)
+		for (int i = 0; i < nodes.size()-1; i++)
 		{
-			Vector2 diff1;
-			Vector2 perp1;
-
-			/*
-			if (i-1 >= 0)
+			if (nodes[i]->variant != -1)
 			{
-				diff1 = points[i] - points[i-1];
+				
+
+				Vector2 diff1;
+				Vector2 perp1;
+
+				/*
+				if (i-1 >= 0)
+				{
+					diff1 = points[i] - points[i-1];
+					perp1 = diff1.GetNormalized().GetPerpendicularLeft();
+					//diff1 = points[i + 1] - points[i];
+					//perp1 = perp1*0.5f + diff1.GetNormalized().GetPerpendicularLeft()*0.5f;
+				}
+				else
+				{
+					diff1 = points[i + 1] - points[i];
+					perp1 = diff1.GetNormalized().GetPerpendicularLeft();
+				}
+				*/
+
+				diff1 = nodes[i + 1]->position - nodes[i]->position;
 				perp1 = diff1.GetNormalized().GetPerpendicularLeft();
-				//diff1 = points[i + 1] - points[i];
-				//perp1 = perp1*0.5f + diff1.GetNormalized().GetPerpendicularLeft()*0.5f;
-			}
-			else
-			{
-				diff1 = points[i + 1] - points[i];
-				perp1 = diff1.GetNormalized().GetPerpendicularLeft();
-			}
-			*/
 
-			diff1 = points[i + 1] - points[i];
-			perp1 = diff1.GetNormalized().GetPerpendicularLeft();
+				Vector2 diff2;
+				Vector2 perp2 = perp1;
+			
+				if (i+2 < nodes.size())
+				{
+					diff2 = nodes[i+2]->position - nodes[i+1]->position;
+					perp2 = diff2.GetNormalized().GetPerpendicularLeft();
+				}
+				else
+				{
+					perp2 = perp1;
+				}
+			
+				Vector2 pos1 = nodes[i]->position;
+				Vector2 pos2 = nodes[i+1]->position;
+			
+				Vector2 texOffset = Vector2::zero;
+				Vector2 texScale = Vector2::one * 1.0f/(float)cells;
+				texOffset.x = (nodes[i]->variant % (cells)) * texScale.x;
+				texOffset.y = (int)(nodes[i]->variant / (cells)) * texScale.y;
+			
+				Graphics::SetColor(nodes[i]->color);
+				glTexCoord2f(texOffset.x, texOffset.y);
+				Vertex(pos1 - perp1 * nodes[i]->scale.y * size * 0.5f);
 
-			Vector2 diff2;
-			Vector2 perp2 = perp1;
-			
-			if (i+2 < points.size())
-			{
-				diff2 = points[i+2] - points[i+1];
-				perp2 = diff2.GetNormalized().GetPerpendicularLeft();
+				Graphics::SetColor(nodes[i+1]->color);
+				glTexCoord2f(texOffset.x + texScale.x, texOffset.y);
+				Vertex(pos2 - perp2 * nodes[i+1]->scale.y * size * 0.5f);
+
+				Graphics::SetColor(nodes[i+1]->color);
+				glTexCoord2f(texOffset.x + texScale.x, texOffset.y + texScale.y);
+				Vertex(pos2 + perp2 * nodes[i+1]->scale.y * size * 0.5f);
+
+				Graphics::SetColor(nodes[i]->color);
+				glTexCoord2f(texOffset.x, texOffset.y + texScale.y);
+				Vertex(pos1 + perp1 * nodes[i]->scale.y * size * 0.5f);
 			}
-			else
-			{
-				perp2 = perp1;
-			}
-			
-			Vector2 pos1 = points[i];
-			Vector2 pos2 = points[i+1];
-			Vertex(pos1 - perp1 * width * 0.5f);
-			Vertex(pos2 - perp2 * width * 0.5f);
-			Vertex(pos2 + perp2 * width * 0.5f);
-			Vertex(pos1 + perp1 * width * 0.5f);
-			//RenderLine(pos - perp * width * 0.5f, pos + perp * width * 0.5f);
 		}
 		glEnd();
 	}

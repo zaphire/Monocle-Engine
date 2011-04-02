@@ -24,5 +24,7 @@ namespace Monocle
 		float width, height;//,angle;
 		Vector2 textureOffset;
 		Vector2 textureScale;
+
+		BlendType blend;
 	};
 }

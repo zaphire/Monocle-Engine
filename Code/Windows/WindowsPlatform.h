@@ -18,7 +18,7 @@ namespace Monocle
 		HWND            hWnd;							// Holds Our Window Handle
 		HINSTANCE       hInstance;						// Holds The Instance Of The Application
 
-		bool	active;									// Window Active Flag Set To TRUE By Default
+		//bool	active;									// Window Active Flag Set To TRUE By Default
 		bool	fullscreen;								// Fullscreen Flag Set To Fullscreen Mode By Default
 
 		static WindowsPlatform* instance;
@@ -30,7 +30,7 @@ namespace Monocle
 				hWnd(NULL),
 				hInstance(NULL)
 		{
-			active = true;
+			//active = true;
 			fullscreen = true;
 			instance = this;
 		}

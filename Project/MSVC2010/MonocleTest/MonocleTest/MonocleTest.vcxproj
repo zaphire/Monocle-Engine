@@ -73,10 +73,13 @@
     <ClInclude Include="..\..\..\..\Code\Audio.h" />
     <ClInclude Include="..\..\..\..\Code\Colliders\CircleCollider.h" />
     <ClInclude Include="..\..\..\..\Code\Colliders\Collider.h" />
+    <ClInclude Include="..\..\..\..\Code\Colliders\PathCollider.h" />
     <ClInclude Include="..\..\..\..\Code\Colliders\PolygonCollider.h" />
     <ClInclude Include="..\..\..\..\Code\Colliders\RectangleCollider.h" />
     <ClInclude Include="..\..\..\..\Code\Collision.h" />
+    <ClInclude Include="..\..\..\..\Code\CollisionData.h" />
     <ClInclude Include="..\..\..\..\Code\Color.h" />
+    <ClInclude Include="..\..\..\..\Code\FileNode.h" />
     <ClInclude Include="..\..\..\..\Code\Game.h" />
     <ClInclude Include="..\..\..\..\Code\Debug.h" />
     <ClInclude Include="..\..\..\..\Code\Editor.h" />
@@ -92,6 +95,7 @@
     <ClInclude Include="..\..\..\..\Code\LevelEditor\FringeTileEditor.h" />
     <ClInclude Include="..\..\..\..\Code\LevelEditor\LevelEditor.h" />
     <ClInclude Include="..\..\..\..\Code\LevelEditor\Node.h" />
+    <ClInclude Include="..\..\..\..\Code\LevelEditor\PathMesh.h" />
     <ClInclude Include="..\..\..\..\Code\Macros.h" />
     <ClInclude Include="..\..\..\..\Code\Monocle.h" />
     <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\glpng.h" />
@@ -122,16 +126,20 @@
     <ClInclude Include="..\..\..\..\Code\Vector3.h" />
     <ClInclude Include="..\..\..\..\Code\Windows\WindowsPlatform.h" />
     <ClInclude Include="..\..\..\..\Code\XML\tinyxml.h" />
+    <ClInclude Include="..\..\..\..\Code\XML\XMLFileNode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp" />
     <ClCompile Include="..\..\..\..\Code\Assets.cpp" />
     <ClCompile Include="..\..\..\..\Code\Colliders\CircleCollider.cpp" />
     <ClCompile Include="..\..\..\..\Code\Colliders\Collider.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Colliders\PathCollider.cpp" />
     <ClCompile Include="..\..\..\..\Code\Colliders\PolygonCollider.cpp" />
     <ClCompile Include="..\..\..\..\Code\Colliders\RectangleCollider.cpp" />
     <ClCompile Include="..\..\..\..\Code\Collision.cpp" />
+    <ClCompile Include="..\..\..\..\Code\CollisionData.cpp" />
     <ClCompile Include="..\..\..\..\Code\Color.cpp" />
+    <ClCompile Include="..\..\..\..\Code\FileNode.cpp" />
     <ClCompile Include="..\..\..\..\Code\Game.cpp" />
     <ClCompile Include="..\..\..\..\Code\Debug.cpp" />
     <ClCompile Include="..\..\..\..\Code\Entity.cpp" />
@@ -145,6 +153,7 @@
     <ClCompile Include="..\..\..\..\Code\LevelEditor\FringeTileEditor.cpp" />
     <ClCompile Include="..\..\..\..\Code\LevelEditor\LevelEditor.cpp" />
     <ClCompile Include="..\..\..\..\Code\LevelEditor\Node.cpp" />
+    <ClCompile Include="..\..\..\..\Code\LevelEditor\PathMesh.cpp" />
     <ClCompile Include="..\..\..\..\Code\Main.cpp" />
     <ClCompile Include="..\..\..\..\Code\Monocle.cpp" />
     <ClCompile Include="..\..\..\..\Code\OpenAL\OpenALAudio.cpp" />
@@ -189,6 +198,7 @@
     <ClCompile Include="..\..\..\..\Code\XML\tinyxml.cpp" />
     <ClCompile Include="..\..\..\..\Code\XML\tinyxmlerror.cpp" />
     <ClCompile Include="..\..\..\..\Code\XML\tinyxmlparser.cpp" />
+    <ClCompile Include="..\..\..\..\Code\XML\XMLFileNode.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

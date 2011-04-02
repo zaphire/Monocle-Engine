@@ -183,6 +183,7 @@ namespace Monocle
 		tagMap[tag].remove(entity);
 	}
 
+	/*
 	Entity* Scene::GetEntity(int index)
 	{
 		int c = 0;
@@ -194,6 +195,7 @@ namespace Monocle
 		}
 		return NULL;
 	}
+	*/
 
 	Entity* Scene::GetNearestEntity(const Vector2 &position, Entity *ignoreEntity)
 	{
@@ -264,15 +266,21 @@ namespace Monocle
 				if ((*i) != ignoreEntity)
 				{
 					Vector2 diff = (*i)->position - position;
-					if (diff.IsInRange(20))
+					if (diff.IsInRange(ENTITY_CONTROLPOINT_SIZE))
 					{
-						Vector2 diff = (*i)->position - position;
 						float sqrMag = diff.GetSquaredMagnitude();
 						if (smallestSqrMag == -1 || sqrMag < smallestSqrMag)
 						{
+							smallestSqrMag = sqrMag;
 							nearestEntity = (*i);
 						}
 					}
+				}
+
+				Entity *nearestChild = (*i)->GetNearestEntityByControlPoint(position, tag, ignoreEntity, smallestSqrMag);
+				if (nearestChild)
+				{
+					nearestEntity = nearestChild;
 				}
 			}
 		}
@@ -303,6 +311,11 @@ namespace Monocle
 			return 0;
 		
 		return static_cast<int>(tagMap[tag].size());
+	}
+
+	const std::list<Entity*>* Scene::GetEntities()
+	{
+		return &entities;
 	}
 
 	void Scene::ReceiveNote(const std::string &note)
@@ -345,6 +358,22 @@ namespace Monocle
 		}
 		return NULL;
 	}
+
+	/*
+	Entity *Scene::GetFirstEntity()
+	{
+		entityIterator = entities.begin();
+		return *entityIterator;
+	}
+
+	Entity *Scene::GetNextEntity()
+	{
+		++entityIterator;
+		if (entityIterator != entities.end())
+			return *entityIterator;
+		return NULL;
+	}
+	*/
 
 	/*
 	void Scene::SendNoteToGame(const std::string &note)

@@ -14,17 +14,17 @@ namespace Monocle
 		float height;
 		RectangleCollider(float width, float height, Vector2 offset=Vector2::zero);
 		ColliderType GetColliderType();
-		bool IntersectsPoint(const Vector2& point);
-		bool IntersectsLine(const Vector2& start, const Vector2& end);
+		bool IntersectsPoint(const Vector2& point, CollisionData *collisionData = NULL);
+		bool IntersectsLine(const Vector2& start, const Vector2& end, float lineRadius = 0.0f, CollisionData *collisionData=NULL);
 
 		float GetRight(bool relativeToEntity = false);
 		float GetLeft(bool relativeToEntity = false);
 		float GetTop(bool relativeToEntity = false);
 		float GetBottom(bool relativeToEntity = false);
 
-		const Vector2& GetTopLeft(bool relativeToEntity = false);
-		const Vector2& GetTopRight(bool relativeToEntity = false);
-		const Vector2& GetBottomLeft(bool relativeToEntity = false);
-		const Vector2& GetBottomRight(bool relativeToEntity = false);
+		Vector2 GetTopLeft(bool relativeToEntity = false);
+		Vector2 GetTopRight(bool relativeToEntity = false);
+		Vector2 GetBottomLeft(bool relativeToEntity = false);
+		Vector2 GetBottomRight(bool relativeToEntity = false);
 	};
 }
