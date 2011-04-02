@@ -9,7 +9,7 @@ namespace Monocle
 		ASSET_UNDEFINED,
 		ASSET_TEXTURE,
 		ASSET_AUDIO,
-		ASSET_MAX
+		ASSET_MAX,
 	};
 
 	enum FilterType
