@@ -8,7 +8,7 @@
 namespace Monocle
 {
 	Entity::Entity(const Entity &entity)
-		: scene(NULL), collider(NULL), graphic(NULL), position(entity.position), scale(entity.scale), rotation(entity.rotation), depth(entity.depth), isVisible(entity.isVisible), color(entity.color), layer(entity.layer)//, tags(entity.tags)
+		: Transform(entity), scene(NULL), collider(NULL), graphic(NULL), parent(NULL), depth(entity.depth), isVisible(entity.isVisible), color(entity.color), layer(entity.layer)//, tags(entity.tags)
 	{
 		std::vector<std::string> copyTags = entity.tags;
 		for (std::vector<std::string>::iterator i = copyTags.begin(); i != copyTags.end(); ++i)
@@ -18,7 +18,7 @@ namespace Monocle
 	}
 
 	Entity::Entity()
-		: scene(NULL), collider(NULL), graphic(NULL), layer(0), depth(0.0f), scale(Vector2::one), rotation(0.0f), color(Color::white), parent(NULL), isVisible(true)
+		: Transform(), scene(NULL), collider(NULL), graphic(NULL), parent(NULL), layer(0), depth(0.0f), color(Color::white), isVisible(true)
 		//, willDie(false)
 	{
 	}

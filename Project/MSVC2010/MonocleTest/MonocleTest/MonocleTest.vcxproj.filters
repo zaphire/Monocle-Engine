@@ -240,6 +240,9 @@
     <ClInclude Include="..\..\..\..\Code\CollisionData.h">
       <Filter>Monocle</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Transform.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp">
@@ -450,6 +453,9 @@
       <Filter>Monocle\Colliders</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\CollisionData.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Transform.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
   </ItemGroup>

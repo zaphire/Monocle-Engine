@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include "Color.h"
 #include "FileNode.h"
+#include "Transform.h"
 
 #include <string>
 #include <vector>
@@ -22,16 +23,13 @@ namespace Monocle
 	class Graphic;
 	class CollisionData;
 
-	class Entity
+	class Entity : public Transform
 	{
 	public:
 		Entity(const Entity &entity);
 		Entity();
 		~Entity();
 
-		Vector2 position;
-		Vector2 scale;
-		float rotation;
 		float depth;
 		bool isVisible;
 
