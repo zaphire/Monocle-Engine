@@ -33,6 +33,7 @@ namespace Monocle
 		Debug::Log("Loading Level...");
 		// load the project data from an xml file
 		instance->tilesets.clear();
+		///TODO: clear fringeTileset
 
 		TiXmlDocument xml(Assets::GetContentPath() + filename);
 		bool isLoaded = xml.LoadFile();
@@ -156,14 +157,15 @@ namespace Monocle
 					if (eEntities)
 					{
 						instance->LoadEntities(eEntities);
+						instance->scene->LoadEntities(eEntities);
 					}
 				}
 			}
-					
 		}
 	}
 
 
+	/*
 	template <class T>
 	void Level::SaveEntitiesOfType(const std::string &name, TiXmlElement *element, Entity *fromEntity)
 	{
@@ -173,7 +175,7 @@ namespace Monocle
 		if (fromEntity)
 			entities = fromEntity->GetChildren();
 		else
-			entities = scene->GetEntities();
+			entities = instance->scene->GetEntities();
 
 		for (std::list<Entity*>::const_iterator i = entities->begin(); i != entities->end(); ++i)
 		{
@@ -184,7 +186,7 @@ namespace Monocle
 				TiXmlElement saveElement(name);
 				xmlFileNode.element = &saveElement;
 
-				SaveEntities(&saveElement, entity);
+				instance->SaveEntities(&saveElement, entity);
 
 				entity->Save(&xmlFileNode);
 
@@ -193,7 +195,9 @@ namespace Monocle
 
 		}
 	}
+	*/
 
+	/*
 	template <class T>
 	void Level::LoadEntitiesOfType(const std::string &name, TiXmlElement *element, Entity *intoEntity)
 	{
@@ -205,17 +209,25 @@ namespace Monocle
 			T *t = new T();
 			Entity *entity = dynamic_cast<Entity*>(t);
 			if (intoEntity == NULL)
-				scene->Add(entity);
+				instance->scene->Add(entity);
 			else
 				intoEntity->Add(entity);
 
-			LoadEntities(eEntity, entity);
+			instance->LoadEntities(eEntity, entity);
 
 			xmlFileNode.element = eEntity;
 			entity->Load(&xmlFileNode);
 
 			eEntity = eEntity->NextSiblingElement(name);
 		}
+	}
+	*/
+
+	void Level::SaveEntities(TiXmlElement *element, Entity *fromEntity)
+	{
+		SaveEntitiesOfType<PathMesh>("PathMesh", element, fromEntity);
+		SaveEntitiesOfType<FringeTile>("FringeTile", element, fromEntity);
+		SaveEntitiesOfType<Node>("Node", element, fromEntity);
 	}
 
 	void Level::LoadEntities(TiXmlElement *element, Entity *intoEntity)
@@ -228,12 +240,6 @@ namespace Monocle
 		}
 	}
 
-	void Level::SaveEntities(TiXmlElement *element, Entity *fromEntity)
-	{
-		SaveEntitiesOfType<PathMesh>("PathMesh", element, fromEntity);
-		SaveEntitiesOfType<FringeTile>("FringeTile", element, fromEntity);
-		SaveEntitiesOfType<Node>("Node", element, fromEntity);
-	}
 
 	Tileset *Level::GetTilesetByName(const std::string &name)
 	{
@@ -301,6 +307,7 @@ namespace Monocle
 
 				TiXmlElement eEntities("Entities");
 				instance->SaveEntities(&eEntities);
+				instance->scene->SaveEntities(&eEntities);
 				eLevel.InsertEndChild(eEntities);
 
 				/*
