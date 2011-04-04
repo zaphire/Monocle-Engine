@@ -8,7 +8,7 @@
 namespace Monocle
 {
 	Entity::Entity(const Entity &entity)
-		: scene(NULL), collider(NULL), graphic(NULL), position(entity.position), scale(entity.scale), rotation(entity.rotation), depth(entity.depth), isVisible(entity.isVisible), color(entity.color), layer(entity.layer)//, tags(entity.tags)
+		: Transform(entity), followCamera(entity.followCamera), scene(NULL), collider(NULL), graphic(NULL), parent(NULL), depth(entity.depth), isVisible(entity.isVisible), color(entity.color), layer(entity.layer)//, tags(entity.tags)
 	{
 		std::vector<std::string> copyTags = entity.tags;
 		for (std::vector<std::string>::iterator i = copyTags.begin(); i != copyTags.end(); ++i)
@@ -18,7 +18,7 @@ namespace Monocle
 	}
 
 	Entity::Entity()
-		: scene(NULL), collider(NULL), graphic(NULL), layer(0), depth(0.0f), scale(Vector2::one), rotation(0.0f), color(Color::white), parent(NULL), isVisible(true)
+		: Transform(), scene(NULL), collider(NULL), graphic(NULL), parent(NULL), layer(0), depth(0.0f), color(Color::white), isVisible(true)
 		//, willDie(false)
 	{
 	}
@@ -72,13 +72,26 @@ namespace Monocle
 		*/
 	}
 
+	void Entity::RemoveSelf()
+	{
+		if (parent)
+			parent->Remove(this);
+		else
+			scene->Remove(this);
+	}
+
 	void Entity::Render()
 	{
-
 		Graphics::PushMatrix();
-		Graphics::Translate(position.x, position.y, depth);
+
+		if (followCamera == Vector2::zero || (Debug::render && Debug::selectedEntity != this))
+			Graphics::Translate(position.x, position.y, depth);
+		else
+			Graphics::Translate(scene->GetCamera()->position * followCamera + position * (Vector2::one - followCamera));
+
 		if (rotation != 0.0f)
 			Graphics::Rotate(rotation, 0, 0, 1);
+
 		Graphics::Scale(scale);
 
 		if (graphic != NULL)
@@ -103,7 +116,11 @@ namespace Monocle
 			Graphics::BindTexture(NULL);
 
 			Graphics::PushMatrix();
-			Graphics::Translate(position.x, position.y, depth);
+			
+			if (followCamera == Vector2::zero || Debug::render)
+				Graphics::Translate(position.x, position.y, depth);
+			else
+				Graphics::Translate(scene->GetCamera()->position * followCamera + position * (Vector2::one - followCamera));
 
 			if (Debug::selectedEntity == this)
 				Graphics::SetColor(Color::orange);
@@ -138,9 +155,12 @@ namespace Monocle
 		if (HasTag(tag))
 			Debug::Log("ERROR: Duplicate tag added to entity.");
 #endif
-		tags.push_back(tag);
-		if (scene != NULL)
-			scene->EntityAddTag(this, tag);
+		if (!HasTag(tag))
+		{
+			tags.push_back(tag);
+			if (scene != NULL)
+				scene->EntityAddTag(this, tag);
+		}
 	}
 
 	void Entity::RemoveTag(const std::string& tag)
@@ -386,6 +406,8 @@ namespace Monocle
 			}
 			fileNode->Write("tags", os.str());
 		}
+		if (followCamera != Vector2::zero)
+			fileNode->Write("followCamera", followCamera);
 	}
 
 	void Entity::Load(FileNode *fileNode)
@@ -405,17 +427,17 @@ namespace Monocle
 			std::istringstream is(tags);
 			while (is >> tag)
 			{
-				printf("loading tag: %s\n", tag);
+				//printf("loading tag: %s\n", tag.c_str());
 				AddTag(tag);
 			}
 		}
+		fileNode->Read("followCamera", followCamera);
 	}
 
 	Entity *Entity::GetParent()
 	{
 		return parent;
 	}
-
 
 	/// TODO: make recursive
 	Entity *Entity::GetNearestEntityByControlPoint(const Vector2 &position, const std::string &tag, Entity *ignoreEntity, float &smallestSqrMag)

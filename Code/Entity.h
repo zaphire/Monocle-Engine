@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include "Color.h"
 #include "FileNode.h"
+#include "Transform.h"
 
 #include <string>
 #include <vector>
@@ -22,21 +23,22 @@ namespace Monocle
 	class Graphic;
 	class CollisionData;
 
-	class Entity
+	class Entity : public Transform
 	{
 	public:
 		Entity(const Entity &entity);
 		Entity();
 		~Entity();
 
-		Vector2 position;
-		Vector2 scale;
-		float rotation;
 		float depth;
 		bool isVisible;
+		Vector2 followCamera;
 
 		Color color; // <- may move this later (material system?)
 		
+
+		// remove from Scene or Entity parent
+		void RemoveSelf();
 
 		//The scene that contains the entity
 		Scene* scene;
@@ -108,7 +110,7 @@ namespace Monocle
 			return NULL;
 		}
 
-		const std::list<Entity*>* GetChildren(); 
+		const std::list<Entity*>* GetChildren();
 
 	protected:
 		friend class Scene;

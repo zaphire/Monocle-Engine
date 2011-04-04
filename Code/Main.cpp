@@ -52,7 +52,7 @@ int main(void)
 #endif
 
 #ifdef TEST_JUMPER
-	game->SetScene(&Jumper::gameScene);
+	game->SetScene(new Jumper::GameScene());
 #endif
 
 #ifdef TEST_FLASH
