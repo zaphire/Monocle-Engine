@@ -69,7 +69,7 @@ namespace Monocle
 	FringeTile::FringeTile()
 		: Entity(), tileID(0), sprite(NULL) //fringeTileset(NULL), tileID(0), sprite(NULL)
 	{
-		AddTag("FringeTile");
+		//AddTag("FringeTile");
 		sprite = new Sprite();
 		SetGraphic(sprite);
 
@@ -79,7 +79,7 @@ namespace Monocle
 	FringeTile::FringeTile(const FringeTile &fringeTile)
 		: Entity(fringeTile), tileID(fringeTile.tileID), sprite(NULL)
 	{
-		AddTag("FringeTile");
+		//AddTag("FringeTile");
 		sprite = new Sprite();
 		sprite->blend = fringeTile.sprite->blend;
 		SetGraphic(sprite);
@@ -175,7 +175,7 @@ namespace Monocle
 	void FringeTile::Save(FileNode *fileNode)
 	{
 		Entity::Save(fileNode);
-		fileNode->Write("id", tileID);
+		fileNode->Write("tileID", tileID);
 		if (sprite->blend != BLEND_ALPHA)
 			fileNode->Write("blend", (int)sprite->blend);
 	}
@@ -184,7 +184,7 @@ namespace Monocle
 	{
 		Entity::Load(fileNode);
 		
-		fileNode->Read("id", tileID);
+		fileNode->Read("tileID", tileID);
 		
 		int spriteBlend = BLEND_ALPHA;
 		fileNode->Read("blend", spriteBlend);

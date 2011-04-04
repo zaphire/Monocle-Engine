@@ -193,6 +193,7 @@ namespace Monocle
 			if (selectedEntity == NULL)
 			{
 				Debug::showBounds = !Debug::showBounds;
+				Debug::render = !Debug::render;
 			}
 		}
 		else

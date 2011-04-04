@@ -320,7 +320,8 @@ namespace Ogmo
 
 		//set screen size
 		Graphics::Set2D(160, 120);
-		Graphics::SetCameraPosition(Vector2(80, 60));
+		//Graphics::SetCameraPosition(Vector2(80, 60));
+		GetCamera()->position = Vector2(80, 60);
 
 		//assets
 		Assets::SetContentPath("../../Content/Ogmo/");

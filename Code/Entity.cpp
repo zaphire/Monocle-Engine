@@ -8,7 +8,7 @@
 namespace Monocle
 {
 	Entity::Entity(const Entity &entity)
-		: Transform(entity), scene(NULL), collider(NULL), graphic(NULL), parent(NULL), depth(entity.depth), isVisible(entity.isVisible), color(entity.color), layer(entity.layer)//, tags(entity.tags)
+		: Transform(entity), followCamera(entity.followCamera), scene(NULL), collider(NULL), graphic(NULL), parent(NULL), depth(entity.depth), isVisible(entity.isVisible), color(entity.color), layer(entity.layer)//, tags(entity.tags)
 	{
 		std::vector<std::string> copyTags = entity.tags;
 		for (std::vector<std::string>::iterator i = copyTags.begin(); i != copyTags.end(); ++i)
@@ -82,11 +82,16 @@ namespace Monocle
 
 	void Entity::Render()
 	{
-
 		Graphics::PushMatrix();
-		Graphics::Translate(position.x, position.y, depth);
+
+		if (followCamera == Vector2::zero || (Debug::render && Debug::selectedEntity != this))
+			Graphics::Translate(position.x, position.y, depth);
+		else
+			Graphics::Translate(scene->GetCamera()->position * followCamera + position * (Vector2::one - followCamera));
+
 		if (rotation != 0.0f)
 			Graphics::Rotate(rotation, 0, 0, 1);
+
 		Graphics::Scale(scale);
 
 		if (graphic != NULL)
@@ -111,7 +116,11 @@ namespace Monocle
 			Graphics::BindTexture(NULL);
 
 			Graphics::PushMatrix();
-			Graphics::Translate(position.x, position.y, depth);
+			
+			if (followCamera == Vector2::zero || Debug::render)
+				Graphics::Translate(position.x, position.y, depth);
+			else
+				Graphics::Translate(scene->GetCamera()->position * followCamera + position * (Vector2::one - followCamera));
 
 			if (Debug::selectedEntity == this)
 				Graphics::SetColor(Color::orange);
@@ -146,9 +155,12 @@ namespace Monocle
 		if (HasTag(tag))
 			Debug::Log("ERROR: Duplicate tag added to entity.");
 #endif
-		tags.push_back(tag);
-		if (scene != NULL)
-			scene->EntityAddTag(this, tag);
+		if (!HasTag(tag))
+		{
+			tags.push_back(tag);
+			if (scene != NULL)
+				scene->EntityAddTag(this, tag);
+		}
 	}
 
 	void Entity::RemoveTag(const std::string& tag)
@@ -394,6 +406,8 @@ namespace Monocle
 			}
 			fileNode->Write("tags", os.str());
 		}
+		if (followCamera != Vector2::zero)
+			fileNode->Write("followCamera", followCamera);
 	}
 
 	void Entity::Load(FileNode *fileNode)
@@ -417,6 +431,7 @@ namespace Monocle
 				AddTag(tag);
 			}
 		}
+		fileNode->Read("followCamera", followCamera);
 	}
 
 	Entity *Entity::GetParent()

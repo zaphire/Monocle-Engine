@@ -71,6 +71,7 @@
     <ClInclude Include="..\..\..\..\Code\Asset.h" />
     <ClInclude Include="..\..\..\..\Code\Assets.h" />
     <ClInclude Include="..\..\..\..\Code\Audio.h" />
+    <ClInclude Include="..\..\..\..\Code\Camera.h" />
     <ClInclude Include="..\..\..\..\Code\Colliders\CircleCollider.h" />
     <ClInclude Include="..\..\..\..\Code\Colliders\Collider.h" />
     <ClInclude Include="..\..\..\..\Code\Colliders\PathCollider.h" />
@@ -132,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp" />
     <ClCompile Include="..\..\..\..\Code\Assets.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Camera.cpp" />
     <ClCompile Include="..\..\..\..\Code\Colliders\CircleCollider.cpp" />
     <ClCompile Include="..\..\..\..\Code\Colliders\Collider.cpp" />
     <ClCompile Include="..\..\..\..\Code\Colliders\PathCollider.cpp" />

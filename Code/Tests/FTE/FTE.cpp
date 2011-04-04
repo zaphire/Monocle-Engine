@@ -23,7 +23,8 @@ namespace FTE
 
 		position += velocity * Monocle::deltaTime;
 
-		Graphics::SetCameraPosition(position);
+		Scene::GetCamera()->position = position;
+		//Graphics::SetCameraPosition(position);
 	}
 
 
@@ -54,7 +55,7 @@ namespace FTE
 
 		// create the player
 		Player *player = new Player();
-		player->position = Graphics::screenCenter;
+		player->position = Graphics::GetScreenCenter();
 		Add(player);
 	}
 

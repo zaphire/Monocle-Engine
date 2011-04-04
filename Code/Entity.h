@@ -32,6 +32,7 @@ namespace Monocle
 
 		float depth;
 		bool isVisible;
+		Vector2 followCamera;
 
 		Color color; // <- may move this later (material system?)
 		
@@ -109,7 +110,7 @@ namespace Monocle
 			return NULL;
 		}
 
-		const std::list<Entity*>* GetChildren(); 
+		const std::list<Entity*>* GetChildren();
 
 	protected:
 		friend class Scene;

@@ -66,6 +66,4 @@ namespace Jumper
 
 		void SpawnPlayer(Vector2 pos);
 	};
-
-	extern GameScene gameScene;
 }
