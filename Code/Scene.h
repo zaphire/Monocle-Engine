@@ -8,10 +8,14 @@
 #include "Entity.h"
 #include "Camera.h"
 
+///TODO: Replace with xml wrapper
+class TiXmlElement;
+
 namespace Monocle
 {
 	class Game;
 	class Entity;
+	
 
 	enum SearchType
 	{
@@ -74,6 +78,10 @@ namespace Monocle
 
 		static void AddCamera(Camera *camera);
 		static Camera *GetCamera(int cameraIndex=0);
+
+		///TODO: replace TiXml with wrapper
+		virtual void SaveEntities(TiXmlElement *element);
+		virtual void LoadEntities(TiXmlElement *element);
 
 	protected:
 		// not sure if we need to pass scene or not yet

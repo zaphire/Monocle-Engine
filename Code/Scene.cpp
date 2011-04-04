@@ -220,6 +220,15 @@ namespace Monocle
 		tagMap[tag].remove(entity);
 	}
 
+	void Scene::SaveEntities(TiXmlElement *element)
+	{
+	}
+
+	void Scene::LoadEntities(TiXmlElement *element)
+	{
+	}
+
+
 	/*
 	Entity* Scene::GetEntity(int index)
 	{
