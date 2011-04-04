@@ -68,6 +68,7 @@
 		37FB69B813319030008963C1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FB69B713319030008963C1 /* OpenGL.framework */; };
 		6657ED15133F9E8F00ACA1E2 /* FTE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6657ED13133F9E8F00ACA1E2 /* FTE.cpp */; };
 		D881B50013445142008EF89C /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D881B4FE13445142008EF89C /* Node.cpp */; };
+		F9132A0A13499ED200567EAB /* PathCollider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9132A0813499ED200567EAB /* PathCollider.cpp */; };
 		F9257DC81338235100A47E00 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DC61338235100A47E00 /* Game.cpp */; };
 		F9257DCD1338236300A47E00 /* Level.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DCB1338236300A47E00 /* Level.cpp */; };
 		F9257DD41338237600A47E00 /* SpriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DD01338237600A47E00 /* SpriteAnimation.cpp */; };
@@ -199,6 +200,8 @@
 		6657ED14133F9E8F00ACA1E2 /* FTE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTE.h; sourceTree = "<group>"; };
 		D881B4FE13445142008EF89C /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Node.cpp; path = ../../../Code/LevelEditor/Node.cpp; sourceTree = "<group>"; };
 		D881B4FF13445142008EF89C /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Node.h; path = ../../../Code/LevelEditor/Node.h; sourceTree = "<group>"; };
+		F9132A0813499ED200567EAB /* PathCollider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PathCollider.cpp; sourceTree = "<group>"; };
+		F9132A0913499ED200567EAB /* PathCollider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathCollider.h; sourceTree = "<group>"; };
 		F9257DC61338235100A47E00 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Game.cpp; path = ../../../Code/Game.cpp; sourceTree = SOURCE_ROOT; };
 		F9257DC71338235100A47E00 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Game.h; path = ../../../Code/Game.h; sourceTree = SOURCE_ROOT; };
 		F9257DCB1338236300A47E00 /* Level.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Level.cpp; path = ../../../Code/Level.cpp; sourceTree = SOURCE_ROOT; };
@@ -409,6 +412,8 @@
 		37FB691913317693008963C1 /* Colliders */ = {
 			isa = PBXGroup;
 			children = (
+				F9132A0813499ED200567EAB /* PathCollider.cpp */,
+				F9132A0913499ED200567EAB /* PathCollider.h */,
 				37FB691A13317693008963C1 /* CircleCollider.cpp */,
 				37FB691B13317693008963C1 /* CircleCollider.h */,
 				37FB691C13317693008963C1 /* Collider.cpp */,
@@ -700,6 +705,7 @@
 				F9F7D63A13457F3B002953B0 /* XMLFileNode.cpp in Sources */,
 				F9F7D63D13457F46002953B0 /* FileNode.cpp in Sources */,
 				F9F7D64313457F5C002953B0 /* PathMesh.cpp in Sources */,
+				F9132A0A13499ED200567EAB /* PathCollider.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
