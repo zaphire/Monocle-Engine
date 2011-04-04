@@ -36,6 +36,9 @@ namespace Monocle
 		Color color; // <- may move this later (material system?)
 		
 
+		// remove from Scene or Entity parent
+		void RemoveSelf();
+
 		//The scene that contains the entity
 		Scene* scene;
 		

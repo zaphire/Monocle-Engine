@@ -72,6 +72,14 @@ namespace Monocle
 		*/
 	}
 
+	void Entity::RemoveSelf()
+	{
+		if (parent)
+			parent->Remove(this);
+		else
+			scene->Remove(this);
+	}
+
 	void Entity::Render()
 	{
 
@@ -405,7 +413,7 @@ namespace Monocle
 			std::istringstream is(tags);
 			while (is >> tag)
 			{
-				printf("loading tag: %s\n", tag);
+				//printf("loading tag: %s\n", tag.c_str());
 				AddTag(tag);
 			}
 		}
@@ -415,7 +423,6 @@ namespace Monocle
 	{
 		return parent;
 	}
-
 
 	/// TODO: make recursive
 	Entity *Entity::GetNearestEntityByControlPoint(const Vector2 &position, const std::string &tag, Entity *ignoreEntity, float &smallestSqrMag)

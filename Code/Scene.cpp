@@ -1,17 +1,24 @@
 #include "Scene.h"
+#include "Graphics.h"
 
 namespace Monocle
 {
+	Scene *Scene::instance = NULL;
+
 	Scene::Scene()
 		: isVisible(true), isPaused(false)
 	{
-
+		instance = this;
+		Camera *camera = new Camera();
+		camera->position = Graphics::GetScreenCenter();
+		AddCamera(camera);
 	}
 
 	Scene::~Scene()
 	{
 		RemoveAll();
 		ResolveEntityChanges();
+		DestroyAllCameras();
 	}
 
 	void Scene::Begin()
@@ -51,15 +58,20 @@ namespace Monocle
 
 			//printf("\n\n****\n");
 
-			///HACK: this next line is a hack - temporary only
-			// TODO sort entities into layer buckets? or one big sorted list?
-			for (int layer = MAX_LAYER; layer >= MIN_LAYER; layer--)
+			for (std::list<Camera*>::iterator camera = cameras.begin(); camera != cameras.end(); ++camera)
 			{
-				for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+				(*camera)->ApplyMatrix();
+
+				///HACK: this next line is a hack - temporary only
+				// TODO sort entities into layer buckets? or one big sorted list?
+				for (int layer = MAX_LAYER; layer >= MIN_LAYER; layer--)
 				{
-					if ((*i)->IsLayer(layer) && (*i)->isVisible)
+					for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 					{
-						(*i)->Render();
+						if ((*i)->IsLayer(layer) && (*i)->isVisible)
+						{
+							(*i)->Render();
+						}
 					}
 				}
 			}
@@ -171,6 +183,31 @@ namespace Monocle
 		toAdd.clear();
 
 		//TODO: Sort the entity list based on layer
+	}
+
+	void Scene::AddCamera(Camera *camera)
+	{
+		instance->cameras.push_back(camera);
+	}
+
+	Camera *Scene::GetCamera(int cameraIndex)
+	{
+		int c = 0;
+		for (std::list<Camera*>::iterator i = instance->cameras.begin(); i != instance->cameras.end(); i++)
+		{
+			if (c == cameraIndex)
+				return *i;
+		}
+		return NULL;
+	}
+
+	void Scene::DestroyAllCameras()
+	{
+		for (std::list<Camera*>::iterator i = cameras.begin(); i != cameras.end(); i++)
+		{
+			delete *i;
+		}
+		cameras.clear();
 	}
 
 	void Scene::EntityAddTag(Entity* entity, const std::string& tag)

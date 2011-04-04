@@ -40,17 +40,25 @@ namespace Monocle
 		void EndFrame();
 		void ShowBuffer();
 
-
 		static void Set2D(int virtualWidth, int virtualHeight);
 		static void Set3D();
 
 		static void Resize(int w, int h);
 
 		static void BindTexture(TextureAsset* textureAsset);
-		static void SetCameraPosition(const Vector2 &position);
-		static void AdjustCameraPosition(const Vector2 &adjustment);
-		static void SetCameraZoom(const Vector2 &zoom);
-		static void AdjustCameraZoom(const Vector2 &adjustment);
+
+		//static void SetCameraPosition(const Vector2 &position);
+		//static void AdjustCameraPosition(const Vector2 &adjustment);
+		//static void SetCameraZoom(const Vector2 &zoom);
+		//static void AdjustCameraZoom(const Vector2 &adjustment);
+		//
+		//static const Vector2 &GetCameraPosition();
+		//static const Vector2 &GetCameraZoom();
+		//
+
+		static const Vector2 &GetResolutionScale();
+
+		//static void MoveCameraPosition(const Vector2 &position, float time, EaseType easeType);
 
 		static void Translate(float x, float y, float z);
 		static void Translate(Vector2 pos);
@@ -67,22 +75,18 @@ namespace Monocle
 		static void SetBlend(BlendType blend);
 		static void SetColor(const Color &color);
 		static void SetBackgroundColor(const Color &color);
-		static void SceneMatrix();
+		//static void SceneMatrix();
 
 		static Vector2 GetMatrixPosition();
 
-		static Vector2 screenCenter;
+		static Vector2 GetScreenCenter();
 		
 		static int GetVirtualWidth();
 		static int GetVirtualHeight();
 
-		static const Vector2 &GetCameraPosition();
-		static const Vector2 &GetCameraZoom();
-		static const Vector2 &GetResolutionScale();
 		static void ResolutionMatrix();
 		static void IdentityMatrix();
 
-		static void MoveCameraPosition(const Vector2 &position, float time, EaseType easeType);
 		static void RenderLine(const Vector2 &pos1, const Vector2 &pos2);
 
 		static void BeginLine();
@@ -93,10 +97,11 @@ namespace Monocle
 		static void RenderPathMesh(const std::vector<Node*> &nodes, int cells, float size);
 
 	private:
+		
 		static Graphics *instance;
-		Vector2 cameraPosition;
-		Vector2 cameraZoom;
+
 		Vector2 resolutionScale;
+		Vector2 screenCenter;
 		int virtualWidth, virtualHeight;
 		unsigned int lastBoundTextureID;
 		BlendType currentBlend;
