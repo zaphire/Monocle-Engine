@@ -46,6 +46,18 @@
             ReferencedContainer = "container:MonocleTest.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "MONOCLE_MAC_USE_CONTENT_PATH"
+            value = "${MONOCLE_MAC_USE_CONTENT_PATH}"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "MONOCLE_CONTENT_PATH"
+            value = "${MONOCLE_CONTENT_PATH}"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
