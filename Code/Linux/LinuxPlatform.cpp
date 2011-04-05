@@ -19,6 +19,9 @@
 
 namespace Monocle
 {
+    //Internal time
+    static struct timeval startTime;
+
     struct KeySymParts {
         union Data {
             uint16_t bits;
@@ -89,6 +92,8 @@ namespace Monocle
 
         CenterWindow();
 
+        //Init internal time
+        gettimeofday(&startTime, NULL);
         return true;
     }
 
@@ -351,9 +356,11 @@ namespace Monocle
 
     long Platform::GetMilliseconds()
     {
-        timeval ts;
-        gettimeofday(&ts, NULL);
-        return (long)((ts.tv_sec * 1000) + (ts.tv_usec/1000.0) + 0.5);
+        long ticks;
+        struct timeval now;
+        gettimeofday(&now, NULL);
+        ticks = (now.tv_sec - startTime.tv_sec) * 1000 + (now.tv_usec - startTime.tv_usec) / 1000;
+        return ticks;
     }
 
     bool Platform::IsKeyPressed(KeyCode keyCode)

@@ -4,8 +4,6 @@
 
 namespace Jumper
 {
-	GameScene gameScene;
-
 	Player::Player(Vector2 pos) 
 		: Entity()
 	{

@@ -10,7 +10,8 @@
 #include "LevelEditor/FringeTile.h"
 
 // temp, replace with generic file interface later
-class TiXmlElement;
+#include "XML/tinyxml.h"
+#include "XML/XMLFileNode.h"
 
 namespace Monocle
 {
@@ -40,6 +41,58 @@ namespace Monocle
 
 		int width, height;
 
+		template <class T> static void SaveEntitiesOfType(const std::string &name, TiXmlElement *element, Entity *fromEntity=NULL)
+		{
+			XMLFileNode xmlFileNode;
+
+			const std::list<Entity*> *entities;
+			if (fromEntity)
+				entities = fromEntity->GetChildren();
+			else
+				entities = instance->scene->GetEntities();
+
+			for (std::list<Entity*>::const_iterator i = entities->begin(); i != entities->end(); ++i)
+			{
+				Entity *entity = *i;
+				T *t = dynamic_cast<T*>(entity);
+				if (t)
+				{
+					TiXmlElement saveElement(name);
+					xmlFileNode.element = &saveElement;
+
+					instance->SaveEntities(&saveElement, entity);
+
+					entity->Save(&xmlFileNode);
+
+					element->InsertEndChild(saveElement);
+				}
+
+			}
+		}
+
+		template <class T> static void LoadEntitiesOfType(const std::string &name, TiXmlElement *element, Entity *intoEntity=NULL)
+		{
+			XMLFileNode xmlFileNode;
+
+			TiXmlElement *eEntity = element->FirstChildElement(name);
+			while (eEntity)
+			{
+				T *t = new T();
+				Entity *entity = dynamic_cast<Entity*>(t);
+				if (intoEntity == NULL)
+					instance->scene->Add(entity);
+				else
+					intoEntity->Add(entity);
+
+				instance->LoadEntities(eEntity, entity);
+
+				xmlFileNode.element = eEntity;
+				entity->Load(&xmlFileNode);
+
+				eEntity = eEntity->NextSiblingElement(name);
+			}
+		}
+
 	private:
 		Tileset *GetTilesetByName(const std::string &name);
 		FringeTileset *GetFringeTilesetByName(const std::string &name);
@@ -53,7 +106,6 @@ namespace Monocle
 		void SaveEntities(TiXmlElement *element, Entity *fromEntity=NULL);
 		void LoadEntities(TiXmlElement *element, Entity *intoEntity=NULL);
 
-		template <class T> void SaveEntitiesOfType(const std::string &name, TiXmlElement *element, Entity *fromEntity=NULL);
-		template <class T> void LoadEntitiesOfType(const std::string &name, TiXmlElement *element, Entity *intoEntity=NULL);
+
 	};
 }

@@ -13,11 +13,11 @@ namespace Ogmo
 		FRICTION_GROUND(800),
 		FRICTION_AIR(400),
 		GRAVITY(300),
-		JUMP(6000),
-		MAXSPEED_GROUND(60.0f),
+                JUMP(120.0f),
+                MAXSPEED_GROUND(60.0f),
 		MAXSPEED_AIR(100.0f),
 		ACCELERATION(800),
-		WALLJUMP(8000),
+                WALLJUMP(160.0f),
 		doubleJump(false),
 		cling(0),
 		onGround(false)
@@ -72,26 +72,26 @@ namespace Ogmo
 			// friction
 			if(onGround)
 			{
-				velocity.x = APPROACH(velocity.x, 0, FRICTION_GROUND * Monocle::deltaTime);
+                                velocity.x = APPROACH(velocity.x, 0, FRICTION_GROUND * Monocle::deltaTime);
 			}
 			else
 			{
-				velocity.x = APPROACH(velocity.x, 0, FRICTION_AIR * Monocle::deltaTime);
+                                velocity.x = APPROACH(velocity.x, 0, FRICTION_AIR * Monocle::deltaTime);
 			}
 		}
 
 		// JUMP INPUT
-		if (Input::IsKeyMaskPressed("jump") && (onGround || cling > 0 || !doubleJump))
+                if (Input::IsKeyMaskPressed("jump") && (onGround || cling > 0 || !doubleJump))
 		{
 			// jump
-			velocity.y = - JUMP * Monocle::deltaTime;
+                        velocity.y = - JUMP;
 
 			if(!onGround)
 			{
 				// wall jump
 				if(cling > 0)
 				{
-					velocity.x = clingDir * WALLJUMP * Monocle::deltaTime;
+                                        velocity.x = clingDir * WALLJUMP;
 					cling = -1;
 				}
 
@@ -108,8 +108,7 @@ namespace Ogmo
 
 		// maxspeed
 		int maxspeed = onGround ? MAXSPEED_GROUND : MAXSPEED_AIR;
-		if(abs(velocity.x) > maxspeed) { velocity.x = SIGN(velocity.x, 1) * maxspeed; } 
-
+                if(abs(velocity.x) > maxspeed) { velocity.x = SIGN(velocity.x, 1) * maxspeed; }
 		// Motion
 		Motion(velocity.x, position.x);
 		Motion(velocity.y, position.y);
@@ -214,7 +213,7 @@ namespace Ogmo
 		Graphics::PushMatrix();
 		Graphics::Translate(position);
 		Graphics::BindTexture(NULL);
-		Graphics::RenderQuad(8, 8);
+                Graphics::RenderQuad(8, 8);
 		Graphics::PopMatrix();
 	}
 
@@ -320,7 +319,8 @@ namespace Ogmo
 
 		//set screen size
 		Graphics::Set2D(160, 120);
-		Graphics::SetCameraPosition(Vector2(80, 60));
+		//Graphics::SetCameraPosition(Vector2(80, 60));
+		GetCamera()->position = Vector2(80, 60);
 
 		//assets
 		Assets::SetContentPath("../../Content/Ogmo/");

@@ -34,8 +34,6 @@ namespace Monocle
 {
 	Graphics *Graphics::instance = NULL;
 
-	Vector2 Graphics::screenCenter;
-
 	Graphics::Graphics()
 	{
 		instance = this;
@@ -63,8 +61,8 @@ namespace Monocle
 
 		Set2D(800,600);
 
-		cameraPosition = screenCenter;
-		cameraZoom = Vector2::one;
+		//cameraPosition = screenCenter;
+		//cameraZoom = Vector2::one;
 	}
 
 	void Graphics::SetBackgroundColor(const Color &color)
@@ -122,14 +120,12 @@ namespace Monocle
 		instance->resolutionScale = Vector2(float(Platform::GetWidth())/virtualWidth, float(Platform::GetWidth())/virtualWidth);
 
 		printf("Set2D: resScale: (%f, %f)\n window (%d, %d)\n", instance->resolutionScale.x, instance->resolutionScale.y, Platform::GetWidth(), Platform::GetHeight());
-		screenCenter.x = virtualWidth/2;
-		screenCenter.y = virtualHeight/2;
+		instance->screenCenter = Vector2(virtualWidth/2, virtualHeight/2);
 	}
 
 	void Graphics::Set3D()
 	{
 	}
-
 
 	void Graphics::Resize(int width, int height)
 	{
@@ -152,29 +148,49 @@ namespace Monocle
 		Set2D(instance->virtualWidth,instance->virtualHeight);
 	}
 
-	void Graphics::SetCameraPosition(const Vector2 &position)
-	{
-		instance->cameraPosition = position;
-	}
+	//void Graphics::SetCameraPosition(const Vector2 &position)
+	//{
+	//	instance->cameraPosition = position;
+	//}
 
-	void Graphics::AdjustCameraPosition(const Vector2 &adjustment)
-	{
-		instance->cameraPosition += adjustment;
-	}
+	//void Graphics::AdjustCameraPosition(const Vector2 &adjustment)
+	//{
+	//	instance->cameraPosition += adjustment;
+	//}
 
-	void Graphics::SetCameraZoom(const Vector2 &zoom)
-	{
-		instance->cameraZoom = zoom;
-	}
-	
-	void Graphics::AdjustCameraZoom(const Vector2 &adjustment)
-	{
-		instance->cameraZoom += adjustment;
+	//void Graphics::SetCameraZoom(const Vector2 &zoom)
+	//{
+	//	instance->cameraZoom = zoom;
+	//}
+	//
+	//void Graphics::AdjustCameraZoom(const Vector2 &adjustment)
+	//{
+	//	instance->cameraZoom += adjustment;
 
-		if (instance->cameraZoom.x < 0.0f)
-			instance->cameraZoom.x = 0.0f;
-		if (instance->cameraZoom.y < 0.0f)
-			instance->cameraZoom.y = 0.0f;
+	//	if (instance->cameraZoom.x < 0.0f)
+	//		instance->cameraZoom.x = 0.0f;
+	//	if (instance->cameraZoom.y < 0.0f)
+	//		instance->cameraZoom.y = 0.0f;
+	//}
+
+	//const Vector2 &Graphics::GetCameraPosition()
+	//{
+	//	return instance->cameraPosition;
+	//}
+
+	//const Vector2 &Graphics::GetCameraZoom()
+	//{
+	//	return instance->cameraZoom;
+	//}
+
+	//void Graphics::MoveCameraPosition(const Vector2 &position, float time, EaseType easeType)
+	//{
+	//	Tween::To(&instance->cameraPosition, position, time, easeType);
+	//}
+
+	const Vector2 &Graphics::GetResolutionScale()
+	{
+		return instance->resolutionScale;
 	}
 
 	void Graphics::Translate(float x, float y, float z)
@@ -280,6 +296,11 @@ namespace Monocle
 		return instance->virtualHeight;
 	}
 
+	Vector2 Graphics::GetScreenCenter()
+	{
+		return instance->screenCenter;
+	}
+
 	void Graphics::RenderQuadCustom(const Vector2 &ul, const Vector2 &ur, const Vector2 &lr, const Vector2 &ll, const Vector2 &textureOffset, const Vector2 &textureScale)
 	{
 		glBegin(GL_QUADS);
@@ -328,7 +349,9 @@ namespace Monocle
 	void Graphics::BeginFrame()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
-		SceneMatrix();
+		glLoadIdentity();
+		glScalef(instance->resolutionScale.x, instance->resolutionScale.y, 0.0f);
+		glTranslatef(instance->screenCenter.x, instance->screenCenter.y, 0.0f);
 	}
 
 	void Graphics::ResolutionMatrix()
@@ -343,14 +366,14 @@ namespace Monocle
 		glLoadIdentity();
 	}
 
-	void Graphics::SceneMatrix()
-	{
-		glLoadIdentity();
-		glScalef(instance->resolutionScale.x, instance->resolutionScale.y, 0.0f);
-		glTranslatef(instance->screenCenter.x, instance->screenCenter.y, 0.0f);
-		glScalef(instance->cameraZoom.x, instance->cameraZoom.y, 0.0f);
-		glTranslatef(-1.0f * instance->cameraPosition.x, -1.0f * instance->cameraPosition.y, 0.0f);
-	}
+	//void Graphics::SceneMatrix()
+	//{
+	//	glLoadIdentity();
+	//	glScalef(instance->resolutionScale.x, instance->resolutionScale.y, 0.0f);
+	//	glTranslatef(instance->screenCenter.x, instance->screenCenter.y, 0.0f);
+	//	glScalef(instance->cameraZoom.x, instance->cameraZoom.y, 0.0f);
+	//	glTranslatef(-1.0f * instance->cameraPosition.x, -1.0f * instance->cameraPosition.y, 0.0f);
+	//}
 
 	void Graphics::EndFrame()
 	{
@@ -389,26 +412,6 @@ namespace Monocle
 		float y = m[13];
 		//float z = m[14];
 		return Vector2(x, y);
-	}
-
-	const Vector2 &Graphics::GetCameraPosition()
-	{
-		return instance->cameraPosition;
-	}
-
-	const Vector2 &Graphics::GetCameraZoom()
-	{
-		return instance->cameraZoom;
-	}
-
-	const Vector2 &Graphics::GetResolutionScale()
-	{
-		return instance->resolutionScale;
-	}
-
-	void Graphics::MoveCameraPosition(const Vector2 &position, float time, EaseType easeType)
-	{
-		Tween::To(&instance->cameraPosition, position, time, easeType);
 	}
 
 	void Graphics::BeginLine()

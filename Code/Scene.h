@@ -6,11 +6,16 @@
 #include <string>
 #include <vector>
 #include "Entity.h"
+#include "Camera.h"
+
+///TODO: Replace with xml wrapper
+class TiXmlElement;
 
 namespace Monocle
 {
 	class Game;
 	class Entity;
+	
 
 	enum SearchType
 	{
@@ -71,6 +76,13 @@ namespace Monocle
 
 		const std::list<Entity*>* GetEntities();
 
+		static void AddCamera(Camera *camera);
+		static Camera *GetCamera(int cameraIndex=0);
+
+		///TODO: replace TiXml with wrapper
+		virtual void SaveEntities(TiXmlElement *element);
+		virtual void LoadEntities(TiXmlElement *element);
+
 	protected:
 		// not sure if we need to pass scene or not yet
 		// or if we'll use this later
@@ -80,6 +92,8 @@ namespace Monocle
 		virtual void ReceiveNote(const std::string &note);
 
 	private:
+		static Scene *instance;
+
 		friend class Game;
 		// scene has a game pointer
 		// so that it can request scene switches
@@ -104,5 +118,8 @@ namespace Monocle
 
 		// for GetFirstEntity and GetNextEntity
 		//std::list<Entity*>::iterator entityIterator;
+
+		std::list<Camera*> cameras;
+		void DestroyAllCameras();
 	};
 }

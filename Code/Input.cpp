@@ -2,6 +2,8 @@
 #include <stdio.h> // for null :P
 #include "Debug.h"
 #include "Graphics.h"
+#include "Camera.h"
+#include "Scene.h"
 
 namespace Monocle
 {
@@ -63,9 +65,9 @@ namespace Monocle
 	{
 		Vector2 resScale = Graphics::GetResolutionScale();
 		Vector2 invResScale = Vector2(1.0f/resScale.x, 1.0f/resScale.y);
-		Vector2 diff = (Platform::mousePosition*invResScale) - Graphics::screenCenter;
-		Vector2 cameraZoom = Graphics::GetCameraZoom();
-		return Graphics::GetCameraPosition() + (diff * Vector2(1/cameraZoom.x, 1/cameraZoom.y));
+		Vector2 diff = (Platform::mousePosition*invResScale) - Graphics::GetScreenCenter();
+		Vector2 cameraZoom = Scene::GetCamera()->scale;
+		return Scene::GetCamera()->position + (diff * Vector2(1/cameraZoom.x, 1/cameraZoom.y));
 	}
 
 	bool Input::IsMouseButtonHeld(MouseButton mouseButton)
