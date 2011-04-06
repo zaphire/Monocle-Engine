@@ -96,7 +96,7 @@ namespace Monocle
 		return points.size();
 	}
 
-	const Vector2& PolygonCollider::GetPoint(int index, bool relativeToEntity)
+	Vector2 PolygonCollider::GetPoint(int index, bool relativeToEntity)
 	{
 #ifdef DEBUG
 		if (index >= points.size())
