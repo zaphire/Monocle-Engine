@@ -47,8 +47,6 @@ namespace PuppetTest
 		entity->SetGraphic(new Sprite("graphics/logo.png"));
 		entity->position = Graphics::GetScreenCenter() + Vector2::up * 138;
 		Add(entity);
-
-
 	}
     
     void TestScene::Update()

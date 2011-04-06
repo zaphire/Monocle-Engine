@@ -12,6 +12,10 @@
 		</Part>
 	</Part>
 </Parts>
+<AnimationLayers>
+    <AnimationLayer name="head" ids="1 2 3 4 5 6 7 8 9 "/>
+    <AnimationLayer name="body" idx="0 "/>
+</AnimationLayers>
 <Animations>
 	<Animation name="idle">
 		<PartKeyFrames id="0">

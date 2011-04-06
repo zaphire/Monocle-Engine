@@ -339,11 +339,13 @@ namespace Monocle
 		return false;
 	}
 
+    /// TODO: write our own matrix functions to replace this stuff
 	Vector2 Entity::GetWorldPosition(const Vector2 &position)
 	{
 		Vector2 returnPos;
 		Graphics::PushMatrix();
 		Graphics::IdentityMatrix();
+        //Graphics::ResolutionMatrix();
 
 		std::list<Entity*> entityChain;
 		
@@ -354,7 +356,7 @@ namespace Monocle
 			current = current->parent;
 		}
 
-		for (std::list<Entity*>::iterator i = entityChain.begin(); i != entityChain.end(); ++i)
+		for (std::list<Entity*>::reverse_iterator i = entityChain.rbegin(); i != entityChain.rend(); ++i)
 		{
 			Graphics::Translate((*i)->position);
 			Graphics::Rotate((*i)->rotation, 0, 0, 1);
