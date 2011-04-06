@@ -21,7 +21,7 @@ namespace Monocle
 		NSWindow* window;
 		WindowData* windowData;
         
-		bool active;
+        std::string bundleResourcesPath;
 	};
 }
 

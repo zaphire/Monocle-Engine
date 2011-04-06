@@ -123,7 +123,7 @@ namespace Monocle
 
 	enum MouseButton
 	{
-                MOUSE_BUTTON_UNDEFINED=-1,
+        MOUSE_BUTTON_UNDEFINED=-1,
 		MOUSE_BUTTON_LEFT=0,
 		MOUSE_BUTTON_RIGHT,
 		MOUSE_BUTTON_MIDDLE,
@@ -174,11 +174,13 @@ namespace Monocle
 		static bool IsActive();
 
 		void WindowSizeChanged(int w, int h);
+        
+        static std::string GetDefaultContentPath();
 
 	private:
 		static Platform *instance;
 		int localKeymap[KEY_MAX];
 		int width, height;
-                void BindLocalKey(int local, int global);
+        void BindLocalKey(int local, int global);
 	};
 }

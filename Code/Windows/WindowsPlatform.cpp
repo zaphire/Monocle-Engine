@@ -628,6 +628,11 @@ namespace Monocle
 	{
 		return GetActiveWindow() == WindowsPlatform::instance->hWnd;
 	}
+
+	std::string Platform::GetDefaultContentPath()
+	{
+		return "../../Content/";
+	}
 }
 
 #endif

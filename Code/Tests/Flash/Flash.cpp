@@ -50,7 +50,7 @@ namespace Flash
 		if (texture != NULL)
 		{
 			Entity *entity = new Entity();
-			Sprite *sprite = new Sprite("../../Content/Flash/" + textureSheet.name + "/" + name + ".png");
+			Sprite *sprite = new Sprite(Assets::GetContentPath() + textureSheet.name + "/" + name + ".png");
 			sprite->position = (texture->registrationPoint * -1) + Vector2(sprite->width, sprite->height)*0.5f;
 			//sprite->position = texture->registrationPoint * -1;
 			entity->SetGraphic(sprite);
@@ -232,6 +232,9 @@ namespace Flash
 		Scene::Begin();
 
 		Graphics::SetBackgroundColor(Color::black);
+        
+        Assets::SetContentPath(Assets::GetContentPath()+"/Flash/");
+        const std::string cp = Assets::GetContentPath();
 
 		editPart = NULL;
 		selectedPartIndex = 0;
@@ -241,10 +244,10 @@ namespace Flash
 		isEditing = false;
 		
 #ifdef ANIM_MONOCLE_LOGO
-		LoadAnimation("../../Content/Flash/animations.xml");
-		LoadTextureSheet("../../Content/Flash/sheets.xml");
+		LoadAnimation(cp+"animations.xml");
+		LoadTextureSheet(cp+"sheets.xml");
 #else
-		LoadAnimation("../../Content/Flash/test.xml");
+		LoadAnimation(cp+"test.xml");
 #endif
 
 		eAnimation = new Entity();

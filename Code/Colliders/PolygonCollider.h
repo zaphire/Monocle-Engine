@@ -20,7 +20,7 @@ namespace Monocle
 		bool IsEmpty();
 		void AddPoint(Vector2 point);
 		int GetPointCount();
-		const Vector2& GetPoint(int index, bool relativeToEntity = false);
+		Vector2 GetPoint(int index, bool relativeToEntity = false);
 
 		float GetLeftmost(bool relativeToEntity = false);
 		float GetRightmost(bool relativeToEntity = false);

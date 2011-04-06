@@ -10,7 +10,6 @@ namespace Monocle
 	class FileNode
 	{
 	public:
-
 		virtual void Write(const std::string &name, const int &value)=0;
 		virtual void Write(const std::string &name, const float &value)=0;
 		virtual void Write(const std::string &name, const std::string &value)=0;

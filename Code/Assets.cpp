@@ -2,6 +2,7 @@
 #include "TextureAsset.h"
 #include <stdio.h> // for NULL
 #include "Debug.h"
+#include "Platform.h"
 
 namespace Monocle
 {
@@ -14,6 +15,7 @@ namespace Monocle
 
 	void Assets::Init()
 	{
+        SetContentPath(Platform::GetDefaultContentPath());
 	}
 
 	TextureAsset *Assets::RequestTexture(const std::string &filename, FilterType filter, bool repeatX, bool repeatY)

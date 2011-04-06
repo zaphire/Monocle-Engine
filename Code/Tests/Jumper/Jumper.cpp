@@ -130,7 +130,7 @@ namespace Jumper
 		Debug::Log("Jumper::GameScene::Begin()!");
 		Scene::Begin();
 
-		Assets::SetContentPath("../../Content/Jumper/");
+		Assets::SetContentPath(Assets::GetContentPath()+"/Jumper/");
 
 		Input::DefineMaskKey("jump", KEY_UP);
 		Input::DefineMaskKey("jump", KEY_Z);

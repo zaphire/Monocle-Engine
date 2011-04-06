@@ -120,6 +120,8 @@
     <ClInclude Include="..\..\..\..\Code\Tests\Jumper\Jumper.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\Ogmo\Ogmo.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\Pong\Pong.h" />
+    <ClInclude Include="..\..\..\..\Code\Tests\PuppetTest\Puppet.h" />
+    <ClInclude Include="..\..\..\..\Code\Tests\PuppetTest\PuppetTest.h" />
     <ClInclude Include="..\..\..\..\Code\TextureAsset.h" />
     <ClInclude Include="..\..\..\..\Code\Tileset.h" />
     <ClInclude Include="..\..\..\..\Code\Transform.h" />
@@ -193,6 +195,8 @@
     <ClCompile Include="..\..\..\..\Code\Tests\Jumper\Jumper.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\Ogmo\Ogmo.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\Pong\Pong.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Tests\PuppetTest\Puppet.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Tests\PuppetTest\PuppetTest.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tileset.cpp" />
     <ClCompile Include="..\..\..\..\Code\Transform.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tween.cpp" />

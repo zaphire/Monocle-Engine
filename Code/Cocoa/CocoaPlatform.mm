@@ -9,6 +9,8 @@
 
 using Monocle::Debug;
 
+//#define MONOCLE_MAC_USE_BUNDLE
+
 @interface MonocleWindow : NSWindow
 /* These are needed for borderless/fullscreen windows */
 - (BOOL)canBecomeKeyWindow;
@@ -77,7 +79,7 @@ static WindowData* AttachWindowListener(NSWindow* window)
 	WindowData* data = (WindowData*) calloc(1, sizeof(WindowData));
 	if (!data) {
 		Debug::Log("Error allocating window data");
-		return false;
+		return NULL;
 	}
 	data->created = true;
 	data->nswindow = window;
@@ -105,6 +107,16 @@ namespace Monocle
 	{
 		//  Init event loop
 		Cocoa_RegisterApp();
+
+        NSDictionary *env = [[NSProcessInfo processInfo] environment];
+        if([[env objectForKey:@"MONOCLE_MAC_USE_CONTENT_PATH"] isEqualToString:@"true"]) {
+            NSString *path = [env objectForKey:@"MONOCLE_CONTENT_PATH"];
+            if(path) {
+                this->bundleResourcesPath = [path fileSystemRepresentation];
+            }
+        } else {
+            this->bundleResourcesPath = [[[NSBundle mainBundle] resourcePath] fileSystemRepresentation];
+        }
 
 		//  Create window
 		window = CreateWindowCocoa(w, h);
@@ -161,7 +173,7 @@ namespace Monocle
 		instance->width  = (int)rect.size.width;
 		instance->height = (int)rect.size.height;
 	}
-
+    
 	void Platform::Update()
 	{
 		Cocoa_PumpEvents();
@@ -232,4 +244,8 @@ namespace Monocle
 	{
 		return [NSApp isActive];
 	}
+
+    std::string Platform::GetDefaultContentPath() {
+        return CocoaPlatform::instance->bundleResourcesPath;
+    }
 }

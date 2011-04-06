@@ -61,6 +61,9 @@
     <Filter Include="Monocle\Tests\Windows">
       <UniqueIdentifier>{359e2e0d-6b74-4021-9d89-0af58ffa0042}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Monocle\Tests\PuppetTest">
+      <UniqueIdentifier>{f95e904c-8c80-42a9-bb9c-06324b935de5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Vector3.h">
@@ -245,6 +248,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Camera.h">
       <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Tests\PuppetTest\Puppet.h">
+      <Filter>Monocle\Tests\PuppetTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Tests\PuppetTest\PuppetTest.h">
+      <Filter>Monocle\Tests\PuppetTest</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -463,6 +472,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Camera.cpp">
       <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Tests\PuppetTest\Puppet.cpp">
+      <Filter>Monocle\Tests\PuppetTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Tests\PuppetTest\PuppetTest.cpp">
+      <Filter>Monocle\Tests\PuppetTest</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

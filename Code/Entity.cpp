@@ -339,11 +339,13 @@ namespace Monocle
 		return false;
 	}
 
+    /// TODO: write our own matrix functions to replace this stuff
 	Vector2 Entity::GetWorldPosition(const Vector2 &position)
 	{
 		Vector2 returnPos;
 		Graphics::PushMatrix();
 		Graphics::IdentityMatrix();
+        //Graphics::ResolutionMatrix();
 
 		std::list<Entity*> entityChain;
 		
@@ -354,7 +356,7 @@ namespace Monocle
 			current = current->parent;
 		}
 
-		for (std::list<Entity*>::iterator i = entityChain.begin(); i != entityChain.end(); ++i)
+		for (std::list<Entity*>::reverse_iterator i = entityChain.rbegin(); i != entityChain.rend(); ++i)
 		{
 			Graphics::Translate((*i)->position);
 			Graphics::Rotate((*i)->rotation, 0, 0, 1);
@@ -387,12 +389,8 @@ namespace Monocle
 
 	void Entity::Save(FileNode *fileNode)
 	{
-		if (position != Vector2::zero)
-			fileNode->Write("position", position);
-		if (rotation != 0)
-			fileNode->Write("rotation", rotation);
-		if (scale != Vector2::one)
-			fileNode->Write("scale", scale);
+		Transform::Save(fileNode);
+
 		if (layer != 0)
 			fileNode->Write("layer", layer);
 		if (color != Color::white)
@@ -412,9 +410,8 @@ namespace Monocle
 
 	void Entity::Load(FileNode *fileNode)
 	{
-		fileNode->Read("position", position);
-		fileNode->Read("rotation", rotation);
-		fileNode->Read("scale", scale);
+		Transform::Load(fileNode);
+
 		int newLayer =0;
 		fileNode->Read("layer", newLayer);
 		SetLayer(newLayer);
@@ -461,6 +458,12 @@ namespace Monocle
 						nearestChild = (*i);
 					}
 				}
+			}
+
+			Entity *newNearestChild = (*i)->GetNearestEntityByControlPoint(position, tag, ignoreEntity, smallestSqrMag);
+			if (newNearestChild)
+			{
+				nearestChild = newNearestChild;
 			}
 		}
 

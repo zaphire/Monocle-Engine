@@ -2,9 +2,22 @@
 #include <iostream>
 #include "../Vector2.h"
 #include "../Color.h"
+#include "tinyxml.h"
 
 namespace Monocle
 {
+	XMLFileNode::XMLFileNode()
+		: element(NULL)
+	{
+
+	}
+
+	XMLFileNode::XMLFileNode(TiXmlElement *element)
+		: element(element)
+	{
+
+	}
+
 	/// WRITE
 	void XMLFileNode::Write(const std::string &name, const int &value)
 	{
@@ -80,5 +93,4 @@ namespace Monocle
 			read >> value.r >> value.g >> value.b >> value.a;
 		}
 	}
-
 }

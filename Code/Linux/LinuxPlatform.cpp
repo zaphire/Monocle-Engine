@@ -408,6 +408,11 @@ namespace Monocle
     {
         return LinuxPlatform::instance->active;
     }
+
+	std::string Platform::GetDefaultContentPath()
+	{
+		return "../../Content/";
+	}
 }
 
 #endif
