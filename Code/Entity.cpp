@@ -387,12 +387,8 @@ namespace Monocle
 
 	void Entity::Save(FileNode *fileNode)
 	{
-		if (position != Vector2::zero)
-			fileNode->Write("position", position);
-		if (rotation != 0)
-			fileNode->Write("rotation", rotation);
-		if (scale != Vector2::one)
-			fileNode->Write("scale", scale);
+		Transform::Save(fileNode);
+
 		if (layer != 0)
 			fileNode->Write("layer", layer);
 		if (color != Color::white)
@@ -412,9 +408,8 @@ namespace Monocle
 
 	void Entity::Load(FileNode *fileNode)
 	{
-		fileNode->Read("position", position);
-		fileNode->Read("rotation", rotation);
-		fileNode->Read("scale", scale);
+		Transform::Load(fileNode);
+
 		int newLayer =0;
 		fileNode->Read("layer", newLayer);
 		SetLayer(newLayer);

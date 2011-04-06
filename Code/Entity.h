@@ -57,9 +57,9 @@ namespace Monocle
 		//Called by the scene when the entity is removed from that scene
 		virtual void Removed();
 
-		virtual void Save(FileNode *fileNode);
-		
-		virtual void Load(FileNode *fileNode);
+		// from Transform:: used to save/load properties
+		void Save(FileNode *fileNode);
+		void Load(FileNode *fileNode);
 
 		//Call to check our collider against all entities that have "tag"
 		Collider* Collide(const std::string &tag, CollisionData *collisionData=NULL);

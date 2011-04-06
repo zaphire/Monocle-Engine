@@ -16,6 +16,7 @@ namespace Monocle
 		Part();
 		int GetID();
 		bool IsName(const std::string &name);
+		bool IsID(int id);
 
 		void Save(FileNode *fileNode);
 		void Load(FileNode *fileNode);
@@ -33,6 +34,9 @@ namespace Monocle
 		KeyFrame();
 		float GetTime();
 		void SetTime(float time);
+
+		void Save(FileNode *fileNode);
+		void Load(FileNode *fileNode);
 
 		EaseType easeType;
 
@@ -67,6 +71,9 @@ namespace Monocle
 		void SetLength(float length);
 		void RefreshLength();
 
+		void Save(FileNode *fileNode);
+		void Load(FileNode *fileNode);
+
 	private:
 		friend class Puppet;
 		float time;
@@ -97,8 +104,7 @@ namespace Monocle
 		bool IsPaused();
 
 		Part *GetPartByName(const std::string &name);
-
-		void DebugSetup();
+		Part *GetPartByID(int id);
 		
 	private:
 		Animation *GetAnimationByName(const std::string &animName);

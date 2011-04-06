@@ -7,7 +7,8 @@ namespace PuppetTest
 		: Entity()
 	{
 		puppet.Load("puppet.xml", this);
-		puppet.DebugSetup();
+		//puppet.DebugSetup();
+		puppet.Play("idle");
 	}
 
 	void PuppetEntity::Update()
@@ -24,6 +25,7 @@ namespace PuppetTest
 
 		PuppetEntity *puppetEntity = new PuppetEntity();
 		puppetEntity->position = Graphics::GetScreenCenter();
+		puppetEntity->scale = Vector2::one * 0.75f;
 		Add(puppetEntity);
 	}
 

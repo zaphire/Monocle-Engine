@@ -30,6 +30,11 @@ namespace Monocle
 		return this->name == name;
 	}
 
+	bool Part::IsID(int id)
+	{
+		return this->id == id;
+	}
+
 	void Part::Save(FileNode *fileNode)
 	{
 		fileNode->Write("id", id);
@@ -61,6 +66,20 @@ namespace Monocle
 	void KeyFrame::SetTime(float time)
 	{
 		this->time = time;
+	}
+
+	void KeyFrame::Save(FileNode *fileNode)
+	{
+		Transform::Save(fileNode);
+
+		fileNode->Write("time", time);
+	}
+
+	void KeyFrame::Load(FileNode *fileNode)
+	{
+		Transform::Load(fileNode);
+
+		fileNode->Read("time", time);
 	}
 
 	PartKeyFrames::PartKeyFrames()
@@ -184,6 +203,16 @@ namespace Monocle
 		}
 	}
 
+	void Animation::Save(FileNode *fileNode)
+	{
+		fileNode->Write("name", name);
+	}
+
+	void Animation::Load(FileNode *fileNode)
+	{
+		fileNode->Read("name", name);
+	}
+
 	Puppet::Puppet()
 		: isPlaying(false), isPaused(false)
 	{
@@ -191,14 +220,67 @@ namespace Monocle
 
 	void Puppet::Load(const std::string &filename, Entity *entity)
 	{
+		animations.clear();
+		// delete parts?
+		parts.clear();
+
 		TiXmlDocument xmlDoc(Assets::GetContentPath() + filename);
 		
 		if (xmlDoc.LoadFile())
 		{
+			/// Parts
 			TiXmlElement *xmlParts = xmlDoc.FirstChildElement("Parts");
 			if (xmlParts)
 			{
 				LoadParts(xmlParts, entity);
+			}
+
+			/// Animations
+			TiXmlElement *xmlAnimations = xmlDoc.FirstChildElement("Animations");
+			if (xmlAnimations)
+			{
+				/// Animation
+				TiXmlElement *xmlAnimation = xmlAnimations->FirstChildElement("Animation");
+				while (xmlAnimation)
+				{
+					XMLFileNode xmlFileNode(xmlAnimation);
+
+					Animation animation;
+					animation.Load(&xmlFileNode);
+
+					/// PartKeyFrames
+					TiXmlElement *xmlPartKeyFrames = xmlAnimation->FirstChildElement("PartKeyFrames");
+					while (xmlPartKeyFrames)
+					{
+						PartKeyFrames partKeyFrames;
+						int id = -1;
+						if (xmlPartKeyFrames->Attribute("id"))
+							id = atoi(xmlPartKeyFrames->Attribute("id"));
+						partKeyFrames.SetPart(GetPartByID(id));
+
+						/// KeyFrame
+						TiXmlElement *xmlKeyFrame = xmlPartKeyFrames->FirstChildElement("KeyFrame");
+						while (xmlKeyFrame)
+						{
+							XMLFileNode xmlFileNode2(xmlKeyFrame);
+
+							KeyFrame keyFrame;
+							keyFrame.Load(&xmlFileNode2);
+							partKeyFrames.AddKeyFrame(keyFrame);
+
+							xmlKeyFrame = xmlKeyFrame->NextSiblingElement("KeyFrame");
+						}
+
+						animation.AddPartKeyFrames(partKeyFrames);
+
+						xmlPartKeyFrames = xmlPartKeyFrames->NextSiblingElement("PartKeyFrames");
+					}
+
+					animation.RefreshLength();
+					animations.push_back(animation);
+
+					xmlAnimation = xmlAnimation->NextSiblingElement("Animation");
+				}
 			}
 		}
 	}
@@ -226,10 +308,14 @@ namespace Monocle
 
 	void Puppet::Play(const std::string &animationName, bool isLooping)
 	{
-		this->isPlaying = true;
-		this->isLooping = isLooping;
-
 		currentAnimation = GetAnimationByName(animationName);
+
+		if (currentAnimation)
+		{
+			this->isPlaying = true;
+			this->isLooping = isLooping;
+		}
+
 	}
 
 	void Puppet::Update()
@@ -290,52 +376,15 @@ namespace Monocle
 		return NULL;
 	}
 
-	void Puppet::DebugSetup()
+	Part *Puppet::GetPartByID(int id)
 	{
-		Part *part1 = GetPartByName("body");
-		Part *part2 = GetPartByName("head");
-
-		if (!part1 || !part2)
+		for (std::list<Part*>::iterator i = parts.begin(); i != parts.end(); ++i)
 		{
-			Debug::Log("Error: loading puppet.xml");
-			return;
+			if ((*i)->IsID(id))
+			{
+				return *i;
+			}
 		}
-
-		/*
-		Part *part1 = new Part(0, "body", "graphics/whatever.png");
-		entity->Add(part1);
-		parts.push_back(part1);
-
-		Part *part2 = new Part(1, "head", "graphics/whatever.png");
-		part2->position = Vector2::down * 100;
-		parts.push_back(part2);
-		part1->Add(part2);
-		*/
-
-		Animation animation;
-		animation.name = "run";
-
-		PartKeyFrames partKeyFrames;
-		partKeyFrames.SetPart(part1);
-
-		KeyFrame keyFrame;
-		keyFrame.position = Vector2::zero;
-		keyFrame.SetTime(0.0f);
-		keyFrame.easeType = EASE_INOUTSIN;
-
-		partKeyFrames.AddKeyFrame(keyFrame);
-
-		keyFrame.position = Vector2::right * 100;
-		keyFrame.SetTime(2.0f);
-
-		partKeyFrames.AddKeyFrame(keyFrame);
-
-		animation.AddPartKeyFrames(partKeyFrames);
-
-		animation.RefreshLength();
-
-		animations.push_back(animation);
-
-		Play("run");
+		return NULL;
 	}
 }
