@@ -162,7 +162,7 @@ namespace Monocle
 
 					printf("LerpTransform %f\n", p);
 					// adjust p by ease
-					currentPartKeyFrames->GetPart()->LerpTransform(prev, next, Tween::Ease(p, prev->easeType));
+					currentPartKeyFrames->GetPart()->LerpTransform(prev, next, Tween::Ease(p, EASE_INOUTSIN));//prev->easeType));
 				}
 			}
 		}
