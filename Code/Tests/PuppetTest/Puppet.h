@@ -2,6 +2,7 @@
 
 #include <list>
 #include "../../Entity.h"
+#include "../../Tween.h"
 
 namespace Monocle
 {
@@ -17,7 +18,9 @@ namespace Monocle
 		KeyFrame();
 		float GetTime();
 		void SetTime(float time);
-	
+
+		EaseType easeType;
+
 	private:
 		float time;
 	};
@@ -87,6 +90,9 @@ namespace Monocle
 		Animation *currentAnimation;
 	
 		std::list<Animation> animations;
+
+	private:
+		void DebugSetup(Entity *entity);
 	};
 
 }

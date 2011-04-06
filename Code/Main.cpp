@@ -14,9 +14,9 @@
 	//#define TEST_PONG
 	//#define TEST_JUMPER
 	//#define TEST_FLASH
-	#define TEST_OGMO
+	//#define TEST_OGMO
 	//#define TEST_FTE
-	//#define TEST_PUPPETTEST
+	#define TEST_PUPPETTEST
 #endif
 
 #ifdef TEST_PONG

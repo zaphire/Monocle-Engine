@@ -13,7 +13,7 @@ namespace Monocle
 	}
 
 	KeyFrame::KeyFrame()
-		: Transform()
+		: Transform(), easeType(EASE_LINEAR)
 	{
 	}
 	
@@ -97,7 +97,7 @@ namespace Monocle
 
 					printf("LerpTransform %f\n", p);
 					// adjust p by ease
-					currentPartKeyFrames->GetPart()->LerpTransform(prev, next, p);
+					currentPartKeyFrames->GetPart()->LerpTransform(prev, next, Tween::Ease(p, prev->easeType));
 				}
 			}
 		}
@@ -130,36 +130,7 @@ namespace Monocle
 
 	void Puppet::Load(const std::string &filename, Entity *entity)
 	{
-		Part *part1 = new Part();
-		part1->SetGraphic(new Sprite("graphics/whatever.png"));
-		entity->Add(part1);
-
-		Part *part2 = new Part();
-		part2->SetGraphic(new Sprite("graphics/whatever.png"));
-		part2->position = Vector2::down * 100;
-		part1->Add(part2);
-
-		Animation animation;
-		animation.name = "run";
-
-		PartKeyFrames partKeyFrames;
-		partKeyFrames.SetPart(part1);
-
-		KeyFrame keyFrame;
-		keyFrame.position = Vector2::zero;
-		keyFrame.SetTime(0.0f);
-		partKeyFrames.AddKeyFrame(keyFrame);
-
-		keyFrame.position = Vector2::right * 20;
-		keyFrame.SetTime(4.0f);
-		partKeyFrames.AddKeyFrame(keyFrame);
-
-		animation.AddPartKeyFrames(partKeyFrames);
-		animation.SetLength(4.0f);
-
-		animations.push_back(animation);
-
-		Play("run");
+		DebugSetup(entity);
 	}
 
 	void Puppet::Play(const std::string &animationName, bool isLooping)
@@ -214,5 +185,42 @@ namespace Monocle
 			return &(*i);
 		}
 		return NULL;
+	}
+
+	void Puppet::DebugSetup(Entity *entity)
+	{
+		Part *part1 = new Part();
+		part1->SetGraphic(new Sprite("graphics/whatever.png"));
+		entity->Add(part1);
+
+		Part *part2 = new Part();
+		part2->SetGraphic(new Sprite("graphics/whatever.png"));
+		part2->position = Vector2::down * 100;
+		part1->Add(part2);
+
+		Animation animation;
+		animation.name = "run";
+
+		PartKeyFrames partKeyFrames;
+		partKeyFrames.SetPart(part1);
+
+		KeyFrame keyFrame;
+		keyFrame.position = Vector2::zero;
+		keyFrame.SetTime(0.0f);
+		keyFrame.easeType = EASE_INOUTSIN;
+
+		partKeyFrames.AddKeyFrame(keyFrame);
+
+		keyFrame.position = Vector2::right * 100;
+		keyFrame.SetTime(2.0f);
+
+		partKeyFrames.AddKeyFrame(keyFrame);
+
+		animation.AddPartKeyFrames(partKeyFrames);
+		animation.SetLength(keyFrame.GetTime());
+
+		animations.push_back(animation);
+
+		Play("run");
 	}
 }
