@@ -9,3 +9,6 @@ monocle.files
 monocle.includes
 monocle.config
 monocle.creator.*
+
+/Project/Xcode4/MonocleTest/MonocleTest.xcodeproj/project.xcworkspace/xcuserdata/
+/Project/Xcode4/MonocleTest/MonocleTest.xcodeproj/xcuserdata/
