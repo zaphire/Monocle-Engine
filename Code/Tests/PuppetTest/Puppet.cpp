@@ -322,7 +322,7 @@ namespace Monocle
 	{
 		if (currentAnimation)
 		{
-			if (isPlaying)
+			if (isPlaying && !isPaused)
 			{
 				currentAnimation->Update();
 			}
@@ -343,6 +343,11 @@ namespace Monocle
 	void Puppet::Resume()
 	{
 		isPaused = false;
+	}
+
+	void Puppet::TogglePause()
+	{
+		isPaused = !isPaused;
 	}
 
 	bool Puppet::IsPlaying()

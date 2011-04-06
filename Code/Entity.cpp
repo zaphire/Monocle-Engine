@@ -457,6 +457,12 @@ namespace Monocle
 					}
 				}
 			}
+
+			Entity *newNearestChild = (*i)->GetNearestEntityByControlPoint(position, tag, ignoreEntity, smallestSqrMag);
+			if (newNearestChild)
+			{
+				nearestChild = newNearestChild;
+			}
 		}
 
 		return nearestChild;

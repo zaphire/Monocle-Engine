@@ -25,5 +25,15 @@ namespace PuppetTest
         
     private:
         PuppetEntity *puppetEntity;
+
+		KeyCode keyTogglePause;
+
+		KeyCode keyMoveLeft;
+		KeyCode keyMoveRight;
+		KeyCode keyMoveUp;
+		KeyCode keyMoveDown;
+
+		KeyCode keyRotateLeft;
+		KeyCode keyRotateRight;
 	};
 }

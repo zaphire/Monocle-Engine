@@ -97,6 +97,8 @@ namespace Monocle
 		void Stop();
 		void Pause();
 		void Resume();
+		
+		void TogglePause();
 
 		void Update();
 
@@ -105,6 +107,7 @@ namespace Monocle
 
 		Part *GetPartByName(const std::string &name);
 		Part *GetPartByID(int id);
+
 		
 	private:
 		Animation *GetAnimationByName(const std::string &animName);
