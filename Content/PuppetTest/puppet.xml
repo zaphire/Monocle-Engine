@@ -5,15 +5,19 @@
 			<Part id="3" name="hat" image="graphics/hat.png" width="128" height="128"/>
 			<Part id="4" name="nose" image="graphics/nose.png" width="128" height="128"/>
 			<Part id="5" name="monocle" image="graphics/monocle.png" width="64" height="64"/>
+			<Part id="6" name="" image="graphics/eyeunderline-left.png" width="32" height="32"/>
+			<Part id="7" name="" image="graphics/eye-left.png" width="32" height="32"/>
+			<Part id="8" name="" image="graphics/eye-right.png" width="32" height="32"/>
+			<Part id="9" name="" image="graphics/eyebrow.png" width="32" height="32"/>
 		</Part>
 	</Part>
 </Parts>
 <Animations>
 	<Animation name="idle">
 		<PartKeyFrames id="0">
-			<KeyFrame time="0" position="0 0"/>
-			<KeyFrame time="0.5" position="0 -10"/>
-			<KeyFrame time="1" position="0 0"/>
+			<KeyFrame time="0" position="-400 0"/>
+			<KeyFrame time="0.5" position="400 -10"/>
+			<KeyFrame time="1" position="-400 0"/>
 		</PartKeyFrames>
 		<PartKeyFrames id="1">
 			<KeyFrame time="0" position="0 -138" rotation="-10"/>
@@ -35,6 +39,18 @@
 		</PartKeyFrames>
 		<PartKeyFrames id="5">
 			<KeyFrame time="0" position="20 -28"/>
+		</PartKeyFrames>
+		<PartKeyFrames id="6">
+			<KeyFrame time="0" position="-35 4"/>
+		</PartKeyFrames>
+		<PartKeyFrames id="7">
+			<KeyFrame time="0" position="-30 -11"/>
+		</PartKeyFrames>
+		<PartKeyFrames id="8">
+			<KeyFrame time="0" position="11 -22"/>
+		</PartKeyFrames>
+		<PartKeyFrames id="9">
+			<KeyFrame time="0" position="-29 -26"/>
 		</PartKeyFrames>
 	</Animation>
 </Animations>
