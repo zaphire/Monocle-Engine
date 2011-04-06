@@ -7,16 +7,52 @@
 
 namespace Monocle
 {
-	Part::Part()
-		: Entity()
+	Part::Part(int id, const std::string &name, const std::string &imageFilename)
+		: Entity(), id(id), name(name), sprite(NULL)
 	{
+		sprite = new Sprite(imageFilename);
+		SetGraphic(sprite);
+	}
+
+	Part::Part()
+		: Entity(), id(-1), sprite(NULL)
+	{
+
+	}
+
+	int Part::GetID()
+	{
+		return id;
+	}
+
+	bool Part::IsName(const std::string &name)
+	{
+		return this->name == name;
+	}
+
+	void Part::Save(FileNode *fileNode)
+	{
+		fileNode->Write("id", id);
+		fileNode->Write("name", name);
+		fileNode->Write("image", sprite->texture->GetName());
+	}
+
+	void Part::Load(FileNode *fileNode)
+	{
+		fileNode->Read("id", id);
+		fileNode->Read("name", name);
+		std::string image;
+		fileNode->Read("image", image);
+		SetGraphic(NULL);
+		sprite = new Sprite(image);
+		SetGraphic(sprite);
 	}
 
 	KeyFrame::KeyFrame()
 		: Transform(), easeType(EASE_LINEAR)
 	{
 	}
-	
+
 	inline float KeyFrame::GetTime()
 	{
 		return time;
@@ -77,7 +113,6 @@ namespace Monocle
 	{
 		time += Monocle::deltaTime;
 
-
 		if (time > length)
 		{
 			time = 0.0f;
@@ -90,7 +125,11 @@ namespace Monocle
 			{
 				KeyFrame *prev=NULL, *next=NULL;
 				currentPartKeyFrames->GetKeyframeForTime(time, &prev, &next);
-				if (prev && next)
+				if (prev && !next)
+				{
+					currentPartKeyFrames->GetPart()->LerpTransform(prev, prev, 1.0f);
+				}
+				else if (prev && next)
 				{
 					float diff = next->GetTime() - prev->GetTime();
 					float p = (time - prev->GetTime()) / diff;
@@ -130,7 +169,37 @@ namespace Monocle
 
 	void Puppet::Load(const std::string &filename, Entity *entity)
 	{
-		DebugSetup(entity);
+		TiXmlDocument xmlDoc(Assets::GetContentPath() + filename);
+		
+		if (xmlDoc.LoadFile())
+		{
+			TiXmlElement *xmlParts = xmlDoc.FirstChildElement("Parts");
+			if (xmlParts)
+			{
+				LoadParts(xmlParts, entity);
+			}
+		}
+	}
+
+	void Puppet::LoadParts(TiXmlElement *element, Entity *intoEntity)
+	{
+		TiXmlElement *xmlPart = element->FirstChildElement("Part");
+		while (xmlPart)
+		{
+			XMLFileNode xmlFileNode(xmlPart);
+
+			Part *part = new Part();
+			part->Load(&xmlFileNode);
+			
+			LoadParts(xmlPart, part);
+
+			parts.push_back(part);
+
+			/// TODO...?
+			intoEntity->Add(part);
+
+			xmlPart = xmlPart->NextSiblingElement("Part");
+		}
 	}
 
 	void Puppet::Play(const std::string &animationName, bool isLooping)
@@ -187,16 +256,39 @@ namespace Monocle
 		return NULL;
 	}
 
-	void Puppet::DebugSetup(Entity *entity)
+	Part *Puppet::GetPartByName(const std::string &name)
 	{
-		Part *part1 = new Part();
-		part1->SetGraphic(new Sprite("graphics/whatever.png"));
-		entity->Add(part1);
+		for (std::list<Part*>::iterator i = parts.begin(); i != parts.end(); ++i)
+		{
+			if ((*i)->IsName(name))
+			{
+				return *i;
+			}
+		}
+		return NULL;
+	}
 
-		Part *part2 = new Part();
-		part2->SetGraphic(new Sprite("graphics/whatever.png"));
+	void Puppet::DebugSetup()
+	{
+		Part *part1 = GetPartByName("body");
+		Part *part2 = GetPartByName("head");
+
+		if (!part1 || !part2)
+		{
+			Debug::Log("Error: loading puppet.xml");
+			return;
+		}
+
+		/*
+		Part *part1 = new Part(0, "body", "graphics/whatever.png");
+		entity->Add(part1);
+		parts.push_back(part1);
+
+		Part *part2 = new Part(1, "head", "graphics/whatever.png");
 		part2->position = Vector2::down * 100;
+		parts.push_back(part2);
 		part1->Add(part2);
+		*/
 
 		Animation animation;
 		animation.name = "run";

@@ -28,9 +28,7 @@ To run on Windows, make sure working directory is set to:
 $(SolutionDir)..\..\..\Build\bin\
 
 =MAC OSX=
-In XCode: Executables->MonocleTest RightClick->GetInfo or CMD+I
-General Tab -> Set Working Directory to... Custom directory
-(YourUserPath)-> "Monocle-Engine/Build/bin"
+Make sure you're using XCode version 4 and that you have the shared Scheme selected.
 
 Change the #defined TEST_* values in main.cpp to try out different demos.
 

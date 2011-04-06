@@ -324,6 +324,7 @@ namespace Ogmo
 
 		//assets
 		Assets::SetContentPath(Assets::GetContentPath()+"/Ogmo/");
+
 		atCoin = new Sprite("coin.png", FILTER_NONE, 8, 8);
 		atSpike = new Sprite("spike.png", FILTER_NONE, 8, 8);
 

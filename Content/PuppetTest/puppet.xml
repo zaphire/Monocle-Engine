@@ -1,0 +1,17 @@
+<Parts>
+	<Part id="0" name="body" image="graphics/body.png" width="64" height="64">
+		<Part id="1" name="head" image="graphics/head.png" width="64" height="64"/>
+	</Part>
+	<Part id="2" name="other" image="graphics/other.png" width="64" height="128"/>
+</Parts>
+<Animations>
+	<Animation name="idle">
+		<PartKeyFrames id="0">
+			<KeyFrame time="0" position="10 10" rotation="45" scale="1 1"/>
+			<KeyFrame time="1" position="10 40" rotation="90"/>
+		</PartKeyFrames>
+		<PartKeyFrames id="1">
+			<KeyFrame time="0" position="0 100" rotation="0"/>
+		</PartKeyFrames>
+	</Animation>
+</Animations>

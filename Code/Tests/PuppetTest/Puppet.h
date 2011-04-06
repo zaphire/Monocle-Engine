@@ -3,13 +3,28 @@
 #include <list>
 #include "../../Entity.h"
 #include "../../Tween.h"
+#include "../../Graphics/Sprite.h"
+
+class TiXmlElement;
 
 namespace Monocle
 {
 	class Part : public Entity
 	{
 	public:
+		Part(int id, const std::string &name, const std::string &imageFilename);
 		Part();
+		int GetID();
+		bool IsName(const std::string &name);
+
+		void Save(FileNode *fileNode);
+		void Load(FileNode *fileNode);
+
+	private:
+		friend class Puppet;
+		int id;
+		std::string name;
+		Sprite *sprite;
 	};
 
 	class KeyFrame : public Transform
@@ -34,14 +49,12 @@ namespace Monocle
 		Part *GetPart();
 		void GetKeyframeForTime(float time, KeyFrame **prev, KeyFrame **next);
 		
-
 	private:
 		Part *part;
 	
 		std::list<KeyFrame> keyFrames;
 	};
 
-	class Puppet;
 	class Animation
 	{
 	public:
@@ -80,6 +93,10 @@ namespace Monocle
 
 		bool IsPlaying();
 		bool IsPaused();
+
+		Part *GetPartByName(const std::string &name);
+
+		void DebugSetup();
 		
 	private:
 		Animation *GetAnimationByName(const std::string &animName);
@@ -90,9 +107,12 @@ namespace Monocle
 		Animation *currentAnimation;
 	
 		std::list<Animation> animations;
+		std::list<Part*> parts;
+
+		void LoadParts(TiXmlElement *element, Entity *intoEntity);
 
 	private:
-		void DebugSetup(Entity *entity);
+		
 	};
 
 }

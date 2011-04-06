@@ -1,13 +1,18 @@
 #pragma once
 
 #include "../FileNode.h"
-#include "tinyxml.h"
+//#include "tinyxml.h"
+
+class TiXmlElement;
 
 namespace Monocle
 {
 	class XMLFileNode : public FileNode
 	{
 	public:
+		XMLFileNode();
+		XMLFileNode(TiXmlElement *element);
+
 		void Write(const std::string &name, const int &value);
 		void Write(const std::string &name, const float &value);
 		void Write(const std::string &name, const std::string &value);
