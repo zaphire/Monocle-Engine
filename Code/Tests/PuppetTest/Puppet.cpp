@@ -103,6 +103,13 @@ namespace Monocle
 		keyFrames.push_back(keyFrame);
 	}
 
+	KeyFrame *PartKeyFrames::GetLastKeyFrame()
+	{
+		if (keyFrames.size() == 0)
+			return NULL;
+		return &keyFrames.back();
+	}
+
 
 	Animation::Animation()
 		: time(0.0f), length(0.0)
@@ -160,6 +167,21 @@ namespace Monocle
 	void Animation::SetLength(float length)
 	{
 		this->length = length;
+	}
+
+	void Animation::RefreshLength()
+	{
+		length = -1.0f;
+		for (std::list<PartKeyFrames>::iterator i = partKeyFrames.begin(); i != partKeyFrames.end(); ++i)
+		{
+			KeyFrame *keyFrame = (*i).GetLastKeyFrame();
+			if (keyFrame)
+			{
+				float t = keyFrame->GetTime();
+				if (t > length)
+					length = t;
+			}
+		}
 	}
 
 	Puppet::Puppet()
@@ -309,7 +331,8 @@ namespace Monocle
 		partKeyFrames.AddKeyFrame(keyFrame);
 
 		animation.AddPartKeyFrames(partKeyFrames);
-		animation.SetLength(keyFrame.GetTime());
+
+		animation.RefreshLength();
 
 		animations.push_back(animation);
 

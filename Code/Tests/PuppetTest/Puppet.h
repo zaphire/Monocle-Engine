@@ -48,6 +48,7 @@ namespace Monocle
 		void SetPart(Part *part);
 		Part *GetPart();
 		void GetKeyframeForTime(float time, KeyFrame **prev, KeyFrame **next);
+		KeyFrame *GetLastKeyFrame();
 		
 	private:
 		Part *part;
@@ -64,6 +65,7 @@ namespace Monocle
 		bool IsName(const std::string &name);
 		void AddPartKeyFrames(const PartKeyFrames &partKeyFrames);
 		void SetLength(float length);
+		void RefreshLength();
 
 	private:
 		friend class Puppet;
