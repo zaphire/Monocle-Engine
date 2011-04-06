@@ -15,9 +15,9 @@
 <Animations>
 	<Animation name="idle">
 		<PartKeyFrames id="0">
-			<KeyFrame time="0" position="-400 0"/>
-			<KeyFrame time="0.5" position="400 -10"/>
-			<KeyFrame time="1" position="-400 0"/>
+			<KeyFrame time="0" position="-50 0"/>
+			<KeyFrame time="0.5" position="50 0"/>
+			<KeyFrame time="1" position="-50 0"/>
 		</PartKeyFrames>
 		<PartKeyFrames id="1">
 			<KeyFrame time="0" position="0 -138" rotation="-10"/>
