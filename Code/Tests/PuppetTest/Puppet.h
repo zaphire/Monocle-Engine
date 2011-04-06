@@ -53,11 +53,13 @@ namespace Monocle
 		Part *GetPart();
 		void GetKeyframeForTime(float time, KeyFrame **prev, KeyFrame **next);
 		KeyFrame *GetLastKeyFrame();
+        
+        std::list<KeyFrame> keyFrames;
 		
 	private:
 		Part *part;
 	
-		std::list<KeyFrame> keyFrames;
+		
 	};
 
 	class Animation
@@ -74,10 +76,14 @@ namespace Monocle
 		void SetDuration(float length);
         float GetDuration();
         float GetCurrentTime();
+        PartKeyFrames *GetPartKeyFrames(Part *part);
+        
 		void RefreshDuration();
 
 		void Save(FileNode *fileNode);
 		void Load(FileNode *fileNode);
+        
+        
         
 	private:
 		friend class Puppet;

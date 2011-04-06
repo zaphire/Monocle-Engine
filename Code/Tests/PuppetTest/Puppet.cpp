@@ -191,6 +191,18 @@ namespace Monocle
     {
         return currentTime;
     }
+    
+    PartKeyFrames *Animation::GetPartKeyFrames(Part *part)
+    {
+        for(std::list<PartKeyFrames>::iterator i = partKeyFrames.begin(); i != partKeyFrames.end(); ++i)
+        {
+            if ((*i).GetPart() == part)
+            {
+                return &(*i);
+            }
+        }
+        return NULL;
+    }
 
 	bool Animation::IsName(const std::string &name)
 	{

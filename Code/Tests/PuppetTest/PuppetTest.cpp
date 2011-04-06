@@ -26,7 +26,25 @@ namespace PuppetTest
             Graphics::RenderLine(start, end);
             Vector2 playHead = (end - start) * p + start;
             float playHeadHalfHeight = 16;
-            Graphics::RenderLine(playHead + Vector2::up * playHeadHalfHeight, playHead + Vector2::down * playHeadHalfHeight);
+            Graphics::RenderLine(playHead + Vector2::up * playHeadHalfHeight * 0.5f, playHead + Vector2::down * playHeadHalfHeight * 0.5f);
+            
+            if (Debug::selectedEntity)
+            {
+                Graphics::SetColor(Color::orange);
+                Part *part = dynamic_cast<Part*>(Debug::selectedEntity);
+                if (part)
+                {
+                    PartKeyFrames *partKeyFrames = currentAnimation->GetPartKeyFrames(part);
+                    if (partKeyFrames)
+                    {
+                        for (std::list<KeyFrame>::iterator i = partKeyFrames->keyFrames.begin(); i != partKeyFrames->keyFrames.end(); ++i)
+                        {
+                            playHead = (end-start) * ((*i).GetTime()/currentAnimation->GetDuration()) + start;
+                            Graphics::RenderLine(playHead + Vector2::up * playHeadHalfHeight, playHead + Vector2::down * playHeadHalfHeight);
+                        }
+                    }
+                }
+            }
             Graphics::PopMatrix();
         }
     }
@@ -51,10 +69,10 @@ namespace PuppetTest
 
 		keyTogglePause = KEY_TAB;
 
-		keyMoveLeft = KEY_LEFT;
-		keyMoveRight = KEY_RIGHT;
-		keyMoveUp = KEY_UP;
-		keyMoveDown = KEY_DOWN;
+		keyMoveLeft = KEY_A;
+		keyMoveRight = KEY_D;
+		keyMoveUp = KEY_W;
+		keyMoveDown = KEY_S;
 
 		keyRotateLeft = KEY_J;
 		keyRotateRight = KEY_L;
@@ -128,13 +146,15 @@ namespace PuppetTest
 			}
             else
             {
-                if (puppetEntity->puppet.GetCurrentAnimation())
-                {
-                    if (Input::IsKeyPressed(keyBackwards))
-                        puppetEntity->puppet.GetCurrentAnimation()->AdjustCurrentTime(-0.1f);
-                    if (Input::IsKeyPressed(keyForwards))
-                        puppetEntity->puppet.GetCurrentAnimation()->AdjustCurrentTime(0.1f);
-                }
+
+            }
+            
+            if (puppetEntity->puppet.GetCurrentAnimation())
+            {
+                if (Input::IsKeyPressed(keyBackwards))
+                    puppetEntity->puppet.GetCurrentAnimation()->AdjustCurrentTime(-0.1f);
+                if (Input::IsKeyPressed(keyForwards))
+                    puppetEntity->puppet.GetCurrentAnimation()->AdjustCurrentTime(0.1f);
             }
 		}
 		else
