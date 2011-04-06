@@ -230,6 +230,7 @@
 		F947BBDB134C943600952C81 /* Puppet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Puppet.h; path = PuppetTest/Puppet.h; sourceTree = "<group>"; };
 		F947BBDC134C943600952C81 /* PuppetTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PuppetTest.cpp; path = PuppetTest/PuppetTest.cpp; sourceTree = "<group>"; };
 		F947BBDD134C943600952C81 /* PuppetTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PuppetTest.h; path = PuppetTest/PuppetTest.h; sourceTree = "<group>"; };
+		F947BBE0134CBACD00952C81 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Macros.h; path = ../../../Code/Macros.h; sourceTree = "<group>"; };
 		F9F7D5D2133B0D57002953B0 /* PolygonCollider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PolygonCollider.cpp; sourceTree = "<group>"; };
 		F9F7D5D3133B0D57002953B0 /* PolygonCollider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolygonCollider.h; sourceTree = "<group>"; };
 		F9F7D5FA133D3F3C002953B0 /* FringeTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FringeTile.cpp; path = ../../../Code/LevelEditor/FringeTile.cpp; sourceTree = SOURCE_ROOT; };
@@ -408,6 +409,7 @@
 				37FB692D13317693008963C1 /* Input.h */,
 				F9257DCB1338236300A47E00 /* Level.cpp */,
 				F9257DCC1338236300A47E00 /* Level.h */,
+				F947BBE0134CBACD00952C81 /* Macros.h */,
 				37AABF371333478A004E2D56 /* Main.cpp */,
 				37FB693913317693008963C1 /* Monocle.cpp */,
 				37FB693A13317693008963C1 /* Monocle.h */,

@@ -20,5 +20,10 @@ namespace PuppetTest
 	public:
 		void Begin();
 		void End();
+        
+        void Update();
+        
+    private:
+        PuppetEntity *puppetEntity;
 	};
 }

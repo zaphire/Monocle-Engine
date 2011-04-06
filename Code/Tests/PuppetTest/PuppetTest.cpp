@@ -27,7 +27,7 @@ namespace PuppetTest
 
 		Assets::SetContentPath(Assets::GetContentPath() + "/PuppetTest/");
 
-		PuppetEntity *puppetEntity = new PuppetEntity();
+        puppetEntity = new PuppetEntity();
 		puppetEntity->position = Graphics::GetScreenCenter() + Vector2::down * 100;
 		puppetEntity->scale = Vector2::one * 0.75f;
 		Add(puppetEntity);
@@ -38,7 +38,15 @@ namespace PuppetTest
 		entity->position = Graphics::GetScreenCenter() + Vector2::up * 138;
 		Add(entity);
 	}
-
+    
+    void TestScene::Update()
+    {
+        Scene::Update();
+        
+        if (Input::IsMouseButtonHeld(MOUSE_BUTTON_LEFT))
+            puppetEntity->position = WEIGHTED_AVERAGE(puppetEntity->position, Input::GetWorldMousePosition(), 15);
+    }
+    
 	void TestScene::End()
 	{
 		Scene::End();
