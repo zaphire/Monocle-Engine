@@ -20,6 +20,8 @@ namespace Monocle
 
 		NSWindow* window;
 		WindowData* windowData;
+        
+        std::string bundleResourcesPath;
 	};
 }
 

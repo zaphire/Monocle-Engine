@@ -200,6 +200,10 @@
 		37FB69B713319030008963C1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		6657ED13133F9E8F00ACA1E2 /* FTE.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FTE.cpp; sourceTree = "<group>"; };
 		6657ED14133F9E8F00ACA1E2 /* FTE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTE.h; sourceTree = "<group>"; };
+		D876F29413456E7500A021D8 /* PathMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PathMesh.cpp; path = ../../../Code/LevelEditor/PathMesh.cpp; sourceTree = "<group>"; };
+		D876F29513456E7500A021D8 /* PathMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathMesh.h; path = ../../../Code/LevelEditor/PathMesh.h; sourceTree = "<group>"; };
+		D876F29713456E9900A021D8 /* XMLFileNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XMLFileNode.cpp; sourceTree = "<group>"; };
+		D876F29813456E9900A021D8 /* XMLFileNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLFileNode.h; sourceTree = "<group>"; };
 		D881B4FE13445142008EF89C /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Node.cpp; path = ../../../Code/LevelEditor/Node.cpp; sourceTree = "<group>"; };
 		D881B4FF13445142008EF89C /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Node.h; path = ../../../Code/LevelEditor/Node.h; sourceTree = "<group>"; };
 		F9132A0813499ED200567EAB /* PathCollider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PathCollider.cpp; sourceTree = "<group>"; };
@@ -267,6 +271,8 @@
 				37B1929A13359C9D00D2D264 /* tinyxml.h */,
 				37B1929B13359C9D00D2D264 /* tinyxmlerror.cpp */,
 				37B1929C13359C9D00D2D264 /* tinyxmlparser.cpp */,
+				D876F29713456E9900A021D8 /* XMLFileNode.cpp */,
+				D876F29813456E9900A021D8 /* XMLFileNode.h */,
 			);
 			name = XML;
 			path = ../../../Code/XML;
@@ -570,6 +576,8 @@
 				F9F7D5FD133D3F3C002953B0 /* FringeTileEditor.h */,
 				F9F7D5FE133D3F3C002953B0 /* LevelEditor.cpp */,
 				F9F7D5FF133D3F3C002953B0 /* LevelEditor.h */,
+				D876F29413456E7500A021D8 /* PathMesh.cpp */,
+				D876F29513456E7500A021D8 /* PathMesh.h */,
 			);
 			name = LevelEditor;
 			sourceTree = "<group>";
@@ -593,6 +601,7 @@
 				37EA2492132F986900D216B0 /* Sources */,
 				37EA2493132F986900D216B0 /* Frameworks */,
 				37EA2494132F986900D216B0 /* Resources */,
+				D881BBFB134643D4001263BE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -638,6 +647,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D881BBFB134643D4001263BE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if ! ${MONOCLE_MAC_USE_CONTENT_PATH}\n  then\n    cp -r \"${MONOCLE_CONTENT_PATH}\" \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Content/\"\nfi";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		37EA2492132F986900D216B0 /* Sources */ = {
@@ -748,6 +774,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MONOCLE_CONTENT_PATH = "${SRCROOT}/../../../Content/";
+				MONOCLE_MAC_USE_CONTENT_PATH = true;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -763,6 +791,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MONOCLE_CONTENT_PATH = "${SRCROOT}/../../../Content/";
+				MONOCLE_MAC_USE_CONTENT_PATH = false;
 				SDKROOT = macosx;
 			};
 			name = Release;
