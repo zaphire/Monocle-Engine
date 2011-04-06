@@ -11,4 +11,11 @@ namespace Monocle
 		: position(transform.position), rotation(transform.rotation), scale(transform.scale)
 	{
 	}
+
+	void Transform::LerpTransform(Transform *prev, Transform *next, float percent)
+	{
+		position = next->position*percent + prev->position*(1.0f - percent);
+		rotation = next->rotation*percent + prev->rotation*(1.0f - percent);
+		scale = next->scale*percent + prev->scale*(1.0f-percent);
+	}
 }

@@ -4,7 +4,6 @@
 #include "Vector2.h"
 
 #if defined(MONOCLE_LINUX)
-	// cmake for other tests isn't working yet
 	#define TEST_JUMPER
 	//#define TEST_FLASH
 	//#define TEST_OGMO
@@ -15,8 +14,9 @@
 	//#define TEST_PONG
 	//#define TEST_JUMPER
 	//#define TEST_FLASH
-	//#define TEST_OGMO
-	#define TEST_FTE
+	#define TEST_OGMO
+	//#define TEST_FTE
+	//#define TEST_PUPPETTEST
 #endif
 
 #ifdef TEST_PONG
@@ -37,6 +37,10 @@
 
 #ifdef TEST_FTE
 	#include "Tests/FTE/FTE.h"
+#endif
+
+#ifdef TEST_PUPPETTEST
+	#include "Tests/PuppetTest/PuppetTest.h"
 #endif
 
 using namespace Monocle;
@@ -65,6 +69,10 @@ int main(void)
 
 #ifdef TEST_FTE
 	game->SetScene(new FTE::LevelScene());
+#endif
+
+#ifdef TEST_PUPPETTEST
+	game->SetScene(new PuppetTest::TestScene());
 #endif
 
 	game->Main();
