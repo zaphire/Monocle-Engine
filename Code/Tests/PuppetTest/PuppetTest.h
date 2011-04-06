@@ -6,6 +6,14 @@ using namespace Monocle;
 
 namespace PuppetTest
 {
+    class Timeline : public Entity
+    {
+    public:
+        Timeline();
+        Animation *currentAnimation;
+        void Render();
+    };
+    
 	class PuppetEntity : public Entity
 	{
 	public:
@@ -35,5 +43,10 @@ namespace PuppetTest
 
 		KeyCode keyRotateLeft;
 		KeyCode keyRotateRight;
+        
+        KeyCode keyBackwards;
+        KeyCode keyForwards;
+        
+        Timeline *timeline;
 	};
 }

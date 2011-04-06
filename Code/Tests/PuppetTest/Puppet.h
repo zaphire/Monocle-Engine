@@ -65,19 +65,24 @@ namespace Monocle
 	public:
 		Animation();
 		void Update();
+        void ApplyTimeChange();
+        void AdjustCurrentTime(float timeOffset);
+        
 		std::string GetName();
 		bool IsName(const std::string &name);
 		void AddPartKeyFrames(const PartKeyFrames &partKeyFrames);
-		void SetLength(float length);
-		void RefreshLength();
+		void SetDuration(float length);
+        float GetDuration();
+        float GetCurrentTime();
+		void RefreshDuration();
 
 		void Save(FileNode *fileNode);
 		void Load(FileNode *fileNode);
-
+        
 	private:
 		friend class Puppet;
-		float time;
-		float length;
+		float currentTime;
+		float duration;
 		std::string name;
 		std::list<PartKeyFrames> partKeyFrames;
 	};
@@ -107,7 +112,10 @@ namespace Monocle
 
 		Part *GetPartByName(const std::string &name);
 		Part *GetPartByID(int id);
-
+        
+        Animation *GetCurrentAnimation();
+        
+        void AdjustTime(float time);
 		
 	private:
 		Animation *GetAnimationByName(const std::string &animName);

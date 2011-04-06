@@ -131,26 +131,35 @@ namespace Monocle
 
 
 	Animation::Animation()
-		: time(0.0f), length(0.0)
+		: currentTime(0.0f), duration(0.0f)
 	{
 	}
 
 	void Animation::Update()
 	{
-		time += Monocle::deltaTime;
+		currentTime += Monocle::deltaTime;
 
-		if (time > length)
+        ApplyTimeChange();
+	}
+    
+    void Animation::ApplyTimeChange()
+    {
+        if (currentTime > duration)
 		{
-			time = 0.0f;
-		}
-
+			currentTime -= int(currentTime/duration) * duration;
+		} 
+        if (currentTime < 0)
+        {
+            currentTime += (int(-1*currentTime/duration)+1) * duration;
+        }
+        
 		for (std::list<PartKeyFrames>::iterator i = partKeyFrames.begin(); i != partKeyFrames.end(); ++i)
 		{
 			PartKeyFrames *currentPartKeyFrames = &(*i);
 			if (currentPartKeyFrames)
 			{
 				KeyFrame *prev=NULL, *next=NULL;
-				currentPartKeyFrames->GetKeyframeForTime(time, &prev, &next);
+				currentPartKeyFrames->GetKeyframeForTime(currentTime, &prev, &next);
 				if (prev && !next)
 				{
 					currentPartKeyFrames->GetPart()->LerpTransform(prev, prev, 1.0f);
@@ -158,20 +167,30 @@ namespace Monocle
 				else if (prev && next)
 				{
 					float diff = next->GetTime() - prev->GetTime();
-					float p = (time - prev->GetTime()) / diff;
-
+					float p = (currentTime - prev->GetTime()) / diff;
+                    
 					//printf("LerpTransform %f\n", p);
 					// adjust p by ease
 					currentPartKeyFrames->GetPart()->LerpTransform(prev, next, Tween::Ease(p, EASE_INOUTSIN));//prev->easeType));
 				}
 			}
 		}
-	}
+    }
 
 	std::string Animation::GetName()
 	{
 		return name;
 	}
+    
+    float Animation::GetDuration()
+    {
+        return duration;
+    }
+
+    float Animation::GetCurrentTime()
+    {
+        return currentTime;
+    }
 
 	bool Animation::IsName(const std::string &name)
 	{
@@ -183,22 +202,28 @@ namespace Monocle
 		this->partKeyFrames.push_back(partKeyFrames);
 	}
 	
-	void Animation::SetLength(float length)
+	void Animation::SetDuration(float duration)
 	{
-		this->length = length;
+		this->duration = duration;
 	}
+    
+    void Animation::AdjustCurrentTime(float timeOffset)
+    {
+        currentTime += timeOffset;
+        ApplyTimeChange();
+    }
 
-	void Animation::RefreshLength()
+	void Animation::RefreshDuration()
 	{
-		length = -1.0f;
+		duration = -1.0f;
 		for (std::list<PartKeyFrames>::iterator i = partKeyFrames.begin(); i != partKeyFrames.end(); ++i)
 		{
 			KeyFrame *keyFrame = (*i).GetLastKeyFrame();
 			if (keyFrame)
 			{
 				float t = keyFrame->GetTime();
-				if (t > length)
-					length = t;
+				if (t > duration)
+					duration = t;
 			}
 		}
 	}
@@ -276,7 +301,7 @@ namespace Monocle
 						xmlPartKeyFrames = xmlPartKeyFrames->NextSiblingElement("PartKeyFrames");
 					}
 
-					animation.RefreshLength();
+					animation.RefreshDuration();
 					animations.push_back(animation);
 
 					xmlAnimation = xmlAnimation->NextSiblingElement("Animation");
@@ -359,6 +384,11 @@ namespace Monocle
 	{
 		return isPaused;
 	}
+    
+    Animation *Puppet::GetCurrentAnimation()
+    {
+        return currentAnimation;
+    }
 
 	Animation *Puppet::GetAnimationByName(const std::string &name)
 	{
