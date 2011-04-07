@@ -14,8 +14,13 @@ namespace Flash
 		Texture(){}
 		std::string name;
 		std::string path;
-		int width, height;
+		int width, height, zIndex;
 		Vector2 registrationPoint;
+
+		bool operator < (const Texture& str) const
+		{
+			return (zIndex < str.zIndex);
+		}
 	};
 
 	class TextureSheet

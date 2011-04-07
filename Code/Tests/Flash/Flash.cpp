@@ -1,6 +1,7 @@
 #include "Flash.h"
 #include "../../XML/tinyxml.h"
 #include <math.h>
+#include <algorithm>
 
 // this puppy will be cleaned up and refactored to the max later
 
@@ -214,11 +215,22 @@ namespace Flash
 						texture.height = XMLReadInt(eTexture, "height");
 						texture.registrationPoint.x = XMLReadFloat(eTexture, "registrationPointX");
 						texture.registrationPoint.y = XMLReadFloat(eTexture, "registrationPointY");
+						
+						if (eTexture->Attribute("zIndex") != NULL)
+						{
+							texture.zIndex = XMLReadInt(eTexture, "zIndex");
+						} 
+						else 
+						{
+							texture.zIndex = 0;
+						}
 
 						textureSheet.textures.push_back(texture);
 
 						eTexture = eTexture->NextSiblingElement("Texture");
 					}
+
+					std::sort(textureSheet.textures.begin(), textureSheet.textures.end());
 
 					eTextureSheet = eTextureSheet->NextSiblingElement("TextureSheet");
 				}
