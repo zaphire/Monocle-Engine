@@ -28,8 +28,8 @@ if(WITH_OPENGL)
 	include_directories(${OPENGL_INCLUDE_DIR})
 	file(GLOB OPENGL_SRCS
 		OpenGL/*.cpp
-		OpenGL/glpng/*.c
-		OpenGL/glpng/*/*.c
+		OpenGL/*.c
+		OpenGL/GL/*.c
 	)
 	set(CORE_LINK ${CORE_LINK} ${OPENGL_LIBRARIES})
 	set(CORE_SRCS ${CORE_SRCS} ${OPENGL_SRCS})

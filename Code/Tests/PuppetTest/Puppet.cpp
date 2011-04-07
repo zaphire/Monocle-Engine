@@ -276,7 +276,7 @@ namespace Monocle
 			{
 				std::istringstream is(offsetString);
 				is >> offset.x >> offset.y;
-				printf("offset (%f, %f)\n", offset);
+				printf("offset (%f, %f)\n", offset.x, offset.y);
 			}
 
 			sprite->position = offset;
