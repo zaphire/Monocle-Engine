@@ -162,6 +162,11 @@ namespace Flash
 								frame.alpha = atof(eFrame->Attribute("alpha"));
 							}
 
+							if (eFrame->Attribute("rotation") != NULL)
+							{
+								frame.rotation = XMLReadFloat(eFrame, "rotation");
+							}
+
 							part.frames.push_back(frame);
 
 							eFrame = eFrame->NextSiblingElement("Frame");
