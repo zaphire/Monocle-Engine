@@ -79,6 +79,8 @@ namespace PuppetTest
         
         keyBackwards = KEY_LEFT;
         keyForwards = KEY_RIGHT;
+        
+        keySetKeyFrame = KEY_SPACE;
 
 		Graphics::Set2D(800, 600);
 		Graphics::SetBackgroundColor(Color::white);
@@ -149,12 +151,20 @@ namespace PuppetTest
 
             }
             
-            if (puppetEntity->puppet.GetCurrentAnimation())
+            if (Animation *anim = puppetEntity->puppet.GetCurrentAnimation())
             {
+                Part *part = dynamic_cast<Part*>(Debug::selectedEntity);
+                
                 if (Input::IsKeyPressed(keyBackwards))
-                    puppetEntity->puppet.GetCurrentAnimation()->AdjustCurrentTime(-0.1f);
+                    anim->AdjustCurrentTime(-0.1f);
                 if (Input::IsKeyPressed(keyForwards))
-                    puppetEntity->puppet.GetCurrentAnimation()->AdjustCurrentTime(0.1f);
+                    anim->AdjustCurrentTime(0.1f);
+                
+                if (Input::IsKeyPressed(keySetKeyFrame))
+                {
+                    anim->SetPartKeyFrame(part, KeyFrame(anim->GetCurrentTime(), *part));
+                    //puppetEntity.puppet.GetCurrentAnimation()->AddNewPartKeyFrame();
+                }
             }
 		}
 		else

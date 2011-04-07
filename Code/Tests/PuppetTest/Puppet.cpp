@@ -53,12 +53,17 @@ namespace Monocle
 		SetGraphic(sprite);
 	}
 
+    KeyFrame::KeyFrame(float time, const Entity &entity)
+        : Transform(entity), time(time)
+    {
+    }
+    
 	KeyFrame::KeyFrame()
 		: Transform(), easeType(EASE_LINEAR)
 	{
 	}
 
-	inline float KeyFrame::GetTime()
+    float KeyFrame::GetTime() const
 	{
 		return time;
 	}
@@ -86,6 +91,11 @@ namespace Monocle
 		: part(NULL)
 	{
 	}
+    
+    PartKeyFrames::PartKeyFrames(Part *part)
+        : part(part)
+    {
+    }
 
 	void PartKeyFrames::GetKeyframeForTime(float time, KeyFrame **prev, KeyFrame **next)
 	{
@@ -128,6 +138,23 @@ namespace Monocle
 			return NULL;
 		return &keyFrames.back();
 	}
+    
+    void PartKeyFrames::InsertKeyFrame(const KeyFrame &keyFrame)
+    {
+        for (std::list<KeyFrame>::iterator i = keyFrames.begin(); i != keyFrames.end(); ++i)
+        {
+            if (keyFrame.GetTime() == (*i).GetTime())
+            {
+                (*i) = keyFrame;
+                return;
+            }
+            else if (keyFrame.GetTime() > (*i).GetTime())
+            {
+                keyFrames.insert(++i, keyFrame);
+                return;
+            }
+        }
+    }
 
 
 	Animation::Animation()
@@ -202,6 +229,20 @@ namespace Monocle
             }
         }
         return NULL;
+    }
+    
+    void Animation::SetPartKeyFrame(Part *part, const KeyFrame &keyFrame)
+    {
+        PartKeyFrames *partKeyFrames = GetPartKeyFrames(part);
+        if (!partKeyFrames)
+        {
+            AddPartKeyFrames(PartKeyFrames(part));
+            partKeyFrames = GetPartKeyFrames(part);
+        }
+        if (partKeyFrames)
+        {
+            partKeyFrames->InsertKeyFrame(keyFrame);
+        }
     }
 
 	bool Animation::IsName(const std::string &name)
