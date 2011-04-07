@@ -225,7 +225,9 @@ namespace Flash
 		}
 	}
 
-#define ANIM_MONOCLE_LOGO
+//#define ANIM_MONOCLE_LOGO
+#define ANIM_MONOCLE_MAN
+//#define ANIM_TEST
 
 	void TestScene::Begin()
 	{
@@ -244,28 +246,36 @@ namespace Flash
 		isEditing = false;
 		
 #ifdef ANIM_MONOCLE_LOGO
-		LoadAnimation(cp+"animations.xml");
-		LoadTextureSheet(cp+"sheets.xml");
-#else
-		LoadAnimation(cp+"test.xml");
+		LoadAnimation(cp+"animations-monoclelogo.xml");
+		LoadTextureSheet(cp+"sheets-monoclelogo.xml");
 #endif
+
+#ifdef ANIM_MONOCLE_MAN
+		LoadAnimation(cp+"animations-monocleman.xml");
+		LoadTextureSheet(cp+"sheets-monocleman.xml");
+#endif
+
+#ifdef ANIM_TEST
+		LoadAnimation(cp+"animations-test.xml");
+#endif
+
 
 		eAnimation = new Entity();
 		eAnimation->position = Vector2(400,300);
 		Add(eAnimation);
 
 		InitAnimation(&animations[0], eAnimation);
-		Play(&animations[0], 15.0f);
+		Play(&animations[0], 30.0f);
 
 		// fudging:
-		eAnimation->position.x += 40;
+		//eAnimation->position.x += 40;
 		eAnimation->scale = Vector2(800.0f/640.0f, 600.0f/480.0f);
 
 		//editor
 		//Pause();
-		isEditing = true;
-		isRecording = true;
-		Debug::showBounds = true;
+		//isEditing = true;
+		//isRecording = true;
+		//Debug::showBounds = true;
 	}
 
 	void TestScene::SelectPrevPart()
