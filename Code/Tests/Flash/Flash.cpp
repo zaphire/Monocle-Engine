@@ -55,6 +55,7 @@ namespace Flash
 			sprite->position = (texture->registrationPoint * -1) + Vector2(sprite->width, sprite->height)*0.5f;
 			//sprite->position = texture->registrationPoint * -1;
 			entity->SetGraphic(sprite);
+			entity->SetLayer(-texture->zIndex); // layers are reversed compared to zIndex
 
 			//printf("size (%d, %d)", (int)sprite->width, (int)sprite->height);
 
