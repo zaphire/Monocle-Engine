@@ -141,19 +141,21 @@ namespace Monocle
     
     void PartKeyFrames::InsertKeyFrame(const KeyFrame &keyFrame)
     {
-        for (std::list<KeyFrame>::iterator i = keyFrames.begin(); i != keyFrames.end(); ++i)
-        {
-            if (keyFrame.GetTime() == (*i).GetTime())
-            {
-                (*i) = keyFrame;
-                return;
-            }
-            else if (keyFrame.GetTime() > (*i).GetTime())
-            {
-                keyFrames.insert(++i, keyFrame);
-                return;
-            }
-        }
+		for (std::list<KeyFrame>::iterator i = keyFrames.begin(); i != keyFrames.end(); ++i)
+		{
+			if (keyFrame.GetTime() == (*i).GetTime())
+			{
+				(*i) = keyFrame;
+				return;
+			}
+			else if ((*i).GetTime() > keyFrame.GetTime())
+			{
+				//inserts BEFORE iterator
+				keyFrames.insert(i, keyFrame);
+				return;
+			}
+		}
+		keyFrames.push_back(keyFrame);
     }
 
 
@@ -258,6 +260,12 @@ namespace Monocle
 	void Animation::SetDuration(float duration)
 	{
 		this->duration = duration;
+	}
+
+	void Animation::SetCurrentTime(float currentTime)
+	{
+		this->currentTime = currentTime;
+		ApplyTimeChange();
 	}
     
     void Animation::AdjustCurrentTime(float timeOffset)

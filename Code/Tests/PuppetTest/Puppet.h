@@ -71,6 +71,7 @@ namespace Monocle
 		Animation();
 		void Update();
         void ApplyTimeChange();
+		void SetCurrentTime(float time);
         void AdjustCurrentTime(float timeOffset);
         
 		std::string GetName();
