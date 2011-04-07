@@ -2,6 +2,7 @@
 #include "Node.h"
 #include "../Assets.h"
 #include "../Graphics.h"
+#include "../TextureAsset.h"
 #include "../Colliders/PathCollider.h"
 
 namespace Monocle

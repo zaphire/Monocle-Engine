@@ -18,6 +18,8 @@ namespace Monocle
 		Vector2();
 		Vector2(float x, float y);
 
+        void Set(float x, float y);
+
 		// return random vector
 		static Vector2 Random();
 

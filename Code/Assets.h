@@ -7,6 +7,8 @@
 namespace Monocle
 {
 	class TextureAsset;
+    class FontAsset;
+    
 
 	class Assets
 	{
@@ -15,6 +17,7 @@ namespace Monocle
 		void Init();
 		//static Asset *RequestAsset(AssetType assetType, const char *filename);
 		static TextureAsset *RequestTexture(const std::string &filename, FilterType filter = FILTER_LINEAR, bool repeatX = false, bool repeatY = false);
+        static FontAsset *RequestFont(const std::string &filename, float size);
 		//static AudioAsset *RequestAudio(const std::string &filename);
 
 		static void SetContentPath(const std::string &contentPath);
@@ -29,6 +32,7 @@ namespace Monocle
 		void StoreAsset(Asset *asset);
 
 		Asset* GetAssetByFilename(const std::string &filename);
+
 
 		static Assets *instance;
 		std::list<Asset*> assets;

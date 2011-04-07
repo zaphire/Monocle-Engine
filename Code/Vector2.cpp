@@ -26,6 +26,11 @@ namespace Monocle
 		: x(x), y(y)
 	{
 	}
+    
+    void Vector2::Set(float x, float y)
+    {
+        this->x = x, this->y = y;
+    }
 
 	Vector2 Vector2::Random()
 	{

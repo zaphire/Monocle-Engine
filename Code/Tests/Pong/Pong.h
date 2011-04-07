@@ -5,6 +5,21 @@ using namespace Monocle;
 
 namespace Pong
 {
+    class Text: public Entity
+    {
+    public:
+        Text(const std::string& text, FontAsset* font);
+        
+		void Render();
+        
+        void SetFont(FontAsset* font) { mFont = font; }
+        void SetText(const std::string& text) { mText = text; }
+        
+    protected:
+        FontAsset* mFont;
+        std::string mText;
+    };
+    
 	class Paddle : public Entity
 	{
 	public:
@@ -33,8 +48,13 @@ namespace Pong
 	public:
 		Ball *ball;
 		Paddle *paddle1, *paddle2;
+        Text *scoreText;
+        
+        int p1Score, p2Score;
 
 		void ResetBall();
+        const std::string GetScoreString();
+
 
 		void Begin();
 		void End();

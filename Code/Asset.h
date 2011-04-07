@@ -9,6 +9,7 @@ namespace Monocle
 		ASSET_UNDEFINED,
 		ASSET_TEXTURE,
 		ASSET_AUDIO,
+        ASSET_FONT,
 		ASSET_MAX,
 	};
 
@@ -23,7 +24,8 @@ namespace Monocle
 	{
 	public:
 		Asset(AssetType type);
-
+        virtual ~Asset() {}
+        
 		std::string filename;
 
 		AssetType type;

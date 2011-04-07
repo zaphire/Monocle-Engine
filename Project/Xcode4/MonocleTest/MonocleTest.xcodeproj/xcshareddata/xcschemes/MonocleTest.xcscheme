@@ -35,7 +35,8 @@
       displayScaleIsEnabled = "NO"
       displayScale = "1.00"
       launchStyle = "0"
-      useCustomWorkingDirectory = "NO"
+      useCustomWorkingDirectory = "YES"
+      customWorkingDirectory = "/Users/graham/Documents/Code/Monocle-Engine/Project/Xcode4"
       buildConfiguration = "Debug">
       <BuildableProductRunnable>
          <BuildableReference

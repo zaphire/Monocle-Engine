@@ -1,11 +1,18 @@
 #include "Assets.h"
-#include "TextureAsset.h"
+
 #include <stdio.h> // for NULL
+
+#include "TextureAsset.h"
+#include "OpenGLFontAsset.h"
 #include "Debug.h"
 #include "Platform.h"
 
 namespace Monocle
 {
+    class TextureAsset;
+    class FontAsset;
+    
+    
 	Assets *Assets::instance = NULL;
 
 	Assets::Assets()
@@ -44,6 +51,40 @@ namespace Monocle
 		// return whatever we found
 		return asset;
 	}
+    
+    FontAsset *Assets::RequestFont(const std::string &filename, float size)
+    {
+		OpenGLFontAsset *asset = NULL;
+		std::string fullFilename = instance->contentPath + filename;
+        
+		//Debug::Log("instance->contentPath + filename: " + fullFilename);
+        
+		// check to see if we have one stored already
+		asset = (OpenGLFontAsset*)instance->GetAssetByFilename(fullFilename);
+        
+		// if not, load it and store it
+		if (!asset)
+		{
+			asset = new OpenGLFontAsset();
+			if (asset->Load(fullFilename, size))
+            {
+                instance->StoreAsset((Asset*)asset);
+            }
+            else
+            {
+                delete asset;
+                asset = NULL;
+            }
+		}
+        
+		if (asset)
+		{
+			asset->AddReference();
+		}
+        
+		// return whatever we found
+		return asset;
+    }
 
 	void Assets::StoreAsset(Asset *asset)
 	{
