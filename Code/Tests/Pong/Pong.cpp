@@ -18,7 +18,7 @@ namespace Pong
 		Graphics::PushMatrix();
 		Graphics::Translate(position);
 		Graphics::SetBlend(BLEND_ALPHA);
-		Graphics::SetColor(Color::white);
+		Graphics::SetColor(Color(0, 0.7f, 0, 1));
         Graphics::BindFont(mFont);
         
         Graphics::RenderText(*mFont, mText, 0, 0);
@@ -190,8 +190,6 @@ namespace Pong
 
 		Scene::Begin();
 		
-		p1Score = p2Score = 0;
-
 		ball = new Ball();
 		ball->position = Vector2(400, 300);
 		Add(ball);
@@ -210,8 +208,10 @@ namespace Pong
 
 		FontAsset* font = Assets::RequestFont("Pong/LiberationSans-Regular.ttf", 25.0f);
         scoreText = new Text(GetScoreString(), font);
-        scoreText->position = Vector2(50, 50);
+        scoreText->position = Vector2(250, 50);
         Add(scoreText);
+        
+        p1Score = p2Score = 0;
 	}
 
 	void GameScene::ReceiveNote(const std::string &note)
