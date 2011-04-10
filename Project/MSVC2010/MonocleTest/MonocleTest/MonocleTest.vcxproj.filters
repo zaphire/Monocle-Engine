@@ -255,6 +255,18 @@
     <ClInclude Include="..\..\..\..\Code\Tests\PuppetTest\PuppetTest.h">
       <Filter>Monocle\Tests\PuppetTest</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\OpenGL\stb_truetype.h">
+      <Filter>Monocle\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\FontAsset.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\TTFFontAsset.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Rect.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp">
@@ -478,6 +490,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Tests\PuppetTest\PuppetTest.cpp">
       <Filter>Monocle\Tests\PuppetTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLTTFFontAsset.cpp">
+      <Filter>Monocle\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Rect.cpp">
+      <Filter>Monocle</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

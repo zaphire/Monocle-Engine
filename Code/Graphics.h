@@ -3,7 +3,6 @@
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Color.h"
-#include "TextureAsset.h"
 #include "Tween.h"
 #include <vector>
 
@@ -11,7 +10,9 @@ namespace Monocle
 {
 	class Node;
 	class Entity;
-
+    class TextureAsset;
+    class FontAsset;
+    
 	enum BlendType
 	{
 		BLEND_NONE=0,
@@ -46,6 +47,7 @@ namespace Monocle
 		static void Resize(int w, int h);
 
 		static void BindTexture(TextureAsset* textureAsset);
+        static void BindFont(FontAsset* fontAsset);
 
 		//static void SetCameraPosition(const Vector2 &position);
 		//static void AdjustCameraPosition(const Vector2 &adjustment);
@@ -61,7 +63,7 @@ namespace Monocle
 		//static void MoveCameraPosition(const Vector2 &position, float time, EaseType easeType);
 
 		static void Translate(float x, float y, float z);
-		static void Translate(Vector2 pos);
+		static void Translate(const Vector2 &pos);
 		static void Scale(const Vector2 &pos);
 		static void Rotate(float r, float ax, float ay, float az);
 
@@ -69,6 +71,7 @@ namespace Monocle
 		//static void RenderQuad(float size);
 		static void RenderQuad(float width, float height, const Vector2 &textureOffset=Vector2::zero, const Vector2 &textureScale=Vector2::one, const Vector2 &position=Vector2::zero);
 		static void RenderQuadCustom(const Vector2 &ul, const Vector2 &ur, const Vector2 &lr, const Vector2 &ll, const Vector2 &textureOffset, const Vector2 &textureScale);
+        static void RenderText(const FontAsset& font, const std::string& text, float x, float y);
 		static void RenderLineRect(float x, float y, float w, float h);
 		static void PushMatrix();
 		static void PopMatrix();

@@ -13,7 +13,6 @@ namespace Monocle
 		static CocoaPlatform* instance;
 		static Platform* platform;
 
-		CocoaPlatform();
 		~CocoaPlatform();
 
 		bool Init(const std::string &name, int w, int h, int bits, bool fullscreen);

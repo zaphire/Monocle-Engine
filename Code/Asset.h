@@ -9,7 +9,8 @@ namespace Monocle
 		ASSET_UNDEFINED,
 		ASSET_TEXTURE,
 		ASSET_AUDIO,
-		ASSET_MAX
+        ASSET_FONT,
+		ASSET_MAX,
 	};
 
 	enum FilterType
@@ -23,7 +24,8 @@ namespace Monocle
 	{
 	public:
 		Asset(AssetType type);
-
+        virtual ~Asset() {}
+        
 		std::string filename;
 
 		AssetType type;

@@ -98,10 +98,6 @@ namespace Monocle
 	CocoaPlatform* CocoaPlatform::instance;
 	Platform*	   CocoaPlatform::platform;
     
-	CocoaPlatform::CocoaPlatform()
-	{
-	}
-
 	bool CocoaPlatform::Init(const std::string &name, int w, int h, int bits, bool fullscreen)
 	{
 		//  Init event loop

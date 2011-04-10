@@ -4,6 +4,7 @@
 #include "../Debug.h"
 #include "../Platform.h"
 #include "../TextureAsset.h"
+#include "../FontAsset.h"
 #include "../Color.h"
 #include "../Tween.h"
 #include "../LevelEditor/Node.h"
@@ -13,7 +14,6 @@
 #ifdef MONOCLE_WINDOWS
 	#define WIN32_LEAN_AND_MEAN
 	#include <Windows.h>
-
 #endif
 
 #if defined(MONOCLE_MAC)
@@ -200,7 +200,7 @@ namespace Monocle
 		glTranslatef(x, y, z);
 	}
 
-	void Graphics::Translate(Vector2 pos)
+	void Graphics::Translate(const Vector2 &pos)
 	{
 		glTranslatef(pos.x, pos.y, 0.0f);
 	}
@@ -347,7 +347,27 @@ namespace Monocle
 			glVertex3f(-halfWidth + position.x, halfHeight + position.y, 0.0f);
 		glEnd();
 	}
-
+    
+    void Graphics::RenderText(const FontAsset& font, const std::string& text, float x, float y)
+    {
+        Rect verts, texCoords;
+        glBegin(GL_QUADS);
+        for (int i = 0; i < text.size(); i++)
+        {
+            char c = text[i];
+            if ((c >= 32) && (c < 128))
+            {
+                font.GetGlyphData(c, &x, &y, verts, texCoords);
+                
+                glTexCoord2f(texCoords.topLeft.x, texCoords.topLeft.y);  glVertex2f(verts.topLeft.x, verts.topLeft.y);
+                glTexCoord2f(texCoords.bottomRight.x, texCoords.topLeft.y);  glVertex2f(verts.bottomRight.x, verts.topLeft.y);
+                glTexCoord2f(texCoords.bottomRight.x, texCoords.bottomRight.y);  glVertex2f(verts.bottomRight.x, verts.bottomRight.y);
+                glTexCoord2f(texCoords.topLeft.x, texCoords.bottomRight.y);  glVertex2f(verts.topLeft.x, verts.bottomRight.y);
+            }
+        }
+        glEnd();
+    }
+    
 	void Graphics::BeginFrame()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
@@ -405,6 +425,26 @@ namespace Monocle
 			}
 		}
 	}
+    
+    void Graphics::BindFont(FontAsset* fontAsset)
+	{
+		if (fontAsset != NULL)
+		{
+			if (instance->lastBoundTextureID != fontAsset->texID)
+			{
+				glBindTexture(GL_TEXTURE_2D, fontAsset->texID);
+				instance->lastBoundTextureID = fontAsset->texID;
+			}
+		}
+		else
+		{
+			if (instance->lastBoundTextureID != 0)
+			{
+				glBindTexture(GL_TEXTURE_2D, 0);
+				instance->lastBoundTextureID = 0;
+			}
+		}
+    }
 
 	Vector2 Graphics::GetMatrixPosition()
 	{

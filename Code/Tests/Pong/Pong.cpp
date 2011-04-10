@@ -3,9 +3,29 @@
 #include "../../Collision.h"
 
 #include <stdlib.h>
+#include <sstream>
 
 namespace Pong
 {
+    Text::Text(const std::string& text, FontAsset* font):
+        mFont(font), mText(text)
+    {
+    }
+    
+    
+    void Text::Render()
+    {
+		Graphics::PushMatrix();
+		Graphics::Translate(position);
+		Graphics::SetBlend(BLEND_ALPHA);
+		Graphics::SetColor(Color::white);
+        Graphics::BindFont(mFont);
+        
+        Graphics::RenderText(*mFont, mText, 0, 0);
+		Graphics::PopMatrix();
+    }
+    
+    
 	/*
 	**************************************************
 	* B a l l
@@ -71,6 +91,7 @@ namespace Pong
 		Graphics::BindTexture(texture);
 		Graphics::PushMatrix();
 		Graphics::Translate(position);
+        Graphics::SetColor(Color::white);
 		Graphics::RenderQuad(25.0f, 25.0f);
 		Graphics::PopMatrix();
 	}
@@ -144,6 +165,7 @@ namespace Pong
 	{
 		Graphics::PushMatrix();
 		Graphics::Translate(position);
+        Graphics::SetColor(Color::white);
 		Graphics::RenderQuad(25, 100.0f);
 		Graphics::PopMatrix();
 	}
@@ -168,6 +190,8 @@ namespace Pong
 
 		Scene::Begin();
 		
+		p1Score = p2Score = 0;
+
 		ball = new Ball();
 		ball->position = Vector2(400, 300);
 		Add(ball);
@@ -183,16 +207,25 @@ namespace Pong
 		paddle2->keyUp = KEY_UP;
 		paddle2->keyDown = KEY_DOWN;
 		Add(paddle2);
+        
+        FontAsset* font = Assets::RequestFont("Pong/LiberationSans-Regular.ttf", 25.0f);
+        scoreText = new Text(GetScoreString(), font);
+        scoreText->position = Vector2(50, 50);
+        Add(scoreText);
 	}
 
 	void GameScene::ReceiveNote(const std::string &note)
 	{
 		if (note == "BallOffLeft")
 		{
+            p2Score++;
+            scoreText->SetText(GetScoreString());
 			ResetBall();
 		}
 		else if (note == "BallOffRight")
 		{
+            p1Score++;
+            scoreText->SetText(GetScoreString());
 			ResetBall();
 		}
 	}
@@ -202,6 +235,13 @@ namespace Pong
 		ball->position = Vector2(400,300);
 		ball->velocity = Vector2::Random() * 200.0f;
 	}
+    
+    const std::string GameScene::GetScoreString()
+    {
+        std::stringstream str;
+        str << "P1:  " << p1Score << " - " << " P2: " << p2Score;
+        return str.str();
+    }
 
 	/*
 	void GameScene::Update()
