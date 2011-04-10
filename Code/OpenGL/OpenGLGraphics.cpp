@@ -350,7 +350,7 @@ namespace Monocle
     
     void Graphics::RenderText(const FontAsset& font, const std::string& text, float x, float y)
     {
-        Quad verts, texCoords;
+        Rect verts, texCoords;
         glBegin(GL_QUADS);
         for (int i = 0; i < text.size(); i++)
         {
@@ -359,10 +359,10 @@ namespace Monocle
             {
                 font.GetGlyphData(c, &x, &y, verts, texCoords);
                 
-                glTexCoord2f(texCoords.tl.x, texCoords.tl.y);  glVertex2f(verts.tl.x, verts.tl.y);
-                glTexCoord2f(texCoords.br.x, texCoords.tl.y);  glVertex2f(verts.br.x, verts.tl.y);
-                glTexCoord2f(texCoords.br.x, texCoords.br.y);  glVertex2f(verts.br.x, verts.br.y);
-                glTexCoord2f(texCoords.tl.x, texCoords.br.y);  glVertex2f(verts.tl.x, verts.br.y);
+                glTexCoord2f(texCoords.topLeft.x, texCoords.topLeft.y);  glVertex2f(verts.topLeft.x, verts.topLeft.y);
+                glTexCoord2f(texCoords.bottomRight.x, texCoords.topLeft.y);  glVertex2f(verts.bottomRight.x, verts.topLeft.y);
+                glTexCoord2f(texCoords.bottomRight.x, texCoords.bottomRight.y);  glVertex2f(verts.bottomRight.x, verts.bottomRight.y);
+                glTexCoord2f(texCoords.topLeft.x, texCoords.bottomRight.y);  glVertex2f(verts.topLeft.x, verts.bottomRight.y);
             }
         }
         glEnd();

@@ -1,6 +1,7 @@
 #include "Flash.h"
 #include "../../XML/tinyxml.h"
 #include <math.h>
+#include <algorithm>
 
 // this puppy will be cleaned up and refactored to the max later
 
@@ -54,6 +55,7 @@ namespace Flash
 			sprite->position = (texture->registrationPoint * -1) + Vector2(sprite->width, sprite->height)*0.5f;
 			//sprite->position = texture->registrationPoint * -1;
 			entity->SetGraphic(sprite);
+			entity->SetLayer(-texture->zIndex); // layers are reversed compared to zIndex
 
 			//printf("size (%d, %d)", (int)sprite->width, (int)sprite->height);
 
@@ -162,6 +164,11 @@ namespace Flash
 								frame.alpha = atof(eFrame->Attribute("alpha"));
 							}
 
+							if (eFrame->Attribute("rotation") != NULL)
+							{
+								frame.rotation = XMLReadFloat(eFrame, "rotation");
+							}
+
 							part.frames.push_back(frame);
 
 							eFrame = eFrame->NextSiblingElement("Frame");
@@ -209,11 +216,22 @@ namespace Flash
 						texture.height = XMLReadInt(eTexture, "height");
 						texture.registrationPoint.x = XMLReadFloat(eTexture, "registrationPointX");
 						texture.registrationPoint.y = XMLReadFloat(eTexture, "registrationPointY");
+						
+						if (eTexture->Attribute("zIndex") != NULL)
+						{
+							texture.zIndex = XMLReadInt(eTexture, "zIndex");
+						} 
+						else 
+						{
+							texture.zIndex = 0;
+						}
 
 						textureSheet.textures.push_back(texture);
 
 						eTexture = eTexture->NextSiblingElement("Texture");
 					}
+
+					std::sort(textureSheet.textures.begin(), textureSheet.textures.end());
 
 					eTextureSheet = eTextureSheet->NextSiblingElement("TextureSheet");
 				}
@@ -225,7 +243,9 @@ namespace Flash
 		}
 	}
 
-#define ANIM_MONOCLE_LOGO
+//#define ANIM_MONOCLE_LOGO
+#define ANIM_MONOCLE_MAN
+//#define ANIM_TEST
 
 	void TestScene::Begin()
 	{
@@ -244,28 +264,36 @@ namespace Flash
 		isEditing = false;
 		
 #ifdef ANIM_MONOCLE_LOGO
-		LoadAnimation(cp+"animations.xml");
-		LoadTextureSheet(cp+"sheets.xml");
-#else
-		LoadAnimation(cp+"test.xml");
+		LoadAnimation(cp+"animations-monoclelogo.xml");
+		LoadTextureSheet(cp+"sheets-monoclelogo.xml");
 #endif
+
+#ifdef ANIM_MONOCLE_MAN
+		LoadAnimation(cp+"animations-monocleman.xml");
+		LoadTextureSheet(cp+"sheets-monocleman.xml");
+#endif
+
+#ifdef ANIM_TEST
+		LoadAnimation(cp+"animations-test.xml");
+#endif
+
 
 		eAnimation = new Entity();
 		eAnimation->position = Vector2(400,300);
 		Add(eAnimation);
 
 		InitAnimation(&animations[0], eAnimation);
-		Play(&animations[0], 15.0f);
+		Play(&animations[0], 30.0f);
 
 		// fudging:
-		eAnimation->position.x += 40;
+		//eAnimation->position.x += 40;
 		eAnimation->scale = Vector2(800.0f/640.0f, 600.0f/480.0f);
 
 		//editor
 		//Pause();
-		isEditing = true;
-		isRecording = true;
-		Debug::showBounds = true;
+		//isEditing = true;
+		//isRecording = true;
+		//Debug::showBounds = true;
 	}
 
 	void TestScene::SelectPrevPart()

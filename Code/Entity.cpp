@@ -100,9 +100,17 @@ namespace Monocle
 			graphic->Render(this);
 		}
 
-		for(std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
+		const int MAX_LAYER = 100;
+		const int MIN_LAYER = -100;
+		for (int layer = MAX_LAYER; layer >= MIN_LAYER; layer--)
 		{
-			(*i)->Render();
+			for(std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
+			{
+				if ((*i)->IsLayer(layer) && (*i)->isVisible)
+				{
+					(*i)->Render();
+				}
+			}
 		}
 
 		Graphics::PopMatrix();

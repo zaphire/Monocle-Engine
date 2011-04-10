@@ -3,7 +3,7 @@
 #include <stdio.h> // for NULL
 
 #include "TextureAsset.h"
-#include "OpenGLFontAsset.h"
+#include "TTFFontAsset.h"
 #include "Debug.h"
 #include "Platform.h"
 
@@ -54,18 +54,18 @@ namespace Monocle
     
     FontAsset *Assets::RequestFont(const std::string &filename, float size)
     {
-		OpenGLFontAsset *asset = NULL;
+		TTFFontAsset *asset = NULL;
 		std::string fullFilename = instance->contentPath + filename;
         
 		//Debug::Log("instance->contentPath + filename: " + fullFilename);
         
 		// check to see if we have one stored already
-		asset = (OpenGLFontAsset*)instance->GetAssetByFilename(fullFilename);
+		asset = (TTFFontAsset*)instance->GetAssetByFilename(fullFilename);
         
 		// if not, load it and store it
 		if (!asset)
 		{
-			asset = new OpenGLFontAsset();
+			asset = new TTFFontAsset();
 			if (asset->Load(fullFilename, size))
             {
                 instance->StoreAsset((Asset*)asset);

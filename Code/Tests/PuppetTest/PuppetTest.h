@@ -47,6 +47,8 @@ namespace PuppetTest
         KeyCode keyBackwards;
         KeyCode keyForwards;
         
+        KeyCode keySetKeyFrame;
+        
         Timeline *timeline;
 	};
 }

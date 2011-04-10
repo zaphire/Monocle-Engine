@@ -24,9 +24,8 @@ namespace PuppetTest
             Graphics::BindTexture(NULL);
             Graphics::SetColor(Color::blue);
             Graphics::RenderLine(start, end);
-            Vector2 playHead = (end - start) * p + start;
+            Vector2 playHead;
             float playHeadHalfHeight = 16;
-            Graphics::RenderLine(playHead + Vector2::up * playHeadHalfHeight * 0.5f, playHead + Vector2::down * playHeadHalfHeight * 0.5f);
             
             if (Debug::selectedEntity)
             {
@@ -45,6 +44,12 @@ namespace PuppetTest
                     }
                 }
             }
+
+			playHead = (end - start) * p + start;
+
+			Graphics::SetColor(Color::blue);
+            Graphics::RenderLine(playHead + Vector2::up * playHeadHalfHeight * 0.5f, playHead + Vector2::down * playHeadHalfHeight * 0.5f);
+
             Graphics::PopMatrix();
         }
     }
@@ -79,6 +84,8 @@ namespace PuppetTest
         
         keyBackwards = KEY_LEFT;
         keyForwards = KEY_RIGHT;
+        
+        keySetKeyFrame = KEY_SPACE;
 
 		Graphics::Set2D(800, 600);
 		Graphics::SetBackgroundColor(Color::white);
@@ -100,6 +107,8 @@ namespace PuppetTest
         timeline = new Timeline();
         Add(timeline);
 	}
+
+	const float TIME_STEP = 0.05f;
     
     void TestScene::Update()
     {
@@ -107,6 +116,8 @@ namespace PuppetTest
         
         timeline->currentAnimation = puppetEntity->puppet.GetCurrentAnimation();
 		
+		Animation *anim = puppetEntity->puppet.GetCurrentAnimation();
+
 		if (Input::IsKeyPressed(keyTogglePause))
 		{
 			puppetEntity->puppet.TogglePause();
@@ -114,6 +125,13 @@ namespace PuppetTest
 			if (!puppetEntity->puppet.IsPaused())
 			{
 				Debug::selectedEntity = NULL;
+			}
+			else
+			{
+				if (anim)
+				{
+					anim->SetCurrentTime(int(anim->GetCurrentTime()/TIME_STEP)*TIME_STEP);
+				}
 			}
 		}
 
@@ -149,12 +167,20 @@ namespace PuppetTest
 
             }
             
-            if (puppetEntity->puppet.GetCurrentAnimation())
+            if (anim)
             {
+                Part *part = dynamic_cast<Part*>(Debug::selectedEntity);
+                
                 if (Input::IsKeyPressed(keyBackwards))
-                    puppetEntity->puppet.GetCurrentAnimation()->AdjustCurrentTime(-0.1f);
+                    anim->AdjustCurrentTime(-TIME_STEP);
                 if (Input::IsKeyPressed(keyForwards))
-                    puppetEntity->puppet.GetCurrentAnimation()->AdjustCurrentTime(0.1f);
+                    anim->AdjustCurrentTime(TIME_STEP);
+                
+                if (Input::IsKeyPressed(keySetKeyFrame))
+                {
+                    anim->SetPartKeyFrame(part, KeyFrame(anim->GetCurrentTime(), *part));
+                    //puppetEntity.puppet.GetCurrentAnimation()->AddNewPartKeyFrame();
+                }
             }
 		}
 		else

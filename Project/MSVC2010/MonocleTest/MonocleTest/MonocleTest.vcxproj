@@ -81,6 +81,7 @@
     <ClInclude Include="..\..\..\..\Code\CollisionData.h" />
     <ClInclude Include="..\..\..\..\Code\Color.h" />
     <ClInclude Include="..\..\..\..\Code\FileNode.h" />
+    <ClInclude Include="..\..\..\..\Code\FontAsset.h" />
     <ClInclude Include="..\..\..\..\Code\Game.h" />
     <ClInclude Include="..\..\..\..\Code\Debug.h" />
     <ClInclude Include="..\..\..\..\Code\Editor.h" />
@@ -112,8 +113,10 @@
     <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\zconf.h" />
     <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\zlib.h" />
     <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\zutil.h" />
+    <ClInclude Include="..\..\..\..\Code\OpenGL\stb_truetype.h" />
     <ClInclude Include="..\..\..\..\Code\Platform.h" />
     <ClInclude Include="..\..\..\..\Code\Random.h" />
+    <ClInclude Include="..\..\..\..\Code\Rect.h" />
     <ClInclude Include="..\..\..\..\Code\Scene.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\Flash\Flash.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\FTE\FTE.h" />
@@ -125,6 +128,7 @@
     <ClInclude Include="..\..\..\..\Code\TextureAsset.h" />
     <ClInclude Include="..\..\..\..\Code\Tileset.h" />
     <ClInclude Include="..\..\..\..\Code\Transform.h" />
+    <ClInclude Include="..\..\..\..\Code\TTFFontAsset.h" />
     <ClInclude Include="..\..\..\..\Code\Tween.h" />
     <ClInclude Include="..\..\..\..\Code\Vector2.h" />
     <ClInclude Include="..\..\..\..\Code\Vector3.h" />
@@ -188,7 +192,9 @@
     <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\zutil.c" />
     <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLGraphics.cpp" />
     <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLTextureAsset.cpp" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLTTFFontAsset.cpp" />
     <ClCompile Include="..\..\..\..\Code\Random.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Rect.cpp" />
     <ClCompile Include="..\..\..\..\Code\Scene.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\Flash\Flash.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\FTE\FTE.cpp" />

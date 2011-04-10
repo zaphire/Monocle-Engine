@@ -1,0 +1,23 @@
+<Textures>
+  <TextureSheet name="monocleman">
+    <Texture name="hat" width="90" height="74" path="monocleman/hat.png" registrationPointX="45.00" registrationPointY="37.00" zIndex="18"/>
+    <Texture name="eyebrow" width="46" height="20" path="monocleman/eyebrow.png" registrationPointX="23.00" registrationPointY="10.00" zIndex="17"/>
+    <Texture name="eye_l" width="16" height="20" path="monocleman/eye_l.png" registrationPointX="8.00" registrationPointY="10.00" zIndex="16"/>
+    <Texture name="eye_r" width="16" height="18" path="monocleman/eye_r.png" registrationPointX="8.00" registrationPointY="9.00" zIndex="15"/>
+    <Texture name="monocle" width="68" height="64" path="monocleman/monocle.png" registrationPointX="34.00" registrationPointY="32.00" zIndex="14"/>
+    <Texture name="nose" width="52" height="96" path="monocleman/nose.png" registrationPointX="26.00" registrationPointY="48.00" zIndex="13"/>
+    <Texture name="mustache" width="124" height="58" path="monocleman/mustache.png" registrationPointX="62.00" registrationPointY="29.00" zIndex="12"/>
+    <Texture name="tortilla" width="262" height="198" path="monocleman/tortilla.png" registrationPointX="131.00" registrationPointY="99.00" zIndex="11"/>
+    <Texture name="upperarm_r" width="62" height="66" path="monocleman/upperarm_r.png" registrationPointX="31.00" registrationPointY="33.00" zIndex="10"/>
+    <Texture name="hand_r" width="48" height="34" path="monocleman/hand_r.png" registrationPointX="24.00" registrationPointY="17.00" zIndex="9"/>
+    <Texture name="lowerarm_r" width="36" height="50" path="monocleman/lowerarm_r.png" registrationPointX="18.00" registrationPointY="25.00" zIndex="8"/>
+    <Texture name="upperarm_l" width="56" height="64" path="monocleman/upperarm_l.png" registrationPointX="28.00" registrationPointY="32.00" zIndex="7"/>
+    <Texture name="hand_l" width="50" height="32" path="monocleman/hand_l.png" registrationPointX="25.00" registrationPointY="16.00" zIndex="6"/>
+    <Texture name="lowerarm_l" width="34" height="52" path="monocleman/lowerarm_l.png" registrationPointX="17.00" registrationPointY="26.00" zIndex="5"/>
+    <Texture name="lowerleg_l" width="60" height="64" path="monocleman/lowerleg_l.png" registrationPointX="30.00" registrationPointY="32.00" zIndex="4"/>
+    <Texture name="upperleg_l" width="46" height="54" path="monocleman/upperleg_l.png" registrationPointX="23.00" registrationPointY="27.00" zIndex="3"/>
+    <Texture name="lowerleg_r" width="68" height="66" path="monocleman/lowerleg_r.png" registrationPointX="34.00" registrationPointY="33.00" zIndex="2"/>
+    <Texture name="upperleg_r" width="56" height="48" path="monocleman/upperleg_r.png" registrationPointX="28.00" registrationPointY="24.00" zIndex="1"/>
+    <Texture name="torso" width="94" height="122" path="monocleman/torso.png" registrationPointX="47.00" registrationPointY="61.00"/>
+  </TextureSheet>
+</Textures>

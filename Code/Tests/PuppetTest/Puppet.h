@@ -31,8 +31,9 @@ namespace Monocle
 	class KeyFrame : public Transform
 	{
 	public:
+        KeyFrame(float time, const Entity &entity);
 		KeyFrame();
-		float GetTime();
+        float GetTime() const;
 		void SetTime(float time);
 
 		void Save(FileNode *fileNode);
@@ -47,12 +48,14 @@ namespace Monocle
 	class PartKeyFrames
 	{
 	public:
+        PartKeyFrames(Part *part);
 		PartKeyFrames();
 		void AddKeyFrame(const KeyFrame &keyFrame);
 		void SetPart(Part *part);
 		Part *GetPart();
 		void GetKeyframeForTime(float time, KeyFrame **prev, KeyFrame **next);
 		KeyFrame *GetLastKeyFrame();
+        void InsertKeyFrame(const KeyFrame &keyFrame);
         
         std::list<KeyFrame> keyFrames;
 		
@@ -68,11 +71,13 @@ namespace Monocle
 		Animation();
 		void Update();
         void ApplyTimeChange();
+		void SetCurrentTime(float time);
         void AdjustCurrentTime(float timeOffset);
         
 		std::string GetName();
 		bool IsName(const std::string &name);
 		void AddPartKeyFrames(const PartKeyFrames &partKeyFrames);
+        void SetPartKeyFrame(Part *part, const KeyFrame &keyFrame);
 		void SetDuration(float length);
         float GetDuration();
         float GetCurrentTime();
