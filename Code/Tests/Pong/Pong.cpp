@@ -207,8 +207,8 @@ namespace Pong
 		paddle2->keyUp = KEY_UP;
 		paddle2->keyDown = KEY_DOWN;
 		Add(paddle2);
-        
-        FontAsset* font = Assets::RequestFont("Pong/LiberationSans-Regular.ttf", 25.0f);
+
+		FontAsset* font = Assets::RequestFont("Pong/LiberationSans-Regular.ttf", 25.0f);
         scoreText = new Text(GetScoreString(), font);
         scoreText->position = Vector2(50, 50);
         Add(scoreText);
