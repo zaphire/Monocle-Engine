@@ -67,8 +67,9 @@
 		37FB69B613317693008963C1 /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB697E13317693008963C1 /* Vector3.cpp */; };
 		37FB69B813319030008963C1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FB69B713319030008963C1 /* OpenGL.framework */; };
 		6657ED15133F9E8F00ACA1E2 /* FTE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6657ED13133F9E8F00ACA1E2 /* FTE.cpp */; };
-		BF9F7B48134D1E7B002A6CC0 /* Quad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF9F7B46134D1E7B002A6CC0 /* Quad.cpp */; };
-		BF9F7B4D134D1F23002A6CC0 /* OpenGLFontAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF9F7B4B134D1F23002A6CC0 /* OpenGLFontAsset.cpp */; };
+		BF1E3BE6135203F0001A979F /* CollisionData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF1E3BE1135203F0001A979F /* CollisionData.cpp */; };
+		BF1E3BE7135203F0001A979F /* Rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF1E3BE3135203F0001A979F /* Rect.cpp */; };
+		BF1E3BEB1352042C001A979F /* OpenGLTTFFontAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF1E3BE91352042C001A979F /* OpenGLTTFFontAsset.cpp */; };
 		D881B50013445142008EF89C /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D881B4FE13445142008EF89C /* Node.cpp */; };
 		F9132A0A13499ED200567EAB /* PathCollider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9132A0813499ED200567EAB /* PathCollider.cpp */; };
 		F9132A11134A0D8200567EAB /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9132A0F134A0D8200567EAB /* Transform.cpp */; };
@@ -204,12 +205,15 @@
 		37FB69B713319030008963C1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		6657ED13133F9E8F00ACA1E2 /* FTE.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FTE.cpp; sourceTree = "<group>"; };
 		6657ED14133F9E8F00ACA1E2 /* FTE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTE.h; sourceTree = "<group>"; };
+		BF1E3BE1135203F0001A979F /* CollisionData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CollisionData.cpp; path = ../../../Code/CollisionData.cpp; sourceTree = "<group>"; };
+		BF1E3BE2135203F0001A979F /* CollisionData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollisionData.h; path = ../../../Code/CollisionData.h; sourceTree = "<group>"; };
+		BF1E3BE3135203F0001A979F /* Rect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Rect.cpp; path = ../../../Code/Rect.cpp; sourceTree = "<group>"; };
+		BF1E3BE4135203F0001A979F /* Rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rect.h; path = ../../../Code/Rect.h; sourceTree = "<group>"; };
+		BF1E3BE5135203F0001A979F /* TTFFontAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTFFontAsset.h; path = ../../../Code/TTFFontAsset.h; sourceTree = "<group>"; };
+		BF1E3BE91352042C001A979F /* OpenGLTTFFontAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLTTFFontAsset.cpp; sourceTree = "<group>"; };
+		BF1E3BEA1352042C001A979F /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
 		BF9F7B45134D1E7B002A6CC0 /* FontAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FontAsset.h; path = ../../../Code/FontAsset.h; sourceTree = "<group>"; };
-		BF9F7B46134D1E7B002A6CC0 /* Quad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Quad.cpp; path = ../../../Code/Quad.cpp; sourceTree = "<group>"; };
-		BF9F7B47134D1E7B002A6CC0 /* Quad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Quad.h; path = ../../../Code/Quad.h; sourceTree = "<group>"; };
 		BF9F7B4A134D1ECA002A6CC0 /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stb_truetype.h; path = ../../../Code/Graphics/stb_truetype.h; sourceTree = "<group>"; };
-		BF9F7B4B134D1F23002A6CC0 /* OpenGLFontAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLFontAsset.cpp; sourceTree = "<group>"; };
-		BF9F7B4C134D1F23002A6CC0 /* OpenGLFontAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLFontAsset.h; sourceTree = "<group>"; };
 		D876F29413456E7500A021D8 /* PathMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PathMesh.cpp; path = ../../../Code/LevelEditor/PathMesh.cpp; sourceTree = "<group>"; };
 		D876F29513456E7500A021D8 /* PathMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathMesh.h; path = ../../../Code/LevelEditor/PathMesh.h; sourceTree = "<group>"; };
 		D876F29713456E9900A021D8 /* XMLFileNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XMLFileNode.cpp; sourceTree = "<group>"; };
@@ -400,6 +404,8 @@
 				F9132A13134A0D8C00567EAB /* Camera.h */,
 				37FB692013317693008963C1 /* Collision.cpp */,
 				37FB692113317693008963C1 /* Collision.h */,
+				BF1E3BE1135203F0001A979F /* CollisionData.cpp */,
+				BF1E3BE2135203F0001A979F /* CollisionData.h */,
 				F9F7D63B13457F46002953B0 /* FileNode.cpp */,
 				F9F7D63C13457F46002953B0 /* FileNode.h */,
 				37FB692213317693008963C1 /* Color.cpp */,
@@ -424,10 +430,10 @@
 				37FB693913317693008963C1 /* Monocle.cpp */,
 				37FB693A13317693008963C1 /* Monocle.h */,
 				37FB696813317693008963C1 /* Platform.h */,
-				BF9F7B46134D1E7B002A6CC0 /* Quad.cpp */,
-				BF9F7B47134D1E7B002A6CC0 /* Quad.h */,
 				37FB696913317693008963C1 /* Random.cpp */,
 				37FB696A13317693008963C1 /* Random.h */,
+				BF1E3BE3135203F0001A979F /* Rect.cpp */,
+				BF1E3BE4135203F0001A979F /* Rect.h */,
 				37FB696B13317693008963C1 /* Scene.cpp */,
 				37FB696C13317693008963C1 /* Scene.h */,
 				37FB697913317693008963C1 /* TextureAsset.h */,
@@ -435,6 +441,7 @@
 				F9257DE0133823AA00A47E00 /* Tileset.h */,
 				F9132A0F134A0D8200567EAB /* Transform.cpp */,
 				F9132A10134A0D8200567EAB /* Transform.h */,
+				BF1E3BE5135203F0001A979F /* TTFFontAsset.h */,
 				37FB697A13317693008963C1 /* Tween.cpp */,
 				37FB697B13317693008963C1 /* Tween.h */,
 				37FB697C13317693008963C1 /* Vector2.cpp */,
@@ -476,10 +483,10 @@
 			isa = PBXGroup;
 			children = (
 				37FB693E13317693008963C1 /* glpng */,
-				BF9F7B4B134D1F23002A6CC0 /* OpenGLFontAsset.cpp */,
-				BF9F7B4C134D1F23002A6CC0 /* OpenGLFontAsset.h */,
 				37FB696613317693008963C1 /* OpenGLGraphics.cpp */,
 				37FB696713317693008963C1 /* OpenGLTextureAsset.cpp */,
+				BF1E3BE91352042C001A979F /* OpenGLTTFFontAsset.cpp */,
+				BF1E3BEA1352042C001A979F /* stb_truetype.h */,
 			);
 			name = OpenGL;
 			path = ../../../Code/OpenGL;
@@ -780,8 +787,9 @@
 				F9132A14134A0D8C00567EAB /* Camera.cpp in Sources */,
 				F947BBDE134C943600952C81 /* Puppet.cpp in Sources */,
 				F947BBDF134C943600952C81 /* PuppetTest.cpp in Sources */,
-				BF9F7B48134D1E7B002A6CC0 /* Quad.cpp in Sources */,
-				BF9F7B4D134D1F23002A6CC0 /* OpenGLFontAsset.cpp in Sources */,
+				BF1E3BE6135203F0001A979F /* CollisionData.cpp in Sources */,
+				BF1E3BE7135203F0001A979F /* Rect.cpp in Sources */,
+				BF1E3BEB1352042C001A979F /* OpenGLTTFFontAsset.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

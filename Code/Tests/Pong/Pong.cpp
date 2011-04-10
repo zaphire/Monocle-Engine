@@ -239,7 +239,7 @@ namespace Pong
     const std::string GameScene::GetScoreString()
     {
         std::stringstream str;
-        str << "P1:  " << p1Score << " - " << " P2: " << p2Score;
+        str << "Scores\nP1:  " << p1Score << " - " << " P2: " << p2Score;
         return str.str();
     }
 

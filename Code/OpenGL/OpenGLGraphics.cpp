@@ -350,19 +350,26 @@ namespace Monocle
     
     void Graphics::RenderText(const FontAsset& font, const std::string& text, float x, float y)
     {
+        float currX = x, currY = y;
         Rect verts, texCoords;
+        
         glBegin(GL_QUADS);
         for (int i = 0; i < text.size(); i++)
         {
             char c = text[i];
             if ((c >= 32) && (c < 128))
             {
-                font.GetGlyphData(c, &x, &y, verts, texCoords);
+                font.GetGlyphData(c, &currX, &currY, verts, texCoords);
                 
                 glTexCoord2f(texCoords.topLeft.x, texCoords.topLeft.y);  glVertex2f(verts.topLeft.x, verts.topLeft.y);
                 glTexCoord2f(texCoords.bottomRight.x, texCoords.topLeft.y);  glVertex2f(verts.bottomRight.x, verts.topLeft.y);
                 glTexCoord2f(texCoords.bottomRight.x, texCoords.bottomRight.y);  glVertex2f(verts.bottomRight.x, verts.bottomRight.y);
                 glTexCoord2f(texCoords.topLeft.x, texCoords.bottomRight.y);  glVertex2f(verts.topLeft.x, verts.bottomRight.y);
+            }
+            else if (c == '\n')
+            {
+                currX = x;
+                currY += font.lineHeight;
             }
         }
         glEnd();

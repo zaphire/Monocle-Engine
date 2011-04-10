@@ -72,6 +72,8 @@ namespace Monocle
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         
+        lineHeight = size;
+        
         return true;
 	}
     
@@ -98,11 +100,18 @@ namespace Monocle
     
     void TTFFontAsset::GetGlyphData(char c, float* x, float* y, Rect& verts, Rect& texCoords) const
     {
-        stbtt_aligned_quad q;
-        stbtt_GetBakedQuad((stbtt_bakedchar *)fontCData, 512, 512, c-32, x, y, &q, 1);//1=opengl,0=old d3d
-        verts.topLeft.x = q.x0;  verts.topLeft.y = q.y0;
-        verts.bottomRight.x = q.x1;  verts.bottomRight.y = q.y1;
-        texCoords.topLeft.x = q.s0;    texCoords.topLeft.y = q.t0;
-        texCoords.bottomRight.x = q.s1;    texCoords.bottomRight.y = q.t1;
+        if (c == '\n')
+        {
+            
+        }
+        else
+        {
+            stbtt_aligned_quad q;
+            stbtt_GetBakedQuad((stbtt_bakedchar *)fontCData, 512, 512, c-32, x, y, &q, 1);//1=opengl,0=old d3d
+            verts.topLeft.x = q.x0;  verts.topLeft.y = q.y0;
+            verts.bottomRight.x = q.x1;  verts.bottomRight.y = q.y1;
+            texCoords.topLeft.x = q.s0;    texCoords.topLeft.y = q.t0;
+            texCoords.bottomRight.x = q.s1;    texCoords.bottomRight.y = q.t1;
+        }
     }
 }
