@@ -1,21 +1,36 @@
+<TextureAtlas image="graphics/monocleman.png" width="512" height="512">
+	<TextureAtlasEntry name="torso" coords="262 2 90 118"/>
+	<TextureAtlasEntry name="tortilla" coords="2 2 258 183"/>
+	<TextureAtlasEntry name="mustache" coords="262 122 109 43"/>
+	<TextureAtlasEntry name="nose" coords="354 2 40 81"/>
+	<TextureAtlasEntry name="hat" coords="396 2 86 69"/>
+	<TextureAtlasEntry name="eye-left" coords="62 249 12 15"/>
+	<TextureAtlasEntry name="eye-right" coords="76 249 12 14"/>
+	<TextureAtlasEntry name="eyeunderline-left" coords="396 73 28 10"/>
+	<TextureAtlasEntry name="eyebrow" coords="46 281 42 16"/>
+	<TextureAtlasEntry name="monocle" coords="119 187 54 50"/>
+</TextureAtlas>
+
 <Parts>
-	<Part id="0" name="torso" image="graphics/torso.png" width="128" height="128">
-		<Part id="1" name="head" image="graphics/head.png" width="256" height="256">
-			<Part id="2" name="mustache" image="graphics/mustache.png" width="128" height="128"/>
-			<Part id="3" name="hat" image="graphics/hat.png" width="128" height="128"/>
-			<Part id="4" name="nose" image="graphics/nose.png" width="128" height="128"/>
-			<Part id="5" name="monocle" image="graphics/monocle.png" width="64" height="64"/>
-			<Part id="6" name="" image="graphics/eyeunderline-left.png" width="32" height="32"/>
-			<Part id="7" name="" image="graphics/eye-left.png" width="32" height="32"/>
-			<Part id="8" name="" image="graphics/eye-right.png" width="32" height="32"/>
-			<Part id="9" name="" image="graphics/eyebrow.png" width="32" height="32"/>
+	<Part id="0" name="torso" atlas="torso">
+		<Part id="1" name="tortilla" atlas="tortilla">
+			<Part id="2" name="mustache" atlas="mustache"/>
+			<Part id="3" name="hat" atlas="hat"/>
+			<Part id="4" name="nose" atlas="nose"/>
+			<Part id="5" name="monocle" atlas="monocle"/>
+			<Part id="6" name="" atlas="eyeunderline-left"/>
+			<Part id="7" name="" atlas="eye-left"/>
+			<Part id="8" name="" atlas="eye-right"/>
+			<Part id="9" name="" atlas="eyebrow"/>
 		</Part>
 	</Part>
 </Parts>
+
 <AnimationLayers>
     <AnimationLayer name="head" ids="1 2 3 4 5 6 7 8 9 "/>
     <AnimationLayer name="body" idx="0 "/>
 </AnimationLayers>
+
 <Animations>
 	<Animation name="idle">
 		<PartKeyFrames id="0">

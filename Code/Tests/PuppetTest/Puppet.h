@@ -9,6 +9,20 @@ class TiXmlElement;
 
 namespace Monocle
 {
+    /*
+    class AtlasEntry
+    {
+    public:
+        void Save(FileNode *fileNode);
+        void Load(FileNode *fileNode);
+        
+        Vector2 offset;
+        Vector2 scale;
+    };
+    */
+	
+	class Puppet;
+    
 	class Part : public Entity
 	{
 	public:
@@ -18,8 +32,8 @@ namespace Monocle
 		bool IsName(const std::string &name);
 		bool IsID(int id);
 
-		void Save(FileNode *fileNode);
-		void Load(FileNode *fileNode);
+		void Save(FileNode *fileNode, Puppet *puppet);
+		void Load(FileNode *fileNode, Puppet *puppet);
 
 	private:
 		friend class Puppet;
@@ -62,7 +76,6 @@ namespace Monocle
 	private:
 		Part *part;
 	
-		
 	};
 
 	class Animation
@@ -88,8 +101,6 @@ namespace Monocle
 		void Save(FileNode *fileNode);
 		void Load(FileNode *fileNode);
         
-        
-        
 	private:
 		friend class Puppet;
 		float currentTime;
@@ -104,16 +115,19 @@ namespace Monocle
 	public:
 	};
 
+	class TextureAtlas;
+	
 	class Puppet
 	{
 	public:
 		Puppet();
+		~Puppet();
 		void Load(const std::string &filename, Entity *entity);
 		void Play(const std::string &animationName, bool isLooping=true);
 		void Stop();
 		void Pause();
 		void Resume();
-		
+
 		void TogglePause();
 
 		void Update();
@@ -123,12 +137,13 @@ namespace Monocle
 
 		Part *GetPartByName(const std::string &name);
 		Part *GetPartByID(int id);
-        
-        Animation *GetCurrentAnimation();
-        
-        void AdjustTime(float time);
+
+		Animation *GetCurrentAnimation();
+		TextureAtlas *GetTextureAtlas();
+
+		void AdjustTime(float time);
 		
-	private:
+	private:		
 		Animation *GetAnimationByName(const std::string &animName);
 		bool isPlaying;
 		bool isPaused;
@@ -138,6 +153,8 @@ namespace Monocle
 	
 		std::list<Animation> animations;
 		std::list<Part*> parts;
+		
+		TextureAtlas *textureAtlas;
 
 		void LoadParts(TiXmlElement *element, Entity *intoEntity);
 
