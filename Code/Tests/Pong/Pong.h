@@ -12,12 +12,12 @@ namespace Pong
         
 		void Render();
         
-        void SetFont(FontAsset* font) { mFont = font; }
-        void SetText(const std::string& text) { mText = text; }
+        void SetFont(FontAsset* font) { this->font = font; }
+        void SetText(const std::string& text) { this->text = text; }
         
     protected:
-        FontAsset* mFont;
-        std::string mText;
+        FontAsset* font;
+        std::string text;
     };
     
 	class Paddle : public Entity

@@ -8,10 +8,9 @@
 namespace Pong
 {
     Text::Text(const std::string& text, FontAsset* font):
-        mFont(font), mText(text)
+        font(font), text(text)
     {
     }
-    
     
     void Text::Render()
     {
@@ -19,9 +18,9 @@ namespace Pong
 		Graphics::Translate(position);
 		Graphics::SetBlend(BLEND_ALPHA);
 		Graphics::SetColor(Color::white);
-        Graphics::BindFont(mFont);
-        
-        Graphics::RenderText(*mFont, mText, 0, 0);
+		Graphics::BindFont(font);
+
+		Graphics::RenderText(*font, text, 0, 0);
 		Graphics::PopMatrix();
     }
     
