@@ -355,15 +355,22 @@ namespace Monocle
         for (int i = 0; i < text.size(); i++)
         {
             char c = text[i];
-            if ((c >= 32) && (c < 128))
-            {
-                font.GetGlyphData(c, &x, &y, verts, texCoords);
-                
-                glTexCoord2f(texCoords.topLeft.x, texCoords.topLeft.y);  glVertex2f(verts.topLeft.x, verts.topLeft.y);
-                glTexCoord2f(texCoords.bottomRight.x, texCoords.topLeft.y);  glVertex2f(verts.bottomRight.x, verts.topLeft.y);
-                glTexCoord2f(texCoords.bottomRight.x, texCoords.bottomRight.y);  glVertex2f(verts.bottomRight.x, verts.bottomRight.y);
-                glTexCoord2f(texCoords.topLeft.x, texCoords.bottomRight.y);  glVertex2f(verts.topLeft.x, verts.bottomRight.y);
-            }
+			if ((c >= 32) && (c < 128))
+			{
+				font.GetGlyphData(c, &x, &y, verts, texCoords);
+
+				glTexCoord2f(texCoords.topLeft.x, texCoords.topLeft.y);
+				glVertex2f(verts.topLeft.x, verts.topLeft.y);
+
+				glTexCoord2f(texCoords.bottomRight.x, texCoords.topLeft.y);
+				glVertex2f(verts.bottomRight.x, verts.topLeft.y);
+
+				glTexCoord2f(texCoords.bottomRight.x, texCoords.bottomRight.y);
+				glVertex2f(verts.bottomRight.x, verts.bottomRight.y);
+
+				glTexCoord2f(texCoords.topLeft.x, texCoords.bottomRight.y);
+				glVertex2f(verts.topLeft.x, verts.bottomRight.y);
+			}
         }
         glEnd();
     }

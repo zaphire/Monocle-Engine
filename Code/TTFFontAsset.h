@@ -15,7 +15,8 @@ namespace Monocle
         void Reload();
         void Unload();
 
-        void GetGlyphData(char c, float* x, float* y, Rect& verts, Rect& texCoords) const;
+		void GetGlyphData(char c, float* x, float* y, Rect& verts, Rect& texCoords) const;
+		//float GetTextWidth(const std::string &text);
 
     protected:
 
