@@ -165,6 +165,11 @@ namespace Monocle
 	{
 		return Vector2(lhs.x - rhs.x, lhs.y - rhs.y);
 	}
+
+	Vector2 operator-(const Vector2 &rhs)
+	{
+		return Vector2(-rhs.x, -rhs.y);
+	}
 	
 	Vector2 operator*(float lhs, const Vector2& rhs)		// left scalar multiplication
 	{
@@ -184,6 +189,11 @@ namespace Monocle
 	Vector2 operator*(const Vector2& lhs, const Vector2& rhs)		// multiply component (scale)
 	{
 		return Vector2(lhs.x * rhs.x, lhs.y * rhs.y);
+	}
+
+	Vector2 operator/(float lhs, const Vector2 &rhs)
+	{
+		return Vector2(lhs / rhs.x, lhs / rhs.y);
 	}
 	
 	/*
