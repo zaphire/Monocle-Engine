@@ -18,5 +18,6 @@ namespace Monocle
 	{
 		Graphics::Scale(scale);
 		Graphics::Translate(position * -1.0f);
+		Graphics::Rotate(rotation, 0, 0, 1);
 	}
 }

@@ -82,6 +82,7 @@ namespace Monocle
 	// or make materials system...
 	void Sprite::Render(Entity *entity)
 	{
+		Graphics::PushMatrix();
 		//Graphics::Rotate(angle, 0, 0, 1);
 		Graphics::Translate(position.x, position.y, 0.0f);
 		//Graphics::SetColor(color);
@@ -113,7 +114,7 @@ namespace Monocle
 			
 			Graphics::RenderQuad(width, height, textureOffset, textureScale);
 		}
-		//Graphics::PopMatrix();
+		Graphics::PopMatrix();
 
 
 		// show bounds, for editor/selection purposes
@@ -121,6 +122,9 @@ namespace Monocle
 		{
 			if (texture != NULL)
 			{
+				Graphics::PushMatrix();
+				Graphics::Translate(position.x, position.y, 0.0f);
+
 				if (Debug::selectedEntity == entity)
 					Graphics::SetColor(Color::orange);
 				else
@@ -140,6 +144,8 @@ namespace Monocle
 					Graphics::RenderLine(Vector2(-width*0.5f, -height*0.5f), Vector2(width*0.5f, height*0.5f));
 					Graphics::RenderLine(Vector2(width*0.5f, -height*0.5f), Vector2(-width*0.5f, height*0.5f));
 				}
+
+				Graphics::PopMatrix();
 
 				/*
 				if (selectedSpriteEntity == this->entity)

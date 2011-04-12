@@ -142,9 +142,17 @@ namespace PuppetTest
 
 			if (Debug::selectedEntity)
 			{
-				const float moveSpeed = 10.0f;
+				float moveSpeed = 10.0f;
+				float rotateSpeed = 15.0f;
+				
+				if (Input::IsKeyHeld(KEY_LSHIFT))
+				{
+					float multiplier = 5.0f;
+					moveSpeed *= multiplier;
+					rotateSpeed *= multiplier;
+				}
+
 				float moveAmount = Monocle::deltaTime * moveSpeed;
-				const float rotateSpeed = 15.0f;
 				float rotateAmount = Monocle::deltaTime * rotateSpeed;
 
                 if (Input::IsKeyHeld(keyMoveLeft))

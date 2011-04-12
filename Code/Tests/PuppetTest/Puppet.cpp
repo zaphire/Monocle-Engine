@@ -208,9 +208,9 @@ namespace Monocle
 		fileNode->Write("name", name);
 		fileNode->Write("image", sprite->texture->GetName());
 
-		std::ostringstream os;
-		os << sprite->textureOffset.x << " " << sprite->textureOffset.y << " " << sprite->textureScale.x << " " << sprite->textureScale.y;
-		os.str();
+		//std::ostringstream os;
+		//os << sprite->textureOffset.x << " " << sprite->textureOffset.y << " " << sprite->textureScale.x << " " << sprite->textureScale.y;
+		//os.str();
 	}
 
 	void Part::Load(FileNode *fileNode, Puppet *puppet)
@@ -220,7 +220,7 @@ namespace Monocle
 
 		sprite = NULL;
 		SetGraphic(NULL);
-		
+
 		TextureAtlas *textureAtlas = puppet->GetTextureAtlas();
 		if (textureAtlas)
 		{
@@ -242,11 +242,11 @@ namespace Monocle
 				}
 			}
 		}
-		
+
 		if (sprite == NULL)
 		{
 			std::string image;
-			fileNode->Read("image", image);		
+			fileNode->Read("image", image);
 
 			sprite = new Sprite(image);
 			SetGraphic(sprite);
@@ -267,6 +267,19 @@ namespace Monocle
 			{
 				sprite->height = height;
 			}
+
+			Vector2 offset;
+			std::string offsetString;
+			fileNode->Read("offset", offsetString);
+
+			if (offsetString != "")
+			{
+				std::istringstream is(offsetString);
+				is >> offset.x >> offset.y;
+				printf("offset (%f, %f)\n", offset);
+			}
+
+			sprite->position = offset;
 		}
 
 //		if (sprite)
@@ -290,8 +303,6 @@ namespace Monocle
 //				sprite->width = width;
 //				sprite->height = height;
 //			}
-//
-
 //		}
 	}
 

@@ -10,7 +10,7 @@ namespace Monocle
         TTFFontAsset();
         ~TTFFontAsset();
 
-        bool Load(const std::string &filename, float size);
+        bool Load(const std::string &filename, float size, int textureWidth=-1, int textureHeight=-1);
 
         void Reload();
         void Unload();
@@ -22,5 +22,6 @@ namespace Monocle
 
         void* fontCData;
         float size;
+		int textureWidth, textureHeight;
     };
 }

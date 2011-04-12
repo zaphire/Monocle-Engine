@@ -7,13 +7,13 @@
 
 namespace Pong
 {
-    Text::Text(const std::string& text, FontAsset* font):
-        font(font), text(text)
-    {
-    }
-    
-    void Text::Render()
-    {
+	Text::Text(const std::string& text, FontAsset* font)
+		: Entity(), font(font), text(text)
+	{
+	}
+
+	void Text::Render()
+	{
 		Graphics::PushMatrix();
 		Graphics::Translate(position);
 		Graphics::SetBlend(BLEND_ALPHA);
@@ -22,8 +22,8 @@ namespace Pong
 
 		Graphics::RenderText(*font, text, 0, 0);
 		Graphics::PopMatrix();
-    }
-    
+	}
+
     
 	/*
 	**************************************************
