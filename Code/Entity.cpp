@@ -25,7 +25,6 @@ namespace Monocle
 
 	Entity::~Entity()
 	{
-
 	}
 
 	void Entity::Added()
@@ -40,6 +39,7 @@ namespace Monocle
 	{
 		if (collider)
 		{
+			Collision::RemoveCollider(collider);
 			delete collider;
 			collider = NULL;
 		}

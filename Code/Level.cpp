@@ -159,6 +159,9 @@ namespace Monocle
 						instance->LoadEntities(eEntities);
 						instance->scene->LoadEntities(eEntities);
 					}
+
+
+					scene->ResolveEntityChanges();
 				}
 			}
 		}

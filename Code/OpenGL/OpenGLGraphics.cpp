@@ -225,6 +225,11 @@ namespace Monocle
 		glScalef(scale.x, scale.y, 1.0f);
 	}
 
+	void Graphics::MultiplyMatrix(float *m)
+	{
+		glMultMatrixf(m);
+	}
+
 	void Graphics::RenderTriangle(float size)
 	{
 		float halfSize = size*0.5f;

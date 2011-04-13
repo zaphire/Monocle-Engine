@@ -19,7 +19,6 @@ namespace Monocle
 		//float GetTextWidth(const std::string &text);
 
     protected:
-
         void* fontCData;
         float size;
 		int textureWidth, textureHeight;
