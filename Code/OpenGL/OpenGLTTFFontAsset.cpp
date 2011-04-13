@@ -5,6 +5,7 @@
 #define STB_TRUETYPE_IMPLEMENTATION  // force following include to generate implementation
 
 #include <cstdlib>
+#include <fstream>
 #define STBTT_malloc(x,u)  malloc(x)
 #define STBTT_free(x,u)    free(x)
 

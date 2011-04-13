@@ -5,6 +5,7 @@
 #include "Color.h"
 #include "Tween.h"
 #include <vector>
+#include <string>
 
 namespace Monocle
 {
