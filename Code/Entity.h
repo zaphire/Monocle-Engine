@@ -91,6 +91,7 @@ namespace Monocle
 		Entity* GetChildEntityAtPosition(const Vector2 &position);
 		Vector2 GetWorldPosition(const Vector2 &position=Vector2::zero);
 		Vector2 GetWorldScale(const Vector2 &scale);
+		Vector2 GetLocalPosition(const Vector2 &worldPosition);
 
 		// enqueue destruction of this entity
 		//void Die();

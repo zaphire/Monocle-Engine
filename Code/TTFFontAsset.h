@@ -10,16 +10,17 @@ namespace Monocle
         TTFFontAsset();
         ~TTFFontAsset();
 
-        bool Load(const std::string &filename, float size);
+        bool Load(const std::string &filename, float size, int textureWidth=-1, int textureHeight=-1);
 
         void Reload();
         void Unload();
 
-        void GetGlyphData(char c, float* x, float* y, Rect& verts, Rect& texCoords) const;
+		void GetGlyphData(char c, float* x, float* y, Rect& verts, Rect& texCoords) const;
+		//float GetTextWidth(const std::string &text);
 
     protected:
-
         void* fontCData;
         float size;
+		int textureWidth, textureHeight;
     };
 }

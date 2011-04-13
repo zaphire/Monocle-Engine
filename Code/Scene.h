@@ -74,6 +74,8 @@ namespace Monocle
 
 		Entity* GetEntityAtPosition(const Vector2 &position, SearchType searchType=SEARCH_TOP);
 
+		Entity* GetFirstEntityWithTag(const std::string &tag);
+
 		const std::list<Entity*>* GetEntities();
 
 		static void AddCamera(Camera *camera);
@@ -91,10 +93,15 @@ namespace Monocle
 		friend class Entity;
 		virtual void ReceiveNote(const std::string &note);
 
+		friend class Level;
+		//Resolves all entities to be added or removed
+		void ResolveEntityChanges();
+
 	private:
 		static Scene *instance;
 
 		friend class Game;
+		
 		// scene has a game pointer
 		// so that it can request scene switches
 		Game *game;
@@ -113,8 +120,7 @@ namespace Monocle
 		//The map of entities sorted by tag
 		std::map<std::string, std::list<Entity*> > tagMap;
 
-		//Resolves all entities to be added or removed
-		void ResolveEntityChanges();
+
 
 		// for GetFirstEntity and GetNextEntity
 		//std::list<Entity*>::iterator entityIterator;

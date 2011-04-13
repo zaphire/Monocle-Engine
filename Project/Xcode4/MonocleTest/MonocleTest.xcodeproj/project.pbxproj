@@ -67,9 +67,6 @@
 		37FB69B613317693008963C1 /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB697E13317693008963C1 /* Vector3.cpp */; };
 		37FB69B813319030008963C1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FB69B713319030008963C1 /* OpenGL.framework */; };
 		6657ED15133F9E8F00ACA1E2 /* FTE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6657ED13133F9E8F00ACA1E2 /* FTE.cpp */; };
-		BF1E3BE6135203F0001A979F /* CollisionData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF1E3BE1135203F0001A979F /* CollisionData.cpp */; };
-		BF1E3BE7135203F0001A979F /* Rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF1E3BE3135203F0001A979F /* Rect.cpp */; };
-		BF1E3BEB1352042C001A979F /* OpenGLTTFFontAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF1E3BE91352042C001A979F /* OpenGLTTFFontAsset.cpp */; };
 		D881B50013445142008EF89C /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D881B4FE13445142008EF89C /* Node.cpp */; };
 		F9132A0A13499ED200567EAB /* PathCollider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9132A0813499ED200567EAB /* PathCollider.cpp */; };
 		F9132A11134A0D8200567EAB /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9132A0F134A0D8200567EAB /* Transform.cpp */; };
@@ -82,6 +79,8 @@
 		F9257DFB133823E100A47E00 /* Ogmo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9257DF9133823E100A47E00 /* Ogmo.cpp */; };
 		F947BBDE134C943600952C81 /* Puppet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F947BBDA134C943600952C81 /* Puppet.cpp */; };
 		F947BBDF134C943600952C81 /* PuppetTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F947BBDC134C943600952C81 /* PuppetTest.cpp */; };
+		F947BBE813532AC400952C81 /* Rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F947BBE613532AC400952C81 /* Rect.cpp */; };
+		F947BBED13532B1900952C81 /* OpenGLTTFFontAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F947BBEB13532B1900952C81 /* OpenGLTTFFontAsset.cpp */; };
 		F9F7D5D4133B0D57002953B0 /* PolygonCollider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7D5D2133B0D57002953B0 /* PolygonCollider.cpp */; };
 		F9F7D600133D3F3C002953B0 /* FringeTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7D5FA133D3F3C002953B0 /* FringeTile.cpp */; };
 		F9F7D601133D3F3C002953B0 /* FringeTileEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7D5FC133D3F3C002953B0 /* FringeTileEditor.cpp */; };
@@ -242,6 +241,11 @@
 		F947BBDC134C943600952C81 /* PuppetTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PuppetTest.cpp; path = PuppetTest/PuppetTest.cpp; sourceTree = "<group>"; };
 		F947BBDD134C943600952C81 /* PuppetTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PuppetTest.h; path = PuppetTest/PuppetTest.h; sourceTree = "<group>"; };
 		F947BBE0134CBACD00952C81 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Macros.h; path = ../../../Code/Macros.h; sourceTree = "<group>"; };
+		F947BBE613532AC400952C81 /* Rect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Rect.cpp; path = ../../../Code/Rect.cpp; sourceTree = "<group>"; };
+		F947BBE713532AC400952C81 /* Rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rect.h; path = ../../../Code/Rect.h; sourceTree = "<group>"; };
+		F947BBEA13532AD400952C81 /* TTFFontAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTFFontAsset.h; path = ../../../Code/TTFFontAsset.h; sourceTree = "<group>"; };
+		F947BBEB13532B1900952C81 /* OpenGLTTFFontAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLTTFFontAsset.cpp; sourceTree = "<group>"; };
+		F947BBEC13532B1900952C81 /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
 		F9F7D5D2133B0D57002953B0 /* PolygonCollider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PolygonCollider.cpp; sourceTree = "<group>"; };
 		F9F7D5D3133B0D57002953B0 /* PolygonCollider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolygonCollider.h; sourceTree = "<group>"; };
 		F9F7D5FA133D3F3C002953B0 /* FringeTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FringeTile.cpp; path = ../../../Code/LevelEditor/FringeTile.cpp; sourceTree = SOURCE_ROOT; };
@@ -430,16 +434,16 @@
 				37FB696813317693008963C1 /* Platform.h */,
 				37FB696913317693008963C1 /* Random.cpp */,
 				37FB696A13317693008963C1 /* Random.h */,
-				BF1E3BE3135203F0001A979F /* Rect.cpp */,
-				BF1E3BE4135203F0001A979F /* Rect.h */,
+				F947BBE613532AC400952C81 /* Rect.cpp */,
+				F947BBE713532AC400952C81 /* Rect.h */,
 				37FB696B13317693008963C1 /* Scene.cpp */,
 				37FB696C13317693008963C1 /* Scene.h */,
 				37FB697913317693008963C1 /* TextureAsset.h */,
 				F9257DDF133823AA00A47E00 /* Tileset.cpp */,
 				F9257DE0133823AA00A47E00 /* Tileset.h */,
+				F947BBEA13532AD400952C81 /* TTFFontAsset.h */,
 				F9132A0F134A0D8200567EAB /* Transform.cpp */,
 				F9132A10134A0D8200567EAB /* Transform.h */,
-				BF1E3BE5135203F0001A979F /* TTFFontAsset.h */,
 				37FB697A13317693008963C1 /* Tween.cpp */,
 				37FB697B13317693008963C1 /* Tween.h */,
 				37FB697C13317693008963C1 /* Vector2.cpp */,
@@ -480,6 +484,8 @@
 		37FB693D13317693008963C1 /* OpenGL */ = {
 			isa = PBXGroup;
 			children = (
+				F947BBEB13532B1900952C81 /* OpenGLTTFFontAsset.cpp */,
+				F947BBEC13532B1900952C81 /* stb_truetype.h */,
 				37FB693E13317693008963C1 /* glpng */,
 				37FB696613317693008963C1 /* OpenGLGraphics.cpp */,
 				37FB696713317693008963C1 /* OpenGLTextureAsset.cpp */,
@@ -785,9 +791,8 @@
 				F9132A14134A0D8C00567EAB /* Camera.cpp in Sources */,
 				F947BBDE134C943600952C81 /* Puppet.cpp in Sources */,
 				F947BBDF134C943600952C81 /* PuppetTest.cpp in Sources */,
-				BF1E3BE6135203F0001A979F /* CollisionData.cpp in Sources */,
-				BF1E3BE7135203F0001A979F /* Rect.cpp in Sources */,
-				BF1E3BEB1352042C001A979F /* OpenGLTTFFontAsset.cpp in Sources */,
+				F947BBE813532AC400952C81 /* Rect.cpp in Sources */,
+				F947BBED13532B1900952C81 /* OpenGLTTFFontAsset.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

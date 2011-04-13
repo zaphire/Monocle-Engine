@@ -225,6 +225,11 @@ namespace Monocle
 		glScalef(scale.x, scale.y, 1.0f);
 	}
 
+	void Graphics::MultiplyMatrix(float *m)
+	{
+		glMultMatrixf(m);
+	}
+
 	void Graphics::RenderTriangle(float size)
 	{
 		float halfSize = size*0.5f;
@@ -359,12 +364,19 @@ namespace Monocle
             char c = text[i];
             if ((c >= 32) && (c < 128))
             {
-                font.GetGlyphData(c, &currX, &currY, verts, texCoords);
+				font.GetGlyphData(c, &currX, &currY, verts, texCoords);
                 
-                glTexCoord2f(texCoords.topLeft.x, texCoords.topLeft.y);  glVertex2f(verts.topLeft.x, verts.topLeft.y);
-                glTexCoord2f(texCoords.bottomRight.x, texCoords.topLeft.y);  glVertex2f(verts.bottomRight.x, verts.topLeft.y);
-                glTexCoord2f(texCoords.bottomRight.x, texCoords.bottomRight.y);  glVertex2f(verts.bottomRight.x, verts.bottomRight.y);
-                glTexCoord2f(texCoords.topLeft.x, texCoords.bottomRight.y);  glVertex2f(verts.topLeft.x, verts.bottomRight.y);
+				glTexCoord2f(texCoords.topLeft.x, texCoords.topLeft.y);
+				glVertex2f(verts.topLeft.x, verts.topLeft.y);
+                
+				glTexCoord2f(texCoords.bottomRight.x, texCoords.topLeft.y);
+				glVertex2f(verts.bottomRight.x, verts.topLeft.y);
+                
+				glTexCoord2f(texCoords.bottomRight.x, texCoords.bottomRight.y);
+				glVertex2f(verts.bottomRight.x, verts.bottomRight.y);
+                
+				glTexCoord2f(texCoords.topLeft.x, texCoords.bottomRight.y);
+				glVertex2f(verts.topLeft.x, verts.bottomRight.y);
             }
             else if (c == '\n')
             {

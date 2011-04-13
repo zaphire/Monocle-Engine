@@ -28,7 +28,9 @@ namespace Monocle
 
 	void Scene::End()
 	{
-
+		RemoveAll();
+		//Resolve adds and removes
+		ResolveEntityChanges();
 	}
 
 	void Scene::Update()
@@ -228,6 +230,17 @@ namespace Monocle
 	{
 	}
 
+	Entity* Scene::GetFirstEntityWithTag(const std::string &tag)
+	{
+		for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+		{
+			if ((*i)->HasTag(tag))
+			{
+				return (*i);
+			}
+		}
+		return NULL;
+	}
 
 	/*
 	Entity* Scene::GetEntity(int index)

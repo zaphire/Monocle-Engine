@@ -17,7 +17,7 @@ namespace Monocle
 		void Init();
 		//static Asset *RequestAsset(AssetType assetType, const char *filename);
 		static TextureAsset *RequestTexture(const std::string &filename, FilterType filter = FILTER_LINEAR, bool repeatX = false, bool repeatY = false);
-        static FontAsset *RequestFont(const std::string &filename, float size);
+        static FontAsset *RequestFont(const std::string &filename, float size, int textureWidth=-1, int textureHeight=-1);
 		//static AudioAsset *RequestAudio(const std::string &filename);
 
 		static void SetContentPath(const std::string &contentPath);
