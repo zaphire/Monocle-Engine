@@ -23,12 +23,12 @@ namespace Monocle
 		SetStartNode(startNode);
 	}
 
-	void PathMesh::MakeCollision()
+	void PathMesh::MakeCollision(float radius)
 	{
 		if (pathCollider)
 			delete pathCollider;
 
-		SetCollider(pathCollider = new PathCollider(startNode));
+		SetCollider(pathCollider = new PathCollider(startNode, radius));
 	}
 
 	void PathMesh::SetStartNode(Node *node)
@@ -75,6 +75,8 @@ namespace Monocle
 		fileNode->Write("size", size);
 		if (texture)
 			fileNode->Write("image", texture->GetName());
+		if (pathCollider && pathCollider->radius != 0.0f)
+			fileNode->Write("radius", pathCollider->radius);
 	}
 
 	void PathMesh::Load(FileNode *fileNode)
@@ -86,6 +88,9 @@ namespace Monocle
 		
 		std::string image;
 		fileNode->Read("image", image);
+
+		float radius = 0.0f;
+		fileNode->Read("radius", radius);
 
 		if (texture)
 		{
@@ -114,6 +119,6 @@ namespace Monocle
 			}
 		}
 
-		MakeCollision();
+		MakeCollision(radius);
 	}
 }

@@ -6,17 +6,17 @@ namespace Monocle
 	/// NODE
 
 	Node::Node(const Node &node)
-		: Entity(node), radius(node.radius), variant(node.variant), next(node.next), prev(node.prev)//, isIgnored(node.isIgnored)
+		: Entity(node), variant(node.variant), next(node.next), prev(node.prev)//, isIgnored(node.isIgnored)
 	{
 	}
 
 	Node::Node()
-		: Entity(), radius(0.0f), next(NULL), prev(NULL), variant(0)//, isIgnored(false)
+		: Entity(), next(NULL), prev(NULL), variant(0)//, isIgnored(false)
 	{
 	}
 
 	Node::Node(const Vector2 &position)
-		: Entity(), radius(0.0f), next(NULL), prev(NULL), variant(0)//, isIgnored(false)
+		: Entity(),next(NULL), prev(NULL), variant(0)//, isIgnored(false)
 	{
 		this->position = position;
 	}
@@ -105,6 +105,10 @@ namespace Monocle
 
 		if (variant != 0)
 			fileNode->Write("variant", variant);
+		/*
+		if (radius != 0)
+			fileNode->Write("radius", radius);
+		*/
 	}
 
 	void Node::Load(FileNode *fileNode)
@@ -112,6 +116,7 @@ namespace Monocle
 		Entity::Load(fileNode);
 
 		fileNode->Read("variant", variant);
+		//fileNode->Read("radius", radius);
 	}
 
 }

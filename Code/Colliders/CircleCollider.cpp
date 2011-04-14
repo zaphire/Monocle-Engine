@@ -45,6 +45,7 @@ namespace Monocle
 		{
 			collisionData->hitPoint = closest;
 			collisionData->penetration = fabs(d.GetMagnitude() - (radius + lineRadius));
+			collisionData->normal = (ePos - closest).GetNormalized();
 		}
 
 		return didCollide;
