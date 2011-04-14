@@ -39,12 +39,15 @@ namespace Monocle
 		Vector2 closest = (t * dir) + start;
 		Vector2 d = (ePos + offset) - closest;
 
-		if (collisionData)
+		bool didCollide = d.GetSquaredMagnitude() <= (radius + lineRadius) * (radius + lineRadius);
+
+		if (didCollide && collisionData)
 		{
 			collisionData->hitPoint = closest;
+			collisionData->penetration = fabs(d.GetMagnitude() - (radius + lineRadius));
 		}
 
-		return d.GetSquaredMagnitude() <= (radius + lineRadius) * (radius + lineRadius);
+		return didCollide;
 	}
 
 	float CircleCollider::GetCenterX(bool relativeToEntity)

@@ -255,6 +255,8 @@ namespace Monocle
 		Node *node = b->startNode;
 		Node *prevNode = NULL;
 		Vector2 start, end;
+		Vector2 avgNormal;
+		int numNormals = 0;
 		while (node)
 		{
 			if (prevNode && prevNode->variant != -1)
@@ -264,14 +266,21 @@ namespace Monocle
 				if (a->IntersectsLine(start, end, 32, collisionData))
 				{
 					if (collisionData)
-						collisionData->normal = (end-start).GetNormalized().GetPerpendicularRight();
-					return true;
+					{
+						avgNormal += (end-start).GetNormalized().GetPerpendicularRight();
+						numNormals++;
+					}
+					//return true;
 				}
 			}
 			prevNode = node;
 			node = node->GetNext();
 		}
-
+		if (numNormals > 0)
+		{
+			collisionData->normal = avgNormal/numNormals;
+			return true;
+		}
 		return false;
 	}
 }
