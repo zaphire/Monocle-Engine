@@ -70,6 +70,15 @@ namespace Monocle
 		glClearColor(color.r, color.g, color.b, color.a);
 	}
 
+	Color Graphics::GetBackgroundColor()
+	{
+		GLfloat *clearColor = new GLfloat[4];
+		glGetFloatv(GL_COLOR_CLEAR_VALUE, clearColor);
+		Color color(clearColor[0], clearColor[1], clearColor[2], clearColor[3]);
+		delete[] clearColor;
+		return color;
+	}
+
 	bool Graphics::SetResolution(int w, int h, int bits, bool full)
 	{
 		//TODO: tell platform to change window size

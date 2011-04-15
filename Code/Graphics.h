@@ -80,6 +80,8 @@ namespace Monocle
 		static void SetBlend(BlendType blend);
 		static void SetColor(const Color &color);
 		static void SetBackgroundColor(const Color &color);
+
+		static Color GetBackgroundColor();
 		//static void SceneMatrix();
 
 		static Vector2 GetMatrixPosition();

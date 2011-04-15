@@ -222,6 +222,11 @@ namespace Monocle
 		tagMap[tag].remove(entity);
 	}
 
+	Entity *Scene::CreateEntity(const std::string &entityTypeName)
+	{
+		return NULL;
+	}
+
 	void Scene::SaveEntities(TiXmlElement *element)
 	{
 	}

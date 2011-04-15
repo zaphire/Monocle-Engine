@@ -89,8 +89,16 @@ namespace Monocle
 	{
 		if (element->Attribute(name))
 		{
-			std::istringstream read(*element->Attribute(name));
-			read >> value.r >> value.g >> value.b >> value.a;
+			std::string string = *element->Attribute(name);
+			std::istringstream read(string);
+			if (string.find('#') != std::string::npos)
+			{
+				// TODO: read hex color
+			}
+			else
+			{
+				read >> value.r >> value.g >> value.b >> value.a;
+			}
 		}
 	}
 }

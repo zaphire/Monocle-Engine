@@ -10,6 +10,23 @@
 
 namespace Monocle
 {
+
+	EntityType::EntityType()
+	{
+	}
+
+	void EntityType::Save(FileNode *fileNode)
+	{
+		fileNode->Write("name", name);
+		fileNode->Write("image", image);
+	}
+
+	void EntityType::Load(FileNode *fileNode)
+	{
+		fileNode->Read("name", name);
+		fileNode->Read("image", image);
+	}
+
 	Level *Level::instance = NULL;
 
 	Level::Level()
@@ -42,6 +59,23 @@ namespace Monocle
 			TiXmlElement* eProject = xml.FirstChildElement("Project");
 			if (eProject)
 			{
+				TiXmlElement* eEntityTypes = eProject->FirstChildElement("EntityTypes");
+				if (eEntityTypes)
+				{
+					TiXmlElement* eEntityType = eEntityTypes->FirstChildElement("EntityType");
+					while (eEntityType)
+					{
+						XMLFileNode xmlFileNode(eEntityType);
+
+						EntityType entityType;
+						entityType.Load(&xmlFileNode);
+
+						instance->entityTypes.push_back(entityType);
+
+						eEntityType = eEntityType->NextSiblingElement("EntityType");
+					}
+				}
+
 				// Load Tileset data (for tiles on a grid)
 				TiXmlElement* eTilesets = eProject->FirstChildElement("Tilesets");
 				if (eTilesets)
@@ -55,7 +89,7 @@ namespace Monocle
 					}
 				}
 
-				// Load FringeTileset data (for abitrarily sized 'n placed tiles)
+				// Load FringeTileset data (for arbitrarily sized 'n placed tiles)
 				TiXmlElement* eFringeTilesets = eProject->FirstChildElement("FringeTilesets");
 				if (eFringeTilesets)
 				{
@@ -134,6 +168,10 @@ namespace Monocle
 					{
 						instance->fringeTileset = instance->GetFringeTilesetByName(fringeTilesetName);
 					}
+
+					Color backgroundColor = Color::black;
+					XMLReadColor(eLevel, "backgroundColor", backgroundColor);
+					Graphics::SetBackgroundColor(backgroundColor);
 
 					TiXmlElement *eTilemap = eLevel->FirstChildElement("Tilemap");
 					while (eTilemap)
@@ -277,6 +315,11 @@ namespace Monocle
 				if (instance->fringeTileset)
 				{
 					eLevel.SetAttribute("fringeTileset", instance->fringeTileset->GetName());
+				}
+				Color backgroundColor = Graphics::GetBackgroundColor();
+				if (backgroundColor != Color::black)
+				{
+					XMLWriteColor(&eLevel, "backgroundColor", backgroundColor);
 				}
 
 				if (!instance->tilemaps.empty())

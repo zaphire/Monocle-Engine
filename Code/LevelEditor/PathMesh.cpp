@@ -54,11 +54,18 @@ namespace Monocle
 		//Graphics::SetColor(Color(0,0,1,0.5f));
 		Graphics::BindTexture(texture);
 		Graphics::PushMatrix();
-		Graphics::Translate(position);
+
+		if (followCamera == Vector2::zero || (Debug::render && Debug::selectedEntity != this))
+			Graphics::Translate(position.x, position.y, depth);
+		else
+			Graphics::Translate(scene->GetCamera()->position * followCamera + position * (Vector2::one - followCamera));
+
 		Graphics::Rotate(rotation, 0, 0, 1);
 		Graphics::Scale(scale);
+
 		if (nodes.size() > 0)
 			Graphics::RenderPathMesh(nodes, cells, size);
+
 		Graphics::PopMatrix();
 
 		Entity::Render();
