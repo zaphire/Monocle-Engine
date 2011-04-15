@@ -25,6 +25,8 @@
 #include <gl/GLU.h>
 #endif
 
+#include "../Macros.h"
+
 namespace Monocle
 {
 	TTFFontAsset::TTFFontAsset()
@@ -90,6 +92,34 @@ namespace Monocle
 			free(fontCData);
 			fontCData = NULL;
 		}
+	}
+
+	float TTFFontAsset::GetTextWidth(const std::string &text)
+	{
+		float width = 0;
+		for (int i = 0; i < text.size(); i++)
+		{
+			float x=0, y=0;
+			Rect verts;
+			Rect texCoords;
+			GetGlyphData(text[i], &x, &y, verts, texCoords);
+			width += verts.bottomRight.x - verts.topLeft.x;
+		}
+		return width;
+	}
+
+	float TTFFontAsset::GetTextHeight(const std::string &text)
+	{
+		float height = 0;
+		for (int i = 0; i < text.size(); i++)
+		{
+			float x=0, y=0;
+			Rect verts;
+			Rect texCoords;
+			GetGlyphData(text[i], &x, &y, verts, texCoords);
+			height = MAX(height, verts.bottomRight.y - verts.topLeft.y);
+		}
+		return height;
 	}
 
 	void TTFFontAsset::GetGlyphData(char c, float* x, float* y, Rect& verts, Rect& texCoords) const
