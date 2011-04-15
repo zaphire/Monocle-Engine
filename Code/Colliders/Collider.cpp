@@ -282,8 +282,9 @@ namespace Monocle
 
 		if (numNormals > 0)
 		{
-			collisionData->normal = avgNormal/numNormals;
+			collisionData->normal = avgNormal/(float)numNormals;
 			collisionData->penetration = maxPenetration;
+			
 			return true;
 		}
 
