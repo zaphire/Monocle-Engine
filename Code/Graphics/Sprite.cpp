@@ -48,8 +48,8 @@ namespace Monocle
 	Sprite::Sprite()
 		: Graphic(),
 		texture(NULL),
-		width(0),
-		height(0),
+		width(1.0f),
+		height(1.0f),
 		textureOffset(Vector2::zero),
 		textureScale(Vector2::one),
 		blend(BLEND_ALPHA)
@@ -90,7 +90,7 @@ namespace Monocle
 
 		Graphics::SetBlend(blend);
 
-		if (texture != NULL)
+		//if (texture != NULL)
 		{
 			// fade out sprite if it's selected (so we can see behind it)
 			//selectedSpriteEntity == this->entity || 
@@ -110,8 +110,6 @@ namespace Monocle
 				}
 			}
 
-
-			
 			Graphics::RenderQuad(width, height, textureOffset, textureScale);
 		}
 		Graphics::PopMatrix();
@@ -120,7 +118,7 @@ namespace Monocle
 		// show bounds, for editor/selection purposes
 		if (Debug::showBounds || Debug::selectedEntity == entity)
 		{
-			if (texture != NULL)
+			//if (texture != NULL)
 			{
 				Graphics::PushMatrix();
 				Graphics::Translate(position.x, position.y, 0.0f);
@@ -146,21 +144,6 @@ namespace Monocle
 				}
 
 				Graphics::PopMatrix();
-
-				/*
-				if (selectedSpriteEntity == this->entity)
-					Graphics::RenderLineRect(0, 0, 10, 10);
-				*/
-
-				/*
-				if (selectedSpriteEntity == this->entity)
-				{
-					Graphics::RenderLineRect(width*0.5f+5, -height*0.5f-5, 10, 10);
-					Graphics::RenderLineRect(width*0.5f+5, height*0.5f+5, 10, 10);
-					Graphics::RenderLineRect(-width*0.5f-5, -height*0.5f-5, 10, 10);
-					Graphics::RenderLineRect(-width*0.5f-5, height*0.5f+5, 10, 10);
-				}
-				*/
 			}
 		}
 	}
