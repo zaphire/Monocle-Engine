@@ -26,7 +26,10 @@ namespace Monocle
 
 	void XMLFileNode::Write(const std::string &name, const float &value)
 	{
-		element->SetAttribute(name, value);
+		std::ostringstream os;
+		os << value;
+		element->SetAttribute(name, os.str());
+		//element->SetAttribute(name, value);
 	}
 
 	void XMLFileNode::Write(const std::string &name, const std::string &value)

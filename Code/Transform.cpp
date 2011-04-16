@@ -30,7 +30,6 @@ namespace Monocle
 			fileNode->Write("scale", scale);
 	}
 
-
 	void Transform::Load(FileNode *fileNode)
 	{
 		fileNode->Read("position", position);
