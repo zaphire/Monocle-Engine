@@ -23,6 +23,18 @@ namespace Monocle
 	class Graphic;
 	class CollisionData;
 
+	class InvokeData
+	{
+	public:
+		InvokeData(void *me, void (*functionPointer)(void *), float delay);
+		void Update();
+
+		void (*functionPointer) (void *);
+		float delay;
+		bool isDone;
+		void *me;
+	};
+
 	class Entity : public Transform
 	{
 	public:
@@ -111,6 +123,8 @@ namespace Monocle
 			return NULL;
 		}
 
+		void Invoke(void (*functionPointer)(void*), float delay);
+
 		const std::list<Entity*>* GetChildren();
 
 	protected:
@@ -140,12 +154,10 @@ namespace Monocle
 		// only for use by scene
 		//friend class Scene;
 		
-		
-		
 		std::vector<std::string> tags;
 		int layer;
 
-		// is Death enqueued? scene will clean up if so
-		//bool willDie;
+		std::list<InvokeData*> invokes;
+		std::list<InvokeData*> removeInvokes;
 	};
 }

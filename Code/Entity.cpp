@@ -3,10 +3,29 @@
 #include "Collision.h"
 #include "Graphics.h"
 #include "FileNode.h"
+#include "Monocle.h"
 #include <sstream>
 
 namespace Monocle
 {
+	InvokeData::InvokeData(void *me, void (*functionPointer) (void *), float delay)
+		: functionPointer(functionPointer), delay(delay), isDone(false), me(me)
+	{
+	}
+
+	void InvokeData::Update()
+	{
+		if (!isDone)
+		{
+			delay -= Monocle::deltaTime;
+			if (delay < 0)
+			{
+				isDone = true;
+				functionPointer(me);
+			}
+		}
+	}
+
 	Entity::Entity(const Entity &entity)
 		: Transform(entity), followCamera(entity.followCamera), scene(NULL), collider(NULL), graphic(NULL), parent(NULL), depth(entity.depth), isVisible(entity.isVisible), color(entity.color), layer(entity.layer)//, tags(entity.tags)
 	{
@@ -55,6 +74,13 @@ namespace Monocle
 			(*i)->Destroy();
 			delete (*i);
 		}
+
+		// clean up invokes
+		for (std::list<InvokeData*>::iterator i = invokes.begin(); i != invokes.end(); ++i)
+		{
+			delete (*i);
+		}
+		invokes.clear();
 	}
 
 	void Entity::Update()
@@ -63,13 +89,23 @@ namespace Monocle
 		{
 			(*i)->Update();
 		}
-		
-		/*
-		if (graphic != NULL)
+
+		// clean up invokes
+		for(std::list<InvokeData*>::iterator i = invokes.begin(); i != invokes.end(); ++i)
 		{
-			graphic->Update();
+			(*i)->Update();
+
+			if ((*i)->isDone)
+			{
+				removeInvokes.push_back(*i);
+			}
 		}
-		*/
+
+		for (std::list<InvokeData*>::iterator i = removeInvokes.begin(); i != removeInvokes.end(); ++i)
+		{
+			delete *i;
+			invokes.remove(*i);
+		}
 	}
 
 	void Entity::RemoveSelf()
@@ -516,6 +552,12 @@ namespace Monocle
 	const std::list<Entity*>* Entity::GetChildren()
 	{
 		return &children;
+	}
+
+	
+	void Entity::Invoke(void (*functionPointer)(void*), float delay)
+	{
+		invokes.push_back(new InvokeData((void*)this, functionPointer, delay));
 	}
 
 	/*
