@@ -48,6 +48,11 @@ namespace Monocle
 		element->SetAttribute(name, os.str());
 	}
 
+	void XMLFileNode::Write(const std::string &name, const bool &value)
+	{
+		element->SetAttribute(name, (int)value);
+	}
+
 
 	/// READ
 	void XMLFileNode::Read(const std::string &name, int &value)
@@ -99,6 +104,16 @@ namespace Monocle
 			{
 				read >> value.r >> value.g >> value.b >> value.a;
 			}
+		}
+	}
+
+	void XMLFileNode::Read(const std::string &name, bool &value)
+	{
+		if (element->Attribute(name))
+		{
+			std::string string = *element->Attribute(name);
+			std::istringstream read(string);
+			read >> value;
 		}
 	}
 }

@@ -8,14 +8,14 @@
 namespace Monocle
 {
 	PathMesh::PathMesh()
-		: Entity(), size(32), startNode(NULL), cells(1), texture(NULL), pathCollider(NULL)
+		: Entity(), size(32), startNode(NULL), cells(1), texture(NULL), pathCollider(NULL), flipX(false), flipY(false)
 	{
 		///HACK
 		//texture = Assets::RequestTexture("graphics/wallpieces.png");
 	}
 	
 	PathMesh::PathMesh(const std::string &textureFilename, int cells, Node *startNode, int size)
-		: Entity(), size(size), cells(cells), pathCollider(NULL)
+		: Entity(), size(size), cells(cells), pathCollider(NULL), flipX(false), flipY(false)
 	{
 		//const std::string &textureFilename, 
 		texture = Assets::RequestTexture(textureFilename);
@@ -64,7 +64,7 @@ namespace Monocle
 		Graphics::Scale(scale);
 
 		if (nodes.size() > 0)
-			Graphics::RenderPathMesh(nodes, cells, size);
+			Graphics::RenderPathMesh(nodes, cells, size, flipX, flipY);
 
 		Graphics::PopMatrix();
 
@@ -84,6 +84,11 @@ namespace Monocle
 			fileNode->Write("image", texture->GetName());
 		if (pathCollider && pathCollider->radius != 0.0f)
 			fileNode->Write("radius", pathCollider->radius);
+
+		if (flipX)
+			fileNode->Write("flipX", flipX);
+		if (flipY)
+			fileNode->Write("flipY", flipY);
 	}
 
 	void PathMesh::Load(FileNode *fileNode)
@@ -98,6 +103,9 @@ namespace Monocle
 
 		float radius = 0.0f;
 		fileNode->Read("radius", radius);
+
+		fileNode->Read("flipX", flipX);
+		fileNode->Read("flipY", flipY);
 
 		if (texture)
 		{

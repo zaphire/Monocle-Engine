@@ -101,7 +101,7 @@ namespace Monocle
 		static void Vertex(Vector2 vertex);
 		static void EndLine();
 
-		static void RenderPathMesh(const std::vector<Node*> &nodes, int cells, float size);
+		static void RenderPathMesh(const std::vector<Node*> &nodes, int cells, float size, bool flipX=false, bool flipY=false);
 
 	private:
 		

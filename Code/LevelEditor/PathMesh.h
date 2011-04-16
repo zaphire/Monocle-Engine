@@ -22,6 +22,8 @@ namespace Monocle
 
 		int cells;
 
+		bool flipX, flipY;
+
 	private:
 		TextureAsset *texture;
 		int size;

@@ -69,6 +69,8 @@ namespace Monocle
 
 		Debug::showBounds = true;
 		Debug::render = true;
+
+		Game::GetScene()->GetCamera()->rotation = 0;
 	}
 
 	void FringeTileEditor::Disable()

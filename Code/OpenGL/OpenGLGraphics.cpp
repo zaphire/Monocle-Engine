@@ -497,7 +497,7 @@ namespace Monocle
 		glEnd();
 	}
 
-	void Graphics::RenderPathMesh(const std::vector<Node*> &nodes, int cells, float size)
+	void Graphics::RenderPathMesh(const std::vector<Node*> &nodes, int cells, float size, bool flipX, bool flipY)
 	{
 		glBegin(GL_QUADS);
 		for (int i = 0; i < nodes.size()-1; i++)
@@ -547,6 +547,13 @@ namespace Monocle
 				Vector2 texScale = Vector2::one * 1.0f/(float)cells;
 				texOffset.x = (nodes[i]->variant % (cells)) * texScale.x;
 				texOffset.y = (int)(nodes[i]->variant / (cells)) * texScale.y;
+
+				if (flipY)
+				{
+					texOffset.y = 1.0f - texOffset.y;
+					texScale.y = - texScale.y;
+					//printf("%f, %f\n", texOffset.y, texScale.y);
+				}
 			
 				Graphics::SetColor(nodes[i]->color);
 				glTexCoord2f(texOffset.x, texOffset.y);
