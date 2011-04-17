@@ -1,7 +1,6 @@
 #include "../../Monocle.h"
 #include "../../Graphics/Sprite.h"
 #include "../../Graphics/SpriteAnimation.h"
-#include "../../LevelEditor/LevelEditor.h"
 #include "../../Level.h"
 
 // by @NoelFB
