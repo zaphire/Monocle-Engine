@@ -62,7 +62,13 @@ namespace Monocle
 			width = (unsigned int)w;
 			height = (unsigned int)h;
 
+			// mipmaps: OpenGL 1.4 version
+			//glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
+
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+
+			// mipmaps: OpenGL 3.0 version
+			//glGenerateMipmap(GL_TEXTURE_2D);
 
 			Debug::Log("Loaded texture: " + filename);
 		}

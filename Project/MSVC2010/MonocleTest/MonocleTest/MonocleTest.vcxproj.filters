@@ -49,11 +49,11 @@
     <Filter Include="Monocle\Tests\FTE">
       <UniqueIdentifier>{f5cb9620-ef8b-41ac-ac96-cd2a8828c016}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Monocle\Tests\Windows">
-      <UniqueIdentifier>{359e2e0d-6b74-4021-9d89-0af58ffa0042}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Monocle\Tests\PuppetTest">
       <UniqueIdentifier>{f95e904c-8c80-42a9-bb9c-06324b935de5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\Windows">
+      <UniqueIdentifier>{42ca9d1a-a305-48b8-a843-81cb86cd8e2d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -107,9 +107,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Vector2.h">
       <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Windows\WindowsPlatform.h">
-      <Filter>Monocle\Tests\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Tests\Jumper\Jumper.h">
       <Filter>Monocle\Tests\Jumper</Filter>
@@ -216,6 +213,9 @@
     <ClInclude Include="..\..\..\..\Code\LevelEditor\LevelEditor.h">
       <Filter>Monocle\LevelEditor</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Windows\WindowsPlatform.h">
+      <Filter>Monocle\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp">
@@ -253,9 +253,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Vector3.cpp">
       <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Windows\WindowsPlatform.cpp">
-      <Filter>Monocle\Tests\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Tests\Jumper\Jumper.cpp">
       <Filter>Monocle\Tests\Jumper</Filter>
@@ -373,6 +370,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\OpenGL\stb_image.c">
       <Filter>Monocle\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Windows\WindowsPlatform.cpp">
+      <Filter>Monocle\Windows</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
