@@ -95,6 +95,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Lib>
+      <OutputFile>$(OutDir)Monocle$(TargetExt)</OutputFile>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Asset.h" />
@@ -128,19 +131,6 @@
     <ClInclude Include="..\..\..\..\Code\LevelEditor\PathMesh.h" />
     <ClInclude Include="..\..\..\..\Code\Macros.h" />
     <ClInclude Include="..\..\..\..\Code\Monocle.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\glpng.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\png\png.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\png\pngconf.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\crc32.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\deflate.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\inffast.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\inffixed.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\inflate.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\inftrees.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\trees.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\zconf.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\zlib.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\zutil.h" />
     <ClInclude Include="..\..\..\..\Code\OpenGL\stb_truetype.h" />
     <ClInclude Include="..\..\..\..\Code\Platform.h" />
     <ClInclude Include="..\..\..\..\Code\Random.h" />
@@ -193,33 +183,10 @@
     <ClCompile Include="..\..\..\..\Code\Main.cpp" />
     <ClCompile Include="..\..\..\..\Code\Monocle.cpp" />
     <ClCompile Include="..\..\..\..\Code\OpenAL\OpenALAudio.cpp" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\glpng.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\png.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngerror.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngget.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngmem.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngpread.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngread.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngrio.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngrtran.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngrutil.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngset.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngtrans.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\adler32.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\compress.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\crc32.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\deflate.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\gzio.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\infback.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\inffast.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\inflate.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\inftrees.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\trees.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\uncompr.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\zutil.c" />
     <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLGraphics.cpp" />
     <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLTextureAsset.cpp" />
     <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLTTFFontAsset.cpp" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\stb_image.c" />
     <ClCompile Include="..\..\..\..\Code\Random.cpp" />
     <ClCompile Include="..\..\..\..\Code\Rect.cpp" />
     <ClCompile Include="..\..\..\..\Code\Scene.cpp" />

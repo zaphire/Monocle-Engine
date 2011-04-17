@@ -18,15 +18,6 @@
     <Filter Include="Monocle\OpenGL">
       <UniqueIdentifier>{67e43894-0ffd-47d4-b06b-fe37a76b1e97}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Monocle\OpenGL\glpng">
-      <UniqueIdentifier>{b9b6ba1b-157a-466a-836b-c7b5487937fb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Monocle\OpenGL\glpng\zlib">
-      <UniqueIdentifier>{14a527e7-87e7-488b-8c8e-a474ac50f4cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Monocle\OpenGL\glpng\png">
-      <UniqueIdentifier>{8c91ded5-8070-41a1-95b8-81a4d0f3e504}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Monocle\Colliders">
       <UniqueIdentifier>{a834cc3d-7677-41d6-a8ec-d21b830b4b57}</UniqueIdentifier>
     </Filter>
@@ -125,45 +116,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Tests\Pong\Pong.h">
       <Filter>Monocle\Tests\Pong</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\glpng.h">
-      <Filter>Monocle\OpenGL\glpng</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\png\png.h">
-      <Filter>Monocle\OpenGL\glpng\png</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\png\pngconf.h">
-      <Filter>Monocle\OpenGL\glpng\png</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\zutil.h">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\crc32.h">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\deflate.h">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\inffast.h">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\inffixed.h">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\inflate.h">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\inftrees.h">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\trees.h">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\zconf.h">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\zlib.h">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Colliders\CircleCollider.h">
       <Filter>Monocle\Colliders</Filter>
@@ -317,78 +269,6 @@
     <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLTextureAsset.cpp">
       <Filter>Monocle\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\glpng.c">
-      <Filter>Monocle\OpenGL\glpng</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngtrans.c">
-      <Filter>Monocle\OpenGL\glpng\png</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\png.c">
-      <Filter>Monocle\OpenGL\glpng\png</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngerror.c">
-      <Filter>Monocle\OpenGL\glpng\png</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngget.c">
-      <Filter>Monocle\OpenGL\glpng\png</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngmem.c">
-      <Filter>Monocle\OpenGL\glpng\png</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngpread.c">
-      <Filter>Monocle\OpenGL\glpng\png</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngread.c">
-      <Filter>Monocle\OpenGL\glpng\png</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngrio.c">
-      <Filter>Monocle\OpenGL\glpng\png</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngrtran.c">
-      <Filter>Monocle\OpenGL\glpng\png</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngrutil.c">
-      <Filter>Monocle\OpenGL\glpng\png</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngset.c">
-      <Filter>Monocle\OpenGL\glpng\png</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\adler32.c">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\compress.c">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\crc32.c">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\deflate.c">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\gzio.c">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\infback.c">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\inffast.c">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\inflate.c">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\inftrees.c">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\trees.c">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\uncompr.c">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\zutil.c">
-      <Filter>Monocle\OpenGL\glpng\zlib</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Code\OpenAL\OpenALAudio.cpp">
       <Filter>Monocle\OpenAL</Filter>
     </ClCompile>
@@ -490,6 +370,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\LevelEditor\LevelEditor.cpp">
       <Filter>Monocle\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\stb_image.c">
+      <Filter>Monocle\OpenGL</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -3,23 +3,24 @@
 #include "../TextureAsset.h"
 #include "../Debug.h"
 
-#include "glpng/glpng.h"
-
 #ifdef MONOCLE_WINDOWS
-	#define WIN32_LEAN_AND_MEAN
-	#include <Windows.h>
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
 #endif
 
 #if defined(MONOCLE_MAC)
-	#include <OpenGL/gl.h>
-	#include <OpenGL/glext.h>
+#include <OpenGL/gl.h>
+#include <OpenGL/glext.h>
 #elif defined(MONOCLE_LINUX)
-	#include <GL/gl.h>
-	#include <GL/glu.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 #else
-	#include <gl/GL.h>
-	#include <gl/GLu.h>
+#include <gl/GL.h>
+#include <gl/GLu.h>
 #endif
+
+#define STBI_HEADER_FILE_ONLY
+#include "stb_image.c"
 
 namespace Monocle
 {
@@ -34,12 +35,11 @@ namespace Monocle
 		this->repeatX = repeatX;
 		this->repeatY = repeatY;
 		this->filename = filename;
-		// only load png for now
-		pngInfo info;
+
 		glGenTextures(1, &texID);
 		glBindTexture(GL_TEXTURE_2D, texID);
 
-		// choose GL_NEAREST or PNG_NOMIPMAPS
+		// choose GL_NEAREST
 		unsigned int glFilter = GL_NEAREST;
 
 		if (filter == FILTER_LINEAR)
@@ -54,13 +54,17 @@ namespace Monocle
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, glRepeatX);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, glRepeatY);
 
-		if (pngLoad(filename.c_str(), PNG_BUILDMIPMAPS, PNG_ALPHA, &info))
+		int w,h,n;
+		unsigned char* data = stbi_load(filename.c_str(), &w, &h, &n, STBI_rgb_alpha);
+
+		if (data)
 		{
-			width = info.Width;
-			height = info.Height;
+			width = (unsigned int)w;
+			height = (unsigned int)h;
+
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
 			Debug::Log("Loaded texture: " + filename);
-			//printf("Size=%i,%i Depth=%i Alpha=%i\n", info.Width, info.Height, info.Depth, info.Alpha);
 		}
 		else
 		{
