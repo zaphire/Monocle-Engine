@@ -8,16 +8,7 @@
 #include <Windows.h>
 #endif
 
-#if defined(MONOCLE_MAC)
-#include <OpenGL/gl.h>
-#include <OpenGL/glext.h>
-#elif defined(MONOCLE_LINUX)
-#include <GL/gl.h>
-#include <GL/glu.h>
-#else
-#include <gl/GL.h>
-#include <gl/GLu.h>
-#endif
+#include "GL/glew.h"
 
 #define STBI_HEADER_FILE_ONLY
 #include "stb_image.c"
@@ -36,8 +27,13 @@ namespace Monocle
 		this->repeatY = repeatY;
 		this->filename = filename;
 
+		
+
 		glGenTextures(1, &texID);
 		glBindTexture(GL_TEXTURE_2D, texID);
+
+		// try to avoid ATI driver bug, see: http://www.opengl.org/wiki/Common_Mistakes#Automatic_mipmap_generation
+		glEnable(GL_TEXTURE_2D);
 
 		// choose GL_NEAREST
 		unsigned int glFilter = GL_NEAREST;
@@ -68,7 +64,7 @@ namespace Monocle
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
 			// mipmaps: OpenGL 3.0 version
-			//glGenerateMipmap(GL_TEXTURE_2D);
+			glGenerateMipmap(GL_TEXTURE_2D);
 
 			Debug::Log("Loaded texture: " + filename);
 		}

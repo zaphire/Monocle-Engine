@@ -12,18 +12,7 @@
 #include "stb_truetype.h"
 
 // OpenGL Headers
-#if defined(MONOCLE_MAC)
-#include <OpenGL/gl.h>
-#include <OpenGL/glext.h>
-#include <OpenGL/glu.h>
-#elif defined(MONOCLE_LINUX)
-#include <GL/gl.h>
-#include <GL/glu.h>
-#else
-#include <windows.h>
-#include <gl/GL.h>
-#include <gl/GLU.h>
-#endif
+#include "GL/glew.h"
 
 #include "../Macros.h"
 

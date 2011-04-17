@@ -133,6 +133,9 @@
     <ClInclude Include="..\..\..\..\Code\LevelEditor\PathMesh.h" />
     <ClInclude Include="..\..\..\..\Code\Macros.h" />
     <ClInclude Include="..\..\..\..\Code\Monocle.h" />
+    <ClInclude Include="..\..\..\..\Code\OpenGL\GL\glew.h" />
+    <ClInclude Include="..\..\..\..\Code\OpenGL\GL\glxew.h" />
+    <ClInclude Include="..\..\..\..\Code\OpenGL\GL\wglew.h" />
     <ClInclude Include="..\..\..\..\Code\OpenGL\stb_truetype.h" />
     <ClInclude Include="..\..\..\..\Code\Platform.h" />
     <ClInclude Include="..\..\..\..\Code\Random.h" />
@@ -185,6 +188,7 @@
     <ClCompile Include="..\..\..\..\Code\Main.cpp" />
     <ClCompile Include="..\..\..\..\Code\Monocle.cpp" />
     <ClCompile Include="..\..\..\..\Code\OpenAL\OpenALAudio.cpp" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\GL\glew.c" />
     <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLGraphics.cpp" />
     <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLTextureAsset.cpp" />
     <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLTTFFontAsset.cpp" />

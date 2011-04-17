@@ -11,22 +11,7 @@
 
 #include <cstdio>
 
-#ifdef MONOCLE_WINDOWS
-	#define WIN32_LEAN_AND_MEAN
-	#include <Windows.h>
-#endif
-
-#if defined(MONOCLE_MAC)
-	#include <OpenGL/gl.h>
-	#include <OpenGL/glext.h>
-	#include <OpenGL/glu.h>
-#elif defined(MONOCLE_LINUX)
-	#include <GL/gl.h>
-	#include <GL/glu.h>
-#else
-	#include <gl/GL.h>
-	#include <gl/GLU.h>
-#endif
+#include "GL/glew.h"
 
 // some opengl/windows init code based on http://nehe.gamedev.net
 
@@ -44,6 +29,13 @@ namespace Monocle
 	{
 		Debug::Log("Graphics::Init");
 		
+		if (GLEW_OK != glewInit())
+		{
+			// GLEW failed!
+			Debug::Log("glewInit failed!");
+			exit(1);
+		}
+
 		glEnable(GL_BLEND);
 		glDisable(GL_LIGHTING);
 		glEnable(GL_TEXTURE_2D);

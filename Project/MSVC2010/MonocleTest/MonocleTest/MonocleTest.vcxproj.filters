@@ -55,6 +55,9 @@
     <Filter Include="Monocle\Windows">
       <UniqueIdentifier>{42ca9d1a-a305-48b8-a843-81cb86cd8e2d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Monocle\OpenGL\GL">
+      <UniqueIdentifier>{9cd65049-d26f-435e-afd0-98483ae1c2eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Vector3.h">
@@ -216,6 +219,15 @@
     <ClInclude Include="..\..\..\..\Code\Windows\WindowsPlatform.h">
       <Filter>Monocle\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\OpenGL\GL\glew.h">
+      <Filter>Monocle\OpenGL\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\OpenGL\GL\glxew.h">
+      <Filter>Monocle\OpenGL\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\OpenGL\GL\wglew.h">
+      <Filter>Monocle\OpenGL\GL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp">
@@ -373,6 +385,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Windows\WindowsPlatform.cpp">
       <Filter>Monocle\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenGL\GL\glew.c">
+      <Filter>Monocle\OpenGL\GL</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
