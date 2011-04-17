@@ -15,6 +15,13 @@ namespace Monocle
 
 		Debug::Log("...Done");
 	}
+
+	void Audio::PlaySFX(const std::string &sfx)
+	{
+		//if (Cast *cast = (Cast*)sfxMap[sfx])
+		{
+		}
+	}
 }
 
 #endif

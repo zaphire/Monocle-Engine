@@ -1,5 +1,6 @@
 #include "CircleCollider.h"
 #include "../CollisionData.h"
+#include <cmath>
 
 namespace Monocle
 {
