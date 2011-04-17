@@ -30,10 +30,10 @@ namespace Monocle
 	};
 	*/
 
-	class FringeTileEditor
+	class LevelEditor
 	{
 	public:
-		FringeTileEditor();
+		LevelEditor();
 		void Init(Scene *scene);
 		void Enable();
 		void Disable();

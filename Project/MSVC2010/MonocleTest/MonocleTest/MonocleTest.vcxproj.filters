@@ -216,9 +216,6 @@
     <ClInclude Include="..\..\..\..\Code\LevelEditor\FringeTile.h">
       <Filter>Monocle\LevelEditor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\LevelEditor\FringeTileEditor.h">
-      <Filter>Monocle\LevelEditor</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Tests\FTE\FTE.h">
       <Filter>Monocle\Tests\FTE</Filter>
     </ClInclude>
@@ -263,6 +260,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Rect.h">
       <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\LevelEditor\LevelEditor.h">
+      <Filter>Monocle\LevelEditor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -449,9 +449,6 @@
     <ClCompile Include="..\..\..\..\Code\LevelEditor\FringeTile.cpp">
       <Filter>Monocle\LevelEditor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\LevelEditor\FringeTileEditor.cpp">
-      <Filter>Monocle\LevelEditor</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Tests\FTE\FTE.cpp">
       <Filter>Monocle\Tests\FTE</Filter>
     </ClCompile>
@@ -490,6 +487,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Rect.cpp">
       <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\LevelEditor\LevelEditor.cpp">
+      <Filter>Monocle\LevelEditor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

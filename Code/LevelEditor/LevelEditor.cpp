@@ -1,4 +1,4 @@
-#include "FringeTileEditor.h"
+#include "LevelEditor.h"
 #include "FringeTile.h"
 #include "../Level.h"
 #include "../Scene.h"
@@ -36,7 +36,7 @@ namespace Monocle
 	}
 	*/
 
-	FringeTileEditor::FringeTileEditor()
+	LevelEditor::LevelEditor()
 		: scene(NULL), selectedEntity(NULL), selectedFringeTile(NULL), isOn(false), state(FTES_NONE), waitForLMBRelease(false), moveAxisLock(0)
 		//, cursor(NULL)
 	{
@@ -55,7 +55,7 @@ namespace Monocle
 		keyScaleUp = KEY_EQUALS;
 	}
 
-	void FringeTileEditor::Init(Scene *scene)
+	void LevelEditor::Init(Scene *scene)
 	{
 		this->scene = scene;
 
@@ -63,7 +63,7 @@ namespace Monocle
 		//scene->Add(cursor);
 	}
 
-	void FringeTileEditor::Enable()
+	void LevelEditor::Enable()
 	{
 		isOn = true;
 
@@ -73,7 +73,7 @@ namespace Monocle
 		Game::GetScene()->GetCamera()->rotation = 0;
 	}
 
-	void FringeTileEditor::Disable()
+	void LevelEditor::Disable()
 	{
 		Select(NULL);
 		isOn = false;
@@ -82,7 +82,7 @@ namespace Monocle
 		Debug::render = false;
 	}
 
-	void FringeTileEditor::Update()
+	void LevelEditor::Update()
 	{
 		if (isOn)
 		{
@@ -121,12 +121,12 @@ namespace Monocle
 		}
 	}
 
-	void FringeTileEditor::UpdateCommand()
+	void LevelEditor::UpdateCommand()
 	{
 
 	}
 
-	void FringeTileEditor::UpdateCamera()
+	void LevelEditor::UpdateCamera()
 	{
 		if (!Input::IsKeyHeld(KEY_LCTRL))
 		{
@@ -188,7 +188,7 @@ namespace Monocle
 		}
 	}
 
-	void FringeTileEditor::UpdateSelect()
+	void LevelEditor::UpdateSelect()
 	{
 		if (Input::IsKeyPressed(KEY_ESCAPE))
 		{
@@ -219,7 +219,7 @@ namespace Monocle
 	}
 
 	template <class T>
-	void FringeTileEditor::CloneEntity(T *t)
+	void LevelEditor::CloneEntity(T *t)
 	{
 		T *newT = new T(*t);
 		Entity *entity = (Entity*)newT;
@@ -228,7 +228,7 @@ namespace Monocle
 		Select(entity);
 	}
 
-	void FringeTileEditor::CloneNode()
+	void LevelEditor::CloneNode()
 	{
 		if (selectedEntity && selectedNode)
 		{
@@ -247,7 +247,7 @@ namespace Monocle
 		}
 	}
 
-	void FringeTileEditor::Select(Entity *entity)
+	void LevelEditor::Select(Entity *entity)
 	{
 		if (entity == NULL)
 			Debug::Log("select none");
@@ -274,7 +274,7 @@ namespace Monocle
 		}
 	}
 
-	void FringeTileEditor::ApplyGrid(Entity *entity, int gridSize)
+	void LevelEditor::ApplyGrid(Entity *entity, int gridSize)
 	{
 		int x = (entity->position.x / gridSize);
 		entity->position.x = (x * gridSize) + gridSize*0.5f;
@@ -284,7 +284,7 @@ namespace Monocle
 		printf("applied grid %d now (%d, %d)\n", gridSize, (int)entity->position.x, (int)entity->position.y);
 	}
 
-	void FringeTileEditor::UpdateOpportunity()
+	void LevelEditor::UpdateOpportunity()
 	{
 		if (waitForLMBRelease && Input::IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
 		{
@@ -488,7 +488,7 @@ namespace Monocle
 		}
 	}
 
-	void FringeTileEditor::UpdateMove()
+	void LevelEditor::UpdateMove()
 	{
 		if (Input::IsKeyPressed(KEY_X))
 		{
@@ -541,7 +541,7 @@ namespace Monocle
 		}
 	}
 
-	void FringeTileEditor::UpdateRotate()
+	void LevelEditor::UpdateRotate()
 	{
 		// let go, return to none state
 		if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || Input::IsKeyPressed(keyRotate) || Input::IsKeyPressed(keySelect))
@@ -578,7 +578,7 @@ namespace Monocle
 		}
 	}
 
-	void FringeTileEditor::UpdateScale()
+	void LevelEditor::UpdateScale()
 	{
 		if (Input::IsKeyPressed(KEY_X))
 		{
@@ -637,7 +637,7 @@ namespace Monocle
 		}
 	}
 
-	void FringeTileEditor::SetState(FringeTileEditorState state)
+	void LevelEditor::SetState(FringeTileEditorState state)
 	{
 		this->state = state;
 	}

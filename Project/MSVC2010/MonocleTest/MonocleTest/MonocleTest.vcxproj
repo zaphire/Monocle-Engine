@@ -94,7 +94,7 @@
     <ClInclude Include="..\..\..\..\Code\Input.h" />
     <ClInclude Include="..\..\..\..\Code\Level.h" />
     <ClInclude Include="..\..\..\..\Code\LevelEditor\FringeTile.h" />
-    <ClInclude Include="..\..\..\..\Code\LevelEditor\FringeTileEditor.h" />
+    <ClInclude Include="..\..\..\..\Code\LevelEditor\LevelEditor.h" />
     <ClInclude Include="..\..\..\..\Code\LevelEditor\Node.h" />
     <ClInclude Include="..\..\..\..\Code\LevelEditor\PathMesh.h" />
     <ClInclude Include="..\..\..\..\Code\Macros.h" />
@@ -158,7 +158,7 @@
     <ClCompile Include="..\..\..\..\Code\Input.cpp" />
     <ClCompile Include="..\..\..\..\Code\Level.cpp" />
     <ClCompile Include="..\..\..\..\Code\LevelEditor\FringeTile.cpp" />
-    <ClCompile Include="..\..\..\..\Code\LevelEditor\FringeTileEditor.cpp" />
+    <ClCompile Include="..\..\..\..\Code\LevelEditor\LevelEditor.cpp" />
     <ClCompile Include="..\..\..\..\Code\LevelEditor\Node.cpp" />
     <ClCompile Include="..\..\..\..\Code\LevelEditor\PathMesh.cpp" />
     <ClCompile Include="..\..\..\..\Code\Main.cpp" />

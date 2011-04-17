@@ -1,5 +1,5 @@
 #include "../../Monocle.h"
-#include "../../LevelEditor/FringeTileEditor.h"
+#include "../../LevelEditor/LevelEditor.h"
 
 using namespace Monocle;
 
@@ -22,7 +22,7 @@ namespace FTE
 		void Update();
 		void End();
 
-		FringeTileEditor fringeTileEditor;
+		LevelEditor levelEditor;
 	};
 
 	extern LevelScene *levelScene;

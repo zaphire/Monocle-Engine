@@ -42,9 +42,9 @@ namespace FTE
 		Graphics::SetBackgroundColor(Color::blue*0.1f + Color::black*0.9f);
 
 		// tell the FTE what scene it is working in
-		fringeTileEditor.Init(this);
+		levelEditor.Init(this);
 		// enable it
-		fringeTileEditor.Enable();
+		levelEditor.Enable();
 		// pause this scene's updating (freeze the game)
 		isPaused = true;
 
@@ -64,7 +64,7 @@ namespace FTE
 		Scene::Update();
 
 		// update the FTE
-		fringeTileEditor.Update();
+		levelEditor.Update();
 
 		if (Input::IsKeyPressed(KEY_S) && Input::IsKeyHeld(KEY_LCTRL))
 		{
@@ -75,15 +75,15 @@ namespace FTE
 		if (Input::IsKeyPressed(KEY_TAB))
 		{
 			// if we're not doing anything in the FTE...
-			if (fringeTileEditor.GetState() == FTES_NONE)
+			if (levelEditor.GetState() == FTES_NONE)
 			{
 				// toggle pause state
 				isPaused = !isPaused;
 
 				if (isPaused)
-					fringeTileEditor.Enable();
+					levelEditor.Enable();
 				else
-					fringeTileEditor.Disable();
+					levelEditor.Disable();
 			}
 		}
 	}
