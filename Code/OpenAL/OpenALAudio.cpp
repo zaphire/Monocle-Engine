@@ -3,6 +3,8 @@
 #include "../Audio.h"
 #include "../Debug.h"
 
+#include "FmodOpenALBridge.h"
+
 namespace Monocle
 {
 	Audio::Audio()
