@@ -8,7 +8,7 @@
 namespace Monocle
 {
 	PathMesh::PathMesh()
-		: Entity(), size(32), startNode(NULL), cells(1), texture(NULL), pathCollider(NULL), flipX(false), flipY(false)
+		: Entity(), size(0.0f), startNode(NULL), cells(1), texture(NULL), pathCollider(NULL), flipX(false), flipY(false)
 	{
 		///HACK
 		//texture = Assets::RequestTexture("graphics/wallpieces.png");
@@ -50,26 +50,32 @@ namespace Monocle
 
 	void PathMesh::Render()
 	{
-		Graphics::SetColor(Color::white);
-		//Graphics::SetColor(Color(0,0,1,0.5f));
-		Graphics::BindTexture(texture);
-		Graphics::PushMatrix();
+		if (texture != NULL || size != 0)
+		{
+			Graphics::SetColor(Color::white);
+			//Graphics::SetColor(Color(0,0,1,0.5f));
+			Graphics::BindTexture(texture);
+			Graphics::PushMatrix();
 
-		if (followCamera == Vector2::zero || (Debug::render && Debug::selectedEntity != this))
-			Graphics::Translate(position.x, position.y, depth);
-		else
-			Graphics::Translate(scene->GetCamera()->position * followCamera + position * (Vector2::one - followCamera));
+			if (followCamera == Vector2::zero || (Debug::render && Debug::selectedEntity != this))
+				Graphics::Translate(position.x, position.y, depth);
+			else
+				Graphics::Translate(scene->GetCamera()->position * followCamera + position * (Vector2::one - followCamera));
 
-		Graphics::Rotate(rotation, 0, 0, 1);
-		Graphics::Scale(scale);
+			Graphics::Rotate(rotation, 0, 0, 1);
+			Graphics::Scale(scale);
 
-		if (nodes.size() > 0)
-			Graphics::RenderPathMesh(nodes, cells, size, flipX, flipY);
+			if (nodes.size() > 0)
+				Graphics::RenderPathMesh(nodes, cells, size, flipX, flipY);
 
-		Graphics::PopMatrix();
+			Graphics::PopMatrix();
 
+		}
 		Entity::Render();
 
+		// HACK: temporary
+		// updates current list of nodes
+		// should only do this when nodes change
 		if (startNode)
 			SetStartNode(startNode);
 	}

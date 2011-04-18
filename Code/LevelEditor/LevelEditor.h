@@ -71,6 +71,7 @@ namespace Monocle
 
 		Vector2 moveOffset;
 		Vector2 moveStartPosition;
+		float moveStartMagnitude;
 		float startRotation;
 		Vector2 startScale;
 

@@ -472,6 +472,7 @@ namespace Monocle
 		{
 			Debug::Log("scale start");
 			moveStartPosition = Input::GetWorldMousePosition();
+			moveStartMagnitude = (Input::GetWorldMousePosition() - selectedEntity->position).GetMagnitude();
 			startScale = selectedEntity->scale;
 			SetState(FTES_SCALE);
 			return;
@@ -595,14 +596,19 @@ namespace Monocle
 				moveAxisLock = 2;
 		}
 
-		Vector2 dir = (Input::GetWorldMousePosition() - moveStartPosition);
-		float mag = fabs(dir.y);
-		if (fabs(dir.x) > fabs(dir.y))
-			mag = fabs(dir.x);
+		Vector2 diff = (Input::GetWorldMousePosition() - selectedEntity->position);
+		float mag = diff.GetMagnitude();
 
-		Vector2 add = Vector2(SIGNOF(selectedEntity->scale.x), SIGNOF(selectedEntity->scale.y)) * mag;
+		Vector2 add = Vector2(SIGNOF(selectedEntity->scale.x), SIGNOF(selectedEntity->scale.y)) * (mag - moveStartMagnitude);
 
-		selectedEntity->scale = startScale + add * 0.01f;
+		//printf("mag: %f add: (%f, %f) scale: (%f, %f)\n", mag, add.x, add.y, selectedEntity->scale.x, selectedEntity->scale.y);
+
+		float scaleSpeed = 1.0f/moveStartMagnitude;
+
+		selectedEntity->scale = startScale + add * scaleSpeed;
+
+		selectedEntity->scale.x = MAX(selectedEntity->scale.x, 0.0f);
+		selectedEntity->scale.y = MAX(selectedEntity->scale.y, 0.0f);
 
 		switch(moveAxisLock)
 		{
