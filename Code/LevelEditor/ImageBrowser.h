@@ -20,7 +20,7 @@ namespace Monocle
 		void ScanDirectory(const std::string &directory);
 	
 	private:
-		void FileCallback(const std::string &filename, void* pointer);	
+		void FileCallback(const std::string &filename, intptr_t pointer);	
 		void NewSelectionImage(const std::string &filename);
 		
 		int selectionWidth, selectionHeight;
