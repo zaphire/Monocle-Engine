@@ -1,6 +1,6 @@
-#include "FTE.h"
+#include "LevelEditorTest.h"
 
-namespace FTE
+namespace LevelEditorTest
 {
 
 	Player::Player()
@@ -41,7 +41,7 @@ namespace FTE
 
 		Graphics::SetBackgroundColor(Color::blue*0.1f + Color::black*0.9f);
 
-		// tell the FTE what scene it is working in
+		// tell the levelEditor what scene it is working in
 		levelEditor.Init(this);
 		// enable it
 		levelEditor.Enable();
@@ -63,7 +63,7 @@ namespace FTE
 	{
 		Scene::Update();
 
-		// update the FTE
+		// update the levelEditor
 		levelEditor.Update();
 
 		if (Input::IsKeyPressed(KEY_S) && Input::IsKeyHeld(KEY_LCTRL))
@@ -74,7 +74,7 @@ namespace FTE
 		// if we hit tab...
 		if (Input::IsKeyPressed(KEY_TAB))
 		{
-			// if we're not doing anything in the FTE...
+			// if we're not doing anything in the levelEditor...
 			if (levelEditor.GetState() == FTES_NONE)
 			{
 				// toggle pause state

@@ -4,7 +4,7 @@
 using namespace Monocle;
 
 // Test the FringeTileEditor
-namespace FTE
+namespace LevelEditorTest
 {
 	class Player : public Entity
 	{
