@@ -1,5 +1,6 @@
 #include "ImageBrowser.h"
 #include "../Input.h"
+#include "MonocleToolkit.h"
 
 namespace Monocle
 {
@@ -8,13 +9,14 @@ namespace Monocle
 	{
 	}
 
-	void SelectionImage::Update()
+	void SelectionImage::Update
 	{
 		Entity::Update();
 	}
 
+	/// IMAGE BROWSER
 	ImageBrowser::ImageBrowser()
-		: Entity(), hasContent(false)
+		: Entity(), selectionWidth(64), selectionHeight(64), hasContent(false)
 	{
 	}
 
@@ -36,10 +38,20 @@ namespace Monocle
 
 	void ImageBrowser::ScanDirectory(const std::string &directory)
 	{
-		// for each file
-			// get file name and type
-			// if type is some kind of image type that we support
-				// create a SelectionImage
-				// add it to the grid/list
+		DestroyChildren();
+		ForEachFile(directory, "bmp|png|jpg|gif|psd", FileCallback(), (void*)this);
+	}
+
+	void ImageBrowser::FileCallback(const std::string &filename, void* pointer)
+	{
+		ImageBrowser *imageBrowser = (ImageBrowser*)pointer;
+		imageBrowser->NewSelectionImage(filename);
+	}
+
+	void ImageBrowser::NewSelectionImage(const std::string &filename)
+	{
+		SelectionImage *selectionImage = new SelectionImage(filename, selectionWidth, selectionHeight);
+		Add(selectionImage);
+		selectionImages.push_back(selectionImage);
 	}
 }

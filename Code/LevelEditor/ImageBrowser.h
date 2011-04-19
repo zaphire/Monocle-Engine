@@ -18,7 +18,13 @@ namespace Monocle
                 void Update();
                 void Render();
 		void ScanDirectory(const std::string &directory);
+	
 	private:
+		void FileCallback(const std::string &filename, void* pointer);	
+		void NewSelectionImage(const std::string &filename);
+		
+		int selectionWidth, selectionHeight;
 		bool hasContent;
+		std::list<SelectionImage*> selectionImages;
 	};
 }
