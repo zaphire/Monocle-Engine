@@ -6,11 +6,21 @@
 
 namespace Monocle
 {
-	SelectionImage::SelectionImage(const std::string &image, int width, int height)
+	SelectionImage::SelectionImage(const std::string &image, int size)
 		: Entity()
 	{
-		SetGraphic(new Sprite(image, width, height));
-
+		Sprite *sprite = NULL;
+		SetGraphic(sprite = new Sprite(image));
+		if (sprite->width > sprite->height)
+		{
+			sprite->height = (sprite->height/sprite->width) * size;
+			sprite->width = size;
+		}
+		else
+		{
+			sprite->width = (sprite->width/sprite->height) * size;
+			sprite->height = size;
+		}
 	}
 
 	void SelectionImage::Update()
@@ -27,7 +37,7 @@ namespace Monocle
 
 	/// IMAGE BROWSER
 	ImageBrowser::ImageBrowser()
-		: Entity(), selectionWidth(128), selectionHeight(128), hasContent(false)
+		: Entity(), selectionImageSize(128), hasContent(false)
 	{
 		SetLayer(-85);
 		followCamera = Vector2::one;
@@ -82,9 +92,9 @@ namespace Monocle
 
 	void ImageBrowser::NewSelectionImage(const std::string &filename)
 	{
-		SelectionImage *selectionImage = new SelectionImage(filename, selectionWidth, selectionHeight);
+		SelectionImage *selectionImage = new SelectionImage(filename, selectionImageSize);
 		grid->Add(selectionImage);
-		selectionImage->position = Vector2(0.0f, selectionWidth * selectionImages.size());
+		selectionImage->position = Vector2(0.0f, selectionImageSize * selectionImages.size());
 		
 		selectionImages.push_back(selectionImage);
 
