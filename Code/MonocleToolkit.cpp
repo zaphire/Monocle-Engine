@@ -4,6 +4,9 @@
 	#define WIN32_LEAN_AND_MEAN
 	#include <Windows.h>
 	#include <ShellAPI.h>
+#elif  defined(MONOCLE_LINUX)
+	#include <sys/types.h>
+	#include <dirent.h>
 #endif
 
 namespace Monocle
@@ -61,7 +64,7 @@ namespace Monocle
 		//stringToLower(type);
 		Debug::Log("forEachFile - path: " + path + " type: " + type);
 
-#if defined(BBGE_BUILD_UNIX)
+#if defined(MONOCLE_LINUX)
 		DIR *dir=0;
 		dir = opendir(path.c_str());
 		if (dir)
@@ -92,9 +95,8 @@ namespace Monocle
 		{
 			Debug::Log("FAILED TO OPEN DIR");
 		}
-#endif
 
-#ifdef BBGE_BUILD_WINDOWS
+#elif defined(MONOCLE_WINDOWS)
 		BOOL            fFinished;
 		HANDLE          hList;
 		TCHAR           szDir[MAX_PATH+1];

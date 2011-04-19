@@ -8,7 +8,7 @@ namespace Monocle
 	class FringeTile;
 	class Scene;
 	class Entity;
-
+	class ImageBrowser;
 
 	enum FringeTileEditorState
 	{
@@ -50,7 +50,6 @@ namespace Monocle
 		void UpdateMove();
 		void UpdateRotate();
 		void UpdateScale();
-		void UpdateCommand();
 
 		void ApplyGrid(Entity *entity, int gridSize);
 
@@ -65,7 +64,7 @@ namespace Monocle
 
 		FringeTile *selectedFringeTile;
 		Node *selectedNode;
-
+		ImageBrowser *imageBrowser;
 		Scene *scene;
 		bool isOn;
 
@@ -95,6 +94,7 @@ namespace Monocle
 		KeyCode keyDelete;
 		KeyCode keyScaleDown;
 		KeyCode keyScaleUp;
+		KeyCode keyOpenImageBrowser;
 
 		/// NODE
 		void CloneNode();

@@ -40,7 +40,7 @@ namespace Monocle
 	void ImageBrowser::ScanDirectory(const std::string &directory)
 	{
 		DestroyChildren();
-		ForEachFile(directory, "bmp|png|jpg|gif|psd", FileCallback(), (intptr_t)this);
+		ForEachFile(directory, "png", &ImageBrowser::FileCallback, (intptr_t)this);
 	}
 
 	void ImageBrowser::FileCallback(const std::string &filename, intptr_t pointer)

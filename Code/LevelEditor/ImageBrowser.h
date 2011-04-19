@@ -16,11 +16,11 @@ namespace Monocle
 	public:
 	        ImageBrowser();
                 void Update();
-                void Render();
+                //void Render();
 		void ScanDirectory(const std::string &directory);
 	
 	private:
-		void FileCallback(const std::string &filename, intptr_t pointer);	
+		static void FileCallback(const std::string &filename, intptr_t pointer);
 		void NewSelectionImage(const std::string &filename);
 		
 		int selectionWidth, selectionHeight;

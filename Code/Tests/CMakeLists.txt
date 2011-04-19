@@ -1,5 +1,5 @@
 add_subdirectory(Flash)
-add_subdirectory(LevelEditorTest)
+add_subdirectory(LevelEditor)
 add_subdirectory(Jumper)
 add_subdirectory(Ogmo)
 add_subdirectory(Pong)

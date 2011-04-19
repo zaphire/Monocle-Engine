@@ -6,6 +6,7 @@
 #include "../Monocle.h"
 #include <cstdio>
 #include <cmath>
+#include "ImageBrowser.h"
 
 namespace Monocle
 {
@@ -37,7 +38,8 @@ namespace Monocle
 	*/
 
 	LevelEditor::LevelEditor()
-		: scene(NULL), selectedEntity(NULL), selectedFringeTile(NULL), isOn(false), state(FTES_NONE), waitForLMBRelease(false), moveAxisLock(0)
+		: scene(NULL), selectedEntity(NULL), selectedFringeTile(NULL), isOn(false), 
+		state(FTES_NONE), waitForLMBRelease(false), moveAxisLock(0), imageBrowser(NULL)
 		//, cursor(NULL)
 	{
 		keyMove = KEY_Q;
@@ -53,6 +55,7 @@ namespace Monocle
 		keyDelete = KEY_BACKSPACE;
 		keyScaleDown = KEY_MINUS;
 		keyScaleUp = KEY_EQUALS;
+		keyOpenImageBrowser = KEY_F1;
 	}
 
 	void LevelEditor::Init(Scene *scene)
@@ -82,6 +85,7 @@ namespace Monocle
 		Debug::render = false;
 	}
 
+	// main level editor update function
 	void LevelEditor::Update()
 	{
 		if (isOn)
@@ -101,9 +105,9 @@ namespace Monocle
 					UpdateOpportunity();
 					break;
 
-				case FTES_COMMAND:
-					UpdateCommand();
-					break;
+				//case FTES_COMMAND:
+				//	UpdateCommand();
+				//	break;
 
 				case FTES_MOVE:
 					UpdateMove();
@@ -121,11 +125,7 @@ namespace Monocle
 		}
 	}
 
-	void LevelEditor::UpdateCommand()
-	{
-
-	}
-
+	// update the camera controls
 	void LevelEditor::UpdateCamera()
 	{
 		if (!Input::IsKeyHeld(KEY_LCTRL))
@@ -188,10 +188,12 @@ namespace Monocle
 		}
 	}
 
+	// update entity selection
 	void LevelEditor::UpdateSelect()
 	{
 		if (Input::IsKeyPressed(KEY_ESCAPE))
 		{
+			// toggle rendering extra stuff if we hit escape
 			if (selectedEntity == NULL)
 			{
 				Debug::showBounds = !Debug::showBounds;
@@ -200,13 +202,14 @@ namespace Monocle
 		}
 		else
 		{
+			// only update selection if bounds are visible
 			if (Debug::showBounds == true)
 			{
+				// if users presses LMB or the selection key
 				if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || Input::IsKeyPressed(keySelect))
 				{
-					Vector2 worldMousePosition = Input::GetWorldMousePosition();
-					//"FringeTile"
-					Entity *entity = scene->GetNearestEntityByControlPoint(worldMousePosition, "", selectedEntity);
+					// get the nearest entity by checking for the world mouse position in control points, from scene
+					Entity *entity = scene->GetNearestEntityByControlPoint(Input::GetWorldMousePosition(), "", selectedEntity);
 					if (entity)
 					{
 						Select(entity);
@@ -228,6 +231,7 @@ namespace Monocle
 		Select(entity);
 	}
 
+	// cloning a node is a special case for now
 	void LevelEditor::CloneNode()
 	{
 		if (selectedEntity && selectedNode)
@@ -486,6 +490,18 @@ namespace Monocle
 			moveAxisLock = 0;
 			SetState(FTES_MOVE);
 			return;
+		}
+
+		if (Input::IsKeyPressed(keyOpenImageBrowser))
+		{
+			if (imageBrowser != NULL)
+			{
+				scene->Remove(imageBrowser);
+				imageBrowser = NULL;
+			}
+			imageBrowser = new ImageBrowser();
+			scene->Add(imageBrowser);
+			imageBrowser->ScanDirectory("graphics");
 		}
 	}
 
