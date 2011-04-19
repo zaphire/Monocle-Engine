@@ -17,6 +17,7 @@ namespace Monocle
 		FTES_ROTATE,
 		FTES_SCALE,
 		FTES_COMMAND,
+		FTES_BROWSER,
 		FTES_MAX
 	};
 

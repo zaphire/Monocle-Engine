@@ -56,7 +56,7 @@ namespace Monocle
 		keyDelete = KEY_BACKSPACE;
 		keyScaleDown = KEY_MINUS;
 		keyScaleUp = KEY_EQUALS;
-		keyOpenImageBrowser = KEY_F1;
+		keyOpenImageBrowser = KEY_F5;
 	}
 
 	void LevelEditor::Init(Scene *scene)
@@ -91,39 +91,56 @@ namespace Monocle
 	{
 		if (isOn)
 		{
-			UpdateCamera();
-			UpdateCommands();
-
-			if (state == FTES_NONE)
+			if (state == FTES_BROWSER)
 			{
-				UpdateSelect();
-			}
-
-			if (selectedEntity)
-			{
-				switch (state)
+				//temphack
+				if (imageBrowser)
 				{
-				case FTES_NONE:
-					UpdateOpportunity();
-					break;
-
-				//case FTES_COMMAND:
-				//	UpdateCommand();
-				//	break;
-
-				case FTES_MOVE:
-					UpdateMove();
-					break;
-
-				case FTES_ROTATE:
-					UpdateRotate();
-					break;
-
-				case FTES_SCALE:
-					UpdateScale();
-					break;
+					if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+					{
+						scene->Remove(imageBrowser);
+						imageBrowser = NULL;
+						SetState(FTES_NONE);
+					}
 				}
 			}
+			else
+			{
+				UpdateCamera();
+				UpdateCommands();
+
+				if (state == FTES_NONE)
+				{
+					UpdateSelect();
+				}
+
+				if (selectedEntity)
+				{
+					switch (state)
+					{
+					case FTES_NONE:
+						UpdateOpportunity();
+						break;
+
+						//case FTES_COMMAND:
+						//	UpdateCommand();
+						//	break;
+
+					case FTES_MOVE:
+						UpdateMove();
+						break;
+
+					case FTES_ROTATE:
+						UpdateRotate();
+						break;
+
+					case FTES_SCALE:
+						UpdateScale();
+						break;
+					}
+				}
+			}
+
 		}
 	}
 
@@ -131,6 +148,8 @@ namespace Monocle
 	{
 		if (Input::IsKeyPressed(keyOpenImageBrowser))
 		{
+			SetState(FTES_BROWSER);
+
 			if (imageBrowser != NULL)
 			{
 				scene->Remove(imageBrowser);

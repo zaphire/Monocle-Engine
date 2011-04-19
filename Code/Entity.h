@@ -90,6 +90,9 @@ namespace Monocle
 		void SetLayer(int layer);
 		void AdjustLayer(int layerAdjustAmount);
 
+		// is our layer # in the debug render range
+		bool IsDebugLayer();
+
 		void SetCollider(Collider *collider);
 		void SetGraphic(Graphic *graphic);
 

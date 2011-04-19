@@ -43,6 +43,16 @@ namespace Monocle
 				(*i)->Update();
 			}
 		}
+		else
+		{
+			for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+			{
+				if (!(*i)->IsDebugLayer())
+				{
+					(*i)->Update();
+				}
+			}
+		}
 
 		//Resolve adds and removes
 		ResolveEntityChanges();

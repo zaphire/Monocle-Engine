@@ -2,6 +2,7 @@
 #include "../Input.h"
 #include "../MonocleToolkit.h"
 #include "../Graphics/Sprite.h"
+#include "../Game.h"
 
 namespace Monocle
 {
@@ -28,12 +29,15 @@ namespace Monocle
 	ImageBrowser::ImageBrowser()
 		: Entity(), selectionWidth(128), selectionHeight(128), hasContent(false)
 	{
-		SetLayer(-80);
+		SetLayer(-85);
 		followCamera = Vector2::one;
 	}
 
 	void ImageBrowser::Update()
 	{
+		scale = Game::GetScene()->GetCamera()->scale;
+		scale = Vector2(1/scale.x, 1/scale.y);
+
 		Entity::Update();
 
 		if (hasContent)

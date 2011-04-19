@@ -127,7 +127,7 @@ namespace Monocle
 	{
 		Graphics::PushMatrix();
 
-		if (followCamera == Vector2::zero || (Debug::render && Debug::selectedEntity != this))
+		if (followCamera == Vector2::zero || (Debug::render && Debug::selectedEntity != this && IsDebugLayer()))
 			Graphics::Translate(position.x, position.y, depth);
 		else
 			Graphics::Translate(scene->GetCamera()->position * followCamera + position * (Vector2::one - followCamera));
@@ -158,7 +158,7 @@ namespace Monocle
 
 		Graphics::PopMatrix();
 		
-		if (Debug::showBounds)
+		if (Debug::showBounds && IsDebugLayer())
 		{
 			Vector2 offset;
 			if (parent)
@@ -269,6 +269,14 @@ namespace Monocle
 	bool Entity::IsLayer(int layer)
 	{
 		return this->layer == layer;
+	}
+
+	bool Entity::IsDebugLayer()
+	{
+		if (parent)
+			return parent->IsDebugLayer();
+
+		return layer > Debug::layerMin && layer < Debug::layerMax;
 	}
 
 	///TODO: enqueue for safety
@@ -409,7 +417,7 @@ namespace Monocle
 
 		for (std::list<Entity*>::reverse_iterator i = entityChain.rbegin(); i != entityChain.rend(); ++i)
 		{
-			Graphics::Translate((*i)->position);
+			Graphics::Translate(scene->GetCamera()->position * (*i)->followCamera + (*i)->position * (Vector2::one - (*i)->followCamera));
 			Graphics::Rotate((*i)->rotation, 0, 0, 1);
 			Graphics::Scale((*i)->scale);
 		}
