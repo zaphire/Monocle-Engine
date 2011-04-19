@@ -128,6 +128,8 @@ namespace Monocle
 		const std::list<Entity*>* GetChildren();
 
 	protected:
+		void DestroyChildren();
+
 		friend class Scene;
 
 		Entity *GetNearestEntityByControlPoint(const Vector2 &position, const std::string &tag, Entity *ignoreEntity, float &smallestSqrMag);

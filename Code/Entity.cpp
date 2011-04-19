@@ -68,12 +68,7 @@ namespace Monocle
 			graphic = NULL;
 		}
 
-		// clean up children
-		for (std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
-		{
-			(*i)->Destroy();
-			delete (*i);
-		}
+		DestroyChildren();
 
 		// clean up invokes
 		for (std::list<InvokeData*>::iterator i = invokes.begin(); i != invokes.end(); ++i)
@@ -81,6 +76,18 @@ namespace Monocle
 			delete (*i);
 		}
 		invokes.clear();
+	}
+
+	void Entity::DestroyChildren()
+	{
+		// clean up children
+		for (std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
+		{
+			(*i)->Destroy();
+			delete (*i);
+		}
+
+		children.clear();
 	}
 
 	void Entity::Update()

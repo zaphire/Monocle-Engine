@@ -7,9 +7,10 @@ namespace Monocle
 	SelectionImage::SelectionImage(const std::string &image, int width, int height)
 		: Entity()
 	{
+		SetLayer(80);
 	}
 
-	void SelectionImage::Update
+	void SelectionImage::Update()
 	{
 		Entity::Update();
 	}
