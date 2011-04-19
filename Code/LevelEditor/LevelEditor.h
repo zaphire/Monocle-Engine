@@ -50,6 +50,7 @@ namespace Monocle
 		void UpdateMove();
 		void UpdateRotate();
 		void UpdateScale();
+		void UpdateCommands();
 
 		void ApplyGrid(Entity *entity, int gridSize);
 

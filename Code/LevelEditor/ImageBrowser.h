@@ -26,5 +26,6 @@ namespace Monocle
 		int selectionWidth, selectionHeight;
 		bool hasContent;
 		std::list<SelectionImage*> selectionImages;
+		Entity *grid;
 	};
 }

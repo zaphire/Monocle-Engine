@@ -23,5 +23,5 @@ namespace Monocle
 	// open a local file or remote URL
 	void OpenURL(const std::string &url);
 	std::string GetWorkingDirectory();
-	void ForEachFile(const std::string &path, const std::string &type, void callback(const std::string &filename, intptr_t param), intptr_t param);
+	void ForEachFile(std::string path, std::string type, void callback(const std::string &filename, intptr_t param), intptr_t param);
 }

@@ -3,7 +3,7 @@
 #include "Collision.h"
 #include "Graphics.h"
 #include "FileNode.h"
-#include "Monocle.h"
+#include "MonocleToolkit.h"
 #include <sstream>
 
 namespace Monocle

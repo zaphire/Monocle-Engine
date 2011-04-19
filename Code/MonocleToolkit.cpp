@@ -56,8 +56,11 @@ namespace Monocle
 	}
 
 
-	void ForEachFile(const std::string &path, const std::string &type, void callback(const std::string &filename, intptr_t param), intptr_t param)
+	void ForEachFile(std::string path, std::string type, void callback(const std::string &filename, intptr_t param), intptr_t param)
 	{
+		//std::string path = inPath;
+		//std::string type = "." + inType;
+		
 		if (path.empty()) return;
 
 		//stringToLowerUserData(path);
@@ -99,37 +102,25 @@ namespace Monocle
 #elif defined(MONOCLE_WINDOWS)
 		BOOL            fFinished;
 		HANDLE          hList;
-		TCHAR           szDir[MAX_PATH+1];
 		WIN32_FIND_DATA FileData;
 
 		int end = path.size()-1;
 		if (path[end] != '/')
-			path[end] += '/';
+			path += "/";
 
-		// Get the proper directory path
-		// \\ %s\\*
+		std::string fullPath = Assets::GetContentPath() + path;
+		std::string searchPath = fullPath + "\\*";
 
-
-
-		if (type.find('.')==std::string::npos)
+		if (type.find('.') == std::string::npos)
 		{
 			type = "." + type;
 		}
 
-
-		//std::string add = "%s*" + type;
-
-		//sprintf(szDir, "%s*", path.c_str());
-		sprintf(szDir, "%s\\*", path.c_str());
-
-		stringToUpper(type);
-
 		// Get the first file
-		hList = FindFirstFile(szDir, &FileData);
+		hList = FindFirstFile(searchPath.c_str(), &FileData);
 		if (hList == INVALID_HANDLE_VALUE)
 		{
-			//printf("No files found\n\n");
-			Debug::Log("No files of type " + type + " found in path " + path);
+			Debug::Log("No files found.");
 		}
 		else
 		{
@@ -137,31 +128,19 @@ namespace Monocle
 			fFinished = FALSE;
 			while (!fFinished)
 			{
-				// Check the object is a directory or not
-				//printf("%*s%s\n", indent, "", FileData.cFileName);
 				std::string filename = FileData.cFileName;
-				//Debug::Log("found: " + filename);
 				if (filename.size()>4)
 				{
-
 					std::string filetype = filename.substr(filename.size()-4, filename.size());
-					stringToUpper(filetype);
-					//Debug::Log("comparing: " + filetype + " and: " + type);
 					if (filetype==type)
 					{
+						Debug::Log("calling callback for file: " + path+filename);
 						callback(path+filename, param);
 					}
 				}
 
-
 				if (!FindNextFile(hList, &FileData))
 				{
-					/*
-					   if (GetLastError() == ERROR_NO_MORE_FILES)
-					   {
-					   fFinished = TRUE;
-					   }
-					 */
 					fFinished = TRUE;
 				}
 			}

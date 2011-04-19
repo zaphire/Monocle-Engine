@@ -13,13 +13,13 @@
 	//#define TEST_game
 	//#define TEST_PONG
 	//#define TEST_JUMPER
-	//#define TEST_FLASH
 	//#define TEST_OGMO
-	//#define TEST_FTE
-	#define TEST_PUPPETTEST
+	#define TEST_LEVELEDITOR
+	//#define TEST_FLASH
+	//#define TEST_PUPPETTEST
 #endif
 
-#ifdef TEST_PONG
+#ifdef TEST_PONG 
 	#include "Tests/Pong/Pong.h"
 #endif
 
@@ -35,8 +35,8 @@
 	#include "Tests/Ogmo/Ogmo.h"
 #endif
 
-#ifdef TEST_FTE
-	#include "Tests/FTE/FTE.h"
+#ifdef TEST_LEVELEDITOR
+	#include "Tests/LevelEditor/LevelEditorTest.h"
 #endif
 
 #ifdef TEST_PUPPETTEST
@@ -67,8 +67,8 @@ int main(void)
 	game->SetScene(new Ogmo::World());
 #endif
 
-#ifdef TEST_FTE
-	game->SetScene(new FTE::LevelScene());
+#ifdef TEST_LEVELEDITOR
+	game->SetScene(new LevelEditorTest::LevelScene());
 #endif
 
 #ifdef TEST_PUPPETTEST

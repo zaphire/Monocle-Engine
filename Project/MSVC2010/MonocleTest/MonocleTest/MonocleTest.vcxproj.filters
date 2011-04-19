@@ -46,9 +46,6 @@
     <Filter Include="Monocle\LevelEditor">
       <UniqueIdentifier>{bbc21fce-4b4f-4566-9f94-f58bc48da817}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Monocle\Tests\FTE">
-      <UniqueIdentifier>{f5cb9620-ef8b-41ac-ac96-cd2a8828c016}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Monocle\Tests\PuppetTest">
       <UniqueIdentifier>{f95e904c-8c80-42a9-bb9c-06324b935de5}</UniqueIdentifier>
     </Filter>
@@ -57,6 +54,9 @@
     </Filter>
     <Filter Include="Monocle\OpenGL\GL">
       <UniqueIdentifier>{9cd65049-d26f-435e-afd0-98483ae1c2eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\Tests\LevelEditor">
+      <UniqueIdentifier>{f5cb9620-ef8b-41ac-ac96-cd2a8828c016}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -168,9 +168,6 @@
     <ClInclude Include="..\..\..\..\Code\LevelEditor\FringeTile.h">
       <Filter>Monocle\LevelEditor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Tests\FTE\FTE.h">
-      <Filter>Monocle\Tests\FTE</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Code\LevelEditor\PathMesh.h">
       <Filter>Monocle\LevelEditor</Filter>
     </ClInclude>
@@ -227,6 +224,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\OpenGL\GL\wglew.h">
       <Filter>Monocle\OpenGL\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\LevelEditor\ImageBrowser.h">
+      <Filter>Monocle\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Tests\LevelEditor\LevelEditorTest.h">
+      <Filter>Monocle\Tests\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\MonocleToolkit.h">
+      <Filter>Monocle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -338,9 +344,6 @@
     <ClCompile Include="..\..\..\..\Code\LevelEditor\FringeTile.cpp">
       <Filter>Monocle\LevelEditor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Tests\FTE\FTE.cpp">
-      <Filter>Monocle\Tests\FTE</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Code\LevelEditor\PathMesh.cpp">
       <Filter>Monocle\LevelEditor</Filter>
     </ClCompile>
@@ -388,6 +391,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\OpenGL\GL\glew.c">
       <Filter>Monocle\OpenGL\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\LevelEditor\ImageBrowser.cpp">
+      <Filter>Monocle\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Tests\LevelEditor\LevelEditorTest.cpp">
+      <Filter>Monocle\Tests\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Tests\LevelEditor\Main.cpp">
+      <Filter>Monocle\Tests\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\MonocleToolkit.cpp">
+      <Filter>Monocle</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

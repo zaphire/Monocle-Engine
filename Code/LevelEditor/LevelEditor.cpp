@@ -3,7 +3,8 @@
 #include "../Level.h"
 #include "../Scene.h"
 #include "../Input.h"
-#include "../Monocle.h"
+#include "../MonocleToolkit.h"
+#include "../Game.h"
 #include <cstdio>
 #include <cmath>
 #include "ImageBrowser.h"
@@ -91,6 +92,7 @@ namespace Monocle
 		if (isOn)
 		{
 			UpdateCamera();
+			UpdateCommands();
 
 			if (state == FTES_NONE)
 			{
@@ -122,6 +124,21 @@ namespace Monocle
 					break;
 				}
 			}
+		}
+	}
+
+	void LevelEditor::UpdateCommands()
+	{
+		if (Input::IsKeyPressed(keyOpenImageBrowser))
+		{
+			if (imageBrowser != NULL)
+			{
+				scene->Remove(imageBrowser);
+				imageBrowser = NULL;
+			}
+			imageBrowser = new ImageBrowser();
+			scene->Add(imageBrowser);
+			imageBrowser->ScanDirectory("graphics");
 		}
 	}
 
@@ -492,17 +509,7 @@ namespace Monocle
 			return;
 		}
 
-		if (Input::IsKeyPressed(keyOpenImageBrowser))
-		{
-			if (imageBrowser != NULL)
-			{
-				scene->Remove(imageBrowser);
-				imageBrowser = NULL;
-			}
-			imageBrowser = new ImageBrowser();
-			scene->Add(imageBrowser);
-			imageBrowser->ScanDirectory("graphics");
-		}
+
 	}
 
 	void LevelEditor::UpdateMove()

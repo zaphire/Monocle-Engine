@@ -1,28 +1,41 @@
 #include "ImageBrowser.h"
 #include "../Input.h"
-#include "MonocleToolkit.h"
+#include "../MonocleToolkit.h"
+#include "../Graphics/Sprite.h"
 
 namespace Monocle
 {
 	SelectionImage::SelectionImage(const std::string &image, int width, int height)
 		: Entity()
 	{
-		SetLayer(80);
+		SetGraphic(new Sprite(image, width, height));
+
 	}
 
 	void SelectionImage::Update()
 	{
 		Entity::Update();
+
+		Vector2 diff = Input::GetWorldMousePosition() - GetWorldPosition();//position - Graphics::GetScreenCenter();
+		float mag = (1.0f-(diff.GetMagnitude()/256.0f)) * 1.0f;
+		if (mag < 0.5f) mag = 0.5f;
+		if (mag > 1.25f) mag = 1.25f;
+		scale = Vector2::one * mag;
+		printf("scale %f, %f\n", scale.x, scale.y);
 	}
 
 	/// IMAGE BROWSER
 	ImageBrowser::ImageBrowser()
-		: Entity(), selectionWidth(64), selectionHeight(64), hasContent(false)
+		: Entity(), selectionWidth(128), selectionHeight(128), hasContent(false)
 	{
+		SetLayer(-80);
+		followCamera = Vector2::one;
 	}
 
 	void ImageBrowser::Update()
 	{
+		Entity::Update();
+
 		if (hasContent)
 		{
 			for (int key = (int)KEY_A; key <= (int)KEY_Z; key++)
@@ -34,12 +47,26 @@ namespace Monocle
 					// if key A is pressed again, select Aardvark2
 				}
 			}
+
+			grid->position += Platform::mouseWheel * Vector2::down * 0.25f;
+			printf("position %f, %f\n", grid->position.x, grid->position.y);
 		}
 	}
 
 	void ImageBrowser::ScanDirectory(const std::string &directory)
 	{
+		hasContent = false;
 		DestroyChildren();
+
+		Entity *bg = new Entity();
+		bg->SetGraphic(new Sprite("", 128, 600));
+		bg->color = Color::black;
+		bg->color.a = 0.75f;
+		Add(bg);
+
+		grid = new Entity();
+		Add(grid);
+
 		ForEachFile(directory, "png", &ImageBrowser::FileCallback, (intptr_t)this);
 	}
 
@@ -52,7 +79,11 @@ namespace Monocle
 	void ImageBrowser::NewSelectionImage(const std::string &filename)
 	{
 		SelectionImage *selectionImage = new SelectionImage(filename, selectionWidth, selectionHeight);
-		Add(selectionImage);
+		grid->Add(selectionImage);
+		selectionImage->position = Vector2(0.0f, selectionWidth * selectionImages.size());
+		
 		selectionImages.push_back(selectionImage);
+
+		hasContent = true;
 	}
 }
