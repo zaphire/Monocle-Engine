@@ -71,6 +71,7 @@ namespace Monocle
 	{
 		hasContent = false;
 		DestroyChildren();
+		selectionImages.clear();
 
 		Entity *bg = new Entity();
 		bg->SetGraphic(new Sprite("", 128, 600));
@@ -88,6 +89,17 @@ namespace Monocle
 	{
 		ImageBrowser *imageBrowser = (ImageBrowser*)pointer;
 		imageBrowser->NewSelectionImage(filename);
+	}
+
+	void ImageBrowser::SetImages(const std::vector<std::string> &images)
+	{
+		DestroyChildren();
+		selectionImages.clear();
+
+		for (int i = 0; i < images.size(); i++)
+		{
+			NewSelectionImage(images[i]);
+		}
 	}
 
 	void ImageBrowser::NewSelectionImage(const std::string &filename)

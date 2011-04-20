@@ -398,9 +398,6 @@
     <ClCompile Include="..\..\..\..\Code\Tests\LevelEditor\LevelEditorTest.cpp">
       <Filter>Monocle\Tests\LevelEditor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Tests\LevelEditor\Main.cpp">
-      <Filter>Monocle\Tests\LevelEditor</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Code\MonocleToolkit.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>

@@ -30,7 +30,10 @@ namespace Monocle
 		   CFStringRef str = CFStringCreateWithCString (0, url.c_str(), 0);
 		   CFURLRef ref = CFURLCreateWithString(kCFAllocatorDefault, str, NULL);
 		   LSOpenCFURLRef(ref, 0);
-		   CFRelease(ref);
+		   CFRelease(ref);		if (type.find('.') == std::string::npos)
+		{
+			type = "." + type;
+		}
 		   CFRelease(str);
 		 */
 #elif defined(MONOCLE_LINUX)
@@ -66,10 +69,22 @@ namespace Monocle
 		//stringToLowerUserData(path);
 		//stringToLower(type);
 		Debug::Log("forEachFile - path: " + path + " type: " + type);
+		
+		int end = path.size()-1;
+		if (path[end] != '/')
+			path += "/";
+
+		if (type.find('.') == std::string::npos)
+		{
+			type = "." + type;
+		}
+
+		std::string fullPath = Assets::GetContentPath() + path;
 
 #if defined(MONOCLE_LINUX)
 		DIR *dir=0;
-		dir = opendir(path.c_str());
+
+		dir = opendir(fullPath.c_str());
 		if (dir)
 		{
 			dirent *file=0;
@@ -86,6 +101,7 @@ namespace Monocle
 						{
 							if (strcasecmp(extension,type.c_str())==0)
 							{
+								printf("calling: %s", (path + std::string(file->d_name)).c_str());
 								callback(path + std::string(file->d_name), param);
 							}
 						}
@@ -104,17 +120,7 @@ namespace Monocle
 		HANDLE          hList;
 		WIN32_FIND_DATA FileData;
 
-		int end = path.size()-1;
-		if (path[end] != '/')
-			path += "/";
-
-		std::string fullPath = Assets::GetContentPath() + path;
 		std::string searchPath = fullPath + "\\*";
-
-		if (type.find('.') == std::string::npos)
-		{
-			type = "." + type;
-		}
 
 		// Get the first file
 		hList = FindFirstFile(searchPath.c_str(), &FileData);
