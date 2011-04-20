@@ -14,6 +14,8 @@ namespace Monocle
 	void Audio::Init()
 	{
 		Debug::Log("Audio::Init...");
+        
+        ChannelStream::init();
 
 		Debug::Log("...Done");
 	}

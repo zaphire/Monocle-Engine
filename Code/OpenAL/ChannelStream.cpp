@@ -3,6 +3,9 @@
 #include <string.h>
 #include "ChannelStream.h"
 
+#include <OpenAL/al.h>
+#include <OpenAL/alc.h>
+
 namespace Monocle
 {
     bool ChannelStream::isPlaying()
@@ -27,14 +30,26 @@ namespace Monocle
                 format = AL_FORMAT_STEREO8;
         }
         
+        check();
+        
         alGenBuffers(NUM_BUFFERS, buffers);
+        
+        check();
+        
         alGenSources(1, &source);
+        
+        check();
         
         alSource3f(source, AL_POSITION, 0.0, 0.0, 0.0);
         alSource3f(source, AL_VELOCITY, 0.0, 0.0, 0.0);
         alSource3f(source, AL_DIRECTION, 0.0, 0.0, 0.0);
+        
+        check();
+        
         alSourcei(source, AL_ROLLOFF_FACTOR, 0);
         alSourcei(source, AL_SOURCE_RELATIVE, AL_TRUE);
+        
+        check();
         
         memset(obtainedBuffer,0,BUFFER_SIZE);
         alBufferData(buffers[0], format, obtainedBuffer, BUFFER_SIZE, samplerate);
@@ -127,7 +142,7 @@ namespace Monocle
         int error = alGetError();
             
         if(error != AL_NO_ERROR)
-            printf("oh: %d\n",error);
+            printf("OpenAL Error: %d\n",error);
     }
 
     ChannelStream::ChannelStream()

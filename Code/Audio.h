@@ -4,6 +4,8 @@
 #include <map>
 
 #include "Audio/ChannelStream.h"
+#include "Audio/AudioAsset.h"
+#include "Audio/AudioDecoder.h"
 
 namespace Monocle
 {
@@ -12,6 +14,8 @@ namespace Monocle
 	public:
 		Audio();
 		void Init();
+        
+        void Update();
 
 		void PlaySFX(const std::string &sfx);
 		

@@ -30,5 +30,7 @@ namespace AudioTest
 		void Update();
 		
 		void ReceiveNote(const std::string &note);
+        
+        void ThinkAudio();
 	};
 }

@@ -1,9 +1,6 @@
 #pragma once
 
-#include <OpenAL/al.h>
-#include <OpenAL/alc.h>
-
-#define BUFFER_SIZE (4096 * 128)
+#define BUFFER_SIZE (1024 * 128)
 #define NUM_BUFFERS 3
 
 namespace Monocle
@@ -49,11 +46,13 @@ namespace Monocle
 
     private:
         
-        ALuint buffers[NUM_BUFFERS]; // buffers
-        ALuint source;     // audio source
-        ALenum format;     // format
-        ALuint active_buffer; // active buffer (0 or 1)
-        ALuint samplerate;
+        // This OpenAL implementation stuff needs to be moved
+        
+        unsigned int buffers[NUM_BUFFERS]; // buffers
+        unsigned int source;     // audio source
+        int format;     // format
+        unsigned int active_buffer; // active buffer (0 or 1)
+        unsigned int samplerate;
         
         bool started;
         

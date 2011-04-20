@@ -16,7 +16,7 @@ namespace Monocle
     {
     public:
         
-        AudioDecodeData( int samplerate, int bit, int ch, AudioDecoder *decoder );
+        AudioDecodeData( int samplerate, int bit, int ch, AudioDecoder *decoder, void *decoderData, AudioAsset *audAsset );
         
         // Source Sound info... (set by the decoder)
         int samplerate;			// Sample Rate (44100, 22050, etc)
@@ -35,6 +35,10 @@ namespace Monocle
         bool done;				// Set to true when playback is finished
       
         AudioDecoder *decoder;
+        AudioAsset *audAsset;
+        
+        // Decoder Specific Data
+        void *decoderData;
     };
     
     class AudioDecoder
@@ -44,13 +48,19 @@ namespace Monocle
         AudioDecoder() { };
         ~AudioDecoder() { };
         
-        virtual AudioDecodeData *RequestData( AudioAsset &asset );
-        virtual unsigned long Render( AudioDecodeData &decodeData );
+        virtual AudioDecodeData *RequestData( AudioAsset &asset )=0;
+        virtual unsigned long Render( unsigned long size, void *outputBuffer, AudioDecodeData &decodeData)=0;
+        
+        virtual void FreeDecoderData( AudioDecodeData &dd )=0;
         
     protected:
         
     };
 }
+
+#ifdef MONOCLE_AUDIO_OGG
+#include "oggvorbis/OggDecoder.h"
+#endif
 
 /*
  typedef int (WINAPI * onu_init_callback)( onu_deck_cable_s *cable );

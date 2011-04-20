@@ -18,6 +18,12 @@
 		03907B6B135E684700D92F21 /* AudioTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B67135E684700D92F21 /* AudioTest.cpp */; };
 		03907B71135E704D00D92F21 /* AudioDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B6F135E704D00D92F21 /* AudioDecoder.cpp */; };
 		03907B73135E74F500D92F21 /* AudioAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B72135E74F500D92F21 /* AudioAsset.cpp */; };
+		03907B77135E7D4700D92F21 /* OggDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B75135E7D4700D92F21 /* OggDecoder.cpp */; };
+		03907B81135E81D700D92F21 /* AudioCrypt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B7F135E81D600D92F21 /* AudioCrypt.cpp */; };
+		03EF8B56135E8CE300E99883 /* libogg.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 03EF8B52135E8CE200E99883 /* libogg.0.dylib */; };
+		03EF8B57135E8CE300E99883 /* libvorbis.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 03EF8B53135E8CE300E99883 /* libvorbis.0.dylib */; };
+		03EF8B58135E8CE300E99883 /* libvorbisenc.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 03EF8B54135E8CE300E99883 /* libvorbisenc.2.dylib */; };
+		03EF8B59135E8CE300E99883 /* libvorbisfile.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 03EF8B55135E8CE300E99883 /* libvorbisfile.3.dylib */; };
 		3782F004133864AD0042BAE7 /* CocoaKeys.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3782F003133864AD0042BAE7 /* CocoaKeys.mm */; };
 		37AABF3613333E29004E2D56 /* Assets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37AABF3413333E29004E2D56 /* Assets.cpp */; };
 		37AABF381333478A004E2D56 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37AABF371333478A004E2D56 /* Main.cpp */; };
@@ -95,6 +101,19 @@
 		03907B6F135E704D00D92F21 /* AudioDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioDecoder.cpp; sourceTree = "<group>"; };
 		03907B70135E704D00D92F21 /* AudioDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioDecoder.h; sourceTree = "<group>"; };
 		03907B72135E74F500D92F21 /* AudioAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioAsset.cpp; sourceTree = "<group>"; };
+		03907B75135E7D4700D92F21 /* OggDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OggDecoder.cpp; path = oggvorbis/OggDecoder.cpp; sourceTree = "<group>"; };
+		03907B76135E7D4700D92F21 /* OggDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OggDecoder.h; path = oggvorbis/OggDecoder.h; sourceTree = "<group>"; };
+		03907B79135E807F00D92F21 /* ogg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ogg.h; sourceTree = "<group>"; };
+		03907B7A135E807F00D92F21 /* os_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = os_types.h; sourceTree = "<group>"; };
+		03907B7C135E807F00D92F21 /* codec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = codec.h; sourceTree = "<group>"; };
+		03907B7D135E807F00D92F21 /* vorbisenc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vorbisenc.h; sourceTree = "<group>"; };
+		03907B7E135E807F00D92F21 /* vorbisfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vorbisfile.h; sourceTree = "<group>"; };
+		03907B7F135E81D600D92F21 /* AudioCrypt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioCrypt.cpp; sourceTree = "<group>"; };
+		03907B80135E81D700D92F21 /* AudioCrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioCrypt.h; sourceTree = "<group>"; };
+		03EF8B52135E8CE200E99883 /* libogg.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libogg.0.dylib; path = ../libogg.0.dylib; sourceTree = "<group>"; };
+		03EF8B53135E8CE300E99883 /* libvorbis.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libvorbis.0.dylib; path = ../libvorbis.0.dylib; sourceTree = "<group>"; };
+		03EF8B54135E8CE300E99883 /* libvorbisenc.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libvorbisenc.2.dylib; path = ../libvorbisenc.2.dylib; sourceTree = "<group>"; };
+		03EF8B55135E8CE300E99883 /* libvorbisfile.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libvorbisfile.3.dylib; path = ../libvorbisfile.3.dylib; sourceTree = "<group>"; };
 		3763773913385C7B003608BB /* GUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUI.cpp; path = ../../../Code/GUI.cpp; sourceTree = "<group>"; };
 		3763773A13385C7B003608BB /* GUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GUI.h; path = ../../../Code/GUI.h; sourceTree = "<group>"; };
 		3782F002133864AD0042BAE7 /* CocoaKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CocoaKeys.h; path = ../../../Code/Cocoa/CocoaKeys.h; sourceTree = "<group>"; };
@@ -227,6 +246,10 @@
 				37FB69B813319030008963C1 /* OpenGL.framework in Frameworks */,
 				37EA249B132F986900D216B0 /* Cocoa.framework in Frameworks */,
 				03907B3F135E604D00D92F21 /* libGLEW.1.5.8.dylib in Frameworks */,
+				03EF8B56135E8CE300E99883 /* libogg.0.dylib in Frameworks */,
+				03EF8B57135E8CE300E99883 /* libvorbis.0.dylib in Frameworks */,
+				03EF8B58135E8CE300E99883 /* libvorbisenc.2.dylib in Frameworks */,
+				03EF8B59135E8CE300E99883 /* libvorbisfile.3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +268,9 @@
 		03907B58135E644400D92F21 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				03907B7F135E81D600D92F21 /* AudioCrypt.cpp */,
+				03907B80135E81D700D92F21 /* AudioCrypt.h */,
+				03907B74135E7D2600D92F21 /* oggvorbis */,
 				03907B59135E644400D92F21 /* ChannelStream.h */,
 				03907B6E135E6F7000D92F21 /* AudioAsset.h */,
 				03907B72135E74F500D92F21 /* AudioAsset.cpp */,
@@ -262,6 +288,38 @@
 				03907B68135E684700D92F21 /* AudioTest.h */,
 			);
 			path = AudioTest;
+			sourceTree = "<group>";
+		};
+		03907B74135E7D2600D92F21 /* oggvorbis */ = {
+			isa = PBXGroup;
+			children = (
+				03907B78135E807F00D92F21 /* ogg */,
+				03907B7B135E807F00D92F21 /* vorbis */,
+				03907B75135E7D4700D92F21 /* OggDecoder.cpp */,
+				03907B76135E7D4700D92F21 /* OggDecoder.h */,
+			);
+			name = oggvorbis;
+			sourceTree = "<group>";
+		};
+		03907B78135E807F00D92F21 /* ogg */ = {
+			isa = PBXGroup;
+			children = (
+				03907B79135E807F00D92F21 /* ogg.h */,
+				03907B7A135E807F00D92F21 /* os_types.h */,
+			);
+			name = ogg;
+			path = oggvorbis/ogg;
+			sourceTree = "<group>";
+		};
+		03907B7B135E807F00D92F21 /* vorbis */ = {
+			isa = PBXGroup;
+			children = (
+				03907B7C135E807F00D92F21 /* codec.h */,
+				03907B7D135E807F00D92F21 /* vorbisenc.h */,
+				03907B7E135E807F00D92F21 /* vorbisfile.h */,
+			);
+			name = vorbis;
+			path = oggvorbis/vorbis;
 			sourceTree = "<group>";
 		};
 		37B1929413359BE600D2D264 /* Flash */ = {
@@ -322,6 +380,10 @@
 		37EA248B132F986800D216B0 = {
 			isa = PBXGroup;
 			children = (
+				03EF8B52135E8CE200E99883 /* libogg.0.dylib */,
+				03EF8B53135E8CE300E99883 /* libvorbis.0.dylib */,
+				03EF8B54135E8CE300E99883 /* libvorbisenc.2.dylib */,
+				03EF8B55135E8CE300E99883 /* libvorbisfile.3.dylib */,
 				03907B40135E618F00D92F21 /* OpenAL.framework */,
 				03907B3E135E604D00D92F21 /* libGLEW.1.5.8.dylib */,
 				37FB691313317656008963C1 /* Monocle */,
@@ -701,6 +763,8 @@
 				03907B6B135E684700D92F21 /* AudioTest.cpp in Sources */,
 				03907B71135E704D00D92F21 /* AudioDecoder.cpp in Sources */,
 				03907B73135E74F500D92F21 /* AudioAsset.cpp in Sources */,
+				03907B77135E7D4700D92F21 /* OggDecoder.cpp in Sources */,
+				03907B81135E81D700D92F21 /* AudioCrypt.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -767,6 +831,7 @@
 					MONOCLE_MAC,
 					MONOCLE_OPENGL,
 					MONOCLE_OPENAL,
+					MONOCLE_AUDIO_OGG,
 				);
 				INFOPLIST_FILE = "MonocleTest/MonocleTest-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -794,6 +859,7 @@
 					MONOCLE_MAC,
 					MONOCLE_OPENGL,
 					MONOCLE_OPENAL,
+					MONOCLE_AUDIO_OGG,
 				);
 				INFOPLIST_FILE = "MonocleTest/MonocleTest-Info.plist";
 				LIBRARY_SEARCH_PATHS = (

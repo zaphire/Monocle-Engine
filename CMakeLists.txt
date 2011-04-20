@@ -16,6 +16,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(BUILD_TESTS OFF CACHE BOOL "Build tests")
 set(WITH_OPENAL ON CACHE BOOL "Use OpenAL")
 set(WITH_OPENGL ON CACHE BOOL "Use OpenGL")
+set(WITH_AUDIOOGG ON CACHE BOOL "Use OGG Vorbis")
 
 if(WIN32)
 	add_definitions(-DMONOCLE_WINDOWS)
@@ -43,6 +44,10 @@ if(WITH_OPENAL)
 	find_package(OpenAL REQUIRED)
 	add_definitions(-DMONOCLE_OPENAL)
 endif(WITH_OPENAL)
+
+if(WITH_AUDIOOGG)
+	add_definitions(-DMONOCLE_AUDIO_OGG)
+endif(WITH_AUDIOOGG)
 
 add_subdirectory(Code)
 
