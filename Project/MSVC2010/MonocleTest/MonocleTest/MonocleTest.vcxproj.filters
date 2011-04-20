@@ -234,6 +234,9 @@
     <ClInclude Include="..\..\..\..\Code\MonocleToolkit.h">
       <Filter>Monocle</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Tests\PuppetTest\TextureAtlas.h">
+      <Filter>Monocle\Tests\PuppetTest</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp">
@@ -403,6 +406,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Editor.cpp">
       <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Tests\PuppetTest\TextureAtlas.cpp">
+      <Filter>Monocle\Tests\PuppetTest</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

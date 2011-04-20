@@ -39,7 +39,9 @@ namespace PuppetTest
                     PartKeyFrames *partKeyFrames = currentAnimation->GetPartKeyFrames(part);
                     if (partKeyFrames)
                     {
-                        for (std::list<KeyFrame>::iterator i = partKeyFrames->keyFrames.begin(); i != partKeyFrames->keyFrames.end(); ++i)
+
+						const std::list<KeyFrame> *keyFrames = partKeyFrames->GetKeyFrames();
+                        for (std::list<KeyFrame>::const_iterator i = keyFrames->begin(); i != keyFrames->end(); ++i)
                         {
                             playHead = (end-start) * ((*i).GetTime()/currentAnimation->GetDuration()) + start;
                             Graphics::RenderLine(playHead + Vector2::up * playHeadHalfHeight, playHead + Vector2::down * playHeadHalfHeight);
@@ -156,6 +158,14 @@ namespace PuppetTest
 			if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 				Debug::selectedEntity = scene->GetNearestEntityByControlPoint(Input::GetWorldMousePosition(), "", Debug::selectedEntity);
 
+			if (Input::IsKeyHeld(KEY_LCTRL))
+			{
+				if (Input::IsKeyPressed(KEY_S))
+				{
+					puppetEntity->puppet.Save(puppetEntity);
+				}
+			}
+
 			if (Debug::selectedEntity)
 			{
 				Part *part = dynamic_cast<Part*>(Debug::selectedEntity);
@@ -182,11 +192,6 @@ namespace PuppetTest
 
 				if (Input::IsKeyHeld(KEY_LCTRL))
 				{
-					if (Input::IsKeyPressed(KEY_S))
-					{
-						// save!
-						puppetEntity->puppet.Save();
-					}
 				}
 				else
 				{

@@ -32,16 +32,20 @@ namespace Monocle
 		bool IsName(const std::string &name);
 		bool IsID(int id);
 
-		void Save(FileNode *fileNode, Puppet *puppet);
-		void Load(FileNode *fileNode, Puppet *puppet);
+		void SetPuppet(Puppet *puppet);
+
+		void Save(FileNode *fileNode);
+		void Load(FileNode *fileNode);
 
 		Sprite *GetSprite();
 
 	private:
 		friend class Puppet;
 		int id;
+		std::string atlas;
 		std::string name;
 		Sprite *sprite;
+		Puppet *puppet;
 	};
 
 	class KeyFrame : public Transform
@@ -69,15 +73,23 @@ namespace Monocle
 		void AddKeyFrame(const KeyFrame &keyFrame);
 		void SetPart(Part *part);
 		Part *GetPart();
-		void GetKeyframeForTime(float time, KeyFrame **prev, KeyFrame **next);
+		void GetKeyFrameForTime(float time, KeyFrame **prev, KeyFrame **next);
 		KeyFrame *GetLastKeyFrame();
+		std::list<KeyFrame> *GetKeyFrames();
         void InsertKeyFrame(const KeyFrame &keyFrame);
+
+		void SetPuppet(Puppet *puppet);
+
+		void Save(FileNode *fileNode);
+		void Load(FileNode *fileNode);
         
-        std::list<KeyFrame> keyFrames;
+        
 		
 	private:
+		std::list<KeyFrame> keyFrames;
 		Part *part;
-	
+		Puppet *puppet;
+		int id;
 	};
 
 	class Animation
@@ -124,7 +136,8 @@ namespace Monocle
 	public:
 		Puppet();
 		~Puppet();
-		void Save();
+
+		void Save(Entity *entity);
 		void Load(const std::string &filename, Entity *entity);
 
 		void Play(const std::string &animationName, bool isLooping=true);
@@ -162,6 +175,7 @@ namespace Monocle
 
 		std::string filename;
 
+		void SaveParts(TiXmlElement *element, Entity *fromEntity);
 		void LoadParts(TiXmlElement *element, Entity *intoEntity);
 
 	private:
