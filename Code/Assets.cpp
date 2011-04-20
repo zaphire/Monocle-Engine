@@ -2,6 +2,7 @@
 
 #include <stdio.h> // for NULL
 
+#include "Audio/AudioAsset.h"
 #include "TextureAsset.h"
 #include "TTFFontAsset.h"
 #include "Debug.h"
@@ -85,6 +86,33 @@ namespace Monocle
 		// return what we found
 		return asset;
     }
+    
+    AudioAsset *Assets::RequestAudio(const std::string &filename, AudioDecoder &decoder)
+	{
+		AudioAsset *asset = NULL;
+		std::string fullFilename = instance->contentPath + filename;
+        
+		//Debug::Log("instance->contentPath + filename: " + fullFilename);
+        
+		// check to see if we have one stored already
+		asset = (AudioAsset*)instance->GetAssetByFilename(fullFilename);
+        
+		// if not, load it and store it
+		if (!asset)
+		{
+			asset = new AudioAsset();
+			asset->Load(fullFilename, decoder);
+			instance->StoreAsset((Asset*)asset);
+		}
+        
+		if (asset)
+		{
+			asset->AddReference();
+		}
+        
+		// return what we found
+		return asset;
+	}
 
 	void Assets::StoreAsset(Asset *asset)
 	{

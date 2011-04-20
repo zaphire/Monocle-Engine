@@ -13,6 +13,11 @@
 		03907B3B135E5F0E00D92F21 /* ImageBrowser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B39135E5F0E00D92F21 /* ImageBrowser.cpp */; };
 		03907B3D135E5F3B00D92F21 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 03907B3C135E5F3B00D92F21 /* stb_image.c */; };
 		03907B3F135E604D00D92F21 /* libGLEW.1.5.8.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 03907B3E135E604D00D92F21 /* libGLEW.1.5.8.dylib */; };
+		03907B41135E618F00D92F21 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03907B40135E618F00D92F21 /* OpenAL.framework */; };
+		03907B64135E651200D92F21 /* ChannelStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B63135E651200D92F21 /* ChannelStream.cpp */; };
+		03907B6B135E684700D92F21 /* AudioTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B67135E684700D92F21 /* AudioTest.cpp */; };
+		03907B71135E704D00D92F21 /* AudioDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B6F135E704D00D92F21 /* AudioDecoder.cpp */; };
+		03907B73135E74F500D92F21 /* AudioAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B72135E74F500D92F21 /* AudioAsset.cpp */; };
 		3782F004133864AD0042BAE7 /* CocoaKeys.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3782F003133864AD0042BAE7 /* CocoaKeys.mm */; };
 		37AABF3613333E29004E2D56 /* Assets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37AABF3413333E29004E2D56 /* Assets.cpp */; };
 		37AABF381333478A004E2D56 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37AABF371333478A004E2D56 /* Main.cpp */; };
@@ -81,6 +86,15 @@
 		03907B3A135E5F0E00D92F21 /* ImageBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageBrowser.h; path = ../../../Code/LevelEditor/ImageBrowser.h; sourceTree = "<group>"; };
 		03907B3C135E5F3B00D92F21 /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
 		03907B3E135E604D00D92F21 /* libGLEW.1.5.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.5.8.dylib; path = ../libGLEW.1.5.8.dylib; sourceTree = "<group>"; };
+		03907B40135E618F00D92F21 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		03907B59135E644400D92F21 /* ChannelStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelStream.h; sourceTree = "<group>"; };
+		03907B63135E651200D92F21 /* ChannelStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChannelStream.cpp; sourceTree = "<group>"; };
+		03907B67135E684700D92F21 /* AudioTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioTest.cpp; sourceTree = "<group>"; };
+		03907B68135E684700D92F21 /* AudioTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioTest.h; sourceTree = "<group>"; };
+		03907B6E135E6F7000D92F21 /* AudioAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioAsset.h; sourceTree = "<group>"; };
+		03907B6F135E704D00D92F21 /* AudioDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioDecoder.cpp; sourceTree = "<group>"; };
+		03907B70135E704D00D92F21 /* AudioDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioDecoder.h; sourceTree = "<group>"; };
+		03907B72135E74F500D92F21 /* AudioAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioAsset.cpp; sourceTree = "<group>"; };
 		3763773913385C7B003608BB /* GUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUI.cpp; path = ../../../Code/GUI.cpp; sourceTree = "<group>"; };
 		3763773A13385C7B003608BB /* GUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GUI.h; path = ../../../Code/GUI.h; sourceTree = "<group>"; };
 		3782F002133864AD0042BAE7 /* CocoaKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CocoaKeys.h; path = ../../../Code/Cocoa/CocoaKeys.h; sourceTree = "<group>"; };
@@ -209,6 +223,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03907B41135E618F00D92F21 /* OpenAL.framework in Frameworks */,
 				37FB69B813319030008963C1 /* OpenGL.framework in Frameworks */,
 				37EA249B132F986900D216B0 /* Cocoa.framework in Frameworks */,
 				03907B3F135E604D00D92F21 /* libGLEW.1.5.8.dylib in Frameworks */,
@@ -225,6 +240,28 @@
 				03907B34135E5EC400D92F21 /* LevelEditorTest.h */,
 			);
 			path = LevelEditor;
+			sourceTree = "<group>";
+		};
+		03907B58135E644400D92F21 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				03907B59135E644400D92F21 /* ChannelStream.h */,
+				03907B6E135E6F7000D92F21 /* AudioAsset.h */,
+				03907B72135E74F500D92F21 /* AudioAsset.cpp */,
+				03907B6F135E704D00D92F21 /* AudioDecoder.cpp */,
+				03907B70135E704D00D92F21 /* AudioDecoder.h */,
+			);
+			name = Audio;
+			path = ../../../Code/Audio;
+			sourceTree = "<group>";
+		};
+		03907B66135E684700D92F21 /* AudioTest */ = {
+			isa = PBXGroup;
+			children = (
+				03907B67135E684700D92F21 /* AudioTest.cpp */,
+				03907B68135E684700D92F21 /* AudioTest.h */,
+			);
+			path = AudioTest;
 			sourceTree = "<group>";
 		};
 		37B1929413359BE600D2D264 /* Flash */ = {
@@ -285,6 +322,7 @@
 		37EA248B132F986800D216B0 = {
 			isa = PBXGroup;
 			children = (
+				03907B40135E618F00D92F21 /* OpenAL.framework */,
 				03907B3E135E604D00D92F21 /* libGLEW.1.5.8.dylib */,
 				37FB691313317656008963C1 /* Monocle */,
 				37EA24A0132F986900D216B0 /* MonocleTest */,
@@ -342,6 +380,7 @@
 		37FB691313317656008963C1 /* Monocle */ = {
 			isa = PBXGroup;
 			children = (
+				03907B58135E644400D92F21 /* Audio */,
 				03907B29135E5E0300D92F21 /* CollisionData.cpp */,
 				03907B2A135E5E0300D92F21 /* CollisionData.h */,
 				37CAD62513325648009BC5F3 /* Cocoa */,
@@ -430,6 +469,7 @@
 		37FB693B13317693008963C1 /* OpenAL */ = {
 			isa = PBXGroup;
 			children = (
+				03907B63135E651200D92F21 /* ChannelStream.cpp */,
 				37FB693C13317693008963C1 /* OpenALAudio.cpp */,
 			);
 			name = OpenAL;
@@ -452,6 +492,7 @@
 		37FB696F13317693008963C1 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				03907B66135E684700D92F21 /* AudioTest */,
 				03907B31135E5EC400D92F21 /* LevelEditor */,
 				F947BBD8134C941B00952C81 /* PuppetTest */,
 				37B1929413359BE600D2D264 /* Flash */,
@@ -656,6 +697,10 @@
 				03907B37135E5EC400D92F21 /* LevelEditorTest.cpp in Sources */,
 				03907B3B135E5F0E00D92F21 /* ImageBrowser.cpp in Sources */,
 				03907B3D135E5F3B00D92F21 /* stb_image.c in Sources */,
+				03907B64135E651200D92F21 /* ChannelStream.cpp in Sources */,
+				03907B6B135E684700D92F21 /* AudioTest.cpp in Sources */,
+				03907B71135E704D00D92F21 /* AudioDecoder.cpp in Sources */,
+				03907B73135E74F500D92F21 /* AudioAsset.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

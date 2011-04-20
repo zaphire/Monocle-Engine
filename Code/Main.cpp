@@ -14,9 +14,10 @@
 	//#define TEST_PONG
 	//#define TEST_JUMPER
 	//#define TEST_OGMO
-	#define TEST_LEVELEDITOR
+	//#define TEST_LEVELEDITOR
 	//#define TEST_FLASH
 	//#define TEST_PUPPETTEST
+    #define TEST_AUDIOTEST
 #endif
 
 #ifdef TEST_PONG 
@@ -41,6 +42,10 @@
 
 #ifdef TEST_PUPPETTEST
 	#include "Tests/PuppetTest/PuppetTest.h"
+#endif
+
+#ifdef TEST_AUDIOTEST
+    #include "Tests/AudioTest/AudioTest.h"
 #endif
 
 using namespace Monocle;
@@ -73,6 +78,10 @@ int main(void)
 
 #ifdef TEST_PUPPETTEST
 	game->SetScene(new PuppetTest::TestScene());
+#endif
+    
+#ifdef TEST_AUDIOTEST
+    game->SetScene(new AudioTest::GameScene());
 #endif
 
 	game->Main();
