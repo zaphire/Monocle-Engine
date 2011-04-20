@@ -82,8 +82,6 @@ namespace Monocle
 
 		void Save(FileNode *fileNode);
 		void Load(FileNode *fileNode);
-        
-        
 		
 	private:
 		std::list<KeyFrame> keyFrames;
@@ -97,9 +95,9 @@ namespace Monocle
 	public:
 		Animation();
 		void Update();
-        void ApplyTimeChange();
+        void ApplyTimeChange(bool loop=true);
 		void SetCurrentTime(float time);
-        void AdjustCurrentTime(float timeOffset);
+        void AdjustCurrentTime(float timeOffset, bool loop=true);
         
 		std::string GetName();
 		bool IsName(const std::string &name);

@@ -18,4 +18,10 @@ namespace Monocle
 		void UpdateCamera();
 		Vector2 lastWorldMousePosition;
 	};
+
+	class EntityEditor : public Editor
+	{
+	public:
+	protected:
+	};
 }

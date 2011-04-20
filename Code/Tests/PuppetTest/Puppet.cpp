@@ -337,15 +337,21 @@ namespace Monocle
         ApplyTimeChange();
 	}
     
-    void Animation::ApplyTimeChange()
+    void Animation::ApplyTimeChange(bool loop)
     {
-        if (currentTime > duration)
+        if (currentTime >= duration)
 		{
-			currentTime -= int(currentTime/duration) * duration;
+			if (!loop)
+				currentTime = duration;
+			else
+				currentTime -= int(currentTime/duration) * duration;
 		} 
-        if (currentTime < 0)
+        else if (currentTime < 0)
         {
-            currentTime += (int(-1*currentTime/duration)+1) * duration;
+			if (!loop)
+				currentTime = 0;
+            else
+				currentTime += (int(-1*currentTime/duration)+1) * duration;
         }
         
 		for (std::list<PartKeyFrames>::iterator i = partKeyFrames.begin(); i != partKeyFrames.end(); ++i)
@@ -434,10 +440,10 @@ namespace Monocle
 		ApplyTimeChange();
 	}
     
-    void Animation::AdjustCurrentTime(float timeOffset)
+    void Animation::AdjustCurrentTime(float timeOffset, bool loop)
     {
         currentTime += timeOffset;
-        ApplyTimeChange();
+        ApplyTimeChange(loop);
     }
 
 	void Animation::RefreshDuration()

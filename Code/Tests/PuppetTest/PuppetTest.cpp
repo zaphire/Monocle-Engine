@@ -196,7 +196,6 @@ namespace PuppetTest
 				{
 					if (Input::IsKeyHeld(keyOffset))
 					{
-
 						if (part)
 						{
 							Sprite *sprite = part->GetSprite();
@@ -210,7 +209,6 @@ namespace PuppetTest
 							if (Input::IsKeyHeld(keyMoveDown))
 								sprite->position += Vector2::down * moveAmount;
 						}
-
 					}
 					else
 					{
@@ -242,9 +240,9 @@ namespace PuppetTest
 				Part *part = dynamic_cast<Part*>(Debug::selectedEntity);
 
 				if (Input::IsKeyPressed(keyBackwards))
-					anim->AdjustCurrentTime(-TIME_STEP);
+					anim->AdjustCurrentTime(-TIME_STEP, false);
 				if (Input::IsKeyPressed(keyForwards))
-					anim->AdjustCurrentTime(TIME_STEP);
+					anim->AdjustCurrentTime(TIME_STEP, false);
 
 				if (Input::IsKeyPressed(keySetKeyFrame))
 				{
