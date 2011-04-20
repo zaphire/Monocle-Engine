@@ -20,6 +20,8 @@
 		03907B73135E74F500D92F21 /* AudioAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B72135E74F500D92F21 /* AudioAsset.cpp */; };
 		03907B77135E7D4700D92F21 /* OggDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B75135E7D4700D92F21 /* OggDecoder.cpp */; };
 		03907B81135E81D700D92F21 /* AudioCrypt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B7F135E81D600D92F21 /* AudioCrypt.cpp */; };
+		03A1D873135F295E00831F9E /* TextureAtlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03A1D871135F295E00831F9E /* TextureAtlas.cpp */; };
+		03A1D876135F297A00831F9E /* Editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03A1D875135F297A00831F9E /* Editor.cpp */; };
 		03EF8B56135E8CE300E99883 /* libogg.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 03EF8B52135E8CE200E99883 /* libogg.0.dylib */; };
 		03EF8B57135E8CE300E99883 /* libvorbis.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 03EF8B53135E8CE300E99883 /* libvorbis.0.dylib */; };
 		03EF8B58135E8CE300E99883 /* libvorbisenc.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 03EF8B54135E8CE300E99883 /* libvorbisenc.2.dylib */; };
@@ -110,6 +112,9 @@
 		03907B7E135E807F00D92F21 /* vorbisfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vorbisfile.h; sourceTree = "<group>"; };
 		03907B7F135E81D600D92F21 /* AudioCrypt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioCrypt.cpp; sourceTree = "<group>"; };
 		03907B80135E81D700D92F21 /* AudioCrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioCrypt.h; sourceTree = "<group>"; };
+		03A1D871135F295E00831F9E /* TextureAtlas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextureAtlas.cpp; path = PuppetTest/TextureAtlas.cpp; sourceTree = "<group>"; };
+		03A1D872135F295E00831F9E /* TextureAtlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextureAtlas.h; path = PuppetTest/TextureAtlas.h; sourceTree = "<group>"; };
+		03A1D875135F297A00831F9E /* Editor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Editor.cpp; path = ../../../Code/Editor.cpp; sourceTree = "<group>"; };
 		03EF8B52135E8CE200E99883 /* libogg.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libogg.0.dylib; path = ../libogg.0.dylib; sourceTree = "<group>"; };
 		03EF8B53135E8CE300E99883 /* libvorbis.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libvorbis.0.dylib; path = ../libvorbis.0.dylib; sourceTree = "<group>"; };
 		03EF8B54135E8CE300E99883 /* libvorbisenc.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libvorbisenc.2.dylib; path = ../libvorbisenc.2.dylib; sourceTree = "<group>"; };
@@ -468,6 +473,7 @@
 				37FB692313317693008963C1 /* Color.h */,
 				37FB692613317693008963C1 /* Debug.cpp */,
 				37FB692713317693008963C1 /* Debug.h */,
+				03A1D875135F297A00831F9E /* Editor.cpp */,
 				37FB692813317693008963C1 /* Editor.h */,
 				37FB692913317693008963C1 /* Entity.cpp */,
 				37FB692A13317693008963C1 /* Entity.h */,
@@ -615,6 +621,8 @@
 		F947BBD8134C941B00952C81 /* PuppetTest */ = {
 			isa = PBXGroup;
 			children = (
+				03A1D871135F295E00831F9E /* TextureAtlas.cpp */,
+				03A1D872135F295E00831F9E /* TextureAtlas.h */,
 				F947BBDA134C943600952C81 /* Puppet.cpp */,
 				F947BBDB134C943600952C81 /* Puppet.h */,
 				F947BBDC134C943600952C81 /* PuppetTest.cpp */,
@@ -765,6 +773,8 @@
 				03907B73135E74F500D92F21 /* AudioAsset.cpp in Sources */,
 				03907B77135E7D4700D92F21 /* OggDecoder.cpp in Sources */,
 				03907B81135E81D700D92F21 /* AudioCrypt.cpp in Sources */,
+				03A1D873135F295E00831F9E /* TextureAtlas.cpp in Sources */,
+				03A1D876135F297A00831F9E /* Editor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

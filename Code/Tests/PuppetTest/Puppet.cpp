@@ -512,7 +512,9 @@ namespace Monocle
 				TiXmlElement xmlAnimation("Animation");
 
 				Animation *animation = &(*i);
-				animation->Save(&XMLFileNode(&xmlAnimation));
+                
+                XMLFileNode xmlFileNodeKeyFrameAnim(&xmlAnimation);
+				animation->Save(&xmlFileNodeKeyFrameAnim);
 
 				/// PartKeyFrames
 				for (std::list<Part*>::iterator j = parts.begin(); j != parts.end(); ++j)
@@ -587,7 +589,8 @@ namespace Monocle
 				while (xmlAnimation)
 				{
 					Animation animation;
-					animation.Load(&XMLFileNode(xmlAnimation));
+                    XMLFileNode xmlFileNodeKeyFrameAnim(xmlAnimation);
+					animation.Load(&xmlFileNodeKeyFrameAnim);
 
 					/// PartKeyFrames
 					TiXmlElement *xmlPartKeyFrames = xmlAnimation->FirstChildElement("PartKeyFrames");
@@ -595,14 +598,16 @@ namespace Monocle
 					{
 						PartKeyFrames partKeyFrames;
 						partKeyFrames.SetPuppet(this);
-						partKeyFrames.Load(&XMLFileNode(xmlPartKeyFrames));
+                        XMLFileNode xmlFileNodeKeyFramePart(xmlPartKeyFrames);
+						partKeyFrames.Load(&xmlFileNodeKeyFramePart);
 
 						/// KeyFrame
 						TiXmlElement *xmlKeyFrame = xmlPartKeyFrames->FirstChildElement("KeyFrame");
 						while (xmlKeyFrame)
 						{
 							KeyFrame keyFrame;
-							keyFrame.Load(&XMLFileNode(xmlKeyFrame));
+                            XMLFileNode xmlFileNodeKeyFrame(xmlKeyFrame);
+							keyFrame.Load(&xmlFileNodeKeyFrame);
 							partKeyFrames.AddKeyFrame(keyFrame);
 
 							xmlKeyFrame = xmlKeyFrame->NextSiblingElement("KeyFrame");
