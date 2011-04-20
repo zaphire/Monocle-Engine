@@ -32,14 +32,20 @@ namespace Monocle
 		bool IsName(const std::string &name);
 		bool IsID(int id);
 
-		void Save(FileNode *fileNode, Puppet *puppet);
-		void Load(FileNode *fileNode, Puppet *puppet);
+		void SetPuppet(Puppet *puppet);
+
+		void Save(FileNode *fileNode);
+		void Load(FileNode *fileNode);
+
+		Sprite *GetSprite();
 
 	private:
 		friend class Puppet;
 		int id;
+		std::string atlas;
 		std::string name;
 		Sprite *sprite;
+		Puppet *puppet;
 	};
 
 	class KeyFrame : public Transform
@@ -67,15 +73,21 @@ namespace Monocle
 		void AddKeyFrame(const KeyFrame &keyFrame);
 		void SetPart(Part *part);
 		Part *GetPart();
-		void GetKeyframeForTime(float time, KeyFrame **prev, KeyFrame **next);
+		void GetKeyFrameForTime(float time, KeyFrame **prev, KeyFrame **next);
 		KeyFrame *GetLastKeyFrame();
+		std::list<KeyFrame> *GetKeyFrames();
         void InsertKeyFrame(const KeyFrame &keyFrame);
-        
-        std::list<KeyFrame> keyFrames;
+
+		void SetPuppet(Puppet *puppet);
+
+		void Save(FileNode *fileNode);
+		void Load(FileNode *fileNode);
 		
 	private:
+		std::list<KeyFrame> keyFrames;
 		Part *part;
-	
+		Puppet *puppet;
+		//int id;
 	};
 
 	class Animation
@@ -83,9 +95,9 @@ namespace Monocle
 	public:
 		Animation();
 		void Update();
-        void ApplyTimeChange();
+        void ApplyTimeChange(bool loop=true);
 		void SetCurrentTime(float time);
-        void AdjustCurrentTime(float timeOffset);
+        void AdjustCurrentTime(float timeOffset, bool loop=true);
         
 		std::string GetName();
 		bool IsName(const std::string &name);
@@ -122,7 +134,10 @@ namespace Monocle
 	public:
 		Puppet();
 		~Puppet();
+
+		void Save(Entity *entity);
 		void Load(const std::string &filename, Entity *entity);
+
 		void Play(const std::string &animationName, bool isLooping=true);
 		void Stop();
 		void Pause();
@@ -156,6 +171,9 @@ namespace Monocle
 		
 		TextureAtlas *textureAtlas;
 
+		std::string filename;
+
+		void SaveParts(TiXmlElement *element, Entity *fromEntity);
 		void LoadParts(TiXmlElement *element, Entity *intoEntity);
 
 	private:

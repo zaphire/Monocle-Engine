@@ -2,6 +2,7 @@
 #include "../Entity.h"
 #include "../Input.h"
 #include "Node.h"
+#include "../Editor.h"
 
 namespace Monocle
 {
@@ -31,7 +32,7 @@ namespace Monocle
 	};
 	*/
 
-	class LevelEditor
+	class LevelEditor : public CameraEditor
 	{
 	public:
 		LevelEditor();
@@ -45,7 +46,7 @@ namespace Monocle
 		}
 
 	protected:
-		void UpdateCamera();
+		//void UpdateCamera();
 		void UpdateSelect();
 		void UpdateOpportunity();
 		void UpdateMove();
