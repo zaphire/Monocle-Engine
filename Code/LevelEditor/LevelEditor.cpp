@@ -89,6 +89,8 @@ namespace Monocle
 	// main level editor update function
 	void LevelEditor::Update()
 	{
+		CameraEditor::Update();
+
 		if (isOn)
 		{
 			if (state == FTES_BROWSER)
@@ -158,69 +160,6 @@ namespace Monocle
 			imageBrowser = new ImageBrowser();
 			scene->Add(imageBrowser);
 			imageBrowser->ScanDirectory("graphics");
-		}
-	}
-
-	// update the camera controls
-	void LevelEditor::UpdateCamera()
-	{
-		if (!Input::IsKeyHeld(KEY_LCTRL))
-		{
-			float moveSpeed = 200.0f;
-			float zoomSpeed = 0.5f;
-
-			if (Input::IsKeyHeld(KEY_LSHIFT))
-			{
-				moveSpeed *= 5.0f;
-				zoomSpeed *= 2.0f;
-			}
-			/*
-			if (Input::IsKeyHeld(KEY_D))
-			{
-				Graphics::AdjustCameraPosition(Vector2::right * moveSpeed * Monocle::deltaTime);
-			}
-			if (Input::IsKeyHeld(KEY_A))
-			{
-				Graphics::AdjustCameraPosition(Vector2::left * moveSpeed * Monocle::deltaTime);
-			}
-			if (Input::IsKeyHeld(KEY_W))
-			{
-				Graphics::AdjustCameraPosition(Vector2::up * moveSpeed * Monocle::deltaTime);
-			}
-			if (Input::IsKeyHeld(KEY_S))
-			{
-				Graphics::AdjustCameraPosition(Vector2::down * moveSpeed * Monocle::deltaTime);
-			}
-			if (Input::IsKeyHeld(KEY_Q))
-			{
-				Graphics::AdjustCameraZoom(-1*Vector2::one * zoomSpeed * Monocle::deltaTime);
-			}
-			if (Input::IsKeyHeld(KEY_E))
-			{
-				Graphics::AdjustCameraZoom(Vector2::one * zoomSpeed * Monocle::deltaTime);
-			}
-			*/
-			if (Platform::mouseWheel != 0)
-			{
-				scene->GetCamera()->scale += (Platform::mouseWheel * Vector2::one * 0.00025f);
-				Vector2 camZoom = scene->GetCamera()->scale;//Graphics::GetCameraZoom();
-				printf("camZoom (%f, %f)\n", camZoom.x, camZoom.y);
-			}
-			if (Input::IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE))
-			{
-				lastWorldMousePosition = Input::GetWorldMousePosition();
-			}
-			if (Input::IsMouseButtonHeld(MOUSE_BUTTON_MIDDLE))
-			{
-				Vector2 diff = Input::GetWorldMousePosition() - lastWorldMousePosition;
-				scene->GetCamera()->position += (-1*diff);
-				lastWorldMousePosition = Input::GetWorldMousePosition();
-
-				Vector2 camPos = scene->GetCamera()->position;
-				printf("camPos (%d, %d)\n", (int)camPos.x, (int)camPos.y);
-				//const float camPanSpeed = 8.0f;
-				//Graphics::AdjustCameraPosition((Input::GetMousePosition() - startCameraMovePosition)*camPanSpeed*Monocle::deltaTime);//(Input::GetWorldMousePosition() - Graphics::GetCameraPosition()));
-			}
 		}
 	}
 

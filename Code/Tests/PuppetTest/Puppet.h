@@ -35,6 +35,8 @@ namespace Monocle
 		void Save(FileNode *fileNode, Puppet *puppet);
 		void Load(FileNode *fileNode, Puppet *puppet);
 
+		Sprite *GetSprite();
+
 	private:
 		friend class Puppet;
 		int id;
@@ -122,7 +124,9 @@ namespace Monocle
 	public:
 		Puppet();
 		~Puppet();
+		void Save();
 		void Load(const std::string &filename, Entity *entity);
+
 		void Play(const std::string &animationName, bool isLooping=true);
 		void Stop();
 		void Pause();
@@ -155,6 +159,8 @@ namespace Monocle
 		std::list<Part*> parts;
 		
 		TextureAtlas *textureAtlas;
+
+		std::string filename;
 
 		void LoadParts(TiXmlElement *element, Entity *intoEntity);
 

@@ -202,8 +202,15 @@ namespace Monocle
 		return this->id == id;
 	}
 
+	Sprite *Part::GetSprite()
+	{
+		return sprite;
+	}
+
 	void Part::Save(FileNode *fileNode, Puppet *puppet)
 	{
+		Entity::Save(fileNode);
+
 		fileNode->Write("id", id);
 		fileNode->Write("name", name);
 		fileNode->Write("image", sprite->texture->GetName());
@@ -215,6 +222,8 @@ namespace Monocle
 
 	void Part::Load(FileNode *fileNode, Puppet *puppet)
 	{
+		Entity::Load(fileNode);
+
 		fileNode->Read("id", id);
 		fileNode->Read("name", name);
 
@@ -567,8 +576,15 @@ namespace Monocle
 		}
 	}
 
+	void Puppet::Save()
+	{
+		// save to filename
+		//TiXmlDocument xmlDoc;
+	}
+
 	void Puppet::Load(const std::string &filename, Entity *entity)
 	{
+		this->filename = filename;
 		animations.clear();
 		// delete parts?
 		parts.clear();

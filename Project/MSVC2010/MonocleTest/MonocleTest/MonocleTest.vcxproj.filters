@@ -401,5 +401,8 @@
     <ClCompile Include="..\..\..\..\Code\MonocleToolkit.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Editor.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

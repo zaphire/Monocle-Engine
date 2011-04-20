@@ -137,15 +137,27 @@ namespace Monocle
 
 		Graphics::Scale(scale);
 
+		const int MAX_LAYER = 100;
+		const int MIN_LAYER = -100;
+
+		for (int layer = MAX_LAYER; layer > 0; layer--)
+		{
+			for(std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
+			{
+				if ((*i)->IsLayer(layer) && (*i)->isVisible)
+				{
+					(*i)->Render();
+				}
+			}
+		}
+
 		if (graphic != NULL)
 		{
 			Graphics::SetColor(color);
 			graphic->Render(this);
 		}
 
-		const int MAX_LAYER = 100;
-		const int MIN_LAYER = -100;
-		for (int layer = MAX_LAYER; layer >= MIN_LAYER; layer--)
+		for (int layer = 0; layer >= MIN_LAYER; layer--)
 		{
 			for(std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
 			{

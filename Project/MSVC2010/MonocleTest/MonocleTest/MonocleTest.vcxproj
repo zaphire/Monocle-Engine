@@ -173,6 +173,7 @@
     <ClCompile Include="..\..\..\..\Code\Collision.cpp" />
     <ClCompile Include="..\..\..\..\Code\CollisionData.cpp" />
     <ClCompile Include="..\..\..\..\Code\Color.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Editor.cpp" />
     <ClCompile Include="..\..\..\..\Code\FileNode.cpp" />
     <ClCompile Include="..\..\..\..\Code\Game.cpp" />
     <ClCompile Include="..\..\..\..\Code\Debug.cpp" />

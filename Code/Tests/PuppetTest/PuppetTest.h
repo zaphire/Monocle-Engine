@@ -1,6 +1,7 @@
 #include "../../Monocle.h"
 #include "../../TextureAsset.h"
 #include "Puppet.h"
+#include "../../Editor.h"
 
 using namespace Monocle;
 
@@ -23,16 +24,14 @@ namespace PuppetTest
 		Puppet puppet;
 	};
 
-	class TestScene : public Scene
+	class PuppetEditor : public CameraEditor
 	{
 	public:
-		void Begin();
-		void End();
-        
-        void Update();
-        
-    private:
-        PuppetEntity *puppetEntity;
+		PuppetEditor();
+		void Init(Scene *scene);
+		void Update();
+
+		PuppetEntity *puppetEntity;
 
 		KeyCode keyTogglePause;
 
@@ -43,12 +42,30 @@ namespace PuppetTest
 
 		KeyCode keyRotateLeft;
 		KeyCode keyRotateRight;
+
+		KeyCode keyBackwards;
+		KeyCode keyForwards;
+
+		KeyCode keySetKeyFrame;
+
+		KeyCode keyZero;
+
+		KeyCode keyOffset;
+
+		Timeline *timeline;
+
+		Scene *scene;
+	};
+
+	class TestScene : public Scene
+	{
+	public:
+		void Begin();
+		void End();
         
-        KeyCode keyBackwards;
-        KeyCode keyForwards;
-        
-        KeyCode keySetKeyFrame;
-        
-        Timeline *timeline;
+        void Update();
+
+	protected:
+		PuppetEditor puppetEditor;
 	};
 }
