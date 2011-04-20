@@ -61,7 +61,9 @@ namespace AudioTest
         cs->open(add->ch,add->bit,add->samplerate);
         
         // Start by filling the buffer
-        unsigned int size;
+        ThinkAudio();
+        
+        /*unsigned int size;
         
         // Fill First Buffers
         unsigned char *data = cs->getStaticBuffer(&size);
@@ -74,7 +76,7 @@ namespace AudioTest
         
         data = cs->getStaticBuffer(&size);
         size = od.Render( size, (void*)data, *add);
-        cs->lockNumberedBuffer(size, 2);
+        cs->lockNumberedBuffer(size, 2);*/
         
         cs->play();
 	}

@@ -62,6 +62,8 @@ namespace Monocle
 
         this->samplerate = samplerate;
         this->started = true;
+        this->startBuffer = 0;
+        this->startedPlaying = false;
     }
 
     void ChannelStream::close()
@@ -77,8 +79,12 @@ namespace Monocle
     {
         int processed;
         
-        alGetSourcei(source, AL_BUFFERS_PROCESSED, &processed);
-        return processed;
+        if (this->startBuffer >= NUM_BUFFERS){
+            alGetSourcei(source, AL_BUFFERS_PROCESSED, &processed);
+            return processed;
+        }else{
+            return NUM_BUFFERS-this->startBuffer;
+        }
     }
 
     void ChannelStream::lockNumberedBuffer( unsigned int size, unsigned int buff )
@@ -89,6 +95,10 @@ namespace Monocle
 
     unsigned char *ChannelStream::getBuffer( unsigned int *size )
     {
+        if (this->startBuffer < NUM_BUFFERS){
+            return getStaticBuffer(size);
+        }
+        
         alSourceUnqueueBuffers(source, 1, &active_buffer);
         check();
         
@@ -103,6 +113,12 @@ namespace Monocle
 
     void ChannelStream::lockBuffer( unsigned int size )
     {
+        if (this->startBuffer < NUM_BUFFERS){
+            lockNumberedBuffer(size, this->startBuffer);
+            this->startBuffer++;
+            return;
+        }
+        
         alBufferData(active_buffer, format, obtainedBuffer, size, samplerate);
         check();
         
@@ -115,6 +131,8 @@ namespace Monocle
         alSourceQueueBuffers(source, NUM_BUFFERS, buffers);
         alSourcePlay(source);
         check();
+        
+        this->startedPlaying = true;
     }
 
     void ChannelStream::stop()
@@ -148,6 +166,8 @@ namespace Monocle
     ChannelStream::ChannelStream()
     {
         started = false;
+        startBuffer=0;
+        this->startedPlaying = false;
         format = AL_FORMAT_STEREO16;
     }
 
