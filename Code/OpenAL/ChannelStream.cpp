@@ -3,6 +3,9 @@
 #include <string.h>
 #include "ChannelStream.h"
 
+#include "Debug.h"
+#include "MonocleToolkit.h"
+
 #include <OpenAL/al.h>
 #include <OpenAL/alc.h>
 
@@ -55,8 +58,8 @@ namespace Monocle
         alBufferData(buffers[0], format, obtainedBuffer, BUFFER_SIZE, samplerate);
         alBufferData(buffers[1], format, obtainedBuffer, BUFFER_SIZE, samplerate);
         alBufferData(buffers[2], format, obtainedBuffer, BUFFER_SIZE, samplerate);
-        
-        printf("opening with sr:%d, nch:%d, format:%d\n",samplerate,channels,format);
+
+        Debug::Log("AUDIO: Opening Audio Channel: " + StringOf(samplerate) + "hz w/ " + StringOf(channels) + " channels (ALformat:" + StringOf(format) +")");
         
         check();
 
@@ -199,7 +202,8 @@ namespace Monocle
         default_device = alcGetString(NULL,
                                       ALC_DEFAULT_DEVICE_SPECIFIER);
         
-        printf("using default device: %s\n", default_device);
+        //printf("using default device: %s\n", default_device);
+        Debug::Log("AUDIO: Opening Audio Device: " + std::string(default_device));
         
         if ((device = alcOpenDevice(default_device)) == NULL) {
             fprintf(stderr, "failed to open sound device\n");
