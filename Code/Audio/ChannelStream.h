@@ -55,6 +55,9 @@ namespace Monocle
         unsigned int samplerate;
         
         bool started;
+        bool startedPlaying;
+        
+        unsigned int startBuffer;
         
         unsigned char obtainedBuffer[BUFFER_SIZE];
     };
