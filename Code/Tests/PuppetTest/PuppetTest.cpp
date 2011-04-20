@@ -6,17 +6,17 @@ namespace PuppetTest
 	const float TIME_STEP = 0.05f;
 
 	/// TIMELINE
-    Timeline::Timeline()
-        : Entity(), currentAnimation(NULL)
-    {
-        
-    }
-    
-    void Timeline::Render()
-    {
-        //Entity::Render();
-        
-        if (currentAnimation)
+	Timeline::Timeline()
+		: Entity(), currentAnimation(NULL)
+	{
+
+	}
+
+	void Timeline::Render()
+	{
+		//Entity::Render();
+
+		if (currentAnimation)
 		{
 			Graphics::PushMatrix();
 			float lineHalfWidth = Graphics::GetVirtualWidth() * 0.9f * 0.5f;
@@ -25,27 +25,27 @@ namespace PuppetTest
 			Vector2 start = Graphics::GetScreenCenter() + Vector2(-lineHalfWidth, y);
 			Vector2 end = Graphics::GetScreenCenter() + Vector2(lineHalfWidth, y);
 			Graphics::BindTexture(NULL);
-            Graphics::SetColor(Color::blue);
-            Graphics::RenderLine(start, end);
-            Vector2 playHead;
-            float playHeadHalfHeight = 16;
-            
-            if (Debug::selectedEntity)
-            {
-                Graphics::SetColor(Color::orange);
-                Part *part = dynamic_cast<Part*>(Debug::selectedEntity);
-                if (part)
-                {
-                    PartKeyFrames *partKeyFrames = currentAnimation->GetPartKeyFrames(part);
-                    if (partKeyFrames)
-                    {
+			Graphics::SetColor(Color::blue);
+			Graphics::RenderLine(start, end);
+			Vector2 playHead;
+			float playHeadHalfHeight = 16;
+
+			if (Debug::selectedEntity)
+			{
+				Graphics::SetColor(Color::orange);
+				Part *part = dynamic_cast<Part*>(Debug::selectedEntity);
+				if (part)
+				{
+					PartKeyFrames *partKeyFrames = currentAnimation->GetPartKeyFrames(part);
+					if (partKeyFrames)
+					{
 
 						const std::list<KeyFrame> *keyFrames = partKeyFrames->GetKeyFrames();
-                        for (std::list<KeyFrame>::const_iterator i = keyFrames->begin(); i != keyFrames->end(); ++i)
-                        {
-                            playHead = (end-start) * ((*i).GetTime()/currentAnimation->GetDuration()) + start;
-                            Graphics::RenderLine(playHead + Vector2::up * playHeadHalfHeight, playHead + Vector2::down * playHeadHalfHeight);
-                        }
+						for (std::list<KeyFrame>::const_iterator i = keyFrames->begin(); i != keyFrames->end(); ++i)
+						{
+							playHead = (end-start) * ((*i).GetTime()/currentAnimation->GetDuration()) + start;
+							Graphics::RenderLine(playHead + Vector2::up * playHeadHalfHeight, playHead + Vector2::down * playHeadHalfHeight);
+						}
 					}
 				}
 			}
@@ -56,15 +56,14 @@ namespace PuppetTest
 			Graphics::RenderLine(playHead + Vector2::up * playHeadHalfHeight * 0.5f, playHead + Vector2::down * playHeadHalfHeight * 0.5f);
 
 			Graphics::PopMatrix();
-        }
-    }
-    
+		}
+	}
+
 	PuppetEntity::PuppetEntity()
 		: Entity()
 	{
 		std::string puppetFile;
-		//puppetFile = "puppet";
-		puppetFile = "narratorarm";
+		puppetFile = "puppet";
 
 		puppet.Load(puppetFile + ".xml", this);
 
@@ -257,7 +256,7 @@ namespace PuppetTest
 		else
 		{
 			//if (Input::IsMouseButtonHeld(MOUSE_BUTTON_LEFT))
-				//puppetEntity->position = WEIGHTED_AVERAGE(puppetEntity->position, Input::GetWorldMousePosition(), 15);
+			//puppetEntity->position = WEIGHTED_AVERAGE(puppetEntity->position, Input::GetWorldMousePosition(), 15);
 		}
 	}
 
@@ -268,14 +267,14 @@ namespace PuppetTest
 
 		puppetEditor.Init(this);
 	}
-    
-    void TestScene::Update()
-    {
-        Scene::Update();
+
+	void TestScene::Update()
+	{
+		Scene::Update();
 
 		puppetEditor.Update();
-    }
-    
+	}
+
 	void TestScene::End()
 	{
 		Scene::End();

@@ -1,6 +1,7 @@
 #include "Editor.h"
 #include "Input.h"
 #include "Scene.h"
+#include <cstdio>
 
 namespace Monocle
 {
