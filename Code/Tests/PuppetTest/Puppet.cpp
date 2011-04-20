@@ -273,11 +273,12 @@ namespace Monocle
 
 	void PartKeyFrames::Save(FileNode *fileNode)
 	{
-		fileNode->Write("id", id);
+		fileNode->Write("id", part->GetID());
 	}
 
 	void PartKeyFrames::Load(FileNode *fileNode)
 	{
+		int id = -1;
 		fileNode->Read("id", id);
 		SetPart(puppet->GetPartByID(id));
 	}
@@ -624,7 +625,8 @@ namespace Monocle
 	void Puppet::SaveParts(TiXmlElement *element, Entity *fromEntity)
 	{
 		XMLFileNode xmlFileNode(element);
-		fromEntity->Save(&xmlFileNode);
+		if (fromEntity->GetParent() != NULL)
+			fromEntity->Save(&xmlFileNode);
 
 		const std::list<Entity*> *children = fromEntity->GetChildren();
 		for (std::list<Entity*>::const_iterator i = children->begin(); i != children->end(); ++i)

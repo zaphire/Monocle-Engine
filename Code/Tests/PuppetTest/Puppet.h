@@ -89,7 +89,7 @@ namespace Monocle
 		std::list<KeyFrame> keyFrames;
 		Part *part;
 		Puppet *puppet;
-		int id;
+		//int id;
 	};
 
 	class Animation
