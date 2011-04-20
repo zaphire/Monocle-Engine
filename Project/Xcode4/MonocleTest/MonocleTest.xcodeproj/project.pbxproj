@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03907B2B135E5E0300D92F21 /* CollisionData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B29135E5E0300D92F21 /* CollisionData.cpp */; };
+		03907B30135E5E9B00D92F21 /* MonocleToolkit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B2E135E5E9B00D92F21 /* MonocleToolkit.cpp */; };
+		03907B37135E5EC400D92F21 /* LevelEditorTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B33135E5EC400D92F21 /* LevelEditorTest.cpp */; };
+		03907B3B135E5F0E00D92F21 /* ImageBrowser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B39135E5F0E00D92F21 /* ImageBrowser.cpp */; };
+		03907B3D135E5F3B00D92F21 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 03907B3C135E5F3B00D92F21 /* stb_image.c */; };
+		03907B3F135E604D00D92F21 /* libGLEW.1.5.8.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 03907B3E135E604D00D92F21 /* libGLEW.1.5.8.dylib */; };
 		3782F004133864AD0042BAE7 /* CocoaKeys.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3782F003133864AD0042BAE7 /* CocoaKeys.mm */; };
 		37AABF3613333E29004E2D56 /* Assets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37AABF3413333E29004E2D56 /* Assets.cpp */; };
 		37AABF381333478A004E2D56 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37AABF371333478A004E2D56 /* Main.cpp */; };
@@ -32,30 +38,6 @@
 		37FB698A13317693008963C1 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB692C13317693008963C1 /* Input.cpp */; };
 		37FB699213317693008963C1 /* Monocle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB693913317693008963C1 /* Monocle.cpp */; };
 		37FB699313317693008963C1 /* OpenALAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB693C13317693008963C1 /* OpenALAudio.cpp */; };
-		37FB699413317693008963C1 /* glpng.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB693F13317693008963C1 /* glpng.c */; };
-		37FB699513317693008963C1 /* png.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB694213317693008963C1 /* png.c */; };
-		37FB699613317693008963C1 /* pngerror.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB694513317693008963C1 /* pngerror.c */; };
-		37FB699713317693008963C1 /* pngget.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB694613317693008963C1 /* pngget.c */; };
-		37FB699813317693008963C1 /* pngmem.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB694713317693008963C1 /* pngmem.c */; };
-		37FB699913317693008963C1 /* pngpread.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB694813317693008963C1 /* pngpread.c */; };
-		37FB699A13317693008963C1 /* pngread.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB694913317693008963C1 /* pngread.c */; };
-		37FB699B13317693008963C1 /* pngrio.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB694A13317693008963C1 /* pngrio.c */; };
-		37FB699C13317693008963C1 /* pngrtran.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB694B13317693008963C1 /* pngrtran.c */; };
-		37FB699D13317693008963C1 /* pngrutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB694C13317693008963C1 /* pngrutil.c */; };
-		37FB699E13317693008963C1 /* pngset.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB694D13317693008963C1 /* pngset.c */; };
-		37FB699F13317693008963C1 /* pngtrans.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB694E13317693008963C1 /* pngtrans.c */; };
-		37FB69A013317693008963C1 /* adler32.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB695013317693008963C1 /* adler32.c */; };
-		37FB69A113317693008963C1 /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB695113317693008963C1 /* compress.c */; };
-		37FB69A213317693008963C1 /* crc32.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB695213317693008963C1 /* crc32.c */; };
-		37FB69A313317693008963C1 /* deflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB695413317693008963C1 /* deflate.c */; };
-		37FB69A413317693008963C1 /* gzio.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB695613317693008963C1 /* gzio.c */; };
-		37FB69A513317693008963C1 /* infback.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB695713317693008963C1 /* infback.c */; };
-		37FB69A613317693008963C1 /* inffast.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB695813317693008963C1 /* inffast.c */; };
-		37FB69A713317693008963C1 /* inflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB695B13317693008963C1 /* inflate.c */; };
-		37FB69A813317693008963C1 /* inftrees.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB695D13317693008963C1 /* inftrees.c */; };
-		37FB69A913317693008963C1 /* trees.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB695F13317693008963C1 /* trees.c */; };
-		37FB69AA13317693008963C1 /* uncompr.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB696113317693008963C1 /* uncompr.c */; };
-		37FB69AB13317693008963C1 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FB696413317693008963C1 /* zutil.c */; };
 		37FB69AC13317693008963C1 /* OpenGLGraphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB696613317693008963C1 /* OpenGLGraphics.cpp */; };
 		37FB69AD13317693008963C1 /* OpenGLTextureAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB696713317693008963C1 /* OpenGLTextureAsset.cpp */; };
 		37FB69AE13317693008963C1 /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB696913317693008963C1 /* Random.cpp */; };
@@ -66,7 +48,6 @@
 		37FB69B513317693008963C1 /* Vector2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB697C13317693008963C1 /* Vector2.cpp */; };
 		37FB69B613317693008963C1 /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB697E13317693008963C1 /* Vector3.cpp */; };
 		37FB69B813319030008963C1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FB69B713319030008963C1 /* OpenGL.framework */; };
-		6657ED15133F9E8F00ACA1E2 /* FTE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6657ED13133F9E8F00ACA1E2 /* FTE.cpp */; };
 		D881B50013445142008EF89C /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D881B4FE13445142008EF89C /* Node.cpp */; };
 		F9132A0A13499ED200567EAB /* PathCollider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9132A0813499ED200567EAB /* PathCollider.cpp */; };
 		F9132A11134A0D8200567EAB /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9132A0F134A0D8200567EAB /* Transform.cpp */; };
@@ -83,7 +64,6 @@
 		F947BBED13532B1900952C81 /* OpenGLTTFFontAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F947BBEB13532B1900952C81 /* OpenGLTTFFontAsset.cpp */; };
 		F9F7D5D4133B0D57002953B0 /* PolygonCollider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7D5D2133B0D57002953B0 /* PolygonCollider.cpp */; };
 		F9F7D600133D3F3C002953B0 /* FringeTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7D5FA133D3F3C002953B0 /* FringeTile.cpp */; };
-		F9F7D601133D3F3C002953B0 /* FringeTileEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7D5FC133D3F3C002953B0 /* FringeTileEditor.cpp */; };
 		F9F7D602133D3F3C002953B0 /* LevelEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7D5FE133D3F3C002953B0 /* LevelEditor.cpp */; };
 		F9F7D63A13457F3B002953B0 /* XMLFileNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7D63813457F3B002953B0 /* XMLFileNode.cpp */; };
 		F9F7D63D13457F46002953B0 /* FileNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7D63B13457F46002953B0 /* FileNode.cpp */; };
@@ -91,6 +71,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		03907B29135E5E0300D92F21 /* CollisionData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CollisionData.cpp; path = ../../../Code/CollisionData.cpp; sourceTree = "<group>"; };
+		03907B2A135E5E0300D92F21 /* CollisionData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollisionData.h; path = ../../../Code/CollisionData.h; sourceTree = "<group>"; };
+		03907B2E135E5E9B00D92F21 /* MonocleToolkit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MonocleToolkit.cpp; path = ../../../Code/MonocleToolkit.cpp; sourceTree = "<group>"; };
+		03907B2F135E5E9B00D92F21 /* MonocleToolkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MonocleToolkit.h; path = ../../../Code/MonocleToolkit.h; sourceTree = "<group>"; };
+		03907B33135E5EC400D92F21 /* LevelEditorTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelEditorTest.cpp; sourceTree = "<group>"; };
+		03907B34135E5EC400D92F21 /* LevelEditorTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelEditorTest.h; sourceTree = "<group>"; };
+		03907B39135E5F0E00D92F21 /* ImageBrowser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImageBrowser.cpp; path = ../../../Code/LevelEditor/ImageBrowser.cpp; sourceTree = "<group>"; };
+		03907B3A135E5F0E00D92F21 /* ImageBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageBrowser.h; path = ../../../Code/LevelEditor/ImageBrowser.h; sourceTree = "<group>"; };
+		03907B3C135E5F3B00D92F21 /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
+		03907B3E135E604D00D92F21 /* libGLEW.1.5.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.5.8.dylib; path = ../libGLEW.1.5.8.dylib; sourceTree = "<group>"; };
 		3763773913385C7B003608BB /* GUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUI.cpp; path = ../../../Code/GUI.cpp; sourceTree = "<group>"; };
 		3763773A13385C7B003608BB /* GUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GUI.h; path = ../../../Code/GUI.h; sourceTree = "<group>"; };
 		3782F002133864AD0042BAE7 /* CocoaKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CocoaKeys.h; path = ../../../Code/Cocoa/CocoaKeys.h; sourceTree = "<group>"; };
@@ -146,43 +136,6 @@
 		37FB693913317693008963C1 /* Monocle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Monocle.cpp; path = ../../../Code/Monocle.cpp; sourceTree = "<group>"; };
 		37FB693A13317693008963C1 /* Monocle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Monocle.h; path = ../../../Code/Monocle.h; sourceTree = "<group>"; };
 		37FB693C13317693008963C1 /* OpenALAudio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenALAudio.cpp; sourceTree = "<group>"; };
-		37FB693F13317693008963C1 /* glpng.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpng.c; sourceTree = "<group>"; };
-		37FB694013317693008963C1 /* glpng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpng.h; sourceTree = "<group>"; };
-		37FB694213317693008963C1 /* png.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = png.c; sourceTree = "<group>"; };
-		37FB694313317693008963C1 /* png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = png.h; sourceTree = "<group>"; };
-		37FB694413317693008963C1 /* pngconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngconf.h; sourceTree = "<group>"; };
-		37FB694513317693008963C1 /* pngerror.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngerror.c; sourceTree = "<group>"; };
-		37FB694613317693008963C1 /* pngget.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngget.c; sourceTree = "<group>"; };
-		37FB694713317693008963C1 /* pngmem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngmem.c; sourceTree = "<group>"; };
-		37FB694813317693008963C1 /* pngpread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngpread.c; sourceTree = "<group>"; };
-		37FB694913317693008963C1 /* pngread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngread.c; sourceTree = "<group>"; };
-		37FB694A13317693008963C1 /* pngrio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngrio.c; sourceTree = "<group>"; };
-		37FB694B13317693008963C1 /* pngrtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngrtran.c; sourceTree = "<group>"; };
-		37FB694C13317693008963C1 /* pngrutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngrutil.c; sourceTree = "<group>"; };
-		37FB694D13317693008963C1 /* pngset.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngset.c; sourceTree = "<group>"; };
-		37FB694E13317693008963C1 /* pngtrans.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngtrans.c; sourceTree = "<group>"; };
-		37FB695013317693008963C1 /* adler32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = adler32.c; sourceTree = "<group>"; };
-		37FB695113317693008963C1 /* compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = compress.c; sourceTree = "<group>"; };
-		37FB695213317693008963C1 /* crc32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = crc32.c; sourceTree = "<group>"; };
-		37FB695313317693008963C1 /* crc32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crc32.h; sourceTree = "<group>"; };
-		37FB695413317693008963C1 /* deflate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = deflate.c; sourceTree = "<group>"; };
-		37FB695513317693008963C1 /* deflate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = deflate.h; sourceTree = "<group>"; };
-		37FB695613317693008963C1 /* gzio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gzio.c; sourceTree = "<group>"; };
-		37FB695713317693008963C1 /* infback.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = infback.c; sourceTree = "<group>"; };
-		37FB695813317693008963C1 /* inffast.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = inffast.c; sourceTree = "<group>"; };
-		37FB695913317693008963C1 /* inffast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inffast.h; sourceTree = "<group>"; };
-		37FB695A13317693008963C1 /* inffixed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inffixed.h; sourceTree = "<group>"; };
-		37FB695B13317693008963C1 /* inflate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = inflate.c; sourceTree = "<group>"; };
-		37FB695C13317693008963C1 /* inflate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inflate.h; sourceTree = "<group>"; };
-		37FB695D13317693008963C1 /* inftrees.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = inftrees.c; sourceTree = "<group>"; };
-		37FB695E13317693008963C1 /* inftrees.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inftrees.h; sourceTree = "<group>"; };
-		37FB695F13317693008963C1 /* trees.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = trees.c; sourceTree = "<group>"; };
-		37FB696013317693008963C1 /* trees.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = trees.h; sourceTree = "<group>"; };
-		37FB696113317693008963C1 /* uncompr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = uncompr.c; sourceTree = "<group>"; };
-		37FB696213317693008963C1 /* zconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zconf.h; sourceTree = "<group>"; };
-		37FB696313317693008963C1 /* zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zlib.h; sourceTree = "<group>"; };
-		37FB696413317693008963C1 /* zutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zutil.c; sourceTree = "<group>"; };
-		37FB696513317693008963C1 /* zutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zutil.h; sourceTree = "<group>"; };
 		37FB696613317693008963C1 /* OpenGLGraphics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLGraphics.cpp; sourceTree = "<group>"; };
 		37FB696713317693008963C1 /* OpenGLTextureAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLTextureAsset.cpp; sourceTree = "<group>"; };
 		37FB696813317693008963C1 /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Platform.h; path = ../../../Code/Platform.h; sourceTree = "<group>"; };
@@ -202,8 +155,6 @@
 		37FB697E13317693008963C1 /* Vector3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Vector3.cpp; path = ../../../Code/Vector3.cpp; sourceTree = "<group>"; };
 		37FB697F13317693008963C1 /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vector3.h; path = ../../../Code/Vector3.h; sourceTree = "<group>"; };
 		37FB69B713319030008963C1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		6657ED13133F9E8F00ACA1E2 /* FTE.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FTE.cpp; sourceTree = "<group>"; };
-		6657ED14133F9E8F00ACA1E2 /* FTE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTE.h; sourceTree = "<group>"; };
 		BF9F7B45134D1E7B002A6CC0 /* FontAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FontAsset.h; path = ../../../Code/FontAsset.h; sourceTree = "<group>"; };
 		D876F29413456E7500A021D8 /* PathMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PathMesh.cpp; path = ../../../Code/LevelEditor/PathMesh.cpp; sourceTree = "<group>"; };
 		D876F29513456E7500A021D8 /* PathMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathMesh.h; path = ../../../Code/LevelEditor/PathMesh.h; sourceTree = "<group>"; };
@@ -243,8 +194,6 @@
 		F9F7D5D3133B0D57002953B0 /* PolygonCollider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolygonCollider.h; sourceTree = "<group>"; };
 		F9F7D5FA133D3F3C002953B0 /* FringeTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FringeTile.cpp; path = ../../../Code/LevelEditor/FringeTile.cpp; sourceTree = SOURCE_ROOT; };
 		F9F7D5FB133D3F3C002953B0 /* FringeTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FringeTile.h; path = ../../../Code/LevelEditor/FringeTile.h; sourceTree = SOURCE_ROOT; };
-		F9F7D5FC133D3F3C002953B0 /* FringeTileEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FringeTileEditor.cpp; path = ../../../Code/LevelEditor/FringeTileEditor.cpp; sourceTree = SOURCE_ROOT; };
-		F9F7D5FD133D3F3C002953B0 /* FringeTileEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FringeTileEditor.h; path = ../../../Code/LevelEditor/FringeTileEditor.h; sourceTree = SOURCE_ROOT; };
 		F9F7D5FE133D3F3C002953B0 /* LevelEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LevelEditor.cpp; path = ../../../Code/LevelEditor/LevelEditor.cpp; sourceTree = SOURCE_ROOT; };
 		F9F7D5FF133D3F3C002953B0 /* LevelEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LevelEditor.h; path = ../../../Code/LevelEditor/LevelEditor.h; sourceTree = SOURCE_ROOT; };
 		F9F7D63813457F3B002953B0 /* XMLFileNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XMLFileNode.cpp; sourceTree = "<group>"; };
@@ -262,12 +211,22 @@
 			files = (
 				37FB69B813319030008963C1 /* OpenGL.framework in Frameworks */,
 				37EA249B132F986900D216B0 /* Cocoa.framework in Frameworks */,
+				03907B3F135E604D00D92F21 /* libGLEW.1.5.8.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03907B31135E5EC400D92F21 /* LevelEditor */ = {
+			isa = PBXGroup;
+			children = (
+				03907B33135E5EC400D92F21 /* LevelEditorTest.cpp */,
+				03907B34135E5EC400D92F21 /* LevelEditorTest.h */,
+			);
+			path = LevelEditor;
+			sourceTree = "<group>";
+		};
 		37B1929413359BE600D2D264 /* Flash */ = {
 			isa = PBXGroup;
 			children = (
@@ -326,6 +285,7 @@
 		37EA248B132F986800D216B0 = {
 			isa = PBXGroup;
 			children = (
+				03907B3E135E604D00D92F21 /* libGLEW.1.5.8.dylib */,
 				37FB691313317656008963C1 /* Monocle */,
 				37EA24A0132F986900D216B0 /* MonocleTest */,
 				37EA2499132F986900D216B0 /* Frameworks */,
@@ -382,6 +342,8 @@
 		37FB691313317656008963C1 /* Monocle */ = {
 			isa = PBXGroup;
 			children = (
+				03907B29135E5E0300D92F21 /* CollisionData.cpp */,
+				03907B2A135E5E0300D92F21 /* CollisionData.h */,
 				37CAD62513325648009BC5F3 /* Cocoa */,
 				37FB691913317693008963C1 /* Colliders */,
 				37CAD626133259BE009BC5F3 /* Graphics */,
@@ -422,6 +384,8 @@
 				37AABF371333478A004E2D56 /* Main.cpp */,
 				37FB693913317693008963C1 /* Monocle.cpp */,
 				37FB693A13317693008963C1 /* Monocle.h */,
+				03907B2E135E5E9B00D92F21 /* MonocleToolkit.cpp */,
+				03907B2F135E5E9B00D92F21 /* MonocleToolkit.h */,
 				37FB696813317693008963C1 /* Platform.h */,
 				37FB696913317693008963C1 /* Random.cpp */,
 				37FB696A13317693008963C1 /* Random.h */,
@@ -477,7 +441,7 @@
 			children = (
 				F947BBEB13532B1900952C81 /* OpenGLTTFFontAsset.cpp */,
 				F947BBEC13532B1900952C81 /* stb_truetype.h */,
-				37FB693E13317693008963C1 /* glpng */,
+				03907B3C135E5F3B00D92F21 /* stb_image.c */,
 				37FB696613317693008963C1 /* OpenGLGraphics.cpp */,
 				37FB696713317693008963C1 /* OpenGLTextureAsset.cpp */,
 			);
@@ -485,71 +449,11 @@
 			path = ../../../Code/OpenGL;
 			sourceTree = "<group>";
 		};
-		37FB693E13317693008963C1 /* glpng */ = {
-			isa = PBXGroup;
-			children = (
-				37FB693F13317693008963C1 /* glpng.c */,
-				37FB694013317693008963C1 /* glpng.h */,
-				37FB694113317693008963C1 /* png */,
-				37FB694F13317693008963C1 /* zlib */,
-			);
-			path = glpng;
-			sourceTree = "<group>";
-		};
-		37FB694113317693008963C1 /* png */ = {
-			isa = PBXGroup;
-			children = (
-				37FB694213317693008963C1 /* png.c */,
-				37FB694313317693008963C1 /* png.h */,
-				37FB694413317693008963C1 /* pngconf.h */,
-				37FB694513317693008963C1 /* pngerror.c */,
-				37FB694613317693008963C1 /* pngget.c */,
-				37FB694713317693008963C1 /* pngmem.c */,
-				37FB694813317693008963C1 /* pngpread.c */,
-				37FB694913317693008963C1 /* pngread.c */,
-				37FB694A13317693008963C1 /* pngrio.c */,
-				37FB694B13317693008963C1 /* pngrtran.c */,
-				37FB694C13317693008963C1 /* pngrutil.c */,
-				37FB694D13317693008963C1 /* pngset.c */,
-				37FB694E13317693008963C1 /* pngtrans.c */,
-			);
-			path = png;
-			sourceTree = "<group>";
-		};
-		37FB694F13317693008963C1 /* zlib */ = {
-			isa = PBXGroup;
-			children = (
-				37FB695013317693008963C1 /* adler32.c */,
-				37FB695113317693008963C1 /* compress.c */,
-				37FB695213317693008963C1 /* crc32.c */,
-				37FB695313317693008963C1 /* crc32.h */,
-				37FB695413317693008963C1 /* deflate.c */,
-				37FB695513317693008963C1 /* deflate.h */,
-				37FB695613317693008963C1 /* gzio.c */,
-				37FB695713317693008963C1 /* infback.c */,
-				37FB695813317693008963C1 /* inffast.c */,
-				37FB695913317693008963C1 /* inffast.h */,
-				37FB695A13317693008963C1 /* inffixed.h */,
-				37FB695B13317693008963C1 /* inflate.c */,
-				37FB695C13317693008963C1 /* inflate.h */,
-				37FB695D13317693008963C1 /* inftrees.c */,
-				37FB695E13317693008963C1 /* inftrees.h */,
-				37FB695F13317693008963C1 /* trees.c */,
-				37FB696013317693008963C1 /* trees.h */,
-				37FB696113317693008963C1 /* uncompr.c */,
-				37FB696213317693008963C1 /* zconf.h */,
-				37FB696313317693008963C1 /* zlib.h */,
-				37FB696413317693008963C1 /* zutil.c */,
-				37FB696513317693008963C1 /* zutil.h */,
-			);
-			path = zlib;
-			sourceTree = "<group>";
-		};
 		37FB696F13317693008963C1 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				03907B31135E5EC400D92F21 /* LevelEditor */,
 				F947BBD8134C941B00952C81 /* PuppetTest */,
-				6657ED12133F9E8F00ACA1E2 /* FTE */,
 				37B1929413359BE600D2D264 /* Flash */,
 				37FB697013317693008963C1 /* Jumper */,
 				F9257DF3133823D600A47E00 /* Ogmo */,
@@ -577,26 +481,17 @@
 			path = Pong;
 			sourceTree = "<group>";
 		};
-		6657ED12133F9E8F00ACA1E2 /* FTE */ = {
-			isa = PBXGroup;
-			children = (
-				6657ED13133F9E8F00ACA1E2 /* FTE.cpp */,
-				6657ED14133F9E8F00ACA1E2 /* FTE.h */,
-			);
-			path = FTE;
-			sourceTree = "<group>";
-		};
 		F9257DD91338238200A47E00 /* LevelEditor */ = {
 			isa = PBXGroup;
 			children = (
+				03907B39135E5F0E00D92F21 /* ImageBrowser.cpp */,
+				03907B3A135E5F0E00D92F21 /* ImageBrowser.h */,
 				F9F7D64113457F5C002953B0 /* PathMesh.cpp */,
 				F9F7D64213457F5C002953B0 /* PathMesh.h */,
 				D881B4FE13445142008EF89C /* Node.cpp */,
 				D881B4FF13445142008EF89C /* Node.h */,
 				F9F7D5FA133D3F3C002953B0 /* FringeTile.cpp */,
 				F9F7D5FB133D3F3C002953B0 /* FringeTile.h */,
-				F9F7D5FC133D3F3C002953B0 /* FringeTileEditor.cpp */,
-				F9F7D5FD133D3F3C002953B0 /* FringeTileEditor.h */,
 				F9F7D5FE133D3F3C002953B0 /* LevelEditor.cpp */,
 				F9F7D5FF133D3F3C002953B0 /* LevelEditor.h */,
 				D876F29413456E7500A021D8 /* PathMesh.cpp */,
@@ -715,30 +610,6 @@
 				37FB698A13317693008963C1 /* Input.cpp in Sources */,
 				37FB699213317693008963C1 /* Monocle.cpp in Sources */,
 				37FB699313317693008963C1 /* OpenALAudio.cpp in Sources */,
-				37FB699413317693008963C1 /* glpng.c in Sources */,
-				37FB699513317693008963C1 /* png.c in Sources */,
-				37FB699613317693008963C1 /* pngerror.c in Sources */,
-				37FB699713317693008963C1 /* pngget.c in Sources */,
-				37FB699813317693008963C1 /* pngmem.c in Sources */,
-				37FB699913317693008963C1 /* pngpread.c in Sources */,
-				37FB699A13317693008963C1 /* pngread.c in Sources */,
-				37FB699B13317693008963C1 /* pngrio.c in Sources */,
-				37FB699C13317693008963C1 /* pngrtran.c in Sources */,
-				37FB699D13317693008963C1 /* pngrutil.c in Sources */,
-				37FB699E13317693008963C1 /* pngset.c in Sources */,
-				37FB699F13317693008963C1 /* pngtrans.c in Sources */,
-				37FB69A013317693008963C1 /* adler32.c in Sources */,
-				37FB69A113317693008963C1 /* compress.c in Sources */,
-				37FB69A213317693008963C1 /* crc32.c in Sources */,
-				37FB69A313317693008963C1 /* deflate.c in Sources */,
-				37FB69A413317693008963C1 /* gzio.c in Sources */,
-				37FB69A513317693008963C1 /* infback.c in Sources */,
-				37FB69A613317693008963C1 /* inffast.c in Sources */,
-				37FB69A713317693008963C1 /* inflate.c in Sources */,
-				37FB69A813317693008963C1 /* inftrees.c in Sources */,
-				37FB69A913317693008963C1 /* trees.c in Sources */,
-				37FB69AA13317693008963C1 /* uncompr.c in Sources */,
-				37FB69AB13317693008963C1 /* zutil.c in Sources */,
 				37FB69AC13317693008963C1 /* OpenGLGraphics.cpp in Sources */,
 				37FB69AD13317693008963C1 /* OpenGLTextureAsset.cpp in Sources */,
 				37FB69AE13317693008963C1 /* Random.cpp in Sources */,
@@ -768,9 +639,7 @@
 				3782F004133864AD0042BAE7 /* CocoaKeys.mm in Sources */,
 				F9F7D5D4133B0D57002953B0 /* PolygonCollider.cpp in Sources */,
 				F9F7D600133D3F3C002953B0 /* FringeTile.cpp in Sources */,
-				F9F7D601133D3F3C002953B0 /* FringeTileEditor.cpp in Sources */,
 				F9F7D602133D3F3C002953B0 /* LevelEditor.cpp in Sources */,
-				6657ED15133F9E8F00ACA1E2 /* FTE.cpp in Sources */,
 				D881B50013445142008EF89C /* Node.cpp in Sources */,
 				F9F7D63A13457F3B002953B0 /* XMLFileNode.cpp in Sources */,
 				F9F7D63D13457F46002953B0 /* FileNode.cpp in Sources */,
@@ -782,6 +651,11 @@
 				F947BBDF134C943600952C81 /* PuppetTest.cpp in Sources */,
 				F947BBE813532AC400952C81 /* Rect.cpp in Sources */,
 				F947BBED13532B1900952C81 /* OpenGLTTFFontAsset.cpp in Sources */,
+				03907B2B135E5E0300D92F21 /* CollisionData.cpp in Sources */,
+				03907B30135E5E9B00D92F21 /* MonocleToolkit.cpp in Sources */,
+				03907B37135E5EC400D92F21 /* LevelEditorTest.cpp in Sources */,
+				03907B3B135E5F0E00D92F21 /* ImageBrowser.cpp in Sources */,
+				03907B3D135E5F3B00D92F21 /* stb_image.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -850,6 +724,11 @@
 					MONOCLE_OPENAL,
 				);
 				INFOPLIST_FILE = "MonocleTest/MonocleTest-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/local/lib,
+					"\"$(SRCROOT)/..\"",
+				);
 				MONOCLE_MAC = "";
 				MONOCLE_OPENGL = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -872,6 +751,11 @@
 					MONOCLE_OPENAL,
 				);
 				INFOPLIST_FILE = "MonocleTest/MonocleTest-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/local/lib,
+					"\"$(SRCROOT)/..\"",
+				);
 				MONOCLE_MAC = "";
 				MONOCLE_OPENGL = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
