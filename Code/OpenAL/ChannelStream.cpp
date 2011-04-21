@@ -6,8 +6,8 @@
 #include "../Debug.h"
 #include "../MonocleToolkit.h"
 
-#include <OpenAL/al.h>
-#include <OpenAL/alc.h>
+#include <AL/al.h>
+#include <AL/alc.h>
 
 namespace Monocle
 {
