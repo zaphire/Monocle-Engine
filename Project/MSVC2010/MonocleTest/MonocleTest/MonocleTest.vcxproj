@@ -63,7 +63,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>MONOCLE_WINDOWS;MONOCLE_OPENGL;MONOCLE_OPENAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MONOCLE_WINDOWS;MONOCLE_OPENGL;MONOCLE_OPENAL;MONOCLE_AUDIO_OGG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -105,6 +105,16 @@
     <ClInclude Include="..\..\..\..\Code\Asset.h" />
     <ClInclude Include="..\..\..\..\Code\Assets.h" />
     <ClInclude Include="..\..\..\..\Code\Audio.h" />
+    <ClInclude Include="..\..\..\..\Code\Audio\AudioAsset.h" />
+    <ClInclude Include="..\..\..\..\Code\Audio\AudioCrypt.h" />
+    <ClInclude Include="..\..\..\..\Code\Audio\AudioDecoder.h" />
+    <ClInclude Include="..\..\..\..\Code\Audio\ChannelStream.h" />
+    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\OggDecoder.h" />
+    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\ogg\ogg.h" />
+    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\ogg\os_types.h" />
+    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\vorbis\codec.h" />
+    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\vorbis\vorbisenc.h" />
+    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\vorbis\vorbisfile.h" />
     <ClInclude Include="..\..\..\..\Code\Camera.h" />
     <ClInclude Include="..\..\..\..\Code\Colliders\CircleCollider.h" />
     <ClInclude Include="..\..\..\..\Code\Colliders\Collider.h" />
@@ -143,6 +153,7 @@
     <ClInclude Include="..\..\..\..\Code\Random.h" />
     <ClInclude Include="..\..\..\..\Code\Rect.h" />
     <ClInclude Include="..\..\..\..\Code\Scene.h" />
+    <ClInclude Include="..\..\..\..\Code\Tests\AudioTest\AudioTest.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\Flash\Flash.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\Jumper\Jumper.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\LevelEditor\LevelEditorTest.h" />
@@ -165,6 +176,10 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp" />
     <ClCompile Include="..\..\..\..\Code\Assets.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Audio\AudioAsset.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Audio\AudioCrypt.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Audio\AudioDecoder.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Audio\oggvorbis\OggDecoder.cpp" />
     <ClCompile Include="..\..\..\..\Code\Camera.cpp" />
     <ClCompile Include="..\..\..\..\Code\Colliders\CircleCollider.cpp" />
     <ClCompile Include="..\..\..\..\Code\Colliders\Collider.cpp" />
@@ -193,6 +208,7 @@
     <ClCompile Include="..\..\..\..\Code\Main.cpp" />
     <ClCompile Include="..\..\..\..\Code\Monocle.cpp" />
     <ClCompile Include="..\..\..\..\Code\MonocleToolkit.cpp" />
+    <ClCompile Include="..\..\..\..\Code\OpenAL\ChannelStream.cpp" />
     <ClCompile Include="..\..\..\..\Code\OpenAL\OpenALAudio.cpp" />
     <ClCompile Include="..\..\..\..\Code\OpenGL\GL\glew.c" />
     <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLGraphics.cpp" />
@@ -202,6 +218,7 @@
     <ClCompile Include="..\..\..\..\Code\Random.cpp" />
     <ClCompile Include="..\..\..\..\Code\Rect.cpp" />
     <ClCompile Include="..\..\..\..\Code\Scene.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Tests\AudioTest\AudioTest.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\Flash\Flash.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\Jumper\Jumper.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\LevelEditor\LevelEditorTest.cpp" />

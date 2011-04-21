@@ -1,10 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "ChannelStream.h"
+#include "../Audio/ChannelStream.h"
 
-#include "Debug.h"
-#include "MonocleToolkit.h"
+#include "../Debug.h"
+#include "../MonocleToolkit.h"
 
 #include <OpenAL/al.h>
 #include <OpenAL/alc.h>

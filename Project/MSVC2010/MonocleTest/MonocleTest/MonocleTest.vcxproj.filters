@@ -58,6 +58,21 @@
     <Filter Include="Monocle\Tests\LevelEditor">
       <UniqueIdentifier>{f5cb9620-ef8b-41ac-ac96-cd2a8828c016}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Monocle\Audio">
+      <UniqueIdentifier>{b2fcfdaa-c7a2-4ef9-b264-0eb24f053009}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\Audio\oggvorbis">
+      <UniqueIdentifier>{14fa2da8-55b3-4149-b3e0-b83c224b95d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\Audio\oggvorbis\ogg">
+      <UniqueIdentifier>{a826a71e-ba23-416f-9831-33cf49e53fa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\Audio\oggvorbis\vorbis">
+      <UniqueIdentifier>{fb2250e5-c6ef-480a-8209-d2321ac0c347}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\Tests\AudioTest">
+      <UniqueIdentifier>{84030347-9629-4332-a0b8-13eec9d3f485}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Vector3.h">
@@ -237,6 +252,39 @@
     <ClInclude Include="..\..\..\..\Code\Tests\PuppetTest\TextureAtlas.h">
       <Filter>Monocle\Tests\PuppetTest</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Audio\AudioAsset.h">
+      <Filter>Monocle\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Audio\AudioCrypt.h">
+      <Filter>Monocle\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Audio\AudioDecoder.h">
+      <Filter>Monocle\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Audio\ChannelStream.h">
+      <Filter>Monocle\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\OggDecoder.h">
+      <Filter>Monocle\Audio\oggvorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\ogg\ogg.h">
+      <Filter>Monocle\Audio\oggvorbis\ogg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\ogg\os_types.h">
+      <Filter>Monocle\Audio\oggvorbis\ogg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\vorbis\codec.h">
+      <Filter>Monocle\Audio\oggvorbis\vorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\vorbis\vorbisenc.h">
+      <Filter>Monocle\Audio\oggvorbis\vorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\vorbis\vorbisfile.h">
+      <Filter>Monocle\Audio\oggvorbis\vorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Tests\AudioTest\AudioTest.h">
+      <Filter>Monocle\Tests\AudioTest</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp">
@@ -409,6 +457,24 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Tests\PuppetTest\TextureAtlas.cpp">
       <Filter>Monocle\Tests\PuppetTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Audio\AudioAsset.cpp">
+      <Filter>Monocle\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Audio\AudioCrypt.cpp">
+      <Filter>Monocle\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Audio\AudioDecoder.cpp">
+      <Filter>Monocle\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Audio\oggvorbis\OggDecoder.cpp">
+      <Filter>Monocle\Audio\oggvorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\OpenAL\ChannelStream.cpp">
+      <Filter>Monocle\OpenAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Tests\AudioTest\AudioTest.cpp">
+      <Filter>Monocle\Tests\AudioTest</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

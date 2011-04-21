@@ -6,7 +6,7 @@
 //
 
 #include "AudioAsset.h"
-#include "Debug.h"
+#include "../Debug.h"
 
 namespace Monocle
 {

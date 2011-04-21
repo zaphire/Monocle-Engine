@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Asset.h"
+#include "../Asset.h"
 #include "AudioDecoder.h"
 
 namespace Monocle
