@@ -1,7 +1,9 @@
 #include "TextureAtlas.h"
+
+#include "XML/XMLFileNode.h"
+#include "XML/tinyxml.h"
+
 #include <sstream>
-#include "../../XML/XMLFileNode.h"
-#include "../../XML/tinyxml.h"
 
 namespace Monocle
 {

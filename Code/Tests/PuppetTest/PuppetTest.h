@@ -1,6 +1,6 @@
 #include "../../Monocle.h"
 #include "../../TextureAsset.h"
-#include "Puppet.h"
+#include "../../Puppet/Puppet.h"
 #include "../../Editor.h"
 
 using namespace Monocle;

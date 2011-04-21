@@ -5,6 +5,7 @@ file(GLOB LEVELEDITOR_SRCS LevelEditor/*.cpp)
 file(GLOB OGMOSIS_SRCS Ogmosis/*.cpp)
 file(GLOB XML_SRCS XML/*.cpp)
 file(GLOB AUDIO_SRCS Audio/*.cpp)
+file(GLOB PUPPET_SRCS Puppet/*.cpp)
 
 set(CORE_SRCS ${CORE_SRCS}
 	${COLLIDERS_SRCS}
@@ -12,6 +13,7 @@ set(CORE_SRCS ${CORE_SRCS}
 	${LEVELEDITOR_SRCS}
 	${OGMOSIS_SRCS}
 	${AUDIO_SRCS}
+	${PUPPET_SRCS}
 )
 
 if(WINDOWS)

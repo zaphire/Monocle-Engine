@@ -1,9 +1,9 @@
 #pragma once
 
 #include <list>
-#include "../../Entity.h"
-#include "../../Tween.h"
-#include "../../Graphics/Sprite.h"
+#include "../Entity.h"
+#include "../Tween.h"
+#include "../Graphics/Sprite.h"
 
 class TiXmlElement;
 

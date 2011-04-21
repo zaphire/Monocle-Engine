@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../FileNode.h"
-#include "../../Vector2.h"
+#include "FileNode.h"
+#include "Vector2.h"
 
 #include <map>
 

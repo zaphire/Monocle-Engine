@@ -1,10 +1,10 @@
 #include "Puppet.h"
 
-#include "../../XML/tinyxml.h"
-#include "../../Assets.h"
-#include "../../Graphics/Sprite.h"
-#include "../../Monocle.h"
-#include "TextureAtlas.h"
+#include "../XML/tinyxml.h"
+#include "../Assets.h"
+#include "../Graphics/Sprite.h"
+#include "../Monocle.h"
+#include "../TextureAtlas.h"
 
 #include <sstream>
 

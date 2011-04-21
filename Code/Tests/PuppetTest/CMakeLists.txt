@@ -1,5 +1,5 @@
 set(PUPPET_SRCS
-        Main.cpp Puppet.cpp PuppetTest.cpp TextureAtlas.cpp
+        Main.cpp PuppetTest.cpp
 )
 
 add_executable(TestPuppet ${PUPPET_SRCS})
