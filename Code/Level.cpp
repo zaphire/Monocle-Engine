@@ -199,7 +199,7 @@ namespace Monocle
 					}
 
 
-					scene->ResolveEntityChanges();
+					instance->scene->ResolveEntityChanges();
 				}
 			}
 		}
