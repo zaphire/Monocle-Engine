@@ -16,8 +16,8 @@
 	//#define TEST_OGMO
 	//#define TEST_LEVELEDITOR
 	//#define TEST_FLASH
-	#define TEST_PUPPETTEST
-    //#define TEST_AUDIOTEST
+	//#define TEST_PUPPETTEST
+    #define TEST_AUDIOTEST
 #endif
 
 #ifdef TEST_PONG 
