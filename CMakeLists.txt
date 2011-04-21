@@ -4,6 +4,8 @@ if(COMMAND cmake_policy)
 	cmake_policy(SET CMP0003 NEW)
 endif(COMMAND cmake_policy)
 
+include(CheckIncludeFiles)
+
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
 
 include_directories(AFTER SYSTEM ${PROJECT_BINARY_DIR} Code)
@@ -46,6 +48,7 @@ if(WITH_OPENAL)
 endif(WITH_OPENAL)
 
 if(WITH_AUDIOOGG)
+	find_package(OggVorbis REQUIRED)
 	add_definitions(-DMONOCLE_AUDIO_OGG)
 endif(WITH_AUDIOOGG)
 

@@ -5,7 +5,6 @@ file(GLOB LEVELEDITOR_SRCS LevelEditor/*.cpp)
 file(GLOB OGMOSIS_SRCS Ogmosis/*.cpp)
 file(GLOB XML_SRCS XML/*.cpp)
 file(GLOB AUDIO_SRCS Audio/*.cpp)
-file(GLOB AUDIO_OGGVORBIS_SRCS Audio/oggvorbis/*.cpp)
 
 set(CORE_SRCS ${CORE_SRCS}
 	${COLLIDERS_SRCS}
@@ -13,7 +12,6 @@ set(CORE_SRCS ${CORE_SRCS}
 	${LEVELEDITOR_SRCS}
 	${OGMOSIS_SRCS}
 	${AUDIO_SRCS}
-	${AUDIO_OGGVORBIS_SRCS}
 )
 
 if(WINDOWS)
@@ -45,6 +43,13 @@ if(WITH_OPENAL)
 	set(CORE_LINK ${CORE_LINK} ${OPENAL_LIBRARY})
 	set(CORE_SRCS ${CORE_SRCS} ${OPENAL_SRCS})
 endif(WITH_OPENAL)
+
+if(WITH_AUDIOOGG)
+	include_directories(${OGGVORBIS_INCLUDE_DIR})
+	set(CORE_LINK ${CORE_LINK} ${OGGVORBIS_LIBRARIES})
+	file(GLOB OGGVORBIS_SRCS Audio/oggvorbis/*.cpp)
+	set(CORE_SRCS ${CORE_SRCS} ${OGGVORBIS_SRCS})
+endif(WITH_AUDIOOGG)
 
 add_library(MonocleCore
 	${CORE_SRCS}
