@@ -206,7 +206,8 @@ namespace Monocle
 	{
 	}
 
-   float KeyFrame::GetTime() const
+
+   	float KeyFrame::GetTime() const
 	{
 		return time;
 	}
