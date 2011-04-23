@@ -9,17 +9,6 @@ class TiXmlElement;
 
 namespace Monocle
 {
-    /*
-    class AtlasEntry
-    {
-    public:
-        void Save(FileNode *fileNode);
-        void Load(FileNode *fileNode);
-        
-        Vector2 offset;
-        Vector2 scale;
-    };
-    */
 	
 	class Puppet;
     
@@ -42,7 +31,7 @@ namespace Monocle
 	private:
 		friend class Puppet;
 		int id;
-		std::string atlas;
+		std::string atlasEntry;
 		std::string name;
 		Sprite *sprite;
 		Puppet *puppet;

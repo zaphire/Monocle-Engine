@@ -10,39 +10,7 @@
 
 namespace Monocle
 {
-    /*
-    void AtlasEntry::Save(FileNode *fileNode)
-    {
-        std::ostringstream os;
-        os << offset.x << " " << offset.y << " " << scale.x << " " << scale.y << " ";
-        fileNode->Write("atlas", os.str());
-    }
-    
-    void AtlasEntry::Load(FileNode *fileNode)
-    {
-        std::string str;
-        
-        fileNode->Read("atlasPixels", str);
-        if (str != "")
-        {
-            std::istringstream is(str);
-            float x, y, w, h, mw, mh;
-            is >> x >> y >> w >> h >> mw >> mh;
-            offset = Vector2(x/mw, y/mh);
-            scale = Vector2(w/mw, h/mh);
-        }
-        else
-        {
-            fileNode->Read("atlas", str);
-            if (str != "")
-            {
-                std::istringstream is(str);
-                is >> offset.x >> offset.y >> scale.x >> scale.y;
-            }
-        }
-    }
-    */
-
+	
 	/// PART
 	Part::Part(int id, const std::string &name, const std::string &imageFilename)
 		: Entity(), id(id), name(name), sprite(NULL), puppet(NULL)
@@ -88,11 +56,11 @@ namespace Monocle
 		fileNode->Write("id", id);
 		fileNode->Write("name", name);
 		
-		fileNode->Write("atlas", atlas);
+		fileNode->Write("atlasEntry", atlasEntry);
 
 		if (sprite)
 		{
-			if (atlas == "")
+			if (atlasEntry == "")
 				fileNode->Write("image", sprite->texture->GetName());
 			fileNode->Write("width", sprite->width);
 			fileNode->Write("height", sprite->height);
@@ -123,10 +91,10 @@ namespace Monocle
 		if (textureAtlas)
 		{
 			TextureAtlasEntry *textureAtlasEntry = NULL;
-			fileNode->Read("atlas", atlas);
-			if (atlas != "")
+			fileNode->Read("atlasEntry", atlasEntry);
+			if (atlasEntry != "")
 			{
-				textureAtlasEntry = textureAtlas->GetEntryByName(atlas);
+				textureAtlasEntry = textureAtlas->GetEntryByName(atlasEntry);
 				if (textureAtlasEntry)
 				{
 					sprite = new Sprite(textureAtlas->GetImageName());
