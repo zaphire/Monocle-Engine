@@ -73,6 +73,9 @@
     <Filter Include="Monocle\Tests\AudioTest">
       <UniqueIdentifier>{84030347-9629-4332-a0b8-13eec9d3f485}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Monocle\Puppet">
+      <UniqueIdentifier>{6f7106a0-9fd8-4404-9093-cdbbd9422cf4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Vector3.h">
@@ -207,9 +210,6 @@
     <ClInclude Include="..\..\..\..\Code\Camera.h">
       <Filter>Monocle</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Tests\PuppetTest\Puppet.h">
-      <Filter>Monocle\Tests\PuppetTest</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Tests\PuppetTest\PuppetTest.h">
       <Filter>Monocle\Tests\PuppetTest</Filter>
     </ClInclude>
@@ -249,9 +249,6 @@
     <ClInclude Include="..\..\..\..\Code\MonocleToolkit.h">
       <Filter>Monocle</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Tests\PuppetTest\TextureAtlas.h">
-      <Filter>Monocle\Tests\PuppetTest</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Audio\AudioAsset.h">
       <Filter>Monocle\Audio</Filter>
     </ClInclude>
@@ -284,6 +281,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Tests\AudioTest\AudioTest.h">
       <Filter>Monocle\Tests\AudioTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\TextureAtlas.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Puppet\Puppet.h">
+      <Filter>Monocle\Puppet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Puppet\PuppetEditor.h">
+      <Filter>Monocle\Puppet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -419,9 +425,6 @@
     <ClCompile Include="..\..\..\..\Code\Camera.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Tests\PuppetTest\Puppet.cpp">
-      <Filter>Monocle\Tests\PuppetTest</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Tests\PuppetTest\PuppetTest.cpp">
       <Filter>Monocle\Tests\PuppetTest</Filter>
     </ClCompile>
@@ -455,9 +458,6 @@
     <ClCompile Include="..\..\..\..\Code\Editor.cpp">
       <Filter>Monocle</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Tests\PuppetTest\TextureAtlas.cpp">
-      <Filter>Monocle\Tests\PuppetTest</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Audio\AudioAsset.cpp">
       <Filter>Monocle\Audio</Filter>
     </ClCompile>
@@ -475,6 +475,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Tests\AudioTest\AudioTest.cpp">
       <Filter>Monocle\Tests\AudioTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\TextureAtlas.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Puppet\Puppet.cpp">
+      <Filter>Monocle\Puppet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Puppet\PuppetEditor.cpp">
+      <Filter>Monocle\Puppet</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

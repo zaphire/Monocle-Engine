@@ -7,11 +7,14 @@
 #include "../MonocleToolkit.h"
 
 #ifdef MONOCLE_MAC
-#include <OpenAL/al.h>
-#include <OpenAL/alc.h>
-#else
-#include <AL/al.h>
-#include <AL/alc.h>
+	#include <OpenAL/al.h>
+	#include <OpenAL/alc.h>
+#elif MONOCLE_LINUX
+	#include <AL/al.h>
+	#include <AL/alc.h>
+#elif MONOCLE_WINDOWS
+	#include <al.h>
+	#include <alc.h>
 #endif
 
 namespace Monocle
