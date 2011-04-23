@@ -13,6 +13,8 @@
 	#include <AL/al.h>
 	#include <AL/alc.h>
 #elif MONOCLE_WINDOWS
+	// install OpenAL from http://connect.creativelabs.com/openal
+	// add paths to VC dirs
 	#include <al.h>
 	#include <alc.h>
 #endif
