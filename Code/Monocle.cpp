@@ -9,7 +9,10 @@
 
 namespace Monocle
 {
-	double deltaTime			= 0.0;
+    // Frame time in seconds
+	double deltaTime		= 0.0;
+    
+    // Time since start in seconds
 	double timeSinceStart	= 0.0;
 
 	const float pi			= 3.14159265358979f;
