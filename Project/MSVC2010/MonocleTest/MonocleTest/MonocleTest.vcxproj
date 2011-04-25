@@ -52,6 +52,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)..\..\..\Build\bin\</OutDir>
     <TargetName>$(ProjectName)$(Configuration)</TargetName>
+    <LibraryPath>C:\Program Files (x86)\OpenAL 1.1 SDK\libs\Win32;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Program Files (x86)\OpenAL 1.1 SDK\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)..\..\..\Build\bin\</OutDir>
@@ -67,7 +69,8 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>OpenGL32.lib;GLu32.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.lib;GLu32.lib;Winmm.lib;OpenAL32.lib;libogg_static.lib;libvorbis_static.lib;libvorbisfile_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\Libs\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -150,6 +153,8 @@
     <ClInclude Include="..\..\..\..\Code\OpenGL\GL\wglew.h" />
     <ClInclude Include="..\..\..\..\Code\OpenGL\stb_truetype.h" />
     <ClInclude Include="..\..\..\..\Code\Platform.h" />
+    <ClInclude Include="..\..\..\..\Code\Puppet\Puppet.h" />
+    <ClInclude Include="..\..\..\..\Code\Puppet\PuppetEditor.h" />
     <ClInclude Include="..\..\..\..\Code\Random.h" />
     <ClInclude Include="..\..\..\..\Code\Rect.h" />
     <ClInclude Include="..\..\..\..\Code\Scene.h" />
@@ -159,10 +164,9 @@
     <ClInclude Include="..\..\..\..\Code\Tests\LevelEditor\LevelEditorTest.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\Ogmo\Ogmo.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\Pong\Pong.h" />
-    <ClInclude Include="..\..\..\..\Code\Tests\PuppetTest\Puppet.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\PuppetTest\PuppetTest.h" />
-    <ClInclude Include="..\..\..\..\Code\Tests\PuppetTest\TextureAtlas.h" />
     <ClInclude Include="..\..\..\..\Code\TextureAsset.h" />
+    <ClInclude Include="..\..\..\..\Code\TextureAtlas.h" />
     <ClInclude Include="..\..\..\..\Code\Tileset.h" />
     <ClInclude Include="..\..\..\..\Code\Transform.h" />
     <ClInclude Include="..\..\..\..\Code\TTFFontAsset.h" />
@@ -215,6 +219,8 @@
     <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLTextureAsset.cpp" />
     <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLTTFFontAsset.cpp" />
     <ClCompile Include="..\..\..\..\Code\OpenGL\stb_image.c" />
+    <ClCompile Include="..\..\..\..\Code\Puppet\Puppet.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Puppet\PuppetEditor.cpp" />
     <ClCompile Include="..\..\..\..\Code\Random.cpp" />
     <ClCompile Include="..\..\..\..\Code\Rect.cpp" />
     <ClCompile Include="..\..\..\..\Code\Scene.cpp" />
@@ -224,9 +230,8 @@
     <ClCompile Include="..\..\..\..\Code\Tests\LevelEditor\LevelEditorTest.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\Ogmo\Ogmo.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\Pong\Pong.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Tests\PuppetTest\Puppet.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\PuppetTest\PuppetTest.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Tests\PuppetTest\TextureAtlas.cpp" />
+    <ClCompile Include="..\..\..\..\Code\TextureAtlas.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tileset.cpp" />
     <ClCompile Include="..\..\..\..\Code\Transform.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tween.cpp" />
