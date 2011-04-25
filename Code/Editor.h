@@ -7,8 +7,9 @@ namespace Monocle
 	class Editor
 	{
 	public:
-		Editor();
-		virtual void Update();
+		virtual void Enable()=0;
+		virtual void Disable()=0;
+		virtual void Update()=0;
 	};
 
 	class CameraEditor : public Editor
@@ -17,11 +18,5 @@ namespace Monocle
 	protected:
 		void UpdateCamera();
 		Vector2 lastWorldMousePosition;
-	};
-
-	class EntityEditor : public Editor
-	{
-	public:
-	protected:
 	};
 }

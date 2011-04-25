@@ -5,15 +5,6 @@
 
 namespace Monocle
 {
-	Editor::Editor()
-	{
-
-	}
-
-	void Editor::Update()
-	{
-
-	}
 
 	// update the camera controls
 	void CameraEditor::UpdateCamera()

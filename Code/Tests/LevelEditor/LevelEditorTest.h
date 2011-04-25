@@ -1,5 +1,6 @@
 #include "../../Monocle.h"
 #include "../../LevelEditor/LevelEditor.h"
+#include "../../Puppet/PuppetEditor.h"
 
 using namespace Monocle;
 
@@ -18,11 +19,13 @@ namespace LevelEditorTest
 	class LevelScene : public Scene
 	{
 	public:
+		LevelScene();
 		void Begin();
 		void Update();
 		void End();
 
-		LevelEditor levelEditor;
+		LevelEditor *levelEditor;
+		PuppetEditor *puppetEditor;
 	};
 
 	extern LevelScene *levelScene;

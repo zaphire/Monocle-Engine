@@ -28,6 +28,8 @@ namespace Monocle
 	public:
 		PuppetEditor();
 		void Init(Scene *scene);
+		void Enable();
+		void Disable();
 		void Update();
 
 		PuppetEntity *puppetEntity;

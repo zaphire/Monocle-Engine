@@ -107,10 +107,8 @@ namespace Monocle
 		keyZero = KEY_0;
 
 		Graphics::Set2D(800, 600);
-		Graphics::SetBackgroundColor(Color::white);
+		//Graphics::SetBackgroundColor(Color::white);
 		Scene::GetCamera()->position = Graphics::GetScreenCenter();
-
-		Assets::SetContentPath(Assets::GetContentPath() + "/PuppetTest/");
 
 		puppetEntity = new PuppetEntity();
 		puppetEntity->position = Graphics::GetScreenCenter() + Vector2::down * 100;
@@ -126,10 +124,17 @@ namespace Monocle
 		timeline = new Timeline();
 		scene->Add(timeline);
 	}
+	
+	void PuppetEditor::Enable()
+	{
+	}
+	
+	void PuppetEditor::Disable()
+	{
+	}
 
 	void PuppetEditor::Update()
 	{
-		CameraEditor::Update();
 
 		UpdateCamera();
 

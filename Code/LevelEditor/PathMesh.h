@@ -17,11 +17,9 @@ namespace Monocle
 		void Render();
 		void Save(FileNode *fileNode);
 		void Load(FileNode *fileNode);
-
 		void MakeCollision(float radius);
-
+		
 		int cells;
-
 		bool flipX, flipY;
 
 	private:

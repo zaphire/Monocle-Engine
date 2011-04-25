@@ -89,7 +89,6 @@ namespace Monocle
 	// main level editor update function
 	void LevelEditor::Update()
 	{
-		CameraEditor::Update();
 
 		if (isOn)
 		{

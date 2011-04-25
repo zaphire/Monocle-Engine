@@ -25,12 +25,12 @@ namespace Monocle
 	void OpenURL(const std::string &url);
 	std::string GetWorkingDirectory();
 	void ForEachFile(std::string path, std::string type, void callback(const std::string &filename, intptr_t param), intptr_t param);
-    
-    template <class T>
-    std::string StringOf(T object)
-    {
-        std::ostringstream os;
-        os << object;
-        return(os.str());
-    };
+	
+	template <class T>
+	std::string StringOf(T object)
+	{
+		std::ostringstream os;
+		os << object;
+		return(os.str());
+	};
 }

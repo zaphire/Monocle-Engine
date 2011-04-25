@@ -30,26 +30,43 @@ namespace LevelEditorTest
 
 	LevelScene *levelScene = NULL;
 
+	LevelScene::LevelScene()
+		: Scene(), levelEditor(NULL), puppetEditor(NULL)
+	{
+	}
+	
 	void LevelScene::Begin()
 	{
+		// init instance pointer
 		levelScene = this;
-
+		
+		// call the super
 		Scene::Begin();
 
 		// set the base content path (used by everything)
-		Assets::SetContentPath(Assets::GetContentPath()+"/FTE/");
-
+		Assets::SetContentPath(Assets::GetContentPath() + "/LevelEditorTest/");
+		
+		// set the background color to a dark blue (10% blue + 90% black)
 		Graphics::SetBackgroundColor(Color::blue*0.1f + Color::black*0.9f);
-
+		
+		// create new LevelEditor
+		levelEditor = new LevelEditor();
 		// tell the levelEditor what scene it is working in
-		levelEditor.Init(this);
+		levelEditor->Init(this);
 		// enable it
-		levelEditor.Enable();
+		levelEditor->Enable();
+		
+		// create new PuppetEditor
+		puppetEditor = new PuppetEditor();
+		// tell the puppetEditor what scene it's working in 
+		puppetEditor->Init(this);
+		
 		// pause this scene's updating (freeze the game)
 		isPaused = true;
 
 		// load project file that defines our tilesets
 		Level::LoadProject("project.xml");
+		
 		// load the actual level
 		Level::Load("level.xml", this);
 
@@ -64,7 +81,9 @@ namespace LevelEditorTest
 		Scene::Update();
 
 		// update the levelEditor
-		levelEditor.Update();
+		levelEditor->Update();
+		
+		puppetEditor->Update();
 
 		if (Input::IsKeyPressed(KEY_S) && Input::IsKeyHeld(KEY_LCTRL))
 		{
@@ -75,21 +94,40 @@ namespace LevelEditorTest
 		if (Input::IsKeyPressed(KEY_TAB))
 		{
 			// if we're not doing anything in the levelEditor...
-			if (levelEditor.GetState() == FTES_NONE)
+			if (levelEditor->GetState() == FTES_NONE)
 			{
 				// toggle pause state
 				isPaused = !isPaused;
 
 				if (isPaused)
-					levelEditor.Enable();
+					levelEditor->Enable();
 				else
-					levelEditor.Disable();
+					levelEditor->Disable();
 			}
+		}
+		
+		// if we hit CTRL+A
+		if (Input::IsKeyHeld(KEY_LCTRL) && Input::IsKeyPressed(KEY_A))
+		{
+			if (!isPaused) isPaused = true;
+			
+			levelEditor->Disable();
+			puppetEditor->Enable();
 		}
 	}
 
 	void LevelScene::End()
 	{
+		if (puppetEditor)
+		{
+			delete puppetEditor;
+			puppetEditor = NULL;
+		}
+		if (levelEditor)
+		{
+			delete levelEditor;
+			levelEditor = NULL;
+		}
 		Scene::End();
 	}
 }
