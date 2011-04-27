@@ -25,7 +25,7 @@ namespace LevelEditorTest
 		void End();
 
 		LevelEditor *levelEditor;
-		PuppetEditor *puppetEditor;
+		//PuppetEditor *puppetEditor;
 	};
 
 	extern LevelScene *levelScene;

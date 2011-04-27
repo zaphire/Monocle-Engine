@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <sstream>
 
+#include "../../Audio/oggvorbis/OggDecoder.h"
+
 namespace AudioTest
 {
     OggDecoder od;

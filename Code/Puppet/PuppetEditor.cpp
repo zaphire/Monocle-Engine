@@ -79,14 +79,12 @@ namespace Monocle
 	}
 
 	/// PUPPET EDITOR
-	PuppetEditor::PuppetEditor()
+	PuppetEditor::PuppetEditor() : Editor()
 	{
 	}
 
-	void PuppetEditor::Init(Scene *scene)
+	void PuppetEditor::Added()
 	{
-		this->scene = scene;
-
 		keyTogglePause = KEY_TAB;
 
 		keyMoveLeft = KEY_A;
@@ -127,141 +125,147 @@ namespace Monocle
 	
 	void PuppetEditor::Enable()
 	{
+		Editor::Enable();
 	}
 	
 	void PuppetEditor::Disable()
 	{
+		Editor::Disable();
 	}
 
 	void PuppetEditor::Update()
 	{
+		Editor::Update();
 
-		UpdateCamera();
-
-		timeline->currentAnimation = puppetEntity->puppet.GetCurrentAnimation();
-
-		Animation *anim = puppetEntity->puppet.GetCurrentAnimation();
-
-		if (Input::IsKeyPressed(keyTogglePause))
+		if (isEnabled)
 		{
-			puppetEntity->puppet.TogglePause();
-			Debug::render = Debug::showBounds = puppetEntity->puppet.IsPaused();
-			if (!puppetEntity->puppet.IsPaused())
+			UpdateCamera();
+
+			timeline->currentAnimation = puppetEntity->puppet.GetCurrentAnimation();
+
+			Animation *anim = puppetEntity->puppet.GetCurrentAnimation();
+
+			if (Input::IsKeyPressed(keyTogglePause))
 			{
-				Debug::selectedEntity = NULL;
-			}
-			else
-			{
-				if (anim)
+				puppetEntity->puppet.TogglePause();
+				Debug::render = Debug::showBounds = puppetEntity->puppet.IsPaused();
+				if (!puppetEntity->puppet.IsPaused())
 				{
-					anim->SetCurrentTime(int(anim->GetCurrentTime()/TIME_STEP)*TIME_STEP);
-				}
-			}
-		}
-
-		if (puppetEntity->puppet.IsPaused())
-		{
-			if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-				Debug::selectedEntity = scene->GetNearestEntityByControlPoint(Input::GetWorldMousePosition(), "", Debug::selectedEntity);
-
-			if (Input::IsKeyHeld(KEY_LCTRL))
-			{
-				if (Input::IsKeyPressed(KEY_S))
-				{
-					puppetEntity->puppet.Save(puppetEntity);
-				}
-			}
-
-			if (Debug::selectedEntity)
-			{
-				Part *part = dynamic_cast<Part*>(Debug::selectedEntity);
-
-				float moveSpeed = 10.0f;
-				float rotateSpeed = 15.0f;
-
-				if (Input::IsKeyHeld(KEY_LSHIFT))
-				{
-					float multiplier = 5.0f;
-					moveSpeed *= multiplier;
-					rotateSpeed *= multiplier;
-				}
-
-				if (Input::IsKeyPressed(keyZero))
-				{
-					part->position = Vector2::zero;
-					part->rotation = 0.0f;
-					part->GetSprite()->position = Vector2::zero;
-				}
-
-				float moveAmount = Monocle::deltaTime * moveSpeed;
-				float rotateAmount = Monocle::deltaTime * rotateSpeed;
-
-				if (Input::IsKeyHeld(KEY_LCTRL))
-				{
+					Debug::selectedEntity = NULL;
 				}
 				else
 				{
-					if (Input::IsKeyHeld(keyOffset))
+					if (anim)
 					{
-						if (part)
-						{
-							Sprite *sprite = part->GetSprite();
+						anim->SetCurrentTime(int(anim->GetCurrentTime()/TIME_STEP)*TIME_STEP);
+					}
+				}
+			}
 
-							if (Input::IsKeyHeld(keyMoveLeft))
-								sprite->position += Vector2::left * moveAmount;
-							if (Input::IsKeyHeld(keyMoveRight))
-								sprite->position += Vector2::right * moveAmount;
-							if (Input::IsKeyHeld(keyMoveUp))
-								sprite->position += Vector2::up * moveAmount;
-							if (Input::IsKeyHeld(keyMoveDown))
-								sprite->position += Vector2::down * moveAmount;
-						}
+			if (puppetEntity->puppet.IsPaused())
+			{
+				if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+					Debug::selectedEntity = scene->GetNearestEntityByControlPoint(Input::GetWorldMousePosition(), "", Debug::selectedEntity);
+
+				if (Input::IsKeyHeld(KEY_LCTRL))
+				{
+					if (Input::IsKeyPressed(KEY_S))
+					{
+						puppetEntity->puppet.Save(puppetEntity);
+					}
+				}
+
+				if (Debug::selectedEntity)
+				{
+					Part *part = dynamic_cast<Part*>(Debug::selectedEntity);
+
+					float moveSpeed = 10.0f;
+					float rotateSpeed = 15.0f;
+
+					if (Input::IsKeyHeld(KEY_LSHIFT))
+					{
+						float multiplier = 5.0f;
+						moveSpeed *= multiplier;
+						rotateSpeed *= multiplier;
+					}
+
+					if (Input::IsKeyPressed(keyZero))
+					{
+						part->position = Vector2::zero;
+						part->rotation = 0.0f;
+						part->GetSprite()->position = Vector2::zero;
+					}
+
+					float moveAmount = Monocle::deltaTime * moveSpeed;
+					float rotateAmount = Monocle::deltaTime * rotateSpeed;
+
+					if (Input::IsKeyHeld(KEY_LCTRL))
+					{
 					}
 					else
 					{
-						if (Input::IsKeyHeld(keyMoveLeft))
-							Debug::selectedEntity->position += Vector2::left * moveAmount;
-						if (Input::IsKeyHeld(keyMoveRight))
-							Debug::selectedEntity->position += Vector2::right * moveAmount;
-						if (Input::IsKeyHeld(keyMoveUp))
-							Debug::selectedEntity->position += Vector2::up * moveAmount;
-						if (Input::IsKeyHeld(keyMoveDown))
-							Debug::selectedEntity->position += Vector2::down * moveAmount;
+						if (Input::IsKeyHeld(keyOffset))
+						{
+							if (part)
+							{
+								Sprite *sprite = part->GetSprite();
+
+								if (Input::IsKeyHeld(keyMoveLeft))
+									sprite->position += Vector2::left * moveAmount;
+								if (Input::IsKeyHeld(keyMoveRight))
+									sprite->position += Vector2::right * moveAmount;
+								if (Input::IsKeyHeld(keyMoveUp))
+									sprite->position += Vector2::up * moveAmount;
+								if (Input::IsKeyHeld(keyMoveDown))
+									sprite->position += Vector2::down * moveAmount;
+							}
+						}
+						else
+						{
+							if (Input::IsKeyHeld(keyMoveLeft))
+								Debug::selectedEntity->position += Vector2::left * moveAmount;
+							if (Input::IsKeyHeld(keyMoveRight))
+								Debug::selectedEntity->position += Vector2::right * moveAmount;
+							if (Input::IsKeyHeld(keyMoveUp))
+								Debug::selectedEntity->position += Vector2::up * moveAmount;
+							if (Input::IsKeyHeld(keyMoveDown))
+								Debug::selectedEntity->position += Vector2::down * moveAmount;
+						}
+
+						if (Input::IsKeyHeld(keyRotateLeft))
+							Debug::selectedEntity->rotation -= rotateAmount;
+						if (Input::IsKeyHeld(keyRotateRight))
+							Debug::selectedEntity->rotation += rotateAmount;
 					}
 
-					if (Input::IsKeyHeld(keyRotateLeft))
-						Debug::selectedEntity->rotation -= rotateAmount;
-					if (Input::IsKeyHeld(keyRotateRight))
-						Debug::selectedEntity->rotation += rotateAmount;
+
+				}
+				else
+				{
+
 				}
 
+				if (anim)
+				{
+					Part *part = dynamic_cast<Part*>(Debug::selectedEntity);
 
+					if (Input::IsKeyPressed(keyBackwards))
+						anim->AdjustCurrentTime(-TIME_STEP, false);
+					if (Input::IsKeyPressed(keyForwards))
+						anim->AdjustCurrentTime(TIME_STEP, false);
+
+					if (Input::IsKeyPressed(keySetKeyFrame))
+					{
+						anim->SetPartKeyFrame(part, KeyFrame(anim->GetCurrentTime(), *part));
+						//puppetEntity.puppet.GetCurrentAnimation()->AddNewPartKeyFrame();
+					}
+				}
 			}
 			else
 			{
-
+				//if (Input::IsMouseButtonHeld(MOUSE_BUTTON_LEFT))
+				//puppetEntity->position = WEIGHTED_AVERAGE(puppetEntity->position, Input::GetWorldMousePosition(), 15);
 			}
-
-			if (anim)
-			{
-				Part *part = dynamic_cast<Part*>(Debug::selectedEntity);
-
-				if (Input::IsKeyPressed(keyBackwards))
-					anim->AdjustCurrentTime(-TIME_STEP, false);
-				if (Input::IsKeyPressed(keyForwards))
-					anim->AdjustCurrentTime(TIME_STEP, false);
-
-				if (Input::IsKeyPressed(keySetKeyFrame))
-				{
-					anim->SetPartKeyFrame(part, KeyFrame(anim->GetCurrentTime(), *part));
-					//puppetEntity.puppet.GetCurrentAnimation()->AddNewPartKeyFrame();
-				}
-			}
-		}
-		else
-		{
-			//if (Input::IsMouseButtonHeld(MOUSE_BUTTON_LEFT))
-			//puppetEntity->position = WEIGHTED_AVERAGE(puppetEntity->position, Input::GetWorldMousePosition(), 15);
 		}
 	}
 }

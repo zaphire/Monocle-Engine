@@ -31,7 +31,7 @@ namespace LevelEditorTest
 	LevelScene *levelScene = NULL;
 
 	LevelScene::LevelScene()
-		: Scene(), levelEditor(NULL), puppetEditor(NULL)
+		: Scene(), levelEditor(NULL)//, puppetEditor(NULL)
 	{
 	}
 	
@@ -46,17 +46,14 @@ namespace LevelEditorTest
 		// set the background color to a dark blue (10% blue + 90% black)
 		Graphics::SetBackgroundColor(Color::blue*0.1f + Color::black*0.9f);
 		
-		// create new LevelEditor
-		levelEditor = new LevelEditor();
-		// tell the levelEditor what scene it is working in
-		levelEditor->Init(this);
-		// enable it
-		levelEditor->Enable();
+		// create new LevelEditor and Add it to the scene
+		Add( levelEditor = new LevelEditor() );
 		
-		// create new PuppetEditor
-		puppetEditor = new PuppetEditor();
-		// tell the puppetEditor what scene it's working in 
-		puppetEditor->Init(this);
+		// create new PuppetEditor and Add it to the scene
+		//Add( puppetEditor = new PuppetEditor() );
+		// disable it
+		//puppetEditor->Disable();
+		
 		
 		// pause this scene's updating (freeze the game)
 		isPaused = true;
@@ -76,11 +73,6 @@ namespace LevelEditorTest
 	void LevelScene::Update()
 	{
 		Scene::Update();
-
-		// update the levelEditor
-		levelEditor->Update();
-		
-		puppetEditor->Update();
 
 		if (Input::IsKeyPressed(KEY_S) && Input::IsKeyHeld(KEY_LCTRL))
 		{
@@ -104,6 +96,7 @@ namespace LevelEditorTest
 		}
 		
 		// if we hit CTRL+A
+		/*
 		if (Input::IsKeyHeld(KEY_LCTRL) && Input::IsKeyPressed(KEY_A))
 		{
 			if (!isPaused) isPaused = true;
@@ -111,20 +104,14 @@ namespace LevelEditorTest
 			levelEditor->Disable();
 			puppetEditor->Enable();
 		}
+		*/
 	}
 
 	void LevelScene::End()
 	{
-		if (puppetEditor)
-		{
-			delete puppetEditor;
-			puppetEditor = NULL;
-		}
-		if (levelEditor)
-		{
-			delete levelEditor;
-			levelEditor = NULL;
-		}
+		levelEditor = NULL;
+		//puppetEditor = NULL;
+
 		Scene::End();
 	}
 }

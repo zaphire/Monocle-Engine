@@ -130,6 +130,10 @@ namespace Monocle
 
 		const std::list<Entity*>* GetChildren();
 
+		void Enable();
+		void Disable();
+		bool IsEnabled();
+
 	protected:
 		void DestroyChildren();
 
@@ -143,6 +147,8 @@ namespace Monocle
 		virtual void ReceiveNote(const std::string &tag, const std::string &note);
 		
 		std::list<Entity*> children;
+
+		bool isEnabled;
 
 	private:
 		Entity *parent;

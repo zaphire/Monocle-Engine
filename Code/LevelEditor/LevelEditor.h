@@ -32,11 +32,10 @@ namespace Monocle
 	};
 	*/
 
-	class LevelEditor : public CameraEditor
+	class LevelEditor : public Editor, public CameraEditor
 	{
 	public:
 		LevelEditor();
-		void Init(Scene *scene);
 		void Enable();
 		void Disable();
 		void Update();
@@ -68,8 +67,6 @@ namespace Monocle
 		FringeTile *selectedFringeTile;
 		Node *selectedNode;
 		ImageBrowser *imageBrowser;
-		Scene *scene;
-		bool isOn;
 
 		Vector2 moveOffset;
 		Vector2 moveStartPosition;

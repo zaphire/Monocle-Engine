@@ -39,7 +39,7 @@ namespace Monocle
 	*/
 
 	LevelEditor::LevelEditor()
-		: scene(NULL), selectedEntity(NULL), selectedFringeTile(NULL), isOn(false), 
+		: Editor(), selectedEntity(NULL), selectedFringeTile(NULL),
 		state(FTES_NONE), waitForLMBRelease(false), moveAxisLock(0), imageBrowser(NULL)
 		//, cursor(NULL)
 	{
@@ -57,19 +57,13 @@ namespace Monocle
 		keyScaleDown = KEY_MINUS;
 		keyScaleUp = KEY_EQUALS;
 		keyOpenImageBrowser = KEY_F5;
-	}
 
-	void LevelEditor::Init(Scene *scene)
-	{
-		this->scene = scene;
-
-		//cursor = new Cursor();
-		//scene->Add(cursor);
+		Enable();
 	}
 
 	void LevelEditor::Enable()
 	{
-		isOn = true;
+		Editor::Enable();
 
 		Debug::showBounds = true;
 		Debug::render = true;
@@ -79,8 +73,9 @@ namespace Monocle
 
 	void LevelEditor::Disable()
 	{
+		Editor::Disable();
+
 		Select(NULL);
-		isOn = false;
 
 		Debug::showBounds = false;
 		Debug::render = false;
@@ -89,9 +84,12 @@ namespace Monocle
 	// main level editor update function
 	void LevelEditor::Update()
 	{
+		Editor::Update();
 
-		if (isOn)
+		if (isEnabled)
 		{
+			Debug::Log("updating...");
+
 			if (state == FTES_BROWSER)
 			{
 				//temphack
