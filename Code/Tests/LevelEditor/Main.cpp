@@ -7,8 +7,6 @@ int main(void)
 {
 	// create a new game instance
 	Game *game = new Game();
-	// initialize the game
-	game->Init();
 	// set the base content path (used by everything)
 	Assets::SetContentPath(Assets::GetContentPath() + "/LevelEditorTest/");
 	// set the first scene

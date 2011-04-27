@@ -11,16 +11,14 @@ namespace Monocle
 {
 	Game *Game::instance = NULL;
 
+
 	Game::Game()
 		:  scene(NULL), switchTo(NULL), isDone(false)
 		//, editor(NULL)
 	{
 		instance = this;
 		Monocle::deltaTime	= 0.0f;
-	}
 
-	void Game::Init()
-	{
 		debug.Init();
 		platform.Init();
 		assets.Init();
@@ -31,6 +29,17 @@ namespace Monocle
 		level.Init();
 	}
 
+	//!
+	//! If FIXED_TIMESTEP is defined, the Main loop will use fixed timestep timing. i.e. Monocle::deltaTime will be the same every frame.
+	//!
+	//! If FIXED_TIMESTEP is not defined, dynamic timing will be used. Monocle::deltaTime will be different values every frame.
+	//! However, Monocle::deltaTime will never be allowed to rise above MAX_DELTA_TIME.
+	//! This means that, when using dynamic timing, on computers running slower than 1/MAX_DELTA_TIME frames per second, the game will slow down - rather than becoming choppy or unstable.
+	//!
+	//! If a scene is set (using Game::SetScene), that Scene's Scene::Update and Scene::Render will be called.
+	//!
+	//! If no Scene is set, nothing will happen.
+	//! 
 	void Game::Main()
 	{
 		long lastTick = Platform::GetMilliseconds();
@@ -48,34 +57,7 @@ namespace Monocle
 
 			tween.Update();
 
-			/*
-			if (editor != NULL)
-			{
-				editor->Update();
-			}
-			*/
-
-			//Switch scenes if necessary
-			if (switchTo != NULL)
-			{
-				if (scene != NULL)
-				{
-					scene->End();
-					scene->game = NULL;
-					// delete scene?
-				}
-
-				scene = switchTo;
-
-				switchTo = NULL;
-
-				if (scene != NULL)
-				{
-					scene->game = this;
-					scene->Begin();
-				}
-			}
-
+			// update timer
 			tick = Platform::GetMilliseconds();
 
 #if defined(FIXED_TIMESTEP)
@@ -123,27 +105,57 @@ namespace Monocle
 
 			lastTick = tick;
 #endif
+
+			//Switch scenes if necessary
+			if (switchTo != NULL)
+			{
+				if (scene != NULL)
+				{
+					scene->End();
+					scene->game = NULL;
+					// delete scene?
+				}
+
+				scene = switchTo;
+
+				switchTo = NULL;
+
+				if (scene != NULL)
+				{
+					scene->game = this;
+					scene->Begin();
+				}
+			}
 		}
 	}
 
+	//!
+	//! Does not quit immediately. Sets an internal boolean and exits at the top of the Game::Main loop.
+	//!
 	void Game::Quit()
 	{
 		instance->isDone = true;
 	}
 
+	//!
+	//! The new Scene won't be set immediately. It will be set at the end of the frame.
+	//!
 	void Game::SetScene(Scene* scene)
 	{
 		instance->switchTo = scene;
 	}
 
+	//!
+	//! Will return NULL if no Scene has been set.
+	//!
 	Scene* Game::GetScene()
 	{
 		return instance->scene;
 	}
 
-	void Game::ReceiveNote(const std::string &note)
-	{
-	}
+	//void Game::ReceiveNote(const std::string &note)
+	//{
+	//}
 
 	/*
 	void Game::SetEditor(Editor *editor)

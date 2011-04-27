@@ -88,8 +88,6 @@ namespace Monocle
 
 		if (isEnabled)
 		{
-			Debug::Log("updating...");
-
 			if (state == FTES_BROWSER)
 			{
 				//temphack
