@@ -1,27 +1,21 @@
 #pragma once
 
 #include "Vector2.h"
+#include "Entity.h"
 
 namespace Monocle
 {
-	class Editor
+	class Editor : public Entity
 	{
 	public:
 		Editor();
-		virtual void Update();
 	};
 
-	class CameraEditor : public Editor
+	class CameraEditor
 	{
 	public:
 	protected:
 		void UpdateCamera();
 		Vector2 lastWorldMousePosition;
-	};
-
-	class EntityEditor : public Editor
-	{
-	public:
-	protected:
 	};
 }

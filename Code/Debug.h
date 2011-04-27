@@ -8,6 +8,9 @@ namespace Monocle
 {
 	class Entity;
 
+	//!
+	//! \brief Holds debug log functions, stores data that controls debug output throughout Monocle
+	//!
 	class Debug
 	{
 	public:
@@ -24,10 +27,11 @@ namespace Monocle
 
 		static bool render;
 		static bool showBounds;
+
+		//! used by LevelEditor and PuppetEditor, as well as Entity for rendering selection effects
 		static Entity *selectedEntity;
 
-		// Entities in layers outside of this range won't be subject to
-		// Debug::render or Debug::showBounds
+		//! Entities in layers outside of this range won't be subject to Debug::render or Debug::showBounds
 		static int layerMin;
 		static int layerMax;
 	};

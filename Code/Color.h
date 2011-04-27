@@ -2,6 +2,7 @@
 
 namespace Monocle
 {
+	//! Describes a color using 4 floats in 0.0 - 1.0 range.
 	class Color
 	{
 	public:
@@ -11,6 +12,7 @@ namespace Monocle
 
 		bool operator!=(const Color& rhs);
 
+		//! red, green, blue, alpha (translucency)
 		float r, g, b, a;
 
 		static Color white;

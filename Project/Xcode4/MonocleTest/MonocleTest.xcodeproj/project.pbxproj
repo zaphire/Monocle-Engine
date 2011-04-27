@@ -57,7 +57,6 @@
 		37FB698913317693008963C1 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB692913317693008963C1 /* Entity.cpp */; };
 		37FB698A13317693008963C1 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB692C13317693008963C1 /* Input.cpp */; };
 		37FB699213317693008963C1 /* Monocle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB693913317693008963C1 /* Monocle.cpp */; };
-		37FB699313317693008963C1 /* OpenALAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB693C13317693008963C1 /* OpenALAudio.cpp */; };
 		37FB69AC13317693008963C1 /* OpenGLGraphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB696613317693008963C1 /* OpenGLGraphics.cpp */; };
 		37FB69AD13317693008963C1 /* OpenGLTextureAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB696713317693008963C1 /* OpenGLTextureAsset.cpp */; };
 		37FB69AE13317693008963C1 /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB696913317693008963C1 /* Random.cpp */; };
@@ -192,7 +191,6 @@
 		37FB692D13317693008963C1 /* Input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Input.h; path = ../../../Code/Input.h; sourceTree = "<group>"; };
 		37FB693913317693008963C1 /* Monocle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Monocle.cpp; path = ../../../Code/Monocle.cpp; sourceTree = "<group>"; };
 		37FB693A13317693008963C1 /* Monocle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Monocle.h; path = ../../../Code/Monocle.h; sourceTree = "<group>"; };
-		37FB693C13317693008963C1 /* OpenALAudio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenALAudio.cpp; sourceTree = "<group>"; };
 		37FB696613317693008963C1 /* OpenGLGraphics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLGraphics.cpp; sourceTree = "<group>"; };
 		37FB696713317693008963C1 /* OpenGLTextureAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLTextureAsset.cpp; sourceTree = "<group>"; };
 		37FB696813317693008963C1 /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Platform.h; path = ../../../Code/Platform.h; sourceTree = "<group>"; };
@@ -579,7 +577,6 @@
 			isa = PBXGroup;
 			children = (
 				03907B63135E651200D92F21 /* ChannelStream.cpp */,
-				37FB693C13317693008963C1 /* OpenALAudio.cpp */,
 			);
 			name = OpenAL;
 			path = ../../../Code/OpenAL;
@@ -757,7 +754,6 @@
 				37FB698913317693008963C1 /* Entity.cpp in Sources */,
 				37FB698A13317693008963C1 /* Input.cpp in Sources */,
 				37FB699213317693008963C1 /* Monocle.cpp in Sources */,
-				37FB699313317693008963C1 /* OpenALAudio.cpp in Sources */,
 				37FB69AC13317693008963C1 /* OpenGLGraphics.cpp in Sources */,
 				37FB69AD13317693008963C1 /* OpenGLTextureAsset.cpp in Sources */,
 				37FB69AE13317693008963C1 /* Random.cpp in Sources */,

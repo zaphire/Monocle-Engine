@@ -23,7 +23,7 @@ namespace Monocle {
             unsigned long fadeinend = this->fades.nFadeIn;
             unsigned long total = this->total;
             unsigned long fadeoutstart;
-            unsigned long pos = cs->getTotalPlayTime();
+            unsigned long pos = cs->GetTotalPlayTime();
             
             if (this->numLoops > 1)
                 total = this->total * this->numLoops;
@@ -77,12 +77,12 @@ namespace Monocle {
                 }
 
             
-            cs->setVolume(vol*this->volume);
+            cs->SetVolume(vol*this->volume);
         }
         else
-            cs->setVolume(this->volume);
+            cs->SetVolume(this->volume);
         
-        if (this->fades.nFadeIn && cs->getTotalPlayTime() > this->fades.nFadeIn)
+        if (this->fades.nFadeIn && cs->GetTotalPlayTime() > this->fades.nFadeIn)
             this->fades.nFadeIn = 0;
         
         return false;
@@ -139,7 +139,7 @@ namespace Monocle {
         this->playStarted = false;
         this->pause = false;
         
-        cs->open(decodeData->ch, decodeData->bit, decodeData->samplerate);
+        cs->Open(decodeData->ch, decodeData->bit, decodeData->samplerate);
         Update();
     }
     
@@ -150,7 +150,7 @@ namespace Monocle {
     
     AudioDeck::~AudioDeck()
     {
-        this->cs->close();
+        this->cs->Close();
         delete this->cs;
         
         if (this->decodeData) delete this->decodeData;
@@ -184,7 +184,7 @@ namespace Monocle {
         {
             if (this->vis)
             {
-                if (vc.GetLatentData(this->cs->getTotalPlayTime()))
+                if (vc.GetLatentData(this->cs->GetTotalPlayTime()))
                 {
                     vc.GetWaveLeft(this->vis->cWaveformL);
                     vc.GetWaveRight(this->vis->cWaveformR);
@@ -235,10 +235,10 @@ namespace Monocle {
     {
         this->pause = false;
         
-        if (playStarted && !cs->isPlaying())
-            cs->resume();       // If we already started playing but aren't playing, we probably need to resume
-        else
-            cs->play();
+        if (playStarted && !cs->IsPlaying())
+            cs->Resume();       // If we already started playing but aren't playing, we probably need to resume
+        else if (!cs->IsPlaying())
+            cs->Play();
         
         playStarted = true;
     }
@@ -246,7 +246,7 @@ namespace Monocle {
     void AudioDeck::Pause()
     {
         this->pause = true;
-        cs->pause();
+        cs->Pause();
         
         fades.aFadeOutStart = 0;
 		fades.aFadeOutEnd = 0;
@@ -255,14 +255,14 @@ namespace Monocle {
     
     void AudioDeck::PauseWithFade( unsigned long msFade )
     {
-        fades.aFadeOutStart = cs->getTotalPlayTime();
+        fades.aFadeOutStart = cs->GetTotalPlayTime();
 		fades.aFadeOutEnd = msFade + fades.aFadeOutStart;
 		fades.bPauseOnFadeOut = true;
     }
     
     void AudioDeck::ResumeWithFade( unsigned long msFade )
     {
-        fades.aFadeInStart = cs->getTotalPlayTime();
+        fades.aFadeInStart = cs->GetTotalPlayTime();
 		fades.aFadeInEnd = msFade + fades.aFadeInStart;
         
         Play();
@@ -291,8 +291,8 @@ namespace Monocle {
         
         // If we're asking for a pause, let's pause!
         if (this->pause){
-            if (cs->isPlaying())
-                cs->pause(); // Double check and make sure we're paused
+            if (cs->IsPlaying())
+                cs->Pause(); // Double check and make sure we're paused
             
             // Let the visualization know we're to be clear
             if (this->vis) this->vis->bClear = true;
@@ -301,8 +301,8 @@ namespace Monocle {
         else
         {
             // Not paused...
-            if (this->playStarted && !cs->isPlaying())
-                cs->resume(); // resume please
+            if (this->playStarted && !cs->IsPlaying())
+                cs->Resume(); // resume please
         
             if (this->vis) this->vis->bClear = false;
         }
@@ -310,17 +310,17 @@ namespace Monocle {
         // Check to see if we need to seek...
         if (this->didSeek)
         {
-            cs->close();
+            cs->Close();
             delete cs;
             cs = new ChannelStream();
-            cs->open(decodeData->ch, decodeData->bit, decodeData->samplerate);
+            cs->Open(decodeData->ch, decodeData->bit, decodeData->samplerate);
             
-			cs->setPan(this->pan);
-			cs->setVolume(this->volume);
+			cs->SetPan(this->pan);
+			cs->SetVolume(this->volume);
             
             if (this->pitchBend != 1.0f)
 			{
-				cs->setPitch(this->pitchBend);
+				cs->SetPitch(this->pitchBend);
 				if (this->vis) this->vis->bDisabled = 1;
 			}
 			else if (this->vis) this->vis->bDisabled = 0;
@@ -332,7 +332,7 @@ namespace Monocle {
 				this->writtenpos = this->lastSeekPos;
 				writtenpos = (this->lastSeekPos/1000)*decodeData->samplerate*sampsize;
 				//od->writtenpos = (totsamps*1000)/(oc->samples*sampsize);
-				cs->setPlayOffset(this->lastSeekPos);
+				cs->SetPlayOffset(this->lastSeekPos);
 				this->currentPosition = this->lastSeekPos;
 			}
 			else
@@ -350,7 +350,7 @@ namespace Monocle {
 //		if (od->done || done || oc->done || oc->almostDone || od->killSwitch)
 //			break;
         
-		int buffers_to_fill = this->cs->needsUpdate();
+		int buffers_to_fill = this->cs->NeedsUpdate();
         unsigned int size;
         
         // If we don't need an update, still update the visualization stuff
@@ -370,7 +370,7 @@ namespace Monocle {
             unsigned long l = 1;
             unsigned long pos = 0;
             
-            data = this->cs->getBuffer(&size);
+            data = this->cs->GetBuffer(&size);
             
             // If the decoder says we're out of data...
             if (decodeData->outOfData)
@@ -515,7 +515,7 @@ namespace Monocle {
 			
 //            size = this->decodeData->decoder->Render(size,(void*)data,*this->decodeData);
 			
-			this->cs->lockBuffer(size);
+			this->cs->LockBuffer(size);
 			
             /*			if (playbackPos >= targetLength)
              break;*/

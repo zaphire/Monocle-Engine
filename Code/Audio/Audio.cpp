@@ -26,7 +26,7 @@ namespace Monocle {
         decoderMap["ogg"] = decoder;
 #endif
             
-        ChannelStream::init();
+        ChannelStream::Init();
             
         Debug::Log("...Done");
 

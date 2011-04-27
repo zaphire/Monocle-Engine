@@ -6,7 +6,6 @@ using namespace Monocle;
 int main(void)
 {
 	Game *game = new Game();
-	game->Init();
 	game->SetScene(new AudioTest::GameScene());
 	game->Main();
 	delete game;

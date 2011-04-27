@@ -1,18 +1,16 @@
 #include "Editor.h"
 #include "Input.h"
 #include "Scene.h"
+#include "Entity.h"
 #include <cstdio>
 
 namespace Monocle
 {
-	Editor::Editor()
+
+	Editor::Editor() : Entity()
 	{
-
-	}
-
-	void Editor::Update()
-	{
-
+		// set layer on top of foreground selectable layer (i.e. avoid having this entity be considered for selection)
+		SetLayer(Debug::layerMin - 1);
 	}
 
 	// update the camera controls

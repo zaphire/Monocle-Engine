@@ -23,12 +23,14 @@ namespace Monocle
 		Puppet puppet;
 	};
 
-	class PuppetEditor : public CameraEditor
+	class PuppetEditor : public Editor, public CameraEditor
 	{
 	public:
 		PuppetEditor();
-		void Init(Scene *scene);
+		void Enable();
+		void Disable();
 		void Update();
+		void Added();
 
 		PuppetEntity *puppetEntity;
 
@@ -52,8 +54,6 @@ namespace Monocle
 		KeyCode keyOffset;
 
 		Timeline *timeline;
-
-		Scene *scene;
 	};
 
 }

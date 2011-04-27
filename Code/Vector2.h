@@ -2,6 +2,9 @@
 
 namespace Monocle
 {
+	//!
+	//! \brief 2 dimensional vector. (x and y coordinates) Can be used to represent directions and/or positions.
+	//!
 	class Vector2
 	{
 	public:

@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <sstream>
 
+#include "../../Audio/oggvorbis/OggDecoder.h"
+
 namespace AudioTest
 {
     OggDecoder od;
@@ -95,6 +97,7 @@ namespace AudioTest
         
         Waveform* wave = new Waveform(deck);
         Add(wave);
+
 	}
 
 	void GameScene::ReceiveNote(const std::string &note)
@@ -106,7 +109,7 @@ namespace AudioTest
 	{
 		Scene::Update();
         
-        scText->SetText("Time is " + StringOf(deck->cs->getTotalPlayTime()) + " / " + StringOf(add->total));
+        scText->SetText("Time is " + StringOf(deck->cs->GetTotalPlayTime()) + " / " + StringOf(add->total));
         
         if (Input::IsKeyPressed(KEY_P)){
             deck->Play();
@@ -132,4 +135,5 @@ namespace AudioTest
         delete deck;
         delete add;
 	}
+
 }

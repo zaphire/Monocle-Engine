@@ -14,6 +14,6 @@ namespace PuppetTest
         void Update();
 
 	protected:
-		PuppetEditor puppetEditor;
+		PuppetEditor *puppetEditor;
 	};
 }

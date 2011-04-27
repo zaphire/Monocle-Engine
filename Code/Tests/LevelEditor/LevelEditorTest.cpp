@@ -30,26 +30,37 @@ namespace LevelEditorTest
 
 	LevelScene *levelScene = NULL;
 
+	LevelScene::LevelScene()
+		: Scene(), levelEditor(NULL)//, puppetEditor(NULL)
+	{
+	}
+	
 	void LevelScene::Begin()
 	{
+		// init instance pointer
 		levelScene = this;
-
+		
+		// call the super
 		Scene::Begin();
-
-		// set the base content path (used by everything)
-		Assets::SetContentPath(Assets::GetContentPath()+"/FTE/");
-
+		
+		// set the background color to a dark blue (10% blue + 90% black)
 		Graphics::SetBackgroundColor(Color::blue*0.1f + Color::black*0.9f);
-
-		// tell the levelEditor what scene it is working in
-		levelEditor.Init(this);
-		// enable it
-		levelEditor.Enable();
+		
+		// create new LevelEditor and Add it to the scene
+		Add( levelEditor = new LevelEditor() );
+		
+		// create new PuppetEditor and Add it to the scene
+		//Add( puppetEditor = new PuppetEditor() );
+		// disable it
+		//puppetEditor->Disable();
+		
+		
 		// pause this scene's updating (freeze the game)
 		isPaused = true;
 
 		// load project file that defines our tilesets
 		Level::LoadProject("project.xml");
+		
 		// load the actual level
 		Level::Load("level.xml", this);
 
@@ -63,9 +74,6 @@ namespace LevelEditorTest
 	{
 		Scene::Update();
 
-		// update the levelEditor
-		levelEditor.Update();
-
 		if (Input::IsKeyPressed(KEY_S) && Input::IsKeyHeld(KEY_LCTRL))
 		{
 			Level::Save();
@@ -75,21 +83,35 @@ namespace LevelEditorTest
 		if (Input::IsKeyPressed(KEY_TAB))
 		{
 			// if we're not doing anything in the levelEditor...
-			if (levelEditor.GetState() == FTES_NONE)
+			if (levelEditor->GetState() == FTES_NONE)
 			{
 				// toggle pause state
 				isPaused = !isPaused;
 
 				if (isPaused)
-					levelEditor.Enable();
+					levelEditor->Enable();
 				else
-					levelEditor.Disable();
+					levelEditor->Disable();
 			}
 		}
+		
+		// if we hit CTRL+A
+		/*
+		if (Input::IsKeyHeld(KEY_LCTRL) && Input::IsKeyPressed(KEY_A))
+		{
+			if (!isPaused) isPaused = true;
+			
+			levelEditor->Disable();
+			puppetEditor->Enable();
+		}
+		*/
 	}
 
 	void LevelScene::End()
 	{
+		levelEditor = NULL;
+		//puppetEditor = NULL;
+
 		Scene::End();
 	}
 }
