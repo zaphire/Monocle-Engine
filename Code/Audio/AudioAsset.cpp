@@ -10,16 +10,15 @@
 
 namespace Monocle
 {
-    void AudioAsset::Load(const std::string &filename, AudioDecoder &decoder)
+    void AudioAsset::Load(const std::string &filename)
 	{
-		this->decoder = &decoder;    
         this->filename = filename;
 	}
     
 	void AudioAsset::Reload()
 	{
 		Unload();
-		Load(filename, *this->decoder);
+		Load(filename);
 	}
     
 	void AudioAsset::Unload()

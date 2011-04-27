@@ -14,10 +14,13 @@ namespace Monocle
         this->audAsset = audAsset;
         
         this->loopsRemaining = 1;
-        this->done = 0;
-        this->almostDone = false;
+        this->outOfData = false;
         this->seekOffset = -1;
         this->total = 0;
     }
-    
+ 
+    AudioDecodeData::~AudioDecodeData()
+    {
+        this->decoder->FreeDecoderData(*this);
+    }
 }

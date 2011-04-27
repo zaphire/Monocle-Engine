@@ -28,8 +28,19 @@ namespace Monocle
         void lockNumberedBuffer( unsigned int size, unsigned int buff );
         unsigned char *getStaticBuffer( unsigned int *size );
         
+        unsigned long getTotalPlayTime(); // Gets the total play time in ms of the object
+        unsigned long getOutputTime(); // Gets the time in ms that the buffer, resets on pauses
+        void setPlayOffset( unsigned long playOffset ); // This is for syncing the appropriate play time
+        
+        void setVolume( float vol );
+        void setPan( float pan );
+        void setPitch( float pitch );
+        
         void play();
         void stop();
+        
+        void pause();
+        void resume();
         
         bool isPlaying();
         void check();                 // checks OpenAL error state
@@ -37,14 +48,16 @@ namespace Monocle
         static int init();
         static void exit();
         
-        float getPlaybackPosition();
-        
     protected:
         
         void empty();                 // empties the queue
         char *errorString(int code); // stringify an error code	
 
     private:
+        
+        unsigned long playOffset;
+        unsigned long playStart;
+        unsigned long pausePos;
         
         // This OpenAL implementation stuff needs to be moved
         

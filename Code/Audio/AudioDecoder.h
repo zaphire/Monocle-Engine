@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "VisCache2.h"
+
 namespace Monocle
 {
     class AudioAsset;
@@ -17,6 +19,7 @@ namespace Monocle
     public:
         
         AudioDecodeData( int samplerate, int bit, int ch, AudioDecoder *decoder, void *decoderData, AudioAsset *audAsset );
+        ~AudioDecodeData();
         
         // Source Sound info... (set by the decoder)
         int samplerate;			// Sample Rate (44100, 22050, etc)
@@ -31,8 +34,7 @@ namespace Monocle
         unsigned long total;	// Total # of milliseconds in track (ignore looping in this calculation!)
         long seekOffset;		// milliseconds in track that was 'seeked' to, in order to return a proper time (-1 for no seek)
         
-        bool almostDone;		// Set to true for an almostDone... where the playback will finish the last buffer
-        bool done;				// Set to true when playback is finished
+        bool outOfData;				// Set to true when no more data is to be generated (and the decoder has exhausted all loops...)
       
         AudioDecoder *decoder;
         AudioAsset *audAsset;

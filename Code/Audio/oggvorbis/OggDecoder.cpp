@@ -217,6 +217,7 @@ namespace Monocle {
         {
             ov_pcm_seek(&data->vf, data->seek);
             data->seek = -1;
+            dd->outOfData = false;
         }
         
         while(ret && pos<size)
@@ -243,7 +244,7 @@ namespace Monocle {
                 dd->loopsRemaining--;
         }
         else if (!ret && (dd->loopsRemaining==0)){
-            dd->almostDone = 1;
+            dd->outOfData = true;
         }
         
         return pos;
