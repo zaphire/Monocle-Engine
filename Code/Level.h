@@ -17,6 +17,18 @@ namespace Monocle
 {
 	class Scene;
 
+	class EntityType
+	{
+	public:
+		EntityType();
+
+		std::string name;
+		std::string image;
+
+		void Save(FileNode *fileNode);
+		void Load(FileNode *fileNode);
+	};
+
 	class Level
 	{
 	public:
@@ -102,6 +114,8 @@ namespace Monocle
 		std::string filename;
 
 		FringeTileset *fringeTileset;
+
+		std::list<EntityType> entityTypes;
 
 		void SaveEntities(TiXmlElement *element, Entity *fromEntity=NULL);
 		void LoadEntities(TiXmlElement *element, Entity *intoEntity=NULL);

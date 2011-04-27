@@ -82,6 +82,7 @@ namespace Monocle
 		static Camera *GetCamera(int cameraIndex=0);
 
 		///TODO: replace TiXml with wrapper
+		virtual Entity *CreateEntity(const std::string &entityTypeName);
 		virtual void SaveEntities(TiXmlElement *element);
 		virtual void LoadEntities(TiXmlElement *element);
 

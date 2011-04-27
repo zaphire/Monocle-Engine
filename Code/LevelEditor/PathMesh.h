@@ -18,9 +18,11 @@ namespace Monocle
 		void Save(FileNode *fileNode);
 		void Load(FileNode *fileNode);
 
-		void MakeCollision();
+		void MakeCollision(float radius);
 
 		int cells;
+
+		bool flipX, flipY;
 
 	private:
 		TextureAsset *texture;

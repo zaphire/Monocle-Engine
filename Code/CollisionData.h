@@ -12,6 +12,7 @@ namespace Monocle
 
 		Vector2 hitPoint;
 		Vector2 normal;
+		float penetration;
 		Collider *collider;
 	};
 }

@@ -48,8 +48,8 @@ namespace Monocle
 	Sprite::Sprite()
 		: Graphic(),
 		texture(NULL),
-		width(0),
-		height(0),
+		width(1.0f),
+		height(1.0f),
 		textureOffset(Vector2::zero),
 		textureScale(Vector2::one),
 		blend(BLEND_ALPHA)
@@ -83,18 +83,12 @@ namespace Monocle
 	void Sprite::Render(Entity *entity)
 	{
 		Graphics::PushMatrix();
-		//Graphics::Rotate(angle, 0, 0, 1);
-		Graphics::Translate(position.x, position.y, 0.0f);
-		//Graphics::SetColor(color);
-		Graphics::BindTexture(texture);
 
-		Graphics::SetBlend(blend);
+			Graphics::Translate(position.x, position.y, 0.0f);
+			Graphics::BindTexture(texture);
+			Graphics::SetBlend(blend);
 
-		if (texture != NULL)
-		{
-			// fade out sprite if it's selected (so we can see behind it)
-			//selectedSpriteEntity == this->entity || 
-			if (Debug::showBounds)
+			if (Debug::showBounds && entity->IsDebugLayer())
 			{
 				if (Debug::selectedEntity == entity)
 				{
@@ -110,58 +104,38 @@ namespace Monocle
 				}
 			}
 
-
-			
 			Graphics::RenderQuad(width, height, textureOffset, textureScale);
-		}
+
 		Graphics::PopMatrix();
 
 
 		// show bounds, for editor/selection purposes
-		if (Debug::showBounds || Debug::selectedEntity == entity)
+		if ((Debug::showBounds || Debug::selectedEntity == entity) && entity->IsDebugLayer())
 		{
-			if (texture != NULL)
+			Graphics::PushMatrix();
+			Graphics::Translate(position.x, position.y, 0.0f);
+
+			if (Debug::selectedEntity == entity)
+				Graphics::SetColor(Color::orange);
+			else
+				Graphics::SetColor(Color(0.9f,0.9f,1.0f,0.25f));
+
+			Graphics::BindTexture(NULL);
+			Graphics::RenderLineRect(0, 0, width, height);
+
+			if (Debug::selectedEntity != entity)
 			{
-				Graphics::PushMatrix();
-				Graphics::Translate(position.x, position.y, 0.0f);
-
-				if (Debug::selectedEntity == entity)
-					Graphics::SetColor(Color::orange);
-				else
-					Graphics::SetColor(Color(0.9f,0.9f,1.0f,0.25f));
-
-				Graphics::BindTexture(NULL);
-				Graphics::RenderLineRect(0, 0, width, height);
-
-				if (Debug::selectedEntity != entity)
-				{
-					Graphics::RenderLine(Vector2(-width*0.5f, -height*0.5f), Vector2(width*0.5f, height*0.5f));
-					Graphics::RenderLine(Vector2(width*0.5f, -height*0.5f), Vector2(-width*0.5f, height*0.5f));
-				}
-				else
-				{
-					Graphics::SetColor(Color::orange - Color(0,0,0,0.5f));
-					Graphics::RenderLine(Vector2(-width*0.5f, -height*0.5f), Vector2(width*0.5f, height*0.5f));
-					Graphics::RenderLine(Vector2(width*0.5f, -height*0.5f), Vector2(-width*0.5f, height*0.5f));
-				}
-
-				Graphics::PopMatrix();
-
-				/*
-				if (selectedSpriteEntity == this->entity)
-					Graphics::RenderLineRect(0, 0, 10, 10);
-				*/
-
-				/*
-				if (selectedSpriteEntity == this->entity)
-				{
-					Graphics::RenderLineRect(width*0.5f+5, -height*0.5f-5, 10, 10);
-					Graphics::RenderLineRect(width*0.5f+5, height*0.5f+5, 10, 10);
-					Graphics::RenderLineRect(-width*0.5f-5, -height*0.5f-5, 10, 10);
-					Graphics::RenderLineRect(-width*0.5f-5, height*0.5f+5, 10, 10);
-				}
-				*/
+				Graphics::RenderLine(Vector2(-width*0.5f, -height*0.5f), Vector2(width*0.5f, height*0.5f));
+				Graphics::RenderLine(Vector2(width*0.5f, -height*0.5f), Vector2(-width*0.5f, height*0.5f));
 			}
+			else
+			{
+				Graphics::SetColor(Color::orange - Color(0,0,0,0.5f));
+				Graphics::RenderLine(Vector2(-width*0.5f, -height*0.5f), Vector2(width*0.5f, height*0.5f));
+				Graphics::RenderLine(Vector2(width*0.5f, -height*0.5f), Vector2(-width*0.5f, height*0.5f));
+			}
+
+			Graphics::PopMatrix();
 		}
 	}
 	

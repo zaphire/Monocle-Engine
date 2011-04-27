@@ -3,10 +3,29 @@
 #include "Collision.h"
 #include "Graphics.h"
 #include "FileNode.h"
+#include "MonocleToolkit.h"
 #include <sstream>
 
 namespace Monocle
 {
+	InvokeData::InvokeData(void *me, void (*functionPointer) (void *), float delay)
+		: functionPointer(functionPointer), delay(delay), isDone(false), me(me)
+	{
+	}
+
+	void InvokeData::Update()
+	{
+		if (!isDone)
+		{
+			delay -= Monocle::deltaTime;
+			if (delay < 0)
+			{
+				isDone = true;
+				functionPointer(me);
+			}
+		}
+	}
+
 	Entity::Entity(const Entity &entity)
 		: Transform(entity), followCamera(entity.followCamera), scene(NULL), collider(NULL), graphic(NULL), parent(NULL), depth(entity.depth), isVisible(entity.isVisible), color(entity.color), layer(entity.layer)//, tags(entity.tags)
 	{
@@ -49,12 +68,26 @@ namespace Monocle
 			graphic = NULL;
 		}
 
+		DestroyChildren();
+
+		// clean up invokes
+		for (std::list<InvokeData*>::iterator i = invokes.begin(); i != invokes.end(); ++i)
+		{
+			delete (*i);
+		}
+		invokes.clear();
+	}
+
+	void Entity::DestroyChildren()
+	{
 		// clean up children
 		for (std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
 		{
 			(*i)->Destroy();
 			delete (*i);
 		}
+
+		children.clear();
 	}
 
 	void Entity::Update()
@@ -63,13 +96,23 @@ namespace Monocle
 		{
 			(*i)->Update();
 		}
-		
-		/*
-		if (graphic != NULL)
+
+		// clean up invokes
+		for(std::list<InvokeData*>::iterator i = invokes.begin(); i != invokes.end(); ++i)
 		{
-			graphic->Update();
+			(*i)->Update();
+
+			if ((*i)->isDone)
+			{
+				removeInvokes.push_back(*i);
+			}
 		}
-		*/
+
+		for (std::list<InvokeData*>::iterator i = removeInvokes.begin(); i != removeInvokes.end(); ++i)
+		{
+			delete *i;
+			invokes.remove(*i);
+		}
 	}
 
 	void Entity::RemoveSelf()
@@ -84,7 +127,7 @@ namespace Monocle
 	{
 		Graphics::PushMatrix();
 
-		if (followCamera == Vector2::zero || (Debug::render && Debug::selectedEntity != this))
+		if (followCamera == Vector2::zero || (Debug::render && Debug::selectedEntity != this && IsDebugLayer()))
 			Graphics::Translate(position.x, position.y, depth);
 		else
 			Graphics::Translate(scene->GetCamera()->position * followCamera + position * (Vector2::one - followCamera));
@@ -94,15 +137,27 @@ namespace Monocle
 
 		Graphics::Scale(scale);
 
+		const int MAX_LAYER = 100;
+		const int MIN_LAYER = -100;
+
+		for (int layer = MAX_LAYER; layer > 0; layer--)
+		{
+			for(std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
+			{
+				if ((*i)->IsLayer(layer) && (*i)->isVisible)
+				{
+					(*i)->Render();
+				}
+			}
+		}
+
 		if (graphic != NULL)
 		{
 			Graphics::SetColor(color);
 			graphic->Render(this);
 		}
 
-		const int MAX_LAYER = 100;
-		const int MIN_LAYER = -100;
-		for (int layer = MAX_LAYER; layer >= MIN_LAYER; layer--)
+		for (int layer = 0; layer >= MIN_LAYER; layer--)
 		{
 			for(std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
 			{
@@ -115,7 +170,7 @@ namespace Monocle
 
 		Graphics::PopMatrix();
 		
-		if (Debug::showBounds)
+		if (Debug::showBounds && IsDebugLayer())
 		{
 			Vector2 offset;
 			if (parent)
@@ -226,6 +281,14 @@ namespace Monocle
 	bool Entity::IsLayer(int layer)
 	{
 		return this->layer == layer;
+	}
+
+	bool Entity::IsDebugLayer()
+	{
+		if (parent)
+			return parent->IsDebugLayer();
+
+		return layer > Debug::layerMin && layer < Debug::layerMax;
 	}
 
 	///TODO: enqueue for safety
@@ -366,7 +429,7 @@ namespace Monocle
 
 		for (std::list<Entity*>::reverse_iterator i = entityChain.rbegin(); i != entityChain.rend(); ++i)
 		{
-			Graphics::Translate((*i)->position);
+			Graphics::Translate(scene->GetCamera()->position * (*i)->followCamera + (*i)->position * (Vector2::one - (*i)->followCamera));
 			Graphics::Rotate((*i)->rotation, 0, 0, 1);
 			Graphics::Scale((*i)->scale);
 		}
@@ -516,6 +579,12 @@ namespace Monocle
 	const std::list<Entity*>* Entity::GetChildren()
 	{
 		return &children;
+	}
+
+	
+	void Entity::Invoke(void (*functionPointer)(void*), float delay)
+	{
+		invokes.push_back(new InvokeData((void*)this, functionPointer, delay));
 	}
 
 	/*

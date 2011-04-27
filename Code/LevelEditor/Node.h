@@ -27,7 +27,6 @@ namespace Monocle
 		void Load(FileNode *fileNode);
 
 		int variant;
-		float radius;
 
 
 	private:

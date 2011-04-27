@@ -8,14 +8,14 @@
 namespace Monocle
 {
 	PathMesh::PathMesh()
-		: Entity(), size(32), startNode(NULL), cells(1), texture(NULL), pathCollider(NULL)
+		: Entity(), size(0.0f), startNode(NULL), cells(1), texture(NULL), pathCollider(NULL), flipX(false), flipY(false)
 	{
 		///HACK
 		//texture = Assets::RequestTexture("graphics/wallpieces.png");
 	}
 	
 	PathMesh::PathMesh(const std::string &textureFilename, int cells, Node *startNode, int size)
-		: Entity(), size(size), cells(cells), pathCollider(NULL)
+		: Entity(), size(size), cells(cells), pathCollider(NULL), flipX(false), flipY(false)
 	{
 		//const std::string &textureFilename, 
 		texture = Assets::RequestTexture(textureFilename);
@@ -23,12 +23,12 @@ namespace Monocle
 		SetStartNode(startNode);
 	}
 
-	void PathMesh::MakeCollision()
+	void PathMesh::MakeCollision(float radius)
 	{
 		if (pathCollider)
 			delete pathCollider;
 
-		SetCollider(pathCollider = new PathCollider(startNode));
+		SetCollider(pathCollider = new PathCollider(startNode, radius));
 	}
 
 	void PathMesh::SetStartNode(Node *node)
@@ -50,19 +50,32 @@ namespace Monocle
 
 	void PathMesh::Render()
 	{
-		Graphics::SetColor(Color::white);
-		//Graphics::SetColor(Color(0,0,1,0.5f));
-		Graphics::BindTexture(texture);
-		Graphics::PushMatrix();
-		Graphics::Translate(position);
-		Graphics::Rotate(rotation, 0, 0, 1);
-		Graphics::Scale(scale);
-		if (nodes.size() > 0)
-			Graphics::RenderPathMesh(nodes, cells, size);
-		Graphics::PopMatrix();
+		if (texture != NULL || size != 0)
+		{
+			Graphics::SetColor(Color::white);
+			//Graphics::SetColor(Color(0,0,1,0.5f));
+			Graphics::BindTexture(texture);
+			Graphics::PushMatrix();
 
+			if (followCamera == Vector2::zero || (Debug::render && Debug::selectedEntity != this))
+				Graphics::Translate(position.x, position.y, depth);
+			else
+				Graphics::Translate(scene->GetCamera()->position * followCamera + position * (Vector2::one - followCamera));
+
+			Graphics::Rotate(rotation, 0, 0, 1);
+			Graphics::Scale(scale);
+
+			if (nodes.size() > 0)
+				Graphics::RenderPathMesh(nodes, cells, size, flipX, flipY);
+
+			Graphics::PopMatrix();
+
+		}
 		Entity::Render();
 
+		// HACK: temporary
+		// updates current list of nodes
+		// should only do this when nodes change
 		if (startNode)
 			SetStartNode(startNode);
 	}
@@ -75,6 +88,13 @@ namespace Monocle
 		fileNode->Write("size", size);
 		if (texture)
 			fileNode->Write("image", texture->GetName());
+		if (pathCollider && pathCollider->radius != 0.0f)
+			fileNode->Write("radius", pathCollider->radius);
+
+		if (flipX)
+			fileNode->Write("flipX", flipX);
+		if (flipY)
+			fileNode->Write("flipY", flipY);
 	}
 
 	void PathMesh::Load(FileNode *fileNode)
@@ -86,6 +106,12 @@ namespace Monocle
 		
 		std::string image;
 		fileNode->Read("image", image);
+
+		float radius = 0.0f;
+		fileNode->Read("radius", radius);
+
+		fileNode->Read("flipX", flipX);
+		fileNode->Read("flipY", flipY);
 
 		if (texture)
 		{
@@ -114,6 +140,6 @@ namespace Monocle
 			}
 		}
 
-		MakeCollision();
+		MakeCollision(radius);
 	}
 }

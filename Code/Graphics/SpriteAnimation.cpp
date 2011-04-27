@@ -1,6 +1,7 @@
 #include "SpriteAnimation.h"
 #include "Sprite.h"
-#include "../Monocle.h"
+#include "../MonocleToolkit.h"
+#include "../Debug.h"
 
 namespace Monocle
 {

@@ -86,6 +86,8 @@ namespace Monocle
 		static void SetBlend(BlendType blend);
 		static void SetColor(const Color &color);
 		static void SetBackgroundColor(const Color &color);
+
+		static Color GetBackgroundColor();
 		//static void SceneMatrix();
 
 		static Vector2 GetMatrixPosition();
@@ -105,7 +107,7 @@ namespace Monocle
 		static void Vertex(Vector2 vertex);
 		static void EndLine();
 
-		static void RenderPathMesh(const std::vector<Node*> &nodes, int cells, float size);
+		static void RenderPathMesh(const std::vector<Node*> &nodes, int cells, float size, bool flipX=false, bool flipY=false);
 
 	private:
 		

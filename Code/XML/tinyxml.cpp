@@ -1869,3 +1869,22 @@ bool XMLReadBool(TiXmlElement* elem, const std::string &att)
 		return bool(atoi((*read).c_str()));
 	return false;
 }
+
+#include "../Color.h"
+
+void XMLReadColor(TiXmlElement* elem, const std::string &att, Monocle::Color &color)
+{
+	const std::string *read = elem->Attribute(att);
+	if (read != NULL)
+	{
+		std::istringstream is(*read);
+		is >> color.r >> color.g >> color.b >> color.a;
+	}
+}
+
+void XMLWriteColor(TiXmlElement *elem, const std::string &att, const Monocle::Color &color)
+{
+	std::ostringstream os; 
+	os << color.r << " " << color.g << " " << color.b << " " << color.a;
+	elem->SetAttribute(att, os.str());
+}

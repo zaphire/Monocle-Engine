@@ -9,24 +9,10 @@
 #include "../Tween.h"
 #include "../LevelEditor/Node.h"
 
+#include <cstdlib>
 #include <cstdio>
 
-#ifdef MONOCLE_WINDOWS
-	#define WIN32_LEAN_AND_MEAN
-	#include <Windows.h>
-#endif
-
-#if defined(MONOCLE_MAC)
-	#include <OpenGL/gl.h>
-	#include <OpenGL/glext.h>
-	#include <OpenGL/glu.h>
-#elif defined(MONOCLE_LINUX)
-	#include <GL/gl.h>
-	#include <GL/glu.h>
-#else
-	#include <gl/GL.h>
-	#include <gl/GLU.h>
-#endif
+#include "GL/glew.h"
 
 // some opengl/windows init code based on http://nehe.gamedev.net
 
@@ -44,6 +30,13 @@ namespace Monocle
 	{
 		Debug::Log("Graphics::Init");
 		
+		if (GLEW_OK != glewInit())
+		{
+			// GLEW failed!
+			Debug::Log("glewInit failed!");
+			exit(1);
+		}
+
 		glEnable(GL_BLEND);
 		glDisable(GL_LIGHTING);
 		glEnable(GL_TEXTURE_2D);
@@ -68,6 +61,15 @@ namespace Monocle
 	void Graphics::SetBackgroundColor(const Color &color)
 	{
 		glClearColor(color.r, color.g, color.b, color.a);
+	}
+
+	Color Graphics::GetBackgroundColor()
+	{
+		GLfloat *clearColor = new GLfloat[4];
+		glGetFloatv(GL_COLOR_CLEAR_VALUE, clearColor);
+		Color color(clearColor[0], clearColor[1], clearColor[2], clearColor[3]);
+		delete[] clearColor;
+		return color;
 	}
 
 	bool Graphics::SetResolution(int w, int h, int bits, bool full)
@@ -538,7 +540,7 @@ namespace Monocle
 		glEnd();
 	}
 
-	void Graphics::RenderPathMesh(const std::vector<Node*> &nodes, int cells, float size)
+	void Graphics::RenderPathMesh(const std::vector<Node*> &nodes, int cells, float size, bool flipX, bool flipY)
 	{
 		glBegin(GL_QUADS);
 		for (int i = 0; i < nodes.size()-1; i++)
@@ -588,6 +590,13 @@ namespace Monocle
 				Vector2 texScale = Vector2::one * 1.0f/(float)cells;
 				texOffset.x = (nodes[i]->variant % (cells)) * texScale.x;
 				texOffset.y = (int)(nodes[i]->variant / (cells)) * texScale.y;
+
+				if (flipY)
+				{
+					texOffset.y = 1.0f - texOffset.y;
+					texScale.y = - texScale.y;
+					//printf("%f, %f\n", texOffset.y, texScale.y);
+				}
 			
 				Graphics::SetColor(nodes[i]->color);
 				glTexCoord2f(texOffset.x, texOffset.y);

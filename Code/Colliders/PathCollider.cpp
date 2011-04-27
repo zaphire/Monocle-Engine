@@ -2,11 +2,13 @@
 
 namespace Monocle
 {
-	PathCollider::PathCollider() : Collider(), startNode(NULL)
+	PathCollider::PathCollider()
+		: Collider(), startNode(NULL), radius(0.0f)
 	{
 	}
 
-	PathCollider::PathCollider(Node *node) : Collider(), startNode(node)
+	PathCollider::PathCollider(Node *node, float radius)
+		: Collider(), startNode(node), radius(radius)
 	{
 	}
 

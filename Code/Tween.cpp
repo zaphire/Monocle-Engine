@@ -1,5 +1,5 @@
 #include "Tween.h"
-#include "Monocle.h"
+#include "MonocleToolkit.h"
 #include <math.h>
 
 namespace Monocle

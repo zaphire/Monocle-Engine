@@ -43,6 +43,16 @@ namespace Monocle
 				(*i)->Update();
 			}
 		}
+		else
+		{
+			for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+			{
+				if (!(*i)->IsDebugLayer())
+				{
+					(*i)->Update();
+				}
+			}
+		}
 
 		//Resolve adds and removes
 		ResolveEntityChanges();
@@ -220,6 +230,11 @@ namespace Monocle
 	void Scene::EntityRemoveTag(Entity* entity, const std::string& tag)
 	{
 		tagMap[tag].remove(entity);
+	}
+
+	Entity *Scene::CreateEntity(const std::string &entityTypeName)
+	{
+		return NULL;
 	}
 
 	void Scene::SaveEntities(TiXmlElement *element)

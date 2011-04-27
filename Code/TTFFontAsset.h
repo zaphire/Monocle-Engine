@@ -18,7 +18,8 @@ namespace Monocle
         void Unload();
 
 		void GetGlyphData(int unicodeCodepoint, float* x, float* y, Rect& verts, Rect& texCoords) const;
-		//float GetTextWidth(const std::string &text);
+		float GetTextWidth(const std::string &text);
+		float GetTextHeight(const std::string &text);
 
     protected:
         struct BakedChar

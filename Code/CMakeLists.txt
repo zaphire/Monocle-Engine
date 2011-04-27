@@ -4,12 +4,16 @@ file(GLOB GRAPHICS_SRCS Graphics/*.cpp)
 file(GLOB LEVELEDITOR_SRCS LevelEditor/*.cpp)
 file(GLOB OGMOSIS_SRCS Ogmosis/*.cpp)
 file(GLOB XML_SRCS XML/*.cpp)
+file(GLOB AUDIO_SRCS Audio/*.cpp)
+file(GLOB PUPPET_SRCS Puppet/*.cpp)
 
 set(CORE_SRCS ${CORE_SRCS}
 	${COLLIDERS_SRCS}
 	${GRAPHICS_SRCS}
 	${LEVELEDITOR_SRCS}
 	${OGMOSIS_SRCS}
+	${AUDIO_SRCS}
+	${PUPPET_SRCS}
 )
 
 if(WINDOWS)
@@ -28,8 +32,8 @@ if(WITH_OPENGL)
 	include_directories(${OPENGL_INCLUDE_DIR})
 	file(GLOB OPENGL_SRCS
 		OpenGL/*.cpp
-		OpenGL/glpng/*.c
-		OpenGL/glpng/*/*.c
+		OpenGL/*.c
+		OpenGL/GL/*.c
 	)
 	set(CORE_LINK ${CORE_LINK} ${OPENGL_LIBRARIES})
 	set(CORE_SRCS ${CORE_SRCS} ${OPENGL_SRCS})
@@ -41,6 +45,13 @@ if(WITH_OPENAL)
 	set(CORE_LINK ${CORE_LINK} ${OPENAL_LIBRARY})
 	set(CORE_SRCS ${CORE_SRCS} ${OPENAL_SRCS})
 endif(WITH_OPENAL)
+
+if(WITH_AUDIOOGG)
+	include_directories(${OGGVORBIS_INCLUDE_DIR})
+	set(CORE_LINK ${CORE_LINK} ${OGGVORBIS_LIBRARIES})
+	file(GLOB OGGVORBIS_SRCS Audio/oggvorbis/*.cpp)
+	set(CORE_SRCS ${CORE_SRCS} ${OGGVORBIS_SRCS})
+endif(WITH_AUDIOOGG)
 
 add_library(MonocleCore
 	${CORE_SRCS}

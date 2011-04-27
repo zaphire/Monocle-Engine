@@ -93,10 +93,18 @@ class TiXmlDeclaration;
 class TiXmlParsingData;
 
 /// MODIFIED
+namespace Monocle
+{
+	class Color;
+}
+
 std::string XMLReadString(TiXmlElement *elem, const std::string &att);
 float XMLReadFloat(TiXmlElement* elem, const std::string &att);
 int XMLReadInt(TiXmlElement* elem, const std::string &att);
 bool XMLReadBool(TiXmlElement* elem, const std::string &att);
+void XMLReadColor(TiXmlElement* elem, const std::string &att, Monocle::Color &color);
+
+void XMLWriteColor(TiXmlElement *elem, const std::string &att, const Monocle::Color &color);
 
 
 const int TIXML_MAJOR_VERSION = 2;

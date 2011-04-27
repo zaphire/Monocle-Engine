@@ -6,6 +6,7 @@
 #include "../Entity.h"
 #include <stdio.h> // for NULL
 #include "../CollisionData.h"
+#include "../Macros.h"
 
 namespace Monocle
 {
@@ -255,21 +256,36 @@ namespace Monocle
 		Node *node = b->startNode;
 		Node *prevNode = NULL;
 		Vector2 start, end;
+		Vector2 avgNormal;
+		int numNormals = 0;
+		float maxPenetration = 0.0f;
+
 		while (node)
 		{
 			if (prevNode && prevNode->variant != -1)
 			{
 				start = prevNode->GetWorldPosition();
 				end = node->GetWorldPosition();
-				if (a->IntersectsLine(start, end, 32, collisionData))
+				if (a->IntersectsLine(start, end, b->radius, collisionData))
 				{
 					if (collisionData)
-						collisionData->normal = (end-start).GetNormalized().GetPerpendicularRight();
-					return true;
+					{
+						avgNormal += collisionData->normal;
+						maxPenetration = MAX(collisionData->penetration, maxPenetration);
+						numNormals++;
+					}
 				}
 			}
 			prevNode = node;
 			node = node->GetNext();
+		}
+
+		if (numNormals > 0)
+		{
+			collisionData->normal = avgNormal/(float)numNormals;
+			collisionData->penetration = maxPenetration;
+			
+			return true;
 		}
 
 		return false;

@@ -18,7 +18,8 @@ namespace Monocle
         FontAsset(): Asset(ASSET_FONT), texID(-1), lineHeight(0) {}
 
 		virtual void GetGlyphData(int unicodeCodepoint, float* x, float* y, Rect& verts, Rect& texCoords) const = 0;
-		//virtual float GetTextWidth(const std::string &text)=0;
+		virtual float GetTextWidth(const std::string &text) = 0;
+		virtual float GetTextHeight(const std::string &text) = 0;
 
 		unsigned int texID;
         float lineHeight;

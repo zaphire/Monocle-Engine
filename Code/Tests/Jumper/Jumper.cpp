@@ -4,6 +4,7 @@
 
 namespace Jumper
 {
+	/// PLAYER
 	Player::Player(Vector2 pos) 
 		: Entity()
 	{
@@ -17,12 +18,12 @@ namespace Jumper
 		sprite = new Sprite("Graphics/Player.png", FILTER_NONE, 64, 64);
 		SetGraphic(sprite);
 
-		speed = 100.0f;
-		gravity = 0.25f;
+		speed = 4000.0f;
+		gravity = 2000.0f;
 		velocity = Vector2(0.0f, 0.0f);
-		jump = 8.0f;
-		maxSpeed = 4.0f;
-		leanAmount = 1.5f;
+		jump = gravity * 0.4f;
+		maxSpeed = 400.0f;
+		leanAmount = 0.05f;
 	}
 
 	void Player::Update()
@@ -60,20 +61,20 @@ namespace Jumper
 		// friction
 
 		// gravity
-		velocity.y += gravity;
+		velocity.y += gravity * Monocle::deltaTime;
 
 		//move
 		Vector2 lastPosition = position;
 		float temp = 0.001f;
 
-		position.x += velocity.x;
+		position.x += velocity.x * Monocle::deltaTime;
 		if(Collide("Wall") || Collide("Player"))
 		{
 			position.x = lastPosition.x;
 			velocity.x = 0.0f;
 		}
 
-		position.y += velocity.y;
+		position.y += velocity.y * Monocle::deltaTime;
 
 		onGround = false;
 
@@ -105,7 +106,7 @@ namespace Jumper
 		return i < 0 ? - to : (i > 0 ? to : 0);
 	}
 
-
+	/// WALL
 	Wall::Wall(Vector2 pos, float w, float h)
 		: Entity()
 	{
@@ -125,6 +126,7 @@ namespace Jumper
 		Graphics::PopMatrix();
 	}
 
+	/// GAME SCENE
 	void GameScene::Begin()
 	{
 		Debug::Log("Jumper::GameScene::Begin()!");
@@ -138,12 +140,6 @@ namespace Jumper
 
 		Input::DefineMaskKey("left", KEY_LEFT);
 		Input::DefineMaskKey("right", KEY_RIGHT);
-
-		/*
-		Level::SetScene(this);
-		Level::LoadProject("project.xml");
-		Level::Load("level01.xml");
-		*/
 
 		Graphics::SetBackgroundColor(Color::blue * 0.1f);
 
@@ -170,7 +166,7 @@ namespace Jumper
 		}
         if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
         {
-            SpawnPlayer(Input::GetWorldMousePosition());
+			SpawnPlayer(Input::GetWorldMousePosition());
         }
 	}
 
@@ -180,26 +176,4 @@ namespace Jumper
 		delete player;
 		//walls.clear();
 	}
-
-	/*
-	// G A M E
-
-	void JumperGame::Init()
-	{
-		Game::Init();
-		SetScene(&gameScene);
-	}
-
-	void JumperGame::ReceiveNote(const std::string &note)
-	{
-		if (note == "SwitchToEditor")
-		{
-			Game::SetScene(&ogmosis);
-		}
-		if (note == "SwitchToGame")
-		{
-			Game::SetScene(&gameScene);
-		}
-	}
-	*/
 }

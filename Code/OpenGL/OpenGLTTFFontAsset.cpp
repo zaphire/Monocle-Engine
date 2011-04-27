@@ -15,18 +15,9 @@
 #include "stb_truetype.h"
 
 // OpenGL Headers
-#if defined(MONOCLE_MAC)
-#include <OpenGL/gl.h>
-#include <OpenGL/glext.h>
-#include <OpenGL/glu.h>
-#elif defined(MONOCLE_LINUX)
-#include <GL/gl.h>
-#include <GL/glu.h>
-#else
-#include <windows.h>
-#include <gl/GL.h>
-#include <gl/GLU.h>
-#endif
+#include "GL/glew.h"
+
+#include "../Macros.h"
 
 // If DirectX supported in the future, change this define accordingly
 #define USE_OPENGL
@@ -102,6 +93,34 @@ namespace Monocle
 			free(fontCData);
 			fontCData = NULL;
 		}
+	}
+
+	float TTFFontAsset::GetTextWidth(const std::string &text)
+	{
+		float width = 0;
+		for (int i = 0; i < text.size(); i++)
+		{
+			float x=0, y=0;
+			Rect verts;
+			Rect texCoords;
+			GetGlyphData(text[i], &x, &y, verts, texCoords);
+			width += verts.bottomRight.x - verts.topLeft.x;
+		}
+		return width;
+	}
+
+	float TTFFontAsset::GetTextHeight(const std::string &text)
+	{
+		float height = 0;
+		for (int i = 0; i < text.size(); i++)
+		{
+			float x=0, y=0;
+			Rect verts;
+			Rect texCoords;
+			GetGlyphData(text[i], &x, &y, verts, texCoords);
+			height = MAX(height, verts.bottomRight.y - verts.topLeft.y);
+		}
+		return height;
 	}
 
 	void TTFFontAsset::GetGlyphData(int unicodeCodepoint, float* x, float* y, Rect& verts, Rect& texCoords) const

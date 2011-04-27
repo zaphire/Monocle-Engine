@@ -12,16 +12,16 @@
 </TextureAtlas>
 
 <Parts>
-	<Part id="0" name="torso" atlas="torso">
-		<Part id="1" name="tortilla" atlas="tortilla">
-			<Part id="2" name="mustache" atlas="mustache"/>
-			<Part id="3" name="hat" atlas="hat"/>
-			<Part id="4" name="nose" atlas="nose"/>
-			<Part id="5" name="monocle" atlas="monocle"/>
-			<Part id="6" name="" atlas="eyeunderline-left"/>
-			<Part id="7" name="" atlas="eye-left"/>
-			<Part id="8" name="" atlas="eye-right"/>
-			<Part id="9" name="" atlas="eyebrow"/>
+	<Part id="0" name="torso" atlasEntry="torso">
+		<Part id="1" name="tortilla" atlasEntry="tortilla">
+			<Part id="2" name="mustache" atlasEntry="mustache"/>
+			<Part id="3" name="hat" atlasEntry="hat"/>
+			<Part id="4" name="nose" atlasEntry="nose"/>
+			<Part id="5" name="monocle" atlasEntry="monocle"/>
+			<Part id="6" name="" atlasEntry="eyeunderline-left"/>
+			<Part id="7" name="" atlasEntry="eye-left"/>
+			<Part id="8" name="" atlasEntry="eye-right"/>
+			<Part id="9" name="" atlasEntry="eyebrow"/>
 		</Part>
 	</Part>
 </Parts>

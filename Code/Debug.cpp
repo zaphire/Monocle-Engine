@@ -8,6 +8,8 @@ namespace Monocle
 	bool Debug::render = false;
 	bool Debug::showBounds = false;
 	Entity *Debug::selectedEntity;
+	int Debug::layerMin = -50;
+	int Debug::layerMax = 50;
 	
 	void Debug::Init()
 	{

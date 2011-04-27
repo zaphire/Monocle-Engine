@@ -9,15 +9,16 @@
 namespace Ogmo
 {
 	// T H E   P L A Y E R (entity)
-	Player::Player(int x, int y) : Entity(), 
+	Player::Player(int x, int y)
+		: Entity(), 
 		FRICTION_GROUND(800),
 		FRICTION_AIR(400),
 		GRAVITY(300),
-                JUMP(120.0f),
-                MAXSPEED_GROUND(60.0f),
+		JUMP(120.0f),
+		MAXSPEED_GROUND(60.0f),
 		MAXSPEED_AIR(100.0f),
 		ACCELERATION(800),
-                WALLJUMP(160.0f),
+		WALLJUMP(160.0f),
 		doubleJump(false),
 		cling(0),
 		onGround(false)
@@ -72,26 +73,26 @@ namespace Ogmo
 			// friction
 			if(onGround)
 			{
-                                velocity.x = APPROACH(velocity.x, 0, FRICTION_GROUND * Monocle::deltaTime);
+				velocity.x = APPROACH(velocity.x, 0, FRICTION_GROUND * Monocle::deltaTime);
 			}
 			else
 			{
-                                velocity.x = APPROACH(velocity.x, 0, FRICTION_AIR * Monocle::deltaTime);
+				velocity.x = APPROACH(velocity.x, 0, FRICTION_AIR * Monocle::deltaTime);
 			}
 		}
 
 		// JUMP INPUT
-                if (Input::IsKeyMaskPressed("jump") && (onGround || cling > 0 || !doubleJump))
+		if (Input::IsKeyMaskPressed("jump") && (onGround || cling > 0 || !doubleJump))
 		{
 			// jump
-                        velocity.y = - JUMP;
+			velocity.y = - JUMP;
 
 			if(!onGround)
 			{
 				// wall jump
 				if(cling > 0)
 				{
-                                        velocity.x = clingDir * WALLJUMP;
+					velocity.x = clingDir * WALLJUMP;
 					cling = -1;
 				}
 
@@ -108,7 +109,7 @@ namespace Ogmo
 
 		// maxspeed
 		int maxspeed = onGround ? MAXSPEED_GROUND : MAXSPEED_AIR;
-                if(abs(velocity.x) > maxspeed) { velocity.x = SIGN(velocity.x, 1) * maxspeed; }
+		if(abs(velocity.x) > maxspeed) { velocity.x = SIGN(velocity.x, 1) * maxspeed; }
 		// Motion
 		Motion(velocity.x, position.x);
 		Motion(velocity.y, position.y);
@@ -155,7 +156,7 @@ namespace Ogmo
 		{
 			World::ResetCoins();
 		}
-	
+
 	}
 
 	bool Player::Motion(float &speed, float &to)
@@ -170,7 +171,7 @@ namespace Ogmo
 			to -= SIGN(speed, 0.1);
 			col = true;
 		}
-		
+
 		// stop motion on collision
 		if(col)
 		{
@@ -184,11 +185,10 @@ namespace Ogmo
 
 	bool Player::CollideAt(const std::string &tag, float x, float y)
 	{
-		Vector2 pre = Vector2(position.x, position.y);
+		Vector2 pre = position;
 		bool collide = false;
 
-		position.x = x;
-		position.y = y;
+		position = Vector2(x, y);
 
 		if(Collide(tag))
 		{
@@ -213,7 +213,7 @@ namespace Ogmo
 		Graphics::PushMatrix();
 		Graphics::Translate(position);
 		Graphics::BindTexture(NULL);
-                Graphics::RenderQuad(8, 8);
+		Graphics::RenderQuad(8, 8);
 		Graphics::PopMatrix();
 	}
 
@@ -237,21 +237,24 @@ namespace Ogmo
 
 	void Coin::Update()
 	{
+		Entity::Update();
+
 		//we hit the player!
-		if(Collide("PLAYER") && !reset)
+		if(!collected)
 		{
-			collected = true;
+			if (Collide("PLAYER") && !reset)
+			{
+				collected = true;
+			}
 		}
 
 		if(collected && isVisible)
 		{
 			//scale out
-			scale.x -= 0.1;
-			scale.y -= 0.1;
+			scale -= Vector2::one * 10.0f * Monocle::deltaTime;
 
 			//follow player
-			position.x -= (position.x - World::player->position.x) / 10;
-			position.y -= (position.y - World::player->position.y) / 10;
+			position -= ((position - World::player->position) / 10) * Monocle::deltaTime * 100.0f;
 
 			//we can't be seen no more
 			if(scale.x < 0)
@@ -259,29 +262,30 @@ namespace Ogmo
 				isVisible = false;
 			}
 		}
-		
-		if(reset)
+		else if(reset)
 		{
 			//we can see you!
 			isVisible = true;
 
 			//scale in
-			if(scale.x != 1)
+			if(scale.x < 1.0f)
 			{
-				scale.x += 0.1;
-				scale.y += 0.1;
+				scale += Vector2::one * 10.0f * Monocle::deltaTime;
+			}
+			else
+			{
+				scale = Vector2::one;
 			}
 
 			//slide to start position
-			position.x -= (position.x - start.x) / 10;
-			position.y -= (position.y - start.y) / 10;
+			position -= ((position - start) / 10) * Monocle::deltaTime * 100.0f;
 
 			//hop to start position
-			if(abs(position.x - start.x) < 0.2 && abs(position.y - start.y) < 0.2)
+			if((position - start).IsInRange(2.0f))
 			{
 				reset = false;
-				position.x = start.x;
-				position.y = start.y;
+				position = start;
+				scale = Vector2::one;
 			}
 		}
 	}
@@ -315,6 +319,8 @@ namespace Ogmo
 
 	void World::Begin()
 	{
+		Scene::Begin();
+
 		instance = this;
 
 		//set screen size
@@ -399,16 +405,15 @@ namespace Ogmo
 		/*
 		if (Input::IsKeyPressed(KEY_F1))
 		{
-			// doesn't clean up properly yet
-			Debug::Log("load level...");
-			Level::Load();
+		// doesn't clean up properly yet
+		Debug::Log("load level...");
+		Level::Load();
 		}
 		*/
 	}
 
 	void World::ResetCoins()
 	{
-		
 		for (std::list<Coin*>::iterator i = instance->coins.begin(); i != instance->coins.end(); ++i)
 		{
 			if((*i)->collected)
@@ -418,11 +423,12 @@ namespace Ogmo
 				(*i)->reset = true;
 			}
 		}
-		
 	}
 
 	void World::End()
 	{
+		Scene::End();
+
 		delete player;
 		delete wall;
 	}

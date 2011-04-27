@@ -9,6 +9,10 @@
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Static Library|Win32">
+      <Configuration>Static Library</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FF228BD1-426C-496D-95C1-4928CF205826}</ProjectGuid>
@@ -26,6 +30,12 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Static Library|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -35,26 +45,50 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Static Library|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)..\..\..\Build\bin\</OutDir>
     <TargetName>$(ProjectName)$(Configuration)</TargetName>
+    <LibraryPath>C:\Program Files (x86)\OpenAL 1.1 SDK\libs\Win32;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Program Files (x86)\OpenAL 1.1 SDK\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)..\..\..\Build\bin\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Static Library|Win32'">
+    <OutDir>$(SolutionDir)..\..\..\Build\lib\win32\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>MONOCLE_WINDOWS;MONOCLE_OPENGL;MONOCLE_OPENAL;MONOCLE_AUDIO_OGG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>OpenGL32.lib;GLu32.lib;Winmm.lib;OpenAL32.lib;libogg_static.lib;libvorbis_static.lib;libvorbisfile_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\Libs\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>MONOCLE_WINDOWS;MONOCLE_OPENGL;MONOCLE_OPENAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>OpenGL32.lib;GLu32.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Static Library|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
@@ -66,11 +100,24 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Lib>
+      <OutputFile>$(OutDir)Monocle$(TargetExt)</OutputFile>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Asset.h" />
     <ClInclude Include="..\..\..\..\Code\Assets.h" />
     <ClInclude Include="..\..\..\..\Code\Audio.h" />
+    <ClInclude Include="..\..\..\..\Code\Audio\AudioAsset.h" />
+    <ClInclude Include="..\..\..\..\Code\Audio\AudioCrypt.h" />
+    <ClInclude Include="..\..\..\..\Code\Audio\AudioDecoder.h" />
+    <ClInclude Include="..\..\..\..\Code\Audio\ChannelStream.h" />
+    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\OggDecoder.h" />
+    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\ogg\ogg.h" />
+    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\ogg\os_types.h" />
+    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\vorbis\codec.h" />
+    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\vorbis\vorbisenc.h" />
+    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\vorbis\vorbisfile.h" />
     <ClInclude Include="..\..\..\..\Code\Camera.h" />
     <ClInclude Include="..\..\..\..\Code\Colliders\CircleCollider.h" />
     <ClInclude Include="..\..\..\..\Code\Colliders\Collider.h" />
@@ -94,38 +141,32 @@
     <ClInclude Include="..\..\..\..\Code\Input.h" />
     <ClInclude Include="..\..\..\..\Code\Level.h" />
     <ClInclude Include="..\..\..\..\Code\LevelEditor\FringeTile.h" />
-    <ClInclude Include="..\..\..\..\Code\LevelEditor\FringeTileEditor.h" />
+    <ClInclude Include="..\..\..\..\Code\LevelEditor\ImageBrowser.h" />
     <ClInclude Include="..\..\..\..\Code\LevelEditor\LevelEditor.h" />
     <ClInclude Include="..\..\..\..\Code\LevelEditor\Node.h" />
     <ClInclude Include="..\..\..\..\Code\LevelEditor\PathMesh.h" />
     <ClInclude Include="..\..\..\..\Code\Macros.h" />
     <ClInclude Include="..\..\..\..\Code\Monocle.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\glpng.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\png\png.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\png\pngconf.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\crc32.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\deflate.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\inffast.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\inffixed.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\inflate.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\inftrees.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\trees.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\zconf.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\zlib.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\glpng\zlib\zutil.h" />
+    <ClInclude Include="..\..\..\..\Code\MonocleToolkit.h" />
+    <ClInclude Include="..\..\..\..\Code\OpenGL\GL\glew.h" />
+    <ClInclude Include="..\..\..\..\Code\OpenGL\GL\glxew.h" />
+    <ClInclude Include="..\..\..\..\Code\OpenGL\GL\wglew.h" />
     <ClInclude Include="..\..\..\..\Code\OpenGL\stb_truetype.h" />
     <ClInclude Include="..\..\..\..\Code\Platform.h" />
+    <ClInclude Include="..\..\..\..\Code\Puppet\Puppet.h" />
+    <ClInclude Include="..\..\..\..\Code\Puppet\PuppetEditor.h" />
     <ClInclude Include="..\..\..\..\Code\Random.h" />
     <ClInclude Include="..\..\..\..\Code\Rect.h" />
     <ClInclude Include="..\..\..\..\Code\Scene.h" />
+    <ClInclude Include="..\..\..\..\Code\Tests\AudioTest\AudioTest.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\Flash\Flash.h" />
-    <ClInclude Include="..\..\..\..\Code\Tests\FTE\FTE.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\Jumper\Jumper.h" />
+    <ClInclude Include="..\..\..\..\Code\Tests\LevelEditor\LevelEditorTest.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\Ogmo\Ogmo.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\Pong\Pong.h" />
-    <ClInclude Include="..\..\..\..\Code\Tests\PuppetTest\Puppet.h" />
     <ClInclude Include="..\..\..\..\Code\Tests\PuppetTest\PuppetTest.h" />
     <ClInclude Include="..\..\..\..\Code\TextureAsset.h" />
+    <ClInclude Include="..\..\..\..\Code\TextureAtlas.h" />
     <ClInclude Include="..\..\..\..\Code\Tileset.h" />
     <ClInclude Include="..\..\..\..\Code\Transform.h" />
     <ClInclude Include="..\..\..\..\Code\TTFFontAsset.h" />
@@ -139,6 +180,10 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp" />
     <ClCompile Include="..\..\..\..\Code\Assets.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Audio\AudioAsset.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Audio\AudioCrypt.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Audio\AudioDecoder.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Audio\oggvorbis\OggDecoder.cpp" />
     <ClCompile Include="..\..\..\..\Code\Camera.cpp" />
     <ClCompile Include="..\..\..\..\Code\Colliders\CircleCollider.cpp" />
     <ClCompile Include="..\..\..\..\Code\Colliders\Collider.cpp" />
@@ -148,6 +193,7 @@
     <ClCompile Include="..\..\..\..\Code\Collision.cpp" />
     <ClCompile Include="..\..\..\..\Code\CollisionData.cpp" />
     <ClCompile Include="..\..\..\..\Code\Color.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Editor.cpp" />
     <ClCompile Include="..\..\..\..\Code\FileNode.cpp" />
     <ClCompile Include="..\..\..\..\Code\Game.cpp" />
     <ClCompile Include="..\..\..\..\Code\Debug.cpp" />
@@ -159,50 +205,33 @@
     <ClCompile Include="..\..\..\..\Code\Input.cpp" />
     <ClCompile Include="..\..\..\..\Code\Level.cpp" />
     <ClCompile Include="..\..\..\..\Code\LevelEditor\FringeTile.cpp" />
-    <ClCompile Include="..\..\..\..\Code\LevelEditor\FringeTileEditor.cpp" />
+    <ClCompile Include="..\..\..\..\Code\LevelEditor\ImageBrowser.cpp" />
     <ClCompile Include="..\..\..\..\Code\LevelEditor\LevelEditor.cpp" />
     <ClCompile Include="..\..\..\..\Code\LevelEditor\Node.cpp" />
     <ClCompile Include="..\..\..\..\Code\LevelEditor\PathMesh.cpp" />
     <ClCompile Include="..\..\..\..\Code\Main.cpp" />
     <ClCompile Include="..\..\..\..\Code\Monocle.cpp" />
+    <ClCompile Include="..\..\..\..\Code\MonocleToolkit.cpp" />
+    <ClCompile Include="..\..\..\..\Code\OpenAL\ChannelStream.cpp" />
     <ClCompile Include="..\..\..\..\Code\OpenAL\OpenALAudio.cpp" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\glpng.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\png.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngerror.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngget.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngmem.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngpread.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngread.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngrio.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngrtran.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngrutil.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngset.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\png\pngtrans.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\adler32.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\compress.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\crc32.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\deflate.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\gzio.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\infback.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\inffast.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\inflate.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\inftrees.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\trees.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\uncompr.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\glpng\zlib\zutil.c" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\GL\glew.c" />
     <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLGraphics.cpp" />
     <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLTextureAsset.cpp" />
     <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLTTFFontAsset.cpp" />
+    <ClCompile Include="..\..\..\..\Code\OpenGL\stb_image.c" />
+    <ClCompile Include="..\..\..\..\Code\Puppet\Puppet.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Puppet\PuppetEditor.cpp" />
     <ClCompile Include="..\..\..\..\Code\Random.cpp" />
     <ClCompile Include="..\..\..\..\Code\Rect.cpp" />
     <ClCompile Include="..\..\..\..\Code\Scene.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Tests\AudioTest\AudioTest.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\Flash\Flash.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Tests\FTE\FTE.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\Jumper\Jumper.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Tests\LevelEditor\LevelEditorTest.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\Ogmo\Ogmo.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\Pong\Pong.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Tests\PuppetTest\Puppet.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tests\PuppetTest\PuppetTest.cpp" />
+    <ClCompile Include="..\..\..\..\Code\TextureAtlas.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tileset.cpp" />
     <ClCompile Include="..\..\..\..\Code\Transform.cpp" />
     <ClCompile Include="..\..\..\..\Code\Tween.cpp" />

@@ -26,7 +26,10 @@ namespace Monocle
 
 	void XMLFileNode::Write(const std::string &name, const float &value)
 	{
-		element->SetAttribute(name, value);
+		std::ostringstream os;
+		os << value;
+		element->SetAttribute(name, os.str());
+		//element->SetAttribute(name, value);
 	}
 
 	void XMLFileNode::Write(const std::string &name, const std::string &value)
@@ -46,6 +49,11 @@ namespace Monocle
 		std::ostringstream os;
 		os << value.r << " " << value.g << " " << value.b << " " << value.a;
 		element->SetAttribute(name, os.str());
+	}
+
+	void XMLFileNode::Write(const std::string &name, const bool &value)
+	{
+		element->SetAttribute(name, (int)value);
 	}
 
 
@@ -89,8 +97,26 @@ namespace Monocle
 	{
 		if (element->Attribute(name))
 		{
-			std::istringstream read(*element->Attribute(name));
-			read >> value.r >> value.g >> value.b >> value.a;
+			std::string string = *element->Attribute(name);
+			std::istringstream read(string);
+			if (string.find('#') != std::string::npos)
+			{
+				// TODO: read hex color
+			}
+			else
+			{
+				read >> value.r >> value.g >> value.b >> value.a;
+			}
+		}
+	}
+
+	void XMLFileNode::Read(const std::string &name, bool &value)
+	{
+		if (element->Attribute(name))
+		{
+			std::string string = *element->Attribute(name);
+			std::istringstream read(string);
+			read >> value;
 		}
 	}
 }
