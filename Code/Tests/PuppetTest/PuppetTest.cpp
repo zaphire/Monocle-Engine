@@ -7,19 +7,20 @@ namespace PuppetTest
 	void TestScene::Begin()
 	{
 		Scene::Begin();
+		
+		Graphics::SetBackgroundColor(Color::white);
 
-		puppetEditor.Init(this);
+		Add(puppetEditor = new PuppetEditor());
 	}
 
 	void TestScene::Update()
 	{
 		Scene::Update();
-
-		puppetEditor.Update();
 	}
 
 	void TestScene::End()
 	{
+		puppetEditor = NULL;
 		Scene::End();
 	}
 }

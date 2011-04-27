@@ -23,6 +23,13 @@ namespace Monocle
 		SEARCH_RECURSIVE
 	};
 
+
+	//! Base class that describes a scene in a Game.
+	/*!
+	Scenes may be levels, title screens, etc.
+	Start by extending the Begin function and adding new Entity objects using the Add function.
+	If an Entity is added to a Scene using the Add function, that Entity will be automatically deleted.
+	*/
 	class Scene
 	{
 	public:
@@ -34,28 +41,28 @@ namespace Monocle
 		// update?
 		bool isPaused;
 
-		//Called when this scene becomes the currently active scene
+		//! Called when this scene becomes the currently active scene
 		virtual void Begin();
 
-		//Called when this scene is ended and a different one becomes the active scene
+		//! Called when this scene is ended and a different one becomes the active scene
 		virtual void End();
 
-		//Called by the main game loop every time the scene should update game logic
+		//! Called by the main game loop every time the scene should update game logic
 		virtual void Update();
 
-		//Called by the main game loop every time the scene should render
+		//! Called by the main game loop every time the scene should render
 		void Render();
 
-		//Add an entity to the scene
+		//! Add an entity to the scene
 		void Add(Entity* entity);
 
-		//Remove an entity from the scene
+		//! Remove an entity from the scene
 		void Remove(Entity* entity);
 
-		//Remove all entities in the scene
+		//! Remove all entities in the scene
 		void RemoveAll();
 
-		//Called by an entity when its tag has changed; the scene must reposition that entity in the tag map
+		//! Called by an entity when its tag has changed; the scene must reposition that entity in the tag map
 		void EntityAddTag(Entity* entity, const std::string& tag);
 		void EntityRemoveTag(Entity* entity, const std::string& tag);
 
