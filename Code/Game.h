@@ -15,21 +15,32 @@
 
 namespace Monocle
 {
+
+	//! Base class for creating a new game. Manages the main loop, timer and high-level updating, rendering.
+	/*!
+	Some games will be able to get away with just instantiating this class and adding Scenes.
+	Some developers may want to extend Game and customize it, instead.
+	*/
 	class Game
 	{
 	public:
 		Game();
 		virtual void Init();
 
+		//! Runs the main game loop. Handles timing and high-level updating, rendering.
 		void Main();
 
+		//! Sets the current Scene. Games can run one Scene at a time.
 		static void SetScene(Scene* scene);
+		//! Returns a pointer to the current Scene.
 		static Scene* GetScene();
 
 		//static void SetEditor(Editor *editor);
 
 		static void Quit();
 
+		//! Receives a string-based message, referred to as a "note." Can be overloaded.
+		//! MARKED FOR REMOVAL
 		virtual void ReceiveNote(const std::string &note);
 
 	private:
@@ -43,7 +54,6 @@ namespace Monocle
 		//The scene to switch to at the end of the frame; if NULL, no switch
 		Scene* switchTo;
 
-		//access these using the public static functions
 		Platform platform;
 		Input input;
 		Graphics graphics;
