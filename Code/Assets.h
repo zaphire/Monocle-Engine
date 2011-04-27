@@ -11,6 +11,13 @@ namespace Monocle
     class AudioAsset;
     class AudioDecoder;
 
+	//!
+	//! \brief Loads and manages TextureAsset, FontAsset, AudioAsset
+	//!
+	//! Call Assets::SetContentPath to initialize the path that all content will be loaded out of.
+	//!
+	//! Call Assets::RequestTexture, Assets::RequestFont, Assets::RequestAudio to load different each type of Asset.
+	//!
 	class Assets
 	{
 	public:

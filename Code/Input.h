@@ -9,6 +9,13 @@
 
 namespace Monocle
 {
+	//!
+	//! \brief Manages input for Monocle
+	//! 
+	//! Is*Held = is key/mouse button currently being held
+	//! Is*Pressed = was the key/mouse button go down in this frame
+	//! Is*Released = did the key/mouse button go up in this frame
+	//! 
 	class Input
 	{
 	public:
