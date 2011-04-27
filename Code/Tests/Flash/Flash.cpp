@@ -252,8 +252,7 @@ namespace Flash
 		Scene::Begin();
 
 		Graphics::SetBackgroundColor(Color::black);
-        
-        Assets::SetContentPath(Assets::GetContentPath()+"/Flash/");
+       
         const std::string cp = Assets::GetContentPath();
 
 		editPart = NULL;

@@ -328,9 +328,6 @@ namespace Ogmo
 		//Graphics::SetCameraPosition(Vector2(80, 60));
 		GetCamera()->position = Vector2(80, 60);
 
-		//assets
-		Assets::SetContentPath(Assets::GetContentPath()+"/Ogmo/");
-
 		atCoin = new Sprite("coin.png", FILTER_NONE, 8, 8);
 		atSpike = new Sprite("spike.png", FILTER_NONE, 8, 8);
 

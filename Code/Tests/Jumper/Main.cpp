@@ -7,6 +7,7 @@ int main(void)
 {
 	Game *game = new Game();
 	game->Init();
+	Assets::SetContentPath(Assets::GetContentPath()+"/Jumper/");
 	game->SetScene(new Jumper::GameScene());
 	game->Main();
 	delete game;

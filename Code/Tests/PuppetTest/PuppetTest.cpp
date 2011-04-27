@@ -7,8 +7,6 @@ namespace PuppetTest
 	void TestScene::Begin()
 	{
 		Scene::Begin();
-
-		Assets::SetContentPath(Assets::GetContentPath() + "/PuppetTest/");
 		
 		Graphics::SetBackgroundColor(Color::white);
 		puppetEditor.Init(this);

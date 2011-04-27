@@ -7,6 +7,7 @@ int main(void)
 {
 	Game *game = new Game();
 	game->Init();
+	Assets::SetContentPath(Assets::GetContentPath() + "/PuppetTest/");
 	game->SetScene(new PuppetTest::TestScene());
 	game->Main();
 	delete game;
