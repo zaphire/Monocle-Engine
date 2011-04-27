@@ -58,7 +58,7 @@ namespace AudioTest
         add = od.RequestData( *audio );
         
         cs = new ChannelStream();
-        cs->open(add->ch,add->bit,add->samplerate);
+        cs->Open(add->ch,add->bit,add->samplerate);
         
         // Start by filling the buffer
         ThinkAudio();
@@ -78,7 +78,7 @@ namespace AudioTest
         size = od.Render( size, (void*)data, *add);
         cs->lockNumberedBuffer(size, 2);*/
         
-        cs->play();
+        cs->Play();
 	}
 
 	void GameScene::ReceiveNote(const std::string &note)
@@ -100,25 +100,25 @@ namespace AudioTest
         
         od.FreeDecoderData(*add);
 
-        cs->close();
+        cs->Close();
         delete cs;
 	}
     
     void GameScene::ThinkAudio()
     {
         // ALL BELOW IS AUDIO GENERATION STUFF...
-		int buffers_to_fill = cs->needsUpdate();
+		int buffers_to_fill = cs->NeedsUpdate();
         unsigned int size;
 		
 		while (buffers_to_fill--)
 		{
 			unsigned char *data;
 			
-			data = cs->getBuffer(&size);
+			data = cs->GetBuffer(&size);
 			
             size = od.Render(size,(void*)data,*add);
 			
-			cs->lockBuffer(size);
+			cs->LockBuffer(size);
 			
             /*			if (playbackPos >= targetLength)
              break;*/

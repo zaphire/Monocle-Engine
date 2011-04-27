@@ -5,44 +5,44 @@
 
 namespace Monocle
 {
-    class ChannelStream {
-        
+    class ChannelStream
+	{
     public:
         ChannelStream();
         ~ChannelStream();
         
     public:
         
-        void open( int channels, int bits, int samplerate );
-        void close();
+        void Open( int channels, int bits, int samplerate );
+        void Close();
         
         // Returns number of buffers to fill
-        int needsUpdate();
+        int NeedsUpdate();
         
         // When update is needed, use getBuffer() to obtain the buffer to fill
-        unsigned char *getBuffer( unsigned int *size );
+        unsigned char *GetBuffer( unsigned int *size );
         
         // Use lockBuffer() after you've filled the buffer obtained from getBuffer()
-        void lockBuffer( unsigned int size );
+        void LockBuffer( unsigned int size );
         
-        void lockNumberedBuffer( unsigned int size, unsigned int buff );
-        unsigned char *getStaticBuffer( unsigned int *size );
+        void LockNumberedBuffer( unsigned int size, unsigned int buff );
+        unsigned char *GetStaticBuffer( unsigned int *size );
         
-        void play();
-        void stop();
+        void Play();
+        void Stop();
         
-        bool isPlaying();
-        void check();                 // checks OpenAL error state
+        bool IsPlaying();
+        void Check();                 // checks OpenAL error state
         
-        static int init();
-        static void exit();
+        static int Init();
+        static void Exit();
         
-        float getPlaybackPosition();
+        float GetPlaybackPosition();
         
     protected:
         
-        void empty();                 // empties the queue
-        char *errorString(int code); // stringify an error code	
+        void Empty();                 // empties the queue
+        char *ErrorString(int code); // stringify an error code	
 
     private:
         

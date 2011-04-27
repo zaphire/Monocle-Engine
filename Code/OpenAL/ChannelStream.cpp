@@ -21,14 +21,14 @@
 
 namespace Monocle
 {
-    bool ChannelStream::isPlaying()
+    bool ChannelStream::IsPlaying()
     {
         ALenum state;
         alGetSourcei(source, AL_SOURCE_STATE, &state);
         return (state == AL_PLAYING);
     }
 
-    void ChannelStream::open( int channels, int bits, int samplerate )
+    void ChannelStream::Open( int channels, int bits, int samplerate )
     {
         if (channels == 1)
         {
@@ -43,26 +43,26 @@ namespace Monocle
                 format = AL_FORMAT_STEREO8;
         }
         
-        check();
+        Check();
         
         alGenBuffers(NUM_BUFFERS, buffers);
         
-        check();
+        Check();
         
         alGenSources(1, &source);
         
-        check();
+        Check();
         
         alSource3f(source, AL_POSITION, 0.0, 0.0, 0.0);
         alSource3f(source, AL_VELOCITY, 0.0, 0.0, 0.0);
         alSource3f(source, AL_DIRECTION, 0.0, 0.0, 0.0);
         
-        check();
+        Check();
         
         alSourcei(source, AL_ROLLOFF_FACTOR, 0);
         alSourcei(source, AL_SOURCE_RELATIVE, AL_TRUE);
         
-        check();
+        Check();
         
         memset(obtainedBuffer,0,BUFFER_SIZE);
         alBufferData(buffers[0], format, obtainedBuffer, BUFFER_SIZE, samplerate);
@@ -71,7 +71,7 @@ namespace Monocle
 
         Debug::Log("AUDIO: Opening Audio Channel: " + StringOf(samplerate) + "hz w/ " + StringOf(channels) + " channels (ALformat:" + StringOf(format) +")");
         
-        check();
+        Check();
 
         this->samplerate = samplerate;
         this->started = true;
@@ -79,16 +79,16 @@ namespace Monocle
         this->startedPlaying = false;
     }
 
-    void ChannelStream::close()
+    void ChannelStream::Close()
     {
         alSourceStop(source);
-        empty();
+        Empty();
         alDeleteSources(1,&source);
         alDeleteBuffers(NUM_BUFFERS,buffers);
         started = false;
     }
 
-    int ChannelStream::needsUpdate()
+    int ChannelStream::NeedsUpdate()
     {
         int processed;
         
@@ -100,60 +100,60 @@ namespace Monocle
         }
     }
 
-    void ChannelStream::lockNumberedBuffer( unsigned int size, unsigned int buff )
+    void ChannelStream::LockNumberedBuffer( unsigned int size, unsigned int buff )
     {
         alBufferData(buffers[buff], format, obtainedBuffer, size, samplerate);
-        check();
+        Check();
     }
 
-    unsigned char *ChannelStream::getBuffer( unsigned int *size )
+    unsigned char *ChannelStream::GetBuffer( unsigned int *size )
     {
         if (this->startBuffer < NUM_BUFFERS){
-            return getStaticBuffer(size);
+            return GetStaticBuffer(size);
         }
         
         alSourceUnqueueBuffers(source, 1, &active_buffer);
-        check();
+        Check();
         
-        return getStaticBuffer(size);
+        return GetStaticBuffer(size);
     }
 
-    unsigned char *ChannelStream::getStaticBuffer( unsigned int *size )
+    unsigned char *ChannelStream::GetStaticBuffer( unsigned int *size )
     {
         size[0] = BUFFER_SIZE;	
         return obtainedBuffer;
     }
 
-    void ChannelStream::lockBuffer( unsigned int size )
+    void ChannelStream::LockBuffer( unsigned int size )
     {
         if (this->startBuffer < NUM_BUFFERS){
-            lockNumberedBuffer(size, this->startBuffer);
+            LockNumberedBuffer(size, this->startBuffer);
             this->startBuffer++;
             return;
         }
         
         alBufferData(active_buffer, format, obtainedBuffer, size, samplerate);
-        check();
+        Check();
         
         alSourceQueueBuffers(source, 1, &active_buffer);
-        check();
+        Check();
     }
 
-    void ChannelStream::play()
+    void ChannelStream::Play()
     {
         alSourceQueueBuffers(source, NUM_BUFFERS, buffers);
         alSourcePlay(source);
-        check();
+        Check();
         
         this->startedPlaying = true;
     }
 
-    void ChannelStream::stop()
+    void ChannelStream::Stop()
     {
         alSourceStop(source);
     }
 
-    void ChannelStream::empty()
+    void ChannelStream::Empty()
     {
         int queued;
         
@@ -164,11 +164,11 @@ namespace Monocle
             ALuint buffer;
             
             alSourceUnqueueBuffers(source, 1, &buffer);
-            check();
+            Check();
         }
     }
 
-    void ChannelStream::check()
+    void ChannelStream::Check()
     {
         int error = alGetError();
             
@@ -187,7 +187,7 @@ namespace Monocle
     ChannelStream::~ChannelStream()
     {
         if (started)
-            close();
+            Close();
     }
 
     void __alexit()
@@ -203,7 +203,7 @@ namespace Monocle
         alcCloseDevice(device);
     }
 
-    int ChannelStream::init()
+    int ChannelStream::Init()
     {
         ALCcontext *context;
         ALCdevice *device;
@@ -233,12 +233,12 @@ namespace Monocle
         return 0;	
     }
 
-    void ChannelStream::exit()
+    void ChannelStream::Exit()
     {
         __alexit();
     }
 
-    float ChannelStream::getPlaybackPosition()
+    float ChannelStream::GetPlaybackPosition()
     {
         float poso;
         int pos;
