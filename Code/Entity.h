@@ -35,45 +35,56 @@ namespace Monocle
 		void *me;
 	};
 
+	//! \brief An object that can Update, Render and be derived to perform other actions.
+	//!
+	//! Examples of what you might use entities for: players, enemies, items, menus.
+	//!
+	//! You would do this by deriving a new type, e.g.:
+	//!
+	//!		class Player : public Entity
+	//! 
+	//! Entities must be Added to a Scene using Scene::Add. Otherwise they will do nothing.
+	//! 
+	//! e.g.: in Scene::Begin()...
+	//!
+	//!		Add(new Player)
+	//!
 	class Entity : public Transform
 	{
 	public:
 		Entity(const Entity &entity);
 		Entity();
 		~Entity();
-
-		float depth;
-		bool isVisible;
-		Vector2 followCamera;
-
-		Color color; // <- may move this later (material system?)
 		
+		//! Called by the scene when the entity is added to that scene
+		virtual void Added();
 
-		// remove from Scene or Entity parent
+		//! Called by the scene when the entity is removed from that scene
+		virtual void Removed();
+
+		//! Enable this object. Set isEnabled to true. Each derived Entity may decide how to handle isEnabled.
+		virtual void Enable();
+		//! Disable this object. Set isEnabled to false. Each derived Entity may decide how to handle isEnabled.
+		virtual void Disable();
+		//! \return isEnabled Is this Entity enabled?
+		bool IsEnabled();
+
+		//! Remove from Scene or Entity parent. May cause our deletion.
 		void RemoveSelf();
-
-		//The scene that contains the entity
-		Scene* scene;
 		
 		virtual void Destroy();
 
-		//Called by the scene when the entity should update its game logic
+		//! Called by the scene when the entity should update its game logic
 		virtual void Update();
 
-		//Called by the scene when the entity should render
+		//! Called by the scene when the entity should render
 		virtual void Render();
 
-		//Called by the scene when the entity is added to that scene
-		virtual void Added();
-
-		//Called by the scene when the entity is removed from that scene
-		virtual void Removed();
-
-		// from Transform:: used to save/load properties
+		//!  from Transform:: used to save/load properties
 		void Save(FileNode *fileNode);
 		void Load(FileNode *fileNode);
 
-		//Call to check our collider against all entities that have "tag"
+		//! Call to check our collider against all entities that have "tag"
 		Collider* Collide(const std::string &tag, CollisionData *collisionData=NULL);
 		//RectangleCollider *AddRectangleCollider(float width, float height, const Vector2 &offset = Vector2::zero);
 
@@ -84,21 +95,25 @@ namespace Monocle
 		const std::string& GetTag(int index);
 		int GetNumberOfTags();
 
-		//Layer
+		//! is our layer number equal to the layer passed in
 		bool IsLayer(int layer);
+		//! \return our layer number
 		int GetLayer();
+		//! set our current layer to the layer passed in
 		void SetLayer(int layer);
 		void AdjustLayer(int layerAdjustAmount);
 
-		// is our layer # in the debug render range
+		//! is our layer number in the debug render range?
 		bool IsDebugLayer();
 
 		void SetCollider(Collider *collider);
 		void SetGraphic(Graphic *graphic);
 
-		// add or remove entities from list of children
+		//! add an Entity as a child
 		void Add(Entity *entity);
+		//! remove an Entity from our list of children
 		void Remove(Entity *entity);
+		//! return our parent Entity, if we have one
 		Entity *GetParent();
 
 		// used by editors
@@ -130,14 +145,19 @@ namespace Monocle
 
 		const std::list<Entity*>* GetChildren();
 
-		void Enable();
-		void Disable();
-		bool IsEnabled();
+		float depth;
+		bool isVisible;
+		Vector2 followCamera;
+
+		Color color; // <- may move this later (material system?)
 
 	protected:
 		void DestroyChildren();
 
 		friend class Scene;
+
+		//! The scene that contains the entity
+		Scene* scene;
 
 		Entity *GetNearestEntityByControlPoint(const Vector2 &position, const std::string &tag, Entity *ignoreEntity, float &smallestSqrMag);
 		// notes are very simple "messages"
