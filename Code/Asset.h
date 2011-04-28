@@ -39,6 +39,7 @@ namespace Monocle
 		virtual void Reload()=0;
 
 		std::string GetName();
+        std::string GetExtension(); // after the . : "booty.ogg" would return "ogg"
 
 	protected:
 		friend class Assets;

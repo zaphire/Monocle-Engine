@@ -2,6 +2,9 @@
 
 namespace Monocle
 {
+	//!
+	//! 3 dimensional vector class. Not fully implemented yet.
+	//!
 	class Vector3
 	{
 	public:

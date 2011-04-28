@@ -29,6 +29,11 @@ namespace Monocle
 		void Load(FileNode *fileNode);
 	};
 
+	//!
+	//! \brief Manages the saving and loading of Entity instances as well as other objects.
+	//!
+	//! Can be extended to save/load any derivation of Entity, by overriding a few functions.
+	//!
 	class Level
 	{
 	public:
