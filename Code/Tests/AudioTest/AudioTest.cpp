@@ -119,18 +119,18 @@ namespace AudioTest
         
         // Make the deck, and it starts playing... (we need a play())
         deck1 = Audio::NewDeck(Assets::RequestAudio("AudioTest/City01.g2m",true,"hellogirl"));
-        deck2 = Audio::NewDeck(Assets::RequestAudio("AudioTest/City01Hell.g2m",false,"hellogirl"));
+//        deck2 = Audio::NewDeck(Assets::RequestAudio("AudioTest/City01Hell.g2m",false,"hellogirl"));
         
-        deck2->volume = 0.0;
+//        deck2->volume = 0.0;
         
         deck1->Play();
-        deck2->Play();
+//        deck2->Play();
         
         Waveform* wave = new Waveform(deck1,1);
         Add(wave);
 
-        Waveform* wave2 = new Waveform(deck2,1);
-        Add(wave2);
+//        Waveform* wave2 = new Waveform(deck2,1);
+//        Add(wave2);
 	}
 
 	void GameScene::ReceiveNote(const std::string &note)
