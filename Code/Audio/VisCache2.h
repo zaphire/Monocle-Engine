@@ -16,6 +16,9 @@ namespace Monocle {
         long			engineerData[4];
     } vc2_entry;
 
+    /**
+        A cache mechanism for syncing written audio data with when it is actually played through the speakers.
+     */
     class VisCache2
     {
     public:

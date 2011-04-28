@@ -120,7 +120,20 @@ namespace Monocle {
         // We need to attach a VizEng internally now.
         this->vis->PrepData();
         
-        memset(&this->fades,0,sizeof(aud_deck_fades));
+        //memset(&this->fades,0,sizeof(AudioFades));
+        this->fades.Reset();
+    }
+    
+    AudioFades::AudioFades()
+    {
+        Reset();
+    }
+    
+    void AudioFades::Reset()
+    {
+        this->nFadeIn = this->nFadeOut = 0;
+        this->aFadeInEnd = this->aFadeInStart = this->aFadeOutEnd = this->aFadeOutStart = 0;
+        this->bPauseOnFadeOut = false;
     }
     
     void AudioDeck::Init()

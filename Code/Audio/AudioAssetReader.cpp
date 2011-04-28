@@ -17,7 +17,7 @@ namespace Monocle {
     {
         this->asset = asset;
         if (key != "")
-            this->cryptKey = new AudioCryptKey((char*)key.c_str());
+            this->cryptKey = new AudioCryptKey(key);
         else
             this->cryptKey = NULL;
         

@@ -18,44 +18,117 @@
 
 namespace Monocle {
     // Structure containing fade information
-    typedef struct aud_deck_fades_s
+    
+    /**
+        Contains fade information for an AudioDeck. All times are in MS, and aFade* times are relative to ChannelStream::GetTotalPlayTime().
+     */
+    class AudioFades
     {
+    public:
+        AudioFades();
+        
+        /**
+            Resets all values to 0
+         */
+        void Reset();
+        
+        /**
+            Fade time in milliseconds at the start of a track
+         */
         unsigned long	nFadeIn;		// Active Fade in time (at beginning of track)
+        /**
+            Fade time in milliseconds at the end of a track (last loop iteration)
+         */
         unsigned long	nFadeOut;		// Active Fade out time (at end of track)
         
-        unsigned long	nDeckFadeIn;	// Deck default Fade In time (at beginning)
-        unsigned long	nDeckFadeOut;	// Deck default Fade Out time (at end)
-        
+        /**
+            Time in milliseconds to start an immdiate fade out
+         */
         unsigned long	aFadeOutStart;		// Immediate Fade Out (as in, Stop and Fade Out, or Pause and Fade Out)
+        
+        /**
+            Time in milliseconds to start an immdiate fade in
+         */
         unsigned long	aFadeInStart;		// Immediate Fade In (as in, Resume and Fade In)
         
+        /**
+            Time in milliseconds to end an immdiate fade out
+         */
         unsigned long	aFadeOutEnd;		// Immediate Fade Out (as in, Stop and Fade Out, or Pause and Fade Out)
+        
+        /**
+            Time in milliseconds to end an immdiate fade in
+         */
         unsigned long	aFadeInEnd;			// Immediate Fade In (as in, Resume and Fade In)
         
+        /**
+            Specifies whether or not an AudioDeck will pause (true) or stop (false) when aFadeOutEnd is reached
+         */
         bool	bPauseOnFadeOut;	// When aFadeOutEnd is reached, should we pause or stop?
         
-    } aud_deck_fades;
+    };
     
+    /**
+        Responsible for controlling a Playback channel (implemented to the system through ChannelStream) and
+        provides a basic control scheme for playback control.
+     
+        Creation of new AudioDeck's is solely the purpose of Audio::NewDeck().
+     */
     class AudioDeck
     {
     public:
         AudioDeck( AudioDeck **deckSetter, AudioDecodeData *decodeData, bool freeDataWithDeck = true );
         AudioDeck( AudioDeck *prevDeck, AudioDecodeData *decodeData, bool freeDataWithDeck = true );
         ~AudioDeck();
+        
+        /**
+            Resets the values in the deck.
+         */
         void ResetDeck();
+        
+        /**
+            Updates the audio engine with freshly decoded data and updates fade and volume levels.
+         */
         void Update();
         
+        /**
+            Sets the fade in time for the start of playback in milliseconds.
+         */
         void SetFadeIn( unsigned long msFade );
+        
+        /**
+            Sets the fade out time for the end of playback in milliseconds.
+         */
         void SetFadeOut( unsigned long msFade );
         
+        /**
+            Begins playback of the Deck (also resumes).
+         */
         void Play();
         
+        /**
+            Pauses the deck.
+         */
         void Pause();
+        
+        /**
+            Pauses the deck with a specified fade time in milliseconds.
+         */
         void PauseWithFade( unsigned long msFade );
         
+        /**
+            Resumes the deck.
+         */
         void Resume();
+        
+        /**
+            Resumes the deck with a specified fade time in milliseconds.
+         */
         void ResumeWithFade( unsigned long msFade );
         
+        /**
+            @return Total length in milliseconds of the deck.
+         */
         unsigned long GetTotalLength();
         
         ChannelStream	*cs;
@@ -92,7 +165,7 @@ namespace Monocle {
         bool		failed;             // If the deck fails, throw this flag.
         void		*visdata;			// Reserved for internal use
         
-        aud_deck_fades		fades;      // Structure containing fade information
+        AudioFades	fades;      // Structure containing fade information
         bool		didSeek;            // Marks that the output buffer needs flushing (internal stuff)
         long		lastSeekPos;        // Last position seeked with "Seek Position"
         
