@@ -5,6 +5,9 @@
 
 namespace Monocle
 {
+	//!
+	//! \brief Describes a rectangle.
+	//!
 	class Rect
 	{
 	public:

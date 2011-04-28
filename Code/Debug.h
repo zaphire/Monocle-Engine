@@ -8,6 +8,9 @@ namespace Monocle
 {
 	class Entity;
 
+	//!
+	//! \brief Holds debug log functions, stores data that controls debug output throughout Monocle
+	//!
 	class Debug
 	{
 	public:
