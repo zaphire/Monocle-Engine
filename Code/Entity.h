@@ -84,10 +84,10 @@ namespace Monocle
 		void Save(FileNode *fileNode);
 		void Load(FileNode *fileNode);
 
-		//! Call to check our collider against all entities that have "tag"
+		//! Check our collider against all entities that have "tag"
 		Collider* Collide(const std::string &tag, CollisionData *collisionData=NULL);
-		Collider* Collide(const std::string &tag, const Vector2& offset, CollisionData *collisionData=NULL);
-		//RectangleCollider *AddRectangleCollider(float width, float height, const Vector2 &offset = Vector2::zero);
+		//! Check our collider against all entities that have "tag" - warping us to atPosition first, then back to our original position after
+		Collider* CollideAt(const std::string &tag, const Vector2& atPosition, CollisionData *collisionData=NULL);
 
 		//Tagging API
 		void AddTag(const std::string& tag);
