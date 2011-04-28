@@ -7,6 +7,10 @@
 #include "AudioAssetReader.h"
 #include "../Debug.h"
 
+#include <stdio.h> // for fopen, etc (GCC)
+#include <stdlib.h> // for free and malloc (GCC)
+#include <string.h> // for memcpy (GCC)
+
 namespace Monocle {
     
     AudioAssetReader::AudioAssetReader( AudioAsset *asset, std::string key )

@@ -10,6 +10,7 @@
 #include "../Debug.h"
 
 #include <stdio.h>
+#include <stdlib.h> // required for free and malloc (GCC)
 
 namespace Monocle
 {

@@ -9,6 +9,7 @@
 
 #include "fft.h"
 #include <math.h>
+#include <string.h> // required for memset when compiling via GCC
 #include "../MonocleToolkit.h"
 
 namespace Monocle {
