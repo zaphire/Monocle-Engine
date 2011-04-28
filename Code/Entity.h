@@ -86,6 +86,7 @@ namespace Monocle
 
 		//! Call to check our collider against all entities that have "tag"
 		Collider* Collide(const std::string &tag, CollisionData *collisionData=NULL);
+		Collider* Collide(const std::string &tag, const Vector2& offset, CollisionData *collisionData=NULL);
 		//RectangleCollider *AddRectangleCollider(float width, float height, const Vector2 &offset = Vector2::zero);
 
 		//Tagging API

@@ -117,15 +117,15 @@ namespace AudioTest
         scText->position = Vector2(50, 50);
         Add(scText);
         
-        // Make the deck, and it starts playing... (we need a play())
-        deck1 = Audio::NewDeck(Assets::RequestAudio("AudioTest/City01.g2m",true,"hellogirl"));
+		// Make the deck, and it starts playing... (we need a play())
+		deck1 = Audio::NewDeck(Assets::RequestAudio("AudioTest/City01.g2m",true,"hellogirl"));
 //        deck2 = Audio::NewDeck(Assets::RequestAudio("AudioTest/City01Hell.g2m",false,"hellogirl"));
         
 //        deck2->volume = 0.0;
         
         deck1->Play();
 //        deck2->Play();
-        
+
         Waveform* wave = new Waveform(deck1,1);
         Add(wave);
 
