@@ -90,6 +90,10 @@ namespace Monocle {
     
     void AudioDeck::ResetDeck()
     {
+        if (!this->decodeData){
+            Debug::Log("AUDIO: No Decoder Data given to Deck, crash imminent");
+        }
+        
         this->done = false;
         this->stopping = 0;
         
@@ -119,13 +123,9 @@ namespace Monocle {
         memset(&this->fades,0,sizeof(aud_deck_fades));
     }
     
-    AudioDeck::AudioDeck( AudioDeck **deckSetter, AudioDecodeData *decodeData )
+    void AudioDeck::Init()
     {
-        this->decodeData = decodeData;
         this->nextDeck = 0;
-        
-        deckSetter[0] = this;
-        this->prevDeckPointerToHere = deckSetter;
         
         this->vis = new AudioVis();
         this->cs = new ChannelStream();
@@ -143,9 +143,24 @@ namespace Monocle {
         Update();
     }
     
-    AudioDeck::AudioDeck( AudioDeck *prevDeck, AudioDecodeData *decodeData )
+    AudioDeck::AudioDeck( AudioDeck **deckSetter, AudioDecodeData *decodeData, bool freeDataWithDeck )
     {
-        AudioDeck(&prevDeck->nextDeck,decodeData);
+        this->freeDecoderData = freeDataWithDeck;
+        this->decodeData = decodeData;
+        deckSetter[0] = this;
+        this->prevDeckPointerToHere = deckSetter;
+        
+        Init();
+    }
+    
+    AudioDeck::AudioDeck( AudioDeck *prevDeck, AudioDecodeData *decodeData, bool freeDataWithDeck )
+    {
+        this->freeDecoderData = freeDataWithDeck;
+        this->decodeData = decodeData;
+        prevDeck->nextDeck = this;
+        this->prevDeckPointerToHere = &prevDeck->nextDeck;
+        
+        Init();
     }
     
     AudioDeck::~AudioDeck()
@@ -153,12 +168,14 @@ namespace Monocle {
         this->cs->Close();
         delete this->cs;
         
-        if (this->decodeData) delete this->decodeData;
+        if (this->decodeData && freeDecoderData) delete this->decodeData;
         
         delete this->vis;
         
         this->prevDeckPointerToHere[0] = this->nextDeck;
-        this->nextDeck->prevDeckPointerToHere = this->prevDeckPointerToHere;
+        
+        if (this->nextDeck)
+            this->nextDeck->prevDeckPointerToHere = this->prevDeckPointerToHere;
     }
     
     void AudioDeck::UpdateVizJunk()
@@ -520,5 +537,10 @@ namespace Monocle {
             /*			if (playbackPos >= targetLength)
              break;*/
 		}
+    }
+    
+    unsigned long AudioDeck::GetTotalLength()
+    {
+        return this->total;
     }
 }

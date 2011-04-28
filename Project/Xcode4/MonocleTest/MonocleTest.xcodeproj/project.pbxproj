@@ -15,6 +15,7 @@
 		031FEEDE1367BB4B00B62E27 /* VisCache2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 031FEEDC1367BB4A00B62E27 /* VisCache2.cpp */; };
 		031FEEE11367BB7200B62E27 /* fft.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 031FEEDF1367BB7100B62E27 /* fft.cpp */; };
 		031FEEEC1367BF2700B62E27 /* AudioDeck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 031FEEEA1367BF2600B62E27 /* AudioDeck.cpp */; };
+		035BC67E1368D744002756A4 /* AudioAssetReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 035BC67C1368D743002756A4 /* AudioAssetReader.cpp */; };
 		03907B2B135E5E0300D92F21 /* CollisionData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B29135E5E0300D92F21 /* CollisionData.cpp */; };
 		03907B30135E5E9B00D92F21 /* MonocleToolkit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B2E135E5E9B00D92F21 /* MonocleToolkit.cpp */; };
 		03907B37135E5EC400D92F21 /* LevelEditorTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B33135E5EC400D92F21 /* LevelEditorTest.cpp */; };
@@ -105,6 +106,8 @@
 		031FEEE01367BB7200B62E27 /* fft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fft.h; sourceTree = "<group>"; };
 		031FEEEA1367BF2600B62E27 /* AudioDeck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioDeck.cpp; sourceTree = "<group>"; };
 		031FEEEB1367BF2700B62E27 /* AudioDeck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioDeck.h; sourceTree = "<group>"; };
+		035BC67C1368D743002756A4 /* AudioAssetReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioAssetReader.cpp; sourceTree = "<group>"; };
+		035BC67D1368D743002756A4 /* AudioAssetReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioAssetReader.h; sourceTree = "<group>"; };
 		03907B29135E5E0300D92F21 /* CollisionData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CollisionData.cpp; path = ../../../Code/CollisionData.cpp; sourceTree = "<group>"; };
 		03907B2A135E5E0300D92F21 /* CollisionData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollisionData.h; path = ../../../Code/CollisionData.h; sourceTree = "<group>"; };
 		03907B2E135E5E9B00D92F21 /* MonocleToolkit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MonocleToolkit.cpp; path = ../../../Code/MonocleToolkit.cpp; sourceTree = "<group>"; };
@@ -308,8 +311,10 @@
 				03907B80135E81D700D92F21 /* AudioCrypt.h */,
 				03907B74135E7D2600D92F21 /* oggvorbis */,
 				03907B59135E644400D92F21 /* ChannelStream.h */,
-				03907B6E135E6F7000D92F21 /* AudioAsset.h */,
 				03907B72135E74F500D92F21 /* AudioAsset.cpp */,
+				03907B6E135E6F7000D92F21 /* AudioAsset.h */,
+				035BC67C1368D743002756A4 /* AudioAssetReader.cpp */,
+				035BC67D1368D743002756A4 /* AudioAssetReader.h */,
 				03907B6F135E704D00D92F21 /* AudioDecoder.cpp */,
 				03907B70135E704D00D92F21 /* AudioDecoder.h */,
 				031FEED91367B8C500B62E27 /* AudioVis.cpp */,
@@ -814,6 +819,7 @@
 				031FEEDE1367BB4B00B62E27 /* VisCache2.cpp in Sources */,
 				031FEEE11367BB7200B62E27 /* fft.cpp in Sources */,
 				031FEEEC1367BF2700B62E27 /* AudioDeck.cpp in Sources */,
+				035BC67E1368D744002756A4 /* AudioAssetReader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

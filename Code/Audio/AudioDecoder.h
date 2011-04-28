@@ -50,7 +50,7 @@ namespace Monocle
         AudioDecoder() { };
         ~AudioDecoder() { };
         
-        virtual AudioDecodeData *RequestData( AudioAsset &asset )=0;
+        virtual AudioDecodeData *RequestData( AudioAsset *asset )=0;
         virtual unsigned long Render( unsigned long size, void *outputBuffer, AudioDecodeData &decodeData)=0;
         
         virtual void FreeDecoderData( AudioDecodeData &dd )=0;

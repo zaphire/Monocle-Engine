@@ -25,7 +25,8 @@ namespace Monocle
         static void PauseAll();
         static void ResumeAll();
         
-        static AudioDeck *NewDeck(AudioDecodeData *decodeData);
+        static AudioDeck *NewDeck( AudioAsset *audioAsset );
+        static AudioDeck *NewDeck( AudioDecodeData *decodeData, bool freeDecodeDataWithDeck = true );
         static AudioDeck *LastDeck();
         
     private:

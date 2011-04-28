@@ -24,6 +24,7 @@ namespace Monocle {
 #ifdef MONOCLE_AUDIO_OGG
         decoder = new OggDecoder();
         decoderMap["ogg"] = decoder;
+        decoderMap["g2m"] = decoder;
 #endif
             
         ChannelStream::Init();
@@ -32,20 +33,42 @@ namespace Monocle {
 
     }
     
-    AudioDeck *Audio::NewDeck( AudioDecodeData *decodeData )
+    AudioDeck *Audio::NewDeck( AudioDecodeData *decodeData, bool freeDecodeDataWithDeck )
     {
         if (!instance->firstDeck)
         {
-            instance->firstDeck = new AudioDeck( &instance->firstDeck, decodeData );
+            instance->firstDeck = new AudioDeck( &instance->firstDeck, decodeData, freeDecodeDataWithDeck );
             return instance->firstDeck;
         }
         else
         {
             // New Deck must be built on the last deck
             AudioDeck *lastDeck = LastDeck();
-            lastDeck->nextDeck = new AudioDeck(lastDeck, decodeData);
+            lastDeck->nextDeck = new AudioDeck(lastDeck, decodeData,freeDecodeDataWithDeck);
             return lastDeck->nextDeck;
         }
+    }
+    
+    AudioDeck *Audio::NewDeck(Monocle::AudioAsset *audioAsset)
+    {
+        std::string ext = audioAsset->GetExtension();
+        std::transform(ext.begin(), ext.end(), ext.begin(), ::tolower);
+        
+        if(instance->decoderMap.find(ext) == instance->decoderMap.end())
+        {
+            Debug::Log("AUDIO: Could not find a decoder for the file: " + audioAsset->GetName());
+            return 0;
+        }
+        
+        AudioDecoder *decoder = instance->decoderMap[ext];
+        AudioDecodeData *decData = decoder->RequestData(audioAsset);
+        
+        if (!decData){
+            Debug::Log("AUDIO: Cannot decode file: " + audioAsset->GetName());
+            return 0;
+        }
+        
+        return Audio::NewDeck( decData, true );
     }
     
     // Grab the last deck in the list

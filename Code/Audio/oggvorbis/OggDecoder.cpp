@@ -14,26 +14,20 @@
 #include <ctype.h>
 
 #include "OggDecoder.h"
-#include "../AudioCrypt.h"
 #include "../AudioAsset.h"
+
+#include "AudioAssetReader.h"
 
 #include "vorbis/codec.h"
 #include "vorbis/vorbisfile.h"
 
 namespace Monocle {
     
-    AudioCryptKey g_mKey("hellogirl");
-    
     // Struct that contains the pointer to our file in memory
-    struct SOggFile
+    /*struct SOggFile
     {
-        char*		dataPtr;			// Pointer to the data in memoru
-        long		dataSize;			// Sizeo fo the data
-        
-        long		dataRead;			// How much data we have read so far
-        AudioCryptKey	*key;
-        
-    };
+        AudioAssetReader *reader;
+    };*/
     
     typedef struct OggDecoderData_s {
         
@@ -58,57 +52,12 @@ namespace Monocle {
                       size_t sizeToRead /* How much we can read*/, 
                       void *datasource	/* this is a pointer to the data we passed into ov_open_callbacks (our SOggFile struct*/)
     {
-        size_t				spaceToEOF;			// How much more we can read till we hit the EOF marker
-        size_t				actualSizeToRead;	// How much data we are actually going to read from memory
-        SOggFile*			vorbisData;			// Our vorbis data, for the typecast
+        AudioAssetReader*	vorbisData;			// Our vorbis data, for the typecast
         
         // Get the data in the right format
-        vorbisData = (SOggFile*)datasource;
+        vorbisData = (AudioAssetReader*)datasource;
         
-        // Calculate how much we need to read.  This can be sizeToRead*byteSize or less depending on how near the EOF marker we are
-        spaceToEOF = vorbisData->dataSize - vorbisData->dataRead;
-        if ((sizeToRead*byteSize) < spaceToEOF)
-            actualSizeToRead = (sizeToRead*byteSize);
-        else
-            actualSizeToRead = spaceToEOF;	
-        
-        // A simple copy of the data from memory to the datastruct that the vorbis libs will use
-        if (actualSizeToRead)
-        {
-            // Copy the data from the start of the file PLUS how much we have already read in
-            memcpy(ptr, (char*)vorbisData->dataPtr + vorbisData->dataRead, actualSizeToRead);
-            
-#ifdef DECODE_ONDEMAND
-            // DECODE
-            if (vorbisData->key)
-            {
-                // This part will be REALLY cool... o_O
-                unsigned long offset;
-                //			unsigned long size;
-                //			unsigned long pos;
-                
-                offset = (vorbisData->dataRead) % 5;
-                
-                /*for (pos=0;pos<(unsigned long)actualSizeToRead;pos+=5)
-                 {
-                 if (actualSizeToRead-pos <= 5) 
-                 size = actualSizeToRead-pos;
-                 else 
-                 size = 5;
-                 
-                 vorbisData->key->DecodeSlice5b((unsigned char*)vorbisData->dataPtr + vorbisData->dataRead + pos, (unsigned char*)ptr+pos, size, offset, spaceToEOF-pos);
-                 }*/
-                
-                vorbisData->key->DecodeSlice5b((unsigned char*)vorbisData->dataPtr + vorbisData->dataRead, (unsigned char*)ptr, actualSizeToRead, offset, spaceToEOF);
-            }
-#endif
-            
-            // Increase by how much we have read by
-            vorbisData->dataRead += (actualSizeToRead);
-        }
-        
-        // Return how much we read (in the same way fread would)
-        return actualSizeToRead;
+        return vorbisData->Read(ptr,sizeToRead*byteSize);
     }
     
     //---------------------------------------------------------------------------------
@@ -120,42 +69,11 @@ namespace Monocle {
                    ogg_int64_t offset	/*offset from the point we wish to seek to*/, 
                    int whence			/*where we want to seek to*/)
     {
-        size_t				spaceToEOF;		// How much more we can read till we hit the EOF marker
-        ogg_int64_t			actualOffset;	// How much we can actually offset it by
-        SOggFile*			vorbisData;		// The data we passed in (for the typecast)
+        AudioAssetReader*	vorbisData;		// The data we passed in (for the typecast)
         
         // Get the data in the right format
-        vorbisData = (SOggFile*)datasource;
-        
-        // Goto where we wish to seek to
-        switch (whence)
-        {
-            case SEEK_SET: // Seek to the start of the data file
-                // Make sure we are not going to the end of the file
-                if (vorbisData->dataSize >= offset)
-                    actualOffset = offset;
-                else
-                    actualOffset = vorbisData->dataSize;
-                // Set where we now are
-                vorbisData->dataRead = (int)actualOffset;
-                break;
-            case SEEK_CUR: // Seek from where we are
-                // Make sure we dont go past the end
-                spaceToEOF = vorbisData->dataSize - vorbisData->dataRead;
-                if (offset < spaceToEOF)
-                    actualOffset = (offset);
-                else
-                    actualOffset = spaceToEOF;	
-                // Seek from our currrent location
-                vorbisData->dataRead += actualOffset;
-                break;
-            case SEEK_END: // Seek from the end of the file
-                vorbisData->dataRead = vorbisData->dataSize+1;
-                break;
-            default:
-                printf("*** ERROR *** Unknown seek command in VorbisSeek\n");
-                break;
-        };
+        vorbisData = (AudioAssetReader*)datasource;
+        vorbisData->Seek( offset, whence );
         
         return 0;
     }
@@ -169,12 +87,12 @@ namespace Monocle {
     {
         // This file is called when we call ov_close.  If we wanted, we could free our memory here, but
         // in this case, we will free the memory in the main body of the program, so dont do anything
-        SOggFile*	vorbisData;
+        AudioAssetReader*	vorbisData;		// The data we passed in (for the typecast)
         
         // Get the data in the right format
-        vorbisData = (SOggFile*)datasource;
-        free(vorbisData->dataPtr);
-        free(datasource);
+        vorbisData = (AudioAssetReader*)datasource;
+        
+        delete vorbisData;
         return 1;
     }
     
@@ -185,13 +103,13 @@ namespace Monocle {
     //---------------------------------------------------------------------------------
     long VorbisTell(void *datasource /*this is a pointer to the data we passed into ov_open_callbacks (our SOggFile struct*/)
     {
-        SOggFile*	vorbisData;
+        AudioAssetReader*	vorbisData;		// The data we passed in (for the typecast)
         
         // Get the data in the right format
-        vorbisData = (SOggFile*)datasource;
+        vorbisData = (AudioAssetReader*)datasource;
         
         // We just want to tell the vorbis libs how much we have read so far
-        return vorbisData->dataRead;
+        return vorbisData->Tell();
     }
     /************************************************************************************************************************
      End of Vorbis callback functions
@@ -263,64 +181,29 @@ namespace Monocle {
     {
         OggDecoderData *data = OGGDATA(dd);
         data->seek = -1;
+
+        vorbisCallbacks.read_func = VorbisRead;
+        vorbisCallbacks.close_func = VorbisClose;
+        vorbisCallbacks.seek_func = VorbisSeek;
+        vorbisCallbacks.tell_func = VorbisTell;
         
-        bool bOk = 0;
+        AudioAssetReader *reader = new AudioAssetReader(dd->audAsset,dd->audAsset->GetDecodeString());
         
-        {
-            // Now we have our file in memory (how ever it got there!), we need to let the vorbis libs know how to read it
-            // To do this, we provide callback functions that enable us to do the reading.  the Vorbis libs just want the result
-            // of the read.  They dont actually do it themselves
-            // Save the function pointersof our read files...
-            vorbisCallbacks.read_func = VorbisRead;
-            vorbisCallbacks.close_func = VorbisClose;
-            vorbisCallbacks.seek_func = VorbisSeek;
-            vorbisCallbacks.tell_func = VorbisTell;
+        if (ov_open_callbacks( reader, &data->vf, NULL, 0, vorbisCallbacks )<0){
+            delete reader;
+            return 1;
         }
         
-        if (!bOk)
+        vorbis_info *vi=ov_info(&data->vf,-1);
+        
+        if (!vi)
         {
-            const char *cOpen = dd->audAsset->filename.c_str();
-            SOggFile *sogg = (SOggFile*)malloc(sizeof(SOggFile));
-            sogg->dataRead = 0;
-            
-            FILE *f = fopen(cOpen,"rb");
-            
-            if (!f){
-                return 1;
-            }
-            else
-            {
-                fseek(f,0,SEEK_END);
-                sogg->dataSize = ftell(f);
-                fseek(f,0,SEEK_SET);
-                
-                sogg->dataPtr = (char*)malloc(sogg->dataSize);
-                sogg->key = &g_mKey;
-                
-                fread(sogg->dataPtr,sogg->dataSize,1,f);
-                
-                fclose(f);
-                
-                if (ov_open_callbacks( sogg, &data->vf, NULL, 0, vorbisCallbacks )<0){
-                    f = fopen(cOpen,"rb");
-                    if (!f || ov_open(f,&data->vf,0,0)<0){
-                        return 1;
-                    }
-                }
-            }
+            delete reader;
+            return 1;
         }
         
-        {
-            vorbis_info *vi=ov_info(&data->vf,-1);
-            
-            if (!vi)
-            {
-                return 1;
-            }
-            
-            dd->samplerate = vi->rate;
-            dd->ch = vi->channels;
-        }
+        dd->samplerate = (int)vi->rate;
+        dd->ch = vi->channels;
         
         dd->total = (long)(((float)ov_pcm_total(&data->vf,-1)/(float)dd->samplerate) * 1000.0f); 
         
@@ -336,10 +219,10 @@ namespace Monocle {
         return;
     }
     
-    AudioDecodeData *OggDecoder::RequestData( AudioAsset &asset )
+    AudioDecodeData *OggDecoder::RequestData( AudioAsset *asset )
     {
         OggDecoderData *data = new OggDecoderData;
-        AudioDecodeData *dd = new AudioDecodeData(44100, 16, 2, this, (void*)data, &asset);
+        AudioDecodeData *dd = new AudioDecodeData(44100, 16, 2, this, (void*)data, asset);
         
         if (oggInit(dd)) {
             // Error

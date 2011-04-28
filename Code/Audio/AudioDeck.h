@@ -33,8 +33,8 @@ namespace Monocle {
     class AudioDeck
     {
     public:
-        AudioDeck( AudioDeck **deckSetter, AudioDecodeData *decodeData );
-        AudioDeck( AudioDeck *prevDeck, AudioDecodeData *decodeData );
+        AudioDeck( AudioDeck **deckSetter, AudioDecodeData *decodeData, bool freeDataWithDeck = true );
+        AudioDeck( AudioDeck *prevDeck, AudioDecodeData *decodeData, bool freeDataWithDeck = true );
         ~AudioDeck();
         void ResetDeck();
         void Update();
@@ -49,6 +49,8 @@ namespace Monocle {
         
         void Resume();
         void ResumeWithFade( unsigned long msFade );
+        
+        unsigned long GetTotalLength();
         
         ChannelStream	*cs;
         AudioDeck       *nextDeck;      // INTERNAL, Next Deck in the sequence
@@ -71,6 +73,8 @@ namespace Monocle {
         bool		done;
         bool		pause;
         bool		stopping;			// Called to let the play function know that this deck is trying to stop
+        
+        bool        freeDecoderData;    // Free the decoder data when deconstructed.
         
         long		total;              // Total length in MS (not including looping)
         long		curpos;             // Current position in MS
@@ -104,5 +108,7 @@ namespace Monocle {
         unsigned long totsamps; // total rendered samples
         
         long vizlast;
+        
+        void        Init();             // Internal init.
     };
 }

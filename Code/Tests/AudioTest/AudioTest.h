@@ -22,19 +22,19 @@ namespace AudioTest
     class Waveform: public Entity
     {
     public:
-        Waveform( AudioDeck *deck );
+        Waveform( AudioDeck *deck, int type = 0 );
         
         void Render();
         
     protected:
         
+        int type;
         AudioDeck *deck;
     };
     
     class GameScene : public Scene
 	{
 	public:
-        AudioDeck *deck;
         
         Text *scText;
 
