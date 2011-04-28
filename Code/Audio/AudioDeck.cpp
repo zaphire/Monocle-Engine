@@ -17,7 +17,10 @@ namespace Monocle {
         if (pause || done)  // also check threads?
             return false;
         
-        if (fades.nFadeIn || fades.nFadeOut || fades.aFadeInStart || fades.aFadeOutStart)
+        if (fades.bSilent){
+            cs->SetVolume(0.0);
+        }
+        else if (fades.nFadeIn || fades.nFadeOut || fades.aFadeInStart || fades.aFadeOutStart)
         {
             float vol = 1.0f;
             unsigned long fadeinend = this->fades.nFadeIn;
@@ -55,27 +58,23 @@ namespace Monocle {
                 
                 if (vol > 1.0f) vol = 1.0f;
             }
-            else
-                // Active Instant Fade Out
-                if (this->fades.aFadeOutStart && pos > this->fades.aFadeOutStart)
-                {
-                    unsigned long fadetotal = this->fades.aFadeOutEnd - this->fades.aFadeOutStart;
-                    vol *= 1.0f - (((float)(pos - this->fades.aFadeOutStart)) / (float)fadetotal);
+            else if (this->fades.aFadeOutStart && pos > this->fades.aFadeOutStart)
+            {
+                unsigned long fadetotal = this->fades.aFadeOutEnd - this->fades.aFadeOutStart;
+                vol *= 1.0f - (((float)(pos - this->fades.aFadeOutStart)) / (float)fadetotal);
+                
+                if (pos > this->fades.aFadeOutEnd){
+                    this->fades.aFadeOutEnd = this->fades.aFadeOutStart = 0;
                     
-                    if (pos > this->fades.aFadeOutEnd){
-                        this->fades.aFadeOutEnd = this->fades.aFadeOutStart = 0;
-                        
-                        if (this->fades.bPauseOnFadeOut){
-                            Pause();
-                        }
-                        else
-                        {
-                            Pause(); // Stopped...
-                            return true;
-                        }
+                    if (this->fades.bPauseOnFadeOut){
+                        Pause();
+                    }
+                    else
+                    {
+                        this->fades.bSilent = true;
                     }
                 }
-
+            }
             
             cs->SetVolume(vol*this->volume);
         }
@@ -134,6 +133,7 @@ namespace Monocle {
         this->nFadeIn = this->nFadeOut = 0;
         this->aFadeInEnd = this->aFadeInStart = this->aFadeOutEnd = this->aFadeOutStart = 0;
         this->bPauseOnFadeOut = false;
+        this->bSilent = false;
     }
     
     void AudioDeck::Init()
@@ -285,15 +285,58 @@ namespace Monocle {
     
     void AudioDeck::PauseWithFade( unsigned long msFade )
     {
-        fades.aFadeOutStart = cs->GetTotalPlayTime();
-		fades.aFadeOutEnd = msFade + fades.aFadeOutStart;
-		fades.bPauseOnFadeOut = true;
+        if (msFade == 0)
+            Pause();
+        else
+        {
+            fades.aFadeOutStart = cs->GetTotalPlayTime();
+            fades.aFadeOutEnd = msFade + fades.aFadeOutStart;
+            fades.bPauseOnFadeOut = true;
+        }
+    }
+    
+    void AudioDeck::MuteWithFade( unsigned long msFade )
+    {
+        if (msFade == 0)
+            fades.bSilent = true;
+        else
+        {
+            fades.aFadeOutStart = cs->GetTotalPlayTime();
+            fades.aFadeOutEnd = msFade + fades.aFadeOutStart;
+            fades.bPauseOnFadeOut = false;
+        }
+    }
+    
+    bool AudioDeck::IsMuted()
+    {
+        if (fades.bSilent) return true;
+        if (fades.aFadeOutStart && !fades.bPauseOnFadeOut) return true;
+        return false;
+    }
+    
+    void AudioDeck::Mute()
+    {
+        fades.bSilent = true;
+    }
+    
+    void AudioDeck::Unmute()
+    {
+        fades.bSilent = false;
+    }
+    
+    void AudioDeck::UnmuteWithFade( unsigned long msFade )
+    {
+        ResumeWithFade( msFade );
+        fades.bSilent = false;
     }
     
     void AudioDeck::ResumeWithFade( unsigned long msFade )
     {
-        fades.aFadeInStart = cs->GetTotalPlayTime();
-		fades.aFadeInEnd = msFade + fades.aFadeInStart;
+        if (msFade > 0)
+        {
+            fades.aFadeInStart = cs->GetTotalPlayTime();
+            fades.aFadeInEnd = msFade + fades.aFadeInStart;
+        }
         
         Play();
     }

@@ -62,9 +62,14 @@ namespace Monocle {
         unsigned long	aFadeInEnd;			// Immediate Fade In (as in, Resume and Fade In)
         
         /**
-            Specifies whether or not an AudioDeck will pause (true) or stop (false) when aFadeOutEnd is reached
+            Specifies whether or not an AudioDeck will pause (true) or continue playing at 0 vol (false) when aFadeOutEnd is reached
          */
-        bool	bPauseOnFadeOut;	// When aFadeOutEnd is reached, should we pause or stop?
+        bool	bPauseOnFadeOut;	// When aFadeOutEnd is reached, should we pause or keep playing.
+        
+        /**
+            Specifies whether or not the deck should be silent (e.g. after bPauseOnFadeOut).
+         */
+        bool    bSilent;
         
     };
     
@@ -127,6 +132,35 @@ namespace Monocle {
         void ResumeWithFade( unsigned long msFade );
         
         /**
+            Unmutes the deck
+         */
+        void Unmute();
+        
+        /**
+            Unmutes the deck with a fadein.
+         
+         @todo Starts playing immediately if the deck is paused.
+         */
+        void UnmuteWithFade( unsigned long msFade );
+        
+        /**
+            Fades the deck out into silence (can be resumed normally with Resume() or ResumeWithFade()).
+            The deck will continue playing in silence and not pause.
+         */
+        void MuteWithFade( unsigned long msFade );
+        
+        /**
+            Mutes the deck but continues playing it. This is different from setting the volume to 0 as it will allow
+            fade in.
+         */
+        void Mute();
+        
+        /**
+         @return If the deck is muted or is muting.
+         */
+        bool IsMuted();
+        
+        /**
             @return Total length in milliseconds of the deck.
          */
         unsigned long GetTotalLength();
@@ -137,6 +171,9 @@ namespace Monocle {
         
         AudioDecodeData *decodeData;
         
+        /**
+            Volume refers to the cumulative volume of the deck, regardless of fades. To mute a deck use Mute().
+         */
         float       volume;             // 0.0 silent - 1.0 full volume
         float       pan;                // -1.0 left - 1.0 right
         float		pitchBend;          // Pitch Bend ranges from 0.5 to 2.0;

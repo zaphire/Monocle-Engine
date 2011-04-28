@@ -36,6 +36,9 @@ namespace AudioTest
     
     void Waveform::Render()
     {
+        if (deck->IsMuted())
+            return;
+        
         Graphics::PushMatrix();
         //Graphics::Translate(position);
         
@@ -119,18 +122,18 @@ namespace AudioTest
         
         // Make the deck, and it starts playing... (we need a play())
         deck1 = Audio::NewDeck(Assets::RequestAudio("AudioTest/City01.g2m",true,"hellogirl"));
-//        deck2 = Audio::NewDeck(Assets::RequestAudio("AudioTest/City01Hell.g2m",false,"hellogirl"));
+        deck2 = Audio::NewDeck(Assets::RequestAudio("AudioTest/City01Hell.g2m",true,"hellogirl"));
         
-//        deck2->volume = 0.0;
+        deck2->Mute();
         
         deck1->Play();
-//        deck2->Play();
+        deck2->Play();
         
         Waveform* wave = new Waveform(deck1,1);
         Add(wave);
 
-//        Waveform* wave2 = new Waveform(deck2,1);
-//        Add(wave2);
+        Waveform* wave2 = new Waveform(deck2,1);
+        Add(wave2);
 	}
 
 	void GameScene::ReceiveNote(const std::string &note)
@@ -144,20 +147,15 @@ namespace AudioTest
         
         scText->SetText("Time is " + StringOf(deck1->cs->GetTotalPlayTime()) + " / " + StringOf(deck1->GetTotalLength()));
         
-        if (Input::IsKeyPressed(KEY_P)){
-            deck1->Play();
-        }
-        
-        if (Input::IsKeyPressed(KEY_S)){
-            deck1->Pause();
-        }
-        
-        if (Input::IsKeyPressed(KEY_F)){
-            deck1->PauseWithFade(1000);
-        }
-        
-        if (Input::IsKeyPressed(KEY_V)){
-            deck1->ResumeWithFade(1000);
+        if (Input::IsKeyPressed(KEY_F))
+        {
+            if (deck2->IsMuted()){
+                deck2->UnmuteWithFade(1000);
+                deck1->MuteWithFade(1000);
+            } else {
+                deck1->UnmuteWithFade(1000);
+                deck2->MuteWithFade(1000);
+            }
         }
 	}
 
