@@ -4,12 +4,14 @@
 //  Created by Josh Whelchel on 4/26/11.
 //
 
-#include <string.h>
+#include <string>
+#include <algorithm>
 
 #include "Audio.h"
 
 #include "oggvorbis/OggDecoder.h"
-#include "Debug.h"
+#include "../Debug.h"
+#include "../MonocleToolkit.h"
 
 namespace Monocle {
     

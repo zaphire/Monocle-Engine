@@ -9,6 +9,7 @@
 
 #include "fft.h"
 #include <math.h>
+#include "../MonocleToolkit.h"
 
 namespace Monocle {
     
@@ -110,8 +111,8 @@ namespace Monocle {
                     d->m_last_hit     = vol;
                     
                     d->m_has_fallen   = 0;
-                    d->m_thresh       = fmax(1.0f, vol*0.85f);  
-                    d->m_limit        = fmax(1.0f, vol*0.70f);
+                    d->m_thresh       = MAX(1.0f, vol*0.85f);  
+                    d->m_limit        = MAX(1.0f, vol*0.70f);
                 }
             }
         }

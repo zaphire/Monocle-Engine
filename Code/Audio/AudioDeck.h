@@ -10,6 +10,10 @@
 #include "AudioDecoder.h"
 #include "AudioVis.h"
 
+#ifdef MONOCLE_WINDOWS
+	#define __INT64_TYPE__ __int64
+#endif
+
 namespace Monocle {
     // Structure containing fade information
     typedef struct aud_deck_fades_s

@@ -7,8 +7,8 @@
 #include <string.h>
 
 #include "AudioDeck.h"
-#include "Platform.h"
-#include "Debug.h"
+#include "../Platform.h"
+#include "../Debug.h"
 
 namespace Monocle {
     

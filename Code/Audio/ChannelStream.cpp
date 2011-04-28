@@ -19,7 +19,7 @@
 	#include <alc.h>
 #endif
 
-#include "Platform.h"
+#include "../Platform.h"
 
 namespace Monocle
 {

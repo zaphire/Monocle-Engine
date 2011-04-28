@@ -16,7 +16,7 @@
 #include "OggDecoder.h"
 #include "../AudioAsset.h"
 
-#include "AudioAssetReader.h"
+#include "../AudioAssetReader.h"
 
 #include "vorbis/codec.h"
 #include "vorbis/vorbisfile.h"
