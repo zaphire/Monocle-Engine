@@ -1,5 +1,9 @@
 
+#include "Audio.h"
 #include "AudioDecoder.h"
+
+#include <string>
+#include <sstream>
 
 namespace Monocle
 {
@@ -22,5 +26,14 @@ namespace Monocle
     AudioDecodeData::~AudioDecodeData()
     {
         this->decoder->FreeDecoderData(*this);
+    }
+    
+    AudioDecoder::AudioDecoder( std::string extension )
+    {
+        std::stringstream ss(extension);
+        std::string tmp;
+        
+        while (ss >> tmp) 
+            Audio::RegisterDecoder(this, tmp);
     }
 }

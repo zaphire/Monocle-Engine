@@ -23,6 +23,9 @@
 
 namespace Monocle {
     
+    // Putting this here automagically will register the extensions "ogg and g2m"
+    static OggDecoder od;
+    
     // Struct that contains the pointer to our file in memory
     /*struct SOggFile
     {

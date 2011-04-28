@@ -16,18 +16,11 @@
 namespace Monocle {
     
     Audio *Audio::instance = NULL;
+    static std::map<std::string, AudioDecoder *> *decoderMap = NULL;
     
     void Audio::Init()
     {
-        AudioDecoder *decoder;
-        
         Debug::Log("Audio::Init...");
-        
-#ifdef MONOCLE_AUDIO_OGG
-        decoder = new OggDecoder();
-        decoderMap["ogg"] = decoder;
-        decoderMap["g2m"] = decoder;
-#endif
             
         ChannelStream::Init();
             
@@ -56,13 +49,13 @@ namespace Monocle {
         std::string ext = audioAsset->GetExtension();
         std::transform(ext.begin(), ext.end(), ext.begin(), ::tolower);
         
-        if(instance->decoderMap.find(ext) == instance->decoderMap.end())
+        if(decoderMap[0].find(ext) == decoderMap[0].end())
         {
             Debug::Log("AUDIO: Could not find a decoder for the file: " + audioAsset->GetName());
             return 0;
         }
         
-        AudioDecoder *decoder = instance->decoderMap[ext];
+        AudioDecoder *decoder = decoderMap[0][ext];
         AudioDecodeData *decData = decoder->RequestData(audioAsset);
         
         if (!decData){
@@ -106,10 +99,13 @@ namespace Monocle {
     Audio::Audio() {
         instance = this;
         this->firstDeck = 0;
+        
+        if (!decoderMap)
+            decoderMap = new std::map<std::string, AudioDecoder *>;
     }
     
     Audio::~Audio() {
-        std::map<std::string,AudioDecoder*>::iterator it;
+//        std::map<std::string,AudioDecoder*>::iterator it;
         
         // Deletes the decks
         AudioDeck *nextDeck = this->firstDeck;
@@ -119,12 +115,22 @@ namespace Monocle {
             nextDeck = d;
         }
         
-        // Removes decoders
+        // Removes decoders (not our job!)
+        /**
         it = decoderMap.begin();
         for (; it != decoderMap.end(); ++it){
             delete it->second;
         }
-        decoderMap.clear();
+         **/
+        
+        if (decoderMap) delete decoderMap;
+        decoderMap = NULL;
+    }
+    
+    void Audio::RegisterDecoder(Monocle::AudioDecoder *decoder, std::string extension)
+    {
+        if (decoderMap == NULL) decoderMap = new std::map<std::string, AudioDecoder *>;
+        decoderMap[0][extension] = decoder;
     }
  
 }
