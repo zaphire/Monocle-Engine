@@ -25,6 +25,9 @@ namespace Monocle
 {
     bool ChannelStream::IsPlaying()
     {
+        if (!started)
+            return false;
+        
         ALenum state;
         alGetSourcei(source, AL_SOURCE_STATE, &state);
         return (state == AL_PLAYING);
@@ -72,7 +75,7 @@ namespace Monocle
             alBufferData(buffers[i], format, obtainedBuffer, BUFFER_SIZE, samplerate);
         //alBufferData(buffers[1], format, obtainedBuffer, BUFFER_SIZE, samplerate);
 
-        Debug::Log("AUDIO: Opening Audio Channel: " + StringOf(samplerate) + "hz w/ " + StringOf(channels) + " channels (ALformat:" + StringOf(format) +")");
+        //Debug::Log("AUDIO: Opening Audio Channel: " + StringOf(samplerate) + "hz w/ " + StringOf(channels) + " channels (ALformat:" + StringOf(format) +")");
         
         Check();
 
@@ -87,16 +90,21 @@ namespace Monocle
     
     void ChannelStream::Close()
     {
+        Check();
         alSourceStop(source);
         Empty();
         alDeleteSources(1,&source);
         alDeleteBuffers(NUM_BUFFERS,buffers);
+        Check();
         started = false;
     }
 
     int ChannelStream::NeedsUpdate()
     {
         int processed;
+        
+        if (!started)
+            return 0;
         
         if (this->startBuffer >= NUM_BUFFERS){
             alGetSourcei(source, AL_BUFFERS_PROCESSED, &processed);
@@ -171,6 +179,7 @@ namespace Monocle
             ALuint buffer;
             
             alSourceUnqueueBuffers(source, 1, &buffer);
+
             Check();
         }
     }
@@ -224,7 +233,7 @@ namespace Monocle
                                       ALC_DEFAULT_DEVICE_SPECIFIER);
         
         //printf("using default device: %s\n", default_device);
-        Debug::Log("AUDIO: Opening Audio Device: " + std::string(default_device));
+        Debug::Log("AUDIO: Opening Audio Channel: " + std::string(default_device));
         
         if ((device = alcOpenDevice(default_device)) == NULL) {
             fprintf(stderr, "failed to open sound device\n");
@@ -297,17 +306,25 @@ namespace Monocle
     
     void ChannelStream::SetVolume( float vol )
     {
-        alSourcef(source,AL_GAIN,vol);
+        if (started)
+            alSourcef(source,AL_GAIN,vol);
     }
     
     void ChannelStream::SetPan( float pan )
     {
-        alSource3f(source,AL_POSITION,pan,0.0,0.0);
+        if (started)
+            alSource3f(source,AL_POSITION,pan,0.0,0.0);
     }
 
     void ChannelStream::SetPitch( float pitch )
     {
-        alSourcef(source,AL_PITCH,pitch);
+        if (started)
+            alSourcef(source,AL_PITCH,pitch);
+    }
+    
+    bool ChannelStream::IsOpen()
+    {
+        return started;
     }
     
 }

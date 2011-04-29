@@ -165,7 +165,36 @@ namespace Monocle {
          */
         unsigned long GetTotalLength();
         
-        ChannelStream	*cs;
+        /**
+            @return Returns playing position of track
+         */
+        unsigned long GetCurrentTime();
+        
+        /**
+            Determines if the deck is finished playing. This occurs at the end of last loop for most files.
+            At this point, it's safe to seek or to simply delete the deck.
+         */
+        bool IsDone();
+        
+        /**
+            Sets the number of full plays the deck should have (0 for infinite). The current or first play will count as 1.
+         
+            @param loops Number of loops, using 0 for infinite
+         */
+        void SetLoops( int loops );
+        
+        /**
+            Returns the number of times the deck has to loop back. 0 indicates the final loop is in progress. -1 indicates infinite looping.
+         */
+        int LoopsRemaining();
+        
+        /**
+            Seeks to a position (in milliseconds) in the track if possible.
+            
+            @param pos Position in track to seek to, must be between 0 and GetTotalLength()
+         */
+        void Seek( long pos );
+        
         AudioDeck       *nextDeck;      // INTERNAL, Next Deck in the sequence
         AudioDeck       **prevDeckPointerToHere;     // INTERNAL, Pointer in the previous deck to this deck
         
@@ -186,14 +215,11 @@ namespace Monocle {
         
     private:
         
-        bool		done;
+        ChannelStream	*cs;
+        
         bool		pause;
-        bool		stopping;			// Called to let the play function know that this deck is trying to stop
         
         bool        freeDecoderData;    // Free the decoder data when deconstructed.
-        
-        long		total;              // Total length in MS (not including looping)
-        long		curpos;             // Current position in MS
         
         unsigned char temp_waveR[576];
         unsigned char temp_waveL[576];
@@ -203,21 +229,21 @@ namespace Monocle {
         void		*visdata;			// Reserved for internal use
         
         AudioFades	fades;      // Structure containing fade information
-        bool		didSeek;            // Marks that the output buffer needs flushing (internal stuff)
         long		lastSeekPos;        // Last position seeked with "Seek Position"
         
         __INT64_TYPE__ writtenpos;		// An internal record keeper of the current written position. Not a good indicator of the current file position. Can be reset to 0 on seeks and flushes.
         
-        int			numLoops;           // The number of loops originally assigned to this deck. (For fade out information... <0 is infinite)
-        
         // Useful External Information
         long		currentPosition;	// This holds an accurate indication of where the current file position is.
         
-        bool		starting;           
-        bool		triggerDisconnectOnFinish;      // (for sound effects...)
-        
         void        UpdateVizJunk();
         bool        UpdateFades();
+        void        FillBuffers();
+        
+        long        sampsize;
+        
+        bool        isFinished;         // Sets to true when the decoder runs out of data AND the silence has played
+        int         bufferCountdown;    // Counts down to zero once the decodeData->outOfData is flagged. Used to signify when audio is truly done.
         
         unsigned long totsamps; // total rendered samples
         

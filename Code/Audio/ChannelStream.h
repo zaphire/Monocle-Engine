@@ -151,6 +151,11 @@ namespace Monocle
         static int Init();
         static void Exit();
         
+        /**
+            @return true if the ChannelStream successfully opened and is presently open
+         */
+        bool IsOpen();
+        
     protected:
         
         void Empty();                 // empties the queue

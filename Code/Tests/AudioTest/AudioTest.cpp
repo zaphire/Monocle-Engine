@@ -85,9 +85,10 @@ namespace AudioTest
             float midy = Graphics::GetVirtualHeight()/2.0;
             float xstep = Graphics::GetVirtualWidth()/400.0;
             float val;
-            float timeR = sinf(deck->cs->GetTotalPlayTime()/5000.0);
-            float timeG = sinf(deck->cs->GetTotalPlayTime()/900.0)/2.0 + 0.5;
-            float timeB = sinf(deck->cs->GetTotalPlayTime()/10000.0);
+            
+            float timeR = sinf(deck->GetCurrentTime()/5000.0);
+            float timeG = sinf(deck->GetCurrentTime()/900.0)/2.0 + 0.5;
+            float timeB = sinf(deck->GetCurrentTime()/10000.0);
             
             lastpos.x = 0.0;
             lastpos.y = midy;
@@ -134,6 +135,8 @@ namespace AudioTest
         // Make the deck, and it starts playing... (we need a play())
         deck = Audio::NewDeck( Assets::RequestAudio("AudioTest/ShortLoop.ogg", true) );
         deck->Play();
+        deck->SetLoops(0);
+        deck->SetFadeOut(500);
         
         Waveform* wave = new Waveform(deck,1);
         Add(wave);
@@ -151,8 +154,22 @@ namespace AudioTest
 	{
 		Scene::Update();
         
-        scText->SetText("Time is " + StringOf(deck->cs->GetTotalPlayTime()) + " / " + StringOf(deck->GetTotalLength()));
+        std::string looping = "off";
+        if (deck->LoopsRemaining()==-1) looping = "on";
         
+        scText->SetText("Looping " + looping + " (L), pos is " + StringOf(deck->GetCurrentTime()) + " / " + StringOf(deck->GetTotalLength()));
+        
+        if (Input::IsKeyPressed(KEY_S))
+            deck->Seek(500);
+        
+        if (Input::IsKeyPressed(KEY_L)){
+            if (deck->LoopsRemaining()==-1)
+                deck->SetLoops(1);
+            else
+                deck->SetLoops(0);
+            
+            deck->Play();
+        }
 	}
     
 	void GameScene::End()
@@ -214,7 +231,7 @@ namespace AudioTest
 	{
 		Scene::Update();
         
-        scText->SetText("Press F to crossfade. " + StringOf(deck1->cs->GetTotalPlayTime()) + " / " + StringOf(deck1->GetTotalLength()));
+        scText->SetText("Press F to crossfade. " + StringOf(deck1->GetCurrentTime()) + " / " + StringOf(deck1->GetTotalLength()));
         
         if (Input::IsKeyPressed(KEY_F))
         {

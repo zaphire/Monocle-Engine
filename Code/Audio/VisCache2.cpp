@@ -44,6 +44,14 @@ namespace Monocle {
     void VisCache2::Clean()
     {
         memset(m_buf,0,sizeof(vc2_entry)*m_nBufLen);
+        // For 8 bit, the 'clean' value is actually 0x80
+        if (m_buf){
+            for (int i=0;i<m_nBufLen;i++){
+                vc2_entry *e = &m_buf[i];
+                memset(e->cWaveLeft,0x80,576);
+                memset(e->cWaveRight,0x80,576);
+            }
+        }
     }
 
     void VisCache2::Reset()
