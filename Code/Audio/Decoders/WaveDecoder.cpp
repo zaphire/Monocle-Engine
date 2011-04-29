@@ -8,8 +8,6 @@
 
 namespace Monocle
 {
-    static WaveDecoder wd;
-    
     typedef struct { 
         short  wFormatTag; 
         short  nChannels; 
