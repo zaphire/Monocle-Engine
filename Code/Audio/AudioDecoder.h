@@ -151,10 +151,6 @@ namespace Monocle
     };
 }
 
-#ifdef MONOCLE_AUDIO_OGG
-#include "oggvorbis/OggDecoder.h"
-#endif
-
 /*
  typedef int (WINAPI * onu_init_callback)( onu_deck_cable_s *cable );
  typedef void (WINAPI * onu_free_callback)( onu_deck_cable_s *cable );
