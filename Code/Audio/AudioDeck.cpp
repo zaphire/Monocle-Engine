@@ -682,4 +682,43 @@ namespace Monocle {
     {
         this->freeDeckOnFinish = freeDeckOnFinish;
     }
+    
+    void AudioDeck::SetVolume( float volume )
+    {
+        if (volume < 0) volume = 0;
+        if (volume > 1) volume = 1;
+        this->volume = volume;
+        UpdateFades(); // Update the volume here.
+    }
+    
+    void AudioDeck::SetPan( float pan )
+    {
+        if (pan < -1) pan = -1;
+        if (pan > 1) pan = 1;
+        this->pan = pan;
+        this->cs->SetPan(pan);
+    }
+    
+    void AudioDeck::SetPitch( float pitch )
+    {
+        if (pitch < 0.5) pitch = 0.5;
+        if (pitch > 2.0) pitch = 2.0;
+        this->pitchBend = pitch;
+        this->cs->SetPitch( this->pitchBend );
+    }
+    
+    float AudioDeck::GetVolume()
+    {
+        return this->volume;
+    }
+    
+    float AudioDeck::GetPan()
+    {
+        return this->pan;
+    }
+    
+    float AudioDeck::GetPitch()
+    {
+        return this->pitchBend;
+    }
 }

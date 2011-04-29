@@ -200,17 +200,42 @@ namespace Monocle {
          */
         void FreeDeckOnFinish( bool freeDeckOnFinish = true );
         
+        /**
+            Sets the volume of the deck, between 0.0 and 1.0 (default is 1.0)
+         */
+        void SetVolume( float volume );
+        
+        /**
+            Sets the panning of the deck, between -1.0 (Left) and 1.0 (Right), with 0.0 being center
+         */
+        void SetPan( float pan );
+        
+        /**
+            Sets the pitch of the deck, between 0.5 (half speed) and 2.0 (double speed), where 1.0 is default.
+            This will disable visualizations if not at 1.0.
+         */
+        void SetPitch( float pitch );
+        
+        /**
+         Gets the volume of the deck, between 0.0 and 1.0 (default is 1.0)
+         */
+        float GetVolume(  );
+        
+        /**
+         Gets the panning of the deck, between -1.0 (Left) and 1.0 (Right), with 0.0 being center
+         */
+        float GetPan(  );
+        
+        /**
+         Gets the pitch of the deck, between 0.5 (half speed) and 2.0 (double speed), where 1.0 is default.
+         This will disable visualizations.
+         */
+        float GetPitch(  );
+        
         AudioDeck       *nextDeck;      // INTERNAL, Next Deck in the sequence
         AudioDeck       **prevDeckPointerToHere;     // INTERNAL, Pointer in the previous deck to this deck
         
         AudioDecodeData *decodeData;
-        
-        /**
-            Volume refers to the cumulative volume of the deck, regardless of fades. To mute a deck use Mute().
-         */
-        float       volume;             // 0.0 silent - 1.0 full volume
-        float       pan;                // -1.0 left - 1.0 right
-        float		pitchBend;          // Pitch Bend ranges from 0.5 to 2.0;
         
         AudioVis    *vis;
         bool		cleanVis;           // Set true if you need to clean the vis (on flushes and seeks)
@@ -250,6 +275,13 @@ namespace Monocle {
         
         bool        isFinished;         // Sets to true when the decoder runs out of data AND the silence has played
         int         bufferCountdown;    // Counts down to zero once the decodeData->outOfData is flagged. Used to signify when audio is truly done.
+        
+        /**
+         Volume refers to the cumulative volume of the deck, regardless of fades. To mute a deck use Mute().
+         */
+        float       volume;             // 0.0 silent - 1.0 full volume
+        float       pan;                // -1.0 left - 1.0 right
+        float		pitchBend;          // Pitch Bend ranges from 0.5 to 2.0;
         
         unsigned long totsamps; // total rendered samples
         

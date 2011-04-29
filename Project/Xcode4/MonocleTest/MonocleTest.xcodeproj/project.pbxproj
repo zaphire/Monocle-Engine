@@ -168,7 +168,7 @@
 		3782F003133864AD0042BAE7 /* CocoaKeys.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CocoaKeys.mm; path = ../../../Code/Cocoa/CocoaKeys.mm; sourceTree = "<group>"; };
 		37AABF3413333E29004E2D56 /* Assets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Assets.cpp; path = ../../../Code/Assets.cpp; sourceTree = "<group>"; };
 		37AABF3513333E29004E2D56 /* Assets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assets.h; path = ../../../Code/Assets.h; sourceTree = "<group>"; };
-		37AABF371333478A004E2D56 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Main.cpp; path = ../../../Code/Main.cpp; sourceTree = "<group>"; };
+		37AABF371333478A004E2D56 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Main.cpp; path = ../Main.cpp; sourceTree = "<group>"; };
 		37B192911335995600D2D264 /* CocoaPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CocoaPlatform.h; path = ../../../Code/Cocoa/CocoaPlatform.h; sourceTree = "<group>"; };
 		37B192921335995600D2D264 /* CocoaPlatform.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CocoaPlatform.mm; path = ../../../Code/Cocoa/CocoaPlatform.mm; sourceTree = "<group>"; };
 		37B1929513359BE600D2D264 /* Flash.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flash.cpp; sourceTree = "<group>"; };
@@ -551,7 +551,6 @@
 				F9257DCB1338236300A47E00 /* Level.cpp */,
 				F9257DCC1338236300A47E00 /* Level.h */,
 				F947BBE0134CBACD00952C81 /* Macros.h */,
-				37AABF371333478A004E2D56 /* Main.cpp */,
 				37FB693913317693008963C1 /* Monocle.cpp */,
 				37FB693A13317693008963C1 /* Monocle.h */,
 				03907B2E135E5E9B00D92F21 /* MonocleToolkit.cpp */,
@@ -623,6 +622,7 @@
 		37FB696F13317693008963C1 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				37AABF371333478A004E2D56 /* Main.cpp */,
 				03907B66135E684700D92F21 /* AudioTest */,
 				03907B31135E5EC400D92F21 /* LevelEditor */,
 				F947BBD8134C941B00952C81 /* PuppetTest */,

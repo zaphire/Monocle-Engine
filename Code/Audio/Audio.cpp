@@ -169,9 +169,9 @@ namespace Monocle {
     {
         AudioDeck *deck = NewDeck(asset);
         if (!deck) return;
-        deck->volume = volume;
-        deck->pan = pan;
-        deck->pitchBend = pitch;
+        deck->SetVolume(volume);
+        deck->SetPan(pan);
+        deck->SetPitch(pitch);
         deck->FreeDeckOnFinish();
         deck->Play();
         return;
