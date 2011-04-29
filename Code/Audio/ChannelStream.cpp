@@ -237,6 +237,8 @@ namespace Monocle
     void ChannelStream::Check( std::string erat )
     {
         int error = alGetError();
+        
+        VERBOSE("Checking " + erat);
             
         if(error != AL_NO_ERROR)
             Debug::Log("OpenAL Error on " + erat + ": " + StringOf(error) + " (" + GetALErrorString(error) + ")");
