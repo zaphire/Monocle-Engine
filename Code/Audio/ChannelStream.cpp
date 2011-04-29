@@ -21,6 +21,8 @@
 
 #include "../Platform.h"
 
+#define VERBOSE(x) Debug::Log(std::string("VERBOSE: ") + x)
+
 std::string GetALErrorString(ALenum err)
 {
     switch(err)
@@ -68,6 +70,11 @@ namespace Monocle
 
     void ChannelStream::Open( int channels, int bits, int samplerate )
     {
+        if (started)
+            return;
+        
+        VERBOSE("ChannelStream Open");
+        
         if (channels == 1)
         {
             format = AL_FORMAT_MONO16;
@@ -125,6 +132,8 @@ namespace Monocle
     {
         if (!started)
             return;
+        
+        VERBOSE("ChannelStream Close");
         
         Check("preclose");
         alSourceStop(source);
@@ -209,6 +218,8 @@ namespace Monocle
     void ChannelStream::Empty()
     {
         int queued = 0;
+        
+        VERBOSE("Empty");
         
         alGetSourcei(source, AL_BUFFERS_QUEUED, &queued);
         Check("emptystart");
