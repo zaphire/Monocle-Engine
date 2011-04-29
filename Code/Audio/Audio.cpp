@@ -6,20 +6,35 @@
 
 #include <string>
 #include <algorithm>
+#include <vector>
 
 #include "Audio.h"
 
 #include "../Debug.h"
 #include "../MonocleToolkit.h"
 
+#ifdef MONOCLE_AUDIO_OGG
+#include "Decoders/OggDecoder.h"
+#endif
+#include "Decoders/WaveDecoder.h"
+
+#define ADD_DECODER(v) decoders->push_back( new v );
+
 namespace Monocle {
     
     Audio *Audio::instance = NULL;
     static std::map<std::string, AudioDecoder *> *decoderMap = NULL;
+    static std::vector<AudioDecoder *> *decoders = NULL;
     
     void Audio::Init()
     {
         Debug::Log("Audio::Init...");
+        
+        // Init the separate decoders here
+        ADD_DECODER(WaveDecoder);
+#ifdef MONOCLE_AUDIO_OGG
+        ADD_DECODER(OggDecoder);
+#endif
             
         ChannelStream::Init();
             
@@ -99,6 +114,8 @@ namespace Monocle {
         instance = this;
         this->firstDeck = 0;
         
+        if (!decoders)
+            decoders = new std::vector<AudioDecoder*>;
         if (!decoderMap)
             decoderMap = new std::map<std::string, AudioDecoder *>;
     }
@@ -122,7 +139,20 @@ namespace Monocle {
         }
          **/
         
+        if (decoders)
+        {
+            
+            std::vector<AudioDecoder *>::iterator it;
+            it = decoders->begin();
+            
+            for (; it != decoders->end(); ++it){
+                delete it[0];
+            }
+            delete decoders;
+        }
+        
         if (decoderMap) delete decoderMap;
+        decoders = NULL;
         decoderMap = NULL;
     }
     
