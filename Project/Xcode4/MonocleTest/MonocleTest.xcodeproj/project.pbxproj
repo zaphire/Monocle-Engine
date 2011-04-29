@@ -22,6 +22,9 @@
 		037D6F85136AFB51001CFBB9 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037D6F83136AFB51001CFBB9 /* Ogg.framework */; };
 		037D6F86136AFB51001CFBB9 /* Vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037D6F84136AFB51001CFBB9 /* Vorbis.framework */; };
 		037D6FBC136AFE94001CFBB9 /* GLEW.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037D6FBB136AFE94001CFBB9 /* GLEW.framework */; };
+		037D6FC2136B027F001CFBB9 /* GLEW.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 037D6FBF136B027E001CFBB9 /* GLEW.framework */; };
+		037D6FC3136B027F001CFBB9 /* Vorbis.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 037D6FC0136B027E001CFBB9 /* Vorbis.framework */; };
+		037D6FC4136B027F001CFBB9 /* Ogg.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 037D6FC1136B027E001CFBB9 /* Ogg.framework */; };
 		03907B2B135E5E0300D92F21 /* CollisionData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B29135E5E0300D92F21 /* CollisionData.cpp */; };
 		03907B30135E5E9B00D92F21 /* MonocleToolkit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B2E135E5E9B00D92F21 /* MonocleToolkit.cpp */; };
 		03907B37135E5EC400D92F21 /* LevelEditorTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B33135E5EC400D92F21 /* LevelEditorTest.cpp */; };
@@ -66,7 +69,7 @@
 		37FB69B413317693008963C1 /* Tween.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB697A13317693008963C1 /* Tween.cpp */; };
 		37FB69B513317693008963C1 /* Vector2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB697C13317693008963C1 /* Vector2.cpp */; };
 		37FB69B613317693008963C1 /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB697E13317693008963C1 /* Vector3.cpp */; };
-		37FB69B813319030008963C1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FB69B713319030008963C1 /* OpenGL.framework */; };
+		37FB69B813319030008963C1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FB69B713319030008963C1 /* OpenGL.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		D881B50013445142008EF89C /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D881B4FE13445142008EF89C /* Node.cpp */; };
 		F9132A0A13499ED200567EAB /* PathCollider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9132A0813499ED200567EAB /* PathCollider.cpp */; };
 		F9132A11134A0D8200567EAB /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9132A0F134A0D8200567EAB /* Transform.cpp */; };
@@ -87,6 +90,22 @@
 		F9F7D63D13457F46002953B0 /* FileNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7D63B13457F46002953B0 /* FileNode.cpp */; };
 		F9F7D64313457F5C002953B0 /* PathMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7D64113457F5C002953B0 /* PathMesh.cpp */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		037D6FBE136B0256001CFBB9 /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				037D6FC2136B027F001CFBB9 /* GLEW.framework in Copy Files */,
+				037D6FC3136B027F001CFBB9 /* Vorbis.framework in Copy Files */,
+				037D6FC4136B027F001CFBB9 /* Ogg.framework in Copy Files */,
+			);
+			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		031FEECC1367AFD100B62E27 /* TextureAtlas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextureAtlas.cpp; path = ../../../Code/TextureAtlas.cpp; sourceTree = "<group>"; };
@@ -120,6 +139,9 @@
 		037D6F83136AFB51001CFBB9 /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = ../../../Libs/MacOSX/Ogg.framework; sourceTree = "<group>"; };
 		037D6F84136AFB51001CFBB9 /* Vorbis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vorbis.framework; path = ../../../Libs/MacOSX/Vorbis.framework; sourceTree = "<group>"; };
 		037D6FBB136AFE94001CFBB9 /* GLEW.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLEW.framework; path = ../../../Libs/MacOSX/GLEW.framework; sourceTree = "<group>"; };
+		037D6FBF136B027E001CFBB9 /* GLEW.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLEW.framework; path = ../../../Libs/MacOSX/GLEW.framework; sourceTree = "<group>"; };
+		037D6FC0136B027E001CFBB9 /* Vorbis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vorbis.framework; path = ../../../Libs/MacOSX/Vorbis.framework; sourceTree = "<group>"; };
+		037D6FC1136B027E001CFBB9 /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = ../../../Libs/MacOSX/Ogg.framework; sourceTree = "<group>"; };
 		03907B29135E5E0300D92F21 /* CollisionData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CollisionData.cpp; path = ../../../Code/CollisionData.cpp; sourceTree = "<group>"; };
 		03907B2A135E5E0300D92F21 /* CollisionData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollisionData.h; path = ../../../Code/CollisionData.h; sourceTree = "<group>"; };
 		03907B2E135E5E9B00D92F21 /* MonocleToolkit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MonocleToolkit.cpp; path = ../../../Code/MonocleToolkit.cpp; sourceTree = "<group>"; };
@@ -425,6 +447,9 @@
 		37EA248B132F986800D216B0 = {
 			isa = PBXGroup;
 			children = (
+				037D6FBF136B027E001CFBB9 /* GLEW.framework */,
+				037D6FC0136B027E001CFBB9 /* Vorbis.framework */,
+				037D6FC1136B027E001CFBB9 /* Ogg.framework */,
 				37FB691313317656008963C1 /* Monocle */,
 				37EA24A0132F986900D216B0 /* MonocleTest */,
 				37EA2499132F986900D216B0 /* Frameworks */,
@@ -675,6 +700,7 @@
 				37EA2492132F986900D216B0 /* Sources */,
 				37EA2493132F986900D216B0 /* Frameworks */,
 				37EA2494132F986900D216B0 /* Resources */,
+				037D6FBE136B0256001CFBB9 /* Copy Files */,
 				D881BBFB134643D4001263BE /* ShellScript */,
 			);
 			buildRules = (
