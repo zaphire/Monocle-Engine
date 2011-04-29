@@ -21,7 +21,7 @@
 #define ADD_DECODER(v) decoders->push_back( new v );
 
 namespace Monocle {
-    
+   
     Audio *Audio::instance = NULL;
     static std::map<std::string, AudioDecoder *> *decoderMap = NULL;
     static std::vector<AudioDecoder *> *decoders = NULL;
