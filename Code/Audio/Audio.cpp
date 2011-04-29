@@ -95,8 +95,11 @@ namespace Monocle {
     {
         AudioDeck *d = firstDeck;
         while (d) {
+            AudioDeck *nextDeck = d->nextDeck;
             d->Update();
-            d = d->nextDeck;
+            
+            // Sometimes the deck will kill itself, so we have to get the next deck BEFORE calling Update().
+            d = nextDeck;
         }
     }
     

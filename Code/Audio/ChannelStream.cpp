@@ -22,6 +22,8 @@
 #include "../Platform.h"
 
 #define VERBOSE(x) Debug::Log(std::string("VERBOSE: ") + x)
+#undef VERBOSE
+#define VERBOSE(x)
 
 std::string GetALErrorString(ALenum err)
 {
