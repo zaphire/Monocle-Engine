@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03078C11136A64560006DF91 /* WaveDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03078C0F136A64560006DF91 /* WaveDecoder.cpp */; };
 		031FEECE1367AFD100B62E27 /* TextureAtlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 031FEECC1367AFD100B62E27 /* TextureAtlas.cpp */; };
 		031FEED41367B02100B62E27 /* Puppet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 031FEED01367B02100B62E27 /* Puppet.cpp */; };
 		031FEED51367B02100B62E27 /* PuppetEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 031FEED21367B02100B62E27 /* PuppetEditor.cpp */; };
@@ -90,6 +91,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		03078C0F136A64560006DF91 /* WaveDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WaveDecoder.cpp; path = wave/WaveDecoder.cpp; sourceTree = "<group>"; };
+		03078C10136A64560006DF91 /* WaveDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaveDecoder.h; path = wave/WaveDecoder.h; sourceTree = "<group>"; };
 		031FEECC1367AFD100B62E27 /* TextureAtlas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextureAtlas.cpp; path = ../../../Code/TextureAtlas.cpp; sourceTree = "<group>"; };
 		031FEECD1367AFD100B62E27 /* TextureAtlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextureAtlas.h; path = ../../../Code/TextureAtlas.h; sourceTree = "<group>"; };
 		031FEED01367B02100B62E27 /* Puppet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Puppet.cpp; sourceTree = "<group>"; };
@@ -279,6 +282,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03078C0E136A64470006DF91 /* wave */ = {
+			isa = PBXGroup;
+			children = (
+				03078C0F136A64560006DF91 /* WaveDecoder.cpp */,
+				03078C10136A64560006DF91 /* WaveDecoder.h */,
+			);
+			name = wave;
+			sourceTree = "<group>";
+		};
 		031FEECF1367B02100B62E27 /* Puppet */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,6 +315,7 @@
 		03907B58135E644400D92F21 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				03078C0E136A64470006DF91 /* wave */,
 				03907B74135E7D2600D92F21 /* oggvorbis */,
 				031FEED61367B09500B62E27 /* Audio.h */,
 				031FEED71367B12000B62E27 /* Audio.cpp */,
@@ -820,6 +833,7 @@
 				031FEEEC1367BF2700B62E27 /* AudioDeck.cpp in Sources */,
 				035BC67E1368D744002756A4 /* AudioAssetReader.cpp in Sources */,
 				037066A61369D25F00B7F9C4 /* ChannelStream.cpp in Sources */,
+				03078C11136A64560006DF91 /* WaveDecoder.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

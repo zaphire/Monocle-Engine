@@ -142,6 +142,7 @@ namespace Monocle {
     
     void AudioDeck::Init()
     {
+        this->freeDeckOnFinish = false;
         this->nextDeck = 0;
         
         if (!this->decodeData){
@@ -471,6 +472,11 @@ namespace Monocle {
             if (this->vis && !this->pause) this->vis->bClear = false;
             
 			UpdateVizJunk();
+            
+            if (this->isFinished && this->freeDeckOnFinish){
+                delete this;
+                return;
+            }
         }
         else
         {
@@ -484,6 +490,9 @@ namespace Monocle {
                 
                 if (cs->IsOpen())
                     cs->Close();
+                
+                if (this->freeDeckOnFinish)
+                    delete this;
                 
                 return;
             }
@@ -667,5 +676,10 @@ namespace Monocle {
             opos -= decodeData->total;
         
         return opos;
+    }
+    
+    void AudioDeck::FreeDeckOnFinish( bool freeDeckOnFinish )
+    {
+        this->freeDeckOnFinish = freeDeckOnFinish;
     }
 }

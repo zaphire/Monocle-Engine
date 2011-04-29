@@ -21,6 +21,39 @@
 
 #include "../Platform.h"
 
+std::string GetALErrorString(ALenum err)
+{
+    switch(err)
+    {
+        case AL_NO_ERROR:
+            return std::string("AL_NO_ERROR");
+            break;
+            
+        case AL_INVALID_NAME:
+            return std::string("AL_INVALID_NAME");
+            break;
+            
+        case AL_INVALID_ENUM:
+            return std::string("AL_INVALID_ENUM");
+            break;
+            
+        case AL_INVALID_VALUE:
+            return std::string("AL_INVALID_VALUE");
+            break;
+            
+        case AL_INVALID_OPERATION:
+            return std::string("AL_INVALID_OPERATION");
+            break;
+            
+        case AL_OUT_OF_MEMORY:
+            return std::string("AL_OUT_OF_MEMORY");
+            break;
+            
+        default:
+            return "??";
+    };
+}
+
 namespace Monocle
 {
     bool ChannelStream::IsPlaying()
@@ -52,22 +85,22 @@ namespace Monocle
         
         alGenBuffers(NUM_BUFFERS, buffers);
         
-        Check();
+        Check("opengenbuf");
         
         alGenSources(1, &source);
         
-        Check();
+        Check("opengensource");
         
         alSource3f(source, AL_POSITION, 0.0, 0.0, 0.0);
         alSource3f(source, AL_VELOCITY, 0.0, 0.0, 0.0);
         alSource3f(source, AL_DIRECTION, 0.0, 0.0, 0.0);
         
-        Check();
+        Check("opensetsource");
         
         alSourcei(source, AL_ROLLOFF_FACTOR, 0);
         alSourcei(source, AL_SOURCE_RELATIVE, AL_TRUE);
         
-        Check();
+        Check("opensetsource2");
         
         memset(obtainedBuffer,0,BUFFER_SIZE);
         
@@ -77,7 +110,7 @@ namespace Monocle
 
         //Debug::Log("AUDIO: Opening Audio Channel: " + StringOf(samplerate) + "hz w/ " + StringOf(channels) + " channels (ALformat:" + StringOf(format) +")");
         
-        Check();
+        Check("openbufferdata");
 
         this->samplerate = samplerate;
         this->started = true;
@@ -90,12 +123,17 @@ namespace Monocle
     
     void ChannelStream::Close()
     {
-        Check();
+        if (!started)
+            return;
+        
+        Check("preclose");
         alSourceStop(source);
+        Check("stop");
         Empty();
         alDeleteSources(1,&source);
+        Check("deletesources");
         alDeleteBuffers(NUM_BUFFERS,buffers);
-        Check();
+        Check("deletebuffers");
         started = false;
     }
 
@@ -117,7 +155,7 @@ namespace Monocle
     void ChannelStream::LockNumberedBuffer( unsigned int size, unsigned int buff )
     {
         alBufferData(buffers[buff], format, obtainedBuffer, size, samplerate);
-        Check();
+        Check("locknumberbuff");
     }
 
     unsigned char *ChannelStream::GetBuffer( unsigned int *size )
@@ -127,7 +165,7 @@ namespace Monocle
         }
         
         alSourceUnqueueBuffers(source, 1, &active_buffer);
-        Check();
+        Check("getbuffer");
         
         return GetStaticBuffer(size);
     }
@@ -147,17 +185,17 @@ namespace Monocle
         }
         
         alBufferData(active_buffer, format, obtainedBuffer, size, samplerate);
-        Check();
+        Check("lockbd");
         
         alSourceQueueBuffers(source, 1, &active_buffer);
-        Check();
+        Check("lockqb");
     }
 
     void ChannelStream::Play()
     {
         alSourceQueueBuffers(source, NUM_BUFFERS, buffers);
         alSourcePlay(source);
-        Check();
+        Check("play");
         
         this->startedPlaying = true;
         this->playStart = Platform::GetMilliseconds();
@@ -170,9 +208,10 @@ namespace Monocle
 
     void ChannelStream::Empty()
     {
-        int queued;
+        int queued = 0;
         
         alGetSourcei(source, AL_BUFFERS_QUEUED, &queued);
+        Check("emptystart");
         
         while(queued--)
         {
@@ -180,16 +219,17 @@ namespace Monocle
             
             alSourceUnqueueBuffers(source, 1, &buffer);
 
-            Check();
+            Check("empty " + StringOf(queued+1));
         }
     }
 
-    void ChannelStream::Check()
+    void ChannelStream::Check( std::string erat )
     {
         int error = alGetError();
             
         if(error != AL_NO_ERROR)
-            printf("OpenAL Error: %d\n",error);
+            Debug::Log("OpenAL Error on " + erat + ": " + StringOf(error) + " (" + GetALErrorString(error) + ")");
+            //printf("OpenAL Error: %d\n",error);
     }
 
     ChannelStream::ChannelStream()

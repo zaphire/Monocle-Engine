@@ -132,5 +132,17 @@ namespace Monocle {
         if (decoderMap == NULL) decoderMap = new std::map<std::string, AudioDecoder *>;
         decoderMap[0][extension] = decoder;
     }
+    
+    void Audio::PlaySound( AudioAsset *asset, int loops, float volume, float pan, float pitch )
+    {
+        AudioDeck *deck = NewDeck(asset);
+        if (!deck) return;
+        deck->volume = volume;
+        deck->pan = pan;
+        deck->pitchBend = pitch;
+        deck->FreeDeckOnFinish();
+        deck->Play();
+        return;
+    }
  
 }

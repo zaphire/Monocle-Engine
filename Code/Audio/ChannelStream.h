@@ -3,6 +3,8 @@
 #define BUFFER_SIZE (1024 * 64)
 #define NUM_BUFFERS 2
 
+#include <string>
+
 namespace Monocle
 {
     /**
@@ -143,7 +145,7 @@ namespace Monocle
          */
         bool IsPlaying();
         
-        void Check();                 // checks OpenAL error state
+        void Check( std::string erat = "unk" );                 // checks OpenAL error state
         
         /**
             Init() opens the sound drivers for the entire audio platform and is called once.

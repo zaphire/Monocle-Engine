@@ -195,6 +195,11 @@ namespace Monocle {
          */
         void Seek( long pos );
         
+        /**
+            Allows the deck to free on completion. Important for sound effects and other nonpersistent sounds.
+         */
+        void FreeDeckOnFinish( bool freeDeckOnFinish = true );
+        
         AudioDeck       *nextDeck;      // INTERNAL, Next Deck in the sequence
         AudioDeck       **prevDeckPointerToHere;     // INTERNAL, Pointer in the previous deck to this deck
         
@@ -217,6 +222,7 @@ namespace Monocle {
         
         ChannelStream	*cs;
         
+        bool        freeDeckOnFinish;
         bool		pause;
         
         bool        freeDecoderData;    // Free the decoder data when deconstructed.

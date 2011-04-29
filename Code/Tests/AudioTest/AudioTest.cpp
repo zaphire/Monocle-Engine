@@ -7,7 +7,8 @@
 #include "../../Audio/oggvorbis/OggDecoder.h"
 
 //#define MONOCLE_AUDIOTEST_CROSSFADING
-#define MONOCLE_AUDIOTEST_LOOPER
+//#define MONOCLE_AUDIOTEST_LOOPER
+#define MONOCLE_AUDIOTEST_SFX
 
 namespace AudioTest
 {    
@@ -107,6 +108,68 @@ namespace AudioTest
         
         Graphics::PopMatrix();
     }
+    
+#ifdef MONOCLE_AUDIOTEST_SFX
+    
+    int cnt = 0;
+    
+    /*
+     **************************************************
+     * G a m e S c e n e
+     **************************************************
+     *
+     * Sets up the game's entities in Begin()
+     * 
+     */
+    
+    AudioAsset *laser, *coin;
+    
+	void GameScene::Begin()
+	{
+		Debug::Log("AudioTest::GameScene::Begin()!");
+        
+		Scene::Begin();
+		
+		FontAsset* font = Assets::RequestFont("AudioTest/LiberationSans-Regular.ttf", 25.0f);
+        scText = new Text("L: Laser, C: Coin", font);
+        scText->position = Vector2(50, 50);
+        Add(scText);
+        
+        laser = Assets::RequestAudio("AudioTest/Laser.wav");
+        coin = Assets::RequestAudio("AudioTest/Coin.wav");
+	}
+    
+	void GameScene::ReceiveNote(const std::string &note)
+	{
+	}
+    
+	
+	void GameScene::Update()
+	{
+		Scene::Update();
+        
+        if (Input::IsKeyPressed(KEY_L)){
+            cnt++;
+            Audio::PlaySound(laser);
+        }
+        
+        if (Input::IsKeyPressed(KEY_C)){
+            cnt++;
+            Audio::PlaySound(coin);
+        }
+        
+        scText->SetText("L: Laser, C: Coin cnt: " + StringOf(cnt));
+	}
+    
+	void GameScene::End()
+	{
+		Scene::End();
+        
+        delete laser;
+        delete coin;
+	}
+    
+#endif
     
 #ifdef MONOCLE_AUDIOTEST_LOOPER
     
