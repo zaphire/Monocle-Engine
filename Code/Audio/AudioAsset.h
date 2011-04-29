@@ -46,6 +46,18 @@ namespace Monocle
         void SetDecodeString( std::string decodeString );
         
         std::string GetDecodeString();
+
+        /**
+         Plays an audio file. The deck it plays on will be freed automatically when the sound is complete.
+         
+         @param loops Number of times to loop
+         @param volume Volume, between 0.0 and 1.0
+         @param pan Panning, between -1.0(L) and 1.0(R), 0.0 for center
+         @param pitch Pitch, 0.5 - 2.0
+         
+         @see Audio::PlaySound
+         */
+        void Play( int loops = 1, float volume = 1.0, float pan = 0.0, float pitch = 1.0 );
         
     private:
         

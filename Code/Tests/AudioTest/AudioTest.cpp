@@ -150,12 +150,12 @@ namespace AudioTest
         
         if (Input::IsKeyPressed(KEY_L)){
             cnt++;
-            Audio::PlaySound(laser);
+            laser->Play();
         }
         
         if (Input::IsKeyPressed(KEY_C)){
             cnt++;
-            Audio::PlaySound(coin);
+            coin->Play();
         }
         
         scText->SetText("L: Laser, C: Coin cnt: " + StringOf(cnt));
