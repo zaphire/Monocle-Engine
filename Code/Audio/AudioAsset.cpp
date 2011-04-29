@@ -6,24 +6,92 @@
 //
 
 #include "AudioAsset.h"
+#include "../MonocleToolkit.h"
 #include "../Debug.h"
+
+#include <stdio.h>
+#include <stdlib.h> // required for free and malloc (GCC)
 
 namespace Monocle
 {
-    void AudioAsset::Load(const std::string &filename, AudioDecoder &decoder)
+    AudioAsset::AudioAsset() : Asset(ASSET_AUDIO)
+    {
+        size = 0;
+        streamFromDisk = false;
+        dataBuffer = 0;
+        decodeString = "";
+    }
+    
+    AudioAsset::~AudioAsset()
+    {
+        Unload();
+    }
+    
+    void AudioAsset::Load(const std::string &filename, bool streamFromDisk)
 	{
-		this->decoder = &decoder;    
         this->filename = filename;
+        
+        this->streamFromDisk = streamFromDisk;
+        
+        FILE *f;
+        f = fopen(this->filename.c_str(),"rb");
+        
+        if (!f){
+            Debug::Log("Asset " + filename + " was not found and cannot be loaded."); // ERROR
+            return;
+        }
+        
+        fseek(f,0,SEEK_END);
+        size = ftell(f);
+        fseek(f,0,SEEK_SET);
+        
+        if (!streamFromDisk){
+            // Load to memory!
+            dataBuffer = malloc(size);
+            fread(dataBuffer,size,1,f);
+            
+            Debug::Log("Commited " + StringOf(size) + " bytes to memory for " + GetName());
+        }
+        
+        fclose(f);
 	}
     
 	void AudioAsset::Reload()
 	{
 		Unload();
-		Load(filename, *this->decoder);
+		Load(this->filename,streamFromDisk);
 	}
     
 	void AudioAsset::Unload()
 	{
 		Debug::Log("Freeing audio memory for: " + this->filename);
+        
+        if (dataBuffer)
+            free(dataBuffer);
 	}
+    
+    bool AudioAsset::IsStreaming()
+    {
+        return streamFromDisk;
+    }
+    
+    void *AudioAsset::GetDataBuffer()
+    {
+        return dataBuffer;
+    }
+    
+    long AudioAsset::GetDataSize()
+    {
+        return size;
+    }
+    
+    void AudioAsset::SetDecodeString(std::string decodeString)
+    {
+        this->decodeString = decodeString;
+    }
+    
+    std::string AudioAsset::GetDecodeString()
+    {
+        return this->decodeString;
+    }
 }

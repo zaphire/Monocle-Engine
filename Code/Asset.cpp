@@ -42,6 +42,12 @@ namespace Monocle
 		int size = Assets::GetContentPath().size();
 		return filename.substr(size, filename.size() - size);
 	}
+    
+    std::string Asset::GetExtension()
+    {
+        std::string fn = GetName();
+        return fn.substr(fn.find_last_of(".") + 1);
+    }
 
 	/*
 	void Asset::Load(const char *filename)

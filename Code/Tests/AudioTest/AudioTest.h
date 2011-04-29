@@ -19,6 +19,19 @@ namespace AudioTest
 		std::string text;
 	};
     
+    class Waveform: public Entity
+    {
+    public:
+        Waveform( AudioDeck *deck, int type = 0 );
+        
+        void Render();
+        
+    protected:
+        
+        int type;
+        AudioDeck *deck;
+    };
+    
     class GameScene : public Scene
 	{
 	public:
@@ -30,7 +43,5 @@ namespace AudioTest
 		void Update();
 		
 		void ReceiveNote(const std::string &note);
-        
-        void ThinkAudio();
 	};
 }

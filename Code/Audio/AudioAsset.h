@@ -8,13 +8,28 @@ namespace Monocle
 	class AudioAsset : public Asset
 	{
 	public:
-        AudioAsset(): Asset(ASSET_AUDIO) { this->decoder = 0; }
-		void Load(const std::string &filename, AudioDecoder &decoder);
+        AudioAsset();
+        ~AudioAsset();
+        
+		void Load( const std::string &filename, bool streamFromDisk );
 		void Reload();
 		void Unload();
         
+        bool IsStreaming();
+        
+        void *GetDataBuffer();
+        long GetDataSize();
+        
+        void SetDecodeString( std::string decodeString );
+        std::string GetDecodeString();
+        
     private:
         
-        AudioDecoder *decoder;
+        long size;
+        bool streamFromDisk;
+        void *dataBuffer;
+
+        std::string decodeString;
+    
 	};
 }

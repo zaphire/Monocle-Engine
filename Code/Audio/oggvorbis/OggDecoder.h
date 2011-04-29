@@ -16,7 +16,7 @@ namespace Monocle
     {
     public:
         
-        virtual AudioDecodeData *RequestData( AudioAsset &asset );
+        virtual AudioDecodeData *RequestData( AudioAsset *asset );
         virtual unsigned long Render( unsigned long size, void *outputBuffer, AudioDecodeData &decodeData );        
         virtual void FreeDecoderData( AudioDecodeData &dd );
     };

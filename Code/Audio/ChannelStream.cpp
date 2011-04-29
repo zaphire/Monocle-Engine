@@ -19,6 +19,8 @@
 	#include <alc.h>
 #endif
 
+#include "../Platform.h"
+
 namespace Monocle
 {
     bool ChannelStream::IsPlaying()
@@ -77,8 +79,11 @@ namespace Monocle
         this->started = true;
         this->startBuffer = 0;
         this->startedPlaying = false;
+        this->pausePos = 0;
+        this->playOffset = 0;
+        this->playStart = -1;
     }
-
+    
     void ChannelStream::Close()
     {
         alSourceStop(source);
@@ -146,6 +151,7 @@ namespace Monocle
         Check();
         
         this->startedPlaying = true;
+        this->playStart = Platform::GetMilliseconds();
     }
 
     void ChannelStream::Stop()
@@ -182,6 +188,10 @@ namespace Monocle
         startBuffer=0;
         this->startedPlaying = false;
         format = AL_FORMAT_STEREO16;
+        
+        this->pausePos = 0;
+        this->playOffset = 0;
+        this->playStart = -1;
     }
 
     ChannelStream::~ChannelStream()
@@ -237,15 +247,66 @@ namespace Monocle
     {
         __alexit();
     }
-
-    float ChannelStream::GetPlaybackPosition()
+    
+    void ChannelStream::Pause()
     {
-        float poso;
-        int pos;
-        alGetSourcei(source,AL_SAMPLE_OFFSET,&pos);
-        
-        poso = (float)pos/(float)this->samplerate;
-        
-        return poso;
+        //m_lpSBuff2->Stop();
+        alSourceStop(source);
+        this->pausePos = Platform::GetMilliseconds();
     }
+    
+    void ChannelStream::Resume()
+    {
+        if (IsPlaying()) return;
+        alSourcePlay(source);
+        
+        this->playOffset += this->pausePos-this->playStart;
+        this->playStart = Platform::GetMilliseconds();
+    }
+    
+    inline unsigned long XMAX( unsigned long a, unsigned long b )
+    {
+        return ( a > b ) ? a : b;
+    }
+    
+    unsigned long ChannelStream::GetOutputTime()
+    {
+        if (this->playStart == -1)
+            return 0;
+        
+        return XMAX(Platform::GetMilliseconds() - this->playStart,0) + this->playOffset;
+    }
+    
+    unsigned long ChannelStream::GetTotalPlayTime()
+    {
+        if (!IsPlaying()) {
+            if (this->pausePos)
+                return (this->pausePos-this->playStart) + this->playOffset;
+            else
+                return 0;
+        }
+        
+        return GetOutputTime();
+    }
+    
+    void ChannelStream::SetPlayOffset( unsigned long playOffset )
+    {
+        this->playOffset = playOffset;
+    }
+    
+    void ChannelStream::SetVolume( float vol )
+    {
+        alSourcef(source,AL_GAIN,vol);
+    }
+    
+    void ChannelStream::SetPan( float pan )
+    {
+        alSource3f(source,AL_POSITION,pan,0.0,0.0);
+    }
+
+    void ChannelStream::SetPitch( float pitch )
+    {
+        alSourcef(source,AL_PITCH,pitch);
+    }
+    
 }

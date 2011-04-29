@@ -21,9 +21,6 @@
     <Filter Include="Monocle\Colliders">
       <UniqueIdentifier>{a834cc3d-7677-41d6-a8ec-d21b830b4b57}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Monocle\OpenAL">
-      <UniqueIdentifier>{ecaa9dfa-367d-4d2d-8d60-0aa9062531ee}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Monocle\Tests\Jumper">
       <UniqueIdentifier>{0cc35010-5a27-4319-bca8-8c4de55f63fc}</UniqueIdentifier>
     </Filter>
@@ -82,9 +79,6 @@
       <Filter>Monocle</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Asset.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Audio.h">
       <Filter>Monocle</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Collision.h">
@@ -291,6 +285,24 @@
     <ClInclude Include="..\..\..\..\Code\Puppet\PuppetEditor.h">
       <Filter>Monocle\Puppet</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Audio\AudioDeck.h">
+      <Filter>Monocle\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Audio\AudioVis.h">
+      <Filter>Monocle\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Audio\AudioAssetReader.h">
+      <Filter>Monocle\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Audio\Audio.h">
+      <Filter>Monocle\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Audio\VisCache2.h">
+      <Filter>Monocle\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Audio\FFT.h">
+      <Filter>Monocle\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Asset.cpp">
@@ -340,9 +352,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLTextureAsset.cpp">
       <Filter>Monocle\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenAL\OpenALAudio.cpp">
-      <Filter>Monocle\OpenAL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Colliders\CircleCollider.cpp">
       <Filter>Monocle\Colliders</Filter>
@@ -470,9 +479,6 @@
     <ClCompile Include="..\..\..\..\Code\Audio\oggvorbis\OggDecoder.cpp">
       <Filter>Monocle\Audio\oggvorbis</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenAL\ChannelStream.cpp">
-      <Filter>Monocle\OpenAL</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Tests\AudioTest\AudioTest.cpp">
       <Filter>Monocle\Tests\AudioTest</Filter>
     </ClCompile>
@@ -484,6 +490,27 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Puppet\PuppetEditor.cpp">
       <Filter>Monocle\Puppet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Audio\AudioDeck.cpp">
+      <Filter>Monocle\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Audio\AudioVis.cpp">
+      <Filter>Monocle\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Audio\AudioAssetReader.cpp">
+      <Filter>Monocle\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Audio\Audio.cpp">
+      <Filter>Monocle\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Audio\VisCache2.cpp">
+      <Filter>Monocle\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Audio\FFT.cpp">
+      <Filter>Monocle\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Audio\ChannelStream.cpp">
+      <Filter>Monocle\Audio</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

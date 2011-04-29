@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		031FEECE1367AFD100B62E27 /* TextureAtlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 031FEECC1367AFD100B62E27 /* TextureAtlas.cpp */; };
+		031FEED41367B02100B62E27 /* Puppet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 031FEED01367B02100B62E27 /* Puppet.cpp */; };
+		031FEED51367B02100B62E27 /* PuppetEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 031FEED21367B02100B62E27 /* PuppetEditor.cpp */; };
+		031FEED81367B12000B62E27 /* Audio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 031FEED71367B12000B62E27 /* Audio.cpp */; };
+		031FEEDB1367B8C600B62E27 /* AudioVis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 031FEED91367B8C500B62E27 /* AudioVis.cpp */; };
+		031FEEDE1367BB4B00B62E27 /* VisCache2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 031FEEDC1367BB4A00B62E27 /* VisCache2.cpp */; };
+		031FEEE11367BB7200B62E27 /* fft.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 031FEEDF1367BB7100B62E27 /* fft.cpp */; };
+		031FEEEC1367BF2700B62E27 /* AudioDeck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 031FEEEA1367BF2600B62E27 /* AudioDeck.cpp */; };
+		035BC67E1368D744002756A4 /* AudioAssetReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 035BC67C1368D743002756A4 /* AudioAssetReader.cpp */; };
 		03907B2B135E5E0300D92F21 /* CollisionData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B29135E5E0300D92F21 /* CollisionData.cpp */; };
 		03907B30135E5E9B00D92F21 /* MonocleToolkit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B2E135E5E9B00D92F21 /* MonocleToolkit.cpp */; };
 		03907B37135E5EC400D92F21 /* LevelEditorTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B33135E5EC400D92F21 /* LevelEditorTest.cpp */; };
@@ -14,7 +23,6 @@
 		03907B3D135E5F3B00D92F21 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 03907B3C135E5F3B00D92F21 /* stb_image.c */; };
 		03907B3F135E604D00D92F21 /* libGLEW.1.5.8.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 03907B3E135E604D00D92F21 /* libGLEW.1.5.8.dylib */; };
 		03907B41135E618F00D92F21 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03907B40135E618F00D92F21 /* OpenAL.framework */; };
-		03907B64135E651200D92F21 /* ChannelStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B63135E651200D92F21 /* ChannelStream.cpp */; };
 		03907B6B135E684700D92F21 /* AudioTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B67135E684700D92F21 /* AudioTest.cpp */; };
 		03907B71135E704D00D92F21 /* AudioDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B6F135E704D00D92F21 /* AudioDecoder.cpp */; };
 		03907B73135E74F500D92F21 /* AudioAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B72135E74F500D92F21 /* AudioAsset.cpp */; };
@@ -49,7 +57,6 @@
 		37FB698913317693008963C1 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB692913317693008963C1 /* Entity.cpp */; };
 		37FB698A13317693008963C1 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB692C13317693008963C1 /* Input.cpp */; };
 		37FB699213317693008963C1 /* Monocle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB693913317693008963C1 /* Monocle.cpp */; };
-		37FB699313317693008963C1 /* OpenALAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB693C13317693008963C1 /* OpenALAudio.cpp */; };
 		37FB69AC13317693008963C1 /* OpenGLGraphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB696613317693008963C1 /* OpenGLGraphics.cpp */; };
 		37FB69AD13317693008963C1 /* OpenGLTextureAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB696713317693008963C1 /* OpenGLTextureAsset.cpp */; };
 		37FB69AE13317693008963C1 /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB696913317693008963C1 /* Random.cpp */; };
@@ -60,7 +67,8 @@
 		37FB69B513317693008963C1 /* Vector2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB697C13317693008963C1 /* Vector2.cpp */; };
 		37FB69B613317693008963C1 /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37FB697E13317693008963C1 /* Vector3.cpp */; };
 		37FB69B813319030008963C1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FB69B713319030008963C1 /* OpenGL.framework */; };
-		BF21B0B01368BEC600ACFCCB /* OpenGLTTFFontAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF21B0AF1368BEC600ACFCCB /* OpenGLTTFFontAsset.cpp */; };
+		BFB4DF80136AB9010049447A /* ChannelStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB4DF7F136AB9010049447A /* ChannelStream.cpp */; };
+		BFB4DF82136AB96E0049447A /* OpenGLTTFFontAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB4DF81136AB96E0049447A /* OpenGLTTFFontAsset.cpp */; };
 		D881B50013445142008EF89C /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D881B4FE13445142008EF89C /* Node.cpp */; };
 		F9132A0A13499ED200567EAB /* PathCollider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9132A0813499ED200567EAB /* PathCollider.cpp */; };
 		F9132A11134A0D8200567EAB /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9132A0F134A0D8200567EAB /* Transform.cpp */; };
@@ -82,6 +90,24 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		031FEECC1367AFD100B62E27 /* TextureAtlas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextureAtlas.cpp; path = ../../../Code/TextureAtlas.cpp; sourceTree = "<group>"; };
+		031FEECD1367AFD100B62E27 /* TextureAtlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextureAtlas.h; path = ../../../Code/TextureAtlas.h; sourceTree = "<group>"; };
+		031FEED01367B02100B62E27 /* Puppet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Puppet.cpp; sourceTree = "<group>"; };
+		031FEED11367B02100B62E27 /* Puppet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Puppet.h; sourceTree = "<group>"; };
+		031FEED21367B02100B62E27 /* PuppetEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PuppetEditor.cpp; sourceTree = "<group>"; };
+		031FEED31367B02100B62E27 /* PuppetEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PuppetEditor.h; sourceTree = "<group>"; };
+		031FEED61367B09500B62E27 /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio.h; sourceTree = "<group>"; };
+		031FEED71367B12000B62E27 /* Audio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Audio.cpp; sourceTree = "<group>"; };
+		031FEED91367B8C500B62E27 /* AudioVis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioVis.cpp; sourceTree = "<group>"; };
+		031FEEDA1367B8C500B62E27 /* AudioVis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioVis.h; sourceTree = "<group>"; };
+		031FEEDC1367BB4A00B62E27 /* VisCache2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VisCache2.cpp; sourceTree = "<group>"; };
+		031FEEDD1367BB4B00B62E27 /* VisCache2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisCache2.h; sourceTree = "<group>"; };
+		031FEEDF1367BB7100B62E27 /* fft.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fft.cpp; sourceTree = "<group>"; };
+		031FEEE01367BB7200B62E27 /* fft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fft.h; sourceTree = "<group>"; };
+		031FEEEA1367BF2600B62E27 /* AudioDeck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioDeck.cpp; sourceTree = "<group>"; };
+		031FEEEB1367BF2700B62E27 /* AudioDeck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioDeck.h; sourceTree = "<group>"; };
+		035BC67C1368D743002756A4 /* AudioAssetReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioAssetReader.cpp; sourceTree = "<group>"; };
+		035BC67D1368D743002756A4 /* AudioAssetReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioAssetReader.h; sourceTree = "<group>"; };
 		03907B29135E5E0300D92F21 /* CollisionData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CollisionData.cpp; path = ../../../Code/CollisionData.cpp; sourceTree = "<group>"; };
 		03907B2A135E5E0300D92F21 /* CollisionData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollisionData.h; path = ../../../Code/CollisionData.h; sourceTree = "<group>"; };
 		03907B2E135E5E9B00D92F21 /* MonocleToolkit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MonocleToolkit.cpp; path = ../../../Code/MonocleToolkit.cpp; sourceTree = "<group>"; };
@@ -94,7 +120,6 @@
 		03907B3E135E604D00D92F21 /* libGLEW.1.5.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.5.8.dylib; path = ../libGLEW.1.5.8.dylib; sourceTree = "<group>"; };
 		03907B40135E618F00D92F21 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		03907B59135E644400D92F21 /* ChannelStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelStream.h; sourceTree = "<group>"; };
-		03907B63135E651200D92F21 /* ChannelStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChannelStream.cpp; sourceTree = "<group>"; };
 		03907B67135E684700D92F21 /* AudioTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioTest.cpp; sourceTree = "<group>"; };
 		03907B68135E684700D92F21 /* AudioTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioTest.h; sourceTree = "<group>"; };
 		03907B6E135E6F7000D92F21 /* AudioAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioAsset.h; sourceTree = "<group>"; };
@@ -148,7 +173,6 @@
 		37EA24A6132F986900D216B0 /* MonocleTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MonocleTest-Prefix.pch"; sourceTree = "<group>"; };
 		37FB691413317693008963C1 /* Asset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Asset.cpp; path = ../../../Code/Asset.cpp; sourceTree = "<group>"; };
 		37FB691513317693008963C1 /* Asset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Asset.h; path = ../../../Code/Asset.h; sourceTree = "<group>"; };
-		37FB691813317693008963C1 /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Audio.h; path = ../../../Code/Audio.h; sourceTree = "<group>"; };
 		37FB691A13317693008963C1 /* CircleCollider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CircleCollider.cpp; sourceTree = "<group>"; };
 		37FB691B13317693008963C1 /* CircleCollider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleCollider.h; sourceTree = "<group>"; };
 		37FB691C13317693008963C1 /* Collider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Collider.cpp; sourceTree = "<group>"; };
@@ -169,7 +193,6 @@
 		37FB692D13317693008963C1 /* Input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Input.h; path = ../../../Code/Input.h; sourceTree = "<group>"; };
 		37FB693913317693008963C1 /* Monocle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Monocle.cpp; path = ../../../Code/Monocle.cpp; sourceTree = "<group>"; };
 		37FB693A13317693008963C1 /* Monocle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Monocle.h; path = ../../../Code/Monocle.h; sourceTree = "<group>"; };
-		37FB693C13317693008963C1 /* OpenALAudio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenALAudio.cpp; sourceTree = "<group>"; };
 		37FB696613317693008963C1 /* OpenGLGraphics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLGraphics.cpp; sourceTree = "<group>"; };
 		37FB696713317693008963C1 /* OpenGLTextureAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLTextureAsset.cpp; sourceTree = "<group>"; };
 		37FB696813317693008963C1 /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Platform.h; path = ../../../Code/Platform.h; sourceTree = "<group>"; };
@@ -189,9 +212,10 @@
 		37FB697E13317693008963C1 /* Vector3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Vector3.cpp; path = ../../../Code/Vector3.cpp; sourceTree = "<group>"; };
 		37FB697F13317693008963C1 /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vector3.h; path = ../../../Code/Vector3.h; sourceTree = "<group>"; };
 		37FB69B713319030008963C1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		BF21B0AF1368BEC600ACFCCB /* OpenGLTTFFontAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OpenGLTTFFontAsset.cpp; path = ../../../Games/Code/OpenGL/OpenGLTTFFontAsset.cpp; sourceTree = "<group>"; };
 		BF41F742135D86F600A80734 /* Range.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Range.h; path = ../../../Code/Range.h; sourceTree = "<group>"; };
 		BF9F7B45134D1E7B002A6CC0 /* FontAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FontAsset.h; path = ../../../Code/FontAsset.h; sourceTree = "<group>"; };
+		BFB4DF7F136AB9010049447A /* ChannelStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChannelStream.cpp; sourceTree = "<group>"; };
+		BFB4DF81136AB96E0049447A /* OpenGLTTFFontAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLTTFFontAsset.cpp; sourceTree = "<group>"; };
 		D876F29413456E7500A021D8 /* PathMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PathMesh.cpp; path = ../../../Code/LevelEditor/PathMesh.cpp; sourceTree = "<group>"; };
 		D876F29513456E7500A021D8 /* PathMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathMesh.h; path = ../../../Code/LevelEditor/PathMesh.h; sourceTree = "<group>"; };
 		D876F29713456E9900A021D8 /* XMLFileNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XMLFileNode.cpp; sourceTree = "<group>"; };
@@ -256,6 +280,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		031FEECF1367B02100B62E27 /* Puppet */ = {
+			isa = PBXGroup;
+			children = (
+				031FEED01367B02100B62E27 /* Puppet.cpp */,
+				031FEED11367B02100B62E27 /* Puppet.h */,
+				031FEED21367B02100B62E27 /* PuppetEditor.cpp */,
+				031FEED31367B02100B62E27 /* PuppetEditor.h */,
+			);
+			name = Puppet;
+			path = ../../../Code/Puppet;
+			sourceTree = "<group>";
+		};
 		03907B31135E5EC400D92F21 /* LevelEditor */ = {
 			isa = PBXGroup;
 			children = (
@@ -268,14 +304,27 @@
 		03907B58135E644400D92F21 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				031FEED61367B09500B62E27 /* Audio.h */,
+				031FEED71367B12000B62E27 /* Audio.cpp */,
+				031FEEEA1367BF2600B62E27 /* AudioDeck.cpp */,
+				031FEEEB1367BF2700B62E27 /* AudioDeck.h */,
 				03907B7F135E81D600D92F21 /* AudioCrypt.cpp */,
 				03907B80135E81D700D92F21 /* AudioCrypt.h */,
 				03907B74135E7D2600D92F21 /* oggvorbis */,
+				BFB4DF7F136AB9010049447A /* ChannelStream.cpp */,
 				03907B59135E644400D92F21 /* ChannelStream.h */,
-				03907B6E135E6F7000D92F21 /* AudioAsset.h */,
 				03907B72135E74F500D92F21 /* AudioAsset.cpp */,
+				03907B6E135E6F7000D92F21 /* AudioAsset.h */,
+				035BC67C1368D743002756A4 /* AudioAssetReader.cpp */,
+				035BC67D1368D743002756A4 /* AudioAssetReader.h */,
 				03907B6F135E704D00D92F21 /* AudioDecoder.cpp */,
 				03907B70135E704D00D92F21 /* AudioDecoder.h */,
+				031FEED91367B8C500B62E27 /* AudioVis.cpp */,
+				031FEEDA1367B8C500B62E27 /* AudioVis.h */,
+				031FEEDC1367BB4A00B62E27 /* VisCache2.cpp */,
+				031FEEDD1367BB4B00B62E27 /* VisCache2.h */,
+				031FEEDF1367BB7100B62E27 /* fft.cpp */,
+				031FEEE01367BB7200B62E27 /* fft.h */,
 			);
 			name = Audio;
 			path = ../../../Code/Audio;
@@ -384,7 +433,6 @@
 				03EF8B53135E8CE300E99883 /* libvorbis.0.dylib */,
 				03EF8B54135E8CE300E99883 /* libvorbisenc.2.dylib */,
 				03EF8B55135E8CE300E99883 /* libvorbisfile.3.dylib */,
-				03907B40135E618F00D92F21 /* OpenAL.framework */,
 				03907B3E135E604D00D92F21 /* libGLEW.1.5.8.dylib */,
 				37FB691313317656008963C1 /* Monocle */,
 				37EA24A0132F986900D216B0 /* MonocleTest */,
@@ -406,6 +454,7 @@
 			children = (
 				37EA249A132F986900D216B0 /* Cocoa.framework */,
 				37FB69B713319030008963C1 /* OpenGL.framework */,
+				03907B40135E618F00D92F21 /* OpenAL.framework */,
 				37EA249C132F986900D216B0 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -449,15 +498,14 @@
 				37FB691913317693008963C1 /* Colliders */,
 				37CAD626133259BE009BC5F3 /* Graphics */,
 				F9257DD91338238200A47E00 /* LevelEditor */,
-				37FB693B13317693008963C1 /* OpenAL */,
 				37FB693D13317693008963C1 /* OpenGL */,
 				37FB696F13317693008963C1 /* Tests */,
 				37B1929813359C9D00D2D264 /* XML */,
 				37FB691413317693008963C1 /* Asset.cpp */,
 				37FB691513317693008963C1 /* Asset.h */,
+				031FEECF1367B02100B62E27 /* Puppet */,
 				37AABF3413333E29004E2D56 /* Assets.cpp */,
 				37AABF3513333E29004E2D56 /* Assets.h */,
-				37FB691813317693008963C1 /* Audio.h */,
 				F9132A12134A0D8C00567EAB /* Camera.cpp */,
 				F9132A13134A0D8C00567EAB /* Camera.h */,
 				37FB692013317693008963C1 /* Collision.cpp */,
@@ -497,6 +545,8 @@
 				37FB696B13317693008963C1 /* Scene.cpp */,
 				37FB696C13317693008963C1 /* Scene.h */,
 				37FB697913317693008963C1 /* TextureAsset.h */,
+				031FEECC1367AFD100B62E27 /* TextureAtlas.cpp */,
+				031FEECD1367AFD100B62E27 /* TextureAtlas.h */,
 				F9257DDF133823AA00A47E00 /* Tileset.cpp */,
 				F9257DE0133823AA00A47E00 /* Tileset.h */,
 				F947BBEA13532AD400952C81 /* TTFFontAsset.h */,
@@ -530,24 +580,14 @@
 			path = ../../../Code/Colliders;
 			sourceTree = "<group>";
 		};
-		37FB693B13317693008963C1 /* OpenAL */ = {
-			isa = PBXGroup;
-			children = (
-				03907B63135E651200D92F21 /* ChannelStream.cpp */,
-				37FB693C13317693008963C1 /* OpenALAudio.cpp */,
-			);
-			name = OpenAL;
-			path = ../../../Code/OpenAL;
-			sourceTree = "<group>";
-		};
 		37FB693D13317693008963C1 /* OpenGL */ = {
 			isa = PBXGroup;
 			children = (
+				BFB4DF81136AB96E0049447A /* OpenGLTTFFontAsset.cpp */,
 				F947BBEC13532B1900952C81 /* stb_truetype.h */,
 				03907B3C135E5F3B00D92F21 /* stb_image.c */,
 				37FB696613317693008963C1 /* OpenGLGraphics.cpp */,
 				37FB696713317693008963C1 /* OpenGLTextureAsset.cpp */,
-				BF21B0AF1368BEC600ACFCCB /* OpenGLTTFFontAsset.cpp */,
 			);
 			name = OpenGL;
 			path = ../../../Code/OpenGL;
@@ -712,7 +752,6 @@
 				37FB698913317693008963C1 /* Entity.cpp in Sources */,
 				37FB698A13317693008963C1 /* Input.cpp in Sources */,
 				37FB699213317693008963C1 /* Monocle.cpp in Sources */,
-				37FB699313317693008963C1 /* OpenALAudio.cpp in Sources */,
 				37FB69AC13317693008963C1 /* OpenGLGraphics.cpp in Sources */,
 				37FB69AD13317693008963C1 /* OpenGLTextureAsset.cpp in Sources */,
 				37FB69AE13317693008963C1 /* Random.cpp in Sources */,
@@ -757,14 +796,23 @@
 				03907B37135E5EC400D92F21 /* LevelEditorTest.cpp in Sources */,
 				03907B3B135E5F0E00D92F21 /* ImageBrowser.cpp in Sources */,
 				03907B3D135E5F3B00D92F21 /* stb_image.c in Sources */,
-				03907B64135E651200D92F21 /* ChannelStream.cpp in Sources */,
 				03907B6B135E684700D92F21 /* AudioTest.cpp in Sources */,
 				03907B71135E704D00D92F21 /* AudioDecoder.cpp in Sources */,
 				03907B73135E74F500D92F21 /* AudioAsset.cpp in Sources */,
 				03907B77135E7D4700D92F21 /* OggDecoder.cpp in Sources */,
 				03907B81135E81D700D92F21 /* AudioCrypt.cpp in Sources */,
 				03A1D876135F297A00831F9E /* Editor.cpp in Sources */,
-				BF21B0B01368BEC600ACFCCB /* OpenGLTTFFontAsset.cpp in Sources */,
+				031FEECE1367AFD100B62E27 /* TextureAtlas.cpp in Sources */,
+				031FEED41367B02100B62E27 /* Puppet.cpp in Sources */,
+				031FEED51367B02100B62E27 /* PuppetEditor.cpp in Sources */,
+				031FEED81367B12000B62E27 /* Audio.cpp in Sources */,
+				031FEEDB1367B8C600B62E27 /* AudioVis.cpp in Sources */,
+				031FEEDE1367BB4B00B62E27 /* VisCache2.cpp in Sources */,
+				031FEEE11367BB7200B62E27 /* fft.cpp in Sources */,
+				031FEEEC1367BF2700B62E27 /* AudioDeck.cpp in Sources */,
+				035BC67E1368D744002756A4 /* AudioAssetReader.cpp in Sources */,
+				BFB4DF80136AB9010049447A /* ChannelStream.cpp in Sources */,
+				BFB4DF82136AB96E0049447A /* OpenGLTTFFontAsset.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

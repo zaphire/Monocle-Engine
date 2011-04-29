@@ -92,7 +92,7 @@ namespace Monocle
 		return asset;
     }
     
-    AudioAsset *Assets::RequestAudio(const std::string &filename, AudioDecoder &decoder)
+    AudioAsset *Assets::RequestAudio(const std::string &filename, bool streamFromDisk, std::string decodeString)
 	{
 		AudioAsset *asset = NULL;
 		std::string fullFilename = instance->contentPath + filename;
@@ -106,7 +106,8 @@ namespace Monocle
 		if (!asset)
 		{
 			asset = new AudioAsset();
-			asset->Load(fullFilename, decoder);
+            asset->SetDecodeString(decodeString);
+			asset->Load(fullFilename, streamFromDisk);
 			instance->StoreAsset((Asset*)asset);
 		}
         
