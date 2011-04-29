@@ -1,7 +1,7 @@
 #pragma once
 
-#define BUFFER_SIZE (1024 * 128)
-#define NUM_BUFFERS 3
+#define BUFFER_SIZE (1024 * 64)
+#define NUM_BUFFERS 2
 
 namespace Monocle
 {

@@ -151,9 +151,8 @@ namespace Monocle {
         if (!ret && (dd->loopsRemaining!=0))
         {
             // we are looping so restart from the beginning
-            
             ret = 1;
-            ov_pcm_seek(&data->vf, /*((data->cable->nLoopIn*(data->cable->samples))/1000)*/0);
+            ov_pcm_seek(&data->vf, 0);  // Loop back position, TODO: If we want to loop to a specific point, here is the code for that!
             while(ret && pos<size)
             {
                 ret = ov_read(&data->vf, (char*)buf+pos, size-pos, 0, 2, 1, &data->sec);

@@ -67,9 +67,10 @@ namespace Monocle
         Check();
         
         memset(obtainedBuffer,0,BUFFER_SIZE);
-        alBufferData(buffers[0], format, obtainedBuffer, BUFFER_SIZE, samplerate);
-        alBufferData(buffers[1], format, obtainedBuffer, BUFFER_SIZE, samplerate);
-        alBufferData(buffers[2], format, obtainedBuffer, BUFFER_SIZE, samplerate);
+        
+        for (int i=0; i<NUM_BUFFERS; i++)
+            alBufferData(buffers[i], format, obtainedBuffer, BUFFER_SIZE, samplerate);
+        //alBufferData(buffers[1], format, obtainedBuffer, BUFFER_SIZE, samplerate);
 
         Debug::Log("AUDIO: Opening Audio Channel: " + StringOf(samplerate) + "hz w/ " + StringOf(channels) + " channels (ALformat:" + StringOf(format) +")");
         

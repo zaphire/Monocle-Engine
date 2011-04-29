@@ -349,6 +349,15 @@ namespace Monocle
 		return Collision::Collide(this, tag, collisionData);
 	}
 
+	Collider* Entity::CollideAt(const std::string &tag, const Vector2 &atPosition, CollisionData *collisionData)
+	{
+		Vector2 oldPosition = position;
+		position = atPosition;
+		Collider *collider = Collision::Collide(this, tag, collisionData);
+		position = oldPosition;
+		return collider;
+	}
+
 	/*
 	RectangleCollider* Entity::AddRectangleCollider(float width, float height, const Vector2 &offset)
 	{

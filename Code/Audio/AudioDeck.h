@@ -208,8 +208,6 @@ namespace Monocle {
         
         __INT64_TYPE__ writtenpos;		// An internal record keeper of the current written position. Not a good indicator of the current file position. Can be reset to 0 on seeks and flushes.
         
-        long		bufLen;             // Buffer length in MS for next play (defaults to 1000) (100 < x < 10000)
-        
         int			numLoops;           // The number of loops originally assigned to this deck. (For fade out information... <0 is infinite)
         
         // Useful External Information

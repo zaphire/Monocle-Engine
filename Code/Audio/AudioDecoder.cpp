@@ -17,7 +17,7 @@ namespace Monocle
         this->decoderData = decoderData;
         this->audAsset = audAsset;
         
-        this->loopsRemaining = 1;
+        this->loopsRemaining = 0;
         this->outOfData = false;
         this->seekOffset = -1;
         this->total = 0;

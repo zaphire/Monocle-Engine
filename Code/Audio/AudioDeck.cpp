@@ -10,6 +10,8 @@
 #include "../Platform.h"
 #include "../Debug.h"
 
+#define MIN(a,b) (a<b)?a:b
+
 namespace Monocle {
     
     bool AudioDeck::UpdateFades()
@@ -111,10 +113,9 @@ namespace Monocle {
         this->lastSeekPos = 0;
         this->total = decodeData->total;
         
-        this->bufLen = 1000;
-
-        vc.Init(this->bufLen + 5000, decodeData->samplerate);
-        this->vizlast = Platform::GetMilliseconds();
+        // Careful calculations calculated the buflen
+        vc.Init((BUFFER_SIZE/32768)*NUM_BUFFERS, decodeData->samplerate);
+        this->vizlast = 0;
         
         // We need to attach a VizEng internally now.
         this->vis->PrepData();
@@ -193,7 +194,7 @@ namespace Monocle {
     
     void AudioDeck::UpdateVizJunk()
     {
-        long viznow = Platform::GetMilliseconds();
+        long viznow = this->cs->GetTotalPlayTime();
         
         if (this->cleanVis){
             vc.Clean();
@@ -223,7 +224,7 @@ namespace Monocle {
                 }
             }
             
-            vizlast = Platform::GetMilliseconds();
+            vizlast = this->cs->GetTotalPlayTime();
         }
     }
     
@@ -376,8 +377,6 @@ namespace Monocle {
             // Not paused...
             if (this->playStarted && !cs->IsPlaying())
                 cs->Resume(); // resume please
-        
-            if (this->vis) this->vis->bClear = false;
         }
         
         // Check to see if we need to seek...
@@ -420,9 +419,6 @@ namespace Monocle {
             // We stop here?
         }
         
-//		if (od->done || done || oc->done || oc->almostDone || od->killSwitch)
-//			break;
-        
 		int buffers_to_fill = this->cs->NeedsUpdate();
         unsigned int size;
         
@@ -431,10 +427,7 @@ namespace Monocle {
             // No update needed?
             if (this->vis && !this->pause) this->vis->bClear = false;
             
-			//vc.SetReadTime( cP->GetOutputTime() );
 			UpdateVizJunk();
-            
-			//PauseHandler(od,&done,cP,&vc);
         }
 		
 		while (buffers_to_fill--)
@@ -445,52 +438,48 @@ namespace Monocle {
             
             data = this->cs->GetBuffer(&size);
             
+            // Prepad the buffer with silence!
+            if (decodeData->bit == 8)
+                memset(data,0x80,size); // unsigned!
+            else
+                memset(data,0,size); // signed (:
+            
             // If the decoder says we're out of data...
             if (decodeData->outOfData)
-            {
-                //for (int i=0;i<32 && !od->done && !done && !oc->done;i++)
-                {
-                    long time = 0;
-                    
-                    //                totsamps += size;
-                    //od->writtenpos += (DWORD)((float)ns*1000.0f)/((float)(oc->samples*sampsize));
-                    //                this->writtenpos = (totsamps*1000)/(decodeData->samplerate*sampsize);
-                    
-                    /*
-                     if (od->triggerDisconnectOnFinish)
-                     {
-                     od->cable->freecable(od->cable);
-                     od->cable = 0;
-                     od->triggerDisconnectOnFinish = 0;
-                     od->settings.pan = 0;
-                     od->settings.volume = 1.0f;
-                     od->settings.rate = -1;
-                     od->rateMultiplier = 1.0f;
-                     }
-                     */
-                    
-                    memset(data,0,size);
-                    
-                    
-                    // Write silence to vc
-                    memset(temp_waveL,0,576);
-                    memset(temp_waveR,0,576);
+            {   
+                // Write silence to vc
+                memset(temp_waveL,0x80,576);
+                memset(temp_waveR,0x80,576);
+                
+                while (pos<size){
+                
+                    vc.SetWrittenTime(this->writtenpos);
                     
                     vc.PutWaveLeft(temp_waveL);
                     vc.PutWaveRight(temp_waveR);
                     vc.SetEngineerData(0,0,0,0);
-                    vc.SetWrittenTime(this->writtenpos);
                     
                     vc.EndEntry();
                     
-                    if (this->vis) this->vis->bClear = true;
+                    UpdateVizJunk();
+                    
+                    l = MIN(576,size-pos);
+
+                    unsigned long nlen;
+                    nlen = (unsigned long)(float)((float)l*1000.0f)/((float)(decodeData->samplerate*sampsize));
+                    totsamps += l;
+                    this->writtenpos = (totsamps*1000)/(decodeData->samplerate*sampsize);
+                    this->currentPosition += nlen;
+                    
+                    pos += l;
                 }
-                
-                l = 0;
+            }
+            else
+            {
+                if (this->vis) this->vis->bClear = false;
             }
             
             while (l && pos<size && !decodeData->outOfData && !this->done){
-                if (this->vis) this->vis->bClear = false;
                 
                 // What to do if the Decoder says we're almost out of data?
                 
@@ -513,7 +502,6 @@ namespace Monocle {
                 
                 vc.SetEngineerData(0,0,0,0);
                 
-//                l = oc->render((ns-pos<576*sampsize)?(ns-pos):576*sampsize,(cdsbuf)((long)buf+(long)pos),oc);
                 l = this->decodeData->decoder->Render((size-pos<576*sampsize)?(size-pos):576*sampsize,(void*)((long)data+(long)pos),*this->decodeData);
                 
                 if (l >= 576*sampsize)
@@ -573,20 +561,14 @@ namespace Monocle {
                 
                 UpdateVizJunk();
                 
-                //			UpdateFades(od,cP,&done); // Do NOT break with an open buffer
-                
                 unsigned long nlen;
                 nlen = (unsigned long)(float)((float)l*1000.0f)/((float)(decodeData->samplerate*sampsize));
-                //nlen = (l*1000)/(oc->samples*oc->ch*sampsize);
                 totsamps += l;
-                //od->writtenpos += nlen;
                 this->writtenpos = (totsamps*1000)/(decodeData->samplerate*sampsize);
                 this->currentPosition += nlen;
                 
                 pos += l;
             }
-			
-//            size = this->decodeData->decoder->Render(size,(void*)data,*this->decodeData);
 			
 			this->cs->LockBuffer(size);
 			

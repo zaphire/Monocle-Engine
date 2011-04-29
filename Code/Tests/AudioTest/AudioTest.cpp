@@ -6,11 +6,11 @@
 
 #include "../../Audio/oggvorbis/OggDecoder.h"
 
+//#define MONOCLE_AUDIOTEST_CROSSFADING
+#define MONOCLE_AUDIOTEST_LOOPER
+
 namespace AudioTest
-{
-    AudioDeck *deck1;
-    AudioDeck *deck2;
-    
+{    
 	Text::Text(const std::string& text, FontAsset* font)
 		: Entity(), font(font), text(text)
 	{
@@ -75,6 +75,13 @@ namespace AudioTest
         } else {
             // Do the spectrum blocks
             
+            if (deck->vis->bClear){
+                Graphics::SetColor(Color::white);
+                Graphics::RenderTriangle(400.0);
+                Graphics::PopMatrix();
+                return;
+            }
+            
             float midy = Graphics::GetVirtualHeight()/2.0;
             float xstep = Graphics::GetVirtualWidth()/400.0;
             float val;
@@ -99,6 +106,68 @@ namespace AudioTest
         
         Graphics::PopMatrix();
     }
+    
+#ifdef MONOCLE_AUDIOTEST_LOOPER
+    
+    AudioDeck *deck;
+    
+    /*
+     **************************************************
+     * G a m e S c e n e
+     **************************************************
+     *
+     * Sets up the game's entities in Begin()
+     * 
+     */
+    
+	void GameScene::Begin()
+	{
+		Debug::Log("AudioTest::GameScene::Begin()!");
+        
+		Scene::Begin();
+		
+		FontAsset* font = Assets::RequestFont("AudioTest/LiberationSans-Regular.ttf", 25.0f);
+        scText = new Text("Dual-worlds Audio Demo", font);
+        scText->position = Vector2(50, 50);
+        Add(scText);
+        
+        // Make the deck, and it starts playing... (we need a play())
+        deck = Audio::NewDeck( Assets::RequestAudio("AudioTest/ShortLoop.ogg", true) );
+        deck->Play();
+        
+        Waveform* wave = new Waveform(deck,1);
+        Add(wave);
+        
+        wave = new Waveform(deck,0);
+        Add(wave);
+	}
+    
+	void GameScene::ReceiveNote(const std::string &note)
+	{
+	}
+    
+	
+	void GameScene::Update()
+	{
+		Scene::Update();
+        
+        scText->SetText("Time is " + StringOf(deck->cs->GetTotalPlayTime()) + " / " + StringOf(deck->GetTotalLength()));
+        
+	}
+    
+	void GameScene::End()
+	{
+		Scene::End();
+        
+        delete deck;
+	}
+    
+#endif
+    
+#ifdef MONOCLE_AUDIOTEST_CROSSFADING
+    
+    AudioDeck *deck1;
+    AudioDeck *deck2;
 
 	/*
 	**************************************************
@@ -128,7 +197,7 @@ namespace AudioTest
         
         deck1->Play();
         deck2->Play();
-        
+
         Waveform* wave = new Waveform(deck1,1);
         Add(wave);
 
@@ -145,7 +214,7 @@ namespace AudioTest
 	{
 		Scene::Update();
         
-        scText->SetText("Time is " + StringOf(deck1->cs->GetTotalPlayTime()) + " / " + StringOf(deck1->GetTotalLength()));
+        scText->SetText("Press F to crossfade. " + StringOf(deck1->cs->GetTotalPlayTime()) + " / " + StringOf(deck1->GetTotalLength()));
         
         if (Input::IsKeyPressed(KEY_F))
         {
@@ -166,5 +235,7 @@ namespace AudioTest
         delete deck1;
         delete deck2;
 	}
+    
+#endif
 
 }

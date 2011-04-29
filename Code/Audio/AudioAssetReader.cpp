@@ -64,7 +64,7 @@ namespace Monocle {
             if (!cryptKey)
             {
                 // Read simply, no decryption needed
-                return fread(dst,size,1,file)*size;
+                return fread(dst,1,size,file);
             }
             else
             {
@@ -94,7 +94,7 @@ namespace Monocle {
                 void *tmpBuf = malloc(trueReadSize);
                 
                 // Read and decode
-                fread(tmpBuf,trueReadSize,1,file);
+                fread(tmpBuf,1,trueReadSize,file);
 
                 cryptKey->DecodeSlice5b((unsigned char*)tmpBuf + sizeAdjustToFive, (unsigned char*)dst, size, sizeAdjustToFive, sizeReadAhead+size);
                 
