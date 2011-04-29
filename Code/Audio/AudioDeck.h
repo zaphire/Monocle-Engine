@@ -237,7 +237,7 @@ namespace Monocle {
         AudioFades	fades;      // Structure containing fade information
         long		lastSeekPos;        // Last position seeked with "Seek Position"
         
-        __INT64_TYPE__ writtenpos;		// An internal record keeper of the current written position. Not a good indicator of the current file position. Can be reset to 0 on seeks and flushes.
+        unsigned long writtenpos;		// An internal record keeper of the current written position. Not a good indicator of the current file position. Can be reset to 0 on seeks and flushes.
         
         // Useful External Information
         long		currentPosition;	// This holds an accurate indication of where the current file position is.
