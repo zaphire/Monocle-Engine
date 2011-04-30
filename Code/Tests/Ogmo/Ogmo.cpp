@@ -8,6 +8,10 @@
 
 namespace Ogmo
 {
+    AudioAsset *sfxCoin=NULL;
+    AudioAsset *sfxJump=NULL;
+    AudioAsset *sfxUFO=NULL;
+    
 	// T H E   P L A Y E R (entity)
 	Player::Player(int x, int y)
 		: Entity(), 
@@ -102,6 +106,9 @@ namespace Ogmo
 					doubleJump = true;
 				}
 			}
+            
+            if (sfxJump)
+                sfxJump->Play(1,1.0,0.0,(doubleJump)?1.0:0.6); // Play at a lower pitch off the ground
 		}
 
 		// gravity
@@ -244,6 +251,9 @@ namespace Ogmo
 		{
 			if (Collide("PLAYER") && !reset)
 			{
+                float coinpitch = ((rand()%101) / 500.0); // Vary from 0.0 to 0.2
+                if (sfxCoin)
+                    sfxCoin->Play(1,1.0,0.0,1.0+coinpitch);
 				collected = true;
 			}
 		}
@@ -344,6 +354,10 @@ namespace Ogmo
 		Level::SetScene(this);
 		Level::LoadProject("project.xml");
 		Level::Load("level01.xml");
+        
+        sfxCoin = Assets::RequestAudio("../AudioTest/coin.wav");
+        sfxJump = Assets::RequestAudio("../AudioTest/jump.wav");
+        sfxUFO = Assets::RequestAudio("../AudioTest/UFO.wav");
 
 		//add player
 		player = new Player(120, 8);
@@ -386,6 +400,9 @@ namespace Ogmo
 		{
 			Add(new Spike(-1, -1, atSpike));
 		}
+        
+        // Nice start noise
+        if (sfxUFO) sfxUFO->Play(1,0.3);
 	}
 
 	void World::Update()

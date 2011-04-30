@@ -32,7 +32,6 @@ namespace Monocle {
     typedef struct OggDecoderData_s {
         
         int sec;
-        long seek;
         OggVorbis_File vf;
         
     } OggDecoderData;
@@ -118,7 +117,7 @@ namespace Monocle {
 //    int WINAPI e_seek( onu_deck_cable_s *cable, long pos )
     static bool oggSeek( AudioDecodeData *dd, long pos )
     {
-        OGGDATA(dd)->seek = (long)(((float)pos/1000.0f) * (float)dd->samplerate);
+        dd->seekOffset = pos;
         if (!ov_seekable(&(OGGDATA(dd)->vf))) return false;
         
         return true;
@@ -131,10 +130,11 @@ namespace Monocle {
         int ret = 1;
         unsigned long pos=0;
         
-        if (data->seek != -1)
+        if (dd->seekOffset != -1)
         {
-            ov_pcm_seek(&data->vf, data->seek);
-            data->seek = -1;
+            long seek = (long)(((float)dd->seekOffset/1000.0f) * (float)dd->samplerate);
+            ov_pcm_seek(&data->vf, seek);
+            dd->seekOffset = -1;
             dd->outOfData = false;
         }
         
@@ -148,9 +148,8 @@ namespace Monocle {
         if (!ret && (dd->loopsRemaining!=0))
         {
             // we are looping so restart from the beginning
-            
             ret = 1;
-            ov_pcm_seek(&data->vf, /*((data->cable->nLoopIn*(data->cable->samples))/1000)*/0);
+            ov_pcm_seek(&data->vf, 0);  // Loop back position, TODO: If we want to loop to a specific point, here is the code for that!
             while(ret && pos<size)
             {
                 ret = ov_read(&data->vf, (char*)buf+pos, size-pos, 0, 2, 1, &data->sec);
@@ -180,7 +179,6 @@ namespace Monocle {
     int oggInit( AudioDecodeData *dd )
     {
         OggDecoderData *data = OGGDATA(dd);
-        data->seek = -1;
 
         vorbisCallbacks.read_func = VorbisRead;
         vorbisCallbacks.close_func = VorbisClose;

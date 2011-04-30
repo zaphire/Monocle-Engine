@@ -9,8 +9,10 @@
 namespace Monocle
 {
 
-    AudioCryptKey::AudioCryptKey( char *cKeyStr )
+    AudioCryptKey::AudioCryptKey( std::string keyStr )
     {
+        char *cKeyStr = (char*)keyStr.c_str();
+        
         // First we need to generate the four parts from the key string.
         KeyStringToFourParts( cKeyStr, &m_nPart1, &m_nPart2, &m_nPart3, &m_nPart4 );
 

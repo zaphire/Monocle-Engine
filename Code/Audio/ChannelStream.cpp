@@ -21,10 +21,50 @@
 
 #include "../Platform.h"
 
+#define VERBOSE(x) Debug::Log(std::string("VERBOSE: ") + x)
+#undef VERBOSE
+#define VERBOSE(x)
+
+std::string GetALErrorString(ALenum err)
+{
+    switch(err)
+    {
+        case AL_NO_ERROR:
+            return std::string("AL_NO_ERROR");
+            break;
+            
+        case AL_INVALID_NAME:
+            return std::string("AL_INVALID_NAME");
+            break;
+            
+        case AL_INVALID_ENUM:
+            return std::string("AL_INVALID_ENUM");
+            break;
+            
+        case AL_INVALID_VALUE:
+            return std::string("AL_INVALID_VALUE");
+            break;
+            
+        case AL_INVALID_OPERATION:
+            return std::string("AL_INVALID_OPERATION");
+            break;
+            
+        case AL_OUT_OF_MEMORY:
+            return std::string("AL_OUT_OF_MEMORY");
+            break;
+            
+        default:
+            return "??";
+    };
+}
+
 namespace Monocle
 {
     bool ChannelStream::IsPlaying()
     {
+        if (!started)
+            return false;
+        
         ALenum state;
         alGetSourcei(source, AL_SOURCE_STATE, &state);
         return (state == AL_PLAYING);
@@ -32,6 +72,11 @@ namespace Monocle
 
     void ChannelStream::Open( int channels, int bits, int samplerate )
     {
+        if (started)
+            return;
+        
+        VERBOSE("ChannelStream Open");
+        
         if (channels == 1)
         {
             format = AL_FORMAT_MONO16;
@@ -49,31 +94,32 @@ namespace Monocle
         
         alGenBuffers(NUM_BUFFERS, buffers);
         
-        Check();
+        Check("opengenbuf");
         
         alGenSources(1, &source);
         
-        Check();
+        Check("opengensource");
         
         alSource3f(source, AL_POSITION, 0.0, 0.0, 0.0);
         alSource3f(source, AL_VELOCITY, 0.0, 0.0, 0.0);
         alSource3f(source, AL_DIRECTION, 0.0, 0.0, 0.0);
         
-        Check();
+        Check("opensetsource");
         
         alSourcei(source, AL_ROLLOFF_FACTOR, 0);
         alSourcei(source, AL_SOURCE_RELATIVE, AL_TRUE);
         
-        Check();
+        Check("opensetsource2");
         
         memset(obtainedBuffer,0,BUFFER_SIZE);
-        alBufferData(buffers[0], format, obtainedBuffer, BUFFER_SIZE, samplerate);
-        alBufferData(buffers[1], format, obtainedBuffer, BUFFER_SIZE, samplerate);
-        alBufferData(buffers[2], format, obtainedBuffer, BUFFER_SIZE, samplerate);
-
-        Debug::Log("AUDIO: Opening Audio Channel: " + StringOf(samplerate) + "hz w/ " + StringOf(channels) + " channels (ALformat:" + StringOf(format) +")");
         
-        Check();
+        for (int i=0; i<NUM_BUFFERS; i++)
+            alBufferData(buffers[i], format, obtainedBuffer, BUFFER_SIZE, samplerate);
+        //alBufferData(buffers[1], format, obtainedBuffer, BUFFER_SIZE, samplerate);
+
+        //Debug::Log("AUDIO: Opening Audio Channel: " + StringOf(samplerate) + "hz w/ " + StringOf(channels) + " channels (ALformat:" + StringOf(format) +")");
+        
+        Check("openbufferdata");
 
         this->samplerate = samplerate;
         this->started = true;
@@ -86,16 +132,28 @@ namespace Monocle
     
     void ChannelStream::Close()
     {
+        if (!started)
+            return;
+        
+        VERBOSE("ChannelStream Close");
+        
+        Check("preclose");
         alSourceStop(source);
+        Check("stop");
         Empty();
         alDeleteSources(1,&source);
+        Check("deletesources");
         alDeleteBuffers(NUM_BUFFERS,buffers);
+        Check("deletebuffers");
         started = false;
     }
 
     int ChannelStream::NeedsUpdate()
     {
         int processed;
+        
+        if (!started)
+            return 0;
         
         if (this->startBuffer >= NUM_BUFFERS){
             alGetSourcei(source, AL_BUFFERS_PROCESSED, &processed);
@@ -108,7 +166,7 @@ namespace Monocle
     void ChannelStream::LockNumberedBuffer( unsigned int size, unsigned int buff )
     {
         alBufferData(buffers[buff], format, obtainedBuffer, size, samplerate);
-        Check();
+        Check("locknumberbuff");
     }
 
     unsigned char *ChannelStream::GetBuffer( unsigned int *size )
@@ -118,7 +176,7 @@ namespace Monocle
         }
         
         alSourceUnqueueBuffers(source, 1, &active_buffer);
-        Check();
+        Check("getbuffer");
         
         return GetStaticBuffer(size);
     }
@@ -138,17 +196,17 @@ namespace Monocle
         }
         
         alBufferData(active_buffer, format, obtainedBuffer, size, samplerate);
-        Check();
+        Check("lockbd");
         
         alSourceQueueBuffers(source, 1, &active_buffer);
-        Check();
+        Check("lockqb");
     }
 
     void ChannelStream::Play()
     {
         alSourceQueueBuffers(source, NUM_BUFFERS, buffers);
         alSourcePlay(source);
-        Check();
+        Check("play");
         
         this->startedPlaying = true;
         this->playStart = Platform::GetMilliseconds();
@@ -161,25 +219,32 @@ namespace Monocle
 
     void ChannelStream::Empty()
     {
-        int queued;
+        int queued = 0;
+        
+        VERBOSE("Empty");
         
         alGetSourcei(source, AL_BUFFERS_QUEUED, &queued);
+        Check("emptystart");
         
         while(queued--)
         {
             ALuint buffer;
             
             alSourceUnqueueBuffers(source, 1, &buffer);
-            Check();
+
+            Check("empty " + StringOf(queued+1));
         }
     }
 
-    void ChannelStream::Check()
+    void ChannelStream::Check( std::string erat )
     {
         int error = alGetError();
+        
+        VERBOSE("Checking " + erat);
             
         if(error != AL_NO_ERROR)
-            printf("OpenAL Error: %d\n",error);
+            Debug::Log("OpenAL Error on " + erat + ": " + StringOf(error) + " (" + GetALErrorString(error) + ")");
+            //printf("OpenAL Error: %d\n",error);
     }
 
     ChannelStream::ChannelStream()
@@ -223,7 +288,7 @@ namespace Monocle
                                       ALC_DEFAULT_DEVICE_SPECIFIER);
         
         //printf("using default device: %s\n", default_device);
-        Debug::Log("AUDIO: Opening Audio Device: " + std::string(default_device));
+        Debug::Log("AUDIO: Opening Audio Channel: " + std::string(default_device));
         
         if ((device = alcOpenDevice(default_device)) == NULL) {
             fprintf(stderr, "failed to open sound device\n");
@@ -296,17 +361,25 @@ namespace Monocle
     
     void ChannelStream::SetVolume( float vol )
     {
-        alSourcef(source,AL_GAIN,vol);
+        if (started)
+            alSourcef(source,AL_GAIN,vol);
     }
     
     void ChannelStream::SetPan( float pan )
     {
-        alSource3f(source,AL_POSITION,pan,0.0,0.0);
+        if (started)
+            alSource3f(source,AL_POSITION,pan,0.0,0.0);
     }
 
     void ChannelStream::SetPitch( float pitch )
     {
-        alSourcef(source,AL_PITCH,pitch);
+        if (started)
+            alSourcef(source,AL_PITCH,pitch);
+    }
+    
+    bool ChannelStream::IsOpen()
+    {
+        return started;
     }
     
 }

@@ -6,27 +6,34 @@
 
 #include <string>
 #include <algorithm>
+#include <vector>
 
 #include "Audio.h"
 
-#include "oggvorbis/OggDecoder.h"
 #include "../Debug.h"
 #include "../MonocleToolkit.h"
 
+#ifdef MONOCLE_AUDIO_OGG
+#include "Decoders/OggDecoder.h"
+#endif
+#include "Decoders/WaveDecoder.h"
+
+#define ADD_DECODER(v) decoders->push_back( new v );
+
 namespace Monocle {
-    
+   
     Audio *Audio::instance = NULL;
+    static std::map<std::string, AudioDecoder *> *decoderMap = NULL;
+    static std::vector<AudioDecoder *> *decoders = NULL;
     
     void Audio::Init()
     {
-        AudioDecoder *decoder;
-        
         Debug::Log("Audio::Init...");
         
+        // Init the separate decoders here
+        ADD_DECODER(WaveDecoder);
 #ifdef MONOCLE_AUDIO_OGG
-        decoder = new OggDecoder();
-        decoderMap["ogg"] = decoder;
-        decoderMap["g2m"] = decoder;
+        ADD_DECODER(OggDecoder);
 #endif
             
         ChannelStream::Init();
@@ -56,13 +63,13 @@ namespace Monocle {
         std::string ext = audioAsset->GetExtension();
         std::transform(ext.begin(), ext.end(), ext.begin(), ::tolower);
         
-        if(instance->decoderMap.find(ext) == instance->decoderMap.end())
+        if(decoderMap[0].find(ext) == decoderMap[0].end())
         {
             Debug::Log("AUDIO: Could not find a decoder for the file: " + audioAsset->GetName());
             return 0;
         }
         
-        AudioDecoder *decoder = instance->decoderMap[ext];
+        AudioDecoder *decoder = decoderMap[0][ext];
         AudioDecodeData *decData = decoder->RequestData(audioAsset);
         
         if (!decData){
@@ -88,8 +95,11 @@ namespace Monocle {
     {
         AudioDeck *d = firstDeck;
         while (d) {
+            AudioDeck *nextDeck = d->nextDeck;
             d->Update();
-            d = d->nextDeck;
+            
+            // Sometimes the deck will kill itself, so we have to get the next deck BEFORE calling Update().
+            d = nextDeck;
         }
     }
     
@@ -106,10 +116,15 @@ namespace Monocle {
     Audio::Audio() {
         instance = this;
         this->firstDeck = 0;
+        
+        if (!decoders)
+            decoders = new std::vector<AudioDecoder*>;
+        if (!decoderMap)
+            decoderMap = new std::map<std::string, AudioDecoder *>;
     }
     
     Audio::~Audio() {
-        std::map<std::string,AudioDecoder*>::iterator it;
+//        std::map<std::string,AudioDecoder*>::iterator it;
         
         // Deletes the decks
         AudioDeck *nextDeck = this->firstDeck;
@@ -119,12 +134,47 @@ namespace Monocle {
             nextDeck = d;
         }
         
-        // Removes decoders
+        // Removes decoders (not our job!)
+        /**
         it = decoderMap.begin();
         for (; it != decoderMap.end(); ++it){
             delete it->second;
         }
-        decoderMap.clear();
+         **/
+        
+        if (decoders)
+        {
+            
+            std::vector<AudioDecoder *>::iterator it;
+            it = decoders->begin();
+            
+            for (; it != decoders->end(); ++it){
+                delete it[0];
+            }
+            delete decoders;
+        }
+        
+        if (decoderMap) delete decoderMap;
+        decoders = NULL;
+        decoderMap = NULL;
+    }
+    
+    void Audio::RegisterDecoder(Monocle::AudioDecoder *decoder, std::string extension)
+    {
+        if (decoderMap == NULL) decoderMap = new std::map<std::string, AudioDecoder *>;
+        decoderMap[0][extension] = decoder;
+    }
+    
+    void Audio::PlaySound( AudioAsset *asset, int loops, float volume, float pan, float pitch )
+    {
+        AudioDeck *deck = NewDeck(asset);
+        if (!deck) return;
+        deck->SetVolume(volume);
+        deck->SetPan(pan);
+        deck->SetPitch(pitch);
+        deck->FreeDeckOnFinish();
+        deck->Play();
+        return;
     }
  
 }
