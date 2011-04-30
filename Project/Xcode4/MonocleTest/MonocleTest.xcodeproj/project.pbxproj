@@ -19,12 +19,10 @@
 		037066A61369D25F00B7F9C4 /* ChannelStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 037066A51369D25F00B7F9C4 /* ChannelStream.cpp */; };
 		037D6F73136AF225001CFBB9 /* OggDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 037D6F6B136AF225001CFBB9 /* OggDecoder.cpp */; };
 		037D6F74136AF225001CFBB9 /* WaveDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 037D6F71136AF225001CFBB9 /* WaveDecoder.cpp */; };
-		037D6F85136AFB51001CFBB9 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037D6F83136AFB51001CFBB9 /* Ogg.framework */; };
 		037D6F86136AFB51001CFBB9 /* Vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037D6F84136AFB51001CFBB9 /* Vorbis.framework */; };
 		037D6FBC136AFE94001CFBB9 /* GLEW.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037D6FBB136AFE94001CFBB9 /* GLEW.framework */; };
 		037D6FC2136B027F001CFBB9 /* GLEW.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 037D6FBF136B027E001CFBB9 /* GLEW.framework */; };
 		037D6FC3136B027F001CFBB9 /* Vorbis.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 037D6FC0136B027E001CFBB9 /* Vorbis.framework */; };
-		037D6FC4136B027F001CFBB9 /* Ogg.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 037D6FC1136B027E001CFBB9 /* Ogg.framework */; };
 		03907B2B135E5E0300D92F21 /* CollisionData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B29135E5E0300D92F21 /* CollisionData.cpp */; };
 		03907B30135E5E9B00D92F21 /* MonocleToolkit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B2E135E5E9B00D92F21 /* MonocleToolkit.cpp */; };
 		03907B37135E5EC400D92F21 /* LevelEditorTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03907B33135E5EC400D92F21 /* LevelEditorTest.cpp */; };
@@ -100,7 +98,6 @@
 			files = (
 				037D6FC2136B027F001CFBB9 /* GLEW.framework in Copy Files */,
 				037D6FC3136B027F001CFBB9 /* Vorbis.framework in Copy Files */,
-				037D6FC4136B027F001CFBB9 /* Ogg.framework in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,7 +138,6 @@
 		037D6FBB136AFE94001CFBB9 /* GLEW.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLEW.framework; path = ../../../Libs/MacOSX/GLEW.framework; sourceTree = "<group>"; };
 		037D6FBF136B027E001CFBB9 /* GLEW.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLEW.framework; path = ../../../Libs/MacOSX/GLEW.framework; sourceTree = "<group>"; };
 		037D6FC0136B027E001CFBB9 /* Vorbis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vorbis.framework; path = ../../../Libs/MacOSX/Vorbis.framework; sourceTree = "<group>"; };
-		037D6FC1136B027E001CFBB9 /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = ../../../Libs/MacOSX/Ogg.framework; sourceTree = "<group>"; };
 		03907B29135E5E0300D92F21 /* CollisionData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CollisionData.cpp; path = ../../../Code/CollisionData.cpp; sourceTree = "<group>"; };
 		03907B2A135E5E0300D92F21 /* CollisionData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollisionData.h; path = ../../../Code/CollisionData.h; sourceTree = "<group>"; };
 		03907B2E135E5E9B00D92F21 /* MonocleToolkit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MonocleToolkit.cpp; path = ../../../Code/MonocleToolkit.cpp; sourceTree = "<group>"; };
@@ -289,7 +285,6 @@
 				03907B41135E618F00D92F21 /* OpenAL.framework in Frameworks */,
 				37FB69B813319030008963C1 /* OpenGL.framework in Frameworks */,
 				37EA249B132F986900D216B0 /* Cocoa.framework in Frameworks */,
-				037D6F85136AFB51001CFBB9 /* Ogg.framework in Frameworks */,
 				037D6F86136AFB51001CFBB9 /* Vorbis.framework in Frameworks */,
 				037D6FBC136AFE94001CFBB9 /* GLEW.framework in Frameworks */,
 			);
@@ -449,7 +444,6 @@
 			children = (
 				037D6FBF136B027E001CFBB9 /* GLEW.framework */,
 				037D6FC0136B027E001CFBB9 /* Vorbis.framework */,
-				037D6FC1136B027E001CFBB9 /* Ogg.framework */,
 				37FB691313317656008963C1 /* Monocle */,
 				37EA24A0132F986900D216B0 /* MonocleTest */,
 				37EA2499132F986900D216B0 /* Frameworks */,
