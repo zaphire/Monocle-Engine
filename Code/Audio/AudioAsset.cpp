@@ -5,6 +5,7 @@
 //  Created by Josh Whelchel on 4/19/11.
 //
 
+#include "Audio.h"
 #include "AudioAsset.h"
 #include "../MonocleToolkit.h"
 #include "../Debug.h"
@@ -93,5 +94,10 @@ namespace Monocle
     std::string AudioAsset::GetDecodeString()
     {
         return this->decodeString;
+    }
+    
+    void AudioAsset::Play( int loops, float volume, float pan, float pitch )
+    {
+        Audio::PlaySound(this,loops,volume,pan,pitch);
     }
 }

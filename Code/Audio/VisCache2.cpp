@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdarg.h>
+#include <stdio.h>
 #include <string.h>
 
 #include "VisCache2.h"
@@ -23,11 +24,13 @@ namespace Monocle {
     void VisCache2::Init(long maxLatency, long srate)
     {
         // 44100 p/s * (1s/1000ms) * (1000ms)
-        m_nBufLen = (srate/1000) * (maxLatency/1000);
+        m_nBufLen = (srate/1000) * (maxLatency);
         
         if (m_buf) free(m_buf);
         m_buf = (vc2_entry*)malloc(sizeof(vc2_entry)*m_nBufLen);
 
+        //printf("Allocating %dkb for viscache\n",(sizeof(vc2_entry)*m_nBufLen)/1024);
+        
         Reset();
     }
 
@@ -41,6 +44,14 @@ namespace Monocle {
     void VisCache2::Clean()
     {
         memset(m_buf,0,sizeof(vc2_entry)*m_nBufLen);
+        // For 8 bit, the 'clean' value is actually 0x80
+        if (m_buf){
+            for (int i=0;i<m_nBufLen;i++){
+                vc2_entry *e = &m_buf[i];
+                memset(e->cWaveLeft,0x80,576);
+                memset(e->cWaveRight,0x80,576);
+            }
+        }
     }
 
     void VisCache2::Reset()

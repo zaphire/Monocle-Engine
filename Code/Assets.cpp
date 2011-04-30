@@ -108,6 +108,13 @@ namespace Monocle
 			asset = new AudioAsset();
             asset->SetDecodeString(decodeString);
 			asset->Load(fullFilename, streamFromDisk);
+            
+            // Return NULL if there was no asset...
+            if (!asset->GetDataSize()){
+                delete asset;
+                return NULL;
+            }
+            
 			instance->StoreAsset((Asset*)asset);
 		}
         

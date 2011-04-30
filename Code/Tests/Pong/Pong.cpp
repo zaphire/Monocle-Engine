@@ -6,7 +6,9 @@
 #include <sstream>
 
 namespace Pong
-{
+{    
+    AudioAsset *sfxWall=NULL;
+
 	Text::Text(const std::string& text, FontAsset* font)
 		: Entity(), font(font), text(text)
 	{
@@ -63,6 +65,12 @@ namespace Pong
 			diff.Normalize();
 			diff *= velocity.GetMagnitude();
 			velocity = diff;
+            
+            // Calculate panning
+            float pan = ((collider->GetEntity()->position.x / Graphics::GetVirtualWidth()) - 0.5) * 2.0;
+
+            if (sfxWall)
+                sfxWall->Play(1,1.0,pan); // Play it with panning! (STEREO, baby :D)
 		}
 
 		// if we hit the top or bottom of the screen
@@ -70,6 +78,12 @@ namespace Pong
 		{
 			position = lastPosition;
 			velocity.y *= -1;
+            
+            // Calculate panning
+            float pan = ((position.x / Graphics::GetVirtualWidth()) - 0.5) * 2.0;
+            
+            if (sfxWall)
+                sfxWall->Play(1,1.0,pan,2.0); // Play it higher, you won't even notice it's the same ;D
 		}
 		
 		// if we go off the left side of the screen
@@ -188,6 +202,8 @@ namespace Pong
 		Debug::Log("Pong::GameScene::Begin()!");
 
 		Scene::Begin();
+        
+        sfxWall = Assets::RequestAudio("AudioTest/Explosion.wav");
 		
 		ball = new Ball();
 		ball->position = Vector2(400, 300);
