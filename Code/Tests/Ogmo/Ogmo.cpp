@@ -251,7 +251,7 @@ namespace Ogmo
 		{
 			if (Collide("PLAYER") && !reset)
 			{
-                float coinpitch = ((rand()%101) / 500.0); // Vary from 0.0 to 0.2
+                float coinpitch = ((rand()%101) / 250.0) - 0.2; // Vary from -0.2 to 0.2
                 if (sfxCoin)
                     sfxCoin->Play(1,1.0,0.0,1.0+coinpitch);
 				collected = true;
