@@ -52,8 +52,13 @@ namespace Monocle
 		// return what we found
 		return asset;
 	}
-    
+
     FontAsset *Assets::RequestFont(const std::string &filename, float size, int textureWidth, int textureHeight)
+    {
+        return RequestFont(filename, size, textureWidth, textureHeight, FontAsset::GlyphRanges(1, Range<int>(32, 128)));
+    }
+
+    FontAsset *Assets::RequestFont(const std::string &filename, float size, int textureWidth, int textureHeight, const FontAsset::GlyphRanges& glyphRanges)
     {
 		TTFFontAsset *asset = NULL;
 		std::string fullFilename = instance->contentPath + filename;
@@ -67,7 +72,7 @@ namespace Monocle
 		if (!asset)
 		{
 			asset = new TTFFontAsset();
-			if (asset->Load(fullFilename, size, textureWidth, textureHeight))
+			if (asset->Load(fullFilename, size, textureWidth, textureHeight, glyphRanges))
             {
                 instance->StoreAsset((Asset*)asset);
             }

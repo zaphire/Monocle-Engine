@@ -355,33 +355,83 @@ namespace Monocle
 		glEnd();
 	}
     
-    void Graphics::RenderText(const FontAsset& font, const std::string& text, float x, float y)
+    // Render the given string, updating x and y to the point where the next character
+    // after this string should be placed.
+    void Graphics::RenderTextUpdatePos(const FontAsset& font, const std::string& text, float *x, float *y)
     {
         Rect verts, texCoords;
+        
+        BindFont(&font);
+        
         glBegin(GL_QUADS);
         for (int i = 0; i < text.size(); i++)
         {
             char c = text[i];
-			if ((c >= 32) && (c < 128))
-			{
-				font.GetGlyphData(c, &x, &y, verts, texCoords);
-
+            if ((c >= 32) && (c < 128))
+            {
+				font.GetGlyphData((int)c, x, y, verts, texCoords);
+                
 				glTexCoord2f(texCoords.topLeft.x, texCoords.topLeft.y);
 				glVertex2f(verts.topLeft.x, verts.topLeft.y);
-
+                
 				glTexCoord2f(texCoords.bottomRight.x, texCoords.topLeft.y);
 				glVertex2f(verts.bottomRight.x, verts.topLeft.y);
-
+                
 				glTexCoord2f(texCoords.bottomRight.x, texCoords.bottomRight.y);
 				glVertex2f(verts.bottomRight.x, verts.bottomRight.y);
-
+                
 				glTexCoord2f(texCoords.topLeft.x, texCoords.bottomRight.y);
 				glVertex2f(verts.topLeft.x, verts.bottomRight.y);
-			}
+            }
         }
         glEnd();
     }
     
+    // Render the given text at point x, y.
+    void Graphics::RenderText(const FontAsset& font, const std::string& text, float x, float y)
+    {
+        RenderTextUpdatePos(font, text, &x, &y);
+    }
+    
+    // Render the given string, updating x and y to the point where the next character
+    // after this string should be placed.
+    void Graphics::RenderTextUpdatePos(const FontAsset& font, const std::wstring& text, float *x, float *y)
+    {
+        Rect verts, texCoords;
+
+        BindFont(&font);
+
+        glBegin(GL_QUADS);
+        for (int i = 0; i < text.size(); i++)
+        {
+            // Render any non-control characters
+            int unicodeCodepoint = text[i];
+            if (unicodeCodepoint >= 32)
+            {
+				font.GetGlyphData(unicodeCodepoint, x, y, verts, texCoords);
+                
+				glTexCoord2f(texCoords.topLeft.x, texCoords.topLeft.y);
+				glVertex2f(verts.topLeft.x, verts.topLeft.y);
+                
+				glTexCoord2f(texCoords.bottomRight.x, texCoords.topLeft.y);
+				glVertex2f(verts.bottomRight.x, verts.topLeft.y);
+                
+				glTexCoord2f(texCoords.bottomRight.x, texCoords.bottomRight.y);
+				glVertex2f(verts.bottomRight.x, verts.bottomRight.y);
+                
+				glTexCoord2f(texCoords.topLeft.x, texCoords.bottomRight.y);
+				glVertex2f(verts.topLeft.x, verts.bottomRight.y);
+            }
+        }
+        glEnd();
+    }
+
+    // Render the given text at point x, y.
+    void Graphics::RenderText(const FontAsset& font, const std::wstring& text, float x, float y)
+    {
+        RenderTextUpdatePos(font, text, &x, &y);
+    }
+
 	void Graphics::BeginFrame()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
@@ -420,7 +470,7 @@ namespace Monocle
 		Platform::ShowBuffer();
 	}
 
-	void Graphics::BindTexture(TextureAsset* textureAsset)
+	void Graphics::BindTexture(const TextureAsset* textureAsset)
 	{
 		if (textureAsset != NULL)
 		{
@@ -440,7 +490,7 @@ namespace Monocle
 		}
 	}
     
-    void Graphics::BindFont(FontAsset* fontAsset)
+    void Graphics::BindFont(const FontAsset* fontAsset)
 	{
 		if (fontAsset != NULL)
 		{
