@@ -24,6 +24,7 @@ namespace Monocle
 	{
 		instance = this;
 		lastBoundTextureID = 0;
+        bgReset = true;
 	}
 
 	void Graphics::Init()
@@ -384,7 +385,9 @@ namespace Monocle
     
 	void Graphics::BeginFrame()
 	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
+        if (instance->bgReset)
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
+        
 		glLoadIdentity();
 		glScalef(instance->resolutionScale.x, instance->resolutionScale.y, 0.0f);
 		glTranslatef(instance->screenCenter.x, instance->screenCenter.y, 0.0f);
@@ -567,6 +570,11 @@ namespace Monocle
 		}
 		glEnd();
 	}
+    
+    void Graphics::EnableBackgroundReset( bool bgReset )
+    {
+        instance->bgReset = bgReset;
+    }
 }
 
 #endif
