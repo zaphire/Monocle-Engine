@@ -790,9 +790,9 @@ namespace Monocle {
         if (index < 0 || index >= 512) return 0.0;
         
         if (channel == -1)
-            return MAX(this->vis->fSpectrum[0][index],this->vis->fSpectrum[1][index]);
+            return MAX(this->vis->fSpectrum[0][index]/10.0,this->vis->fSpectrum[1][index]/10.0);
         else
-            return this->vis->fSpectrum[channel][index];
+            return this->vis->fSpectrum[channel][index]/10.0;
     }
     
     int AudioDeck::GetVisLoudestSpectrumIndex( float *loudestValue, int channel, int startIndex, int endIndex)
