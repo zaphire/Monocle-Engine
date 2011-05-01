@@ -273,6 +273,11 @@ namespace Monocle {
          */
         int GetLoudestSpectrumIndex( float *loudestValue = NULL, int channel = -1, int startIndex = 0, int endIndex = 511); 
         
+        /**
+         Flushes the deck.
+         */
+        void Flush();
+        
         AudioDeck       *nextDeck;      // INTERNAL, Next Deck in the sequence
         AudioDeck       **prevDeckPointerToHere;     // INTERNAL, Pointer in the previous deck to this deck
         
