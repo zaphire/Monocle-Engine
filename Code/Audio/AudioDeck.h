@@ -243,6 +243,36 @@ namespace Monocle {
          */
         bool IsVisEnabled();
         
+        /**
+         Returns the visual waveform data if visualizations are enabled.
+         
+         @param index A value between 0-575 to specify where in the wave we're retrieving
+         @param channel Which channel data to get, 0 for left, 1 for right
+         @return a value between -1.0 and 1.0
+         */
+        float GetVisWaveform( int index, int channel = 0 );
+        
+        /**
+         Returns the visual spectrum data if visualizations are enabled. The best data is generally between indecies 10 and ~450.
+         
+         @param index A value between 0-511 to specify where in the wave we're retrieving
+         @param channel Which channel data to get, 0 for left, 1 for right - if channel is -1 (default) then it will return the loudest of the two channels.
+         @return a value between 0.0 and 1.0
+         */
+        float GetVisSpectrum( int index, int channel = -1 );
+        
+        /**
+         Returns the index (and value) of the loudest spectrum sample in a given channel (-1 to ignore channels).
+         
+         @param loudestValue pointer to fill with the value of the loudest index.
+         @param channel Which channel data to get, 0 for left, 1 for right - if channel is -1 (default) then it will return the loudest of the two channels.
+         @param startIndex The index to begin looking at (0-511)
+         @param endIndex The last index to look at (0-511)
+         @warning startIndex must be less than endIndex.
+         @return The index of the loudest spectrum, 0 - 511
+         */
+        int GetLoudestSpectrumIndex( float *loudestValue = NULL, int channel = -1, int startIndex = 0, int endIndex = 511); 
+        
         AudioDeck       *nextDeck;      // INTERNAL, Next Deck in the sequence
         AudioDeck       **prevDeckPointerToHere;     // INTERNAL, Pointer in the previous deck to this deck
         

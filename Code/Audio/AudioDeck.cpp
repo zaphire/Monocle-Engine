@@ -11,6 +11,7 @@
 #include "../Debug.h"
 
 #define MIN(a,b) (a<b)?a:b
+#define MAX(a,b) (a>b)?a:b
 
 namespace Monocle {
     
@@ -751,5 +752,47 @@ namespace Monocle {
     float AudioDeck::GetPitch()
     {
         return this->pitchBend;
+    }
+    
+    float AudioDeck::GetVisWaveform( int index, int channel )
+    {
+        if (!IsVisEnabled()) return 0.0;
+        if (channel < 0 || channel > 1) return 0.0;
+        if (index < 0 || index >= 576) return 0.0;
+        return this->vis->fWaveform[channel][index] / 128.0;
+    }
+    
+    float AudioDeck::GetVisSpectrum( int index, int channel )
+    {
+        if (!IsVisEnabled()) return 0.0;
+        if (channel < 0 || channel > 1) return 0.0;
+        if (index < 0 || index >= 512) return 0.0;
+        
+        if (channel == -1)
+            return MAX(this->vis->fSpectrum[0][index],this->vis->fSpectrum[1][index]);
+        else
+            return this->vis->fSpectrum[channel][index];
+    }
+    
+    int AudioDeck::GetLoudestSpectrumIndex( float *loudestValue, int channel, int startIndex, int endIndex)
+    {
+        int loudestIndex=0;
+        float loudestIndexValue=-1;
+        int ind;
+        
+        if (!IsVisEnabled()) return 0;
+        if (startIndex < 0 || startIndex >= 512) return 0;
+        if (endIndex < 0 || endIndex >= 512) return 0;
+        if (endIndex < startIndex) return 0;
+        
+        for (ind=startIndex;ind<=endIndex;ind++)
+        {
+            float val = GetVisSpectrum(ind,channel);
+            if (val > loudestIndexValue) loudestIndex = ind;
+        }
+        
+        if (loudestValue) loudestValue[0] = loudestIndexValue;
+        
+        return ind;
     }
 }
