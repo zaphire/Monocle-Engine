@@ -795,7 +795,7 @@ namespace Monocle {
             return this->vis->fSpectrum[channel][index];
     }
     
-    int AudioDeck::GetLoudestSpectrumIndex( float *loudestValue, int channel, int startIndex, int endIndex)
+    int AudioDeck::GetVisLoudestSpectrumIndex( float *loudestValue, int channel, int startIndex, int endIndex)
     {
         int loudestIndex=0;
         float loudestIndexValue=-1;
