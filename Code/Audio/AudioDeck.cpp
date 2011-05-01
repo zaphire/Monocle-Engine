@@ -126,8 +126,10 @@ namespace Monocle {
         
         this->isFinished = false;
         
-        vc.Clean();
-        vc.Reset();
+        if (IsVisEnabled()){
+            vc.Clean();
+            vc.Reset();
+        }
         this->vizlast = 0;
         
         this->bufferCountdown = NUM_BUFFERS;
@@ -138,6 +140,33 @@ namespace Monocle {
         cs->SetPitch(pitchBend);
         cs->SetPan(pan);
         //memset(&this->fades,0,sizeof(AudioFades));
+    }
+    
+    bool AudioDeck::IsVisEnabled()
+    {
+        // jw: Not sure if this is the best way, but it works.
+        if (this->vis) return true;
+        return false;
+    }
+    
+    void AudioDeck::EnableVis( bool visEnable )
+    {
+        if (visEnable && this->vis)
+            return;
+        
+        if (visEnable)
+        {
+            // Careful calculations calculated the buflen
+            vc.Init((BUFFER_SIZE/32768)*NUM_BUFFERS, decodeData->samplerate);
+            
+            this->vis = new AudioVis();
+            this->vis->PrepData();
+        }
+        
+        if (!visEnable && this->vis){
+            vc.Destroy();
+            delete this->vis;
+        }
     }
     
     void AudioDeck::Init()
@@ -151,7 +180,7 @@ namespace Monocle {
         
         this->cleanVis = false;
         
-        this->vis = new AudioVis();
+        this->vis = NULL;
         this->cs = new ChannelStream();
         
         this->pitchBend = 1.0;
@@ -161,12 +190,13 @@ namespace Monocle {
         this->lastSeekPos = 0;
         this->fades.Reset();
         
-        // Careful calculations calculated the buflen
-        vc.Init((BUFFER_SIZE/32768)*NUM_BUFFERS, decodeData->samplerate);
+        if (IsVisEnabled()){
+            // Careful calculations calculated the buflen
+            vc.Init((BUFFER_SIZE/32768)*NUM_BUFFERS, decodeData->samplerate);
+            
+            this->vis = new AudioVis();
+        }
         this->vizlast = 0;
-        
-        // We need to attach a VizEng internally now.
-        this->vis->PrepData();
 
         ResetDeck();
 //        this->bufferCountdown = NUM_BUFFERS;
@@ -201,7 +231,8 @@ namespace Monocle {
         
         if (this->decodeData && freeDecoderData) delete this->decodeData;
         
-        delete this->vis;
+        if (this->vis)
+            delete this->vis;
         
         this->prevDeckPointerToHere[0] = this->nextDeck;
         
