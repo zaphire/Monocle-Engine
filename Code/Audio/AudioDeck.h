@@ -271,7 +271,7 @@ namespace Monocle {
          @warning startIndex must be less than endIndex.
          @return The index of the loudest spectrum, 0 - 511
          */
-        int GetLoudestSpectrumIndex( float *loudestValue = NULL, int channel = -1, int startIndex = 0, int endIndex = 511); 
+        int GetVisLoudestSpectrumIndex( float *loudestValue = NULL, int channel = -1, int startIndex = 0, int endIndex = 511); 
         
         /**
          Flushes the deck.
