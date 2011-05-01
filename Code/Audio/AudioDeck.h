@@ -232,6 +232,17 @@ namespace Monocle {
          */
         float GetPitch(  );
         
+        /**
+         Enables the processing of visualization spectrum data and
+         waveform grabs.
+         */
+        void EnableVis( bool visEnable = true );
+        
+        /**
+         @return true is Visualization data is enabled
+         */
+        bool IsVisEnabled();
+        
         AudioDeck       *nextDeck;      // INTERNAL, Next Deck in the sequence
         AudioDeck       **prevDeckPointerToHere;     // INTERNAL, Pointer in the previous deck to this deck
         
