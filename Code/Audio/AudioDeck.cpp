@@ -819,4 +819,35 @@ namespace Monocle {
         
         return loudestIndex;
     }
+    
+    float AudioDeck::GetVisBandAverage( int band, VisBandLength length, int channel)
+    {
+        if (!IsVisEnabled()) return 0.0;
+        if (band < 0 || band >= 16) return 0.0;
+        if (channel < -1 || channel > 1) return 0.0;
+        
+        if (channel >= 0){
+            switch (length)
+            {
+                case VIS_BAND_LONG:
+                    return this->vis->long_avg[channel][band];
+                case VIS_BAND_SHORT:
+                    return this->vis->imm[channel][band];
+                case VIS_BAND_MEDIUM:
+                    return this->vis->med_avg[channel][band];
+            }
+        }else{
+            switch (length)
+            {
+                case VIS_BAND_LONG:
+                    return MAX(this->vis->long_avg[0][band],this->vis->long_avg[1][band]);
+                case VIS_BAND_SHORT:
+                    return MAX(this->vis->imm[0][band], this->vis->imm[1][band]);
+                case VIS_BAND_MEDIUM:
+                    return MAX(this->vis->med_avg[0][band],this->vis->med_avg[1][band]);
+            }
+        }
+        
+        return 0.0;
+    }
 }

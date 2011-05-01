@@ -19,6 +19,13 @@
 namespace Monocle {
     // Structure containing fade information
     
+    enum VisBandLength
+	{
+		VIS_BAND_SHORT=0,
+		VIS_BAND_MEDIUM,
+        VIS_BAND_LONG
+	};
+    
     /**
         Contains fade information for an AudioDeck. All times are in MS, and aFade* times are relative to ChannelStream::GetTotalPlayTime().
      */
@@ -272,6 +279,16 @@ namespace Monocle {
          @return The index of the loudest spectrum, 0 - 511
          */
         int GetVisLoudestSpectrumIndex( float *loudestValue = NULL, int channel = -1, int startIndex = 0, int endIndex = 511); 
+        
+        /**
+         Returns the average of one of 16 bands in the spectrum.
+         
+         @param band band index 0-15
+         @param length One of VIS_BAND_SHORT, VIS_BAND_MEDIUM, and VIS_BAND_LONG to determine the length of the average
+         @param channel 0 for left, 1 for right, -1 for loudest of either
+         @return The average of the visual band
+         */
+        float GetVisBandAverage( int band, VisBandLength length = VIS_BAND_SHORT, int channel = -1 );
         
         /**
          Flushes the deck.

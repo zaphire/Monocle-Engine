@@ -97,7 +97,7 @@ namespace AudioTest
             for (i=0;i<400;i++)
             {
 //                val = deck->vis->fSpectrum[0][i];
-                val = deck->GetVisSpectrum(i);
+                val = deck->GetVisSpectrum(i)*10.0;
                 
                 Graphics::SetColor(Color(val*timeR, val*timeG, val*timeB, 1.0));
                 Graphics::RenderLineRect( thispos.x, midy, xstep, val*100.0);
