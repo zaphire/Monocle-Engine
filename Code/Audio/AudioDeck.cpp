@@ -786,7 +786,7 @@ namespace Monocle {
     float AudioDeck::GetVisSpectrum( int index, int channel )
     {
         if (!IsVisEnabled()) return 0.0;
-        if (channel < 0 || channel > 1) return 0.0;
+        if (channel < -1 || channel > 1) return 0.0;
         if (index < 0 || index >= 512) return 0.0;
         
         if (channel == -1)
