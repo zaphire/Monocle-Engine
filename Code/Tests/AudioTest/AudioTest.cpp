@@ -273,6 +273,8 @@ namespace AudioTest
         
         deck2->Mute();
         
+        deck1->EnableVis();
+        deck2->EnableVis();
         deck1->Play();
         deck2->Play();
 

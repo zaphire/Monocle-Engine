@@ -143,6 +143,21 @@ namespace Monocle {
         //memset(&this->fades,0,sizeof(AudioFades));
     }
     
+    void AudioDeck::Flush()
+    {
+        bool wasPlaying = cs->IsPlaying();
+        bool wasPaused = this->pause;
+        long seek = this->GetCurrentTime();
+        
+        this->decodeData->seekOffset = seek;
+        ResetDeck();
+        
+        if (wasPlaying && !wasPaused)
+            cs->Play();
+        if (wasPaused)
+            this->pause = true;
+    }
+    
     bool AudioDeck::IsVisEnabled()
     {
         // jw: Not sure if this is the best way, but it works.
@@ -160,8 +175,17 @@ namespace Monocle {
             // Careful calculations calculated the buflen
             vc.Init((BUFFER_SIZE/32768)*NUM_BUFFERS, decodeData->samplerate);
             
+            vc.Clean();
+            
             this->vis = new AudioVis();
             this->vis->PrepData();
+            
+            if (cs->IsOpen())
+                this->vizlast = cs->GetTotalPlayTime();
+            else
+                this->vizlast = 0;
+            
+            Flush();
         }
         
         if (!visEnable && this->vis){
@@ -194,6 +218,7 @@ namespace Monocle {
         if (IsVisEnabled()){
             // Careful calculations calculated the buflen
             vc.Init((BUFFER_SIZE/32768)*NUM_BUFFERS, decodeData->samplerate);
+            vc.Clean();
             
             this->vis = new AudioVis();
         }
