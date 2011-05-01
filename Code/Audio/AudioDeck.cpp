@@ -809,7 +809,7 @@ namespace Monocle {
         for (ind=startIndex;ind<=endIndex;ind++)
         {
             float val = GetVisSpectrum(ind,channel);
-            if (val > loudestIndexValue) loudestIndex = ind;
+            if (val > loudestIndexValue) { loudestIndex = ind; loudestIndexValue = val; }
         }
         
         if (loudestValue) loudestValue[0] = loudestIndexValue;
