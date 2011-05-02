@@ -111,6 +111,7 @@ namespace Monocle
             }
         } else {
             this->bundleResourcesPath = [[[NSBundle mainBundle] resourcePath] fileSystemRepresentation];
+            this->bundleResourcesPath = this->bundleResourcesPath + std::string("/Content");
         }
 
 		//  Create window
