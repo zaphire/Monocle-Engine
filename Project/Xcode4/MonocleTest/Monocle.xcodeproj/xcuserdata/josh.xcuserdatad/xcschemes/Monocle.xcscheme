@@ -13,10 +13,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "37EA2495132F986900D216B0"
-               BuildableName = "MonocleTest.app"
-               BlueprintName = "MonocleTest"
-               ReferencedContainer = "container:MonocleTest.xcodeproj">
+               BlueprintIdentifier = "0328F44C136DAB6100639FB1"
+               BuildableName = "libMonocle.a"
+               BlueprintName = "Monocle"
+               ReferencedContainer = "container:Monocle.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -37,27 +37,6 @@
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Debug">
-      <BuildableProductRunnable>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "37EA2495132F986900D216B0"
-            BuildableName = "MonocleTest.app"
-            BlueprintName = "MonocleTest"
-            ReferencedContainer = "container:MonocleTest.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "MONOCLE_MAC_USE_CONTENT_PATH"
-            value = "${MONOCLE_MAC_USE_CONTENT_PATH}"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "MONOCLE_CONTENT_PATH"
-            value = "${MONOCLE_CONTENT_PATH}"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -68,15 +47,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release">
-      <BuildableProductRunnable>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "37EA2495132F986900D216B0"
-            BuildableName = "MonocleTest.app"
-            BlueprintName = "MonocleTest"
-            ReferencedContainer = "container:MonocleTest.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
