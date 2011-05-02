@@ -10,3 +10,4 @@
 //#include "../Tests/LevelEditor/Main.cpp"
 //#include "../Tests/PuppetTest/Main.cpp"
 #include "../Tests/AudioTest/Main.cpp"
+//#include "../Tests/Scripted/Main.cpp"
