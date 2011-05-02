@@ -5,505 +5,667 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Tests">
-      <UniqueIdentifier>{778a5877-7e41-418b-9d20-428e9205209d}</UniqueIdentifier>
+    <Filter Include="Code">
+      <UniqueIdentifier>{35495e59-0c83-4b71-b73f-1d6e0cf2f87b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tests\AudioTest">
-      <UniqueIdentifier>{76662daa-290a-4eb2-8c3d-6290235a070e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tests\Flash">
-      <UniqueIdentifier>{a08e69a1-a1ce-4966-9ad9-b7cee63a0915}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tests\Jumper">
-      <UniqueIdentifier>{37df09b9-9ee4-4c32-8d4b-1c3bd29aff4b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tests\LevelEditor">
-      <UniqueIdentifier>{12a42eb4-e2ea-463a-aeb7-2a30b212c1d2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tests\Ogmo">
-      <UniqueIdentifier>{a1a9d307-21cf-43ad-b814-c87bb4573aac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tests\Pong">
-      <UniqueIdentifier>{56d1a2db-d3de-4143-a8c4-c0fb8292b965}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tests\PuppetTest">
-      <UniqueIdentifier>{1971d84b-8de3-4117-b3fb-00772de2f368}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core">
+    <Filter Include="Code\Core">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Core\Audio">
+    <Filter Include="Code\Core\Audio">
       <UniqueIdentifier>{613b3108-c696-41a8-9be8-6e8c1f2f6812}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Audio\Decoders">
+    <Filter Include="Code\Core\Audio\Decoders">
       <UniqueIdentifier>{437fd3be-1633-4073-8976-5ec2bb0400c3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Colliders">
+    <Filter Include="Code\Core\Colliders">
       <UniqueIdentifier>{464de9c4-a578-49a7-b793-95f0d5406246}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Graphics">
+    <Filter Include="Code\Core\Graphics">
       <UniqueIdentifier>{1cc2fe0b-a2ba-4269-89d5-dd62f51562c0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\LevelEditor">
+    <Filter Include="Code\Core\LevelEditor">
       <UniqueIdentifier>{30c9b6c2-0699-4b93-92b6-d4c2e0fa6a60}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\OpenGL">
+    <Filter Include="Code\Core\OpenGL">
       <UniqueIdentifier>{a598ebcd-8f59-4f42-89e9-bc85b1bf0057}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Puppet">
+    <Filter Include="Code\Core\Puppet">
       <UniqueIdentifier>{d49e9543-14c1-4bef-8e14-fede4039a18e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Windows">
+    <Filter Include="Code\Core\Windows">
       <UniqueIdentifier>{51dc29ac-8c7b-4649-b00f-6cb97e134065}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\XML">
+    <Filter Include="Code\Core\XML">
       <UniqueIdentifier>{dbc6d1f3-9ac1-424b-8bb5-65dd3a11c62e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Libraries">
+    <Filter Include="Code\Libraries">
       <UniqueIdentifier>{bb19ecc9-9a7a-46cf-9252-14b651e8bea9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Libraries\GL">
+    <Filter Include="Code\Libraries\GL">
       <UniqueIdentifier>{613a880f-1620-4f3c-8310-9fe7c6704817}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Libraries\Lua">
+    <Filter Include="Code\Libraries\Lua">
       <UniqueIdentifier>{177567bd-e2e9-4ce0-92af-640997b20970}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Libraries\TinyXML">
+    <Filter Include="Code\Libraries\TinyXML">
       <UniqueIdentifier>{82c21d51-af8f-4bc6-a6ce-863f0251b101}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Libraries\stb">
+    <Filter Include="Code\Libraries\stb">
       <UniqueIdentifier>{7791f33d-5416-45a3-bc9c-8e0f463d7662}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Tests">
+      <UniqueIdentifier>{778a5877-7e41-418b-9d20-428e9205209d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Tests\AudioTest">
+      <UniqueIdentifier>{76662daa-290a-4eb2-8c3d-6290235a070e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Tests\Flash">
+      <UniqueIdentifier>{a08e69a1-a1ce-4966-9ad9-b7cee63a0915}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Tests\Jumper">
+      <UniqueIdentifier>{37df09b9-9ee4-4c32-8d4b-1c3bd29aff4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Tests\LevelEditor">
+      <UniqueIdentifier>{12a42eb4-e2ea-463a-aeb7-2a30b212c1d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Tests\Ogmo">
+      <UniqueIdentifier>{a1a9d307-21cf-43ad-b814-c87bb4573aac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Tests\Pong">
+      <UniqueIdentifier>{56d1a2db-d3de-4143-a8c4-c0fb8292b965}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Tests\PuppetTest">
+      <UniqueIdentifier>{1971d84b-8de3-4117-b3fb-00772de2f368}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Core\Asset.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Assets.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Camera.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Collision.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\CollisionData.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Color.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Debug.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Editor.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Entity.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\FileNode.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Game.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\GUI.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Input.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Level.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Monocle.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\MonocleToolkit.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Random.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Rect.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Scene.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\TextureAtlas.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Tileset.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Transform.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Tween.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Vector2.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Vector3.cpp">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Audio\Audio.cpp">
-      <Filter>Core\Audio</Filter>
+      <Filter>Code\Core\Audio</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Audio\AudioAsset.cpp">
-      <Filter>Core\Audio</Filter>
+      <Filter>Code\Core\Audio</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Audio\AudioAssetReader.cpp">
-      <Filter>Core\Audio</Filter>
+      <Filter>Code\Core\Audio</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Audio\AudioCrypt.cpp">
-      <Filter>Core\Audio</Filter>
+      <Filter>Code\Core\Audio</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Audio\AudioDeck.cpp">
-      <Filter>Core\Audio</Filter>
+      <Filter>Code\Core\Audio</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Audio\AudioDecoder.cpp">
-      <Filter>Core\Audio</Filter>
+      <Filter>Code\Core\Audio</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Audio\AudioVis.cpp">
-      <Filter>Core\Audio</Filter>
+      <Filter>Code\Core\Audio</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Audio\ChannelStream.cpp">
-      <Filter>Core\Audio</Filter>
+      <Filter>Code\Core\Audio</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Audio\fft.cpp">
-      <Filter>Core\Audio</Filter>
+      <Filter>Code\Core\Audio</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Audio\VisCache2.cpp">
-      <Filter>Core\Audio</Filter>
+      <Filter>Code\Core\Audio</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Audio\Decoders\OggDecoder.cpp">
-      <Filter>Core\Audio\Decoders</Filter>
+      <Filter>Code\Core\Audio\Decoders</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Audio\Decoders\WaveDecoder.cpp">
-      <Filter>Core\Audio\Decoders</Filter>
+      <Filter>Code\Core\Audio\Decoders</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Colliders\CircleCollider.cpp">
-      <Filter>Core\Colliders</Filter>
+      <Filter>Code\Core\Colliders</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Colliders\Collider.cpp">
-      <Filter>Core\Colliders</Filter>
+      <Filter>Code\Core\Colliders</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Colliders\PathCollider.cpp">
-      <Filter>Core\Colliders</Filter>
+      <Filter>Code\Core\Colliders</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Colliders\PolygonCollider.cpp">
-      <Filter>Core\Colliders</Filter>
+      <Filter>Code\Core\Colliders</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Colliders\RectangleCollider.cpp">
-      <Filter>Core\Colliders</Filter>
+      <Filter>Code\Core\Colliders</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Graphics\Sprite.cpp">
-      <Filter>Core\Graphics</Filter>
+      <Filter>Code\Core\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Graphics\SpriteAnimation.cpp">
-      <Filter>Core\Graphics</Filter>
+      <Filter>Code\Core\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Graphics\Tilemap.cpp">
-      <Filter>Core\Graphics</Filter>
+      <Filter>Code\Core\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\LevelEditor\FringeTile.cpp">
-      <Filter>Core\LevelEditor</Filter>
+      <Filter>Code\Core\LevelEditor</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\LevelEditor\ImageBrowser.cpp">
-      <Filter>Core\LevelEditor</Filter>
+      <Filter>Code\Core\LevelEditor</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\LevelEditor\LevelEditor.cpp">
-      <Filter>Core\LevelEditor</Filter>
+      <Filter>Code\Core\LevelEditor</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\LevelEditor\Node.cpp">
-      <Filter>Core\LevelEditor</Filter>
+      <Filter>Code\Core\LevelEditor</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\LevelEditor\PathMesh.cpp">
-      <Filter>Core\LevelEditor</Filter>
+      <Filter>Code\Core\LevelEditor</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\OpenGL\OpenGLGraphics.cpp">
-      <Filter>Core\OpenGL</Filter>
+      <Filter>Code\Core\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\OpenGL\OpenGLTextureAsset.cpp">
-      <Filter>Core\OpenGL</Filter>
+      <Filter>Code\Core\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\OpenGL\OpenGLTTFFontAsset.cpp">
-      <Filter>Core\OpenGL</Filter>
+      <Filter>Code\Core\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Puppet\Puppet.cpp">
-      <Filter>Core\Puppet</Filter>
+      <Filter>Code\Core\Puppet</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Puppet\PuppetEditor.cpp">
-      <Filter>Core\Puppet</Filter>
+      <Filter>Code\Core\Puppet</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\Windows\WindowsPlatform.cpp">
-      <Filter>Core\Windows</Filter>
+      <Filter>Code\Core\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Core\XML\XMLFileNode.cpp">
-      <Filter>Core\XML</Filter>
+      <Filter>Code\Core\XML</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Tests\AudioTest\AudioTest.cpp">
-      <Filter>Tests\AudioTest</Filter>
+      <Filter>Code\Tests\AudioTest</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Tests\Flash\Flash.cpp">
-      <Filter>Tests\Flash</Filter>
+      <Filter>Code\Tests\Flash</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Tests\Jumper\Jumper.cpp">
-      <Filter>Tests\Jumper</Filter>
+      <Filter>Code\Tests\Jumper</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Tests\Ogmo\Ogmo.cpp">
-      <Filter>Tests\Ogmo</Filter>
+      <Filter>Code\Tests\Ogmo</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Tests\Pong\Pong.cpp">
-      <Filter>Tests\Pong</Filter>
+      <Filter>Code\Tests\Pong</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Tests\PuppetTest\PuppetTest.cpp">
-      <Filter>Tests\PuppetTest</Filter>
+      <Filter>Code\Tests\PuppetTest</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Tests\LevelEditor\LevelEditorTest.cpp">
-      <Filter>Tests\LevelEditor</Filter>
+      <Filter>Code\Tests\LevelEditor</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Tests\Main.cpp">
-      <Filter>Tests</Filter>
+      <Filter>Code\Tests</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Libraries\GL\glew.c">
-      <Filter>Libraries\GL</Filter>
+      <Filter>Code\Libraries\GL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Libraries\TinyXML\tinyxml.cpp">
-      <Filter>Libraries\TinyXML</Filter>
+      <Filter>Code\Libraries\TinyXML</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Libraries\TinyXML\tinyxmlerror.cpp">
-      <Filter>Libraries\TinyXML</Filter>
+      <Filter>Code\Libraries\TinyXML</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Libraries\TinyXML\tinyxmlparser.cpp">
-      <Filter>Libraries\TinyXML</Filter>
+      <Filter>Code\Libraries\TinyXML</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Libraries\stb\stb_image.c">
-      <Filter>Libraries\stb</Filter>
+      <Filter>Code\Libraries\stb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\lapi.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\lauxlib.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\lbaselib.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\lcode.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\ldblib.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\ldebug.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\ldo.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\ldump.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\lfunc.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\lgc.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\linit.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\liolib.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\llex.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\lmathlib.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\lmem.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\loadlib.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\lobject.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\lopcodes.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\loslib.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\lparser.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\lstate.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\lstring.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\lstrlib.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\ltable.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\ltablib.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\ltm.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\lundump.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\lvm.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\lzio.c">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\Lua\print.c">
+      <Filter>Code\Libraries\Lua</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Core\Asset.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Assets.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Camera.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Collision.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\CollisionData.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Color.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Debug.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Editor.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Entity.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\FileNode.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\FontAsset.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Game.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Graphics.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\GUI.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Input.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Level.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Macros.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Monocle.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\MonocleToolkit.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Platform.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Random.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Rect.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Scene.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\TextureAsset.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\TextureAtlas.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Tileset.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Transform.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\TTFFontAsset.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Tween.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Vector2.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Vector3.h">
-      <Filter>Core</Filter>
+      <Filter>Code\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Audio\Audio.h">
-      <Filter>Core\Audio</Filter>
+      <Filter>Code\Core\Audio</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Audio\AudioAsset.h">
-      <Filter>Core\Audio</Filter>
+      <Filter>Code\Core\Audio</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Audio\AudioAssetReader.h">
-      <Filter>Core\Audio</Filter>
+      <Filter>Code\Core\Audio</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Audio\AudioCrypt.h">
-      <Filter>Core\Audio</Filter>
+      <Filter>Code\Core\Audio</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Audio\AudioDeck.h">
-      <Filter>Core\Audio</Filter>
+      <Filter>Code\Core\Audio</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Audio\AudioDecoder.h">
-      <Filter>Core\Audio</Filter>
+      <Filter>Code\Core\Audio</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Audio\AudioVis.h">
-      <Filter>Core\Audio</Filter>
+      <Filter>Code\Core\Audio</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Audio\ChannelStream.h">
-      <Filter>Core\Audio</Filter>
+      <Filter>Code\Core\Audio</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Audio\fft.h">
-      <Filter>Core\Audio</Filter>
+      <Filter>Code\Core\Audio</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Audio\VisCache2.h">
-      <Filter>Core\Audio</Filter>
+      <Filter>Code\Core\Audio</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Audio\Decoders\OggDecoder.h">
-      <Filter>Core\Audio\Decoders</Filter>
+      <Filter>Code\Core\Audio\Decoders</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Audio\Decoders\WaveDecoder.h">
-      <Filter>Core\Audio\Decoders</Filter>
+      <Filter>Code\Core\Audio\Decoders</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Colliders\RectangleCollider.h">
-      <Filter>Core\Colliders</Filter>
+      <Filter>Code\Core\Colliders</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Colliders\CircleCollider.h">
-      <Filter>Core\Colliders</Filter>
+      <Filter>Code\Core\Colliders</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Colliders\Collider.h">
-      <Filter>Core\Colliders</Filter>
+      <Filter>Code\Core\Colliders</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Colliders\PathCollider.h">
-      <Filter>Core\Colliders</Filter>
+      <Filter>Code\Core\Colliders</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Colliders\PolygonCollider.h">
-      <Filter>Core\Colliders</Filter>
+      <Filter>Code\Core\Colliders</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Graphics\Sprite.h">
-      <Filter>Core\Graphics</Filter>
+      <Filter>Code\Core\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Graphics\SpriteAnimation.h">
-      <Filter>Core\Graphics</Filter>
+      <Filter>Code\Core\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Graphics\Tilemap.h">
-      <Filter>Core\Graphics</Filter>
+      <Filter>Code\Core\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\LevelEditor\PathMesh.h">
-      <Filter>Core\LevelEditor</Filter>
+      <Filter>Code\Core\LevelEditor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\LevelEditor\FringeTile.h">
-      <Filter>Core\LevelEditor</Filter>
+      <Filter>Code\Core\LevelEditor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\LevelEditor\ImageBrowser.h">
-      <Filter>Core\LevelEditor</Filter>
+      <Filter>Code\Core\LevelEditor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\LevelEditor\LevelEditor.h">
-      <Filter>Core\LevelEditor</Filter>
+      <Filter>Code\Core\LevelEditor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\LevelEditor\Node.h">
-      <Filter>Core\LevelEditor</Filter>
+      <Filter>Code\Core\LevelEditor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Puppet\Puppet.h">
-      <Filter>Core\Puppet</Filter>
+      <Filter>Code\Core\Puppet</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Puppet\PuppetEditor.h">
-      <Filter>Core\Puppet</Filter>
+      <Filter>Code\Core\Puppet</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\Windows\WindowsPlatform.h">
-      <Filter>Core\Windows</Filter>
+      <Filter>Code\Core\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Core\XML\XMLFileNode.h">
-      <Filter>Core\XML</Filter>
+      <Filter>Code\Core\XML</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Tests\AudioTest\AudioTest.h">
-      <Filter>Tests\AudioTest</Filter>
+      <Filter>Code\Tests\AudioTest</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Tests\Flash\Flash.h">
-      <Filter>Tests\Flash</Filter>
+      <Filter>Code\Tests\Flash</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Tests\Jumper\Jumper.h">
-      <Filter>Tests\Jumper</Filter>
+      <Filter>Code\Tests\Jumper</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Tests\Ogmo\Ogmo.h">
-      <Filter>Tests\Ogmo</Filter>
+      <Filter>Code\Tests\Ogmo</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Tests\Pong\Pong.h">
-      <Filter>Tests\Pong</Filter>
+      <Filter>Code\Tests\Pong</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Tests\PuppetTest\PuppetTest.h">
-      <Filter>Tests\PuppetTest</Filter>
+      <Filter>Code\Tests\PuppetTest</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Tests\LevelEditor\LevelEditorTest.h">
-      <Filter>Tests\LevelEditor</Filter>
+      <Filter>Code\Tests\LevelEditor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Libraries\GL\glew.h">
-      <Filter>Libraries\GL</Filter>
+      <Filter>Code\Libraries\GL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Libraries\GL\glxew.h">
-      <Filter>Libraries\GL</Filter>
+      <Filter>Code\Libraries\GL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Libraries\GL\wglew.h">
-      <Filter>Libraries\GL</Filter>
+      <Filter>Code\Libraries\GL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Libraries\TinyXML\tinyxml.h">
-      <Filter>Libraries\TinyXML</Filter>
+      <Filter>Code\Libraries\TinyXML</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Libraries\stb\stb_truetype.h">
-      <Filter>Libraries\stb</Filter>
+      <Filter>Code\Libraries\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\lapi.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\lauxlib.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\lcode.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\ldebug.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\ldo.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\lfunc.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\lgc.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\llex.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\llimits.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\lmem.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\lobject.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\lopcodes.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\lparser.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\lstate.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\lstring.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\ltable.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\ltm.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\lua.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\luaconf.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\lualib.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\lundump.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\lvm.h">
+      <Filter>Code\Libraries\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\Lua\lzio.h">
+      <Filter>Code\Libraries\Lua</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
