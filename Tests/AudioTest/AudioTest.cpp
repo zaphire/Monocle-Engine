@@ -137,6 +137,9 @@ namespace AudioTest
         
         laser = Assets::RequestAudio("AudioTest/Laser.wav");
         coin = Assets::RequestAudio("AudioTest/Coin.wav");
+        
+        if (!laser || !coin)
+            return Game::Quit();
 	}
     
 	void GameScene::ReceiveNote(const std::string &note)
@@ -197,6 +200,10 @@ namespace AudioTest
         
         // Make the deck, and it starts playing... (we need a play())
         deck = Audio::NewDeck( Assets::RequestAudio("AudioTest/ShortLoop.ogg", true) );
+        
+        if (!deck)
+            return Game::Quit();
+        
         deck->Play();
         deck->SetLoops(0);
         deck->SetFadeOut(500);
@@ -272,6 +279,9 @@ namespace AudioTest
         // Make the deck, and it starts playing... (we need a play())
         deck1 = Audio::NewDeck(Assets::RequestAudio("AudioTest/City01.g2m",true,"hellogirl"));
         deck2 = Audio::NewDeck(Assets::RequestAudio("AudioTest/City01Hell.g2m",true,"hellogirl"));
+        
+        if (!deck1 || !deck2)
+            return Game::Quit();
         
         deck2->Mute();
         
