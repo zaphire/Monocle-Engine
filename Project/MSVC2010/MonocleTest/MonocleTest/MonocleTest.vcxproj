@@ -14,6 +14,152 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Core\Asset.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Assets.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Audio\Audio.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Audio\AudioAsset.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Audio\AudioAssetReader.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Audio\AudioCrypt.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Audio\AudioDeck.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Audio\AudioDecoder.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Audio\AudioVis.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Audio\ChannelStream.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Audio\Decoders\OggDecoder.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Audio\Decoders\WaveDecoder.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Audio\fft.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Audio\VisCache2.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Camera.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Colliders\CircleCollider.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Colliders\Collider.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Colliders\PathCollider.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Colliders\PolygonCollider.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Colliders\RectangleCollider.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Collision.cpp" />
+    <ClCompile Include="..\..\..\..\Core\CollisionData.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Color.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Debug.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Editor.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Entity.cpp" />
+    <ClCompile Include="..\..\..\..\Core\FileNode.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Game.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Graphics\Sprite.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Graphics\SpriteAnimation.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Graphics\Tilemap.cpp" />
+    <ClCompile Include="..\..\..\..\Core\GUI.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Input.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Level.cpp" />
+    <ClCompile Include="..\..\..\..\Core\LevelEditor\FringeTile.cpp" />
+    <ClCompile Include="..\..\..\..\Core\LevelEditor\ImageBrowser.cpp" />
+    <ClCompile Include="..\..\..\..\Core\LevelEditor\LevelEditor.cpp" />
+    <ClCompile Include="..\..\..\..\Core\LevelEditor\Node.cpp" />
+    <ClCompile Include="..\..\..\..\Core\LevelEditor\PathMesh.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Monocle.cpp" />
+    <ClCompile Include="..\..\..\..\Core\MonocleToolkit.cpp" />
+    <ClCompile Include="..\..\..\..\Core\OpenGL\OpenGLGraphics.cpp" />
+    <ClCompile Include="..\..\..\..\Core\OpenGL\OpenGLTextureAsset.cpp" />
+    <ClCompile Include="..\..\..\..\Core\OpenGL\OpenGLTTFFontAsset.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Puppet\Puppet.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Puppet\PuppetEditor.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Random.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Rect.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Scene.cpp" />
+    <ClCompile Include="..\..\..\..\Core\TextureAtlas.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Tileset.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Transform.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Tween.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Vector2.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Vector3.cpp" />
+    <ClCompile Include="..\..\..\..\Core\Windows\WindowsPlatform.cpp" />
+    <ClCompile Include="..\..\..\..\Core\XML\XMLFileNode.cpp" />
+    <ClCompile Include="..\..\..\..\Libraries\GL\glew.c" />
+    <ClCompile Include="..\..\..\..\Libraries\stb\stb_image.c" />
+    <ClCompile Include="..\..\..\..\Libraries\TinyXML\tinyxml.cpp" />
+    <ClCompile Include="..\..\..\..\Libraries\TinyXML\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\..\..\Libraries\TinyXML\tinyxmlparser.cpp" />
+    <ClCompile Include="..\..\..\..\Tests\AudioTest\AudioTest.cpp" />
+    <ClCompile Include="..\..\..\..\Tests\Flash\Flash.cpp" />
+    <ClCompile Include="..\..\..\..\Tests\Jumper\Jumper.cpp" />
+    <ClCompile Include="..\..\..\..\Tests\LevelEditor\LevelEditorTest.cpp" />
+    <ClCompile Include="..\..\..\..\Tests\Main.cpp" />
+    <ClCompile Include="..\..\..\..\Tests\Ogmo\Ogmo.cpp" />
+    <ClCompile Include="..\..\..\..\Tests\Pong\Pong.cpp" />
+    <ClCompile Include="..\..\..\..\Tests\PuppetTest\PuppetTest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Core\Asset.h" />
+    <ClInclude Include="..\..\..\..\Core\Assets.h" />
+    <ClInclude Include="..\..\..\..\Core\Audio\Audio.h" />
+    <ClInclude Include="..\..\..\..\Core\Audio\AudioAsset.h" />
+    <ClInclude Include="..\..\..\..\Core\Audio\AudioAssetReader.h" />
+    <ClInclude Include="..\..\..\..\Core\Audio\AudioCrypt.h" />
+    <ClInclude Include="..\..\..\..\Core\Audio\AudioDeck.h" />
+    <ClInclude Include="..\..\..\..\Core\Audio\AudioDecoder.h" />
+    <ClInclude Include="..\..\..\..\Core\Audio\AudioVis.h" />
+    <ClInclude Include="..\..\..\..\Core\Audio\ChannelStream.h" />
+    <ClInclude Include="..\..\..\..\Core\Audio\Decoders\OggDecoder.h" />
+    <ClInclude Include="..\..\..\..\Core\Audio\Decoders\WaveDecoder.h" />
+    <ClInclude Include="..\..\..\..\Core\Audio\fft.h" />
+    <ClInclude Include="..\..\..\..\Core\Audio\VisCache2.h" />
+    <ClInclude Include="..\..\..\..\Core\Camera.h" />
+    <ClInclude Include="..\..\..\..\Core\Colliders\CircleCollider.h" />
+    <ClInclude Include="..\..\..\..\Core\Colliders\Collider.h" />
+    <ClInclude Include="..\..\..\..\Core\Colliders\PathCollider.h" />
+    <ClInclude Include="..\..\..\..\Core\Colliders\PolygonCollider.h" />
+    <ClInclude Include="..\..\..\..\Core\Colliders\RectangleCollider.h" />
+    <ClInclude Include="..\..\..\..\Core\Collision.h" />
+    <ClInclude Include="..\..\..\..\Core\CollisionData.h" />
+    <ClInclude Include="..\..\..\..\Core\Color.h" />
+    <ClInclude Include="..\..\..\..\Core\Debug.h" />
+    <ClInclude Include="..\..\..\..\Core\Editor.h" />
+    <ClInclude Include="..\..\..\..\Core\Entity.h" />
+    <ClInclude Include="..\..\..\..\Core\FileNode.h" />
+    <ClInclude Include="..\..\..\..\Core\FontAsset.h" />
+    <ClInclude Include="..\..\..\..\Core\Game.h" />
+    <ClInclude Include="..\..\..\..\Core\Graphics.h" />
+    <ClInclude Include="..\..\..\..\Core\Graphics\Sprite.h" />
+    <ClInclude Include="..\..\..\..\Core\Graphics\SpriteAnimation.h" />
+    <ClInclude Include="..\..\..\..\Core\Graphics\Tilemap.h" />
+    <ClInclude Include="..\..\..\..\Core\GUI.h" />
+    <ClInclude Include="..\..\..\..\Core\Input.h" />
+    <ClInclude Include="..\..\..\..\Core\Level.h" />
+    <ClInclude Include="..\..\..\..\Core\LevelEditor\FringeTile.h" />
+    <ClInclude Include="..\..\..\..\Core\LevelEditor\ImageBrowser.h" />
+    <ClInclude Include="..\..\..\..\Core\LevelEditor\LevelEditor.h" />
+    <ClInclude Include="..\..\..\..\Core\LevelEditor\Node.h" />
+    <ClInclude Include="..\..\..\..\Core\LevelEditor\PathMesh.h" />
+    <ClInclude Include="..\..\..\..\Core\Macros.h" />
+    <ClInclude Include="..\..\..\..\Core\Monocle.h" />
+    <ClInclude Include="..\..\..\..\Core\MonocleToolkit.h" />
+    <ClInclude Include="..\..\..\..\Core\Platform.h" />
+    <ClInclude Include="..\..\..\..\Core\Puppet\Puppet.h" />
+    <ClInclude Include="..\..\..\..\Core\Puppet\PuppetEditor.h" />
+    <ClInclude Include="..\..\..\..\Core\Random.h" />
+    <ClInclude Include="..\..\..\..\Core\Rect.h" />
+    <ClInclude Include="..\..\..\..\Core\Scene.h" />
+    <ClInclude Include="..\..\..\..\Core\TextureAsset.h" />
+    <ClInclude Include="..\..\..\..\Core\TextureAtlas.h" />
+    <ClInclude Include="..\..\..\..\Core\Tileset.h" />
+    <ClInclude Include="..\..\..\..\Core\Transform.h" />
+    <ClInclude Include="..\..\..\..\Core\TTFFontAsset.h" />
+    <ClInclude Include="..\..\..\..\Core\Tween.h" />
+    <ClInclude Include="..\..\..\..\Core\Vector2.h" />
+    <ClInclude Include="..\..\..\..\Core\Vector3.h" />
+    <ClInclude Include="..\..\..\..\Core\Windows\WindowsPlatform.h" />
+    <ClInclude Include="..\..\..\..\Core\XML\XMLFileNode.h" />
+    <ClInclude Include="..\..\..\..\Libraries\GL\glew.h" />
+    <ClInclude Include="..\..\..\..\Libraries\GL\glxew.h" />
+    <ClInclude Include="..\..\..\..\Libraries\GL\wglew.h" />
+    <ClInclude Include="..\..\..\..\Libraries\stb\stb_truetype.h" />
+    <ClInclude Include="..\..\..\..\Libraries\TinyXML\tinyxml.h" />
+    <ClInclude Include="..\..\..\..\Tests\AudioTest\AudioTest.h" />
+    <ClInclude Include="..\..\..\..\Tests\Flash\Flash.h" />
+    <ClInclude Include="..\..\..\..\Tests\Jumper\Jumper.h" />
+    <ClInclude Include="..\..\..\..\Tests\LevelEditor\LevelEditorTest.h" />
+    <ClInclude Include="..\..\..\..\Tests\Ogmo\Ogmo.h" />
+    <ClInclude Include="..\..\..\..\Tests\Pong\Pong.h" />
+    <ClInclude Include="..\..\..\..\Tests\PuppetTest\PuppetTest.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FF228BD1-426C-496D-95C1-4928CF205826}</ProjectGuid>
     <RootNamespace>MonocleTest</RootNamespace>
@@ -68,11 +214,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>MONOCLE_WINDOWS;MONOCLE_OPENGL;MONOCLE_OPENAL;MONOCLE_AUDIO_OGG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\..\Core;..\..\..\..\Libraries</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>OpenGL32.lib;GLu32.lib;Winmm.lib;OpenAL32.lib;libogg_static.lib;libvorbis_static.lib;libvorbisfile_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\..\Libs\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\Libraries\Compiled\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -107,157 +254,6 @@
       <OutputFile>$(OutDir)Monocle$(TargetExt)</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\Code\Asset.h" />
-    <ClInclude Include="..\..\..\..\Code\Assets.h" />
-    <ClInclude Include="..\..\..\..\Code\Audio\Audio.h" />
-    <ClInclude Include="..\..\..\..\Code\Audio\AudioAsset.h" />
-    <ClInclude Include="..\..\..\..\Code\Audio\AudioAssetReader.h" />
-    <ClInclude Include="..\..\..\..\Code\Audio\AudioCrypt.h" />
-    <ClInclude Include="..\..\..\..\Code\Audio\AudioDeck.h" />
-    <ClInclude Include="..\..\..\..\Code\Audio\AudioDecoder.h" />
-    <ClInclude Include="..\..\..\..\Code\Audio\AudioVis.h" />
-    <ClInclude Include="..\..\..\..\Code\Audio\ChannelStream.h" />
-    <ClInclude Include="..\..\..\..\Code\Audio\FFT.h" />
-    <ClInclude Include="..\..\..\..\Code\Audio\Decoders\WaveDecoder.h" />
-    <ClInclude Include="..\..\..\..\Code\Audio\Decoders\OggDecoder.h" />
-    <ClInclude Include="..\..\..\..\Code\Audio\Decoders\ogg\ogg.h" />
-    <ClInclude Include="..\..\..\..\Code\Audio\Decoders\ogg\os_types.h" />
-    <ClInclude Include="..\..\..\..\Code\Audio\Decoders\vorbis\codec.h" />
-    <ClInclude Include="..\..\..\..\Code\Audio\Decoders\vorbis\vorbisenc.h" />
-    <ClInclude Include="..\..\..\..\Code\Audio\Decoders\vorbis\vorbisfile.h" />
-    <ClInclude Include="..\..\..\..\Code\Audio\VisCache2.h" />
-    <ClInclude Include="..\..\..\..\Code\Camera.h" />
-    <ClInclude Include="..\..\..\..\Code\Colliders\CircleCollider.h" />
-    <ClInclude Include="..\..\..\..\Code\Colliders\Collider.h" />
-    <ClInclude Include="..\..\..\..\Code\Colliders\PathCollider.h" />
-    <ClInclude Include="..\..\..\..\Code\Colliders\PolygonCollider.h" />
-    <ClInclude Include="..\..\..\..\Code\Colliders\RectangleCollider.h" />
-    <ClInclude Include="..\..\..\..\Code\Collision.h" />
-    <ClInclude Include="..\..\..\..\Code\CollisionData.h" />
-    <ClInclude Include="..\..\..\..\Code\Color.h" />
-    <ClInclude Include="..\..\..\..\Code\FileNode.h" />
-    <ClInclude Include="..\..\..\..\Code\FontAsset.h" />
-    <ClInclude Include="..\..\..\..\Code\Game.h" />
-    <ClInclude Include="..\..\..\..\Code\Debug.h" />
-    <ClInclude Include="..\..\..\..\Code\Editor.h" />
-    <ClInclude Include="..\..\..\..\Code\Entity.h" />
-    <ClInclude Include="..\..\..\..\Code\Graphics.h" />
-    <ClInclude Include="..\..\..\..\Code\Graphics\Sprite.h" />
-    <ClInclude Include="..\..\..\..\Code\Graphics\SpriteAnimation.h" />
-    <ClInclude Include="..\..\..\..\Code\Graphics\Tilemap.h" />
-    <ClInclude Include="..\..\..\..\Code\GUI.h" />
-    <ClInclude Include="..\..\..\..\Code\Input.h" />
-    <ClInclude Include="..\..\..\..\Code\Level.h" />
-    <ClInclude Include="..\..\..\..\Code\LevelEditor\FringeTile.h" />
-    <ClInclude Include="..\..\..\..\Code\LevelEditor\ImageBrowser.h" />
-    <ClInclude Include="..\..\..\..\Code\LevelEditor\LevelEditor.h" />
-    <ClInclude Include="..\..\..\..\Code\LevelEditor\Node.h" />
-    <ClInclude Include="..\..\..\..\Code\LevelEditor\PathMesh.h" />
-    <ClInclude Include="..\..\..\..\Code\Macros.h" />
-    <ClInclude Include="..\..\..\..\Code\Monocle.h" />
-    <ClInclude Include="..\..\..\..\Code\MonocleToolkit.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\GL\glew.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\GL\glxew.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\GL\wglew.h" />
-    <ClInclude Include="..\..\..\..\Code\OpenGL\stb_truetype.h" />
-    <ClInclude Include="..\..\..\..\Code\Platform.h" />
-    <ClInclude Include="..\..\..\..\Code\Puppet\Puppet.h" />
-    <ClInclude Include="..\..\..\..\Code\Puppet\PuppetEditor.h" />
-    <ClInclude Include="..\..\..\..\Code\Random.h" />
-    <ClInclude Include="..\..\..\..\Code\Rect.h" />
-    <ClInclude Include="..\..\..\..\Code\Scene.h" />
-    <ClInclude Include="..\..\..\..\Code\Tests\AudioTest\AudioTest.h" />
-    <ClInclude Include="..\..\..\..\Code\Tests\Flash\Flash.h" />
-    <ClInclude Include="..\..\..\..\Code\Tests\Jumper\Jumper.h" />
-    <ClInclude Include="..\..\..\..\Code\Tests\LevelEditor\LevelEditorTest.h" />
-    <ClInclude Include="..\..\..\..\Code\Tests\Ogmo\Ogmo.h" />
-    <ClInclude Include="..\..\..\..\Code\Tests\Pong\Pong.h" />
-    <ClInclude Include="..\..\..\..\Code\Tests\PuppetTest\PuppetTest.h" />
-    <ClInclude Include="..\..\..\..\Code\TextureAsset.h" />
-    <ClInclude Include="..\..\..\..\Code\TextureAtlas.h" />
-    <ClInclude Include="..\..\..\..\Code\Tileset.h" />
-    <ClInclude Include="..\..\..\..\Code\Transform.h" />
-    <ClInclude Include="..\..\..\..\Code\TTFFontAsset.h" />
-    <ClInclude Include="..\..\..\..\Code\Tween.h" />
-    <ClInclude Include="..\..\..\..\Code\Vector2.h" />
-    <ClInclude Include="..\..\..\..\Code\Vector3.h" />
-    <ClInclude Include="..\..\..\..\Code\Windows\WindowsPlatform.h" />
-    <ClInclude Include="..\..\..\..\Code\XML\tinyxml.h" />
-    <ClInclude Include="..\..\..\..\Code\XML\XMLFileNode.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\Code\Asset.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Assets.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Audio\Audio.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Audio\AudioAsset.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Audio\AudioAssetReader.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Audio\AudioCrypt.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Audio\AudioDeck.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Audio\AudioDecoder.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Audio\AudioVis.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Audio\ChannelStream.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Audio\FFT.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Audio\Decoders\OggDecoder.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Audio\Decoders\WaveDecoder.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Audio\VisCache2.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Camera.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Colliders\CircleCollider.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Colliders\Collider.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Colliders\PathCollider.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Colliders\PolygonCollider.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Colliders\RectangleCollider.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Collision.cpp" />
-    <ClCompile Include="..\..\..\..\Code\CollisionData.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Color.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Editor.cpp" />
-    <ClCompile Include="..\..\..\..\Code\FileNode.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Game.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Debug.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Entity.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Graphics\Sprite.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Graphics\SpriteAnimation.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Graphics\Tilemap.cpp" />
-    <ClCompile Include="..\..\..\..\Code\GUI.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Input.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Level.cpp" />
-    <ClCompile Include="..\..\..\..\Code\LevelEditor\FringeTile.cpp" />
-    <ClCompile Include="..\..\..\..\Code\LevelEditor\ImageBrowser.cpp" />
-    <ClCompile Include="..\..\..\..\Code\LevelEditor\LevelEditor.cpp" />
-    <ClCompile Include="..\..\..\..\Code\LevelEditor\Node.cpp" />
-    <ClCompile Include="..\..\..\..\Code\LevelEditor\PathMesh.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Main.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Monocle.cpp" />
-    <ClCompile Include="..\..\..\..\Code\MonocleToolkit.cpp" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\GL\glew.c" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLGraphics.cpp" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLTextureAsset.cpp" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLTTFFontAsset.cpp" />
-    <ClCompile Include="..\..\..\..\Code\OpenGL\stb_image.c" />
-    <ClCompile Include="..\..\..\..\Code\Puppet\Puppet.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Puppet\PuppetEditor.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Random.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Rect.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Scene.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Tests\AudioTest\AudioTest.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Tests\Flash\Flash.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Tests\Jumper\Jumper.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Tests\LevelEditor\LevelEditorTest.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Tests\Ogmo\Ogmo.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Tests\Pong\Pong.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Tests\PuppetTest\PuppetTest.cpp" />
-    <ClCompile Include="..\..\..\..\Code\TextureAtlas.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Tileset.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Transform.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Tween.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Vector2.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Vector3.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Windows\WindowsPlatform.cpp" />
-    <ClCompile Include="..\..\..\..\Code\XML\tinyxml.cpp" />
-    <ClCompile Include="..\..\..\..\Code\XML\tinyxmlerror.cpp" />
-    <ClCompile Include="..\..\..\..\Code\XML\tinyxmlparser.cpp" />
-    <ClCompile Include="..\..\..\..\Code\XML\XMLFileNode.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
