@@ -1,8 +1,8 @@
 #include "Ogmo.h"
-#include "../../Input.h"
-#include "../../Level.h"
-#include "../../Monocle.h"
-#include "../../Macros.h"
+#include <Input.h>
+#include <Level.h>
+#include <Monocle.h>
+#include <Macros.h>
 
 #include <stdlib.h>
 

@@ -1,6 +1,6 @@
 #include "Jumper.h"
-#include "../../Input.h"
-#include "../../Level.h"
+#include <Input.h>
+#include <Level.h>
 
 namespace Jumper
 {

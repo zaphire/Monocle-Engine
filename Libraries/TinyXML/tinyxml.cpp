@@ -1870,7 +1870,7 @@ bool XMLReadBool(TiXmlElement* elem, const std::string &att)
 	return false;
 }
 
-#include "../Color.h"
+#include <Color.h>
 
 void XMLReadColor(TiXmlElement* elem, const std::string &att, Monocle::Color &color)
 {

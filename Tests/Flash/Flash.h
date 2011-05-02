@@ -1,6 +1,7 @@
-#include "../../Monocle.h"
-#include "../../TextureAsset.h"
-#include "../../Graphics/Sprite.h"
+#include <Monocle.h>
+#include <TextureAsset.h>
+#include <Graphics/Sprite.h>
+
 #include <string>
 #include <vector>
 

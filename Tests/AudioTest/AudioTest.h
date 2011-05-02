@@ -1,4 +1,4 @@
-#include "../../Monocle.h"
+#include <Monocle.h>
 
 using namespace Monocle;
 

@@ -1,6 +1,6 @@
 #include "Level.h"
 #include "Assets.h"
-#include "XML/tinyxml.h"
+#include <TinyXML/tinyxml.h>
 #include "XML/XMLFileNode.h"
 #include <iostream>
 #include <fstream>

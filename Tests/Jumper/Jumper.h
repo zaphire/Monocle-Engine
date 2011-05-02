@@ -1,6 +1,6 @@
-#include "../../Monocle.h"
-#include "../../Graphics/Sprite.h"
-#include "../../Level.h"
+#include <Monocle.h>
+#include <Graphics/Sprite.h>
+#include <Level.h>
 
 // by @NoelFB
 using namespace Monocle;

@@ -1,5 +1,5 @@
-#include "../../Monocle.h"
-#include "../../Puppet/PuppetEditor.h"
+#include <Monocle.h>
+#include <Puppet/PuppetEditor.h>
 
 using namespace Monocle;
 

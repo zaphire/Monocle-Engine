@@ -1,5 +1,5 @@
-#include "../../Monocle.h"
-#include "../../TextureAsset.h"
+#include <Monocle.h>
+#include <TextureAsset.h>
 
 using namespace Monocle;
 

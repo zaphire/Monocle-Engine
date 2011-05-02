@@ -11,7 +11,7 @@
 #include "GL/glew.h"
 
 #define STBI_HEADER_FILE_ONLY
-#include "stb_image.c"
+#include <stb/stb_image.c>
 
 namespace Monocle
 {

@@ -10,8 +10,8 @@
 #include "LevelEditor/FringeTile.h"
 
 // temp, replace with generic file interface later
-#include "XML/tinyxml.h"
-#include "XML/XMLFileNode.h"
+#include <TinyXML/tinyxml.h>
+#include <XML/XMLFileNode.h>
 
 namespace Monocle
 {

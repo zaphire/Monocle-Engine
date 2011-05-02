@@ -1,7 +1,7 @@
 #include "TextureAtlas.h"
 
-#include "XML/XMLFileNode.h"
-#include "XML/tinyxml.h"
+#include <XML/XMLFileNode.h>
+#include <TinyXML/tinyxml.h>
 
 #include <sstream>
 

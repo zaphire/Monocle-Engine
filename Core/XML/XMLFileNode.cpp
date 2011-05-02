@@ -2,7 +2,7 @@
 #include <iostream>
 #include "../Vector2.h"
 #include "../Color.h"
-#include "tinyxml.h"
+#include <TinyXML/tinyxml.h>
 
 namespace Monocle
 {

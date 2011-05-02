@@ -5,512 +5,505 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Monocle">
+    <Filter Include="Tests">
+      <UniqueIdentifier>{778a5877-7e41-418b-9d20-428e9205209d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\AudioTest">
+      <UniqueIdentifier>{76662daa-290a-4eb2-8c3d-6290235a070e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Flash">
+      <UniqueIdentifier>{a08e69a1-a1ce-4966-9ad9-b7cee63a0915}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Jumper">
+      <UniqueIdentifier>{37df09b9-9ee4-4c32-8d4b-1c3bd29aff4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\LevelEditor">
+      <UniqueIdentifier>{12a42eb4-e2ea-463a-aeb7-2a30b212c1d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Ogmo">
+      <UniqueIdentifier>{a1a9d307-21cf-43ad-b814-c87bb4573aac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Pong">
+      <UniqueIdentifier>{56d1a2db-d3de-4143-a8c4-c0fb8292b965}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\PuppetTest">
+      <UniqueIdentifier>{1971d84b-8de3-4117-b3fb-00772de2f368}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Monocle\Tests">
-      <UniqueIdentifier>{108f55c5-9ca0-4a9b-9d2c-29a184c1ac10}</UniqueIdentifier>
+    <Filter Include="Core\Audio">
+      <UniqueIdentifier>{613b3108-c696-41a8-9be8-6e8c1f2f6812}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Monocle\Tests\Pong">
-      <UniqueIdentifier>{a012267c-9d76-4faa-8f4f-8ce0d9f25d62}</UniqueIdentifier>
+    <Filter Include="Core\Audio\Decoders">
+      <UniqueIdentifier>{437fd3be-1633-4073-8976-5ec2bb0400c3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Monocle\OpenGL">
-      <UniqueIdentifier>{67e43894-0ffd-47d4-b06b-fe37a76b1e97}</UniqueIdentifier>
+    <Filter Include="Core\Colliders">
+      <UniqueIdentifier>{464de9c4-a578-49a7-b793-95f0d5406246}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Monocle\Colliders">
-      <UniqueIdentifier>{a834cc3d-7677-41d6-a8ec-d21b830b4b57}</UniqueIdentifier>
+    <Filter Include="Core\Graphics">
+      <UniqueIdentifier>{1cc2fe0b-a2ba-4269-89d5-dd62f51562c0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Monocle\Tests\Jumper">
-      <UniqueIdentifier>{0cc35010-5a27-4319-bca8-8c4de55f63fc}</UniqueIdentifier>
+    <Filter Include="Core\LevelEditor">
+      <UniqueIdentifier>{30c9b6c2-0699-4b93-92b6-d4c2e0fa6a60}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Monocle\Main">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Core\OpenGL">
+      <UniqueIdentifier>{a598ebcd-8f59-4f42-89e9-bc85b1bf0057}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Monocle\Graphics">
-      <UniqueIdentifier>{5fa20246-a07a-4840-9919-412e07fc3951}</UniqueIdentifier>
+    <Filter Include="Core\Puppet">
+      <UniqueIdentifier>{d49e9543-14c1-4bef-8e14-fede4039a18e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Monocle\Tests\Flash">
-      <UniqueIdentifier>{e9cd7ea2-96d7-44a3-914e-4d3e4c08e98d}</UniqueIdentifier>
+    <Filter Include="Core\Windows">
+      <UniqueIdentifier>{51dc29ac-8c7b-4649-b00f-6cb97e134065}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Monocle\XML">
-      <UniqueIdentifier>{d0da0306-c7a3-4393-8191-1d763d3e0f49}</UniqueIdentifier>
+    <Filter Include="Core\XML">
+      <UniqueIdentifier>{dbc6d1f3-9ac1-424b-8bb5-65dd3a11c62e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Monocle\Tests\Ogmo">
-      <UniqueIdentifier>{12a8ee66-4cba-4d3c-9b2c-5e16fe6b9487}</UniqueIdentifier>
+    <Filter Include="Libraries">
+      <UniqueIdentifier>{bb19ecc9-9a7a-46cf-9252-14b651e8bea9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Monocle\LevelEditor">
-      <UniqueIdentifier>{bbc21fce-4b4f-4566-9f94-f58bc48da817}</UniqueIdentifier>
+    <Filter Include="Libraries\GL">
+      <UniqueIdentifier>{613a880f-1620-4f3c-8310-9fe7c6704817}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Monocle\Tests\PuppetTest">
-      <UniqueIdentifier>{f95e904c-8c80-42a9-bb9c-06324b935de5}</UniqueIdentifier>
+    <Filter Include="Libraries\Lua">
+      <UniqueIdentifier>{177567bd-e2e9-4ce0-92af-640997b20970}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Monocle\Windows">
-      <UniqueIdentifier>{42ca9d1a-a305-48b8-a843-81cb86cd8e2d}</UniqueIdentifier>
+    <Filter Include="Libraries\TinyXML">
+      <UniqueIdentifier>{82c21d51-af8f-4bc6-a6ce-863f0251b101}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Monocle\OpenGL\GL">
-      <UniqueIdentifier>{9cd65049-d26f-435e-afd0-98483ae1c2eb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Monocle\Tests\LevelEditor">
-      <UniqueIdentifier>{f5cb9620-ef8b-41ac-ac96-cd2a8828c016}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Monocle\Audio">
-      <UniqueIdentifier>{b2fcfdaa-c7a2-4ef9-b264-0eb24f053009}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Monocle\Audio\oggvorbis">
-      <UniqueIdentifier>{14fa2da8-55b3-4149-b3e0-b83c224b95d3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Monocle\Audio\oggvorbis\ogg">
-      <UniqueIdentifier>{a826a71e-ba23-416f-9831-33cf49e53fa2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Monocle\Audio\oggvorbis\vorbis">
-      <UniqueIdentifier>{fb2250e5-c6ef-480a-8209-d2321ac0c347}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Monocle\Tests\AudioTest">
-      <UniqueIdentifier>{84030347-9629-4332-a0b8-13eec9d3f485}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Monocle\Puppet">
-      <UniqueIdentifier>{6f7106a0-9fd8-4404-9093-cdbbd9422cf4}</UniqueIdentifier>
+    <Filter Include="Libraries\stb">
+      <UniqueIdentifier>{7791f33d-5416-45a3-bc9c-8e0f463d7662}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Code\Vector3.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Asset.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Collision.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Color.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Debug.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Editor.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Entity.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Graphics.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Input.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Monocle.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Platform.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Random.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Scene.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\TextureAsset.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Tween.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Vector2.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Tests\Jumper\Jumper.h">
-      <Filter>Monocle\Tests\Jumper</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Tests\Pong\Pong.h">
-      <Filter>Monocle\Tests\Pong</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Colliders\CircleCollider.h">
-      <Filter>Monocle\Colliders</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Colliders\Collider.h">
-      <Filter>Monocle\Colliders</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Colliders\RectangleCollider.h">
-      <Filter>Monocle\Colliders</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Graphics\Sprite.h">
-      <Filter>Monocle\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Assets.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Graphics\SpriteAnimation.h">
-      <Filter>Monocle\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Tests\Flash\Flash.h">
-      <Filter>Monocle\Tests\Flash</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\XML\tinyxml.h">
-      <Filter>Monocle\XML</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\GUI.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Game.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Level.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Graphics\Tilemap.h">
-      <Filter>Monocle\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Tileset.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Macros.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Tests\Ogmo\Ogmo.h">
-      <Filter>Monocle\Tests\Ogmo</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Colliders\PolygonCollider.h">
-      <Filter>Monocle\Colliders</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\LevelEditor\FringeTile.h">
-      <Filter>Monocle\LevelEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\LevelEditor\PathMesh.h">
-      <Filter>Monocle\LevelEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\XML\XMLFileNode.h">
-      <Filter>Monocle\XML</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\FileNode.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\LevelEditor\Node.h">
-      <Filter>Monocle\LevelEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Colliders\PathCollider.h">
-      <Filter>Monocle\Colliders</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\CollisionData.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Transform.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Camera.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Tests\PuppetTest\PuppetTest.h">
-      <Filter>Monocle\Tests\PuppetTest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\OpenGL\stb_truetype.h">
-      <Filter>Monocle\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\FontAsset.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\TTFFontAsset.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Rect.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\LevelEditor\LevelEditor.h">
-      <Filter>Monocle\LevelEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Windows\WindowsPlatform.h">
-      <Filter>Monocle\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\OpenGL\GL\glew.h">
-      <Filter>Monocle\OpenGL\GL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\OpenGL\GL\glxew.h">
-      <Filter>Monocle\OpenGL\GL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\OpenGL\GL\wglew.h">
-      <Filter>Monocle\OpenGL\GL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\LevelEditor\ImageBrowser.h">
-      <Filter>Monocle\LevelEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Tests\LevelEditor\LevelEditorTest.h">
-      <Filter>Monocle\Tests\LevelEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\MonocleToolkit.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Audio\AudioAsset.h">
-      <Filter>Monocle\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Audio\AudioCrypt.h">
-      <Filter>Monocle\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Audio\AudioDecoder.h">
-      <Filter>Monocle\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Audio\ChannelStream.h">
-      <Filter>Monocle\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\OggDecoder.h">
-      <Filter>Monocle\Audio\oggvorbis</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\ogg\ogg.h">
-      <Filter>Monocle\Audio\oggvorbis\ogg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\ogg\os_types.h">
-      <Filter>Monocle\Audio\oggvorbis\ogg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\vorbis\codec.h">
-      <Filter>Monocle\Audio\oggvorbis\vorbis</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\vorbis\vorbisenc.h">
-      <Filter>Monocle\Audio\oggvorbis\vorbis</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Audio\oggvorbis\vorbis\vorbisfile.h">
-      <Filter>Monocle\Audio\oggvorbis\vorbis</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Tests\AudioTest\AudioTest.h">
-      <Filter>Monocle\Tests\AudioTest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\TextureAtlas.h">
-      <Filter>Monocle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Puppet\Puppet.h">
-      <Filter>Monocle\Puppet</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Puppet\PuppetEditor.h">
-      <Filter>Monocle\Puppet</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Audio\AudioDeck.h">
-      <Filter>Monocle\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Audio\AudioVis.h">
-      <Filter>Monocle\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Audio\AudioAssetReader.h">
-      <Filter>Monocle\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Audio\Audio.h">
-      <Filter>Monocle\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Audio\VisCache2.h">
-      <Filter>Monocle\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Audio\FFT.h">
-      <Filter>Monocle\Audio</Filter>
-    </ClInclude>
+    <ClCompile Include="..\..\..\..\Core\Asset.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Assets.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Camera.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Collision.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\CollisionData.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Color.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Debug.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Editor.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Entity.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\FileNode.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Game.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\GUI.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Input.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Level.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Monocle.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\MonocleToolkit.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Random.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Rect.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Scene.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\TextureAtlas.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Tileset.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Transform.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Tween.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Vector2.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Vector3.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Audio\Audio.cpp">
+      <Filter>Core\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Audio\AudioAsset.cpp">
+      <Filter>Core\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Audio\AudioAssetReader.cpp">
+      <Filter>Core\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Audio\AudioCrypt.cpp">
+      <Filter>Core\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Audio\AudioDeck.cpp">
+      <Filter>Core\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Audio\AudioDecoder.cpp">
+      <Filter>Core\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Audio\AudioVis.cpp">
+      <Filter>Core\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Audio\ChannelStream.cpp">
+      <Filter>Core\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Audio\fft.cpp">
+      <Filter>Core\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Audio\VisCache2.cpp">
+      <Filter>Core\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Audio\Decoders\OggDecoder.cpp">
+      <Filter>Core\Audio\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Audio\Decoders\WaveDecoder.cpp">
+      <Filter>Core\Audio\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Colliders\CircleCollider.cpp">
+      <Filter>Core\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Colliders\Collider.cpp">
+      <Filter>Core\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Colliders\PathCollider.cpp">
+      <Filter>Core\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Colliders\PolygonCollider.cpp">
+      <Filter>Core\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Colliders\RectangleCollider.cpp">
+      <Filter>Core\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Graphics\Sprite.cpp">
+      <Filter>Core\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Graphics\SpriteAnimation.cpp">
+      <Filter>Core\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Graphics\Tilemap.cpp">
+      <Filter>Core\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\LevelEditor\FringeTile.cpp">
+      <Filter>Core\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\LevelEditor\ImageBrowser.cpp">
+      <Filter>Core\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\LevelEditor\LevelEditor.cpp">
+      <Filter>Core\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\LevelEditor\Node.cpp">
+      <Filter>Core\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\LevelEditor\PathMesh.cpp">
+      <Filter>Core\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\OpenGL\OpenGLGraphics.cpp">
+      <Filter>Core\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\OpenGL\OpenGLTextureAsset.cpp">
+      <Filter>Core\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\OpenGL\OpenGLTTFFontAsset.cpp">
+      <Filter>Core\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Puppet\Puppet.cpp">
+      <Filter>Core\Puppet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Puppet\PuppetEditor.cpp">
+      <Filter>Core\Puppet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\Windows\WindowsPlatform.cpp">
+      <Filter>Core\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core\XML\XMLFileNode.cpp">
+      <Filter>Core\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Tests\AudioTest\AudioTest.cpp">
+      <Filter>Tests\AudioTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Tests\Flash\Flash.cpp">
+      <Filter>Tests\Flash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Tests\Jumper\Jumper.cpp">
+      <Filter>Tests\Jumper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Tests\Ogmo\Ogmo.cpp">
+      <Filter>Tests\Ogmo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Tests\Pong\Pong.cpp">
+      <Filter>Tests\Pong</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Tests\PuppetTest\PuppetTest.cpp">
+      <Filter>Tests\PuppetTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Tests\LevelEditor\LevelEditorTest.cpp">
+      <Filter>Tests\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Tests\Main.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\GL\glew.c">
+      <Filter>Libraries\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\TinyXML\tinyxml.cpp">
+      <Filter>Libraries\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\TinyXML\tinyxmlerror.cpp">
+      <Filter>Libraries\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\TinyXML\tinyxmlparser.cpp">
+      <Filter>Libraries\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Libraries\stb\stb_image.c">
+      <Filter>Libraries\stb</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Code\Asset.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Collision.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Color.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Debug.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Entity.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Input.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Monocle.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Random.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Scene.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Tween.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Vector2.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Vector3.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Tests\Jumper\Jumper.cpp">
-      <Filter>Monocle\Tests\Jumper</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Tests\Pong\Pong.cpp">
-      <Filter>Monocle\Tests\Pong</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLGraphics.cpp">
-      <Filter>Monocle\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLTextureAsset.cpp">
-      <Filter>Monocle\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Colliders\CircleCollider.cpp">
-      <Filter>Monocle\Colliders</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Colliders\Collider.cpp">
-      <Filter>Monocle\Colliders</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Colliders\RectangleCollider.cpp">
-      <Filter>Monocle\Colliders</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Main.cpp">
-      <Filter>Monocle\Main</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Graphics\Sprite.cpp">
-      <Filter>Monocle\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Assets.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Graphics\SpriteAnimation.cpp">
-      <Filter>Monocle\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Tests\Flash\Flash.cpp">
-      <Filter>Monocle\Tests\Flash</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\XML\tinyxml.cpp">
-      <Filter>Monocle\XML</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\XML\tinyxmlerror.cpp">
-      <Filter>Monocle\XML</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\XML\tinyxmlparser.cpp">
-      <Filter>Monocle\XML</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\GUI.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Game.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Level.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Graphics\Tilemap.cpp">
-      <Filter>Monocle\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Tileset.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Tests\Ogmo\Ogmo.cpp">
-      <Filter>Monocle\Tests\Ogmo</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Colliders\PolygonCollider.cpp">
-      <Filter>Monocle\Colliders</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\LevelEditor\FringeTile.cpp">
-      <Filter>Monocle\LevelEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\LevelEditor\PathMesh.cpp">
-      <Filter>Monocle\LevelEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\XML\XMLFileNode.cpp">
-      <Filter>Monocle\XML</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\FileNode.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\LevelEditor\Node.cpp">
-      <Filter>Monocle\LevelEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Colliders\PathCollider.cpp">
-      <Filter>Monocle\Colliders</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\CollisionData.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Transform.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Camera.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Tests\PuppetTest\PuppetTest.cpp">
-      <Filter>Monocle\Tests\PuppetTest</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\OpenGLTTFFontAsset.cpp">
-      <Filter>Monocle\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Rect.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\LevelEditor\LevelEditor.cpp">
-      <Filter>Monocle\LevelEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\stb_image.c">
-      <Filter>Monocle\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Windows\WindowsPlatform.cpp">
-      <Filter>Monocle\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\OpenGL\GL\glew.c">
-      <Filter>Monocle\OpenGL\GL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\LevelEditor\ImageBrowser.cpp">
-      <Filter>Monocle\LevelEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Tests\LevelEditor\LevelEditorTest.cpp">
-      <Filter>Monocle\Tests\LevelEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\MonocleToolkit.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Editor.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Audio\AudioAsset.cpp">
-      <Filter>Monocle\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Audio\AudioCrypt.cpp">
-      <Filter>Monocle\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Audio\AudioDecoder.cpp">
-      <Filter>Monocle\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Audio\oggvorbis\OggDecoder.cpp">
-      <Filter>Monocle\Audio\oggvorbis</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Tests\AudioTest\AudioTest.cpp">
-      <Filter>Monocle\Tests\AudioTest</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\TextureAtlas.cpp">
-      <Filter>Monocle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Puppet\Puppet.cpp">
-      <Filter>Monocle\Puppet</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Puppet\PuppetEditor.cpp">
-      <Filter>Monocle\Puppet</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Audio\AudioDeck.cpp">
-      <Filter>Monocle\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Audio\AudioVis.cpp">
-      <Filter>Monocle\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Audio\AudioAssetReader.cpp">
-      <Filter>Monocle\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Audio\Audio.cpp">
-      <Filter>Monocle\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Audio\VisCache2.cpp">
-      <Filter>Monocle\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Audio\FFT.cpp">
-      <Filter>Monocle\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Audio\ChannelStream.cpp">
-      <Filter>Monocle\Audio</Filter>
-    </ClCompile>
+    <ClInclude Include="..\..\..\..\Core\Asset.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Assets.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Camera.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Collision.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\CollisionData.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Color.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Debug.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Editor.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Entity.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\FileNode.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\FontAsset.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Game.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Graphics.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\GUI.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Input.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Level.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Macros.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Monocle.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\MonocleToolkit.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Platform.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Random.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Rect.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Scene.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\TextureAsset.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\TextureAtlas.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Tileset.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Transform.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\TTFFontAsset.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Tween.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Vector2.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Vector3.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Audio\Audio.h">
+      <Filter>Core\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Audio\AudioAsset.h">
+      <Filter>Core\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Audio\AudioAssetReader.h">
+      <Filter>Core\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Audio\AudioCrypt.h">
+      <Filter>Core\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Audio\AudioDeck.h">
+      <Filter>Core\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Audio\AudioDecoder.h">
+      <Filter>Core\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Audio\AudioVis.h">
+      <Filter>Core\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Audio\ChannelStream.h">
+      <Filter>Core\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Audio\fft.h">
+      <Filter>Core\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Audio\VisCache2.h">
+      <Filter>Core\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Audio\Decoders\OggDecoder.h">
+      <Filter>Core\Audio\Decoders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Audio\Decoders\WaveDecoder.h">
+      <Filter>Core\Audio\Decoders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Colliders\RectangleCollider.h">
+      <Filter>Core\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Colliders\CircleCollider.h">
+      <Filter>Core\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Colliders\Collider.h">
+      <Filter>Core\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Colliders\PathCollider.h">
+      <Filter>Core\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Colliders\PolygonCollider.h">
+      <Filter>Core\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Graphics\Sprite.h">
+      <Filter>Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Graphics\SpriteAnimation.h">
+      <Filter>Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Graphics\Tilemap.h">
+      <Filter>Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\LevelEditor\PathMesh.h">
+      <Filter>Core\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\LevelEditor\FringeTile.h">
+      <Filter>Core\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\LevelEditor\ImageBrowser.h">
+      <Filter>Core\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\LevelEditor\LevelEditor.h">
+      <Filter>Core\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\LevelEditor\Node.h">
+      <Filter>Core\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Puppet\Puppet.h">
+      <Filter>Core\Puppet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Puppet\PuppetEditor.h">
+      <Filter>Core\Puppet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\Windows\WindowsPlatform.h">
+      <Filter>Core\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core\XML\XMLFileNode.h">
+      <Filter>Core\XML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Tests\AudioTest\AudioTest.h">
+      <Filter>Tests\AudioTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Tests\Flash\Flash.h">
+      <Filter>Tests\Flash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Tests\Jumper\Jumper.h">
+      <Filter>Tests\Jumper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Tests\Ogmo\Ogmo.h">
+      <Filter>Tests\Ogmo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Tests\Pong\Pong.h">
+      <Filter>Tests\Pong</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Tests\PuppetTest\PuppetTest.h">
+      <Filter>Tests\PuppetTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Tests\LevelEditor\LevelEditorTest.h">
+      <Filter>Tests\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\GL\glew.h">
+      <Filter>Libraries\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\GL\glxew.h">
+      <Filter>Libraries\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\GL\wglew.h">
+      <Filter>Libraries\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\TinyXML\tinyxml.h">
+      <Filter>Libraries\TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Libraries\stb\stb_truetype.h">
+      <Filter>Libraries\stb</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

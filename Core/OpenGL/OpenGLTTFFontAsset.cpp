@@ -9,7 +9,7 @@
 #define STBTT_malloc(x,u)  malloc(x)
 #define STBTT_free(x,u)    free(x)
 
-#include "stb_truetype.h"
+#include <stb/stb_truetype.h>
 
 // OpenGL Headers
 #include "GL/glew.h"

@@ -1,6 +1,6 @@
 #include "Pong.h"
-#include "../../Input.h"
-#include "../../Collision.h"
+#include <Input.h>
+#include <Collision.h>
 
 #include <stdlib.h>
 #include <sstream>

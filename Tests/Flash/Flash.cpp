@@ -1,5 +1,5 @@
 #include "Flash.h"
-#include "../../XML/tinyxml.h"
+#include <TinyXML/tinyxml.h>
 #include <math.h>
 #include <algorithm>
 
