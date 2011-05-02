@@ -60,6 +60,9 @@ namespace Monocle {
     
     AudioDeck *Audio::NewDeck(Monocle::AudioAsset *audioAsset)
     {
+        if (!audioAsset)
+            return NULL;
+        
         std::string ext = audioAsset->GetExtension();
         std::transform(ext.begin(), ext.end(), ext.begin(), ::tolower);
         
