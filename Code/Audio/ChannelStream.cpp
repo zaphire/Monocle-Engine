@@ -282,15 +282,8 @@ namespace Monocle
     {
         ALCcontext *context;
         ALCdevice *device;
-        const ALCchar *default_device;
         
-        default_device = alcGetString(NULL,
-                                      ALC_DEFAULT_DEVICE_SPECIFIER);
-        
-        //printf("using default device: %s\n", default_device);
-        Debug::Log("AUDIO: Opening Audio Channel: " + std::string(default_device));
-        
-        if ((device = alcOpenDevice(default_device)) == NULL) {
+        if ((device = alcOpenDevice(NULL)) == NULL) {
             fprintf(stderr, "failed to open sound device\n");
             return -1;
         }

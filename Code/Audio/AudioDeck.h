@@ -19,6 +19,13 @@
 namespace Monocle {
     // Structure containing fade information
     
+    enum VisBandLength
+	{
+		VIS_BAND_SHORT=0,
+		VIS_BAND_MEDIUM,
+        VIS_BAND_LONG
+	};
+    
     /**
         Contains fade information for an AudioDeck. All times are in MS, and aFade* times are relative to ChannelStream::GetTotalPlayTime().
      */
@@ -231,6 +238,62 @@ namespace Monocle {
          This will disable visualizations.
          */
         float GetPitch(  );
+        
+        /**
+         Enables the processing of visualization spectrum data and
+         waveform grabs.
+         */
+        void EnableVis( bool visEnable = true );
+        
+        /**
+         @return true is Visualization data is enabled
+         */
+        bool IsVisEnabled();
+        
+        /**
+         Returns the visual waveform data if visualizations are enabled.
+         
+         @param index A value between 0-575 to specify where in the wave we're retrieving
+         @param channel Which channel data to get, 0 for left, 1 for right
+         @return a value between -1.0 and 1.0
+         */
+        float GetVisWaveform( int index, int channel = 0 );
+        
+        /**
+         Returns the visual spectrum data if visualizations are enabled. The best data is generally between indecies 10 and ~450.
+         
+         @param index A value between 0-511 to specify where in the wave we're retrieving
+         @param channel Which channel data to get, 0 for left, 1 for right - if channel is -1 (default) then it will return the loudest of the two channels.
+         @return a value between 0.0 and 1.0
+         */
+        float GetVisSpectrum( int index, int channel = -1 );
+        
+        /**
+         Returns the index (and value) of the loudest spectrum sample in a given channel (-1 to ignore channels).
+         
+         @param loudestValue pointer to fill with the value of the loudest index.
+         @param channel Which channel data to get, 0 for left, 1 for right - if channel is -1 (default) then it will return the loudest of the two channels.
+         @param startIndex The index to begin looking at (0-511)
+         @param endIndex The last index to look at (0-511)
+         @warning startIndex must be less than endIndex.
+         @return The index of the loudest spectrum, 0 - 511
+         */
+        int GetVisLoudestSpectrumIndex( float *loudestValue = NULL, int channel = -1, int startIndex = 0, int endIndex = 511); 
+        
+        /**
+         Returns the average of one of 16 bands in the spectrum.
+         
+         @param band band index 0-15
+         @param length One of VIS_BAND_SHORT, VIS_BAND_MEDIUM, and VIS_BAND_LONG to determine the length of the average
+         @param channel 0 for left, 1 for right, -1 for loudest of either
+         @return The average of the visual band
+         */
+        float GetVisBandAverage( int band, VisBandLength length = VIS_BAND_SHORT, int channel = -1 );
+        
+        /**
+         Flushes the deck.
+         */
+        void Flush();
         
         AudioDeck       *nextDeck;      // INTERNAL, Next Deck in the sequence
         AudioDeck       **prevDeckPointerToHere;     // INTERNAL, Pointer in the previous deck to this deck

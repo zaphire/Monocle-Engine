@@ -61,7 +61,8 @@ namespace AudioTest
 
             for (i=0;i<576;i++)
             {
-                thispos.y = deck->vis->fWaveform[0][i] + midy; //-128 to +128
+//                thispos.y = deck->vis->fWaveform[0][i] + midy; //-128 to +128
+                thispos.y = deck->GetVisWaveform(i)*128.0 + midy;
                 thispos.x = xstep*i;
                 
                 if (deck->vis->bClear) thispos.y = midy;
@@ -95,7 +96,8 @@ namespace AudioTest
             
             for (i=0;i<400;i++)
             {
-                val = deck->vis->fSpectrum[0][i];
+//                val = deck->vis->fSpectrum[0][i];
+                val = deck->GetVisSpectrum(i)*10.0;
                 
                 Graphics::SetColor(Color(val*timeR, val*timeG, val*timeB, 1.0));
                 Graphics::RenderLineRect( thispos.x, midy, xstep, val*100.0);
@@ -273,6 +275,8 @@ namespace AudioTest
         
         deck2->Mute();
         
+        deck1->EnableVis();
+        deck2->EnableVis();
         deck1->Play();
         deck2->Play();
 

@@ -11,6 +11,7 @@
 #include "../Debug.h"
 
 #define MIN(a,b) (a<b)?a:b
+#define MAX(a,b) (a>b)?a:b
 
 namespace Monocle {
     
@@ -126,8 +127,10 @@ namespace Monocle {
         
         this->isFinished = false;
         
-        vc.Clean();
-        vc.Reset();
+        if (IsVisEnabled()){
+            vc.Clean();
+            vc.Reset();
+        }
         this->vizlast = 0;
         
         this->bufferCountdown = NUM_BUFFERS;
@@ -138,6 +141,57 @@ namespace Monocle {
         cs->SetPitch(pitchBend);
         cs->SetPan(pan);
         //memset(&this->fades,0,sizeof(AudioFades));
+    }
+    
+    void AudioDeck::Flush()
+    {
+        bool wasPlaying = cs->IsPlaying();
+        bool wasPaused = this->pause;
+        long seek = this->GetCurrentTime();
+        
+        this->decodeData->seekOffset = seek;
+        ResetDeck();
+        
+        if (wasPlaying && !wasPaused)
+            cs->Play();
+        if (wasPaused)
+            this->pause = true;
+    }
+    
+    bool AudioDeck::IsVisEnabled()
+    {
+        // jw: Not sure if this is the best way, but it works.
+        if (this->vis) return true;
+        return false;
+    }
+    
+    void AudioDeck::EnableVis( bool visEnable )
+    {
+        if (visEnable && this->vis)
+            return;
+        
+        if (visEnable)
+        {
+            // Careful calculations calculated the buflen
+            vc.Init((BUFFER_SIZE/32768)*NUM_BUFFERS, decodeData->samplerate);
+            
+            vc.Clean();
+            
+            this->vis = new AudioVis();
+            this->vis->PrepData();
+            
+            if (cs->IsOpen())
+                this->vizlast = cs->GetTotalPlayTime();
+            else
+                this->vizlast = 0;
+            
+            Flush();
+        }
+        
+        if (!visEnable && this->vis){
+            vc.Destroy();
+            delete this->vis;
+        }
     }
     
     void AudioDeck::Init()
@@ -151,7 +205,7 @@ namespace Monocle {
         
         this->cleanVis = false;
         
-        this->vis = new AudioVis();
+        this->vis = NULL;
         this->cs = new ChannelStream();
         
         this->pitchBend = 1.0;
@@ -161,12 +215,14 @@ namespace Monocle {
         this->lastSeekPos = 0;
         this->fades.Reset();
         
-        // Careful calculations calculated the buflen
-        vc.Init((BUFFER_SIZE/32768)*NUM_BUFFERS, decodeData->samplerate);
+        if (IsVisEnabled()){
+            // Careful calculations calculated the buflen
+            vc.Init((BUFFER_SIZE/32768)*NUM_BUFFERS, decodeData->samplerate);
+            vc.Clean();
+            
+            this->vis = new AudioVis();
+        }
         this->vizlast = 0;
-        
-        // We need to attach a VizEng internally now.
-        this->vis->PrepData();
 
         ResetDeck();
 //        this->bufferCountdown = NUM_BUFFERS;
@@ -201,7 +257,8 @@ namespace Monocle {
         
         if (this->decodeData && freeDecoderData) delete this->decodeData;
         
-        delete this->vis;
+        if (this->vis)
+            delete this->vis;
         
         this->prevDeckPointerToHere[0] = this->nextDeck;
         
@@ -212,6 +269,8 @@ namespace Monocle {
     void AudioDeck::UpdateVizJunk()
     {
         long viznow = this->cs->GetTotalPlayTime();
+        
+        if (!IsVisEnabled()) return;
         
         if (this->cleanVis){
             vc.Clean();
@@ -512,6 +571,7 @@ namespace Monocle {
             else
                 memset(data,0,size); // signed (:
             
+            // jw: this can be simplified because we're only helping out the visualizers.
             // If the decoder says we're out of data...
             if (decodeData->outOfData)
             {   
@@ -521,13 +581,16 @@ namespace Monocle {
                 
                 while (pos<size){
                     
-                    vc.SetWrittenTime(this->writtenpos);
-                    
-                    vc.PutWaveLeft(temp_waveL);
-                    vc.PutWaveRight(temp_waveR);
-                    vc.SetEngineerData(0,0,0,0);
-                    
-                    vc.EndEntry();
+                    if (IsVisEnabled())
+                    {
+                        vc.SetWrittenTime(this->writtenpos);
+                        
+                        vc.PutWaveLeft(temp_waveL);
+                        vc.PutWaveRight(temp_waveR);
+                        vc.SetEngineerData(0,0,0,0);
+                        
+                        vc.EndEntry();
+                    }
                     
                     UpdateVizJunk();
                     
@@ -544,88 +607,78 @@ namespace Monocle {
             }
             else
             {
-                if (this->vis) this->vis->bClear = false;
+                if (IsVisEnabled()) this->vis->bClear = false;
             }
             
             while (l && pos<size && !decodeData->outOfData){
                 
                 // What to do if the Decoder says we're almost out of data?
                 
-                //			vc.NextFrame();
-                //			vc.SetReadTime( cP->GetOutputTime() );
-                //			vc.SetWriteTime( od->writtenpos );
-                
-                vc.SetWrittenTime( this->writtenpos );
-                
-                // If our engineer wants to set cached data, here is where we do it!
-                /*if (oc->setcacheinfo)
-                 {
-                 //onu_deck_cable_s *cable, long *data1, long *data2, long *data3, long *data4 
-                 long data[4];
-                 oc->setcacheinfo(oc,&data[0],&data[1],&data[2],&data[3]);
-                 vc.SetEngineerData(data[0],data[1],data[2],data[3]);
-                 }
-                 else
-                 vc.SetEngineerData(0,0,0,0);*/
-                
-                vc.SetEngineerData(0,0,0,0);
+                if (IsVisEnabled()){
+                    vc.SetWrittenTime( this->writtenpos );
+                    vc.SetEngineerData(0,0,0,0);
+                }
                 
                 l = this->decodeData->decoder->Render((size-pos<576*sampsize)?(size-pos):576*sampsize,(void*)((long)data+(long)pos),*this->decodeData);
                 
-                if (l >= 576*sampsize)
-                {				
-                    int i = 0;
-                    int samp = 0;
-                    
-                    if (decodeData->bit == 16)
-                    {
-                        short *copybuf = (short*)((long)data+(long)pos);
-                        
-                        for (i=0; i<576; i++, samp+=decodeData->ch)
-                        {
-                            temp_waveL[i] = C168(copybuf[samp]);
-                            
-                            if (decodeData->ch == 1)
-                                temp_waveR[i] = C168(copybuf[samp]);
-                            else
-                                temp_waveR[i] = C168(copybuf[samp+1]); // Stereo (:
-                            
-                            //temp_waveL[i] = copybuf[samp] >> 8;
-                            //temp_waveR[i] = copybuf[samp+1] >> 8;
-                            //temp_waveL[i] = 0xFF;
-                            //temp_waveR[i] = 0xFF;
-                        }
-                    }
-                    else if (decodeData->bit == 8)
-                    {
-                        unsigned char *copybuf = (unsigned char*)((long)data+(long)pos);
-                        
-                        for (i=0; i<576; i++, samp+=decodeData->ch)
-                        {
-                            temp_waveL[i] = copybuf[samp];
-                            
-                            if (decodeData->ch == 1)
-                                temp_waveR[i] = copybuf[samp];
-                            else
-                                temp_waveR[i] = copybuf[samp+1]; // Stereo (:
-                            
-                            //temp_waveL[i] = copybuf[samp] >> 8;
-                            //temp_waveR[i] = copybuf[samp+1] >> 8;
-                            //temp_waveL[i] = 0xFF;
-                            //temp_waveR[i] = 0xFF;
-                        }
-                    }
-                    
-                    vc.PutWaveLeft(temp_waveL);
-                    vc.PutWaveRight(temp_waveR);
-                }
-                else
+                if (IsVisEnabled())
                 {
-                    vc.PutWaveLeft(temp_waveL);
-                    vc.PutWaveRight(temp_waveR);
-                }
+                    if (l >= 576*sampsize)
+                    {				
+                        int i = 0;
+                        int samp = 0;
+                        
+                        if (decodeData->bit == 16)
+                        {
+                            short *copybuf = (short*)((long)data+(long)pos);
+                            
+                            for (i=0; i<576; i++, samp+=decodeData->ch)
+                            {
+                                temp_waveL[i] = C168(copybuf[samp]);
+                                
+                                if (decodeData->ch == 1)
+                                    temp_waveR[i] = C168(copybuf[samp]);
+                                else
+                                    temp_waveR[i] = C168(copybuf[samp+1]); // Stereo (:
+                                
+                                //temp_waveL[i] = copybuf[samp] >> 8;
+                                //temp_waveR[i] = copybuf[samp+1] >> 8;
+                                //temp_waveL[i] = 0xFF;
+                                //temp_waveR[i] = 0xFF;
+                            }
+                        }
+                        else if (decodeData->bit == 8)
+                        {
+                            unsigned char *copybuf = (unsigned char*)((long)data+(long)pos);
+                            
+                            for (i=0; i<576; i++, samp+=decodeData->ch)
+                            {
+                                temp_waveL[i] = copybuf[samp];
+                                
+                                if (decodeData->ch == 1)
+                                    temp_waveR[i] = copybuf[samp];
+                                else
+                                    temp_waveR[i] = copybuf[samp+1]; // Stereo (:
+                                
+                                //temp_waveL[i] = copybuf[samp] >> 8;
+                                //temp_waveR[i] = copybuf[samp+1] >> 8;
+                                //temp_waveL[i] = 0xFF;
+                                //temp_waveR[i] = 0xFF;
+                            }
+                        }
+                        
+                        vc.PutWaveLeft(temp_waveL);
+                        vc.PutWaveRight(temp_waveR);
+                    }
+                    else
+                    {
+                        vc.PutWaveLeft(temp_waveL);
+                        vc.PutWaveRight(temp_waveR);
+                    }
+                    
+                    vc.EndEntry();
                 
-                vc.EndEntry();
+                }
                 
                 UpdateVizJunk();
                 
@@ -720,5 +773,81 @@ namespace Monocle {
     float AudioDeck::GetPitch()
     {
         return this->pitchBend;
+    }
+    
+    float AudioDeck::GetVisWaveform( int index, int channel )
+    {
+        if (!IsVisEnabled()) return 0.0;
+        if (channel < 0 || channel > 1) return 0.0;
+        if (index < 0 || index >= 576) return 0.0;
+        return this->vis->fWaveform[channel][index] / 128.0;
+    }
+    
+    float AudioDeck::GetVisSpectrum( int index, int channel )
+    {
+        if (!IsVisEnabled()) return 0.0;
+        if (channel < -1 || channel > 1) return 0.0;
+        if (index < 0 || index >= 512) return 0.0;
+        
+        if (channel == -1)
+            return MAX(this->vis->fSpectrum[0][index]/10.0,this->vis->fSpectrum[1][index]/10.0);
+        else
+            return this->vis->fSpectrum[channel][index]/10.0;
+    }
+    
+    int AudioDeck::GetVisLoudestSpectrumIndex( float *loudestValue, int channel, int startIndex, int endIndex)
+    {
+        int loudestIndex=0;
+        float loudestIndexValue=-1;
+        int ind;
+        
+        if (!IsVisEnabled()) return 0;
+        if (startIndex < 0 || startIndex >= 512) return 0;
+        if (endIndex < 0 || endIndex >= 512) return 0;
+        if (endIndex < startIndex) return 0;
+        
+        for (ind=startIndex;ind<=endIndex;ind++)
+        {
+            float val = GetVisSpectrum(ind,channel);
+            if (val > loudestIndexValue) { 
+                loudestIndex = ind; 
+                loudestIndexValue = val; 
+            }
+        }
+        
+        if (loudestValue) loudestValue[0] = loudestIndexValue;
+        
+        return loudestIndex;
+    }
+    
+    float AudioDeck::GetVisBandAverage( int band, VisBandLength length, int channel)
+    {
+        if (!IsVisEnabled()) return 0.0;
+        if (band < 0 || band >= 16) return 0.0;
+        if (channel < -1 || channel > 1) return 0.0;
+        
+        if (channel >= 0){
+            switch (length)
+            {
+                case VIS_BAND_LONG:
+                    return this->vis->long_avg[channel][band];
+                case VIS_BAND_SHORT:
+                    return this->vis->imm[channel][band];
+                case VIS_BAND_MEDIUM:
+                    return this->vis->med_avg[channel][band];
+            }
+        }else{
+            switch (length)
+            {
+                case VIS_BAND_LONG:
+                    return MAX(this->vis->long_avg[0][band],this->vis->long_avg[1][band]);
+                case VIS_BAND_SHORT:
+                    return MAX(this->vis->imm[0][band], this->vis->imm[1][band]);
+                case VIS_BAND_MEDIUM:
+                    return MAX(this->vis->med_avg[0][band],this->vis->med_avg[1][band]);
+            }
+        }
+        
+        return 0.0;
     }
 }
