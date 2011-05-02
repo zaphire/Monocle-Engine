@@ -107,11 +107,11 @@ namespace Monocle
         if([[env objectForKey:@"MONOCLE_MAC_USE_CONTENT_PATH"] isEqualToString:@"true"]) {
             NSString *path = [env objectForKey:@"MONOCLE_CONTENT_PATH"];
             if(path) {
-                this->bundleResourcesPath = [path fileSystemRepresentation];
+                this->bundleResourcesPath = [path fileSystemRepresentation] + std::string("/");
             }
         } else {
             this->bundleResourcesPath = [[[NSBundle mainBundle] resourcePath] fileSystemRepresentation];
-            this->bundleResourcesPath = this->bundleResourcesPath + std::string("/Content");
+            this->bundleResourcesPath = this->bundleResourcesPath + std::string("/Content/");
         }
 
 		//  Create window

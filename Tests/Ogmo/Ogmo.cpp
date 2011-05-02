@@ -330,6 +330,8 @@ namespace Ogmo
 	void World::Begin()
 	{
 		Scene::Begin();
+        
+        Graphics::SetBackgroundColor(Color::black);
 
 		instance = this;
 
