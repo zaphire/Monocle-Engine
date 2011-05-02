@@ -137,20 +137,25 @@ namespace Monocle
 	{
 		return isEnabled;
 	}
-
-	void Entity::Render()
-	{
-		Graphics::PushMatrix();
-
+    
+    void Entity::PreRender()
+    {
+        Graphics::PushMatrix();
+        
 		if (followCamera == Vector2::zero || (Debug::render && Debug::selectedEntity != this && IsDebugLayer()))
 			Graphics::Translate(position.x, position.y, depth);
 		else
 			Graphics::Translate(scene->GetCamera()->position * followCamera + position * (Vector2::one - followCamera));
-
+        
 		if (rotation != 0.0f)
 			Graphics::Rotate(rotation, 0, 0, 1);
-
+        
 		Graphics::Scale(scale);
+    }
+
+	void Entity::Render()
+	{
+		PreRender();
 
 		const int MAX_LAYER = 100;
 		const int MIN_LAYER = -100;
@@ -183,38 +188,43 @@ namespace Monocle
 			}
 		}
 
-		Graphics::PopMatrix();
+		PostRender();
+	}
+    
+    void Entity::PostRender()
+    {
+        Graphics::PopMatrix();
 		
 		if (Debug::showBounds && IsDebugLayer())
 		{
 			Vector2 offset;
 			if (parent)
 				offset = Vector2::one * 2;
-
+            
 			Graphics::BindTexture(NULL);
-
+            
 			Graphics::PushMatrix();
 			
 			if (followCamera == Vector2::zero || Debug::render)
 				Graphics::Translate(position.x, position.y, depth);
 			else
 				Graphics::Translate(scene->GetCamera()->position * followCamera + position * (Vector2::one - followCamera));
-
+            
 			if (Debug::selectedEntity == this)
 				Graphics::SetColor(Color::orange);
 			else
 				Graphics::SetColor(Color(0.9f,0.9f,1.0f,0.8f));
-
+            
 			Graphics::RenderLineRect(offset.x, offset.y, ENTITY_CONTROLPOINT_SIZE, ENTITY_CONTROLPOINT_SIZE);
-
+            
 			if (Debug::selectedEntity != this)
 				Graphics::SetColor(Color(0.0f,0.0f,0.25f,0.8f));
-
+            
 			Graphics::RenderLineRect(offset.x, offset.y, ENTITY_CONTROLPOINT_SIZE * 0.75f, ENTITY_CONTROLPOINT_SIZE * 0.75f);
-
+            
 			Graphics::PopMatrix();
 		}
-	}
+    }
 
 	const std::string& Entity::GetTag(int index)
 	{
