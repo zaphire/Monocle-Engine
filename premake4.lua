@@ -1,6 +1,6 @@
 _MONOCLE_BASE			= os.getcwd()
 _BUILD_BASE				= os.getcwd().."/Build/gen-".._ACTION
-_MONOCLE_INCLUDE		= _MONOCLE_BASE.."/Core/Monocle"
+_MONOCLE_INCLUDE		= _MONOCLE_BASE.."/Core"
 _MONOCLE_LIBRARIES		= _MONOCLE_BASE.."/Libraries"
 
 newoption
@@ -21,7 +21,7 @@ function monocle_os_defines()
 	end
 end
 
-function monocle_includedirs()
+function monocle_os_includedirs()
 	includedirs{ _MONOCLE_INCLUDE }
 	includedirs{ _MONOCLE_LIBRARIES }
 end

@@ -4,11 +4,11 @@ project "MonocleCore"
 	language "C++"
 
 	monocle_os_defines();
-	monocle_includedirs();
+	monocle_os_includedirs();
 
 	basedir	( _BUILD_BASE.."/MonocleCore" )
 
-	files { "Monocle/**.h", "Monocle/**.cpp", "Monocle/**.c" }
+	files { "**.h", "**.cpp", "**.c" }
 
 	configuration "Debug"
 		defines { "DEBUG" }
