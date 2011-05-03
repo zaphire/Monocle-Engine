@@ -4,17 +4,25 @@
 -- Example usage: "premake4 --testapp=Pong vs2010"
 --
 
-_MONOCLE_BASE			= os.getcwd()
-_BUILD_BASE				= os.getcwd().."/Build/gen-".._ACTION
-_MONOCLE_INCLUDE		= _MONOCLE_BASE.."/Core"
-_MONOCLE_EXTLIB_BASE	= _MONOCLE_BASE.."/Libraries"
-_MONOCLE_EXTLIB_LIB_INC	= _MONOCLE_EXTLIB_BASE.."/Compiled"
-
 newoption
 {
 	trigger		=	"testapp",
 	description	=	"Generate project files for a monocle test app"
 }
+
+_MONOCLE_APP = "Monocle"
+if _OPTIONS["testapp"] ~= nil then
+	_MONOCLE_APP = _OPTIONS["testapp"]
+end
+
+
+
+_MONOCLE_BASE			= os.getcwd()
+_BUILD_BASE				= os.getcwd().."/Build/gen-".._ACTION.."-".._MONOCLE_APP
+_MONOCLE_INCLUDE		= _MONOCLE_BASE.."/Core"
+_MONOCLE_EXTLIB_BASE	= _MONOCLE_BASE.."/Libraries"
+_MONOCLE_EXTLIB_LIB_INC	= _MONOCLE_EXTLIB_BASE.."/Compiled"
+
 
 function monocle_os_defines()
 
@@ -76,16 +84,16 @@ end
 
 function monocle_build_targetdir( suffix )
 	if suffix ~= nil then
-		targetdir (_BUILD_BASE.."/../gen-".._ACTION.."-bin-"..suffix.."/")
+		targetdir (_BUILD_BASE.."-bin-"..suffix.."/")
 	else
-		targetdir (_BUILD_BASE.."/../gen-".._ACTION.."bin/")
+		targetdir (_BUILD_BASE.."-bin/")
 	end
 	
 end
 
 
 
-_MONOCLE_SOLUTION_NAME = "MonocleProject"
+_MONOCLE_SOLUTION_NAME = "MonocleLibrary"
 if _OPTIONS["testapp"] ~= nil then
 	_MONOCLE_SOLUTION_NAME  = (_OPTIONS["testapp"].."Solution")
 end
