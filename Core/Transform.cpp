@@ -43,7 +43,6 @@ namespace Monocle
     
     Vector2 Transform::GetDirectionVector()
     {
-        printf("%f\n",rotation);
         return Vector2(sin(rotation*pi / 180.0),cos(rotation*pi / 180.0)*-1.0);
     }
 }
