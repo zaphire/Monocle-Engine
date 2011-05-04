@@ -8,7 +8,8 @@
 #include <Windows.h>
 #endif
 
-#include "GL/glew.h"
+#define GLEW_STATIC
+#include <GL/glew.h>
 
 #define STBI_HEADER_FILE_ONLY
 #include <stb/stb_image.c>

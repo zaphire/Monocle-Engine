@@ -12,7 +12,8 @@
 #include <stb/stb_truetype.h>
 
 // OpenGL Headers
-#include "GL/glew.h"
+#define GLEW_STATIC
+#include <GL/glew.h>
 
 #include "../Macros.h"
 

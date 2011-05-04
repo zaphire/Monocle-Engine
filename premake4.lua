@@ -73,7 +73,7 @@ function monocle_os_links()
 	monocle_extlib("TinyXML")
 	
 	if os.is( "windows" ) == true then
-		links {"Winmm", "glew32", "opengl32", "glu32", "openal32", "libogg_static","libvorbis_static","libvorbisfile_static"}
+		links {"Winmm", "glew32s", "opengl32", "glu32", "openal32", "libogg_static","libvorbis_static","libvorbisfile_static"}
 	elseif os.is( "linux" ) == true then
 		-- this needs to be tested
 		links {"GLEW", "OPENGL", "GLU", "OPENAL", "ogg","vorbis","vorbisfile","vorbisenc"}
