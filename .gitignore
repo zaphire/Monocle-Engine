@@ -38,5 +38,4 @@ monocle.creator.*
 *.perspective
 *.perspectivev3
 *.pbxuser
-/Project/Xcode4/MonocleTest/MonocleTest.xcodeproj/project.xcworkspace/xcuserdata/
-/Project/Xcode4/MonocleTest/MonocleTest.xcodeproj/xcuserdata/
+*.xcuserstate

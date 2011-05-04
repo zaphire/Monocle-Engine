@@ -27,7 +27,11 @@ void initLuaState(lua_State **L)
 	lua_call(*L, 0, 0);
 }
 
+#ifdef MONOCLE_TEST_SELECTOR
+int LuaTestMain(void)
+#else
 int main(void)
+#endif
 {
 	// run require with module loader code
 	// run main.lua
@@ -37,7 +41,7 @@ int main(void)
 
 	initLuaState(&L);
 
-	if ((iErr = luaL_loadfile (L, "../../Content/Scripted/main.lua")) == 0)
+	if ((iErr = luaL_loadfile (L, std::string(Platform::GetDefaultContentPath()+"/Scripted/main.lua").c_str())) == 0)
 	{
 		// Call main...
 		if ((iErr = lua_pcall (L, 0, LUA_MULTRET, 0)) == 0)
