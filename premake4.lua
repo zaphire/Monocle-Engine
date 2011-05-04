@@ -76,7 +76,7 @@ function monocle_os_links()
 		links {"Winmm", "glew32s", "opengl32", "glu32", "openal32", "libogg_static","libvorbis_static","libvorbisfile_static"}
 	elseif os.is( "linux" ) == true then
 		-- this needs to be tested
-		links {"GLEW", "OPENGL", "GLU", "OPENAL", "ogg","vorbis","vorbisfile","vorbisenc"}
+		links { os.findlib("X11"), os.findlib("OpenGL"), os.findlib("OpenAL"), os.findlib("ogg"), os.findlib("vorbis"), os.findlib("vorbisfile") }
 	elseif os.is( "mac" ) == true then
 		-- soundofjw put in some mac stuff here, AirBash has no mac ^^
 		links {"GLEW", "OPENGL", "GLU", "OPENAL", "ogg","vorbis","vorbisfile","vorbisenc"}
