@@ -27,11 +27,7 @@ void initLuaState(lua_State **L)
 	lua_call(*L, 0, 0);
 }
 
-#ifdef MONOCLE_TEST_SELECTOR
-int LuaTestMain(void)
-#else
 int main(void)
-#endif
 {
 	// run require with module loader code
 	// run main.lua
