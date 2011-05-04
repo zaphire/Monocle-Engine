@@ -119,7 +119,7 @@ namespace Monocle
 	{
 		if (parent)
 			parent->Remove(this);
-		else
+		else if (scene)
 			scene->Remove(this);
 	}
 
