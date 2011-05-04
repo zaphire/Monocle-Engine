@@ -19,7 +19,14 @@ end
 
 
 _MONOCLE_BASE			= os.getcwd()
-_BUILD_BASE			= os.getcwd().."/Build/gen-".._ACTION.."-".._MONOCLE_APP
+
+-- jw: Fix premake4 --help
+if _ACTION ~= NIL then
+	_BUILD_BASE		= os.getcwd().."/Build/gen-".._ACTION.."-".._MONOCLE_APP
+else
+	_BUILD_BASE		= os.getcwd()
+end
+
 _MONOCLE_INCLUDE		= _MONOCLE_BASE.."/Core"
 _MONOCLE_EXTLIB_BASE		= _MONOCLE_BASE.."/Libraries"
 _MONOCLE_EXTLIB_LIB_INC		= _MONOCLE_EXTLIB_BASE.."/Compiled"
@@ -32,7 +39,7 @@ function monocle_os_defines()
 		defines {"MONOCLE_WINDOWS"}
 	elseif os.is( "linux" ) == true then
 		defines {"MONOCLE_LINUX"}
-	elseif os.is( "mac" ) == true then
+	elseif os.is( "macosx" ) == true then
 		defines {"MONOCLE_MAC"}
 	end
 end
@@ -42,7 +49,7 @@ function monocle_get_os_lib_dir()
 		return ("Win32")
 	elseif os.is( "linux" ) == true then
 		return ("Linux")
-	elseif os.is( "mac" ) == true then
+	elseif os.is( "macosx" ) == true then
 		return ("MacOSX")
 	end
 end
@@ -77,9 +84,9 @@ function monocle_os_links()
 	elseif os.is( "linux" ) == true then
 		-- this needs to be tested
 		links { os.findlib("X11"), os.findlib("OpenGL"), os.findlib("OpenAL"), os.findlib("ogg"), os.findlib("vorbis"), os.findlib("vorbisfile") }
-	elseif os.is( "mac" ) == true then
-		-- soundofjw put in some mac stuff here, AirBash has no mac ^^
-		links {"GLEW", "OPENGL", "GLU", "OPENAL", "ogg","vorbis","vorbisfile","vorbisenc"}
+	elseif os.is( "macosx" ) == true then
+		links { "OpenGL.framework", "OpenAL.framework", "Cocoa.framework" }
+		links {"GLEW", "ogg","vorbis","vorbisfile","vorbisenc" }
 	end
 end
 
@@ -106,8 +113,7 @@ solution (_MONOCLE_SOLUTION_NAME)
 	basedir( _BUILD_BASE )
 	configurations { "Debug", "Release" }
 
-	-- Monocle Test App
-	if _OPTIONS["testapp"] ~= nil then
+	if _OPTIONS["testapp"] ~= NIL then
 		_TESTAPP_PREMAKE_GENERIC_SCRIPT 	= "Tests/premake4-test-generic.lua"
 		_TESTAPP_PREMAKE_SCRIPT 			= "Tests/".._OPTIONS["testapp"].."/premake4-".._OPTIONS["testapp"]..".lua"
 		
