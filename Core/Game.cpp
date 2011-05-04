@@ -10,13 +10,14 @@
 namespace Monocle
 {
 	Game *Game::instance = NULL;
-
+    float Game::frames_per_sec = 0;
 
 	Game::Game()
 		:  scene(NULL), switchTo(NULL), isDone(false)
 		//, editor(NULL)
 	{
 		instance = this;
+        frames_per_sec = 0.0;
 		Monocle::deltaTime	= 0.0f;
 
 		debug.Init();
@@ -69,6 +70,9 @@ namespace Monocle
 
 			// update timer
 			tick = Platform::GetMilliseconds();
+            
+            // Frames per second
+            frames_per_sec = (frames_per_sec * 0.9) + ((tick-lastTick) * 0.1);
 
 #if defined(FIXED_TIMESTEP)
 			int updates = 0;
