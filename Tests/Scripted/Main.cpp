@@ -1,14 +1,62 @@
 #include <Game.h>
 
-#include <lua/lua.h>
+extern "C"
+{
+	#include <lua/lua.h>
+	#include <lua/lualib.h>
+	#include <lua/lauxlib.h>
+};
+
 // Test LUA scripting.
 
 using namespace Monocle;
+
+
+void initLuaState(lua_State **L)
+{
+	lua_pushcfunction(*L, luaopen_io);
+	lua_call(*L, 0, 0);
+
+	/*
+	luaopen_base(L);
+	luaopen_table(L);
+	luaopen_string(L);
+	luaopen_math(L);
+	*/
+}
 
 int main(void)
 {
 	// run require with module loader code
 	// run main.lua
+
+	int iErr = 0;
+	lua_State *L = luaL_newstate();
+
+	initLuaState(&L);
+
+	if ((iErr = luaL_loadfile (L, "../../Content/Scripted/main.lua")) == 0)
+	{
+		// Call main...
+		if ((iErr = lua_pcall (L, 0, LUA_MULTRET, 0)) == 0)
+		{ 
+			// Push the function name onto the stack
+			lua_pushstring (L, "HelloWorld");
+			// Function is located in the Global Table
+			lua_gettable (L, LUA_GLOBALSINDEX);  
+			lua_pcall (L, 0, 0, 0);
+		}
+		else
+		{
+			printf("pcall fail\n");
+		}
+	}
+	else
+	{
+		printf("Couldn't load file!\n");
+	}
+
+	lua_close(L);
 
 	return 0;
 }

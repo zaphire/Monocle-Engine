@@ -19,10 +19,10 @@ end
 
 
 _MONOCLE_BASE			= os.getcwd()
-_BUILD_BASE				= os.getcwd().."/Build/gen-".._ACTION.."-".._MONOCLE_APP
+_BUILD_BASE			= os.getcwd().."/Build/gen-".._ACTION.."-".._MONOCLE_APP
 _MONOCLE_INCLUDE		= _MONOCLE_BASE.."/Core"
-_MONOCLE_EXTLIB_BASE	= _MONOCLE_BASE.."/Libraries"
-_MONOCLE_EXTLIB_LIB_INC	= _MONOCLE_EXTLIB_BASE.."/Compiled"
+_MONOCLE_EXTLIB_BASE		= _MONOCLE_BASE.."/Libraries"
+_MONOCLE_EXTLIB_LIB_INC		= _MONOCLE_EXTLIB_BASE.."/Compiled"
 
 
 function monocle_os_defines()
