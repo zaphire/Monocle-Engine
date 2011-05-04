@@ -42,6 +42,7 @@ namespace Monocle
 		//virtual void ReceiveNote(const std::string &note);
 		
 		//virtual void Init();
+        static float frames_per_sec;
 
 	private:
 		static Game *instance;

@@ -1,6 +1,10 @@
 #include "Transform.h"
 #include "FileNode.h"
 
+#include "MonocleToolkit.h"
+#include <math.h>
+#include <stdio.h>
+
 namespace Monocle
 {
 	Transform::Transform()
@@ -36,4 +40,10 @@ namespace Monocle
 		fileNode->Read("rotation", rotation);
 		fileNode->Read("scale", scale);
 	}
+    
+    Vector2 Transform::GetDirectionVector()
+    {
+        printf("%f\n",rotation);
+        return Vector2(sin(rotation*pi / 180.0),cos(rotation*pi / 180.0)*-1.0);
+    }
 }

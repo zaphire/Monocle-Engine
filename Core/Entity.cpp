@@ -140,6 +140,8 @@ namespace Monocle
     
     void Entity::PreRender()
     {
+        const int MAX_LAYER = 100;
+        
         Graphics::PushMatrix();
         
 		if (followCamera == Vector2::zero || (Debug::render && Debug::selectedEntity != this && IsDebugLayer()))
@@ -151,16 +153,8 @@ namespace Monocle
 			Graphics::Rotate(rotation, 0, 0, 1);
         
 		Graphics::Scale(scale);
-    }
-
-	void Entity::Render()
-	{
-		PreRender();
-
-		const int MAX_LAYER = 100;
-		const int MIN_LAYER = -100;
-
-		for (int layer = MAX_LAYER; layer > 0; layer--)
+        
+        for (int layer = MAX_LAYER; layer > 0; layer--)
 		{
 			for(std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
 			{
@@ -170,6 +164,11 @@ namespace Monocle
 				}
 			}
 		}
+    }
+
+	void Entity::Render()
+	{
+		PreRender();
 
 		if (graphic != NULL)
 		{
@@ -177,7 +176,14 @@ namespace Monocle
 			graphic->Render(this);
 		}
 
-		for (int layer = 0; layer >= MIN_LAYER; layer--)
+		PostRender();
+	}
+    
+    void Entity::PostRender()
+    {
+        const int MIN_LAYER = -100;
+        
+        for (int layer = 0; layer >= MIN_LAYER; layer--)
 		{
 			for(std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
 			{
@@ -187,12 +193,7 @@ namespace Monocle
 				}
 			}
 		}
-
-		PostRender();
-	}
-    
-    void Entity::PostRender()
-    {
+        
         Graphics::PopMatrix();
 		
 		if (Debug::showBounds && IsDebugLayer())
