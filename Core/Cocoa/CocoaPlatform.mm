@@ -102,6 +102,7 @@ namespace Monocle
 	{
 		//  Init event loop
 		Cocoa_RegisterApp();
+        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];        
 
         NSDictionary *env = [[NSProcessInfo processInfo] environment];
         if([[env objectForKey:@"MONOCLE_MAC_USE_CONTENT_PATH"] isEqualToString:@"true"]) {
@@ -133,7 +134,8 @@ namespace Monocle
 		//  Init internal timer
 		gettimeofday(&startTime, NULL);
 
-		return true;
+        [pool release];
+        return true;
 	}
 
 	Platform* Platform::instance;
