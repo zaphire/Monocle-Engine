@@ -12,7 +12,8 @@
 #include <cstdlib>
 #include <cstdio>
 
-#include "GL/glew.h"
+#define GLEW_STATIC
+#include <GL/glew.h>
 
 // some opengl/windows init code based on http://nehe.gamedev.net
 
