@@ -24,5 +24,8 @@ namespace Monocle
 		Vector2 position;
 		float rotation;
 		Vector2 scale;
+        
+        //! Retrieves a direction vector based on the rotation value.
+        Vector2 GetDirectionVector();
 	};
 }

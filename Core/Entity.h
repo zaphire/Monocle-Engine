@@ -170,6 +170,14 @@ namespace Monocle
 		std::list<Entity*> children;
 
 		bool isEnabled;
+        
+        /** Responsible for scaling, rotating, and translating before rendering. Includes Pushing matrix.
+            Useful when overloading the Render() function
+         */
+        void PreRender();
+        
+        /** Pops the matrix and renders any bounds **/
+        void PostRender();
 
 	private:
 		Entity *parent;
