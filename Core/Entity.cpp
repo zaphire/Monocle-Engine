@@ -54,7 +54,7 @@ namespace Monocle
 	{
 	}
 
-	void Entity::Destroy()
+	void Entity::Destroyed()
 	{
 		if (collider)
 		{
@@ -83,7 +83,7 @@ namespace Monocle
 		// clean up children
 		for (std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
 		{
-			(*i)->Destroy();
+			(*i)->Destroyed();
 			delete (*i);
 		}
 

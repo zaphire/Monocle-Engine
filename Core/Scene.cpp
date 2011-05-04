@@ -165,7 +165,7 @@ namespace Monocle
 		//Resolve removes
 		for (std::list<Entity*>::iterator i = toRemove.begin(); i != toRemove.end(); ++i)
 		{
-			(*i)->Destroy();
+			(*i)->Destroyed();
 
 			entities.remove(*i);
 

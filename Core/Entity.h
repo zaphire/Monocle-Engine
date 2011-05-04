@@ -55,12 +55,6 @@ namespace Monocle
 		Entity(const Entity &entity);
 		Entity();
 		~Entity();
-		
-		//! Called by the scene when the entity is added to that scene
-		virtual void Added();
-
-		//! Called by the scene when the entity is removed from that scene
-		virtual void Removed();
 
 		//! Enable this object. Set isEnabled to true. Each derived Entity may decide how to handle isEnabled.
 		virtual void Enable();
@@ -71,8 +65,7 @@ namespace Monocle
 
 		//! Remove from Scene or Entity parent. May cause our deletion.
 		void RemoveSelf();
-		
-		virtual void Destroy();
+	
 
 		//! Called by the scene when the entity should update its game logic
 		virtual void Update();
@@ -83,6 +76,13 @@ namespace Monocle
 		//!  from Transform:: used to save/load properties
 		void Save(FileNode *fileNode);
 		void Load(FileNode *fileNode);
+
+		//! Called by the scene when the entity is added to that scene
+		virtual void Added();
+		//! Called by the scene when the entity is removed from that scene
+		virtual void Removed();
+		//! Called when Entity is destroyed
+		virtual void Destroyed();
 
 		//! Check our collider against all entities that have "tag"
 		Collider* Collide(const std::string &tag, CollisionData *collisionData=NULL);
