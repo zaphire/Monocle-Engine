@@ -19,16 +19,6 @@ using namespace Monocle;
 static Scene *nextScene = NULL;
 static std::string newAssetPath = "";
 static Game *pGame = NULL;
-static bool luaTest = false;
-
-int LuaTestMain(void);
-
-#ifndef MONOCLE_MAC
-int LuaTestMain(void) {
-    printf("LUA Scripted Test is not built into the project yet. -jw\n");
-    return 1;
-}
-#endif
 
 namespace TestSelector
 {
@@ -46,8 +36,7 @@ namespace TestSelector
                 "Ogmo",
                 "Level Editor",
                 "Pong",
-                "Puppet Test",
-                "LUA Script"
+                "Puppet Test"
             };
             
             Debug::Log("TestSelector::GameScene::Begin()!");
@@ -108,12 +97,6 @@ namespace TestSelector
                 nextScene = new PuppetTest::TestScene();
             }
             
-            if (Input::IsKeyPressed(KEY_8)){
-                luaTest = true;
-                Game::Quit();
-                return;
-            }
-            
             if (nextScene){
                 pGame->SetScene(nextScene);
                 Assets::SetContentPath(Assets::GetContentPath()+newAssetPath);
@@ -128,9 +111,6 @@ int main(void)
 	pGame->SetScene(new TestSelector::GameScene());
 	pGame->Main();
     delete pGame;
-    
-    if (luaTest)
-        return LuaTestMain();
     
 	return 0;
 }

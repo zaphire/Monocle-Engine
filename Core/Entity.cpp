@@ -137,9 +137,10 @@ namespace Monocle
 	{
 		return isEnabled;
 	}
-    
-    void Entity::PreRender()
-    {
+
+	void Entity::Render()
+	{
+        const int MIN_LAYER = -100;
         const int MAX_LAYER = 100;
         
         Graphics::PushMatrix();
@@ -164,11 +165,6 @@ namespace Monocle
 				}
 			}
 		}
-    }
-
-	void Entity::Render()
-	{
-		PreRender();
 
 		if (graphic != NULL)
 		{
@@ -176,14 +172,7 @@ namespace Monocle
 			graphic->Render(this);
 		}
 
-		PostRender();
-	}
-    
-    void Entity::PostRender()
-    {
-        const int MIN_LAYER = -100;
-        
-        for (int layer = 0; layer >= MIN_LAYER; layer--)
+		for (int layer = 0; layer >= MIN_LAYER; layer--)
 		{
 			for(std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
 			{
@@ -225,7 +214,7 @@ namespace Monocle
             
 			Graphics::PopMatrix();
 		}
-    }
+	}
 
 	const std::string& Entity::GetTag(int index)
 	{

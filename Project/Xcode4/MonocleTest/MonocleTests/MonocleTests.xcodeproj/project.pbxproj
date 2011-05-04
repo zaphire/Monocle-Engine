@@ -21,7 +21,6 @@
 		03836F77136EEE56006746F2 /* AudioTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03836F53136EEE56006746F2 /* AudioTest.cpp */; };
 		03937809136EF6BE00118824 /* MonocleTests-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 03937803136EF6BE00118824 /* MonocleTests-Info.plist */; };
 		0393780B136EF6BE00118824 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03937807136EF6BE00118824 /* InfoPlist.strings */; };
-		03AB004413719D6000721066 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03AB004313719D6000721066 /* Main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,7 +63,6 @@
 		03937802136EF6BE00118824 /* MonocleTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MonocleTests-Prefix.pch"; path = "MonocleTests/MonocleTests-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		03937803136EF6BE00118824 /* MonocleTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "MonocleTests-Info.plist"; path = "MonocleTests/MonocleTests-Info.plist"; sourceTree = SOURCE_ROOT; };
 		03937808136EF6BE00118824 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = MonocleTests/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
-		03AB004313719D6000721066 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Main.cpp; path = Scripted/Main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,7 +149,6 @@
 		03836F51136EEE56006746F2 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				03AB004113719D3900721066 /* Scripted */,
 				0328BB99136EFC1F0031F7A3 /* Test Selector */,
 				03836F52136EEE56006746F2 /* AudioTest */,
 				03836F58136EEE56006746F2 /* Flash */,
@@ -241,14 +238,6 @@
 			path = PuppetTest;
 			sourceTree = "<group>";
 		};
-		03AB004113719D3900721066 /* Scripted */ = {
-			isa = PBXGroup;
-			children = (
-				03AB004313719D6000721066 /* Main.cpp */,
-			);
-			name = Scripted;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -333,7 +322,6 @@
 				03115132136EFAF2002E27C2 /* PuppetTest.cpp in Sources */,
 				03836F77136EEE56006746F2 /* AudioTest.cpp in Sources */,
 				0328BB9D136EFC3B0031F7A3 /* Main.cpp in Sources */,
-				03AB004413719D6000721066 /* Main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
