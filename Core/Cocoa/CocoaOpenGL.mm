@@ -20,6 +20,10 @@ Cocoa_GL_CreateContext()
     
     attr[i++] = NSOpenGLPFADoubleBuffer;
     attr[i++] = NSOpenGLPFAAccelerated;
+    attr[i++] = NSOpenGLPFAColorSize;
+    attr[i++] = 32.0;
+    attr[i++] = NSOpenGLPFADepthSize;
+    attr[i++] = 32.0;
     attr[i] = 0;
 
     fmt = [[NSOpenGLPixelFormat alloc] initWithAttributes:attr];
