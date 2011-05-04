@@ -83,7 +83,7 @@ function monocle_os_links()
 		links {"Winmm", "glew32s", "opengl32", "glu32", "openal32", "libogg_static","libvorbis_static","libvorbisfile_static"}
 	elseif os.is( "linux" ) == true then
 		-- this needs to be tested
-		links { os.findlib("X11"), os.findlib("OpenGL"), os.findlib("OpenAL"), os.findlib("ogg"), os.findlib("vorbis"), os.findlib("vorbisfile") }
+		links { "X11","GLEW","GL","GLU","openal","ogg","vorbis","vorbisfile","vorbisenc" }
 	elseif os.is( "macosx" ) == true then
 		links { "OpenGL.framework", "OpenAL.framework", "Cocoa.framework" }
 		links {"GLEW", "ogg","vorbis","vorbisfile","vorbisenc" }
