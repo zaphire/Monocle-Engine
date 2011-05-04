@@ -23,6 +23,13 @@ static bool luaTest = false;
 
 int LuaTestMain(void);
 
+#ifndef MONOCLE_MAC
+int LuaTestMain(void) {
+    printf("LUA Scripted Test is not built into the project yet. -jw\n");
+    return 1;
+}
+#endif
+
 namespace TestSelector
 {
     class GameScene : public Scene
