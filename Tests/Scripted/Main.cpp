@@ -17,12 +17,14 @@ void initLuaState(lua_State **L)
 	lua_pushcfunction(*L, luaopen_io);
 	lua_call(*L, 0, 0);
 
-	/*
-	luaopen_base(L);
-	luaopen_table(L);
-	luaopen_string(L);
-	luaopen_math(L);
-	*/
+	lua_pushcfunction(*L, luaopen_table);
+	lua_call(*L, 0, 0);
+
+	lua_pushcfunction(*L, luaopen_string);
+	lua_call(*L, 0, 0);
+
+	lua_pushcfunction(*L, luaopen_math);
+	lua_call(*L, 0, 0);
 }
 
 int main(void)
