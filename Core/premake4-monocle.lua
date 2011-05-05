@@ -12,9 +12,8 @@ project "MonocleCore"
 	files { _MONOCLE_EXTLIB_BASE.."/stb/**.c" }		--hacky include for stb
 	files { _MONOCLE_EXTLIB_BASE.."/lua/**.c" }		--hacky include for lua
 
-	if os.is("macosx") then
-		files { "**.mm " }
-	end
+	configuration "macosx"
+		files { "**.mm" }
 	
 	links{ "TinyXML" }
 

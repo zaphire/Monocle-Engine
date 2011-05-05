@@ -1,5 +1,6 @@
-#include <OpenGL/OpenGL.h>
-#include <OpenGL/CGLRenderers.h>
+#import <OpenGL/OpenGL.h>
+#import <OpenGL/CGLRenderers.h>
+#import <AppKit/AppKit.h>
 
 #include "../Debug.h"
 
