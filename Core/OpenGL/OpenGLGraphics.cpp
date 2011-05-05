@@ -26,6 +26,7 @@ namespace Monocle
 		instance = this;
 		lastBoundTextureID = 0;
         bgReset = true;
+        currentBlend = BLEND_NONE;
 	}
 
 	void Graphics::Init()
