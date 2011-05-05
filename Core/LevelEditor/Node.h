@@ -4,6 +4,7 @@
 
 namespace Monocle
 {
+	//! /brief Linked list marker. Used to describe paths.
 	class Node : public Entity
 	{
 	public:
