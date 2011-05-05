@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include "Graphics.h"
+#include "MonocleToolkit.h"
 
 namespace Monocle
 {
@@ -162,6 +163,10 @@ namespace Monocle
 
 	void Scene::ResolveEntityChanges()
 	{
+        // Remove any duplicates...
+        toRemove.sort();
+        toRemove.unique();
+        
 		//Resolve removes
 		for (std::list<Entity*>::iterator i = toRemove.begin(); i != toRemove.end(); ++i)
 		{
