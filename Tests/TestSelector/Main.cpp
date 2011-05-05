@@ -42,9 +42,14 @@ namespace TestSelector
             Debug::Log("TestSelector::GameScene::Begin()!");
             
             Scene::Begin();
-            
-            FontAsset* font = Assets::RequestFont("AudioTest/LiberationSans-Regular.ttf", 25.0f);
-            scText = new AudioTest::Text("Please select a test to run:", font);
+
+			///HACK: so that things can actually run properly on windows
+#ifdef MONOCLE_WINDOWS
+			Assets::SetContentPath("../../../Content/");
+#endif
+
+			FontAsset* font = Assets::RequestFont("AudioTest/LiberationSans-Regular.ttf", 25.0f);
+			scText = new AudioTest::Text("Please select a test to run:", font);
             scText->position = Vector2(50, 50);
             Add(scText);
             
@@ -64,42 +69,51 @@ namespace TestSelector
             nextScene = NULL;
             newAssetPath = "";
             
-            if (Input::IsKeyPressed(KEY_1)){
+            if (Input::IsKeyPressed(KEY_1))
+			{
                 nextScene = new AudioTest::GameScene();
             }
             
-            if (Input::IsKeyPressed(KEY_2)){
+            if (Input::IsKeyPressed(KEY_2))
+			{
                 newAssetPath = "Flash/";
                 nextScene = new Flash::TestScene();
             }
             
-            if (Input::IsKeyPressed(KEY_3)){
+            if (Input::IsKeyPressed(KEY_3))
+			{
                 newAssetPath = "Jumper/";
                 nextScene = new Jumper::GameScene();
             }
             
-            if (Input::IsKeyPressed(KEY_4)){
+            if (Input::IsKeyPressed(KEY_4))
+			{
                 newAssetPath = "Ogmo/";
                 nextScene = new Ogmo::World();
             }
             
-            if (Input::IsKeyPressed(KEY_5)){
+            if (Input::IsKeyPressed(KEY_5))
+			{
                 newAssetPath = "LevelEditorTest/";
                 nextScene = new LevelEditorTest::LevelScene();
             }
             
-            if (Input::IsKeyPressed(KEY_6)){
-                nextScene = new Pong::GameScene();
-            }
-            
-            if (Input::IsKeyPressed(KEY_7)){
-                newAssetPath = "PuppetTest/";
-                nextScene = new PuppetTest::TestScene();
-            }
-            
-            if (nextScene){
-                pGame->SetScene(nextScene);
-                Assets::SetContentPath(Assets::GetContentPath()+newAssetPath);
+            if (Input::IsKeyPressed(KEY_6))
+			{
+				nextScene = new Pong::GameScene();
+			}
+
+			if (Input::IsKeyPressed(KEY_7))
+			{
+				newAssetPath = "PuppetTest/";
+				nextScene = new PuppetTest::TestScene();
+			}
+
+			if (nextScene)
+			{
+				Assets::SetContentPath(Platform::GetDefaultContentPath() + Platform::GetDefaultContentPath() + newAssetPath);
+				pGame->SetScene(nextScene);
+				
             }
         }
     };

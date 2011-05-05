@@ -1,5 +1,12 @@
 #include <Game.h>
 
+int main(void)
+{
+	return 0;
+}
+
+
+/*
 extern "C"
 {
 	#include <lua/lua.h>
@@ -62,3 +69,4 @@ int main(void)
 
 	return 0;
 }
+*/
