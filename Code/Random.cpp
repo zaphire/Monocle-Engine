@@ -18,4 +18,9 @@ namespace Monocle
 	{
 		return start + (rand() % (end-start));
 	}
+
+  float Random::Unit()
+  {
+    return (float)rand()/(float)RAND_MAX;
+  }
 }

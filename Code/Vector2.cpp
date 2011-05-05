@@ -5,32 +5,31 @@
 
 namespace Monocle
 {
-	Vector2 Vector2::zero = Vector2(0,0);
-	Vector2 Vector2::one = Vector2(1,1);
-	Vector2 Vector2::up = Vector2(0, -1); //2d style
-	Vector2 Vector2::down = Vector2(0, 1);
-	Vector2 Vector2::left = Vector2(-1, 0);
-	Vector2 Vector2::right = Vector2(1, 0);
+  //TODO: Replace these constants with a math namespace containing the same functionality.
+  const float PI = 2.0f * acos(0.0f);
+  const float TWO_PI = 2.0f * acos(0.0f);
 
-	Vector2::Vector2(const Vector2 &vector2)
-		: x(vector2.x), y(vector2.y)
-	{
-	}
+	const Vector2 Vector2::zero = Vector2(0.0f,0.0f);
+	const Vector2 Vector2::one = Vector2(1.0f,1.0f);
+	const Vector2 Vector2::up = Vector2(0.0f, -1.0f); //2d style
+	const Vector2 Vector2::down = Vector2(0.0f, 1.0f);
+	const Vector2 Vector2::left = Vector2(-1.0f, 0.0f);
+	const Vector2 Vector2::right = Vector2(1.0f, 0.0f);
 
 	Vector2::Vector2()
 		: x(0.0f), y(0.0f)
 	{
 	}
 
-	Vector2::Vector2(float x, float y)
+  Vector2::Vector2(const Vector2 &other)
+		: x(other.x), y(other.y)
+	{
+	}
+
+  Vector2::Vector2(float x, float y)
 		: x(x), y(y)
 	{
 	}
-    
-    void Vector2::Set(float x, float y)
-    {
-        this->x = x, this->y = y;
-    }
 
 	Vector2 Vector2::Random()
 	{
@@ -38,37 +37,27 @@ namespace Monocle
 		return Vector2(sin(rad), cos(rad));
 	}
 
-	float Vector2::GetSquaredMagnitude()
+	Vector2 Vector2::RandomDeviant(const Vector2& observed, float angle)
 	{
-		return pow(x, 2) + pow(y, 2);
+    // logic from: http://www.ogre3d.org/docs/api/html/OgreVector2_8h_source.html#l00510
+    angle *= Random::Unit() * TWO_PI;
+    float cosa = cos(angle);
+    float sina = sin(angle);		
+		return 
+      Vector2(cosa * observed.x - sina * observed.y,
+              sina * observed.x + cosa * observed.y);
 	}
 
-	float Vector2::GetMagnitude()
-	{
-		return sqrt(pow(x, 2) + pow(y, 2));
-	}
-
-	Vector2 Vector2::GetNormalized()
-	{
-		float mag = GetMagnitude();
-		return Vector2(x / mag, y / mag);
-	}
+  void Vector2::Set(const float x, const float y)
+  {
+      this->x = x, this->y = y;
+  }
 
 	void Vector2::Normalize()
 	{
 		float mag = GetMagnitude();
 		x /= mag;
 		y /= mag;
-	}
-
-	Vector2 Vector2::GetPerpendicularLeft()
-	{
-		return Vector2(-y, x);
-	}
-
-	Vector2 Vector2::GetPerpendicularRight()
-	{
-		return Vector2(y, -x);
 	}
 
 	void Vector2::Clamp(float max)
@@ -81,125 +70,269 @@ namespace Monocle
 		}
 	}
 
-	bool Vector2::IsInRange(float range)
+  bool Vector2::IsUnitLength()const
+  {
+    return GetMagnitude() == 1.0f;
+  }
+  
+  bool Vector2::IsZeroLength()const
+  {
+    return *(this) == 0.0f; // only 0,0 vectors have Mag == 0. Skip expensive GetMagnitude();
+  }
+
+	bool Vector2::IsInRange(const float range)const
 	{
 		return ((pow(x, 2) + pow(y, 2)) <= pow(range, 2));
 	}
 
-	float Vector2::Dot(Vector2 b)
+	float Vector2::Dot(const Vector2& other)const
 	{
-		return (x * b.x + y * b.y);
+		return (x * other.x + y * other.y);
 	}
 	
-	float Vector2::Cross(Vector2 b)
+	float Vector2::Cross(const Vector2& other)const
 	{
-		return (x * b.y - y * b.x);
-	}
-	
-	float Vector2::operator[](int i)
-	{
-		if (i <= 0)
-		{
-			return x;
-		}
-		else
-		{
-			return y;
-		}
-	}
-	
-	Vector2& Vector2::operator=(const Vector2& rhs)
-	{
-		if (&rhs != this)
-		{
-			x = rhs.x;
-			y = rhs.y;
-		}
-		return *this;
-	}
-	
-	bool Vector2::operator==(const Vector2& rhs)
-	{
-		return ((x == rhs.x) && (y == rhs.y));
-	}
-	
-	bool Vector2::operator!=(const Vector2& rhs)
-	{
-		return ((x != rhs.x) || (y != rhs.y));
-	}
-	
-	Vector2& Vector2::operator+=(const Vector2& rhs)
-	{
-		x = x + rhs.x;
-		y = y + rhs.y;
-		return *this;
-	}
-	
-	Vector2& Vector2::operator-=(const Vector2& rhs)
-	{
-		x = x - rhs.x;
-		y = y - rhs.y;
-		return *this;
-	}
-	
-	Vector2& Vector2::operator*=(float rhs)				// scalar multiplication
-	{
-		x = x * rhs;
-		y = y * rhs;
-		return *this;
-	}
-	
-	Vector2& Vector2::operator/=(float rhs)				// scalar inverse multiplication
-	{
-		x = x / rhs;
-		y = y / rhs;
-		return *this;
+		return (x * other.y - y * other.x);
 	}
 
-	Vector2 operator+(const Vector2& lhs, const Vector2& rhs)
+  float Vector2::SquaredDistance(const Vector2& other)const
+  {
+    return (*(this) - other).GetSquaredMagnitude();
+  }
+
+  float Vector2::Distance(const Vector2& other)const
+  {
+    return (*(this) - other).GetMagnitude();
+  }
+
+  Vector2 Vector2::MidPoint(const Vector2& other)const
+  {
+    return Vector2((this->x + other.x) * 0.5f, (this->y + other.y) * 0.5f);
+  }
+
+  Vector2 Vector2::LERP(const Vector2& to, const float percentage) const
+  {
+    return *(this) + (to - *(this)) * percentage;
+  }
+
+	float Vector2::GetSquaredMagnitude()const
 	{
-		return Vector2(lhs.x + rhs.x, lhs.y + rhs.y);
-	}
-	
-	Vector2 operator-(const Vector2& lhs, const Vector2& rhs)
-	{
-		return Vector2(lhs.x - rhs.x, lhs.y - rhs.y);
+		return pow(x, 2) + pow(y, 2);
 	}
 
-	Vector2 operator-(const Vector2 &rhs)
+	float Vector2::GetMagnitude()const
 	{
-		return Vector2(-rhs.x, -rhs.y);
-	}
-	
-	Vector2 operator*(float lhs, const Vector2& rhs)		// left scalar multiplication
-	{
-		return Vector2(lhs * rhs.x, lhs * rhs.y);
-	}
-	
-	Vector2 operator*(const Vector2& lhs, float rhs)		// right scalar multiplication
-	{
-		return Vector2(lhs.x * rhs, lhs.y * rhs);
-	}
-	
-	Vector2 operator/(const Vector2& lhs, float rhs)		// right scalar inverse multiplication
-	{
-		return Vector2(lhs.x / rhs, lhs.y / rhs);
-	}
-	
-	Vector2 operator*(const Vector2& lhs, const Vector2& rhs)		// multiply component (scale)
-	{
-		return Vector2(lhs.x * rhs.x, lhs.y * rhs.y);
+		return sqrt(pow(x, 2) + pow(y, 2));
 	}
 
-	Vector2 operator/(float lhs, const Vector2 &rhs)
+	Vector2 Vector2::GetNormalized()const
 	{
-		return Vector2(lhs / rhs.x, lhs / rhs.y);
+		float mag = GetMagnitude();
+		return Vector2(x / mag, y / mag);
 	}
-	
-	/*
-	float operator^(const Vector2& lhs, const Vector2& rhs)		// cross product
+
+	Vector2 Vector2::GetPerpendicularLeft()const
 	{
-		return lhs.x * rhs.y - lhs.y * rhs.x;
+		return Vector2(-y, x);
 	}
-	*/
+
+	Vector2 Vector2::GetPerpendicularRight()const
+	{
+		return Vector2(y, -x);
+	}
+
+  Vector2 Vector2::xx()const
+  {
+    return Vector2(this->x, this->x);
+  }
+
+  Vector2 Vector2::yy()const
+  {
+    return Vector2(this->y, this->y);
+  }
+
+  Vector2 Vector2::yx()const
+  {
+    return Vector2(this->y, this->x);
+  }
+
+  const float Vector2::operator[](unsigned char i)const
+  {
+    switch(i)
+    {
+    case 0: return x;
+    case 1: return y;
+
+    default: return x; // TODO: Handle this scenario with an assertion?
+    }
+  }
+
+  float& Vector2::operator[](unsigned char i)
+  {
+    switch(i)
+    {
+    case 0: return x;
+    case 1: return y;
+
+    default: return x; // TODO: Handle this scenario with an assertion?
+    }
+  }
+
+  Vector2 Vector2::operator-()const
+  {
+    return Vector2(x < 0.0f ? x : - x, y < 0 ? y : - y);
+  }
+  Vector2 Vector2::operator+()const
+  {
+    return Vector2(x > 0.0f ? x : - x, y > 0 ? y : - y);
+  }
+
+  Vector2& Vector2::operator=(const Vector2& rhs)
+  {
+    this->x = rhs.x;
+    this->y = rhs.y;
+    return *(this);
+  }
+
+  bool Vector2::operator==(const Vector2& rhs)const
+  {
+    return this->x == rhs.x && this->y == rhs.y;
+  }
+  bool Vector2::operator!=(const Vector2& rhs)const
+  {
+    return !(*(this) == rhs);
+  }
+  bool Vector2::operator<(const Vector2& rhs)const
+  {
+    return this->GetSquaredMagnitude() < rhs.GetSquaredMagnitude();
+  }
+  bool Vector2::operator>(const Vector2& rhs)const
+  {
+    return this->GetSquaredMagnitude() > rhs.GetSquaredMagnitude();
+  }
+  bool Vector2::operator<=(const Vector2& rhs)const
+  {
+    return this->GetSquaredMagnitude() <= rhs.GetSquaredMagnitude();
+  }
+  bool Vector2::operator>=(const Vector2& rhs)const
+  {
+    return this->GetSquaredMagnitude() >= rhs.GetSquaredMagnitude();
+  }
+
+  Vector2 Vector2::operator+(const Vector2& rhs)const
+  {
+    return Vector2(this->x + rhs.x, this->y + rhs.y);
+  }
+  Vector2 Vector2::operator-(const Vector2& rhs)const
+  {
+    return Vector2(this->x - rhs.x, this->y - rhs.y);
+  }
+  Vector2 Vector2::operator*(const Vector2& rhs)const
+  {
+    return Vector2(this->x * rhs.x, this->y * rhs.y);
+  }
+  Vector2 Vector2::operator/(const Vector2& rhs)const
+  {
+    return Vector2(this->x / rhs.x, this->y / rhs.y);
+  }
+
+  Vector2& Vector2::operator+=(const Vector2& rhs)
+  {
+    this->x += rhs.x;
+    this->y += rhs.y;
+    return *(this);
+  }
+  Vector2& Vector2::operator-=(const Vector2& rhs)
+  {
+    this->x -= rhs.x;
+    this->y -= rhs.y;
+    return *(this);
+  }
+  Vector2& Vector2::operator*=(const Vector2& rhs)    
+  {
+    this->x *= rhs.x;
+    this->y *= rhs.y;
+    return *(this);
+  }
+  Vector2& Vector2::operator/=(const Vector2& rhs)
+  {
+    this->x /= rhs.x;
+    this->y /= rhs.y;
+    return *(this);
+  }
+
+  Vector2& Vector2::operator=(const float rhs)
+  {
+    this->x = rhs;
+    this->y = rhs;
+    return *(this); 
+  }
+
+  bool Vector2::operator==(const float rhs)const
+  {
+    return this->GetMagnitude() == rhs;
+  }
+  bool Vector2::operator!=(const float rhs)const
+  {
+    return this->GetMagnitude() != rhs;
+  }
+  bool Vector2::operator<(const float rhs)const
+  {
+    return this->GetMagnitude() < rhs;
+  }
+  bool Vector2::operator>(const float rhs)const
+  {
+    return this->GetMagnitude() > rhs;
+  }
+  bool Vector2::operator<=(const float rhs)const
+  {
+    return this->GetMagnitude() <= rhs;
+  }
+  bool Vector2::operator>=(const float rhs)const
+  {
+    return this->GetMagnitude() >= rhs;
+  }
+
+  Vector2 Vector2::operator+(const float rhs)const
+  {
+    return Vector2(this->x + rhs,this->y + rhs);
+  }
+  Vector2 Vector2::operator-(const float rhs)const
+  {
+    return Vector2(this->x - rhs,this->y - rhs);
+  }
+  Vector2 Vector2::operator*(const float rhs)const
+  {
+    return Vector2(this->x * rhs,this->y * rhs);
+  }
+  Vector2 Vector2::operator/(const float rhs)const
+  {
+    return Vector2(this->x / rhs,this->y / rhs);
+  }
+
+  Vector2& Vector2::operator+=(const float rhs)
+  {
+    this->x += rhs;
+    this->y += rhs;
+    return *(this);
+  }
+  Vector2& Vector2::operator-=(const float rhs)
+  {
+    this->x -= rhs;
+    this->y -= rhs;
+    return *(this);
+  }
+  Vector2& Vector2::operator*=(const float rhs)
+  {
+    this->x *= rhs;
+    this->y *= rhs;
+    return *(this);
+  }
+  Vector2& Vector2::operator/=(const float rhs)
+  {
+    this->x /= rhs;
+    this->y /= rhs;
+    return *(this);
+  }
+
 }
