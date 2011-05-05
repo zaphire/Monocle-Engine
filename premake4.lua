@@ -69,7 +69,7 @@ end
 function monocle_os_links()
 	-- helper function to include header / library paths and link libraries by os
 	-- nightmare for case-sensitivity on linux
-	links { "MonocleCore","TinyXML" }
+	links { "MonocleCore" }
 	
 	print( _MONOCLE_EXTLIB_BASE );
 	
@@ -77,7 +77,7 @@ function monocle_os_links()
 	monocle_extlib("openal")
 	monocle_extlib("ogg")
 	monocle_extlib("vorbis")
-	monocle_extlib("TinyXML")
+	--monocle_extlib("TinyXML")
 	
 	if os.is( "windows" ) == true then
 		links {"Winmm", "glew32s", "opengl32", "glu32", "openal32", "libogg_static","libvorbis_static","libvorbisfile_static"}

@@ -9,13 +9,16 @@ project "MonocleCore"
 	basedir	( _BUILD_BASE )
 	
 	files { "**.h", "**.cpp", "**.c" }
+	
 	files { _MONOCLE_EXTLIB_BASE.."/stb/**.c" }
+	files { _MONOCLE_EXTLIB_BASE.."/TinyXML/**.cpp" }
+	files { _MONOCLE_EXTLIB_BASE.."/GL/glew.c" }
 	--files { _MONOCLE_EXTLIB_BASE.."/lua/**.c" }
 
 	configuration "macosx"
 		files { "**.mm" }
 	
-	links{ "TinyXML" }
+	--links{ "TinyXML" }
 
 	configuration "Debug"
 		defines { "DEBUG" }
@@ -25,8 +28,8 @@ project "MonocleCore"
 		defines { "NDEBUG" }
 		flags { "Optimize" } 
 	
--- TinyXML
--- This should really be distributed as a 3rd party lib
+-- Old TinyXML Project (source just added to Core for now)
+--[[
 project "TinyXML"
 	kind "StaticLib"
 	language "C++"
@@ -45,3 +48,4 @@ project "TinyXML"
 	configuration "Release"
 		defines { "NDEBUG" }
 		flags { "Optimize" } 
+]]--
