@@ -1,6 +1,11 @@
 
 function TestSelector_includefiles( name )
 	files { "../"..name.."/**.h", "../"..name.."/**.cpp" }
+
+	if name ~= "TestSelector" then
+		excludes { "../"..name.."/Main.cpp" }
+	end
+
 	includedirs{ "../"..name }
 end
 
