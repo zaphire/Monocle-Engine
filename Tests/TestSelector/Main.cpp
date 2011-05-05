@@ -43,11 +43,6 @@ namespace TestSelector
             
             Scene::Begin();
 
-			///HACK: so that things can actually run properly on windows
-#ifdef MONOCLE_WINDOWS
-			Assets::SetContentPath("../../../Content/");
-#endif
-
 			FontAsset* font = Assets::RequestFont("AudioTest/LiberationSans-Regular.ttf", 25.0f);
 			scText = new AudioTest::Text("Please select a test to run:", font);
             scText->position = Vector2(50, 50);
@@ -111,7 +106,7 @@ namespace TestSelector
 
 			if (nextScene)
 			{
-				Assets::SetContentPath(Platform::GetDefaultContentPath() + Platform::GetDefaultContentPath() + newAssetPath);
+				Assets::SetContentPath(Platform::GetDefaultContentPath() + newAssetPath);
 				pGame->SetScene(nextScene);
 				
             }
