@@ -6,7 +6,7 @@ project "MonocleCore"
 	monocle_os_defines();
 	monocle_os_includedirs();
 	
-	basedir	( _BUILD_BASE.."/MonocleCore" )
+	basedir	( _BUILD_BASE )
 	
 	files { "**.h", "**.cpp", "**.c" }
 	files { _MONOCLE_EXTLIB_BASE.."/stb/**.c" }		--hacky include for stb

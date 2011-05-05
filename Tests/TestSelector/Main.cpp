@@ -69,22 +69,22 @@ namespace TestSelector
             }
             
             if (Input::IsKeyPressed(KEY_2)){
-                newAssetPath = "/Flash/";
+                newAssetPath = "Flash/";
                 nextScene = new Flash::TestScene();
             }
             
             if (Input::IsKeyPressed(KEY_3)){
-                newAssetPath = "/Jumper/";
+                newAssetPath = "Jumper/";
                 nextScene = new Jumper::GameScene();
             }
             
             if (Input::IsKeyPressed(KEY_4)){
-                newAssetPath = "/Ogmo/";
+                newAssetPath = "Ogmo/";
                 nextScene = new Ogmo::World();
             }
             
             if (Input::IsKeyPressed(KEY_5)){
-                newAssetPath = "/LevelEditorTest/";
+                newAssetPath = "LevelEditorTest/";
                 nextScene = new LevelEditorTest::LevelScene();
             }
             
@@ -93,7 +93,7 @@ namespace TestSelector
             }
             
             if (Input::IsKeyPressed(KEY_7)){
-                newAssetPath = "/PuppetTest/";
+                newAssetPath = "PuppetTest/";
                 nextScene = new PuppetTest::TestScene();
             }
             

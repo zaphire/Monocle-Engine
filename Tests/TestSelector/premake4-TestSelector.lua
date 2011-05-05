@@ -13,7 +13,7 @@ end
 	project (_OPTIONS["testapp"])
 		kind "ConsoleApp"
 		language "C++"
-		basedir	( _BUILD_BASE.."/".._OPTIONS["testapp"] )
+		basedir	( _BUILD_BASE )
 		
 		monocle_os_defines()
 		monocle_os_includedirs()
