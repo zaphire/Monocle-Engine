@@ -11,6 +11,8 @@ _MONOCLE_BASE			= os.getcwd()			--root directory for monocle
 
 dofile( (_MONOCLE_BASE.."/premake4-helper.lua") )
 
+print( _MONOCLE_EXTLIB_BASE );
+
 --
 -- Monocle Solution
 --
