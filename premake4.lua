@@ -6,8 +6,8 @@
 --
 
 -- Required globals for helper script
-_MONOCLE_APP 			= "Monocle"	
-_MONOCLE_BASE			= os.getcwd()
+_MONOCLE_APP_BASE		= os.getcwd()			--root directory of your project
+_MONOCLE_BASE			= os.getcwd()			--root directory for monocle
 
 dofile( (_MONOCLE_BASE.."/premake4-helper.lua") )
 
