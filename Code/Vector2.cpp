@@ -26,7 +26,7 @@ namespace Monocle
 	{
 	}
 
-  Vector2::Vector2(float x, float y)
+  Vector2::Vector2(const float x, const float y)
 		: x(x), y(y)
 	{
 	}
@@ -40,7 +40,7 @@ namespace Monocle
 	Vector2 Vector2::RandomDeviant(const Vector2& observed, float angle)
 	{
     // logic from: http://www.ogre3d.org/docs/api/html/OgreVector2_8h_source.html#l00510
-    angle *= Random::Unit() * TWO_PI;
+    angle *= Random::Unit() * TWO_PI; // Ensure Random is seeded before using.
     float cosa = cos(angle);
     float sina = sin(angle);		
 		return 
@@ -77,7 +77,7 @@ namespace Monocle
   
   bool Vector2::IsZeroLength()const
   {
-    return *(this) == 0.0f; // only 0,0 vectors have Mag == 0. Skip expensive GetMagnitude();
+    return this->x == 0.0f && this->y == 0.0f; // only 0,0 vectors have Mag == 0. Skip expensive GetMagnitude();
   }
 
 	bool Vector2::IsInRange(const float range)const
