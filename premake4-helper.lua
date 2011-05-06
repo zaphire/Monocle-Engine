@@ -5,22 +5,27 @@ newoption
 	description	=	"Generate project files for a monocle test app"
 }
 
-if _OPTIONS["testapp"] ~= nil then
-	_MONOCLE_APP = _OPTIONS["testapp"]
+--Set app name
+if _MONOCLE_APP == nil then
+	if _OPTIONS["testapp"] ~= nil then
+		_MONOCLE_APP = _OPTIONS["testapp"]
+	else
+		_MONOCLE_APP = "Monocle"
+	end
 end
 
 -- jw: Fix premake4 --help
 if _ACTION ~= NIL then
-	_BUILD_BASE		= os.getcwd().."/Build/gen-".._ACTION.."-".._MONOCLE_APP
+	_BUILD_BASE		= _MONOCLE_BASE.."/Build/gen-".._ACTION.."-".._MONOCLE_APP
 else
-	_BUILD_BASE		= os.getcwd()
+	_BUILD_BASE		= _MONOCLE_BASE
 end
 
-_MONOCLE_INCLUDE		= _MONOCLE_BASE.."/Core"
+_MONOCLE_INCLUDE			= _MONOCLE_BASE.."/Core"
 _MONOCLE_EXTLIB_BASE		= _MONOCLE_BASE.."/Libraries"
 _MONOCLE_EXTLIB_LIB_INC		= _MONOCLE_EXTLIB_BASE.."/Compiled"
 
-
+--Preprocessor os specific defines 
 function monocle_os_defines()
 
 	defines {"MONOCLE_OPENGL","MONOCLE_OPENAL","MONOCLE_AUDIO_OGG"}
@@ -33,6 +38,7 @@ function monocle_os_defines()
 	end
 end
 
+--Get os specific directory name where precompiled libraries are present
 function monocle_get_os_lib_dir()
 	if os.is( "windows" ) == true then
 		return ("Win32")
@@ -43,22 +49,23 @@ function monocle_get_os_lib_dir()
 	end
 end
 
+--Set include directories for a 3rd party library 
 function monocle_extlib(name)
 	-- needs to be called for each library
 	includedirs{ (_MONOCLE_EXTLIB_BASE.."/"..name) }
 	-- os and compiler specific includes go here
 end
 
+--Set include paths for the Monocle libary directories
 function monocle_os_includedirs()
 	-- needs to be called once in a project
 	includedirs{ _MONOCLE_INCLUDE,_MONOCLE_EXTLIB_BASE }
 	libdirs { (_MONOCLE_EXTLIB_LIB_INC.."/"..monocle_get_os_lib_dir()) }
 end
 
+-- helper function to include header / library paths and link libraries by os
 function monocle_os_links()
-	-- helper function to include header / library paths and link libraries by os
-	-- nightmare for case-sensitivity on linux
-	links { "MonocleCore","TinyXML" }
+	links { "MonocleCore" }
 	
 	print( _MONOCLE_EXTLIB_BASE );
 	
@@ -78,6 +85,7 @@ function monocle_os_links()
 	end
 end
 
+--Generate path to target build directory
 function monocle_build_targetdir( suffix )
 	if suffix ~= nil then
 		targetdir (_BUILD_BASE.."-bin-"..suffix.."/")
@@ -86,13 +94,12 @@ function monocle_build_targetdir( suffix )
 	end
 end
 
-
-_MONOCLE_SOLUTION_NAME = "MonocleLibrary"
-if _OPTIONS["testapp"] ~= nil then
-	_MONOCLE_SOLUTION_NAME  = (_OPTIONS["testapp"].."Solution")
+--Ensure Monocle has a solution name
+if _MONOCLE_SOLUTION_NAME == nil then
+	_MONOCLE_SOLUTION_NAME = (_MONOCLE_APP.."Solution")
 end
 
-
+--Helper function to include a testapp project into solution
 function monocle_project_testapp( name )
 		_TESTAPP_PREMAKE_GENERIC_SCRIPT 	= "Tests/premake4-test-generic.lua"
 		_TESTAPP_PREMAKE_SCRIPT 			= "Tests/"..name.."/premake4-"..name..".lua"
@@ -104,6 +111,7 @@ function monocle_project_testapp( name )
 		end
 end
 
+--Helper function to include MonocleCore Library project into solution
 function monocle_project_corelib()
 	dofile( (_MONOCLE_BASE.."/Core/premake4-monocle.lua") );
 end
