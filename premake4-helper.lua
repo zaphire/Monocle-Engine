@@ -16,9 +16,9 @@ end
 
 -- jw: Fix premake4 --help
 if _ACTION ~= NIL then
-	_BUILD_BASE		= _MONOCLE_BASE.."/Build/gen-".._ACTION.."-".._MONOCLE_APP
+	_BUILD_BASE		= _MONOCLE_APP_BASE.."/Build/gen-".._ACTION.."-".._MONOCLE_APP
 else
-	_BUILD_BASE		= _MONOCLE_BASE
+	_BUILD_BASE		= _MONOCLE_APP_BASE
 end
 
 _MONOCLE_INCLUDE			= _MONOCLE_BASE.."/Core"
