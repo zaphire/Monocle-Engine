@@ -23,10 +23,12 @@ project "MonocleCore"
 	configuration "Debug"
 		defines { "DEBUG" }
 		flags { "Symbols" }
+		targetsuffix "Debug"
 
 	configuration "Release"
 		defines { "NDEBUG" }
 		flags { "Optimize" } 
+
 	
 -- Old TinyXML Project (source just added to Core for now)
 --[[
