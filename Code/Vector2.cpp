@@ -7,7 +7,7 @@ namespace Monocle
 {
   //TODO: Replace these constants with a math namespace containing the same functionality.
   const float PI = 2.0f * acos(0.0f);
-  const float TWO_PI = 2.0f * acos(0.0f);
+  const float TWO_PI = 2.0f * PI;
 
 	const Vector2 Vector2::zero = Vector2(0.0f,0.0f);
 	const Vector2 Vector2::one = Vector2(1.0f,1.0f);
