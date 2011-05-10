@@ -48,8 +48,9 @@ namespace Monocle {
         if (m_buf){
             for (int i=0;i<m_nBufLen;i++){
                 vc2_entry *e = &m_buf[i];
-                memset(e->cWaveLeft,0x80,576);
-                memset(e->cWaveRight,0x80,576);
+                memset(e->cWaveLeft,0x80,sizeof(e->cWaveLeft));
+                memset(e->cWaveRight,0x80,sizeof(e->cWaveRight));
+                e->isSet = false;
             }
         }
     }
@@ -65,6 +66,7 @@ namespace Monocle {
     {
         vc2_entry *e = &m_buf[m_curIndex];
         e->nPos = pos;
+        e->isSet = true;
     }
 
     void VisCache2::SetEngineerData(long data1, long data2, long data3, long data4)

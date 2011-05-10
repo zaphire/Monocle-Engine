@@ -118,6 +118,7 @@ namespace Monocle {
         
         this->currentPosition = 0;
         this->totsamps = 0;
+        this->writtenpos = 0;
         this->failed = false;
         
         this->playStarted = false;
@@ -173,19 +174,20 @@ namespace Monocle {
         if (visEnable)
         {
             // Careful calculations calculated the buflen
-            vc.Init((BUFFER_SIZE/32768)*NUM_BUFFERS, decodeData->samplerate);
+//            vc.Init((BUFFER_SIZE/32768)*(NUM_BUFFERS+2), decodeData->samplerate);
+            vc.Init((BUFFER_SIZE/32768)*(NUM_BUFFERS+2),decodeData->samplerate);
             
             vc.Clean();
             
             this->vis = new AudioVis();
             this->vis->PrepData();
             
+            Flush();
+            
             if (cs->IsOpen())
                 this->vizlast = cs->GetTotalPlayTime();
             else
                 this->vizlast = 0;
-            
-            Flush();
         }
         
         if (!visEnable && this->vis){
@@ -206,7 +208,6 @@ namespace Monocle {
         this->cleanVis = false;
         
         this->vis = NULL;
-        this->cs = new ChannelStream();
         
         this->pitchBend = 1.0;
         this->volume = 1.0;
@@ -215,19 +216,32 @@ namespace Monocle {
         this->lastSeekPos = 0;
         this->fades.Reset();
         
+        // This, because we set vis = NULL, should never happen.
+        // Eventually maybe we'll enable vis before a deck opens.
         if (IsVisEnabled()){
             // Careful calculations calculated the buflen
-            vc.Init((BUFFER_SIZE/32768)*NUM_BUFFERS, decodeData->samplerate);
+            vc.Init((BUFFER_SIZE/32768)*(NUM_BUFFERS+2), decodeData->samplerate);
             vc.Clean();
             
             this->vis = new AudioVis();
         }
         this->vizlast = 0;
+        
+        /** these are replaced by resetdeck(), but just in case? **/
+        this->sampsize = 2;
+        this->currentPosition = 0;
+        this->totsamps = 0;
+        this->writtenpos = 0;
+        this->failed = false;
+        this->playStarted = false;
+        this->pause = false;
+        this->decodeData->outOfData = false;
+        this->isFinished = false;
+        this->vizlast = 0;
 
+        // Open the channel and reset the deck.
+        this->cs = new ChannelStream();
         ResetDeck();
-//        this->bufferCountdown = NUM_BUFFERS;
-//        cs->Open(decodeData->ch, decodeData->bit, decodeData->samplerate);
-//        Update();
     }
     
     AudioDeck::AudioDeck( AudioDeck **deckSetter, AudioDecodeData *decodeData, bool freeDataWithDeck )
@@ -284,9 +298,8 @@ namespace Monocle {
             return;
         }
         
-        //	if (vc->iWriteTimeMs < vc->iReadTimeMs)
-        //		return;
         
+        // Fill in 20ms increments
         if (viznow - vizlast > 20)
         {
             if (this->vis)
@@ -297,6 +310,11 @@ namespace Monocle {
                     vc.GetWaveRight(this->vis->cWaveformR);
                     this->vis->AnalyzeNewSound(576);
                     vc.GetEngineerData(&this->vis->engineerData[0],&this->vis->engineerData[1],&this->vis->engineerData[2],&this->vis->engineerData[3]);
+                }
+                else
+                {
+                    // We've run out of brainpower somewhere.
+//                    this->cleanVis = true;
                 }
             }
             

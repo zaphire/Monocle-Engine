@@ -244,14 +244,19 @@ namespace Monocle
 
     ChannelStream::ChannelStream()
     {
-        started = false;
-        startBuffer=0;
+        memset(this->buffers,0,sizeof(this->buffers));
+        memset(this->obtainedBuffer,0,sizeof(this->obtainedBuffer));
+        
+        this->started = false;
+        this->startBuffer=0;
         this->startedPlaying = false;
-        format = AL_FORMAT_STEREO16;
+        this->format = AL_FORMAT_STEREO16;
         
         this->pausePos = 0;
         this->playOffset = 0;
         this->playStart = 0;
+        
+        this->source = 0;
     }
 
     ChannelStream::~ChannelStream()

@@ -14,6 +14,8 @@ namespace Monocle {
         // Engineer Data (4 longs should be plenty)
         // (eg, want to store information on the current order of a module, etc)
         long			engineerData[4];
+        
+        bool            isSet;
     } vc2_entry;
 
     /**

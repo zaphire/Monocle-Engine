@@ -320,7 +320,6 @@ namespace Monocle {
         
         bool        playStarted;        // Regardless of pause, did we start to play?
         bool		failed;             // If the deck fails, throw this flag.
-        void		*visdata;			// Reserved for internal use
         
         AudioFades	fades;      // Structure containing fade information
         long		lastSeekPos;        // Last position seeked with "Seek Position"
