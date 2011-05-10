@@ -122,7 +122,7 @@ namespace Monocle
         this->startedPlaying = false;
         this->pausePos = 0;
         this->playOffset = 0;
-        this->playStart = -1;
+        this->playStart = 0;
     }
     
     void ChannelStream::Close()
@@ -251,7 +251,7 @@ namespace Monocle
         
         this->pausePos = 0;
         this->playOffset = 0;
-        this->playStart = -1;
+        this->playStart = 0;
     }
 
     ChannelStream::~ChannelStream()
@@ -324,7 +324,7 @@ namespace Monocle
     
     unsigned long ChannelStream::GetOutputTime()
     {
-        if (this->playStart == -1)
+        if (!this->startedPlaying)
             return 0;
         
         return XMAX(Platform::GetMilliseconds() - this->playStart,0) + this->playOffset;
