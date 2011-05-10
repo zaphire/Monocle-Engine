@@ -101,7 +101,6 @@ namespace Monocle
 
         unsigned char oldbyte[5], newbyte[4];
         long rdr;
-        long counter = 0;
         
         /** For every 4 bytes, lookie is defined
             lookie = lookupTable1[counter++%256] % 4
@@ -135,14 +134,12 @@ namespace Monocle
 
         unsigned char oldbyte[5], newbyte[4];
         long rdr;
-        long counter = 0;
         
         /** For every 4 bytes, lookie is defined
             lookie = lookupTable1[counter++%256] % 4
         **/
         for (pos=0;pos < nLength;pos+=5)
         {
-            unsigned char lookie;
             ptr = pData+pos;
 
             for (rdr=0;rdr<5;rdr++){
