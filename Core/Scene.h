@@ -51,7 +51,7 @@ namespace Monocle
 		virtual void Update();
 
 		//! Called by the main game loop every time the scene should render
-		void Render();
+		virtual void Render();
 
 		//! Add an entity to the scene
 		void Add(Entity* entity);
