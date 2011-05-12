@@ -277,31 +277,47 @@ namespace Monocle
 			return;
 		}
 
-		if (Input::IsKeyPressed(KEY_1))
+		if (Input::IsKeyHeld(KEY_G))
 		{
-			ApplyGrid(selectedEntity, 32);
+			if (Input::IsKeyPressed(KEY_1))
+			{
+				ApplyGrid(selectedEntity, 32);
+			}
+			if (Input::IsKeyPressed(KEY_2))
+			{
+				ApplyGrid(selectedEntity, 64);
+			}
+			if (Input::IsKeyPressed(KEY_3))
+			{
+				ApplyGrid(selectedEntity, 128);
+			}
+			if (Input::IsKeyPressed(KEY_4))
+			{
+				ApplyGrid(selectedEntity, 256);
+			}
+			if (Input::IsKeyPressed(KEY_5))
+			{
+				ApplyGrid(selectedEntity, 512);
+			}
 		}
-		if (Input::IsKeyPressed(KEY_2))
-		{
-			ApplyGrid(selectedEntity, 64);
-		}
-		if (Input::IsKeyPressed(KEY_3))
-		{
-			ApplyGrid(selectedEntity, 128);
-		}
-		if (Input::IsKeyPressed(KEY_4))
-		{
-			ApplyGrid(selectedEntity, 256);
-		}
-		if (Input::IsKeyPressed(KEY_5))
-		{
-			ApplyGrid(selectedEntity, 512);
-		}
+
 
 		if (Input::IsKeyPressed(keyFocus))
 		{
 			//Graphics::MoveCameraPosition(selectedEntity->position, 0.125f, EASE_OUTSIN);
 			scene->GetCamera()->position = selectedEntity->position;
+		}
+
+		if (Input::IsKeyHeld(keyFlip))
+		{
+			if (Input::IsKeyPressed(keyFlipH))
+			{
+				selectedEntity->scale.x *= -1;
+			}
+			if (Input::IsKeyPressed(keyFlipV))
+			{
+				selectedEntity->scale.y *= -1;
+			}
 		}
 
 		if (selectedNode)
@@ -379,18 +395,6 @@ namespace Monocle
 			if (Input::IsKeyHeld(KEY_LSHIFT) && Input::IsKeyPressed(KEY_0))
 			{
 				selectedEntity->rotation = 0;
-			}
-
-			if (Input::IsKeyHeld(keyFlip))
-			{
-				if (Input::IsKeyPressed(keyFlipH))
-				{
-					selectedEntity->scale.x *= -1;
-				}
-				if (Input::IsKeyPressed(keyFlipV))
-				{
-					selectedEntity->scale.y *= -1;
-				}
 			}
 
 		}
