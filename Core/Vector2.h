@@ -21,6 +21,8 @@ namespace Monocle
 		Vector2();
 		Vector2(float x, float y);
 
+		
+
         void Set(float x, float y);
 
 		// return random vector
@@ -43,8 +45,12 @@ namespace Monocle
 		static Vector2 Multiply(Vector2 a, float s);
 		static Vector2 Scale(Vector2 a, float s);
 		*/
-		
-		float operator[](int i);
+
+		Vector2 xx() const;
+		Vector2 yy() const;
+		Vector2 yx() const;
+
+		float& operator[] (unsigned int i);
 		
 		Vector2& operator=(const Vector2& rhs);
 		bool operator==(const Vector2& rhs);

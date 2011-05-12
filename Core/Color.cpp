@@ -35,6 +35,29 @@ namespace Monocle
 		return ((r != rhs.r) || (g != rhs.g) || (b != rhs.b) || (a != rhs.a));
 	}
 
+	void Color::Clamp()
+	{
+		for (unsigned int i = 0; i < 4; i++)
+		{
+			if ((*this)[i] > 1.0f)
+				(*this)[i] = 1.0f;
+			if ((*this)[i] < 0.0f)
+				(*this)[i] = 0.0f;
+		}
+	}
+
+	float& Color::operator[] (unsigned int i)
+	{
+		switch(i)
+		{
+		case 0: return r;
+		case 1: return g;
+		case 2: return b;
+		case 3: return a;
+		default: return r; // TODO: Handle this scenario with an assertion?
+		}
+	}
+
 	Color operator+(const Color& lhs, const Color& rhs)
 	{
 		return Color(lhs.r + rhs.r, lhs.g + rhs.g, lhs.b + rhs.b, lhs.a + rhs.a);

@@ -21,13 +21,12 @@ else
 	_BUILD_BASE		= _MONOCLE_APP_BASE
 end
 
-_MONOCLE_INCLUDE			= _MONOCLE_BASE.."/Core"
+_MONOCLE_INCLUDE		= _MONOCLE_BASE.."/Core"
 _MONOCLE_EXTLIB_BASE		= _MONOCLE_BASE.."/Libraries"
 _MONOCLE_EXTLIB_LIB_INC		= _MONOCLE_EXTLIB_BASE.."/Compiled"
 
 --Preprocessor os specific defines 
 function monocle_os_defines()
-
 	defines {"MONOCLE_OPENGL","MONOCLE_OPENAL","MONOCLE_AUDIO_OGG"}
 	if os.is( "windows" ) == true then
 		defines {"MONOCLE_WINDOWS"}
@@ -67,6 +66,11 @@ end
 function monocle_os_links()
 	links { "MonocleCore" }
 	
+	monocle_os_links_base()
+end
+
+-- convenient if one wants to build a project that includes all the core source 'n libs
+function monocle_os_links_base()
 	print( _MONOCLE_EXTLIB_BASE );
 	
 	monocle_extlib("glew")
@@ -102,7 +106,7 @@ end
 --Helper function to include a testapp project into solution
 function monocle_project_testapp( name )
 		_TESTAPP_PREMAKE_GENERIC_SCRIPT 	= _MONOCLE_BASE.."/Tests/premake4-test-generic.lua"
-		_TESTAPP_PREMAKE_SCRIPT 			= _MONOCLE_BASE.."/Tests/"..name.."/premake4-"..name..".lua"
+		_TESTAPP_PREMAKE_SCRIPT 		= _MONOCLE_BASE.."/Tests/"..name.."/premake4-"..name..".lua"
 		
 		if os.isfile( _TESTAPP_PREMAKE_SCRIPT ) then
 			dofile( _TESTAPP_PREMAKE_SCRIPT )

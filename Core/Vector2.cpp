@@ -96,18 +96,32 @@ namespace Monocle
 		return (x * b.y - y * b.x);
 	}
 	
-	float Vector2::operator[](int i)
+	Vector2 Vector2::xx()const
 	{
-		if (i <= 0)
+		return Vector2(this->x, this->x);
+	}
+
+	Vector2 Vector2::yy()const
+	{
+		return Vector2(this->y, this->y);
+	}
+
+	Vector2 Vector2::yx()const
+	{
+		return Vector2(this->y, this->x);
+	}
+
+	float& Vector2::operator[] (unsigned int i)
+	{
+		switch(i)
 		{
-			return x;
-		}
-		else
-		{
-			return y;
+		case 0: return x;
+		case 1: return y;
+
+		default: return x; // TODO: Handle this scenario with an assertion?
 		}
 	}
-	
+
 	Vector2& Vector2::operator=(const Vector2& rhs)
 	{
 		if (&rhs != this)

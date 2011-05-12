@@ -47,9 +47,11 @@ namespace Monocle
 		keyRotate = KEY_W;
 		keyScale = KEY_E;
 		keySelect = KEY_SPACE;
-		keyFocus = KEY_F;
+		keyFocus = KEY_Z;
 		keyClone = KEY_T;
-		keyFlipH = KEY_C;
+		keyColor = KEY_C;
+		keyFlip = KEY_F;
+		keyFlipH = KEY_H;
 		keyFlipV = KEY_V;
 		keyPrevTile = KEY_LEFTBRACKET;
 		keyNextTile = KEY_RIGHTBRACKET;
@@ -133,6 +135,10 @@ namespace Monocle
 
 					case FTES_SCALE:
 						UpdateScale();
+						break;
+
+					case FTES_COLOR:
+						UpdateColor();
 						break;
 					}
 				}
@@ -375,14 +381,18 @@ namespace Monocle
 				selectedEntity->rotation = 0;
 			}
 
-			if (Input::IsKeyPressed(keyFlipH))
+			if (Input::IsKeyHeld(keyFlip))
 			{
-				selectedEntity->scale.x *= -1;
+				if (Input::IsKeyPressed(keyFlipH))
+				{
+					selectedEntity->scale.x *= -1;
+				}
+				if (Input::IsKeyPressed(keyFlipV))
+				{
+					selectedEntity->scale.y *= -1;
+				}
 			}
-			if (Input::IsKeyPressed(keyFlipV))
-			{
-				selectedEntity->scale.y *= -1;
-			}
+
 		}
 
 		if (Input::IsKeyPressed(keyDelete))
@@ -434,35 +444,45 @@ namespace Monocle
 			printf("layer is now: %d\n", selectedEntity->GetLayer());
 		}
 
-		if (!waitForLMBRelease && Input::IsKeyHeld(keyRotate))
+		if (!waitForLMBRelease)
 		{
-			moveStartPosition = Input::GetWorldMousePosition();
-			startRotation = selectedEntity->rotation;
-			SetState(FTES_ROTATE);
-			return;
+			if (Input::IsKeyHeld(keyRotate))
+			{
+				moveStartPosition = Input::GetWorldMousePosition();
+				startRotation = selectedEntity->rotation;
+				SetState(FTES_ROTATE);
+				return;
+			}
+
+			if (Input::IsKeyHeld(keyScale))
+			{
+				Debug::Log("scale start");
+				moveStartPosition = Input::GetWorldMousePosition();
+				moveStartMagnitude = (Input::GetWorldMousePosition() - selectedEntity->position).GetMagnitude();
+				startScale = selectedEntity->scale;
+				SetState(FTES_SCALE);
+				return;
+			}
+
+			if (Input::IsKeyPressed(keyMove))//Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) //
+			{
+				Debug::Log("move start");
+				moveStartPosition = selectedEntity->position;
+				moveOffset = selectedEntity->position - Input::GetWorldMousePosition();
+				moveAxisLock = 0;
+				SetState(FTES_MOVE);
+				return;
+			}
+
+			if (Input::IsKeyPressed(keyColor))
+			{
+				Debug::Log("color start");
+				startColor = selectedEntity->color;
+				changeColorValue = 0;
+				SetState(FTES_COLOR);
+				return;
+			}
 		}
-
-		if (!waitForLMBRelease && Input::IsKeyHeld(keyScale))
-		{
-			Debug::Log("scale start");
-			moveStartPosition = Input::GetWorldMousePosition();
-			moveStartMagnitude = (Input::GetWorldMousePosition() - selectedEntity->position).GetMagnitude();
-			startScale = selectedEntity->scale;
-			SetState(FTES_SCALE);
-			return;
-		}
-
-		if (!waitForLMBRelease && Input::IsKeyPressed(keyMove))//Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) //
-		{
-			Debug::Log("move start");
-			moveStartPosition = selectedEntity->position;
-			moveOffset = selectedEntity->position - Input::GetWorldMousePosition();
-			moveAxisLock = 0;
-			SetState(FTES_MOVE);
-			return;
-		}
-
-
 	}
 
 	void LevelEditor::UpdateMove()
@@ -618,6 +638,77 @@ namespace Monocle
 			return;
 		}
 	}
+
+	void LevelEditor::UpdateColor()
+	{
+		if (Input::IsKeyPressed(KEY_ESCAPE))
+		{
+			selectedEntity->color = startColor;
+			SetState(FTES_NONE);
+			return;
+		}
+
+		if (Input::IsKeyPressed(KEY_RETURN) || Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		{
+			SetState(FTES_NONE);
+			return;
+		}
+
+		if (Input::IsKeyPressed(KEY_R))
+		{
+			if (changeColorValue == 1)
+				changeColorValue = 0;
+			else
+				changeColorValue = 1;
+		}
+		else if (Input::IsKeyPressed(KEY_G))
+		{
+			if (changeColorValue == 2)
+				changeColorValue = 0;
+			else
+				changeColorValue = 2;
+		}
+		else if (Input::IsKeyPressed(KEY_B))
+		{
+			if (changeColorValue == 3)
+				changeColorValue = 0;
+			else
+				changeColorValue = 3;
+		}
+		else if (Input::IsKeyPressed(KEY_A))
+		{
+
+			if (changeColorValue == 4)
+				changeColorValue = 0;
+			else
+				changeColorValue = 4;
+		}
+
+		float change = 0.0f;
+		float changeSpeed = 1.0f;
+		if (Input::IsKeyHeld(KEY_UP))
+			change = changeSpeed * Monocle::deltaTime;
+		else if (Input::IsKeyHeld(KEY_DOWN))
+			change = -changeSpeed * Monocle::deltaTime;
+
+		if (change != 0.0f)
+		{
+			if (changeColorValue > 0)
+			{
+				selectedEntity->color[changeColorValue-1] += change;
+				selectedEntity->color.Clamp();
+			}
+			else
+			{
+				for (unsigned int i = 0; i < 3; i++)
+				{
+					selectedEntity->color[i] += change;
+				}
+				selectedEntity->color.Clamp();
+			}
+		}
+	}
+
 
 	void LevelEditor::SetState(FringeTileEditorState state)
 	{

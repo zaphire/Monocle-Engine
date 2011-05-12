@@ -46,13 +46,13 @@ namespace AudioTest
         Graphics::SetColor(Color::white);
         
         int i;
-        
-        Vector2 lastpos, thispos;
-        
-        if (type == 0)
-        {
-        
-            float midy = Graphics::GetVirtualHeight()/2.0;
+
+		Vector2 lastpos, thispos;
+
+		if (type == 0)
+		{
+
+			float midy = Graphics::GetVirtualHeight()/2.0;
             float xstep = Graphics::GetVirtualWidth()/576.0;
             
             lastpos.x = 0.0;
@@ -83,10 +83,10 @@ namespace AudioTest
             }
             
             float midy = Graphics::GetVirtualHeight()/2.0;
-            float xstep = Graphics::GetVirtualWidth()/400.0;
-            float val;
-            
-            float timeR = sinf(deck->GetCurrentTime()/5000.0);
+			float xstep = Graphics::GetVirtualWidth()/400.0;
+			float val;
+
+			float timeR = sinf(deck->GetCurrentTime()/5000.0);
             float timeG = sinf(deck->GetCurrentTime()/900.0)/2.0 + 0.5;
             float timeB = sinf(deck->GetCurrentTime()/10000.0);
             
@@ -97,10 +97,10 @@ namespace AudioTest
             for (i=0;i<400;i++)
             {
 //                val = deck->vis->fSpectrum[0][i];
-                val = deck->GetVisSpectrum(i)*10.0;
-                
-                Graphics::SetColor(Color(val*timeR, val*timeG, val*timeB, 1.0));
-                Graphics::RenderLineRect( thispos.x, midy, xstep, val*100.0);
+				val = deck->GetVisSpectrum(i)*10.0;
+
+				Graphics::SetColor(Color(val*timeR, val*timeG, val*timeB, 1.0));
+				Graphics::RenderLineRect( thispos.x, midy, xstep, val*100.0);
                 
                 thispos.x += xstep;
             }
@@ -276,16 +276,17 @@ namespace AudioTest
         scText->position = Vector2(50, 50);
         Add(scText);
         
-        // Make the deck, and it starts playing... (we need a play())
-        deck1 = Audio::NewDeck(Assets::RequestAudio("AudioTest/City01.g2m",true,"hellogirl"));
-        deck2 = Audio::NewDeck(Assets::RequestAudio("AudioTest/City01Hell.g2m",true,"hellogirl"));
+		// Make the deck, and it starts playing... (we need a play())
+		//deck1 = Audio::NewDeck(Assets::RequestAudio("AudioTest/City01.g2m",true,"hellogirl"));
+        deck1 = Audio::NewDeck(Assets::RequestAudio("..\\..\\Marian\\Content\\Marian\\music\\title-accordian.ogg", true));
+		deck2 = Audio::NewDeck(Assets::RequestAudio("AudioTest/City01Hell.g2m",true,"hellogirl"));
         
         if (!deck1 || !deck2)
             return Game::Quit();
         
         deck2->Mute();
-        
-        deck1->EnableVis();
+
+		deck1->EnableVis();
         deck2->EnableVis();
         deck1->Play();
         deck2->Play();
@@ -309,11 +310,11 @@ namespace AudioTest
         scText->SetText("Press F to crossfade. " + StringOf(deck1->GetCurrentTime()) + " / " + StringOf(deck1->GetTotalLength()));
         
         if (Input::IsKeyPressed(KEY_F))
-        {
-            if (deck2->IsMuted()){
-                deck2->UnmuteWithFade(1000);
-                deck1->MuteWithFade(1000);
-            } else {
+		{
+			if (deck2->IsMuted()){
+				deck2->UnmuteWithFade(1000);
+				deck1->MuteWithFade(1000);
+			} else {
                 deck1->UnmuteWithFade(1000);
                 deck2->MuteWithFade(1000);
             }

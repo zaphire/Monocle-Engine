@@ -78,7 +78,7 @@ namespace Monocle
 		if (entity->GetCollider() == NULL)
 		{
 			RectangleCollider *rectangleCollider = new RectangleCollider(width, height, offset);
-
+			 
 			RegisterColliderWithEntity((Collider*)rectangleCollider, entity);
 
 			return rectangleCollider;

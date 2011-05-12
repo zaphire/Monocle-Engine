@@ -10,6 +10,9 @@ namespace Monocle
 		Color();
 		Color(float r, float g, float b, float a);
 
+		void Clamp();
+
+		float& operator[] (unsigned int i);
 		bool operator!=(const Color& rhs);
 
 		//! red, green, blue, alpha (translucency)
@@ -24,10 +27,13 @@ namespace Monocle
 		static Color yellow;
 		static Color orange;
 		static Color purple;
+
+
 	};
 
 	Color operator+(const Color& lhs, const Color& rhs);	
 	Color operator-(const Color& lhs, const Color& rhs);
 	Color operator*(float lhs, const Color& rhs);		// left scalar multiplication
 	Color operator*(const Color& lhs, float rhs);		// right scalar multiplication
+
 }

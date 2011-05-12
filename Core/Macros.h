@@ -30,7 +30,7 @@
 		Returns value shifted toward target by amount, without crossing target.
 		For example, APPROACH(2, 0, 3) will perform 2 - 3 = -1, but return 0 because -1 crossed the target of 0.
 		APPROACH(-4, 0, 3) will return -1, because it will perform -4 + 3 = -1.
-*/
+		*/
 #define APPROACH(value, target, amount) ((value >= target) ? MAX(value - amount, target) : MIN(value + amount, target))
 
 /*	LERP

@@ -19,6 +19,8 @@ namespace Monocle
 		FTES_SCALE,
 		FTES_COMMAND,
 		FTES_BROWSER,
+		FTES_COLOR,
+		FTES_FLIP,
 		FTES_MAX
 	};
 
@@ -51,6 +53,7 @@ namespace Monocle
 		void UpdateMove();
 		void UpdateRotate();
 		void UpdateScale();
+		void UpdateColor();
 		void UpdateCommands();
 
 		void ApplyGrid(Entity *entity, int gridSize);
@@ -73,6 +76,7 @@ namespace Monocle
 		float moveStartMagnitude;
 		float startRotation;
 		Vector2 startScale;
+		Color startColor;
 
 		bool waitForLMBRelease;
 
@@ -80,13 +84,16 @@ namespace Monocle
 		Vector2 lastWorldMousePosition;
 		//Cursor *cursor;
 		int moveAxisLock;
+		int changeColorValue;
 
 		KeyCode keyMove;
 		KeyCode keyRotate;
 		KeyCode keyScale;
 		KeyCode keySelect;
+		KeyCode keyColor;
 		KeyCode keyFocus;
 		KeyCode keyClone;
+		KeyCode keyFlip;
 		KeyCode keyFlipH;
 		KeyCode keyFlipV;
 		KeyCode keyPrevTile;
