@@ -9,9 +9,10 @@
 #include "AudioDeck.h"
 #include "../Platform.h"
 #include "../Debug.h"
+#include "../MonocleToolkit.h"
 
-#define MIN(a,b) (a<b)?a:b
-#define MAX(a,b) (a>b)?a:b
+//#define MIN(a,b) (a<b)?a:b
+//#define MAX(a,b) (a>b)?a:b
 
 namespace Monocle {
     
@@ -134,6 +135,8 @@ namespace Monocle {
         }
         this->vizlast = 0;
         
+        // We don't init. lastSeekPos because we could have set that before a Flush(). (important)
+        
         this->bufferCountdown = NUM_BUFFERS;
         cs->Open(decodeData->ch, decodeData->bit, decodeData->samplerate);
         FillBuffers();
@@ -148,8 +151,12 @@ namespace Monocle {
     {
         bool wasPlaying = cs->IsPlaying();
         bool wasPaused = this->pause;
-        long seek = this->GetCurrentTime();
+        long seek = cs->GetOutputTime() + this->lastSeekPos;
         
+        while (seek > decodeData->total && decodeData->total > 0)
+            seek -= decodeData->total;
+        
+        this->lastSeekPos = seek;
         this->decodeData->seekOffset = seek;
         ResetDeck();
         
@@ -286,9 +293,10 @@ namespace Monocle {
         
         if (!IsVisEnabled()) return;
         
-        if (this->cleanVis){
+        if (this->cleanVis || viznow - vizlast > 2000){
             vc.Clean();
             this->cleanVis = false;
+            vizlast=viznow;
         }
         
         if (this->vis && this->vis->bDisabled) return;
@@ -297,7 +305,6 @@ namespace Monocle {
             if (this->vis) this->vis->bClear = true;
             return;
         }
-        
         
         // Fill in 20ms increments
         if (viznow - vizlast > 20)
@@ -479,9 +486,24 @@ namespace Monocle {
         }
         else
         {
-            // Not paused...
-            if (this->playStarted && !cs->IsPlaying())
-                cs->Resume(); // resume please
+            // Not paused... so we probably LOST SYNC. oh god. ):
+            if (this->playStarted && !cs->IsPlaying()){
+//                cs->Resume(); // resume please
+                
+                // Make sure we're not just ending naturally!
+                if (!decodeData->outOfData)
+                {
+                    // We're supposed to be playing, and we're not.
+                    // flush and play :O
+                    
+                    Debug::Log("AUDIO: ChannelStream stopped playing. The audio thread could not keep up with the buffer - try increasing buffer size or reducing latency.");
+                    
+                    Flush();
+                    Play();
+                    
+                    return;
+                }
+            }
         }
         
         /**
@@ -743,7 +765,7 @@ namespace Monocle {
         if (!cs->IsPlaying())
             return 0;
         
-        while (opos > decodeData->total)
+        while (opos > decodeData->total && decodeData->total > 0)
             opos -= decodeData->total;
         
         return opos;
