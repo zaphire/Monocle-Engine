@@ -417,25 +417,6 @@ namespace Monocle
 			selectedEntity->scale -= Vector2(SIGNOF(selectedEntity->scale.x), SIGNOF(selectedEntity->scale.y)) * 0.125f;
 		}
 
-		const float moveSpeed = 10.0f;
-		if (Input::IsKeyHeld(KEY_LEFT))
-		{
-			selectedEntity->position += Vector2::left * moveSpeed * Monocle::deltaTime;
-		}
-		if (Input::IsKeyHeld(KEY_RIGHT))
-		{
-			selectedEntity->position += Vector2::right * moveSpeed * Monocle::deltaTime;
-		}
-		if (Input::IsKeyHeld(KEY_UP))
-		{
-			selectedEntity->position += Vector2::up * moveSpeed * Monocle::deltaTime;
-		}
-		if (Input::IsKeyHeld(KEY_DOWN))
-		{
-			selectedEntity->position += Vector2::down * moveSpeed * Monocle::deltaTime;
-		}
-
-
 
 		if (Input::IsKeyPressed(KEY_I))
 		{
@@ -518,12 +499,35 @@ namespace Monocle
 			break;
 		}
 		
+		/*
 		if (Input::IsKeyPressed(KEY_0))
 		{
 			selectedEntity->position = Vector2::zero;
 			SetState(FTES_NONE);
 			return;
 		}
+		*/
+
+		// move to inside UpdateMove()
+		/*
+		const float moveSpeed = 10.0f;
+		if (Input::IsKeyHeld(KEY_LEFT))
+		{
+			selectedEntity->position += Vector2::left * moveSpeed * Monocle::deltaTime;
+		}
+		if (Input::IsKeyHeld(KEY_RIGHT))
+		{
+			selectedEntity->position += Vector2::right * moveSpeed * Monocle::deltaTime;
+		}
+		if (Input::IsKeyHeld(KEY_UP))
+		{
+			selectedEntity->position += Vector2::up * moveSpeed * Monocle::deltaTime;
+		}
+		if (Input::IsKeyHeld(KEY_DOWN))
+		{
+			selectedEntity->position += Vector2::down * moveSpeed * Monocle::deltaTime;
+		}
+		*/
 
 		// cancel out of move by hitting escape or rmb
 		if (Input::IsKeyPressed(KEY_ESCAPE) || Input::IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
@@ -539,6 +543,24 @@ namespace Monocle
 			SetState(FTES_NONE);
 			printf("position: (%d, %d)\n", (int)selectedEntity->position.x, (int)selectedEntity->position.y);
 			return;
+		}
+
+		UpdateNumberEntry();
+
+		if (isNumberEntry)
+		{
+			switch(moveAxisLock)
+			{
+			case 1:
+				selectedEntity->position.x = numberEntryValue;
+				break;
+			case 2:
+				selectedEntity->position.y = numberEntryValue;
+				break;
+			default:
+				selectedEntity->position = Vector2::one * numberEntryValue;
+				break;
+			}
 		}
 	}
 
@@ -645,16 +667,18 @@ namespace Monocle
 
 	void LevelEditor::UpdateColor()
 	{
-		if (Input::IsKeyPressed(KEY_ESCAPE))
+		if (Input::IsKeyPressed(KEY_ESCAPE) || Input::IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
 		{
 			selectedEntity->color = startColor;
 			SetState(FTES_NONE);
+			isNumberEntry = false;
 			return;
 		}
 
 		if (Input::IsKeyPressed(KEY_RETURN) || Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
 			SetState(FTES_NONE);
+			isNumberEntry = false;
 			return;
 		}
 
@@ -700,7 +724,6 @@ namespace Monocle
 			if (changeColorValue > 0)
 			{
 				selectedEntity->color[changeColorValue-1] += change;
-				selectedEntity->color.Clamp();
 			}
 			else
 			{
@@ -708,7 +731,106 @@ namespace Monocle
 				{
 					selectedEntity->color[i] += change;
 				}
-				selectedEntity->color.Clamp();
+			}
+		}
+
+		UpdateNumberEntry();
+
+		if (isNumberEntry)
+		{
+			if (changeColorValue > 0)
+			{
+				selectedEntity->color[changeColorValue-1] = numberEntryValue;
+			}
+			else
+			{
+				for (unsigned int i = 0; i < 3; i++)
+				{
+					selectedEntity->color[i] = numberEntryValue;
+				}
+			}
+		}
+
+		selectedEntity->color.Clamp();
+	}
+
+	//void LevelEditor::UpdateText()
+	//{
+	//	if (Input::IsKeyPressed(KEY_BACKSPACE))
+	//	{
+	//		if (!text.empty())
+	//			text.resize(text.size()-1);
+	//	}
+	//	else
+	//	{
+	//		for (int key = KEY_A; key < KEY_Z; key++)
+	//		{
+	//			if (Input::IsKeyPressed((KeyCode)key))
+	//			{
+	//				text += 'a' + (char)key;
+	//			}
+	//		}
+	//	}
+
+	//	if (Input::IsKeyPressed(KEY_RETURN))
+	//	{
+	//		// mark textEntry as finished
+	//		isTextEntered = true;
+	//	}
+	//}
+
+	void LevelEditor::UpdateNumberEntry()
+	{
+		bool changed = false;
+		if (Input::IsKeyPressed(KEY_BACKSPACE))
+		{
+			numberEntryString="";
+			changed = true;
+		}
+		else
+		{
+			std::string oldNumberEntryString = numberEntryString;
+
+			if (Input::IsKeyPressed(KEY_0))
+				numberEntryString += "0";
+			if (Input::IsKeyPressed(KEY_1))
+				numberEntryString += "1";
+			if (Input::IsKeyPressed(KEY_2))
+				numberEntryString += "2";
+			if (Input::IsKeyPressed(KEY_3))
+				numberEntryString += "3";
+			if (Input::IsKeyPressed(KEY_4))
+				numberEntryString += "4";
+			if (Input::IsKeyPressed(KEY_5))
+				numberEntryString += "5";
+			if (Input::IsKeyPressed(KEY_6))
+				numberEntryString += "6";
+			if (Input::IsKeyPressed(KEY_7))
+				numberEntryString += "7";
+			if (Input::IsKeyPressed(KEY_8))
+				numberEntryString += "8";
+			if (Input::IsKeyPressed(KEY_9))
+				numberEntryString += "9";
+
+			if (Input::IsKeyPressed(KEY_PERIOD))
+				numberEntryString += ".";
+
+			changed = (oldNumberEntryString != numberEntryString);
+		}
+		if (changed)
+		{
+			if (numberEntryString.empty())
+			{
+				isNumberEntry = false;
+			}
+			else
+			{
+				std::istringstream is(numberEntryString);
+				is >> numberEntryValue;
+				isNumberEntry = true;
+
+				Debug::Log("numberEntryString: " + numberEntryString);
+				Debug::Log(numberEntryValue);
 			}
 		}
 	}
@@ -717,5 +839,11 @@ namespace Monocle
 	void LevelEditor::SetState(FringeTileEditorState state)
 	{
 		this->state = state;
+
+		if (state == FTES_NONE)
+		{
+			isNumberEntry = false;
+			numberEntryString = "";
+		}
 	}
 }

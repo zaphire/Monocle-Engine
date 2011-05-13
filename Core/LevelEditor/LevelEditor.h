@@ -56,6 +56,8 @@ namespace Monocle
 		void UpdateColor();
 		void UpdateCommands();
 
+		void UpdateNumberEntry();
+
 		void ApplyGrid(Entity *entity, int gridSize);
 
 		template <class T>
@@ -102,6 +104,12 @@ namespace Monocle
 		KeyCode keyScaleDown;
 		KeyCode keyScaleUp;
 		KeyCode keyOpenImageBrowser;
+
+		bool isNumberEntry;
+		std::string numberEntryString;
+		float numberEntryValue;
+
+		std::string text;
 
 		/// NODE
 		void CloneNode();
