@@ -53,8 +53,10 @@ namespace Monocle
 		char buffer[256];
 		::GetCurrentDirectory(256, (char*)&buffer);
 		return std::string(buffer) + + "\\";
-#else
-		return "";
+#elif defined(MONOCLE_LINUX)
+        char buffer[FILENAME_MAX];
+        getcwd(buffer, sizeof(buffer));
+		return std::string(buffer) + "\\";
 #endif
 	}
 
@@ -63,13 +65,13 @@ namespace Monocle
 	{
 		//std::string path = inPath;
 		//std::string type = "." + inType;
-		
+
 		if (path.empty()) return;
 
 		//stringToLowerUserData(path);
 		//stringToLower(type);
 		Debug::Log("forEachFile - path: " + path + " type: " + type);
-		
+
 		int end = path.size()-1;
 		if (path[end] != '/')
 			path += "/";
