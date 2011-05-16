@@ -16,6 +16,7 @@ namespace Monocle
 		KEY_ESCAPE,
 		KEY_SPACE,
 		KEY_QUOTE,
+		KEY_APOSTROPHE,
 		KEY_COMMA,
 		KEY_MINUS,
 		KEY_PERIOD,
@@ -174,7 +175,7 @@ namespace Monocle
 		static bool IsActive();
 
 		void WindowSizeChanged(int w, int h);
-        
+
         static std::string GetDefaultContentPath();
 
 	private:

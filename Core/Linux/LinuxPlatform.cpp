@@ -177,6 +177,7 @@ namespace Monocle
 
         BindLocalKey(XK_space, KEY_SPACE);
         BindLocalKey(XK_quotedbl, KEY_QUOTE);
+        BindLocalKey(XK_apostrophe, KEY_APOSTROPHE);
         BindLocalKey(XK_comma, KEY_COMMA);
         BindLocalKey(XK_minus, KEY_MINUS);
         BindLocalKey(XK_period, KEY_PERIOD);

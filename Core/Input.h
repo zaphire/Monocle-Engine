@@ -11,11 +11,11 @@ namespace Monocle
 {
 	//!
 	//! \brief Manages input for Monocle
-	//! 
+	//!
 	//! Is*Held = is key/mouse button currently being held
 	//! Is*Pressed = was the key/mouse button go down in this frame
 	//! Is*Released = did the key/mouse button go up in this frame
-	//! 
+	//!
 	class Input
 	{
 	public:
@@ -27,6 +27,7 @@ namespace Monocle
 		static Vector2 GetMousePosition();
 		// take camera into account
 		static Vector2 GetWorldMousePosition();
+		static int getMouseWheelScroll();
 		static bool IsMouseButtonHeld(MouseButton mouseButton);
 		static bool IsMouseButtonReleased(MouseButton mouseButton);
 		static bool IsMouseButtonPressed(MouseButton mouseButton);
@@ -46,16 +47,14 @@ namespace Monocle
 		static bool IsKeyMaskReleased(const std::string& mask);
 		static bool IsKeyMaskPressed(const std::string& mask);
 
-		
-
 		void Update();
-		
+
 	private:
 		static Input *instance;
 
 		bool previousKeys[KEY_MAX];
 		bool currentKeys[KEY_MAX];
-	
+
 		bool previousMouseButtons[MOUSE_BUTTON_MAX];
 		bool currentMouseButtons[MOUSE_BUTTON_MAX];
 
