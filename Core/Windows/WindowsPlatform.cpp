@@ -367,7 +367,7 @@ namespace Monocle
 
 			case WM_MOUSEWHEEL:
 			{
-				instance->platform->mouseWheel = (short)HIWORD(wParam);
+				instance->platform->mouseScroll = (short)HIWORD(wParam);
 			}
 			return(0);
 		}
@@ -381,7 +381,7 @@ namespace Monocle
 	bool Platform::keys[KEY_MAX];
 	bool Platform::mouseButtons[3];
 	Vector2 Platform::mousePosition;
-	int Platform::mouseWheel = 0;
+	int Platform::mouseScroll = 0;
 
 	Platform::Platform()
 	{
@@ -533,7 +533,7 @@ namespace Monocle
 
 	void Platform::Update()
 	{
-		mouseWheel = 0;
+		mouseScroll = 0;
 		// Pump messages
 		MSG msg;	
 		while (PeekMessage(&msg,NULL,0,0,PM_NOREMOVE))

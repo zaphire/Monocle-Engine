@@ -139,7 +139,7 @@ namespace Monocle
     bool Platform::keys[KEY_MAX];
     bool Platform::mouseButtons[3];
     Vector2 Platform::mousePosition;
-    int Platform::mouseWheel = 0;
+    int Platform::mouseScroll = 0;
 
     Platform::Platform()
     {
@@ -296,7 +296,7 @@ namespace Monocle
 
     void Platform::Update()
     {
-        mouseWheel = 0; //reset mouse wheel state
+        mouseScroll = 0; //reset mouse wheel state
         XEvent event;
 
         while (XPending(LinuxPlatform::instance->hDisplay)) { XNextEvent(LinuxPlatform::instance->hDisplay, &event);
@@ -325,9 +325,9 @@ namespace Monocle
                         button = MOUSE_BUTTON_RIGHT; break;
                     // TODO check if 120 is the right amount and generalise code
                     case Button4:
-                        mouseWheel += 120; break;
+                        mouseScroll += 120; break;
                     case Button5:
-                        mouseWheel -= 120; break;
+                        mouseScroll -= 120; break;
                     }
 
                     Platform::SetMouseButton(button,

@@ -27,10 +27,10 @@ namespace Monocle
 				zoomSpeed *= 2.0f;
 			}
 
-			if (Platform::mouseWheel != 0)
+			if (Platform::mouseScroll != 0)
 			{
 				const float minZoom = 0.01f;
-				Scene::GetCamera()->scale += (Platform::mouseWheel * Vector2::one * 0.00025f);
+				Scene::GetCamera()->scale += (Platform::mouseScroll * Vector2::one * 0.00025f);
 				if (Scene::GetCamera()->scale.x < minZoom)
 				{
 					Scene::GetCamera()->scale = Vector2::one * minZoom;

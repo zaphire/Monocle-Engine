@@ -62,7 +62,7 @@ namespace Monocle
 				}
 			}
 
-			grid->position += Platform::mouseWheel * Vector2::down * 0.25f;
+			grid->position += Platform::mouseScroll * Vector2::down * 0.25f;
 			printf("position %f, %f\n", grid->position.x, grid->position.y);
 		}
 	}
