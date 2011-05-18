@@ -177,6 +177,7 @@ namespace Monocle
 
         BindLocalKey(XK_space, KEY_SPACE);
         BindLocalKey(XK_quotedbl, KEY_QUOTE);
+		BindLocalKey(XK_apostrophe, KEY_APOSTROPHE);
         BindLocalKey(XK_comma, KEY_COMMA);
         BindLocalKey(XK_minus, KEY_MINUS);
         BindLocalKey(XK_period, KEY_PERIOD);
@@ -273,19 +274,19 @@ namespace Monocle
         BindLocalKey(KeySymParts::Get(XK_F2).low, KEY_F2);
         BindLocalKey(KeySymParts::Get(XK_F3).low, KEY_F3);
         BindLocalKey(KeySymParts::Get(XK_F4).low, KEY_F4);
-        BindLocalKey(KeySymParts::Get(XK_F5).low, KEY_F5);
-        BindLocalKey(KeySymParts::Get(XK_F6).low, KEY_F6);
-        BindLocalKey(KeySymParts::Get(XK_F7).low, KEY_F7);
-        BindLocalKey(KeySymParts::Get(XK_F8).low, KEY_F8);
-        BindLocalKey(KeySymParts::Get(XK_F9).low, KEY_F9);
-        BindLocalKey(KeySymParts::Get(XK_F10).low, KEY_F10);
-        BindLocalKey(KeySymParts::Get(XK_F11).low, KEY_F11);
-        BindLocalKey(KeySymParts::Get(XK_F12).low, KEY_F12);
-        BindLocalKey(KeySymParts::Get(XK_F13).low, KEY_F13);
-        BindLocalKey(KeySymParts::Get(XK_F14).low, KEY_F14);
-        BindLocalKey(KeySymParts::Get(XK_F15).low, KEY_F15);
-        Init("Monocle Powered", 800, 600, 24, false);
-    }
+		BindLocalKey(KeySymParts::Get(XK_F5).low, KEY_F5);
+		BindLocalKey(KeySymParts::Get(XK_F6).low, KEY_F6);
+		BindLocalKey(KeySymParts::Get(XK_F7).low, KEY_F7);
+		BindLocalKey(KeySymParts::Get(XK_F8).low, KEY_F8);
+		BindLocalKey(KeySymParts::Get(XK_F9).low, KEY_F9);
+		BindLocalKey(KeySymParts::Get(XK_F10).low, KEY_F10);
+		BindLocalKey(KeySymParts::Get(XK_F11).low, KEY_F11);
+		BindLocalKey(KeySymParts::Get(XK_F12).low, KEY_F12);
+		BindLocalKey(KeySymParts::Get(XK_F13).low, KEY_F13);
+		BindLocalKey(KeySymParts::Get(XK_F14).low, KEY_F14);
+		BindLocalKey(KeySymParts::Get(XK_F15).low, KEY_F15);
+		Init("Monocle Powered", 800, 600, 24, false);
+	}
 
     void Platform::Init(const std::string &name, int w, int h, int bits, bool fullscreen)
     {
@@ -323,7 +324,7 @@ namespace Monocle
                         button = MOUSE_BUTTON_MIDDLE; break;
                     case Button3: // right click
                         button = MOUSE_BUTTON_RIGHT; break;
-                    // TODO check if 120 is the right amount and generalise code
+                    // TODO check if 120 is the right amount and generalize code
                     case Button4:
                         mouseScroll += 120; break;
                     case Button5:

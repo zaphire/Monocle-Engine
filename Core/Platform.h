@@ -16,6 +16,7 @@ namespace Monocle
 		KEY_ESCAPE,
 		KEY_SPACE,
 		KEY_QUOTE,
+		KEY_APOSTROPHE,
 		KEY_COMMA,
 		KEY_MINUS,
 		KEY_PERIOD,

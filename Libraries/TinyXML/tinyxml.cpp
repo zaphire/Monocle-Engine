@@ -1878,7 +1878,23 @@ void XMLReadColor(TiXmlElement* elem, const std::string &att, Monocle::Color &co
 	if (read != NULL)
 	{
 		std::istringstream is(*read);
-		is >> color.r >> color.g >> color.b >> color.a;
+		if (read->find("0x") != std::string::npos)
+		{
+			unsigned int hexcolor;
+			is >> std::hex >> hexcolor;
+
+			color.r = ( hexcolor >> 16 ) & 0xFF;
+			color.g = ( hexcolor >> 8 ) & 0xFF;
+			color.b = hexcolor & 0xFF;
+			color.r/=255.0f;
+			color.g/=255.0f;
+			color.b/=255.0f;
+		}
+		else
+		{
+			is >> color.r >> color.g >> color.b >> color.a;
+		}
+		
 	}
 }
 
