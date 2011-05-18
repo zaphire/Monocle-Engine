@@ -1846,7 +1846,7 @@ std::string XMLReadString(TiXmlElement *elem, const std::string &att)
 	return "";
 }
 
-float XMLReadFloat(TiXmlElement* elem, const std::string &att)
+float XMLReadFloat(TiXmlElement *elem, const std::string &att)
 {
 	const std::string *read = elem->Attribute(att);
 	if (read != NULL)
@@ -1854,15 +1854,15 @@ float XMLReadFloat(TiXmlElement* elem, const std::string &att)
 	return 0.0f;
 }
 
-int XMLReadInt(TiXmlElement* elem, const std::string &att)
+int XMLReadInt(TiXmlElement *elem, const std::string &att)
 {
 	const std::string *read = elem->Attribute(att);
 	if (read != NULL)
 		return atoi((*read).c_str());
-	return 0.0f;
+	return 0;
 }
 
-bool XMLReadBool(TiXmlElement* elem, const std::string &att)
+bool XMLReadBool(TiXmlElement *elem, const std::string &att)
 {
 	const std::string *read = elem->Attribute(att);
 	if (read != NULL)
@@ -1870,9 +1870,38 @@ bool XMLReadBool(TiXmlElement* elem, const std::string &att)
 	return false;
 }
 
+
+void XMLReadString(TiXmlElement *elem, const std::string &att, std::string *intoString)
+{
+	const std::string *read = elem->Attribute(att);
+	if (read != NULL)
+		*intoString = *read;
+}
+
+void XMLReadFloat(TiXmlElement* elem, const std::string &att, float *intoFloat)
+{
+	const std::string *read = elem->Attribute(att);
+	if (read != NULL)
+		*intoFloat = atof((*read).c_str());
+}
+
+void XMLReadInt(TiXmlElement* elem, const std::string &att, int *intoInteger)
+{
+	const std::string *read = elem->Attribute(att);
+	if (read != NULL)
+		*intoInteger = atoi((*read).c_str());
+}
+
+void XMLReadBool(TiXmlElement* elem, const std::string &att, bool *intoBoolean)
+{
+	const std::string *read = elem->Attribute(att);
+	if (read != NULL)
+		*intoBoolean = bool(atoi((*read).c_str()));
+}
+
 #include <Color.h>
 
-void XMLReadColor(TiXmlElement* elem, const std::string &att, Monocle::Color &color)
+void XMLReadColor(TiXmlElement* elem, const std::string &att, Monocle::Color *color)
 {
 	const std::string *read = elem->Attribute(att);
 	if (read != NULL)
@@ -1883,16 +1912,16 @@ void XMLReadColor(TiXmlElement* elem, const std::string &att, Monocle::Color &co
 			unsigned int hexcolor;
 			is >> std::hex >> hexcolor;
 
-			color.r = ( hexcolor >> 16 ) & 0xFF;
-			color.g = ( hexcolor >> 8 ) & 0xFF;
-			color.b = hexcolor & 0xFF;
-			color.r/=255.0f;
-			color.g/=255.0f;
-			color.b/=255.0f;
+			color->r = ( hexcolor >> 16 ) & 0xFF;
+			color->g = ( hexcolor >> 8 ) & 0xFF;
+			color->b = hexcolor & 0xFF;
+			color->r /= 255.0f;
+			color->g /= 255.0f;
+			color->b /= 255.0f;
 		}
 		else
 		{
-			is >> color.r >> color.g >> color.b >> color.a;
+			is >> color->r >> color->g >> color->b >> color->a;
 		}
 		
 	}

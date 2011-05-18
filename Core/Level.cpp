@@ -170,7 +170,7 @@ namespace Monocle
 					}
 
 					Color backgroundColor = Color::black;
-					XMLReadColor(eLevel, "backgroundColor", backgroundColor);
+					XMLReadColor(eLevel, "backgroundColor", &backgroundColor);
 					Graphics::SetBackgroundColor(backgroundColor);
 
 					TiXmlElement *eTilemap = eLevel->FirstChildElement("Tilemap");

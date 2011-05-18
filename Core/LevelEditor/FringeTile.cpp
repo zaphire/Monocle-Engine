@@ -87,6 +87,11 @@ namespace Monocle
 		RefreshTexture();
 	}
 
+	Entity* FringeTile::Clone()
+	{
+		return new FringeTile(*this);
+	}
+
 	/*
 	FringeTile::FringeTile(int tileID)
 		: Entity(), tileID(tileID), sprite(NULL)

@@ -60,6 +60,8 @@ namespace Monocle
 		keyScaleUp = KEY_EQUALS;
 		keyOpenImageBrowser = KEY_F5;
 
+		SetState(FTES_NONE);
+
 		Enable();
 	}
 
@@ -197,6 +199,7 @@ namespace Monocle
 		}
 	}
 
+	/*
 	template <class T>
 	void LevelEditor::CloneEntity(T *t)
 	{
@@ -205,6 +208,18 @@ namespace Monocle
 		entity->position = Input::GetWorldMousePosition();
 		scene->Add(entity);
 		Select(entity);
+	}
+	*/
+
+	void LevelEditor::CloneEntity(Entity *entity, const Vector2 &position)
+	{
+		Entity *newEntity = entity->Clone();
+		newEntity->position = position;
+		if (entity->GetParent())
+			entity->GetParent()->Add(newEntity);
+		else
+			scene->Add(newEntity);
+		Select(newEntity);
 	}
 
 	// cloning a node is a special case for now
@@ -377,10 +392,10 @@ namespace Monocle
 			{
 				selectedFringeTile->NextTile();
 			}
-			if (Input::IsKeyPressed(keyClone))
-			{
-				CloneEntity(selectedFringeTile);
-			}
+			//if (Input::IsKeyPressed(keyClone))
+			//{
+			//	CloneEntity(selectedFringeTile);
+			//}
 			if (Input::IsKeyPressed(KEY_M))
 			{
 				std::string path = Monocle::GetWorkingDirectory() + selectedFringeTile->sprite->texture->filename;
@@ -397,6 +412,11 @@ namespace Monocle
 				selectedEntity->rotation = 0;
 			}
 
+		}
+
+		if (Input::IsKeyPressed(keyClone))
+		{
+			CloneEntity(selectedEntity, Input::GetWorldMousePosition());
 		}
 
 		if (Input::IsKeyPressed(keyDelete))

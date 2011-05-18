@@ -46,6 +46,11 @@ namespace Monocle
 	{
 	}
 
+	Entity *Entity::Clone()
+	{
+		return new Entity(*this);
+	}
+
 	void Entity::Added()
 	{
 	}
