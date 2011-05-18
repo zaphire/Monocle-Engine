@@ -96,12 +96,14 @@ class TiXmlParsingData;
 namespace Monocle
 {
 	class Color;
+	class Vector2;
 }
 
 std::string XMLReadString(TiXmlElement *elem, const std::string &att);
 float XMLReadFloat(TiXmlElement *elem, const std::string &att);
 int XMLReadInt(TiXmlElement *elem, const std::string &att);
 bool XMLReadBool(TiXmlElement *elem, const std::string &att);
+Monocle::Vector2 XMLReadVector2(TiXmlElement *elem, const std::string &att);
 
 void XMLReadString(TiXmlElement *elem, const std::string &att, std::string *intoString);
 void XMLReadFloat(TiXmlElement* elem, const std::string &att, float *intoFloat);

@@ -28,7 +28,7 @@ namespace Monocle
 	Vector2 Collider::GetEntityPosition()
 	{
 		if (entity != NULL)
-			return entity->position;
+			return entity->GetWorldPosition();
 		else
 			return Vector2();
 	}

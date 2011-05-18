@@ -213,6 +213,7 @@ namespace Monocle
 
 	void LevelEditor::CloneEntity(Entity *entity, const Vector2 &position)
 	{
+		//Entity *newEntity = (Entity*)(new typeid(T));
 		Entity *newEntity = entity->Clone();
 		newEntity->position = position;
 		if (entity->GetParent())

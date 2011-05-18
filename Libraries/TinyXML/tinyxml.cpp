@@ -1870,6 +1870,20 @@ bool XMLReadBool(TiXmlElement *elem, const std::string &att)
 	return false;
 }
 
+#include <Vector2.h>
+
+Monocle::Vector2 XMLReadVector2(TiXmlElement *elem, const std::string &att)
+{
+	Monocle::Vector2 vec2;
+	const std::string *read = elem->Attribute(att);
+	if (read != NULL)
+	{
+		std::istringstream is(*read);
+		is >> vec2.x >> vec2.y;
+	}
+	return vec2;
+}
+
 
 void XMLReadString(TiXmlElement *elem, const std::string &att, std::string *intoString)
 {
