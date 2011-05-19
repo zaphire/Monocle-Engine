@@ -142,7 +142,7 @@ namespace Monocle
 	bool Platform::keys[KEY_MAX];
 	bool Platform::mouseButtons[3];
 	Vector2 Platform::mousePosition;
-	int Platform::mouseWheel=0;
+	int Platform::mouseScroll=0;
 
 	Platform::Platform()
 	{
@@ -244,6 +244,7 @@ namespace Monocle
 	}
 
     std::string Platform::GetDefaultContentPath() {
-        return CocoaPlatform::instance->bundleResourcesPath;
+//        return CocoaPlatform::instance->bundleResourcesPath;
+        return "../../Content/";
     }
 }

@@ -8,32 +8,24 @@
 
 namespace Monocle
 {
-    typedef struct { 
-        short  wFormatTag; 
-        short  nChannels; 
-        int nSamplesPerSec; 
-        int nAvgBytesPerSec; 
-        short  nBlockAlign; 
-        short  wBitsPerSample; 
-        short  cbSize; 
-    } WAVEFORMATEX; 
-    
-    class WaveDecoderData {
-    public:
-        WAVEFORMATEX format;
-        AudioAssetReader *reader;
-    };
+    /***
+     THIS CODE is responsible for registering this decoder with the file extension.
+     See more info in Audio::Init.
+     ***/
+    AudioDecoder *makeWaveFunc( AudioAsset *asset )
+    {
+        return new WaveDecoder(asset);
+    }
     
     static short WAVE_FORMAT_PCM = 0x0001;
     
-    void WaveDecoder::WaveOpen(WaveDecoderData *data)
+    void WaveDecoder::WaveOpen()
     {
         char csID[10];
         int fsize;
         int wfxsize;
         int datasize;
-        WAVEFORMATEX *wfx = &data->format;
-        AudioAssetReader *reader = data->reader;
+        WAVEFORMATEX *wfx = &format;
         
         csID[4] = 0;
         reader->Read(csID,4);
@@ -72,38 +64,31 @@ namespace Monocle
         // Should be at data...
     }
     
-    AudioDecodeData *WaveDecoder::RequestData( AudioAsset *asset )
+    WaveDecoder::WaveDecoder( AudioAsset *asset )
     {
-        WaveDecoderData *data = new WaveDecoderData;
-        AudioDecodeData *dd = new AudioDecodeData(44100, 16, 2, this, (void*)data, asset);
+        this->audAsset = asset;
+        reader = new AudioAssetReader(audAsset,audAsset->GetDecodeString());
         
-        AudioAssetReader *reader = new AudioAssetReader(dd->audAsset,dd->audAsset->GetDecodeString());
-        data->reader = reader;
+        WaveOpen();
         
-        WaveOpen(data);
-        dd->samplerate = data->format.nSamplesPerSec;
-        dd->bit = data->format.wBitsPerSample;
-        dd->ch = data->format.nChannels;
-        
-        return dd;
+        Init(format.nSamplesPerSec,format.wBitsPerSample,format.nChannels);
     }
     
-    unsigned long WaveDecoder::Render( unsigned long size, void *buf, AudioDecodeData &dd )
+    unsigned long WaveDecoder::Render( unsigned long size, void *buf )
     {
-        WaveDecoderData *wdd = (WaveDecoderData*)dd.decoderData;
-        AudioAssetReader *reader = wdd->reader;
-        
         size_t ret = reader->Read(buf, size);
         if (!ret)
-            dd.outOfData = true;
+            outOfData = true;
         
         return ret;
     }
     
-    void WaveDecoder::FreeDecoderData( AudioDecodeData &dd )
+    WaveDecoder::~WaveDecoder()
     {
-        WaveDecoderData *wdd = (WaveDecoderData*)dd.decoderData;
-        delete wdd->reader;
-        delete wdd;
+        delete reader;
     }
 }
+
+
+
+

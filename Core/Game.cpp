@@ -46,7 +46,6 @@ namespace Monocle
 		long lastTick = Platform::GetMilliseconds();
 		long firstTick = Platform::GetMilliseconds();
 		long tick;
-        bool audioPaused = false;
 
 		while (!isDone)
 		{
@@ -54,7 +53,7 @@ namespace Monocle
 
 			while (!platform.IsActive())
 			{
-                if (!audioPaused)
+                if (!audio.IsPaused())
                     audio.PauseAll();
                 
                 // Otherwise, if we're not supposed to care if it pauses, we'll call audio.Update();
@@ -62,7 +61,7 @@ namespace Monocle
 				platform.Update();
 			}
             
-            if (audioPaused)
+            if (audio.IsPaused())
                 audio.ResumeAll();
 
             audio.Update();

@@ -17,7 +17,6 @@
 #endif
 
 namespace Monocle {
-    // Structure containing fade information
     
     enum VisBandLength
 	{
@@ -25,6 +24,15 @@ namespace Monocle {
 		VIS_BAND_MEDIUM,
         VIS_BAND_LONG
 	};
+    
+    enum FadeOutAction
+    {
+        FADEOUT_AND_MUTE=0,
+        FADEOUT_AND_PAUSE,
+        FADEOUT_AND_STOP,
+        
+        FADEOUT_AND_COUNT
+    };
     
     /**
         Contains fade information for an AudioDeck. All times are in MS, and aFade* times are relative to ChannelStream::GetTotalPlayTime().
@@ -71,7 +79,7 @@ namespace Monocle {
         /**
             Specifies whether or not an AudioDeck will pause (true) or continue playing at 0 vol (false) when aFadeOutEnd is reached
          */
-        bool	bPauseOnFadeOut;	// When aFadeOutEnd is reached, should we pause or keep playing.
+        FadeOutAction	fadeAction;	// When aFadeOutEnd is reached, should we pause or keep playing, or die?.
         
         /**
             Specifies whether or not the deck should be silent (e.g. after bPauseOnFadeOut).
@@ -89,8 +97,8 @@ namespace Monocle {
     class AudioDeck
     {
     public:
-        AudioDeck( AudioDeck **deckSetter, AudioDecodeData *decodeData, bool freeDataWithDeck = true );
-        AudioDeck( AudioDeck *prevDeck, AudioDecodeData *decodeData, bool freeDataWithDeck = true );
+        AudioDeck( AudioDeck **deckSetter, AudioDecoder *decoder, bool freeDecoderWithDeck = true );
+        AudioDeck( AudioDeck *prevDeck, AudioDecoder *decoder, bool freeDecoderWithDeck = true );
         ~AudioDeck();
         
         /**
@@ -129,6 +137,13 @@ namespace Monocle {
         void PauseWithFade( unsigned long msFade );
         
         /**
+            Determines if the deck is paused.
+         
+            @param absolute If false, IsPaused() returns whether or not the Deck is supposed to be paused. (for the audio engine)
+         */
+        bool IsPaused( bool absolute = true );
+        
+        /**
             Resumes the deck.
          */
         void Resume();
@@ -155,6 +170,16 @@ namespace Monocle {
             The deck will continue playing in silence and not pause.
          */
         void MuteWithFade( unsigned long msFade );
+        
+        /**
+            Stops the deck.
+         */
+        void Stop();
+        
+        /**
+            Stops the deck with a fade time in milliseconds.
+         */
+        void StopWithFade( unsigned long msFade );
         
         /**
             Mutes the deck but continues playing it. This is different from setting the volume to 0 as it will allow
@@ -295,10 +320,16 @@ namespace Monocle {
          */
         void Flush();
         
+        /**
+            Returns the ChannelStream class behind this deck.
+            Advanced purposes only.
+         */
+        ChannelStream *GetChannelStream();
+        
         AudioDeck       *nextDeck;      // INTERNAL, Next Deck in the sequence
         AudioDeck       **prevDeckPointerToHere;     // INTERNAL, Pointer in the previous deck to this deck
         
-        AudioDecodeData *decodeData;
+        AudioDecoder *decoder;
         
         AudioVis    *vis;
         bool		cleanVis;           // Set true if you need to clean the vis (on flushes and seeks)
@@ -313,7 +344,7 @@ namespace Monocle {
         bool        freeDeckOnFinish;
         bool		pause;
         
-        bool        freeDecoderData;    // Free the decoder data when deconstructed.
+        bool        freeDecoder;    // Free the decoder data when deconstructed.
         
         unsigned char temp_waveR[576];
         unsigned char temp_waveL[576];

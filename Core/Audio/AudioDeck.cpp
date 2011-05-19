@@ -6,7 +6,7 @@
 
 #include <string.h>
 
-#include "AudioDeck.h"
+#include "Audio.h"
 #include "../Platform.h"
 #include "../Debug.h"
 #include "../MonocleToolkit.h"
@@ -28,7 +28,7 @@ namespace Monocle {
         {
             float vol = 1.0f;
             unsigned long fadeinend = this->fades.nFadeIn;
-            unsigned long total = decodeData->total;
+            unsigned long total = decoder->total;
             unsigned long fadeoutstart;
             unsigned long pos = cs->GetTotalPlayTime();
             unsigned long opos = GetCurrentTime();
@@ -41,7 +41,7 @@ namespace Monocle {
             
             /** TODO:
                 If there is an issue with the looping and fading out of short sound files, it is because of
-             this section, specifically: (this->fades.nFadeOut && opos > fadeoutstart && this->decodeData->loopsRemaining == 0)
+             this section, specifically: (this->fades.nFadeOut && opos > fadeoutstart && this->decoder->loopsRemaining == 0)
              
              loopsRemaining might be 0 in the written buffer before it's reached the speakers. There is no easy solution to this problem
              other than to shorten the number of buffers or buffer size of the audio stream.
@@ -53,7 +53,7 @@ namespace Monocle {
             }
             else
                 // Fade Out (only if no loops remain)
-                if (this->fades.nFadeOut && opos > fadeoutstart && this->decodeData->loopsRemaining == 0) {
+                if (this->fades.nFadeOut && opos > fadeoutstart && this->decoder->loopsRemaining == 0) {
                     vol *= 1.0f - ((float)(opos - fadeoutstart)) / ((float)this->fades.nFadeOut);
                 }
             
@@ -74,12 +74,22 @@ namespace Monocle {
                 if (pos > this->fades.aFadeOutEnd){
                     this->fades.aFadeOutEnd = this->fades.aFadeOutStart = 0;
                     
-                    if (this->fades.bPauseOnFadeOut){
-                        Pause();
-                    }
-                    else
+                    switch (this->fades.fadeAction)
                     {
-                        this->fades.bSilent = true;
+                        case FADEOUT_AND_PAUSE:
+                            Pause();
+                            break;
+                            
+                        case FADEOUT_AND_STOP:
+                            Stop();
+                            return true; // We return here in case we free the deck on finish!
+                            
+                        default:
+                        case FADEOUT_AND_MUTE:
+                            this->fades.bSilent = true;
+                            break;
+                            
+                            
                     }
                 }
             }
@@ -104,7 +114,7 @@ namespace Monocle {
     {
         this->nFadeIn = this->nFadeOut = 0;
         this->aFadeInEnd = this->aFadeInStart = this->aFadeOutEnd = this->aFadeOutStart = 0;
-        this->bPauseOnFadeOut = false;
+        this->fadeAction = FADEOUT_AND_PAUSE;
         this->bSilent = false;
     }
     
@@ -114,8 +124,8 @@ namespace Monocle {
             cs->Close();
         
         int ss = 1;
-        if (decodeData->bit==16) ss = 2;
-        this->sampsize = ss * decodeData->ch;
+        if (decoder->bit==16) ss = 2;
+        this->sampsize = ss * decoder->ch;
         
         this->currentPosition = 0;
         this->totsamps = 0;
@@ -125,7 +135,7 @@ namespace Monocle {
         this->playStarted = false;
         this->pause = false;
         
-        this->decodeData->outOfData = false;
+        this->decoder->outOfData = false;
         
         this->isFinished = false;
         
@@ -138,7 +148,7 @@ namespace Monocle {
         // We don't init. lastSeekPos because we could have set that before a Flush(). (important)
         
         this->bufferCountdown = NUM_BUFFERS;
-        cs->Open(decodeData->ch, decodeData->bit, decodeData->samplerate);
+        cs->Open(decoder->ch, decoder->bit, decoder->samplerate);
         FillBuffers();
         
         cs->SetVolume(volume);
@@ -153,11 +163,11 @@ namespace Monocle {
         bool wasPaused = this->pause;
         long seek = cs->GetOutputTime() + this->lastSeekPos;
         
-        while (seek > decodeData->total && decodeData->total > 0)
-            seek -= decodeData->total;
+        while (seek > decoder->total && decoder->total > 0)
+            seek -= decoder->total;
         
         this->lastSeekPos = seek;
-        this->decodeData->seekOffset = seek;
+        this->decoder->seekOffset = seek;
         ResetDeck();
         
         if (wasPlaying && !wasPaused)
@@ -181,8 +191,8 @@ namespace Monocle {
         if (visEnable)
         {
             // Careful calculations calculated the buflen
-//            vc.Init((BUFFER_SIZE/32768)*(NUM_BUFFERS+2), decodeData->samplerate);
-            vc.Init((BUFFER_SIZE/32768)*(NUM_BUFFERS+2),decodeData->samplerate);
+//            vc.Init((BUFFER_SIZE/32768)*(NUM_BUFFERS+2), decoder->samplerate);
+            vc.Init((BUFFER_SIZE/32768)*(NUM_BUFFERS+2),decoder->samplerate);
             
             vc.Clean();
             
@@ -208,7 +218,7 @@ namespace Monocle {
         this->freeDeckOnFinish = false;
         this->nextDeck = 0;
         
-        if (!this->decodeData){
+        if (!this->decoder){
             Debug::Log("AUDIO: No Decoder Data given to AudioDeck, crash imminent");
         }
         
@@ -227,7 +237,7 @@ namespace Monocle {
         // Eventually maybe we'll enable vis before a deck opens.
         if (IsVisEnabled()){
             // Careful calculations calculated the buflen
-            vc.Init((BUFFER_SIZE/32768)*(NUM_BUFFERS+2), decodeData->samplerate);
+            vc.Init((BUFFER_SIZE/32768)*(NUM_BUFFERS+2), decoder->samplerate);
             vc.Clean();
             
             this->vis = new AudioVis();
@@ -242,7 +252,7 @@ namespace Monocle {
         this->failed = false;
         this->playStarted = false;
         this->pause = false;
-        this->decodeData->outOfData = false;
+        this->decoder->outOfData = false;
         this->isFinished = false;
         this->vizlast = 0;
 
@@ -251,20 +261,20 @@ namespace Monocle {
         ResetDeck();
     }
     
-    AudioDeck::AudioDeck( AudioDeck **deckSetter, AudioDecodeData *decodeData, bool freeDataWithDeck )
+    AudioDeck::AudioDeck( AudioDeck **deckSetter, AudioDecoder *decoder, bool freeDecoderWithDeck )
     {
-        this->freeDecoderData = freeDataWithDeck;
-        this->decodeData = decodeData;
+        this->freeDecoder = freeDecoderWithDeck;
+        this->decoder = decoder;
         deckSetter[0] = this;
         this->prevDeckPointerToHere = deckSetter;
         
         Init();
     }
     
-    AudioDeck::AudioDeck( AudioDeck *prevDeck, AudioDecodeData *decodeData, bool freeDataWithDeck )
+    AudioDeck::AudioDeck( AudioDeck *prevDeck, AudioDecoder *decoder, bool freeDecoderWithDeck )
     {
-        this->freeDecoderData = freeDataWithDeck;
-        this->decodeData = decodeData;
+        this->freeDecoder = freeDecoderWithDeck;
+        this->decoder = decoder;
         prevDeck->nextDeck = this;
         this->prevDeckPointerToHere = &prevDeck->nextDeck;
         
@@ -276,7 +286,7 @@ namespace Monocle {
         this->cs->Close();
         delete this->cs;
         
-        if (this->decodeData && freeDecoderData) delete this->decodeData;
+        if (this->decoder && freeDecoder) delete this->decoder;
         
         if (this->vis)
             delete this->vis;
@@ -369,9 +379,9 @@ namespace Monocle {
         
         if (!cs->IsOpen()){
             // We probably reached the end and are wanting a replay. In this case we should reset the deck and decoder.
-            if (decodeData->seekOffset == -1)
-                decodeData->seekOffset = 0;
-            long seekTo = decodeData->seekOffset;
+            if (decoder->seekOffset == -1)
+                decoder->seekOffset = 0;
+            long seekTo = decoder->seekOffset;
             ResetDeck();
             this->lastSeekPos = seekTo;
         }
@@ -382,6 +392,17 @@ namespace Monocle {
             cs->Play();
         
         playStarted = true;
+        
+        if (Audio::IsPaused())
+            cs->Pause();
+    }
+    
+    bool AudioDeck::IsPaused( bool absolute )
+    {
+        if (absolute)
+            return this->pause || Audio::IsPaused();
+        else
+            return this->pause;
     }
     
     void AudioDeck::Pause()
@@ -391,7 +412,7 @@ namespace Monocle {
         
         fades.aFadeOutStart = 0;
 		fades.aFadeOutEnd = 0;
-		fades.bPauseOnFadeOut = false;
+		fades.fadeAction = FADEOUT_AND_MUTE;
     }
     
     void AudioDeck::PauseWithFade( unsigned long msFade )
@@ -402,7 +423,36 @@ namespace Monocle {
         {
             fades.aFadeOutStart = cs->GetTotalPlayTime();
             fades.aFadeOutEnd = msFade + fades.aFadeOutStart;
-            fades.bPauseOnFadeOut = true;
+            fades.fadeAction = FADEOUT_AND_PAUSE;
+        }
+    }
+    
+    void AudioDeck::Stop()
+    {
+        this->pause = true;
+        this->isFinished = true;
+        this->playStarted = false;
+        cs->Close();
+        
+        if (freeDeckOnFinish){
+            delete this;
+            return;
+        }
+        
+        fades.aFadeOutStart = 0;
+		fades.aFadeOutEnd = 0;
+		fades.fadeAction = FADEOUT_AND_MUTE;
+    }
+    
+    void AudioDeck::StopWithFade( unsigned long msFade )
+    {
+        if (msFade == 0)
+            Stop();
+        else
+        {
+            fades.aFadeOutStart = cs->GetTotalPlayTime();
+            fades.aFadeOutEnd = msFade + fades.aFadeOutStart;
+            fades.fadeAction = FADEOUT_AND_STOP;
         }
     }
     
@@ -414,14 +464,14 @@ namespace Monocle {
         {
             fades.aFadeOutStart = cs->GetTotalPlayTime();
             fades.aFadeOutEnd = msFade + fades.aFadeOutStart;
-            fades.bPauseOnFadeOut = false;
+            fades.fadeAction = FADEOUT_AND_MUTE;
         }
     }
     
     bool AudioDeck::IsMuted()
     {
         if (fades.bSilent) return true;
-        if (fades.aFadeOutStart && !fades.bPauseOnFadeOut) return true;
+        if (fades.aFadeOutStart && fades.fadeAction == FADEOUT_AND_MUTE) return true;
         return false;
     }
     
@@ -470,7 +520,7 @@ namespace Monocle {
     void AudioDeck::Seek( long pos )
     {
         if (pos >= 0)
-            decodeData->seekOffset = pos;
+            decoder->seekOffset = pos;
     }
     
     void AudioDeck::Update()
@@ -491,7 +541,7 @@ namespace Monocle {
 //                cs->Resume(); // resume please
                 
                 // Make sure we're not just ending naturally!
-                if (!decodeData->outOfData)
+                if (!decoder->outOfData)
                 {
                     // We're supposed to be playing, and we're not.
                     // flush and play :O
@@ -508,12 +558,12 @@ namespace Monocle {
         
         /**
         // Check to see if we need to seek...
-        if (decodeData->seekOffset != -1 && 0)
+        if (decoder->seekOffset != -1 && 0)
         {
             cs->Close();
             delete cs;
             cs = new ChannelStream();
-            cs->Open(decodeData->ch, decodeData->bit, decodeData->samplerate);
+            cs->Open(decoder->ch, decoder->bit, decoder->samplerate);
             
 			cs->SetPan(this->pan);
 			cs->SetVolume(this->volume);
@@ -530,7 +580,7 @@ namespace Monocle {
                 vc.Reset();
                 
 				this->writtenpos = this->lastSeekPos;
-				writtenpos = (this->lastSeekPos/1000)*decodeData->samplerate*sampsize;
+				writtenpos = (this->lastSeekPos/1000)*decoder->samplerate*sampsize;
 				//od->writtenpos = (totsamps*1000)/(oc->samples*sampsize);
 				cs->SetPlayOffset(this->lastSeekPos);
 				this->currentPosition = this->lastSeekPos;
@@ -544,8 +594,8 @@ namespace Monocle {
 		}
          **/
         
-        if (decodeData->seekOffset != -1){
-            long seekTo = decodeData->seekOffset;
+        if (decoder->seekOffset != -1){
+            long seekTo = decoder->seekOffset;
             bool repause = this->pause;
             ResetDeck();
             lastSeekPos = seekTo;
@@ -554,7 +604,9 @@ namespace Monocle {
         }
         
 		if (UpdateFades()){
-            // We stop here?
+            // UpdateFades() returns true if we stopped.
+            // We return in case we deleted this deck on finish.
+            return;
         }
         
 		FillBuffers();
@@ -579,7 +631,7 @@ namespace Monocle {
         }
         else
         {
-            if (decodeData->outOfData&&bufferCountdown>0){
+            if (decoder->outOfData&&bufferCountdown>0){
                 bufferCountdown--;
             }
             
@@ -606,14 +658,14 @@ namespace Monocle {
             data = this->cs->GetBuffer(&size);
             
             // Prepad the buffer with silence!
-            if (decodeData->bit == 8)
+            if (decoder->bit == 8)
                 memset(data,0x80,size); // unsigned!
             else
                 memset(data,0,size); // signed (:
             
             // jw: this can be simplified because we're only helping out the visualizers.
             // If the decoder says we're out of data...
-            if (decodeData->outOfData)
+            if (decoder->outOfData)
             {   
                 // Write silence to vc
                 memset(temp_waveL,0x80,576);
@@ -637,9 +689,9 @@ namespace Monocle {
                     l = MIN(576,size-pos);
                     
                     unsigned long nlen;
-                    nlen = (unsigned long)(float)((float)l*1000.0f)/((float)(decodeData->samplerate*sampsize));
+                    nlen = (unsigned long)(float)((float)l*1000.0f)/((float)(decoder->samplerate*sampsize));
                     totsamps += l;
-                    this->writtenpos = (totsamps*1000)/(decodeData->samplerate*sampsize);
+                    this->writtenpos = (totsamps*1000)/(decoder->samplerate*sampsize);
                     this->currentPosition += nlen;
                     
                     pos += l;
@@ -650,7 +702,7 @@ namespace Monocle {
                 if (IsVisEnabled()) this->vis->bClear = false;
             }
             
-            while (l && pos<size && !decodeData->outOfData){
+            while (l && pos<size && !decoder->outOfData){
                 
                 // What to do if the Decoder says we're almost out of data?
                 
@@ -659,7 +711,7 @@ namespace Monocle {
                     vc.SetEngineerData(0,0,0,0);
                 }
                 
-                l = this->decodeData->decoder->Render((size-pos<576*sampsize)?(size-pos):576*sampsize,(void*)((long)data+(long)pos),*this->decodeData);
+                l = this->decoder->Render((size-pos<576*sampsize)?(size-pos):576*sampsize,(void*)((long)data+(long)pos));
                 
                 if (IsVisEnabled())
                 {
@@ -668,15 +720,15 @@ namespace Monocle {
                         int i = 0;
                         int samp = 0;
                         
-                        if (decodeData->bit == 16)
+                        if (decoder->bit == 16)
                         {
                             short *copybuf = (short*)((long)data+(long)pos);
                             
-                            for (i=0; i<576; i++, samp+=decodeData->ch)
+                            for (i=0; i<576; i++, samp+=decoder->ch)
                             {
                                 temp_waveL[i] = C168(copybuf[samp]);
                                 
-                                if (decodeData->ch == 1)
+                                if (decoder->ch == 1)
                                     temp_waveR[i] = C168(copybuf[samp]);
                                 else
                                     temp_waveR[i] = C168(copybuf[samp+1]); // Stereo (:
@@ -687,15 +739,15 @@ namespace Monocle {
                                 //temp_waveR[i] = 0xFF;
                             }
                         }
-                        else if (decodeData->bit == 8)
+                        else if (decoder->bit == 8)
                         {
                             unsigned char *copybuf = (unsigned char*)((long)data+(long)pos);
                             
-                            for (i=0; i<576; i++, samp+=decodeData->ch)
+                            for (i=0; i<576; i++, samp+=decoder->ch)
                             {
                                 temp_waveL[i] = copybuf[samp];
                                 
-                                if (decodeData->ch == 1)
+                                if (decoder->ch == 1)
                                     temp_waveR[i] = copybuf[samp];
                                 else
                                     temp_waveR[i] = copybuf[samp+1]; // Stereo (:
@@ -723,9 +775,9 @@ namespace Monocle {
                 UpdateVizJunk();
                 
                 unsigned long nlen;
-                nlen = (unsigned long)(float)((float)l*1000.0f)/((float)(decodeData->samplerate*sampsize));
+                nlen = (unsigned long)(float)((float)l*1000.0f)/((float)(decoder->samplerate*sampsize));
                 totsamps += l;
-                this->writtenpos = (totsamps*1000)/(decodeData->samplerate*sampsize);
+                this->writtenpos = (totsamps*1000)/(decoder->samplerate*sampsize);
                 this->currentPosition += nlen;
                 
                 pos += l;
@@ -740,7 +792,7 @@ namespace Monocle {
     
     unsigned long AudioDeck::GetTotalLength()
     {
-        return decodeData->total;
+        return decoder->total;
     }
     
     bool AudioDeck::IsDone()
@@ -750,12 +802,12 @@ namespace Monocle {
     
     void AudioDeck::SetLoops(int loops)
     {
-        decodeData->loopsRemaining = loops-1;
+        decoder->loopsRemaining = loops-1;
     }
     
     int AudioDeck::LoopsRemaining()
     {
-        return decodeData->loopsRemaining;
+        return decoder->loopsRemaining;
     }
     
     unsigned long AudioDeck::GetCurrentTime()
@@ -765,8 +817,8 @@ namespace Monocle {
         if (!cs->IsPlaying())
             return 0;
         
-        while (opos > decodeData->total && decodeData->total > 0)
-            opos -= decodeData->total;
+        while (opos > decoder->total && decoder->total > 0)
+            opos -= decoder->total;
         
         return opos;
     }
@@ -889,5 +941,10 @@ namespace Monocle {
         }
         
         return 0.0;
+    }
+    
+    ChannelStream *AudioDeck::GetChannelStream()
+    {
+        return this->cs;
     }
 }

@@ -5,7 +5,6 @@
 #include <map>
 #include <string>
 #include <vector>
-#include "Entity.h"
 #include "Camera.h"
 
 ///TODO: Replace with xml wrapper

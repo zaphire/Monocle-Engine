@@ -27,9 +27,13 @@ namespace Monocle
          */
         void Update();
         
-        
         static void PauseAll();
         static void ResumeAll();
+        
+        /**
+            Returns true if all the decks are paused.
+         */
+        static bool IsPaused();
         
         /**
             Creates a new deck from a given AudioAsset. Assets::RequestAudio is responsible for providing
@@ -43,7 +47,7 @@ namespace Monocle
             use this if you aren't using a standard file extension for your audio asset. Unless freeDecodeDataWithDeck
             is set to false, the deck will be responsible for destroying the data when it is freed.
          */
-        static AudioDeck *NewDeck( AudioDecodeData *decodeData, bool freeDecodeDataWithDeck = true );
+        static AudioDeck *NewDeck( AudioDecoder *decodeData, bool freeDecoderWithDeck = true );
         
         /**
             Returns the last created AudioDeck in the stack.
@@ -53,10 +57,11 @@ namespace Monocle
         /**
             Registers a decoder with a file extension for automatic assignment when calling NewDeck().
          
-            @param decoder Pointer to an instance of the specified decoder.
+            @param makeFunc Pointer to a function which will construct a new audio decoder for the appropriate extension
             @param extension The file extension associated with this AudioDecoder, e.g. "ogg"
+            @see makeDecoderFunc
          */
-        static void RegisterDecoder( AudioDecoder *decoder, std::string extension );
+        static void RegisterDecoder( makeDecoderFunc makeFunc, std::string extension );
         
         /**
             Plays an audio file. The deck it plays on will be freed automatically when the sound is complete.
@@ -69,14 +74,50 @@ namespace Monocle
          */
         static void PlaySound( AudioAsset *asset, int loops = 1, float volume = 1.0, float pan = 0.0, float pitch = 1.0 );
         
+        /**
+            Plays an audio sound as an infinitely looping music deck. If music is already playing, the previous deck will fade out
+            fadeTime. The new music will also fade in that much. To stop the music abruptly and fade this one in, call
+            StopMusic() first.
+         
+            @param asset AudioAsset to play
+            @param volume Volume between 0.0 and 1.0
+            @param fadeTime Time to fade in (milliseconds) (and fade out current deck if playing)
+         */
+        static void PlayMusic( AudioAsset *asset, float volume = 1.0, long fadeTime = 0 );
+        
+        /**
+            Stops the currently playing music deck.
+         
+             @param fadeTime Time to fade out (milliseconds)
+         */
+        static void StopMusic( long fadeTime = 0 );
+        
+        /**
+            Pauses the music deck.
+         */
+        static void PauseMusic();
+        
+        /**
+            Resumes the music deck.
+         */
+        static void ResumeMusic();
+        
+        /**
+            Returns the static music AudioDeck.
+         */
+        static AudioDeck *GetMusicDeck();
     private:
         
         static Audio *instance;        
         
         AudioDeck *firstDeck;
+        
+        bool allPaused;
 		
-		std::map<std::string, void*> sfxMap;
-        std::map<std::string, void*> musMap;
+        /** For easy playback of music **/
+        AudioDeck *musicDeck;
+        
+        std::map<std::string, AudioAsset*> musMap;
 	};
 }
 

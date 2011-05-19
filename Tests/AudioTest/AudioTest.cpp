@@ -278,7 +278,7 @@ namespace AudioTest
         
 		// Make the deck, and it starts playing... (we need a play())
 		//deck1 = Audio::NewDeck(Assets::RequestAudio("AudioTest/City01.g2m",true,"hellogirl"));
-        deck1 = Audio::NewDeck(Assets::RequestAudio("..\\..\\Marian\\Content\\Marian\\music\\title-accordian.ogg", true));
+        deck1 = Audio::NewDeck(Assets::RequestAudio("AudioTest/City01.g2m", true, "hellogirl"));
 		deck2 = Audio::NewDeck(Assets::RequestAudio("AudioTest/City01Hell.g2m",true,"hellogirl"));
         
         if (!deck1 || !deck2)

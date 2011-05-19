@@ -16,11 +16,14 @@ namespace Monocle
     {
     public:
         
-        OggDecoder() : AudioDecoder("ogg g2m") { };
+        OggDecoder( AudioAsset *asset );
+        ~OggDecoder();
         
-        virtual AudioDecodeData *RequestData( AudioAsset *asset );
-        virtual unsigned long Render( unsigned long size, void *outputBuffer, AudioDecodeData &decodeData );        
-        virtual void FreeDecoderData( AudioDecodeData &dd );
+        virtual unsigned long Render( unsigned long size, void *outputBuffer );        
+        
+        void *oggData;
+
+        AudioAsset *audAsset;
     };
 }
 

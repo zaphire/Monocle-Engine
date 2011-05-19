@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "Entity.h"
 #include "Graphics.h"
 #include "MonocleToolkit.h"
 
