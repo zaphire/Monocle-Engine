@@ -43,7 +43,7 @@ namespace Monocle
             use this if you aren't using a standard file extension for your audio asset. Unless freeDecodeDataWithDeck
             is set to false, the deck will be responsible for destroying the data when it is freed.
          */
-        static AudioDeck *NewDeck( AudioDecodeData *decodeData, bool freeDecodeDataWithDeck = true );
+        static AudioDeck *NewDeck( AudioDecoder *decodeData, bool freeDecoderWithDeck = true );
         
         /**
             Returns the last created AudioDeck in the stack.
@@ -53,10 +53,11 @@ namespace Monocle
         /**
             Registers a decoder with a file extension for automatic assignment when calling NewDeck().
          
-            @param decoder Pointer to an instance of the specified decoder.
+            @param makeFunc Pointer to a function which will construct a new audio decoder for the appropriate extension
             @param extension The file extension associated with this AudioDecoder, e.g. "ogg"
+            @see makeDecoderFunc
          */
-        static void RegisterDecoder( AudioDecoder *decoder, std::string extension );
+        static void RegisterDecoder( makeDecoderFunc makeFunc, std::string extension );
         
         /**
             Plays an audio file. The deck it plays on will be freed automatically when the sound is complete.

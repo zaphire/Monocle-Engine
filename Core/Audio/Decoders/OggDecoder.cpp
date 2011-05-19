@@ -23,6 +23,15 @@
 
 namespace Monocle {
     
+    /***
+        THIS CODE is responsible for registering this decoder with the file extension.
+        See more info in Audio::Init.
+     ***/
+    AudioDecoder *makeOggFunc( AudioAsset *asset )
+    {
+        return new OggDecoder(asset);
+    }
+    
     // Struct that contains the pointer to our file in memory
     /*struct SOggFile
     {
@@ -36,9 +45,9 @@ namespace Monocle {
         
     } OggDecoderData;
     
-    inline OggDecoderData *OGGDATA( AudioDecodeData *d )
+    inline OggDecoderData *OGGDATA( OggDecoder *d )
     {
-        return (OggDecoderData*)d->decoderData;
+        return (OggDecoderData*)d->oggData;
     }
     
     //---------------------------------------------------------------------------------
@@ -115,56 +124,12 @@ namespace Monocle {
      ************************************************************************************************************************/
     
 //    int WINAPI e_seek( onu_deck_cable_s *cable, long pos )
-    static bool oggSeek( AudioDecodeData *dd, long pos )
+    static bool oggSeek( OggDecoder *dd, long pos )
     {
         dd->seekOffset = pos;
         if (!ov_seekable(&(OGGDATA(dd)->vf))) return false;
         
         return true;
-    }
-    
-    static unsigned long oggRender( unsigned long size, void *buf, AudioDecodeData *dd )
-    {
-        OggDecoderData *data = OGGDATA(dd);
-        
-        int ret = 1;
-        unsigned long pos=0;
-        
-        if (dd->seekOffset != -1)
-        {
-            long seek = (long)(((float)dd->seekOffset/1000.0f) * (float)dd->samplerate);
-            ov_pcm_seek(&data->vf, seek);
-            dd->seekOffset = -1;
-            dd->outOfData = false;
-        }
-        
-        while(ret && pos<size)
-        {
-            ret = ov_read(&data->vf, (char*)buf+pos, size-pos, 0, 2, 1, &data->sec);
-            pos += ret;
-        }
-        
-        // reached the and?
-        if (!ret && (dd->loopsRemaining!=0))
-        {
-            // we are looping so restart from the beginning
-            ret = 1;
-            ov_pcm_seek(&data->vf, 0);  // Loop back position, TODO: If we want to loop to a specific point, here is the code for that!
-            while(ret && pos<size)
-            {
-                ret = ov_read(&data->vf, (char*)buf+pos, size-pos, 0, 2, 1, &data->sec);
-                pos += ret;
-            }
-            
-            // Decrease from Loops Remaining (don't touch the -1 infinite loop stuff)
-            if (dd->loopsRemaining > 0)
-                dd->loopsRemaining--;
-        }
-        else if (!ret && (dd->loopsRemaining==0)){
-            dd->outOfData = true;
-        }
-        
-        return pos;
     }
     
     ov_callbacks vorbisCallbacks;
@@ -176,20 +141,75 @@ namespace Monocle {
         return false;
     }
     
-    int oggInit( AudioDecodeData *dd )
+    unsigned long OggDecoder::Render( unsigned long size, void *buf )
     {
-        OggDecoderData *data = OGGDATA(dd);
-
+        OggDecoderData *data = OGGDATA(this);
+        if (!data){
+            outOfData = true;
+            return 0;
+        }
+        
+        int ret = 1;
+        unsigned long pos=0;
+        
+        if (seekOffset != -1)
+        {
+            long seek = (long)(((float)seekOffset/1000.0f) * (float)samplerate);
+            ov_pcm_seek(&data->vf, seek);
+            seekOffset = -1;
+            outOfData = false;
+        }
+        
+        while(ret && pos<size)
+        {
+            ret = ov_read(&data->vf, (char*)buf+pos, size-pos, 0, 2, 1, &data->sec);
+            pos += ret;
+        }
+        
+        // reached the and?
+        if (!ret && (loopsRemaining!=0))
+        {
+            // we are looping so restart from the beginning
+            ret = 1;
+            ov_pcm_seek(&data->vf, 0);  // Loop back position, TODO: If we want to loop to a specific point, here is the code for that!
+            while(ret && pos<size)
+            {
+                ret = ov_read(&data->vf, (char*)buf+pos, size-pos, 0, 2, 1, &data->sec);
+                pos += ret;
+            }
+            
+            // Decrease from Loops Remaining (don't touch the -1 infinite loop stuff)
+            if (loopsRemaining > 0)
+                loopsRemaining--;
+        }
+        else if (!ret && (loopsRemaining==0)){
+            outOfData = true;
+        }
+        
+        return pos;
+    }
+    
+    OggDecoder::OggDecoder( AudioAsset *asset )
+    {
+        Init(44100,16,2);
+        this->audAsset = asset;
+        
+        oggData = new OggDecoderData();
+        OggDecoderData *data = OGGDATA(this);
+        
         vorbisCallbacks.read_func = VorbisRead;
         vorbisCallbacks.close_func = VorbisClose;
         vorbisCallbacks.seek_func = VorbisSeek;
         vorbisCallbacks.tell_func = VorbisTell;
         
-        AudioAssetReader *reader = new AudioAssetReader(dd->audAsset,dd->audAsset->GetDecodeString());
+        AudioAssetReader *reader = new AudioAssetReader(audAsset,audAsset->GetDecodeString());
         
         if (ov_open_callbacks( reader, &data->vf, NULL, 0, vorbisCallbacks )<0){
             delete reader;
-            return 1;
+            delete (OggDecoderData*)oggData;
+            oggData = NULL;
+            reader = NULL;
+            return;
         }
         
         vorbis_info *vi=ov_info(&data->vf,-1);
@@ -197,48 +217,23 @@ namespace Monocle {
         if (!vi)
         {
             delete reader;
-            return 1;
+            delete (OggDecoderData*)oggData;
+            oggData = NULL;
+            reader = NULL;
+            return;
         }
         
-        dd->samplerate = (int)vi->rate;
-        dd->ch = vi->channels;
+        samplerate = (int)vi->rate;
+        ch = vi->channels;
         
-        dd->total = (long)(((float)ov_pcm_total(&data->vf,-1)/(float)dd->samplerate) * 1000.0f); 
-        
-        return 0;
+        total = (long)(((float)ov_pcm_total(&data->vf,-1)/(float)samplerate) * 1000.0f); 
     }
     
-    void oggFree( AudioDecodeData *dd )
+    OggDecoder::~OggDecoder()
     {
-        OggDecoderData *data = OGGDATA(dd);
+        OggDecoderData *data = OGGDATA(this);
         ov_clear(&data->vf);
-        free(data);
-        dd->decoderData = 0;
-        return;
-    }
-    
-    AudioDecodeData *OggDecoder::RequestData( AudioAsset *asset )
-    {
-        OggDecoderData *data = new OggDecoderData;
-        AudioDecodeData *dd = new AudioDecodeData(44100, 16, 2, this, (void*)data, asset);
-        
-        if (oggInit(dd)) {
-            // Error
-            oggFree(dd);
-            return 0;
-        }
-        
-        return dd;
-    }
-    
-    unsigned long OggDecoder::Render( unsigned long size, void *buf, AudioDecodeData &dd )
-    {
-        return oggRender(size, buf, &dd);
-    }
-    
-    void OggDecoder::FreeDecoderData( AudioDecodeData &dd )
-    {
-        oggFree(&dd);
+        delete data;
     }
     
 }

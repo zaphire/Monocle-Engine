@@ -89,8 +89,8 @@ namespace Monocle {
     class AudioDeck
     {
     public:
-        AudioDeck( AudioDeck **deckSetter, AudioDecodeData *decodeData, bool freeDataWithDeck = true );
-        AudioDeck( AudioDeck *prevDeck, AudioDecodeData *decodeData, bool freeDataWithDeck = true );
+        AudioDeck( AudioDeck **deckSetter, AudioDecoder *decoder, bool freeDecoderWithDeck = true );
+        AudioDeck( AudioDeck *prevDeck, AudioDecoder *decoder, bool freeDecoderWithDeck = true );
         ~AudioDeck();
         
         /**
@@ -298,7 +298,7 @@ namespace Monocle {
         AudioDeck       *nextDeck;      // INTERNAL, Next Deck in the sequence
         AudioDeck       **prevDeckPointerToHere;     // INTERNAL, Pointer in the previous deck to this deck
         
-        AudioDecodeData *decodeData;
+        AudioDecoder *decoder;
         
         AudioVis    *vis;
         bool		cleanVis;           // Set true if you need to clean the vis (on flushes and seeks)
@@ -313,7 +313,7 @@ namespace Monocle {
         bool        freeDeckOnFinish;
         bool		pause;
         
-        bool        freeDecoderData;    // Free the decoder data when deconstructed.
+        bool        freeDecoder;    // Free the decoder data when deconstructed.
         
         unsigned char temp_waveR[576];
         unsigned char temp_waveL[576];

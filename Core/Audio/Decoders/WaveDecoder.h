@@ -10,22 +10,35 @@
 #include "../AudioDecoder.h"
 #include "../AudioAssetReader.h"
 
+typedef struct { 
+    short  wFormatTag; 
+    short  nChannels; 
+    int nSamplesPerSec; 
+    int nAvgBytesPerSec; 
+    short  nBlockAlign; 
+    short  wBitsPerSample; 
+    short  cbSize; 
+} WAVEFORMATEX; 
+
 namespace Monocle
 {
-    class WaveDecoderData;
     class WaveDecoder : public AudioDecoder
     {
     public:
         
-        WaveDecoder() : AudioDecoder("wav wave pcm") { };
+        WaveDecoder( AudioAsset *asset );
+        ~WaveDecoder();
         
-        virtual AudioDecodeData *RequestData( AudioAsset *asset );
-        virtual unsigned long Render( unsigned long size, void *outputBuffer, AudioDecodeData &decodeData );        
-        virtual void FreeDecoderData( AudioDecodeData &dd );
+        virtual unsigned long Render( unsigned long size, void *outputBuffer );        
+        
+        AudioAsset *audAsset;
+        
+        WAVEFORMATEX format;
+        AudioAssetReader *reader;
         
     private:
         
-        void WaveOpen(WaveDecoderData *data);
+        void WaveOpen();
     };
 }
 

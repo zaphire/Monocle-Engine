@@ -8,14 +8,11 @@
 namespace Monocle
 {
     
-    AudioDecodeData::AudioDecodeData( int samplerate, int bit, int ch, AudioDecoder *decoder, void *decoderData, AudioAsset *audAsset )
+    void AudioDecoder::Init( int samplerate, int bit, int ch )
     {
         this->samplerate = samplerate;
         this->bit = bit;
         this->ch = ch;
-        this->decoder = decoder;
-        this->decoderData = decoderData;
-        this->audAsset = audAsset;
         
         this->loopsRemaining = 0;
         this->outOfData = false;
@@ -23,17 +20,13 @@ namespace Monocle
         this->total = 0;
     }
  
-    AudioDecodeData::~AudioDecodeData()
+    AudioDecoder::~AudioDecoder()
     {
-        this->decoder->FreeDecoderData(*this);
+
     }
     
-    AudioDecoder::AudioDecoder( std::string extension )
+    AudioDecoder::AudioDecoder( )
     {
-        std::stringstream ss(extension);
-        std::string tmp;
-        
-        while (ss >> tmp) 
-            Audio::RegisterDecoder(this, tmp);
+
     }
 }
