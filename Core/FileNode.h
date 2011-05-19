@@ -23,5 +23,8 @@ namespace Monocle
 		virtual void Read(const std::string &name, Vector2 &value)=0;
 		virtual void Read(const std::string &name, Color &value)=0;
 		virtual void Read(const std::string &name, bool &value)=0;
+
+		virtual FileNode* FirstChildNode(const std::string &name)=0;
+		virtual FileNode* NextChildNode(const std::string &name)=0;
 	};
 }

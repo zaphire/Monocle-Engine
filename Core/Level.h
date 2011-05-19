@@ -77,7 +77,7 @@ namespace Monocle
 					TiXmlElement saveElement(name);
 					xmlFileNode.element = &saveElement;
 
-					instance->SaveEntities(&saveElement, entity);
+					//instance->SaveEntities(&saveElement, entity);
 
 					entity->Save(&xmlFileNode);
 
@@ -102,7 +102,7 @@ namespace Monocle
 				//else
 				//intoEntity->Add(entity);
 
-				instance->LoadEntities(eEntity, entity);
+				//instance->LoadEntities(eEntity, entity);
 
 				xmlFileNode.element = eEntity;
 				entity->Load(&xmlFileNode);

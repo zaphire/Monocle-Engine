@@ -120,6 +120,7 @@ namespace Monocle
 		}
 		else
 		{
+			entity->scene = this;
 			toAdd.push_back(entity);
 		}
 	}

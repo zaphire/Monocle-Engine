@@ -12,6 +12,7 @@ namespace Monocle
 	public:
 		XMLFileNode();
 		XMLFileNode(TiXmlElement *element);
+		~XMLFileNode();
 
 		void Write(const std::string &name, const int &value);
 		void Write(const std::string &name, const float &value);
@@ -27,6 +28,10 @@ namespace Monocle
 		void Read(const std::string &name, Color &value);
 		void Read(const std::string &name, bool &value);
 
+		FileNode* FirstChildNode(const std::string &name);
+		FileNode* NextChildNode(const std::string &name);
+
 		TiXmlElement *element;
+		XMLFileNode *iterator;
 	};
 }

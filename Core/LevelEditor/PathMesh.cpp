@@ -133,19 +133,26 @@ namespace Monocle
 		startNode = NULL;
 		//startNode = GetFirstChildOfType<Node>();
 		Node *lastNode = NULL;
+		Node *firstNode = NULL;
 
-		/*
-		FileNode *curNode = fileNode->FirstChildNode();
+		FileNode *curNode = fileNode->FirstChildNode("Node");
 		while (curNode)
 		{
 			Node *newNode = scene->Create<Node>();
 			newNode->Load(curNode);
+			
+			if (firstNode == NULL)
+				firstNode = newNode;
 			if (lastNode)
 				lastNode->SetNext(newNode);
 			lastNode = newNode;
-			curNode = fileNode->NextChildNode();
+
+			newNode->SetParent(this);
+
+			curNode = fileNode->NextChildNode("Node");
 		}
-		*/
+
+		startNode = firstNode;
 
 		//for (std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
 		//{
