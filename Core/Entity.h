@@ -66,17 +66,6 @@ namespace Monocle
 
 		//! Remove from Scene or Entity parent. May cause our deletion.
 		void RemoveSelf();
-
-		//! create a new entity of type T, add it to the scene and as a child
-		template<class T>
-		T* Create()
-		{
-			T *t = new T();
-			if (scene)
-				scene->Add(t);
-			Add(t);
-			return t;
-		}
 	
 		//! Called by the scene when the entity should update its game logic
 		virtual void Update();
@@ -128,7 +117,7 @@ namespace Monocle
 		//! return our parent Entity, if we have one
 
 		//! set parent entity
-		//void SetParent(Entity *parent);
+		void SetParent(Entity *parent);
 		//! return pointer to parent entity
 		Entity *GetParent();
 		//! return pointer to the Scene we are currently in
