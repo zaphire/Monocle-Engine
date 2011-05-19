@@ -54,7 +54,7 @@ namespace Monocle
 	public:
 		Entity(const Entity &entity);
 		Entity();
-		~Entity();
+		virtual ~Entity();
 		virtual Entity *Clone();
 
 		//! Enable this object. Set isEnabled to true. Each derived Entity may decide how to handle isEnabled.
