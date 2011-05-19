@@ -23,6 +23,7 @@ namespace Monocle
 		bool flipX, flipY;
 
 	private:
+		//std::list<Node*> nodes;
 		TextureAsset *texture;
 		int size;
 		Node *startNode;

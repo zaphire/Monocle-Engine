@@ -142,15 +142,8 @@ namespace Monocle
 		return isEnabled;
 	}
 
-	void Entity::Render()
+	void Entity::ApplyMatrix()
 	{
-        const int MIN_LAYER = -100;
-        const int MAX_LAYER = 100;
-        
-        Graphics::PushMatrix();
-
-		MatrixChain();
-        
 		if (followCamera == Vector2::zero || (Debug::render && Debug::selectedEntity != this && IsDebugLayer()))
 			Graphics::Translate(position.x, position.y, depth);
 		else
@@ -160,7 +153,18 @@ namespace Monocle
 			Graphics::Rotate(rotation, 0, 0, 1);
         
 		Graphics::Scale(scale);
+
+	}
+
+	void Entity::Render()
+	{
+        const int MIN_LAYER = -100;
+        const int MAX_LAYER = 100;
         
+        Graphics::PushMatrix();
+
+		MatrixChain();
+                
 		//for (int layer = MAX_LAYER; layer > 0; layer--)
 		//{
 		//	for(std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
@@ -203,10 +207,12 @@ namespace Monocle
 
 			MatrixChain();
 			
+			/*
 			if (followCamera == Vector2::zero || Debug::render)
 				Graphics::Translate(position.x, position.y, depth);
 			else
 				Graphics::Translate(scene->GetCamera()->position * followCamera + position * (Vector2::one - followCamera));
+			*/
             
 			if (Debug::selectedEntity == this)
 				Graphics::SetColor(Color::orange);
@@ -474,9 +480,10 @@ namespace Monocle
 
 		for (std::list<Entity*>::reverse_iterator i = entityChain.rbegin(); i != entityChain.rend(); ++i)
 		{
-			Graphics::Translate(scene->GetCamera()->position * (*i)->followCamera + (*i)->position * (Vector2::one - (*i)->followCamera));
-			Graphics::Rotate((*i)->rotation, 0, 0, 1);
-			Graphics::Scale((*i)->scale);
+			(*i)->ApplyMatrix();
+			//Graphics::Translate(scene->GetCamera()->position * (*i)->followCamera + (*i)->position * (Vector2::one - (*i)->followCamera));
+			//Graphics::Rotate((*i)->rotation, 0, 0, 1);
+			//Graphics::Scale((*i)->scale);
 		}
 	}
 
@@ -504,8 +511,6 @@ namespace Monocle
 			Graphics::Rotate(-(*i)->rotation, 0, 0, 1);
 			Graphics::Translate(-(*i)->position);
 		}
-
-		
 
 		returnPos = Graphics::GetMatrixPosition();
 

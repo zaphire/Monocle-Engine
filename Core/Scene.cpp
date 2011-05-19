@@ -344,7 +344,7 @@ namespace Monocle
 			{
 				if ((*i) != ignoreEntity)
 				{
-					Vector2 diff = (*i)->position - position;
+					Vector2 diff = (*i)->GetWorldPosition() - position;
 					if (diff.IsInRange(ENTITY_CONTROLPOINT_SIZE))
 					{
 						float sqrMag = diff.GetSquaredMagnitude();

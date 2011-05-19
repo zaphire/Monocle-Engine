@@ -159,9 +159,13 @@ namespace Monocle
 		//std::list<Entity*> children;
 
 		bool isEnabled;
+
+		void ApplyMatrix();
 		void MatrixChain();
 
 	private:
+		int id;
+
 		Entity *parent;
 
 		// only for use by Collision class

@@ -64,9 +64,10 @@ namespace Monocle
 			{
 				Graphics::SetColor(Color::blue);
 			}
+			Vector2 position = GetWorldPosition();
 			Graphics::RenderLineRect(position.x, position.y, 64, 64);
 			if (next)
-				Graphics::RenderLine(position, next->position);
+				Graphics::RenderLine(position, next->GetWorldPosition());
 		}
 	}
 

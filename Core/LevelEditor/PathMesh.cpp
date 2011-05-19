@@ -31,6 +31,14 @@ namespace Monocle
 		SetCollider(pathCollider = new PathCollider(startNode, radius));
 	}
 
+	//void PathMesh::Adopted(Entity *entity)
+	//{
+	//	if (!startNode)
+	//	{
+	//		startNode = dynamic_cast<Node*>(entity);
+	//	}
+	//}
+
 	void PathMesh::SetStartNode(Node *node)
 	{
 		nodes.clear();
@@ -125,6 +133,20 @@ namespace Monocle
 		startNode = NULL;
 		//startNode = GetFirstChildOfType<Node>();
 		Node *lastNode = NULL;
+
+		/*
+		FileNode *curNode = fileNode->FirstChildNode();
+		while (curNode)
+		{
+			Node *newNode = scene->Create<Node>();
+			newNode->Load(curNode);
+			if (lastNode)
+				lastNode->SetNext(newNode);
+			lastNode = newNode;
+			curNode = fileNode->NextChildNode();
+		}
+		*/
+
 		//for (std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
 		//{
 		//	Node *node = dynamic_cast<Node*>(*i);
