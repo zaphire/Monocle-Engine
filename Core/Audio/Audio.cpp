@@ -94,6 +94,9 @@ namespace Monocle {
     
     void Audio::Update()
     {
+        if (IsPaused())
+            return;     // Wow, we don't care! ;D
+        
         AudioDeck *d = firstDeck;
         while (d) {
             AudioDeck *nextDeck = d->nextDeck;
@@ -103,23 +106,17 @@ namespace Monocle {
             d = nextDeck;
         }
     }
-    
-    void Audio::PauseAll()
-    {
-        
-    }
-    
-    void Audio::ResumeAll()
-    {
-        
-    }
-    
+
     Audio::Audio() {
         instance = this;
-        this->firstDeck = 0;
+        this->firstDeck = NULL;
         
         if (!decoderMap)
             decoderMap = new std::map<std::string, makeDecoderFunc>;
+        
+        this->musicDeck = NULL;
+        
+        this->allPaused = false;
     }
     
     Audio::~Audio() {
@@ -135,6 +132,7 @@ namespace Monocle {
         
         if (decoderMap) delete decoderMap;
         decoderMap = NULL;
+        musicDeck = NULL;
     }
     
     void Audio::RegisterDecoder(makeDecoderFunc makeFunc, std::string extension)
@@ -156,9 +154,100 @@ namespace Monocle {
         deck->SetVolume(volume);
         deck->SetPan(pan);
         deck->SetPitch(pitch);
+        deck->SetLoops(loops);
         deck->FreeDeckOnFinish();
         deck->Play();
         return;
     }
+    
+    /** Music Stuff **/
+    void Audio::PlayMusic( AudioAsset *asset, float volume, long fadeTime )
+    {
+        AudioDeck *mus;
+        StopMusic(fadeTime);
+        
+        mus = NewDeck(asset);
+        mus->SetLoops(0);
+        mus->SetVolume(volume);
+        mus->SetFadeIn(fadeTime);
+        mus->Play();
+        
+        instance->musicDeck = mus;
+    }
+    
+    void Audio::StopMusic( long fadeTime )
+    {
+        if (instance->musicDeck){
+            if (fadeTime > 0){
+                instance->musicDeck->FreeDeckOnFinish();
+                instance->musicDeck->StopWithFade(fadeTime);
+            }
+            else
+            {
+                instance->musicDeck->Stop();
+                delete instance->musicDeck;
+            }
+        }
+        
+        instance->musicDeck = NULL;
+    }
+    
+    AudioDeck *Audio::GetMusicDeck()
+    {
+        return instance->musicDeck;
+    }
  
+    void Audio::PauseMusic()
+    {
+        AudioDeck *mus = GetMusicDeck();
+        if (mus) mus->Pause();
+    }
+    
+    void Audio::ResumeMusic()
+    {
+        AudioDeck *mus = GetMusicDeck();
+        if (mus) mus->Resume();        
+    }
+    
+    bool Audio::IsPaused()
+    {
+        return instance->allPaused;
+    }
+    
+    void Audio::PauseAll()
+    {
+        instance->allPaused = true;
+        
+        AudioDeck *d = instance->firstDeck;
+        while (d) {
+            AudioDeck *nextDeck = d->nextDeck;
+            ChannelStream *cs;
+            cs = d->GetChannelStream();
+            
+            if (cs) cs->Pause();
+            
+            // Sometimes the deck will kill itself, so we have to get the next deck BEFORE calling Update().
+            d = nextDeck;
+        }
+    }
+    
+    void Audio::ResumeAll()
+    {
+        AudioDeck *d = instance->firstDeck;
+        while (d) {
+            AudioDeck *nextDeck = d->nextDeck;
+            ChannelStream *cs;
+            cs = d->GetChannelStream();
+            
+            if (cs) {
+                if (!d->IsPaused(false))
+                    cs->Resume();
+            }
+            
+            // Sometimes the deck will kill itself, so we have to get the next deck BEFORE calling Update().
+            d = nextDeck;
+        }
+        
+        instance->allPaused = false;
+    }
 }

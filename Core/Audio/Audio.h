@@ -27,9 +27,13 @@ namespace Monocle
          */
         void Update();
         
-        
         static void PauseAll();
         static void ResumeAll();
+        
+        /**
+            Returns true if all the decks are paused.
+         */
+        static bool IsPaused();
         
         /**
             Creates a new deck from a given AudioAsset. Assets::RequestAudio is responsible for providing
@@ -70,14 +74,50 @@ namespace Monocle
          */
         static void PlaySound( AudioAsset *asset, int loops = 1, float volume = 1.0, float pan = 0.0, float pitch = 1.0 );
         
+        /**
+            Plays an audio sound as an infinitely looping music deck. If music is already playing, the previous deck will fade out
+            fadeTime. The new music will also fade in that much. To stop the music abruptly and fade this one in, call
+            StopMusic() first.
+         
+            @param asset AudioAsset to play
+            @param volume Volume between 0.0 and 1.0
+            @param fadeTime Time to fade in (milliseconds) (and fade out current deck if playing)
+         */
+        static void PlayMusic( AudioAsset *asset, float volume = 1.0, long fadeTime = 0 );
+        
+        /**
+            Stops the currently playing music deck.
+         
+             @param fadeTime Time to fade out (milliseconds)
+         */
+        static void StopMusic( long fadeTime = 0 );
+        
+        /**
+            Pauses the music deck.
+         */
+        static void PauseMusic();
+        
+        /**
+            Resumes the music deck.
+         */
+        static void ResumeMusic();
+        
+        /**
+            Returns the static music AudioDeck.
+         */
+        static AudioDeck *GetMusicDeck();
     private:
         
         static Audio *instance;        
         
         AudioDeck *firstDeck;
+        
+        bool allPaused;
 		
-		std::map<std::string, void*> sfxMap;
-        std::map<std::string, void*> musMap;
+        /** For easy playback of music **/
+        AudioDeck *musicDeck;
+        
+        std::map<std::string, AudioAsset*> musMap;
 	};
 }
 

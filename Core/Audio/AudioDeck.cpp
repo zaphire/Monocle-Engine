@@ -6,7 +6,7 @@
 
 #include <string.h>
 
-#include "AudioDeck.h"
+#include "Audio.h"
 #include "../Platform.h"
 #include "../Debug.h"
 #include "../MonocleToolkit.h"
@@ -74,12 +74,22 @@ namespace Monocle {
                 if (pos > this->fades.aFadeOutEnd){
                     this->fades.aFadeOutEnd = this->fades.aFadeOutStart = 0;
                     
-                    if (this->fades.bPauseOnFadeOut){
-                        Pause();
-                    }
-                    else
+                    switch (this->fades.fadeAction)
                     {
-                        this->fades.bSilent = true;
+                        case FADEOUT_AND_PAUSE:
+                            Pause();
+                            break;
+                            
+                        case FADEOUT_AND_STOP:
+                            Stop();
+                            return true; // We return here in case we free the deck on finish!
+                            
+                        default:
+                        case FADEOUT_AND_MUTE:
+                            this->fades.bSilent = true;
+                            break;
+                            
+                            
                     }
                 }
             }
@@ -104,7 +114,7 @@ namespace Monocle {
     {
         this->nFadeIn = this->nFadeOut = 0;
         this->aFadeInEnd = this->aFadeInStart = this->aFadeOutEnd = this->aFadeOutStart = 0;
-        this->bPauseOnFadeOut = false;
+        this->fadeAction = FADEOUT_AND_PAUSE;
         this->bSilent = false;
     }
     
@@ -382,6 +392,17 @@ namespace Monocle {
             cs->Play();
         
         playStarted = true;
+        
+        if (Audio::IsPaused())
+            cs->Pause();
+    }
+    
+    bool AudioDeck::IsPaused( bool absolute )
+    {
+        if (absolute)
+            return this->pause || Audio::IsPaused();
+        else
+            return this->pause;
     }
     
     void AudioDeck::Pause()
@@ -391,7 +412,7 @@ namespace Monocle {
         
         fades.aFadeOutStart = 0;
 		fades.aFadeOutEnd = 0;
-		fades.bPauseOnFadeOut = false;
+		fades.fadeAction = FADEOUT_AND_MUTE;
     }
     
     void AudioDeck::PauseWithFade( unsigned long msFade )
@@ -402,7 +423,36 @@ namespace Monocle {
         {
             fades.aFadeOutStart = cs->GetTotalPlayTime();
             fades.aFadeOutEnd = msFade + fades.aFadeOutStart;
-            fades.bPauseOnFadeOut = true;
+            fades.fadeAction = FADEOUT_AND_PAUSE;
+        }
+    }
+    
+    void AudioDeck::Stop()
+    {
+        this->pause = true;
+        this->isFinished = true;
+        this->playStarted = false;
+        cs->Close();
+        
+        if (freeDeckOnFinish){
+            delete this;
+            return;
+        }
+        
+        fades.aFadeOutStart = 0;
+		fades.aFadeOutEnd = 0;
+		fades.fadeAction = FADEOUT_AND_MUTE;
+    }
+    
+    void AudioDeck::StopWithFade( unsigned long msFade )
+    {
+        if (msFade == 0)
+            Stop();
+        else
+        {
+            fades.aFadeOutStart = cs->GetTotalPlayTime();
+            fades.aFadeOutEnd = msFade + fades.aFadeOutStart;
+            fades.fadeAction = FADEOUT_AND_STOP;
         }
     }
     
@@ -414,14 +464,14 @@ namespace Monocle {
         {
             fades.aFadeOutStart = cs->GetTotalPlayTime();
             fades.aFadeOutEnd = msFade + fades.aFadeOutStart;
-            fades.bPauseOnFadeOut = false;
+            fades.fadeAction = FADEOUT_AND_MUTE;
         }
     }
     
     bool AudioDeck::IsMuted()
     {
         if (fades.bSilent) return true;
-        if (fades.aFadeOutStart && !fades.bPauseOnFadeOut) return true;
+        if (fades.aFadeOutStart && fades.fadeAction == FADEOUT_AND_MUTE) return true;
         return false;
     }
     
@@ -554,7 +604,9 @@ namespace Monocle {
         }
         
 		if (UpdateFades()){
-            // We stop here?
+            // UpdateFades() returns true if we stopped.
+            // We return in case we deleted this deck on finish.
+            return;
         }
         
 		FillBuffers();
@@ -889,5 +941,10 @@ namespace Monocle {
         }
         
         return 0.0;
+    }
+    
+    ChannelStream *AudioDeck::GetChannelStream()
+    {
+        return this->cs;
     }
 }
