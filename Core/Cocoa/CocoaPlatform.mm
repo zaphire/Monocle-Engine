@@ -142,7 +142,7 @@ namespace Monocle
 	bool Platform::keys[KEY_MAX];
 	bool Platform::mouseButtons[3];
 	Vector2 Platform::mousePosition;
-	int Platform::mouseWheel=0;
+	int Platform::mouseScroll=0;
 
 	Platform::Platform()
 	{
