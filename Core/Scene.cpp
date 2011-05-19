@@ -356,11 +356,11 @@ namespace Monocle
 					}
 				}
 
-				Entity *nearestChild = (*i)->GetNearestEntityByControlPoint(position, tag, ignoreEntity, smallestSqrMag);
-				if (nearestChild)
-				{
-					nearestEntity = nearestChild;
-				}
+				//Entity *nearestChild = (*i)->GetNearestEntityByControlPoint(position, tag, ignoreEntity, smallestSqrMag);
+				//if (nearestChild)
+				//{
+				//	nearestEntity = nearestChild;
+				//}
 			}
 		}
 
@@ -411,30 +411,31 @@ namespace Monocle
 		}
 	}
 
-	Entity* Scene::GetEntityAtPosition(const Vector2 &position, SearchType searchType)
+	Entity* Scene::GetEntityAtPosition(const Vector2 &position)
 	{
-		if (searchType == SEARCH_TOP)
+		for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 		{
-			for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+			if ((*i)->IsPositionInGraphic(position))
 			{
-				if ((*i)->IsPositionInGraphic(position))
-				{
-					return *i;
-				}
+				return *i;
 			}
 		}
-		else if (searchType == SEARCH_RECURSIVE)
-		{
-			Debug::Log("recursive");
-			for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
-			{
-				Entity *entity = (*i)->GetChildEntityAtPosition(position);
-				if (entity)
-				{
-					return entity;
-				}
-			}
-		}
+		//if (searchType == SEARCH_TOP)
+		//{
+
+		//}
+		//else if (searchType == SEARCH_RECURSIVE)
+		//{
+		//	Debug::Log("recursive");
+		//	for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+		//	{
+		//		Entity *entity = (*i)->GetChildEntityAtPosition(position);
+		//		if (entity)
+		//		{
+		//			return entity;
+		//		}
+		//	}
+		//}
 		return NULL;
 	}
 

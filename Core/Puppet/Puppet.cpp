@@ -608,17 +608,17 @@ namespace Monocle
 		if (fromEntity->GetParent() != NULL)
 			fromEntity->Save(&xmlFileNode);
 
-		const std::list<Entity*> *children = fromEntity->GetChildren();
-		for (std::list<Entity*>::const_iterator i = children->begin(); i != children->end(); ++i)
-		{
-			Part *part = dynamic_cast<Part*>(*i);
-			if (part)
-			{
-				TiXmlElement xmlPart("Part");
-				SaveParts(&xmlPart, part);
-				xmlFileNode.element->InsertEndChild(xmlPart);
-			}
-		}
+		//const std::list<Entity*> *children = fromEntity->GetChildren();
+		//for (std::list<Entity*>::const_iterator i = children->begin(); i != children->end(); ++i)
+		//{
+		//	Part *part = dynamic_cast<Part*>(*i);
+		//	if (part)
+		//	{
+		//		TiXmlElement xmlPart("Part");
+		//		SaveParts(&xmlPart, part);
+		//		xmlFileNode.element->InsertEndChild(xmlPart);
+		//	}
+		//}
 	}
 
 	void Puppet::LoadParts(TiXmlElement *element, Entity *intoEntity)
@@ -636,8 +636,9 @@ namespace Monocle
 
 			parts.push_back(part);
 
-			/// TODO...?
-			intoEntity->Add(part);
+			Game::GetScene()->Add(part);
+			part->SetParent(intoEntity);
+			//intoEntity->Add(part);
 
 			xmlPart = xmlPart->NextSiblingElement("Part");
 		}

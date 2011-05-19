@@ -70,17 +70,20 @@ namespace Monocle
 	void ImageBrowser::ScanDirectory(const std::string &directory)
 	{
 		hasContent = false;
-		DestroyChildren();
+		//DestroyChildren();
 		selectionImages.clear();
 
 		Entity *bg = new Entity();
+		bg->SetParent(this);
 		bg->SetGraphic(new Sprite("", 128, 600));
 		bg->color = Color::black;
 		bg->color.a = 0.75f;
-		Add(bg);
+		scene->Add(bg);
 
 		grid = new Entity();
-		Add(grid);
+		grid->SetParent(this);
+		scene->Add(grid);
+		
 
 		ForEachFile(directory, "png", &ImageBrowser::FileCallback, (intptr_t)this);
 	}
@@ -93,7 +96,7 @@ namespace Monocle
 
 	void ImageBrowser::SetImages(const std::vector<std::string> &images)
 	{
-		DestroyChildren();
+		//DestroyChildren();
 		selectionImages.clear();
 
 		for (int i = 0; i < images.size(); i++)
@@ -105,7 +108,9 @@ namespace Monocle
 	void ImageBrowser::NewSelectionImage(const std::string &filename)
 	{
 		SelectionImage *selectionImage = new SelectionImage(filename, selectionImageSize);
-		grid->Add(selectionImage);
+		scene->Add(selectionImage);
+		selectionImage->SetParent(this);
+		//grid->Add(selectionImage);
 		selectionImage->position = Vector2(0.0f, selectionImageSize * selectionImages.size());
 		
 		selectionImages.push_back(selectionImage);

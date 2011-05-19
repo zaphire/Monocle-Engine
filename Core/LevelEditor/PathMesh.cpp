@@ -125,20 +125,20 @@ namespace Monocle
 		startNode = NULL;
 		//startNode = GetFirstChildOfType<Node>();
 		Node *lastNode = NULL;
-		for (std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
-		{
-			Node *node = dynamic_cast<Node*>(*i);
-			if (node)
-			{
-				if (!startNode)
-					startNode = node;
-				if (lastNode)
-				{
-					lastNode->SetNext(node);
-				}
-				lastNode = node;
-			}
-		}
+		//for (std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
+		//{
+		//	Node *node = dynamic_cast<Node*>(*i);
+		//	if (node)
+		//	{
+		//		if (!startNode)
+		//			startNode = node;
+		//		if (lastNode)
+		//		{
+		//			lastNode->SetNext(node);
+		//		}
+		//		lastNode = node;
+		//	}
+		//}
 
 		MakeCollision(radius);
 	}

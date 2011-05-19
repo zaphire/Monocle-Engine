@@ -216,10 +216,10 @@ namespace Monocle
 		//Entity *newEntity = (Entity*)(new typeid(T));
 		Entity *newEntity = entity->Clone();
 		newEntity->position = position;
-		if (entity->GetParent())
-			entity->GetParent()->Add(newEntity);
-		else
-			scene->Add(newEntity);
+		//if (entity->GetParent())
+		//	entity->GetParent()->Add(newEntity);
+		//else
+		scene->Add(newEntity);
 		Select(newEntity);
 	}
 
@@ -230,14 +230,15 @@ namespace Monocle
 		{
 			Node *newNode = new Node(Input::GetWorldMousePosition());
 			newNode->Copy(selectedNode);
-			if (selectedNode->GetParent())
-			{
-				///HACK: replace with "GetLocalPosition" function
-				newNode->position = Input::GetWorldMousePosition() - selectedNode->GetParent()->position;
-				selectedNode->GetParent()->Add(newNode);
-			}
-			else
-				scene->Add(newNode);
+			//if (selectedNode->GetParent())
+			//{
+			//	///HACK: replace with "GetLocalPosition" function
+			//	newNode->position = Input::GetWorldMousePosition() - selectedNode->GetParent()->position;
+			//	selectedNode->GetParent()->Add(newNode);
+			//}
+			//else
+			//	scene->Add(newNode);
+			scene->Add(newNode);
 			selectedNode->InsertNext(newNode);
 			Select(newNode);
 		}

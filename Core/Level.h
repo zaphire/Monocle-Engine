@@ -63,10 +63,10 @@ namespace Monocle
 			XMLFileNode xmlFileNode;
 
 			const std::list<Entity*> *entities;
-			if (fromEntity)
-				entities = fromEntity->GetChildren();
-			else
-				entities = instance->scene->GetEntities();
+			//if (fromEntity)
+			//	entities = fromEntity->GetChildren();
+			//else
+			entities = instance->scene->GetEntities();
 
 			for (std::list<Entity*>::const_iterator i = entities->begin(); i != entities->end(); ++i)
 			{
@@ -96,10 +96,11 @@ namespace Monocle
 			{
 				T *t = new T();
 				Entity *entity = dynamic_cast<Entity*>(t);
-				if (intoEntity == NULL)
-					instance->scene->Add(entity);
-				else
-					intoEntity->Add(entity);
+				//if (intoEntity == NULL)
+				instance->scene->Add(entity);
+				entity->SetParent(intoEntity);
+				//else
+				//intoEntity->Add(entity);
 
 				instance->LoadEntities(eEntity, entity);
 
