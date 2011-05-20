@@ -174,6 +174,12 @@ namespace Monocle
 				sprite->width = fringeTileData->width;
 				sprite->height = fringeTileData->height;
 			}
+
+			if (fringeTileData->atlasX != 0 || fringeTileData->atlasW != 0 || fringeTileData->atlasY != 0 || fringeTileData->atlasH != 0)
+			{
+				sprite->textureOffset = Vector2(fringeTileData->atlasX / (float)sprite->texture->width, fringeTileData->atlasY / (float)sprite->texture->height);
+				sprite->textureScale = Vector2(fringeTileData->atlasW / (float)sprite->texture->width, fringeTileData->atlasH / (float)sprite->texture->height);
+			}
 		}
 	}
 
@@ -188,9 +194,9 @@ namespace Monocle
 	void FringeTile::Load(FileNode *fileNode)
 	{
 		Entity::Load(fileNode);
-		
+
 		fileNode->Read("tileID", tileID);
-		
+
 		int spriteBlend = BLEND_ALPHA;
 		fileNode->Read("blend", spriteBlend);
 		sprite->blend = (BlendType)spriteBlend;

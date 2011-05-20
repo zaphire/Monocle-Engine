@@ -383,7 +383,7 @@ namespace Flash
 			{
 				if (Input::IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
 				{
-					Entity *clickedEntity = GetEntityAtPosition(Input::GetMousePosition(), SEARCH_RECURSIVE);
+					Entity *clickedEntity = GetEntityAtPosition(Input::GetMousePosition());
 					if (clickedEntity)
 					{
 						Debug::Log("clicked entity!");
@@ -621,11 +621,8 @@ namespace Flash
 			if (entity)
 			{
 				animation->parts[i].entity = entity;
-
-				if (eParent)
-					eParent->Add(entity);
-				else
-					Add(entity);
+				Add(entity);
+				entity->SetParent(eParent);
 			}
 		}
 	}
@@ -745,7 +742,8 @@ namespace Flash
 				if (prevFrame != currentFrame)
 				{
 					Entity *entity = editPart->CreateEntity(textureSheet);
-					eAnimation->Add(entity);
+					Add(entity);
+					entity->SetParent(eAnimation);
 					editPart->ApplyFrameToEntity(prevFrame, entity);
 					onionSkins.push_back(entity);
 					float oldA = entity->color.a;
@@ -757,7 +755,8 @@ namespace Flash
 				{
 					// spawn part at next frame
 					Entity *entity = editPart->CreateEntity(textureSheet);
-					eAnimation->Add(entity);
+					Add(entity);
+					entity->SetParent(eAnimation);
 					editPart->ApplyFrameToEntity(nextFrame, entity);
 					onionSkins.push_back(entity);
 					float oldA = entity->color.a;
@@ -772,10 +771,8 @@ namespace Flash
 	{
 		for (std::vector<Entity*>::iterator i = onionSkins.begin(); i != onionSkins.end(); ++i)
 		{
-			//HACK: leak memory like an IDIOT.
-			eAnimation->Remove((*i)); // <- need to enqueue for deletion here
-			// for now delete right away, later (after changes made to Remove) this probably won't work
-			delete *i;
+			Remove(*i);
+			//eAnimation->Remove((*i));
 		}
 		onionSkins.clear();
 	}

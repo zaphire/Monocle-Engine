@@ -15,14 +15,15 @@ namespace Monocle
 			: width(-1), height(-1), repeatX(false), repeatY(false)
 		{}
 
-		FringeTileData(const std::string &imageFilename, int width=-1, int height=-1, FilterType filter=FILTER_LINEAR, bool repeatX=false, bool repeatY=false)
-			: imageFilename(imageFilename), repeatX(repeatX), repeatY(repeatY), filter(filter), width(width), height(height)
+		FringeTileData(const std::string &imageFilename, int width=-1, int height=-1, FilterType filter=FILTER_LINEAR, bool repeatX=false, bool repeatY=false, int atlasX=0, int atlasY=0, int atlasW=0, int atlasH=0)
+			: imageFilename(imageFilename), repeatX(repeatX), repeatY(repeatY), filter(filter), width(width), height(height), atlasX(atlasX), atlasY(atlasY), atlasW(atlasW), atlasH(atlasH)
 		{}
 
 		std::string imageFilename;
 		int width, height;
 		FilterType filter;
 		bool repeatX, repeatY;
+		int atlasX, atlasY, atlasW, atlasH;
 		// bool useFiltering;
 	};
 

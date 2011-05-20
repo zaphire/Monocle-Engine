@@ -3,7 +3,7 @@
 namespace Monocle
 {
 	CollisionData::CollisionData()
-		: penetration(0.0f)
+		: penetration(0.0f), collider(NULL)
 	{
 	}
 }

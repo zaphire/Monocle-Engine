@@ -31,6 +31,9 @@ namespace Monocle
 		FileNode* FirstChildNode(const std::string &name);
 		FileNode* NextChildNode(const std::string &name);
 
+		//FileNode* NewNode(const std::string &name);
+		//FileNode* InsertEndChildNode(FileNode *fileNode);
+
 		TiXmlElement *element;
 		XMLFileNode *iterator;
 	};

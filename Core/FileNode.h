@@ -26,5 +26,6 @@ namespace Monocle
 
 		virtual FileNode* FirstChildNode(const std::string &name)=0;
 		virtual FileNode* NextChildNode(const std::string &name)=0;
+		//virtual FileNode* InsertEndChildNode(const std::string &name)=0;
 	};
 }

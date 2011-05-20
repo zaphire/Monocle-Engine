@@ -57,6 +57,14 @@ namespace Monocle
 		return iterator;
 	}
 
+	/*
+	FileNode* XMLFileNode::InsertEndChildNode(FileNode *fileNode)
+	{
+		XMLFileNode *xmlFileNode = (XMLFileNode*)fileNode;
+		xmlFileNode->element->InsertEndChild(xmlFileNode->element);
+	}
+	*/
+
 	/// WRITE
 	void XMLFileNode::Write(const std::string &name, const int &value)
 	{

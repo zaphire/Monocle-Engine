@@ -118,9 +118,17 @@ namespace Monocle
 								bool repeatX = XMLReadBool(eFringeTile, "repeatX");
 								bool repeatY = XMLReadBool(eFringeTile, "repeatY");
 
+								int atlasX=0, atlasY=0, atlasW=0, atlasH=0;
+								std::string atlas = XMLReadString(eFringeTile, "atlas");
+								if (atlas != "")
+								{
+									std::istringstream is(atlas);
+									is >> atlasX >> atlasY >> atlasW >> atlasH;
+								}
+
 								if (image != "")
 								{
-									fringeTileset.SetFringeTileData(tileID, new FringeTileData(image, width, height, filter, repeatX, repeatY));
+									fringeTileset.SetFringeTileData(tileID, new FringeTileData(image, width, height, filter, repeatX, repeatY, atlasX, atlasY, atlasW, atlasH));
 								}
 							}
 							eFringeTile = eFringeTile->NextSiblingElement("FringeTile");
@@ -268,7 +276,7 @@ namespace Monocle
 	{
 		SaveEntitiesOfType<PathMesh>("PathMesh", element, fromEntity);
 		SaveEntitiesOfType<FringeTile>("FringeTile", element, fromEntity);
-		SaveEntitiesOfType<Node>("Node", element, fromEntity);
+		//SaveEntitiesOfType<Node>("Node", element, fromEntity);
 	}
 
 	void Level::LoadEntities(TiXmlElement *element, Entity *intoEntity)
@@ -277,7 +285,7 @@ namespace Monocle
 		{
 			LoadEntitiesOfType<PathMesh>("PathMesh", element, intoEntity);
 			LoadEntitiesOfType<FringeTile>("FringeTile", element, intoEntity);
-			LoadEntitiesOfType<Node>("Node", element, intoEntity);
+			//LoadEntitiesOfType<Node>("Node", element, intoEntity);
 		}
 	}
 
