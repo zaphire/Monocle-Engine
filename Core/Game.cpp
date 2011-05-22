@@ -49,6 +49,8 @@ namespace Monocle
 
 		while (!isDone)
 		{
+			this->Update();
+
 			platform.Update();
 
 			while (!platform.IsActive())
@@ -140,6 +142,11 @@ namespace Monocle
 				}
 			}
 		}
+	}
+
+	void Game::Update()
+	{
+
 	}
 
 	//!
