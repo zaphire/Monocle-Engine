@@ -24,6 +24,7 @@ namespace Monocle
 	public:
 		Collision();
 		void Init();
+		Collider* LineCast(const Vector2 &start, const Vector2 &end, float radius, const std::string &tag, CollisionData *collisionData = NULL);
 
 	private:
 		friend class Entity;
