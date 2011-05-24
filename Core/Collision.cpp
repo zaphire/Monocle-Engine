@@ -29,6 +29,23 @@ namespace Monocle
 		instance->colliders.remove(collider);
 	}
 
+	Collider* Collision::LineCast(const Vector2 &start, const Vector2 &end, float radius, const std::string &tag, CollisionData *collisionData)
+	{
+		Collider *collider = NULL;
+		for (std::list<Collider*>::iterator i = instance->colliders.begin(); i != instance->colliders.end(); ++i)
+		{
+			Entity *entity = (*i)->GetEntity();
+			if (entity && entity->HasTag(tag))
+			{
+				if ((*i)->IntersectsLine(start, end, radius, collisionData))
+				{
+					return collisionData->collider;
+				}
+			}
+		}
+		return collider;
+	}
+
 	Collider* Collision::Collide(Entity *entity, const std::string &tag, CollisionData *collisionData)
 	{
 		Collider *passedCollider = entity->GetCollider();

@@ -1,4 +1,5 @@
 #include "PathCollider.h"
+#include "CollisionData.h"
 
 namespace Monocle
 {
@@ -22,8 +23,23 @@ namespace Monocle
 		return false;
 	}
 
-	bool PathCollider::IntersectsLine(const Vector2& start, const Vector2& end, float lineRadius, CollisionData *collisionData)
+	// ignores radius for now
+	bool PathCollider::IntersectsLine(const Vector2& start, const Vector2& end, float radius, CollisionData *collisionData)
 	{
+		Node *node = startNode;
+		while(node)
+		{
+			Node *next = node->GetNext();
+			if (next)
+			{
+				if (LinesIntersect(node->GetWorldPosition(), next->GetWorldPosition(), start, end, collisionData))
+				{
+					collisionData->collider = this;
+					return true;
+				}
+			}
+			node = next;
+		}
 		return false;
 	}
 }

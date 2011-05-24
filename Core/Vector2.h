@@ -38,6 +38,9 @@ namespace Monocle
 		bool IsInRange(float range);
 		float Dot(Vector2 other);
 		float Cross(Vector2 other);
+		//! return angle in radians
+		float GetAngleRadians();
+		float GetAngleDegrees();
 		
 		/*
 		static Vector2 Add(Vector2 a, Vector2 b);

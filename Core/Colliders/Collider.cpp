@@ -81,28 +81,72 @@ namespace Monocle
 		return false;
 	}
 
-	bool Collider::LinesIntersect(const Vector2& aStart, const Vector2& aEnd, const Vector2& bStart, const Vector2& bEnd)
+	bool Collider::LinesIntersect(const Vector2& aStart, const Vector2& aEnd, const Vector2& bStart, const Vector2& bEnd, CollisionData *collisionData)
 	{
+		
+		Vector2 s1, s2;
+		s1 = aEnd - aStart;
+		s2 = bEnd - bStart;
+
+		float s, t;
+		s = (-s1.y * (aStart.x - bStart.x) + s1.x * (aStart.y - bStart.y)) / (-s2.x * s1.y + s1.x * s2.y);
+		t = ( s2.x * (aStart.y - bStart.y) - s2.y * (aStart.x - bStart.x)) / (-s2.x * s1.y + s1.x * s2.y);
+
+		if (s >= 0 && s <= 1 && t >= 0 && t <= 1)
+		{
+			if (collisionData)
+			{
+				collisionData->hitPoint = aStart + (t * s1);
+			}
+			return true;
+		}
+
+		return false;
+		
+
+		/*
 		float d = ((bEnd.y - bStart.y) * (aEnd.x - aStart.x)) - ((bEnd.x - bStart.x) * (aEnd.y - aStart.y));
 		float nX = ((bEnd.x - bStart.x) * (aStart.y - bStart.y)) - ((bEnd.y - bStart.y) * (aStart.x - bStart.x));
 		float nY = ((aEnd.x - aStart.x) * (aStart.y - bStart.y)) - ((aEnd.y - aStart.y) * (aStart.x - bStart.x));
 
-		//Lines are parallel if d == 0, so check if they're coincident
-		if (d == 0.0f)
+		// ignore this optimization if we care about finding a hitPoint
+		if (!collisionData)
 		{
-			if (nX == 0.0f && nY == 0.0f)
+			//Lines are parallel if d == 0, so check if they're coincident
+			if (d == 0.0f)
 			{
-				//Lines are coincident, now check if they overlap
-				return ((aEnd.x > bStart.x && aStart.x < bEnd.x) || (aEnd.y > bStart.y && aStart.y < bEnd.y));
+				if (nX == 0.0f && nY == 0.0f)
+				{
+					//Lines are coincident, now check if they overlap
+					return ((aEnd.x > bStart.x && aStart.x < bEnd.x) || (aEnd.y > bStart.y && aStart.y < bEnd.y));
+				}
+				else
+				{
+					return false;
+				}
 			}
-			else
-				return false;
 		}
-		
+
 		float uX = nX / d;
 		float uY = nY / d;
 
+		if (collisionData)
+		{
+			if (uX >= 0.0f && uX <= 1.0f && uY >= 0.0f && uY <= 1.0f)
+			{
+				// Collision detected
+				Vector2 diff = aEnd - aStart;
+				collisionData->hitPoint = aStart + (uY * diff);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		
 		return (uX >= 0.0f && uX <= 1.0f && uY >= 0.0f && uY <= 1.0f);
+		*/
 	}
 
 	bool Collider::CollideRectRect(RectangleCollider* a, RectangleCollider* b, CollisionData *collisionData)

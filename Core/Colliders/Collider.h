@@ -38,7 +38,7 @@ namespace Monocle
 		virtual bool IntersectsLine(const Vector2& start, const Vector2& end, float lineRadius = 0.0f, CollisionData *collisionData=NULL)=0;
 
 		static bool Collide(Collider* a, Collider* b, CollisionData *collisionData = NULL);
-		static bool LinesIntersect(const Vector2& aStart, const Vector2& aEnd, const Vector2& bStart, const Vector2& bEnd);
+		static bool LinesIntersect(const Vector2& aStart, const Vector2& aEnd, const Vector2& bStart, const Vector2& bEnd, CollisionData *collisionData=NULL);
 
 	private:
 		Entity *entity;

@@ -95,6 +95,21 @@ namespace Monocle
 	{
 		return (x * b.y - y * b.x);
 	}
+
+	float Vector2::GetAngleRadians()
+	{
+		float angle = atan2(y, x);
+		if (angle < 0)
+		{
+			angle += 2 * Monocle::pi;
+		}
+		return angle;
+	}
+
+	float Vector2::GetAngleDegrees()
+	{
+		return GetAngleRadians() * Monocle::rad2Deg;
+	}
 	
 	Vector2 Vector2::xx()const
 	{

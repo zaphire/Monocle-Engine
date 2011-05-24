@@ -30,6 +30,9 @@ namespace Monocle
 		//! Runs the main game loop. Handles timing and high-level updating, rendering.
 		void Main();
 
+		//! for overriding functionality
+		virtual void Update();
+
 		//! Sets the current Scene. Games can run one Scene at a time.
 		static void SetScene(Scene* scene);
 		//! Returns a pointer to the current Scene.
