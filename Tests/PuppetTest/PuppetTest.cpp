@@ -7,7 +7,7 @@ namespace PuppetTest
 	void TestScene::Begin()
 	{
 		Scene::Begin();
-		
+
 		Graphics::SetBackgroundColor(Color::white);
 
 		Add(puppetEditor = new PuppetEditor());
@@ -20,7 +20,6 @@ namespace PuppetTest
 
 	void TestScene::End()
 	{
-		puppetEditor = NULL;
 		Scene::End();
 	}
 }
