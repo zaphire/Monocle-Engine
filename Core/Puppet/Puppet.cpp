@@ -10,7 +10,7 @@
 
 namespace Monocle
 {
-	
+
 	/// PART
 	Part::Part(int id, const std::string &name, const std::string &imageFilename)
 		: Entity(), id(id), name(name), sprite(NULL), puppet(NULL)
@@ -55,7 +55,7 @@ namespace Monocle
 		//Entity::Save(fileNode);
 		fileNode->Write("id", id);
 		fileNode->Write("name", name);
-		
+
 		fileNode->Write("atlasEntry", atlasEntry);
 
 		if (sprite)
@@ -116,7 +116,7 @@ namespace Monocle
 			sprite = new Sprite(image);
 			SetGraphic(sprite);
 		}
-		
+
 		if (sprite != NULL)
 		{
 			int width=-1, height=-1;
@@ -168,7 +168,7 @@ namespace Monocle
         : Transform(entity), time(time)
     {
     }
-    
+
 	KeyFrame::KeyFrame()
 		: Transform(), easeType(EASE_LINEAR)
 	{
@@ -199,15 +199,22 @@ namespace Monocle
 		fileNode->Read("time", time);
 	}
 
-    
+
 	PartKeyFrames::PartKeyFrames()
 		: part(NULL), puppet(NULL)
 	{
 	}
-    
+
     PartKeyFrames::PartKeyFrames(Part *part)
         : part(part), puppet(NULL)
     {
+    }
+
+    PartKeyFrames::~PartKeyFrames()
+    {
+        std::cout << "PartKeyFrames destructing" << std::endl;
+        delete puppet;
+        delete part;
     }
 
 	std::list<KeyFrame> *PartKeyFrames::GetKeyFrames()
@@ -273,7 +280,7 @@ namespace Monocle
 			return NULL;
 		return &keyFrames.back();
 	}
-    
+
     void PartKeyFrames::InsertKeyFrame(const KeyFrame &keyFrame)
     {
 		for (std::list<KeyFrame>::iterator i = keyFrames.begin(); i != keyFrames.end(); ++i)
@@ -299,13 +306,18 @@ namespace Monocle
 	{
 	}
 
+	Animation::~Animation()
+	{
+	    //destruction of std::list calls item destructors (PartKeyFrames has pointers that need to be deleted)
+	}
+
 	void Animation::Update()
 	{
 		currentTime += Monocle::deltaTime;
 
         ApplyTimeChange();
 	}
-    
+
     void Animation::ApplyTimeChange(bool loop)
     {
         if (currentTime >= duration)
@@ -314,7 +326,7 @@ namespace Monocle
 				currentTime = duration;
 			else
 				currentTime -= int(currentTime/duration) * duration;
-		} 
+		}
         else if (currentTime < 0)
         {
 			if (!loop)
@@ -322,7 +334,7 @@ namespace Monocle
             else
 				currentTime += (int(-1*currentTime/duration)+1) * duration;
         }
-        
+
 		for (std::list<PartKeyFrames>::iterator i = partKeyFrames.begin(); i != partKeyFrames.end(); ++i)
 		{
 			PartKeyFrames *currentPartKeyFrames = &(*i);
@@ -338,7 +350,7 @@ namespace Monocle
 				{
 					float diff = next->GetTime() - prev->GetTime();
 					float p = (currentTime - prev->GetTime()) / diff;
-                    
+
 					//printf("LerpTransform %f\n", p);
 					// adjust p by ease
 					currentPartKeyFrames->GetPart()->LerpTransform(prev, next, Tween::Ease(p, EASE_INOUTSIN));//prev->easeType));
@@ -351,7 +363,7 @@ namespace Monocle
 	{
 		return name;
 	}
-    
+
     float Animation::GetDuration()
     {
         return duration;
@@ -361,7 +373,7 @@ namespace Monocle
     {
         return currentTime;
     }
-    
+
     PartKeyFrames *Animation::GetPartKeyFrames(Part *part)
     {
         for(std::list<PartKeyFrames>::iterator i = partKeyFrames.begin(); i != partKeyFrames.end(); ++i)
@@ -373,7 +385,7 @@ namespace Monocle
         }
         return NULL;
     }
-    
+
     void Animation::SetPartKeyFrame(Part *part, const KeyFrame &keyFrame)
     {
         PartKeyFrames *partKeyFrames = GetPartKeyFrames(part);
@@ -397,7 +409,7 @@ namespace Monocle
 	{
 		this->partKeyFrames.push_back(partKeyFrames);
 	}
-	
+
 	void Animation::SetDuration(float duration)
 	{
 		this->duration = duration;
@@ -408,7 +420,7 @@ namespace Monocle
 		this->currentTime = currentTime;
 		ApplyTimeChange();
 	}
-    
+
     void Animation::AdjustCurrentTime(float timeOffset, bool loop)
     {
         currentTime += timeOffset;
@@ -444,7 +456,7 @@ namespace Monocle
 		: isPlaying(false), isPaused(false), textureAtlas(NULL)
 	{
 	}
-	
+
 	Puppet::~Puppet()
 	{
 		if (textureAtlas)
@@ -481,7 +493,7 @@ namespace Monocle
 				TiXmlElement xmlAnimation("Animation");
 
 				Animation *animation = &(*i);
-                
+
                 XMLFileNode xmlFileNodeKeyFrameAnim(&xmlAnimation);
 				animation->Save(&xmlFileNodeKeyFrameAnim);
 
@@ -497,7 +509,7 @@ namespace Monocle
 						partKeyFrames->Save(&xmlFileNodePartKeyFrames);
 
 						/// KeyFrame
-					
+
 						std::list<KeyFrame> *keyFrames = partKeyFrames->GetKeyFrames();
 						for (std::list<KeyFrame>::iterator i = keyFrames->begin(); i != keyFrames->end(); ++i)
 						{
@@ -529,9 +541,9 @@ namespace Monocle
 		animations.clear();
 		// delete parts?
 		parts.clear();
-		
+
 		TiXmlDocument xmlDoc(Assets::GetContentPath() + filename);
-		
+
 		if (xmlDoc.LoadFile())
 		{
 			/// TextureAtlas
@@ -541,7 +553,7 @@ namespace Monocle
 				textureAtlas = new TextureAtlas();
 				textureAtlas->Load(xmlTextureAtlas);
 			}
-			
+
 			/// Parts
 			TiXmlElement *xmlParts = xmlDoc.FirstChildElement("Parts");
 			if (xmlParts)
@@ -631,7 +643,7 @@ namespace Monocle
 			Part *part = new Part();
 			part->SetPuppet(this);
 			part->Load(&xmlFileNode);
-			
+
 			LoadParts(xmlPart, part);
 
 			parts.push_back(part);
@@ -697,12 +709,12 @@ namespace Monocle
 	{
 		return isPaused;
 	}
-    
+
     Animation *Puppet::GetCurrentAnimation()
     {
         return currentAnimation;
     }
-	
+
 	TextureAtlas *Puppet::GetTextureAtlas()
 	{
 		return textureAtlas;

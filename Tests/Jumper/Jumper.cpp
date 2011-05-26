@@ -5,7 +5,7 @@
 namespace Jumper
 {
 	/// PLAYER
-	Player::Player(Vector2 pos) 
+	Player::Player(Vector2 pos)
 		: Entity()
 	{
 		position = pos;
@@ -88,7 +88,7 @@ namespace Jumper
 			position.y = lastPosition.y;
 			velocity.y = 0;
 			onGround = true;
-			
+
 			// get fat when we're landing
 			if (isJumping)
 			{
@@ -171,7 +171,7 @@ namespace Jumper
 	void GameScene::End()
 	{
 		Level::End();
-		delete player;
+		//delete player;
 		//walls.clear();
 	}
 }

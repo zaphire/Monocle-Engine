@@ -9,9 +9,9 @@ class TiXmlElement;
 
 namespace Monocle
 {
-	
+
 	class Puppet;
-    
+
 	class Part : public Entity
 	{
 	public:
@@ -59,6 +59,7 @@ namespace Monocle
 	public:
         PartKeyFrames(Part *part);
 		PartKeyFrames();
+		~PartKeyFrames();
 		void AddKeyFrame(const KeyFrame &keyFrame);
 		void SetPart(Part *part);
 		Part *GetPart();
@@ -71,7 +72,7 @@ namespace Monocle
 
 		void Save(FileNode *fileNode);
 		void Load(FileNode *fileNode);
-		
+
 	private:
 		std::list<KeyFrame> keyFrames;
 		Part *part;
@@ -83,11 +84,13 @@ namespace Monocle
 	{
 	public:
 		Animation();
+		~Animation();
+
 		void Update();
         void ApplyTimeChange(bool loop=true);
 		void SetCurrentTime(float time);
         void AdjustCurrentTime(float timeOffset, bool loop=true);
-        
+
 		std::string GetName();
 		bool IsName(const std::string &name);
 		void AddPartKeyFrames(const PartKeyFrames &partKeyFrames);
@@ -96,12 +99,12 @@ namespace Monocle
         float GetDuration();
         float GetCurrentTime();
         PartKeyFrames *GetPartKeyFrames(Part *part);
-        
+
 		void RefreshDuration();
 
 		void Save(FileNode *fileNode);
 		void Load(FileNode *fileNode);
-        
+
 	private:
 		friend class Puppet;
 		float currentTime;
@@ -117,7 +120,7 @@ namespace Monocle
 	};
 
 	class TextureAtlas;
-	
+
 	class Puppet
 	{
 	public:
@@ -146,18 +149,18 @@ namespace Monocle
 		TextureAtlas *GetTextureAtlas();
 
 		void AdjustTime(float time);
-		
-	private:		
+
+	private:
 		Animation *GetAnimationByName(const std::string &animName);
 		bool isPlaying;
 		bool isPaused;
 		bool isLooping;
-	
+
 		Animation *currentAnimation;
-	
+
 		std::list<Animation> animations;
 		std::list<Part*> parts;
-		
+
 		TextureAtlas *textureAtlas;
 
 		std::string filename;
@@ -166,7 +169,7 @@ namespace Monocle
 		void LoadParts(TiXmlElement *element, Entity *intoEntity);
 
 	private:
-		
+
 	};
 
 }

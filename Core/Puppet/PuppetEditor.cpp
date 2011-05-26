@@ -14,6 +14,11 @@ namespace Monocle
 
 	}
 
+	Timeline::~Timeline()
+	{
+	    delete currentAnimation;
+	}
+
 	void Timeline::Render()
 	{
 		//Entity::Render();
@@ -83,6 +88,11 @@ namespace Monocle
 	{
 	}
 
+	PuppetEditor::~PuppetEditor()
+	{
+	    delete timeline;
+	}
+
 	void PuppetEditor::Added()
 	{
 		keyTogglePause = KEY_TAB;
@@ -122,12 +132,12 @@ namespace Monocle
 		timeline = new Timeline();
 		scene->Add(timeline);
 	}
-	
+
 	void PuppetEditor::Enable()
 	{
 		Editor::Enable();
 	}
-	
+
 	void PuppetEditor::Disable()
 	{
 		Editor::Disable();

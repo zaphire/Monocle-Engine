@@ -10,10 +10,11 @@ namespace Monocle
     {
     public:
         Timeline();
+        ~Timeline();
         Animation *currentAnimation;
         void Render();
     };
-    
+
 	class PuppetEntity : public Entity
 	{
 	public:
@@ -27,6 +28,7 @@ namespace Monocle
 	{
 	public:
 		PuppetEditor();
+		~PuppetEditor();
 		void Enable();
 		void Disable();
 		void Update();
