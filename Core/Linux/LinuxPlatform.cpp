@@ -152,17 +152,7 @@ namespace Monocle
             keys[i] = false;
             localKeymap[i] = KEY_UNDEFINED;
         }
-    }
-
-    void Platform::BindLocalKey(int local, int global) {
-        //Needed to avoid key redefinition
-        if (localKeymap[local] == KEY_UNDEFINED) {
-            localKeymap[local] = global;
-        }
-    }
-
-    void Platform::Init()
-    {
+        
         BindLocalKey(KeySymParts::Get(XK_Up).low, KEY_UP);
         BindLocalKey(KeySymParts::Get(XK_Down).low, KEY_DOWN);
         BindLocalKey(KeySymParts::Get(XK_Left).low, KEY_LEFT);
@@ -285,8 +275,14 @@ namespace Monocle
 		BindLocalKey(KeySymParts::Get(XK_F13).low, KEY_F13);
 		BindLocalKey(KeySymParts::Get(XK_F14).low, KEY_F14);
 		BindLocalKey(KeySymParts::Get(XK_F15).low, KEY_F15);
-		Init("Monocle Powered", 800, 600, 24, false);
-	}
+    }
+
+    void Platform::BindLocalKey(int local, int global) {
+        //Needed to avoid key redefinition
+        if (localKeymap[local] == KEY_UNDEFINED) {
+            localKeymap[local] = global;
+        }
+    }
 
     void Platform::Init(const std::string &name, int w, int h, int bits, bool fullscreen)
     {
