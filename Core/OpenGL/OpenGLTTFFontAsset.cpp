@@ -23,7 +23,7 @@ namespace Monocle
         : FontAsset(), fontCData(NULL), textureWidth(512), textureHeight(512)
 	{
 	}
-    
+
     TTFFontAsset::~TTFFontAsset()
     {
         Unload();
@@ -42,9 +42,9 @@ namespace Monocle
 			Debug::Log("Error: Failed to open font: " + filename);
             return false;
         }
-        
+
         this->size = size;
-        
+
         fontCData = (void*)(stbtt_bakedchar*)malloc(sizeof(stbtt_bakedchar) * 96);
 
         unsigned char* ttf_buffer = (unsigned char*)malloc(1 << 20);
@@ -58,25 +58,25 @@ namespace Monocle
         glGenTextures(1, &texID);
         glBindTexture(GL_TEXTURE_2D, texID);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, this->textureWidth, this->textureHeight, 0, GL_ALPHA, GL_UNSIGNED_BYTE, temp_bitmap);
-        
+
         free(temp_bitmap);
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        
+
         return true;
 	}
-    
+
 	void TTFFontAsset::Reload()
 	{
 		Unload();
 		Load(filename, size);
 	}
-    
+
 	void TTFFontAsset::Unload()
 	{
 		Debug::Log("Freeing font texture memory for: " + filename);
 		glDeleteTextures(1, &texID);
-        
+
         if (fontCData)
         {
 			free(fontCData);
@@ -87,29 +87,33 @@ namespace Monocle
 	float TTFFontAsset::GetTextWidth(const std::string &text)
 	{
 		float width = 0;
+		float x,y;
 		for (int i = 0; i < text.size(); i++)
 		{
-			float x=0, y=0;
 			Rect verts;
 			Rect texCoords;
 			GetGlyphData(text[i], &x, &y, verts, texCoords);
-			width += verts.bottomRight.x - verts.topLeft.x;
+			width = verts.bottomRight.x;
 		}
 		return width;
 	}
 
 	float TTFFontAsset::GetTextHeight(const std::string &text)
 	{
-		float height = 0;
+		//float height = 0;
+		float top = 0, bottom = 0;
 		for (int i = 0; i < text.size(); i++)
 		{
 			float x=0, y=0;
 			Rect verts;
 			Rect texCoords;
 			GetGlyphData(text[i], &x, &y, verts, texCoords);
-			height = MAX(height, verts.bottomRight.y - verts.topLeft.y);
+			//height = MAX(height, verts.bottomRight.y - verts.topLeft.y);
+			top = MIN(verts.topLeft.y, top);
+			bottom = MAX(verts.bottomRight.y, bottom);
 		}
-		return height;
+		//return height;
+		return bottom - top;
 	}
 
 	void TTFFontAsset::GetGlyphData(char c, float* x, float* y, Rect& verts, Rect& texCoords) const
