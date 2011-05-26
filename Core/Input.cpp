@@ -63,11 +63,12 @@ namespace Monocle
 
 	Vector2 Input::GetWorldMousePosition()
 	{
+		Camera *mainCamera = Scene::GetMainCamera();
 		Vector2 resScale = Graphics::GetResolutionScale();
 		Vector2 invResScale = Vector2(1.0f/resScale.x, 1.0f/resScale.y);
 		Vector2 diff = (Platform::mousePosition*invResScale) - Graphics::GetScreenCenter();
-		Vector2 cameraZoom = Scene::GetCamera()->scale;
-		return Scene::GetCamera()->position + (diff * Vector2(1/cameraZoom.x, 1/cameraZoom.y));
+		Vector2 cameraZoom = mainCamera->scale;
+		return mainCamera->position + (diff * Vector2(1/cameraZoom.x, 1/cameraZoom.y));
 	}
 
 	int Input::GetMouseScroll()

@@ -8,12 +8,13 @@ namespace Monocle
 	Scene *Scene::instance = NULL;
 
 	Scene::Scene()
-		: isVisible(true), isPaused(false)
+		: isVisible(true), isPaused(false), activeCamera(NULL), mainCamera(NULL)
 	{
 		instance = this;
 		Camera *camera = new Camera();
 		camera->position = Graphics::GetScreenCenter();
 		AddCamera(camera);
+		SetMainCamera(camera);
 	}
 
 	Scene::~Scene()
@@ -67,28 +68,33 @@ namespace Monocle
 			//Render all the entities
 			// sort by layer?
 
-			const int MAX_LAYER = 100;
-			const int MIN_LAYER = -100;
-
 			//printf("\n\n****\n");
 
 			for (std::list<Camera*>::iterator camera = cameras.begin(); camera != cameras.end(); ++camera)
 			{
-				(*camera)->ApplyMatrix();
+				activeCamera = *camera;
 
-				///HACK: this next line is a hack - temporary only
-				// TODO sort entities into layer buckets? or one big sorted list?
-				for (int layer = MAX_LAYER; layer >= MIN_LAYER; layer--)
+				if (activeCamera->isVisible)
 				{
-					for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+					activeCamera->ApplyMatrix();
+
+					///HACK: optimize later so we don't run through all the layers
+					// TODO sort entities into layer buckets? or one big sorted list?
+
+					for (int layer = activeCamera->GetBackLayer(); layer >= activeCamera->GetFrontLayer(); layer--)
 					{
-						if ((*i)->IsLayer(layer) && (*i)->isVisible)
+						for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 						{
-							(*i)->Render();
+							if ((*i)->isVisible && (*i)->IsLayer(layer))
+							{
+								(*i)->Render();
+							}
 						}
 					}
 				}
 			}
+
+			activeCamera = NULL;
 		}
 	}
 
@@ -226,6 +232,21 @@ namespace Monocle
 				return *i;
 		}
 		return NULL;
+	}
+
+	//Camera *Scene::GetActiveCamera()
+	//{
+	//	return instance->activeCamera;
+	//}
+
+	Camera *Scene::GetMainCamera()
+	{
+		return instance->mainCamera;
+	}
+	
+	void Scene::SetMainCamera(Camera *camera)
+	{
+		instance->mainCamera = camera;
 	}
 
 	void Scene::DestroyAllCameras()

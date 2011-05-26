@@ -221,28 +221,36 @@ namespace Monocle
 		//else
 		scene->Add(newEntity);
 		Select(newEntity);
-	}
+		newEntity->SetParent(entity->GetParent());
 
-	// cloning a node is a special case for now
-	void LevelEditor::CloneNode()
-	{
-		if (selectedEntity && selectedNode)
+		// special case code
+		Node *node = dynamic_cast<Node*>(entity);
+		if (node && selectedNode)
 		{
-			Node *newNode = new Node(Input::GetWorldMousePosition());
-			newNode->Copy(selectedNode);
-			//if (selectedNode->GetParent())
-			//{
-			//	///HACK: replace with "GetLocalPosition" function
-			//	newNode->position = Input::GetWorldMousePosition() - selectedNode->GetParent()->position;
-			//	selectedNode->GetParent()->Add(newNode);
-			//}
-			//else
-			//	scene->Add(newNode);
-			scene->Add(newNode);
-			selectedNode->InsertNext(newNode);
-			Select(newNode);
+			selectedNode->InsertNext(node);
 		}
 	}
+
+	//// cloning a node is a special case for now
+	//void LevelEditor::CloneNode()
+	//{
+	//	if (selectedEntity && selectedNode)
+	//	{
+	//		Node *newNode = new Node(Input::GetWorldMousePosition());
+	//		newNode->Copy(selectedNode);
+	//		//if (selectedNode->GetParent())
+	//		//{
+	//		//	///HACK: replace with "GetLocalPosition" function
+	//		//	newNode->position = Input::GetWorldMousePosition() - selectedNode->GetParent()->position;
+	//		//	selectedNode->GetParent()->Add(newNode);
+	//		//}
+	//		//else
+	//		//	scene->Add(newNode);
+	//		scene->Add(newNode);
+	//		selectedNode->InsertNext(newNode);
+	//		Select(newNode);
+	//	}
+	//}
 
 	void LevelEditor::Select(Entity *entity)
 	{
@@ -339,10 +347,12 @@ namespace Monocle
 
 		if (selectedNode)
 		{
+			/*
 			if (Input::IsKeyPressed(keyClone))
 			{
 				CloneNode();
 			}
+			*/
 			if (Input::IsKeyPressed(keyDelete))
 			{
 				Node *lastSelectedNode = selectedNode;

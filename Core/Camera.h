@@ -11,5 +11,14 @@ namespace Monocle
 		Camera(const Camera& camera);
 
 		void ApplyMatrix();
+
+		void SetLayers(int backLayer, int frontLayer);
+		int GetBackLayer();
+		int GetFrontLayer();
+
+		bool isVisible;
+
+	private:
+		int backLayer, frontLayer;
 	};
 }

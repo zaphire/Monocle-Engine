@@ -87,14 +87,6 @@ namespace Monocle
 		this->SetNext(node);
 	}
 
-	void Node::Copy(Node *node)
-	{
-		this->scale = node->scale;
-		this->variant = node->variant;
-		this->prev = node->prev;
-		this->next = node->next;
-	}
-
 	Node *Node::GetNext()
 	{
 		return next;

@@ -20,8 +20,6 @@ namespace Monocle
 		void SetNext(Node *node);
 		void InsertNext(Node *node);
 
-		void Copy(Node *node);
-
 		Node *GetNext();
 		Node *GetPrev();
 

@@ -96,6 +96,7 @@ namespace Monocle
 
 		static void ResolutionMatrix();
 		static void IdentityMatrix();
+		static void DefaultMatrix();
 
 		static void RenderLine(const Vector2 &pos1, const Vector2 &pos2);
 

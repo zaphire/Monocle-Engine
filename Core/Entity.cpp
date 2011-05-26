@@ -144,54 +144,28 @@ namespace Monocle
 
 	void Entity::ApplyMatrix()
 	{
-		if (followCamera == Vector2::zero || (Debug::render && Debug::selectedEntity != this && IsDebugLayer()))
-			Graphics::Translate(position.x, position.y, depth);
-		else
-			Graphics::Translate(scene->GetCamera()->position * followCamera + position * (Vector2::one - followCamera));
+		//if (followCamera == Vector2::zero || (Debug::render && Debug::selectedEntity != this && IsDebugLayer()))
+		Graphics::Translate(position.x, position.y, depth);
+		//else
+			//Graphics::Translate(camera->position * followCamera + position * (Vector2::one - followCamera));
         
 		if (rotation != 0.0f)
 			Graphics::Rotate(rotation, 0, 0, 1);
         
 		Graphics::Scale(scale);
-
 	}
 
 	void Entity::Render()
 	{
-        const int MIN_LAYER = -100;
-        const int MAX_LAYER = 100;
-        
         Graphics::PushMatrix();
 
 		MatrixChain();
-                
-		//for (int layer = MAX_LAYER; layer > 0; layer--)
-		//{
-		//	for(std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
-		//	{
-		//		if ((*i)->IsLayer(layer) && (*i)->isVisible)
-		//		{
-		//			(*i)->Render();
-		//		}
-		//	}
-		//}
 
 		if (graphic != NULL)
 		{
 			Graphics::SetColor(color);
 			graphic->Render(this);
 		}
-
-		//for (int layer = 0; layer >= MIN_LAYER; layer--)
-		//{
-		//	for(std::list<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
-		//	{
-		//		if ((*i)->IsLayer(layer) && (*i)->isVisible)
-		//		{
-		//			(*i)->Render();
-		//		}
-		//	}
-		//}
         
         Graphics::PopMatrix();
 		
@@ -470,7 +444,7 @@ namespace Monocle
 	void Entity::MatrixChain()
 	{
 		std::list<Entity*> entityChain;
-		
+
 		Entity *current = this;
 		while (current)
 		{

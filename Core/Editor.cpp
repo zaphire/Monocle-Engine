@@ -27,31 +27,33 @@ namespace Monocle
 				zoomSpeed *= 2.0f;
 			}
 
+			Camera *mainCamera = Scene::GetMainCamera();
+
 			if (Platform::mouseScroll != 0)
 			{
 				const float minZoom = 0.01f;
-				Scene::GetCamera()->scale += (Platform::mouseScroll * Vector2::one * 0.00025f);
-				if (Scene::GetCamera()->scale.x < minZoom)
+				mainCamera->scale += (Platform::mouseScroll * Vector2::one * 0.00025f);
+				if (mainCamera->scale.x < minZoom)
 				{
-					Scene::GetCamera()->scale = Vector2::one * minZoom;
+					mainCamera->scale = Vector2::one * minZoom;
 				}
-				Vector2 camZoom = Scene::GetCamera()->scale;//Graphics::GetCameraZoom();
+				Vector2 camZoom = mainCamera->scale;
 				printf("camZoom (%f, %f)\n", camZoom.x, camZoom.y);
 			}
+
 			if (Input::IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE))
 			{
 				lastWorldMousePosition = Input::GetWorldMousePosition();
 			}
+
 			if (Input::IsMouseButtonHeld(MOUSE_BUTTON_MIDDLE))
 			{
 				Vector2 diff = Input::GetWorldMousePosition() - lastWorldMousePosition;
-				Scene::GetCamera()->position += (-1*diff);
+				mainCamera->position += (-1*diff);
 				lastWorldMousePosition = Input::GetWorldMousePosition();
 
-				Vector2 camPos = Scene::GetCamera()->position;
+				Vector2 camPos = mainCamera->position;
 				printf("camPos (%d, %d)\n", (int)camPos.x, (int)camPos.y);
-				//const float camPanSpeed = 8.0f;
-				//Graphics::AdjustCameraPosition((Input::GetMousePosition() - startCameraMovePosition)*camPanSpeed*Monocle::deltaTime);//(Input::GetWorldMousePosition() - Graphics::GetCameraPosition()));
 			}
 		}
 	}

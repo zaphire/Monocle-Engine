@@ -111,6 +111,6 @@ namespace Monocle
 		std::string text;
 
 		/// NODE
-		void CloneNode();
+		//void CloneNode();
 	};
 }
