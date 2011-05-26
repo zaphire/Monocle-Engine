@@ -35,5 +35,6 @@ namespace Monocle
 	Color operator-(const Color& lhs, const Color& rhs);
 	Color operator*(float lhs, const Color& rhs);		// left scalar multiplication
 	Color operator*(const Color& lhs, float rhs);		// right scalar multiplication
+	Color operator/(const Color& lhs, float rhs);
 
 }

@@ -12,7 +12,7 @@ namespace Monocle
 	Game *Game::instance = NULL;
     float Game::frames_per_sec = 0;
 
-	Game::Game()
+	Game::Game(const std::string &name, int w, int h, int bits, bool fullscreen)
 		:  scene(NULL), switchTo(NULL), isDone(false)
 		//, editor(NULL)
 	{
@@ -21,7 +21,7 @@ namespace Monocle
 		Monocle::deltaTime	= 0.0f;
 
 		debug.Init();
-		platform.Init();
+		platform.Init(name, w, h, bits, fullscreen);
 		assets.Init();
 		input.Init();
 		graphics.Init();

@@ -104,17 +104,12 @@ namespace Monocle
 		if (flipY)
 			fileNode->Write("flipY", flipY);
 
-		/*
-		FileNode *curFileNode = NULL;
 		Node *curNode = startNode;
 		while (curNode)
 		{
-			curFileNode = fileNode->NewNode("Node");
-			curNode->Save(curFileNode);
-			fileNode->InsertEndChildNode(curFileNode);
+			fileNode->SaveChildNode("Node", curNode);
 			curNode = curNode->GetNext();
 		}
-		*/
 	}
 
 	void PathMesh::Load(FileNode *fileNode)

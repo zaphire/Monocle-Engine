@@ -151,7 +151,7 @@ namespace Monocle
 	public:
 		Platform();
 
-		void Init();
+		//void Init();
 		void Init(const std::string &name, int w, int h, int bits, bool fullscreen);
 		void Update();
 

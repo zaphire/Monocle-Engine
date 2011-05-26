@@ -518,10 +518,10 @@ namespace Monocle
 		localKeymap[KEY_MENU] = VK_APPS;
 	}
 
-	void Platform::Init()
-	{
-		Init("Monocle Powered", 1024, 768, 32, false);
-	}
+	//void Platform::Init()
+	//{
+	//	Init("Monocle Powered", 1024, 768, 32, false);
+	//}
 
 	void Platform::Init(const std::string &name, int w, int h, int bits, bool fullscreen)
 	{

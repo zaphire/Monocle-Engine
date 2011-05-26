@@ -102,6 +102,8 @@ namespace Monocle
 		virtual Entity *CreateEntity(const std::string &entityTypeName);
 		virtual void SaveEntities(TiXmlElement *element);
 		virtual void LoadEntities(TiXmlElement *element);
+		virtual void SaveLevel(FileNode *fileNode);
+		virtual void LoadLevel(FileNode *fileNode);
 
 	protected:
 		// not sure if we need to pass scene or not yet
@@ -114,6 +116,7 @@ namespace Monocle
 		friend class Level;
 		//Resolves all entities to be added or removed
 		void ResolveEntityChanges();
+
 
 	private:
 		static Scene *instance;

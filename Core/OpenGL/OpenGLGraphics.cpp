@@ -48,12 +48,13 @@ namespace Monocle
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClearDepth(1.0f);
 		glDisable(GL_DEPTH_TEST);
-		//glDepthFunc(GL_LEQUAL); 
+		//glDepthFunc(GL_LEQUAL);
 		//glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
 		//clear screen
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		ShowBuffer();
+
 
 		Set2D(800,600);
 

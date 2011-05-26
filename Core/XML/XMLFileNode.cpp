@@ -3,6 +3,7 @@
 #include "../Vector2.h"
 #include "../Color.h"
 #include <TinyXML/tinyxml.h>
+#include "../Entity.h"
 
 namespace Monocle
 {
@@ -57,13 +58,17 @@ namespace Monocle
 		return iterator;
 	}
 
-	/*
-	FileNode* XMLFileNode::InsertEndChildNode(FileNode *fileNode)
-	{
-		XMLFileNode *xmlFileNode = (XMLFileNode*)fileNode;
-		xmlFileNode->element->InsertEndChild(xmlFileNode->element);
-	}
-	*/
+	//FileNode* NewNode(const std::string &name)
+	//{
+	//	XMLFileNode *xmlFileNode = new XMLFileNode();
+	//	xmlFileNode->managed = new TiXmlElement(name);
+	//}
+
+	//FileNode* XMLFileNode::InsertEndChildNode(FileNode *fileNode)
+	//{
+	//	XMLFileNode *xmlFileNode = (XMLFileNode*)fileNode;
+	//	xmlFileNode->element->InsertEndChild(*xmlFileNode->element);
+	//}
 
 	/// WRITE
 	void XMLFileNode::Write(const std::string &name, const int &value)
@@ -165,5 +170,14 @@ namespace Monocle
 			std::istringstream read(string);
 			read >> value;
 		}
+	}
+
+
+	void XMLFileNode::SaveChildNode(const std::string &name, Entity *entity)
+	{
+		TiXmlElement newElement(name);
+		XMLFileNode xmlFileNode(&newElement);
+		entity->Save(&xmlFileNode);
+		element->InsertEndChild(newElement);
 	}
 }

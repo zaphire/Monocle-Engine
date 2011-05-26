@@ -204,6 +204,14 @@ namespace Monocle
 		//TODO: Sort the entity list based on layer
 	}
 
+	void Scene::SaveLevel(FileNode *fileNode)
+	{
+	}
+
+	void Scene::LoadLevel(FileNode *fileNode)
+	{
+	}
+
 	void Scene::AddCamera(Camera *camera)
 	{
 		instance->cameras.push_back(camera);

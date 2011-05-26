@@ -77,4 +77,9 @@ namespace Monocle
 	{
 		return Color(lhs.r * rhs, lhs.g * rhs, lhs.b * rhs, lhs.a * rhs);
 	}
+
+	Color operator/(const Color& lhs, float rhs)
+	{
+		return Color(lhs.r / rhs, lhs.g / rhs, lhs.b / rhs, lhs.a / rhs);
+	}
 }

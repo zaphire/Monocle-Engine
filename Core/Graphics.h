@@ -36,6 +36,8 @@ namespace Monocle
 	public:
 		Graphics();
 		void Init();
+
+		///TODO: move to platform?
 		bool SetResolution(int w, int h, int bits, bool full);
 
 		void BeginFrame();

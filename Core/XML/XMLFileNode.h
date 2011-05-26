@@ -5,8 +5,11 @@
 
 class TiXmlElement;
 
+
 namespace Monocle
 {
+	class Entity;
+
 	class XMLFileNode : public FileNode
 	{
 	public:
@@ -31,10 +34,14 @@ namespace Monocle
 		FileNode* FirstChildNode(const std::string &name);
 		FileNode* NextChildNode(const std::string &name);
 
+		void SaveChildNode(const std::string &name, Entity *entity);
+
 		//FileNode* NewNode(const std::string &name);
 		//FileNode* InsertEndChildNode(FileNode *fileNode);
 
 		TiXmlElement *element;
+		//TiXmlElement *managed;
+
 		XMLFileNode *iterator;
 	};
 }

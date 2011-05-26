@@ -30,7 +30,7 @@ namespace Monocle
 		while(node)
 		{
 			Node *next = node->GetNext();
-			if (next)
+			if (next && node->variant != -1)
 			{
 				if (LinesIntersect(node->GetWorldPosition(), next->GetWorldPosition(), start, end, collisionData))
 				{
