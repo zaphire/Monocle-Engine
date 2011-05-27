@@ -13,7 +13,6 @@ namespace Monocle
     class TextureAsset;
     class FontAsset;
     
-    
 	Assets *Assets::instance = NULL;
 
 	Assets::Assets()

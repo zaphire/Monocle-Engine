@@ -5,11 +5,10 @@
 namespace Monocle
 {
 	Asset::Asset(AssetType type)
-		: type(type)
+		: type(type) 
 	{
 		isCached = false;
 		referenceCount = 0;
-		type = ASSET_UNDEFINED;
 	}
 
 	void Asset::AddReference()
@@ -39,6 +38,7 @@ namespace Monocle
 
 	std::string Asset::GetName()
 	{
+	    //Will this stop working correctly if the content path is changed?
 		int size = Assets::GetContentPath().size();
 		return filename.substr(size, filename.size() - size);
 	}
