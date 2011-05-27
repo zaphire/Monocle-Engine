@@ -19,13 +19,11 @@ namespace Monocle
             
             void Asset::setup()
             {
-                std::cout << "Setup" << std::endl;
                 asset = new DerivedAsset();
             }
             
             void Asset::tear_down()
             {
-                std::cout << "Tear down" << std::endl;
                 delete asset;
                 asset = NULL;
             }

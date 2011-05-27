@@ -18,7 +18,9 @@ namespace Monocle
             public:
                 DerivedAssets() : Monocle::Assets() {}
                 
-                void AssertInstance();
+                void init();
+                
+                void remove(Asset *asset);
             };
             
             class Assets: public ::Test::Suite
@@ -35,6 +37,7 @@ namespace Monocle
                 void RequestTexture();
                 void RequestFont();
                 void RequestAudio();
+                void GetContentPath();
                 
                 Monocle::Assets *assets;
             };

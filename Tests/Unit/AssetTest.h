@@ -2,6 +2,8 @@
 
 #include <cpptest-suite.h>
 
+#include <Asset.h>
+
 namespace Monocle
 {
     class Asset;
