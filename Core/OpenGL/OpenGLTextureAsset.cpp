@@ -21,7 +21,7 @@ namespace Monocle
 	{
 	}
 
-	void TextureAsset::Load(const std::string &filename, FilterType filter, bool repeatX, bool repeatY)
+	bool TextureAsset::Load(const std::string &filename, FilterType filter, bool repeatX, bool repeatY)
 	{
 		this->filter = filter;
 		this->repeatX = repeatX;
@@ -80,6 +80,7 @@ namespace Monocle
 			Debug::Log(filename);
 
 			width = height = 64;
+			return false;
 		}
 	}
 
