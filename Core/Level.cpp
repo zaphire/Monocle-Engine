@@ -2,7 +2,6 @@
 #include "Assets.h"
 #include <TinyXML/tinyxml.h>
 #include "XML/XMLFileNode.h"
-#include <iostream>
 #include <fstream>
 #include "Entity.h"
 #include "LevelEditor/Node.h"
