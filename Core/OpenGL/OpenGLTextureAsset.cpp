@@ -21,7 +21,7 @@ namespace Monocle
 	{
 	}
 
-	void TextureAsset::Load(const std::string &filename, FilterType filter, bool repeatX, bool repeatY)
+	bool TextureAsset::Load(const std::string &filename, FilterType filter, bool repeatX, bool repeatY)
 	{
 		this->filter = filter;
 		this->repeatX = repeatX;
@@ -73,6 +73,7 @@ namespace Monocle
 			//gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA8, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
 			Debug::Log("Loaded texture: " + filename);
+			return true;
 		}
 		else
 		{
@@ -80,6 +81,7 @@ namespace Monocle
 			Debug::Log(filename);
 
 			width = height = 64;
+			return false;
 		}
 	}
 
