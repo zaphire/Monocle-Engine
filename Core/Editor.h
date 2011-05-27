@@ -10,14 +10,14 @@ namespace Monocle
 	{
 	public:
 		Editor();
-		virtual ~Editor();
+		virtual ~Editor() {}
 	};
 
     //! Additional base class for editors that require the ability to change camera position
 	class CameraEditor
 	{
 	public:
-        virtual ~CameraEditor();
+        virtual ~CameraEditor() {}
 	protected:
         //! Updates zoom (mousewheel) and position(middle click) of camera  
 		void UpdateCamera();
