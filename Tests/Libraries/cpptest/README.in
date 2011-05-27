@@ -1,0 +1,67 @@
+CppTest - A C++ Unit Testing Framework
+
+Table of contents
+=================
+
+  - General information
+  - Installation
+  - How to report bugs
+  - Patches
+
+General information
+===================
+
+This is CppTest version @VERSION@. CppTest is a portable and powerful, yet
+simple, unit testing framework for handling automated tests in C++. The focus
+lies on usability and extendability. Several output formats are supported and
+new ones are easily added.
+
+Documentation is either generated (using 'make') or found on the home page. 
+Generated documentation is found under 'doc/html', and the starting point is 
+'doc/html/index.html'. Code examples are found under 'test'.
+
+The official home page is:    http://cpptest.sourceforge.net
+The official project page is: http://sourceforge.net/projects/cpptest
+
+Installation
+============
+
+See the files INSTALL.quick and INSTALL.
+
+How to report bugs
+==================
+
+Bugs should be reported to the bug tracking system (see the official web site).
+You will need to create an account on http://sourceforge.net for yourself.
+
+In the bug report please include:
+
+- Information about your system and CppTest version.
+
+- How to reproduce the bug.
+  If possible, please include a short test program that reproduces the behavoir.
+  As a last resort, you can also provide a pointer to a larger piece
+  of software that can be downloaded.
+
+- Crash information.
+  If the bug was a crash, supply the exact text that was printed out when the
+  crash occured.
+
+- Further information such as stack traces may also be useful.
+
+- If possible, provide a patch.
+
+- Any other relevant information.
+
+Patches
+=======
+
+Patches should also be submitted to the bug tracking system (see above). If the
+patch fixes an existing bug, add the patch as an attachment to that bug report.
+
+Otherwise, enter a new bug report that describes the patch, and attach the
+patch to that bug report. Please use the PATCH keyword in Bugzilla.
+
+Patches should be in unified diff form, that is, using the -u option to
+GNU diff.
+

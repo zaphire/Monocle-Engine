@@ -1,0 +1,205 @@
+/*!
+
+\page tutorial Tutorial
+
+\section Contents
+
+- \ref tutorial_introduction
+- \ref tutorial_tests
+  - \ref tutorial_test_cases
+  - \ref tutorial_asserts
+- \ref tutorial_output_handlers
+  - \ref tutorial_available_output_handlers
+  - \ref tutorial_screenshots
+- \ref tutorial_test_suites
+  - \ref tutorial_running_test_suites
+  - \ref tutorial_embedded_test_suites
+  - \ref tutorial_test_fixtures
+
+\section tutorial_introduction Introduction
+
+CppTest is a portable and powerful, yet simple, unit testing framework for 
+handling automated tests in C++. The focus lies on usability and extendability.
+Several output formats are supported and new ones are easily added.
+
+This tutorial is intended to quickly get you started.
+
+CppTest is released under the GNU 
+<a href="http://www.gnu.org/copyleft/lesser.html">
+Lesser General Public License</a>.
+
+\section tutorial_tests Tests
+
+\subsection tutorial_test_cases Test cases
+
+Each test must be created and run within a test suite (see 
+\ref tutorial_test_suites below), which must be derived from Test::Suite. 
+Tests must be registered with the TEST_ADD(func) macro inorder to be executed. 
+Note that a test function must return <tt>void</tt> and take no parameters. 
+For example:
+
+\code
+class ExampleTestSuite : public Test::Suite
+{
+public:
+	ExampleTestSuite()
+	{
+		TEST_ADD(ExampleTestSuite::first_test)
+		TEST_ADD(ExampleTestSuite::second_test)
+	}
+	
+private:
+	void first_test();
+	void second_test();
+};
+\endcode
+
+\subsection tutorial_asserts Asserts
+
+Asserts are used to ensure that the tests are correct. If not, one or more 
+asserts will be generated. There exist several types of asserts, see 
+\ref asserts for a complete list.
+
+For example, the functions declared within <tt>ExampleTestSuite</tt> may be 
+declared as:
+
+\code
+void ExampleTestSuite::first_test()
+{
+	// Will succeed since the expression evaluates to true
+	//
+	TEST_ASSERT(1 + 1 == 2)
+	
+	// Will fail since the expression evaluates to false
+	//
+	TEST_ASSERT(0 == 1);
+}
+
+void ExampleTestSuite::second_test()
+{
+	// Will succeed since the expression evaluates to true
+	//
+	TEST_ASSERT_DELTA(0.5, 0.7, 0.3);
+	
+	// Will fail since the expression evaluates to false
+	//
+	TEST_ASSERT_DELTA(0.5, 0.7, 0.1);
+}
+\endcode
+
+\section tutorial_output_handlers Output handlers
+
+\subsection tutorial_available_output_handlers Available output handlers
+
+An output handler takes care of all assert messages and generates some output
+as result. There exist several output handlers that all fit different needs. 
+Currently, the following output handlers exist:
+- Test::TextOutput, which is a simple output handler that outputs its result 
+  to standard out in either terse or verbose mode.
+- Test::CompilerOutput, which emulates the output of a compiler. This makes it 
+  easy to integrate unit testing into your build environment.
+- Test::HtmlOutput, which outputs a fancy HTML table.
+
+New output handlers should be derived from Test::Output.
+
+\subsection tutorial_screenshots Screenshots
+
+The result from the different output handlers is shown below:
+
+- <a href="screenshot-text-terse.png">Terse text output</a>
+- <a href="screenshot-text-verbose.png">Verbose text output</a>
+- <a href="screenshot-compiler.png">Compiler output</a>
+- <a href="html-example.html">HTML output</a>
+
+\section tutorial_test_suites Test suites
+
+\subsection tutorial_running_test_suites Running test suites
+
+The tests within a test suite are all executed when Test::Suite::run() is 
+called. This method returns a boolean value that only returns true if all tests 
+were successful. This value may be used to return a suiteable value from the
+program. For example, the following is required to execute our tests within 
+<tt>ExampleTestSuite</tt>:
+
+\code
+	Test::TextOutput output(Test::TextOutput::Verbose);
+	ExampleTestSuite ets;
+	return ets.run(output) ? EXIT_SUCCESS : EXIT_FAILURE;
+\endcode
+
+Note that a single test normally continues after an assert. However, this 
+behavior may be changed with an optional parameter to Test::Suite::run().
+For example:
+
+\code
+class SomeTestSuite: public Test::Suite
+{
+public:
+	SomeTestSuite() { TEST_ADD(SomeTestSuite::test) }
+private:
+	void test()
+	{
+		TEST_FAIL("this will always fail")
+		TEST_FAIL("this assert will never be executed")
+	}
+};
+
+bool run_tests()
+{
+	SomeTestSuite sts;
+	Test::TextOutput output(Test::TextOutput::Verbose);
+	return sts.run(output, false); // Note the 'false' parameter
+}
+\endcode
+
+\subsection tutorial_embedded_test_suites Embedded test suites
+
+Test suites may also be added other test suites using Test::Suite::add().
+This way, you may develop logically separated test suites and run all tests 
+at once. For example:
+
+\code
+class TestSuite1: public Test::Suite { }; // ... with many tests
+class TestSuite2: public Test::Suite { }; // ... with many tests
+class TestSuite3: public Test::Suite { }; // ... with many tests
+
+bool run_tests()
+{
+	Test::Suite ts;
+	ts.add(auto_ptr<Test::Suite>(new TestSuite1));
+	ts.add(auto_ptr<Test::Suite>(new TestSuite2));
+	ts.add(auto_ptr<Test::Suite>(new TestSuite3));
+	
+	Test::TextOutput output(Test::TextOutput::Verbose);
+	return ts.run(output);
+}
+\endcode
+
+\subsection tutorial_test_fixtures Test fixtures
+
+Test cases in the same test suite often share the same requirements, they all
+require some known set of objects or resources. Instead of repeating all 
+initialization code for each test it may be moved to the Test::Suite::setup() 
+and Test::Suite::tear_down() functions. The setup function is called before 
+each test function is called, and the tear down function is called after each
+test function has been called. For example:
+
+\code
+class SomeTestSuite: public Test::Suite
+{
+public:
+	SomeTestSuite() 
+	{ 
+		TEST_ADD(SomeTestSuite::test1) 
+		TEST_ADD(SomeTestSuite::test2) 
+	}
+protected:
+	virtual void setup()     {} // setup resources... 
+	virtual void tear_down() {} // remove resources...
+private:
+	void test1() {} // use common resources...
+	void test2() {} // use common resources...
+};
+\endcode
+
+*/

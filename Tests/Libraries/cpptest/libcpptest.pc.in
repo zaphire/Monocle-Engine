@@ -1,0 +1,12 @@
+prefix=@prefix@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libcpptest
+Description: C++ test suite
+Version: @VERSION@
+Libs: -L${libdir} -lcpptest
+Cflags: -I${includedir}
+
+

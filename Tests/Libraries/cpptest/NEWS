@@ -1,0 +1,65 @@
+Release 1.1.1 -- March 26 2010
+------------------------------
+- Fixed: Suite no longer successful with uncaught exceptions (#2976484)
+    Thanks for the patch to Nate Gallaher.
+- Fixed: Include cpptest-source.h from cpptest-suite.h (#2968577)
+    Thanks for reporting to Dzmitry Liauchuk.
+- Changed: Soname set to 0:7:0
+
+Release 1.1.0 -- July 17 2008
+-----------------------------
+- Changed: HTML output handler migrated from 'HTML 4.0 Transitional'
+    to 'XHTML 1.0 Strict'. Thanks for the patch to Robin Patenall.
+- Changed: Exceptions from test cases are now caught. The originating
+    test is evaluated as an error. (#1291742)
+- Fixed: Child suite failure was not propagated upwards. (#1719029)
+- Fixed: '100%' could be reported in spite of failures. (#1375372)
+- Fixed: Now builds with GNU G++ 4.3.1 and Sun C++ 5.9.
+- Fixed: Unused parameter warnings in cpptest-output.h (#2005194)
+- Removed: '-Wno-unused-parameter' compilation flag
+- Changed: File config.h for Windows renamed to winconfig.h
+- Changed: Soname set to 0:6:0
+
+Release 1.0.5 -- February 4 2008
+--------------------------------
+Maintenance release. Added a more flexible way of handling the 
+pkg-config file.
+
+Release 1.0.4 -- December 12 2007
+---------------------------------
+Added a pkg-config file. The pkg-config program is used to retrieve 
+information about installed libraries in the system. It is typically 
+used to compile and link against one or more libraries.
+
+Release 1.0.3 -- June 8 2005
+----------------------------
+This is a maintenance release concerning the configuration tools only.
+The library itself is not affected. 
+
+- Converted files from DOS format to UNIX format.
+- Updated the configuration file for Doxygen 
+- Removed some Doxygen related warnings
+- 'configure.ac' changes
+  - Changed '--enable-doc' to be set to 'no' by default.
+  - Changed Doxygen program checking so that a missing program does not abort 
+    the configuration process.
+  - Removed '--enabled-debug'.
+  - Added '--enable-warnings'.
+
+Release 1.0.2 -- July 8 2004
+----------------------------
+- Added Microsoft VisualStudio.NET projects files. They have been present
+  since 1.0.0 but not in distributed form, e.g., *.tar.gz or *.zip.
+
+Release 1.0.1 -- February 5 2004
+--------------------------------
+- Added a Microsoft Studio .NET project/solution that compiles both the 
+  library and the test program.
+- Added some more documentation.
+- Changed all "C++Test" strings to "CppTest" after a not so friendly letter
+  from Parasoft, which apparently have an own product called C++Test.
+
+Release 1.0.0 -- Maj 13 2003
+---------------------------
+- Initial public release.
+

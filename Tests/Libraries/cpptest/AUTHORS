@@ -1,0 +1,11 @@
+Current maintainer
+	Sebastian Pipping <sebastian@pipping.org>
+
+Main author:
+	Niklas Lundell <nilu@users.sourceforge.net>
+
+Contributors:
+	David Morris - pkg-config and installation patches.
+	Robin Patenall - migration to XHTML 1.0 strict
+	Sebastian Pipping - several bugfixes
+
