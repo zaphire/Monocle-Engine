@@ -9,7 +9,6 @@ namespace Monocle
 	{
 	public:
         AudioAsset();
-        ~AudioAsset();
         
         /**
             Prepares the asset for decoding.

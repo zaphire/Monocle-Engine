@@ -22,11 +22,9 @@ namespace Monocle
         dataBuffer = 0;
         decodeString = "";
     }
-    
-    AudioAsset::~AudioAsset()
-    {
-        Unload();
-    }
+	
+	/// Alec: Removed destructor.
+	/// These objects get deleted when you call RemoveReference() (if the references run out)
     
     void AudioAsset::Load(const std::string &filename, bool streamFromDisk)
 	{
@@ -68,7 +66,10 @@ namespace Monocle
 		Debug::Log("Freeing audio memory for: " + this->filename);
         
         if (dataBuffer)
+		{
             free(dataBuffer);
+			dataBuffer = NULL;
+		}
 	}
     
     bool AudioAsset::IsStreaming()

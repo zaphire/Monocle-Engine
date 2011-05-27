@@ -504,10 +504,8 @@ namespace Monocle
 		glBegin(GL_QUADS);
 		for (int i = 0; i < nodes.size()-1; i++)
 		{
-			if (nodes[i]->variant != -1)
+			if (nodes[i]->variant != -1 && nodes[i]->variant < cells)
 			{
-				
-
 				Vector2 diff1;
 				Vector2 perp1;
 

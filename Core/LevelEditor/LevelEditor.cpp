@@ -215,20 +215,27 @@ namespace Monocle
 	{
 		//Entity *newEntity = (Entity*)(new typeid(T));
 		Entity *newEntity = entity->Clone();
-		newEntity->position = position;
-		//if (entity->GetParent())
-		//	entity->GetParent()->Add(newEntity);
-		//else
 		scene->Add(newEntity);
-		Select(newEntity);
-		newEntity->SetParent(entity->GetParent());
+
+		if (entity->GetParent())
+		{
+			newEntity->position = position - entity->GetParent()->GetWorldPosition();
+		}
+		else
+		{
+			newEntity->position = position;
+		}
 
 		// special case code
-		Node *node = dynamic_cast<Node*>(entity);
+		Node *node = dynamic_cast<Node*>(newEntity);
 		if (node && selectedNode)
 		{
 			selectedNode->InsertNext(node);
 		}
+
+		newEntity->SetParent(entity->GetParent());
+
+		Select(newEntity);
 	}
 
 	//// cloning a node is a special case for now
@@ -330,7 +337,7 @@ namespace Monocle
 		if (Input::IsKeyPressed(keyFocus))
 		{
 			//Graphics::MoveCameraPosition(selectedEntity->position, 0.125f, EASE_OUTSIN);
-			scene->GetCamera()->position = selectedEntity->position;
+			scene->GetMainCamera()->position = selectedEntity->position;
 		}
 
 		if (Input::IsKeyHeld(keyFlip))
