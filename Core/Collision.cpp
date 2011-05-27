@@ -35,11 +35,14 @@ namespace Monocle
 		for (std::list<Collider*>::iterator i = instance->colliders.begin(); i != instance->colliders.end(); ++i)
 		{
 			Entity *entity = (*i)->GetEntity();
-			if (entity && entity->HasTag(tag))
+			if (entity)
 			{
-				if ((*i)->IntersectsLine(start, end, radius, collisionData))
+				if (entity->HasTag(tag))
 				{
-					return collisionData->collider;
+					if ((*i)->IntersectsLine(start, end, radius, collisionData))
+					{
+						return collisionData->collider;
+					}
 				}
 			}
 		}

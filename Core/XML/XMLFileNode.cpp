@@ -46,15 +46,25 @@ namespace Monocle
 	
 	FileNode* XMLFileNode::NextChildNode(const std::string &name)
 	{
+		// if we have an iterator
 		if (iterator)
-			iterator->element = iterator->element->NextSiblingElement(name);
-
-		if (iterator->element == NULL)
 		{
-			delete iterator;
-			iterator = NULL;
+			// if we have an element
+			if (iterator->element)
+			{
+				// get the next element
+				iterator->element = iterator->element->NextSiblingElement(name);
+			}
+			
+			// if it's element is NULL
+			if (iterator->element == NULL)
+			{
+				// delete it
+				delete iterator;
+				iterator = NULL;
+			}
 		}
-
+			
 		return iterator;
 	}
 

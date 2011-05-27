@@ -187,9 +187,10 @@ namespace Monocle
 					TiXmlElement *eTilemap = eLevel->FirstChildElement("Tilemap");
 					while (eTilemap)
 					{
-						Entity *entity = new Entity();
+						
 						Tilemap *tilemap = new Tilemap(instance->GetTilesetByName(XMLReadString(eTilemap, "set")), instance->width, instance->height, XMLReadInt(eTilemap, "tileWidth"), XMLReadInt(eTilemap, "tileHeight"));
 						instance->tilemaps.push_back(tilemap);
+						Entity *entity = new Entity();
 						entity->SetGraphic(tilemap);
 						instance->scene->Add(entity);
 

@@ -76,10 +76,10 @@ namespace Monocle
 	void TextureAtlas::Save(TiXmlDocument *document)
 	{
 		TiXmlElement xmlTextureAtlas("TextureAtlas");
-		XMLFileNode xmlFileNode(&xmlTextureAtlas);
-		xmlFileNode.Write("image", image);
-		xmlFileNode.Write("width", width);
-		xmlFileNode.Write("height", height);
+		XMLFileNode xmlFileNodeTextureAtlas(&xmlTextureAtlas);
+		xmlFileNodeTextureAtlas.Write("image", image);
+		xmlFileNodeTextureAtlas.Write("width", width);
+		xmlFileNodeTextureAtlas.Write("height", height);
 
 		for (std::map<std::string, TextureAtlasEntry*>::iterator i = entries.begin(); i != entries.end(); ++i)
 		{
@@ -97,10 +97,10 @@ namespace Monocle
 
 	void TextureAtlas::Load(TiXmlElement *element)
 	{
-		XMLFileNode xmlFileNode(element);
-		xmlFileNode.Read("image", image);
-		xmlFileNode.Read("width", width);
-		xmlFileNode.Read("height", height);
+		XMLFileNode xmlFileNodeTextureAtlas(element);
+		xmlFileNodeTextureAtlas.Read("image", image);
+		xmlFileNodeTextureAtlas.Read("width", width);
+		xmlFileNodeTextureAtlas.Read("height", height);
 
 		TiXmlElement *xmlAtlasEntry = element->FirstChildElement("TextureAtlasEntry");
 		while (xmlAtlasEntry)

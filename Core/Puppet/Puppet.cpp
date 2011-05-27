@@ -499,9 +499,9 @@ namespace Monocle
 						/// KeyFrame
 					
 						std::list<KeyFrame> *keyFrames = partKeyFrames->GetKeyFrames();
-						for (std::list<KeyFrame>::iterator i = keyFrames->begin(); i != keyFrames->end(); ++i)
+						for (std::list<KeyFrame>::iterator k = keyFrames->begin(); k != keyFrames->end(); ++k)
 						{
-							KeyFrame *keyFrame = &(*i);
+							KeyFrame *keyFrame = &(*k);
 
 							TiXmlElement xmlKeyFrame("KeyFrame");
 							XMLFileNode xmlFileNodeKeyFrame(&xmlKeyFrame);

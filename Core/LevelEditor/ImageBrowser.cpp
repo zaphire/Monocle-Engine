@@ -74,16 +74,16 @@ namespace Monocle
 		selectionImages.clear();
 
 		Entity *bg = new Entity();
+		scene->Add(bg);
 		bg->SetParent(this);
 		bg->SetGraphic(new Sprite("", 128, 600));
 		bg->color = Color::black;
 		bg->color.a = 0.75f;
-		scene->Add(bg);
+		
 
 		grid = new Entity();
-		grid->SetParent(this);
 		scene->Add(grid);
-		
+		grid->SetParent(this);
 
 		ForEachFile(directory, "png", &ImageBrowser::FileCallback, (intptr_t)this);
 	}

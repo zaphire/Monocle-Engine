@@ -12,7 +12,7 @@
 
 namespace Monocle
 {
-	const int ENTITY_CONTROLPOINT_SIZE = 20;
+	const float ENTITY_CONTROLPOINT_SIZE = 20.0f;
 
 	class Scene;
 	class Collision;

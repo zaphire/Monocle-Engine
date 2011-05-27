@@ -30,12 +30,15 @@ namespace Monocle
 		while(node)
 		{
 			Node *next = node->GetNext();
-			if (next && node->variant != -1)
+			if (next)
 			{
-				if (LinesIntersect(node->GetWorldPosition(), next->GetWorldPosition(), start, end, collisionData))
+				if (node->variant != -1)
 				{
-					collisionData->collider = this;
-					return true;
+					if (LinesIntersect(node->GetWorldPosition(), next->GetWorldPosition(), start, end, collisionData))
+					{
+						collisionData->collider = this;
+						return true;
+					}
 				}
 			}
 			node = next;
