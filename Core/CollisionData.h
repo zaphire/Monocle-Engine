@@ -11,13 +11,13 @@ namespace Monocle
 	public:
 		CollisionData();
 
-		//! position where the collision occurred
+		//! Position where the collision occurred
 		Vector2 hitPoint;
-		//! normal of the collision
+		//! Normal of the collision
 		Vector2 normal;
-		//! how far into the collider we've moved
+		//! How far into the collider we've moved
 		float penetration;
-		//! pointer to the collider that was hit
+		//! Pointer to the collider that was hit
 		Collider *collider;
 	};
 }
