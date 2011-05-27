@@ -4,6 +4,7 @@
 
 #include <Platform.h>
 
+#include <Game.h>
 #include <FontAsset.h>
 #include <Audio/AudioAsset.h>
 #include <TextureAsset.h>
@@ -66,7 +67,7 @@ namespace Monocle
                 //requested the same file, should return identical pointer
                 TEST_ASSERT( audio == newaudio );
                 
-                newaudio = assets->RequestAudio("AudioTest/powerup.wav", false);
+                newaudio = assets->RequestAudio("AudioTest/Powerup.wav", false);
                 TEST_ASSERT( newaudio != NULL );
                 //new file, should not be the same pointer
                 TEST_ASSERT( audio != newaudio );
@@ -83,7 +84,12 @@ namespace Monocle
                 TEST_ASSERT( font != NULL );
                 
                 FontAsset *newfont = assets->RequestFont("AudioTest/LiberationSans-Regular.ttf", 14);
+                TEST_ASSERT( newfont != NULL );
                 TEST_ASSERT( font != newfont );
+                
+                newfont = assets->RequestFont("AudioTest/LiberationSans-Regular.ttf", 12);
+                TEST_ASSERT( font != NULL );
+                TEST_ASSERT( font == newfont );
                 
                 delete font;
                 delete newfont;
@@ -93,11 +99,21 @@ namespace Monocle
             
             void Assets::RequestTexture()
             {
-                assets->SetContentPath( "../../../Content/" );
-                TextureAsset *tex = assets->RequestTexture("doesntexist.png");
+                Game *g = new Game();
+                
+                Monocle::Assets::SetContentPath( "../../../Content/" );
+                
+                TextureAsset *tex = Monocle::Assets::RequestTexture("doesntexist.png");
                 TEST_ASSERT( tex == NULL );
-                tex = assets->RequestTexture("Jumper/Graphics/player.png");
+                
+                tex = Monocle::Assets::RequestTexture("Ogmo/player.png");
                 TEST_ASSERT( tex != NULL );
+                
+                TextureAsset *newtex = Monocle::Assets::RequestTexture("Ogmo/player.png");
+                TEST_ASSERT( tex == newtex )
+                
+                delete tex;
+                tex = NULL;
             }
         }
     }
