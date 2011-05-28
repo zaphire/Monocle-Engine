@@ -13,7 +13,6 @@
 #include <cstdio>
 
 #include <stdint.h>
-#include <iostream>
 #include <fstream>
 
 #define GLEW_STATIC
@@ -616,8 +615,6 @@ namespace Monocle
         
         char *data = new char[w * h * 3];
         glReadPixels(0,0, w, h, GL_BGR, GL_UNSIGNED_BYTE, data);
-        
-		std::cout << sizeof(bmp_header) << std::endl;
 
         bmp_header.bfType1 = 'B';
         bmp_header.bfType2 = 'M';
