@@ -21,6 +21,13 @@ namespace Monocle
 		BLEND_ADDITIVE,
 		BLEND_MULTIPLY,
 	};
+	
+	enum ImageType
+	{
+	    IMAGE_BMP,
+	    IMAGE_PNG,
+	    IMAGE_TGA
+	};
 
 	class Graphic
 	{
@@ -107,7 +114,7 @@ namespace Monocle
 
 		static void RenderPathMesh(const std::vector<Node*> &nodes, int cells, float size, bool flipX=false, bool flipY=false);
 		
-		static void ScreenToBMP(const std::string &filename);
+		static void ScreenToImage(const std::string &filename, ImageType type);
 
 	private:
 		

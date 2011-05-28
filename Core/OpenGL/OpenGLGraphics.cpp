@@ -15,6 +15,9 @@
 #include <stdint.h>
 #include <fstream>
 
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include <stb/stb_image_write.h>
+
 #define GLEW_STATIC
 #include <GL/glew.h>
 
@@ -583,84 +586,36 @@ namespace Monocle
         instance->bgReset = bgReset;
     }
     
-    void Graphics::ScreenToBMP(const std::string &filename)
+    void Graphics::ScreenToImage(const std::string &filename, ImageType type)
     {
-        struct
-        {
-            int8_t bfType1;
-            int8_t bfType2;
-            int32_t bfSize;
-            int16_t bfReserved1;
-            int16_t bfReserved2;
-            int32_t bfOffbits;
-        } bmp_header;
-        struct
-        {
-            int32_t biSize;
-            int32_t biWidth;
-            int32_t biHeight;
-            int16_t biPlanes;
-            int16_t biBitCount;
-            int32_t biCompression;
-            int32_t biSizeImage;
-            int32_t biXPxlsPerMeter;
-            int32_t biYPxlsPerMeter;
-            int32_t biClrUsed;
-            int32_t biClrImportant;
-        } dib_header;
-        
-        int w = Platform::GetWidth(), h = Platform::GetHeight();
-        int pix = w * h;
-        int bpp = 24;
-        
+        int w = Platform::GetWidth(),
+            h = Platform::GetHeight();
         char *data = new char[w * h * 3];
-        glReadPixels(0,0, w, h, GL_BGR, GL_UNSIGNED_BYTE, data);
-
-        bmp_header.bfType1 = 'B';
-        bmp_header.bfType2 = 'M';
-        bmp_header.bfSize = 14 + 40 + w*h*3;
-        bmp_header.bfReserved1 = 0;
-        bmp_header.bfReserved2 = 0;
-        bmp_header.bfOffbits = 14 + 40;
+        glReadPixels(0,0, w, h, GL_RGB, GL_UNSIGNED_BYTE, data);
         
-        dib_header.biSize = 40;
-        dib_header.biWidth = w;
-        dib_header.biHeight = h;
-        dib_header.biPlanes = 1;
-        dib_header.biBitCount = 24;
-        dib_header.biCompression = 0;
-        dib_header.biSizeImage = w*h*3;
-        dib_header.biXPxlsPerMeter = 2400;
-        dib_header.biYPxlsPerMeter = 2400;
-        dib_header.biClrUsed = 0;
-        dib_header.biClrImportant = 0;
+        char* tmpline = new char[w*3];
         
-        std::fstream out;
-        out.open(filename.data(), std::ios::out | std::ios::binary | std::ios::trunc);
+        const int linewidth = w * 3;
         
-        out.write((char*)&bmp_header.bfType1, sizeof(bmp_header.bfType1));
-        out.write((char*)&bmp_header.bfType2, sizeof(bmp_header.bfType2));
-        out.write((char*)&bmp_header.bfSize, sizeof(bmp_header.bfSize));
-        out.write((char*)&bmp_header.bfReserved1, sizeof(bmp_header.bfReserved1));
-        out.write((char*)&bmp_header.bfReserved2, sizeof(bmp_header.bfReserved2));
-        out.write((char*)&bmp_header.bfOffbits, sizeof(bmp_header.bfOffbits));
+        //flip the image
+        for(int y = 0; y < (h/2); y++)
+        {
+            std::copy(data + y * linewidth, data + y * linewidth + linewidth, tmpline);
+            std::copy(data + (h-y) * linewidth, data + (h-y) * linewidth + linewidth, data + y * linewidth);
+            std::copy(tmpline, tmpline + linewidth, data + (h-y) * linewidth);
+        }
         
-        out.write((char*)&dib_header.biSize, sizeof(dib_header.biSize));
-        out.write((char*)&dib_header.biWidth, sizeof(dib_header.biWidth));
-        out.write((char*)&dib_header.biHeight, sizeof(dib_header.biHeight));
-        out.write((char*)&dib_header.biPlanes, sizeof(dib_header.biPlanes));
-        out.write((char*)&dib_header.biBitCount, sizeof(dib_header.biBitCount));
-        out.write((char*)&dib_header.biCompression, sizeof(dib_header.biCompression));
-        out.write((char*)&dib_header.biSizeImage, sizeof(dib_header.biSizeImage));
-        out.write((char*)&dib_header.biXPxlsPerMeter, sizeof(dib_header.biXPxlsPerMeter));
-        out.write((char*)&dib_header.biYPxlsPerMeter, sizeof(dib_header.biYPxlsPerMeter));
-        out.write((char*)&dib_header.biClrUsed, sizeof(dib_header.biClrUsed));
-        out.write((char*)&dib_header.biClrImportant, sizeof(dib_header.biClrImportant));
-                
-        out.write(data, w*h*3);
+        switch(type)
+        {
+            case IMAGE_PNG:
+                stbi_write_png( filename.data(), w, h, 3, data, w * 3 ); break;
+            case IMAGE_BMP:
+                stbi_write_bmp( filename.data(), w, h, 3, data); break;
+            case IMAGE_TGA:
+                stbi_write_tga( filename.data(), w, h, 3, data); break;
+        }
         
-        out.close();
-        
+        delete tmpline;
         delete data;
     }
 }
