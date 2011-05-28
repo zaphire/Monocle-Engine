@@ -11,7 +11,6 @@ namespace Monocle
 
     Input::EventHandler::~EventHandler()
     {
-        Monocle::Debug::Log("eventhandler destructing");
         Input::RemoveHandler(this);
     }
 
