@@ -7,6 +7,7 @@
 class EntityInputHandler : public Monocle::Entity, public Monocle::Input::EventHandler
 {
 public:
+    ~EntityInputHandler() { }
     void OnKeyPress() { }
 };
 
@@ -25,7 +26,9 @@ public:
         
         if(key == Monocle::KEY_R)
         {
-            delete entity;
+            if(entity)
+                delete entity;
+            entity = NULL;
         }
     }
     
