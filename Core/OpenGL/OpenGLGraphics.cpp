@@ -12,6 +12,8 @@
 #include <cstdlib>
 #include <cstdio>
 
+#include <stdint.h>
+
 #include <fstream>
 
 #define GLEW_STATIC
