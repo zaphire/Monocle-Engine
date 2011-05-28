@@ -23,4 +23,9 @@ namespace Monocle
 	{
 		return ((float) rand()) / (float) RAND_MAX;
 	}
+
+	float Random::RangeFloat(float start, float end)
+	{
+		return ((((float) rand()) / (float) RAND_MAX) * (end-start)) + start;
+	}
 }

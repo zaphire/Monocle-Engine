@@ -96,6 +96,24 @@ namespace Monocle
 		return (x * b.y - y * b.x);
 	}
 
+	// static version
+	Vector2 Vector2::Reflect(const Vector2& a, const Vector2& b)
+	{
+		Vector2 newVec;
+		float dotProduct = -a.x*b.x - a.y*b.y;
+		newVec.x = a.x + 2 * b.x * dotProduct;
+		newVec.y = a.y + 2 * b.y * dotProduct;
+		return newVec;
+	}
+
+	Vector2 Vector2::Reflect(const Vector2 &other)
+	{
+		float dotProduct = -x*other.x - y*other.y;
+		x = x + 2 * other.x * dotProduct;
+		y = y + 2 * other.y * dotProduct;
+		return *this;
+	}
+
 	float Vector2::GetAngleRadians()
 	{
 		float angle = atan2(y, x);
