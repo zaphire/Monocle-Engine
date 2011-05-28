@@ -3,12 +3,11 @@
 #include "Platform.h"
 #include "Vector2.h"
 #include <string>
-#include <vector>
 #include <map>
 #include <list>
 
 namespace Monocle
-{
+{    
 	//!
 	//! \brief Manages input for Monocle
 	//! 
@@ -19,6 +18,19 @@ namespace Monocle
 	class Input
 	{
 	public:
+        class EventHandler
+        {
+        public:
+            virtual ~EventHandler();
+            virtual void OnKeyPress(Monocle::KeyCode key) {}
+            virtual void OnKeyRelease(Monocle::KeyCode key) {}
+            
+            virtual void OnMouseMove(Vector2 mousePosition) {}
+            virtual void OnMousePress(Vector2 mousePosition, MouseButton button) {}
+            virtual void OnMouseRelease(Vector2 mousePosition, MouseButton button) {}
+            virtual void OnMouseScroll(int scrollDelta) {}
+        };
+	
 		Input();
 		void Init();
 
@@ -49,8 +61,9 @@ namespace Monocle
 		static bool IsKeyMaskReleased(const std::string& mask);
 		static bool IsKeyMaskPressed(const std::string& mask);
 
+		static void AddHandler(EventHandler *handler);
+		static void RemoveHandler(EventHandler *handler);
 		
-
 		void Update();
 		
 	private:
@@ -63,5 +76,8 @@ namespace Monocle
 		bool currentMouseButtons[MOUSE_BUTTON_MAX];
 
 		std::map<std::string, std::list<KeyCode> > keyMasks;
+		int lastMouseScroll;
+		Vector2 lastMousePos;
+		std::list < EventHandler* > handlers;
 	};
 }
