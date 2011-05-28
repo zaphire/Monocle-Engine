@@ -12,9 +12,6 @@
 #include <cstdlib>
 #include <cstdio>
 
-#include <stdint.h>
-#include <fstream>
-
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include <stb/stb_image_write.h>
 
