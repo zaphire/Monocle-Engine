@@ -1,4 +1,5 @@
 #include "AssetsTest.h"
+#include "../Tests.h"
 
 #include <cpptest-assert.h>
 
@@ -55,7 +56,7 @@ namespace Monocle
             
             void Assets::RequestAudio()
             {
-                assets->SetContentPath( "../../../Content/" );
+                assets->SetContentPath( CONTENT_PATH );
                 AudioAsset *audio = assets->RequestAudio("doesntexist.wav", false);
                 //File does not exist, return value should be null
                 TEST_ASSERT( audio == NULL );
