@@ -21,6 +21,7 @@ namespace Monocle
         class EventHandler
         {
         public:
+            virtual ~EventHandler();
             virtual void OnKeyPress(Monocle::KeyCode key) {}
             virtual void OnKeyRelease(Monocle::KeyCode key) {}
             
@@ -61,6 +62,7 @@ namespace Monocle
 		static bool IsKeyMaskPressed(const std::string& mask);
 
 		static void AddHandler(EventHandler *handler);
+		static void RemoveHandler(EventHandler *handler);
 		
 		void Update();
 		

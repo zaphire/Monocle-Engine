@@ -1,7 +1,14 @@
 #pragma once
 
 #include <Scene.h>
+#include <Entity.h>
 #include <Input.h>
+
+class EntityInputHandler : public Monocle::Entity, public Monocle::Input::EventHandler
+{
+public:
+    void OnKeyPress() { }
+};
 
 class InputHandlerTestScene : public Monocle::Scene, public Monocle::Input::EventHandler
 {
@@ -9,11 +16,17 @@ public:
     void Begin()
     {
         Monocle::Input::AddHandler(this);
+        Monocle::Input::AddHandler(entity = new EntityInputHandler());
     }
     
     void OnKeyPress(Monocle::KeyCode key)
     {
         Monocle::Debug::Log("Key Pressed!");
+        
+        if(key == Monocle::KEY_R)
+        {
+            delete entity;
+        }
     }
     
     void OnKeyRelease(Monocle::KeyCode key)
@@ -52,4 +65,7 @@ public:
         Monocle::Debug::Log("Mouse Moved!");
         Monocle::Debug::Log(mousePos);
     }
+    
+private:
+    EntityInputHandler *entity;
 };

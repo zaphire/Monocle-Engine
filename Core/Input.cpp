@@ -9,6 +9,12 @@ namespace Monocle
 {
 	Input *Input::instance = NULL;
 
+    Input::EventHandler::~EventHandler()
+    {
+        Monocle::Debug::Log("eventhandler destructing");
+        Input::RemoveHandler(this);
+    }
+
 	Input::Input()
 	{
 		instance = this;
@@ -207,5 +213,10 @@ namespace Monocle
 	void Input::AddHandler(EventHandler *handler)
 	{
 	    instance->handlers.push_back(handler);
+	}
+	
+	void Input::RemoveHandler(EventHandler *handler)
+	{
+	    instance->handlers.remove(handler);
 	}
 }
