@@ -22,7 +22,7 @@ namespace Monocle
 	{
 	public:
 		//! \brief Requests a texture asset
-		//! Returns a pointer to the requested Texture Asset.  Calling this function multiple times with the same filename will return
+		//! Returns a pointer to the requested Texture Asset, NULL on failure.  Calling this function multiple times with the same filename will return
 		//! a pointer to the same Texture.  Pointers returned from this function should not be deleted by the caller.
 		//! \param filename The path to the requested file, relative to the current content path.
 		//! \param FilterType The image filter type to use on the generated texture.
@@ -31,7 +31,7 @@ namespace Monocle
 		//! \sa RequestAudio, RequestFont, FilterType
 		static TextureAsset *RequestTexture(const std::string &filename, FilterType filter = FILTER_LINEAR, bool repeatX = false, bool repeatY = false);
 		//! \brief Requests a font asset
-		//! Returns a pointer to the requested Font Asset.  Calling this function multiple times with the same filename will return
+		//! Returns a pointer to the requested Font Asset, NULL on failure.  Calling this function multiple times with the same filename will return
 		//! a pointer to the same Font.  Pointers returned from this function should not be deleted by the caller.
 		//! \param filename The path to the requested file, relative to the current content path.
 		//! \param size The point-size of the font.
@@ -40,7 +40,7 @@ namespace Monocle
 		//! \sa RequestAudio, RequestTexture
         static FontAsset *RequestFont(const std::string &filename, float size, int textureWidth=-1, int textureHeight=-1);
         //! \brief Requests an audio asset
-		//! Returns a pointer to the requested Audio Asset.  Calling this function multiple times with the same filename will return
+		//! Returns a pointer to the requested Audio Asset, NULL on failure.  Calling this function multiple times with the same filename will return
 		//! a pointer to the same Audio.  Pointers returned from this function should not be deleted by the caller.
 		//! \param filename The path to the requested file, relative to the current content path.
 		//! \param streamFromDisk If true, the audio is not pre-loaded into memory
