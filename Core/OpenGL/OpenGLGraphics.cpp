@@ -12,6 +12,9 @@
 #include <cstdlib>
 #include <cstdio>
 
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include <stb/stb_image_write.h>
+
 #define GLEW_STATIC
 #include <GL/glew.h>
 
@@ -578,6 +581,39 @@ namespace Monocle
     void Graphics::EnableBackgroundReset( bool bgReset )
     {
         instance->bgReset = bgReset;
+    }
+    
+    void Graphics::ScreenToImage(const std::string &filename, ImageType type)
+    {
+        int w = Platform::GetWidth(),
+            h = Platform::GetHeight();
+        char *data = new char[w * h * 3];
+        glReadPixels(0,0, w, h, GL_RGB, GL_UNSIGNED_BYTE, data);
+        
+        char* tmpline = new char[w*3];
+        
+        const int linewidth = w * 3;
+        
+        //flip the image
+        for(int y = 0; y < (h/2); y++)
+        {
+            std::copy(data + y * linewidth, data + y * linewidth + linewidth, tmpline);
+            std::copy(data + (h-y) * linewidth, data + (h-y) * linewidth + linewidth, data + y * linewidth);
+            std::copy(tmpline, tmpline + linewidth, data + (h-y) * linewidth);
+        }
+        
+        switch(type)
+        {
+            case IMAGE_PNG:
+                stbi_write_png( filename.data(), w, h, 3, data, w * 3 ); break;
+            case IMAGE_BMP:
+                stbi_write_bmp( filename.data(), w, h, 3, data); break;
+            case IMAGE_TGA:
+                stbi_write_tga( filename.data(), w, h, 3, data); break;
+        }
+        
+        delete tmpline;
+        delete data;
     }
 }
 
