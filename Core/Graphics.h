@@ -106,6 +106,8 @@ namespace Monocle
 		static void EndLine();
 
 		static void RenderPathMesh(const std::vector<Node*> &nodes, int cells, float size, bool flipX=false, bool flipY=false);
+		
+		static void ScreenToBMP(const std::string &filename);
 
 	private:
 		
