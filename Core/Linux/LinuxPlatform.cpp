@@ -327,8 +327,9 @@ namespace Monocle
                         mouseScroll -= 120; break;
                     }
 
-                    Platform::SetMouseButton(button,
-                                             event.type == ButtonPress);
+                    if(mouseScroll == 0)
+                        Platform::SetMouseButton(button,
+                                                 event.type == ButtonPress);
                     Platform::mousePosition = Vector2(event.xbutton.x,
                                                       event.xbutton.y);
                 } break;
