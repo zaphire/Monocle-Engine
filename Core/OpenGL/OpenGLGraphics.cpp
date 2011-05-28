@@ -13,7 +13,7 @@
 #include <cstdio>
 
 #include <stdint.h>
-
+#include <iostream>
 #include <fstream>
 
 #define GLEW_STATIC
@@ -586,14 +586,13 @@ namespace Monocle
     
     void Graphics::ScreenToBMP(const std::string &filename)
     {
-        typedef __int16_t WORD;
         struct
         {
-            char bfType1;
-            char bfType2;
+            int8_t bfType1;
+            int8_t bfType2;
             int32_t bfSize;
-            WORD bfReserved1;
-            WORD bfReserved2;
+            int16_t bfReserved1;
+            int16_t bfReserved2;
             int32_t bfOffbits;
         } bmp_header;
         struct
@@ -601,8 +600,8 @@ namespace Monocle
             int32_t biSize;
             int32_t biWidth;
             int32_t biHeight;
-            WORD biPlanes;
-            WORD biBitCount;
+            int16_t biPlanes;
+            int16_t biBitCount;
             int32_t biCompression;
             int32_t biSizeImage;
             int32_t biXPxlsPerMeter;
@@ -616,32 +615,34 @@ namespace Monocle
         int bpp = 24;
         
         char *data = new char[w * h * 3];
-        glReadPixels(0,0, w, h, GL_RGB, GL_UNSIGNED_BYTE, data);
+        glReadPixels(0,0, w, h, GL_BGR, GL_UNSIGNED_BYTE, data);
         
+		std::cout << sizeof(bmp_header) << std::endl;
+
         bmp_header.bfType1 = 'B';
         bmp_header.bfType2 = 'M';
-        bmp_header.bfSize = sizeof(bmp_header) + sizeof(dib_header) + (w * h * 3);
+        bmp_header.bfSize = 14 + 40 + w*h*3;
         bmp_header.bfReserved1 = 0;
         bmp_header.bfReserved2 = 0;
-        bmp_header.bfOffbits = sizeof(bmp_header) + sizeof(dib_header);
+        bmp_header.bfOffbits = 14 + 40;
         
-        dib_header.biSize = sizeof(dib_header);
+        dib_header.biSize = 40;
         dib_header.biWidth = w;
         dib_header.biHeight = h;
         dib_header.biPlanes = 1;
         dib_header.biBitCount = 24;
         dib_header.biCompression = 0;
-        dib_header.biSizeImage = w * h * 3;
-        dib_header.biXPxlsPerMeter = 0;
-        dib_header.biYPxlsPerMeter = 0;
+        dib_header.biSizeImage = w*h*3;
+        dib_header.biXPxlsPerMeter = 2400;
+        dib_header.biYPxlsPerMeter = 2400;
         dib_header.biClrUsed = 0;
         dib_header.biClrImportant = 0;
-                
+        
         std::fstream out;
         out.open(filename.data(), std::ios::out | std::ios::binary | std::ios::trunc);
         
-        out.write(&bmp_header.bfType1, sizeof(bmp_header.bfType1));
-        out.write(&bmp_header.bfType2, sizeof(bmp_header.bfType2));
+        out.write((char*)&bmp_header.bfType1, sizeof(bmp_header.bfType1));
+        out.write((char*)&bmp_header.bfType2, sizeof(bmp_header.bfType2));
         out.write((char*)&bmp_header.bfSize, sizeof(bmp_header.bfSize));
         out.write((char*)&bmp_header.bfReserved1, sizeof(bmp_header.bfReserved1));
         out.write((char*)&bmp_header.bfReserved2, sizeof(bmp_header.bfReserved2));
