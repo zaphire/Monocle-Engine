@@ -89,19 +89,26 @@ namespace Monocle
 		//! Check our collider against all entities that have "tag" - warping us to atPosition first, then back to our original position after
 		Collider* CollideAt(const std::string &tag, const Vector2& atPosition, CollisionData *collisionData=NULL);
 
-		//Tagging API
+		//! Associates this entity with the given tag
 		void AddTag(const std::string& tag);
+		//! Checks whether this entity is associated with a given tag
 		bool HasTag(const std::string& tag);
+		//! Removes a tag from this Entity
 		void RemoveTag(const std::string& tag);
+		//! Gets the tag at the given offset from the list of tags
 		const std::string& GetTag(int index);
+		//! Gets the number of tags associated with this entity
 		int GetNumberOfTags();
 
-		//! is our layer number equal to the layer passed in
+		//! Checks if this entity is on the given layer
 		bool IsLayer(int layer);
+		//! Gets the layer that this entity is on
 		//! \return our layer number
 		int GetLayer();
-		//! set our current layer to the layer passed in
+		//! Moves the entity to the given layer
 		void SetLayer(int layer);
+		//! Moves the entity to the layer determined by the given offset, relative to the layer it
+		//! is currently on
 		void AdjustLayer(int layerAdjustAmount);
 
 		//! is our layer number in the debug render range?
