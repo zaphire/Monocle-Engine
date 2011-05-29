@@ -297,7 +297,9 @@ namespace Monocle
         XEvent event;
 
         while (XPending(LinuxPlatform::instance->hDisplay)) { XNextEvent(LinuxPlatform::instance->hDisplay, &event);
-            switch(event.type) {
+            bool mScrolled = false;
+		
+			switch(event.type) {
             case Expose: {
                     XExposeEvent &expose = event.xexpose;
                     glViewport(0, 0, expose.width, expose.height);
@@ -322,13 +324,14 @@ namespace Monocle
                         button = MOUSE_BUTTON_RIGHT; break;
                     // TODO check if 120 is the right amount and generalize code
                     case Button4:
-                        mouseScroll += 120; break;
+                        mouseScroll += 120; mScrolled = true; break;
                     case Button5:
-                        mouseScroll -= 120; break;
+                        mouseScroll -= 120; mScrolled = true; break;
                     }
 
-                    Platform::SetMouseButton(button,
-                                             event.type == ButtonPress);
+					if(!mScrolled)
+						Platform::SetMouseButton(button,
+                                                 event.type == ButtonPress);
                     Platform::mousePosition = Vector2(event.xbutton.x,
                                                       event.xbutton.y);
                 } break;
