@@ -1,4 +1,10 @@
-T H E  M O N O C L E  E N G I N E
+                               _                            _             
+                              | |                          (_)            
+ ____   ___  ____   ___   ____| | ____     ____ ____   ____ _ ____   ____ 
+|    \ / _ \|  _ \ / _ \ / ___) |/ _  )   / _  )  _ \ / _  | |  _ \ / _  )
+| | | | |_| | | | | |_| ( (___| ( (/ /   ( (/ /| | | ( ( | | | | | ( (/ / 
+|_|_|_|\___/|_| |_|\___/ \____)_|\____)   \____)_| |_|\_|| |_|_| |_|\____)
+                                                     (_____|            
 
 MIT License
 
@@ -20,7 +26,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-BUILD HELP
+== Branches ==
+
+"development" - the latest code
+"master" - the last 'stable' code
+
+i.e. If you want to check out the latest, grab "development."
+
+== Building ==
+
+To build Monocle, use one of the included project files.
+
+If there is no project file for your platform, generate one automatically using Premake4.
+
+See: http://industriousone.com/premake
 
 =WINDOWS=
 To run on Windows, make sure working directory is set to:
@@ -32,24 +51,6 @@ Make sure you're using XCode version 4 and that you have the shared Scheme selec
 
 Change the #defined TEST_* values in main.cpp to try out different demos.
 
-D E M O  C O N T R O L S
+== Demo Controls ==
 
-TEST_JUMPER
-	Arrow Keys = Move, Jump
-	Space = Spawn New Player
-
-TEST_FLASH
-	Space = toggle play/pause
-	Left/Right = prev/next frame
-	Up Arrow = clone a new end frame and jump to it
-	A,S,D,W = move
-	Q,E = rotate
-	[,] = select part
-	J,K,L,I = scale
-	Minus = copy the part frame data from the previous frame to the current frame
-	Equals = copy the part frame data from the next frame to the current frame
-	Backspace = undo changes up to when part/frame was entered
-
-TEST_PONG
-	W/S = player 1
-	I/K = player 2
+Updated demo controls coming soon...
