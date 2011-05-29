@@ -41,13 +41,27 @@ If there is no project file for your platform, generate one automatically using 
 
 See: http://industriousone.com/premake
 
-Windows:
-To run on Windows, make sure working directory is set to:
+Run: premake4 --help
+to see all options.
 
+Windows:
+Generate Windows project files with Premake4.
+e.g. To generate project files for vs2010, including tests
+run: premake4 vs2010 --testapp
+in the Monocle-Engine root directory.
+
+The project files will show up in Build/gen-vs2010-All and Build/gen-vs2010-Monocle
+
+To run tests on Windows, make sure the project's working directory is set to:
 $(SolutionDir)..\..\..\Build\bin\
 
 Mac OSX:
+You can use the XCode project file included.
 Make sure you're using XCode version 4 and that you have the shared Scheme selected.
+
+Linux:
+Generate CMakeLists with Premake4.
+They will show up in Build/gen-*
 
 Tests:
 Change premake4 commandline to build a project file with tests included.
