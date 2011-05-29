@@ -26,25 +26,25 @@ namespace Monocle
 		//! \param repeatY [in] Whether or not the texture should be repeated on the y axis if necessary when rendered
 		//! \sa Assets::GetContentPath
 		bool Load(const std::string &filename, FilterType filter, bool repeatX, bool repeatY);
-        //! \brief Replaces the pixels in a rectangular area of the texture using the data pointed to.
-        //! \param data [in] The pointer to the data to fill the rectangle with
-        //! \param position [in] The top left hand corner of the rect to update
-        //! \param size [in] The size of the rect to update
+		//! \brief Replaces the pixels in a rectangular area of the texture using the data pointed to.
+		//! \param data [in] The pointer to the data to fill the rectangle with
+		//! \param position [in] The top left hand corner of the rect to update
+		//! \param size [in] The size of the rect to update
 		void UpdateRect(const unsigned char *data, Monocle::Vector2 position, Monocle::Vector2 size);
-        //! \brief Copies a portion of the texture into another area of the same texture.
-        //! \param srcPos [in] The top left corner of the rect to copy from
-        //! \param dstPos [in] The top left corner of the rect to copy to
-        //! \param size [in] The size of the rect to copy
-        //! \remarks This function produces a 1:1 scale copy.
+		//! \brief Copies a portion of the texture into another area of the same texture.
+		//! \param srcPos [in] The top left corner of the rect to copy from
+		//! \param dstPos [in] The top left corner of the rect to copy to
+		//! \param size [in] The size of the rect to copy
+		//! \remarks This function produces a 1:1 scale copy.
 		void CopyRect(Monocle::Vector2 srcPos, Monocle::Vector2 dstPos, Monocle::Vector2 copysize);
-        //! \brief Copies a portion of the texture into a buffer, and returns it.
-        unsigned char *ReadRect(Monocle::Vector2 srcPos, Monocle::Vector2 size);
+		//! \brief Copies a portion of the texture into a buffer, and returns it.
+		unsigned char *ReadRect(Monocle::Vector2 srcPos, Monocle::Vector2 size);
 		//! \brief Reloads the texture
 		void Reload();
 		//! \brief Unloads the texture
 		void Unload();
 
-        //should have getter functions and be private
+		//should have getter functions and be private
 		unsigned int width, height;
 		unsigned int texID;
 
