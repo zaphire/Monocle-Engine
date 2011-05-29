@@ -1,8 +1,8 @@
 #pragma once
-
+ 
 #include "Asset.h"
 #include "Vector2.h"
-
+ 
 namespace Monocle
 {
 	class TextureAsset : public Asset
@@ -43,13 +43,14 @@ namespace Monocle
 		void Reload();
 		//! \brief Unloads the texture
 		void Unload();
-
+ 
 		//should have getter functions and be private
 		unsigned int width, height;
 		unsigned int texID;
-
-    private:
+ 
+	private:
 		FilterType filter;
 		bool repeatX, repeatY;
 	};
 }
+ 
