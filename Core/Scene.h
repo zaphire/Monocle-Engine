@@ -103,6 +103,7 @@ namespace Monocle
 		//static Camera *GetActiveCamera();
 
 		static Camera *GetMainCamera();
+		static Camera *GetActiveCamera();
 		static void SetMainCamera(Camera *camera);
 
 		///TODO: replace TiXml with wrapper

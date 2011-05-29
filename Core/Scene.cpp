@@ -234,10 +234,10 @@ namespace Monocle
 		return NULL;
 	}
 
-	//Camera *Scene::GetActiveCamera()
-	//{
-	//	return instance->activeCamera;
-	//}
+	Camera *Scene::GetActiveCamera()
+	{
+		return instance->activeCamera;
+	}
 
 	Camera *Scene::GetMainCamera()
 	{

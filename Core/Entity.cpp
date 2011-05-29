@@ -144,10 +144,16 @@ namespace Monocle
 
 	void Entity::ApplyMatrix()
 	{
-		//if (followCamera == Vector2::zero || (Debug::render && Debug::selectedEntity != this && IsDebugLayer()))
-		Graphics::Translate(position.x, position.y, depth);
-		//else
-			//Graphics::Translate(camera->position * followCamera + position * (Vector2::one - followCamera));
+		if (followCamera == Vector2::zero || (Debug::render && Debug::selectedEntity != this && IsDebugLayer()))
+			Graphics::Translate(position.x, position.y, depth);
+		else
+		{
+			Camera *camera = scene->GetActiveCamera();
+			if (!camera)
+				camera = scene->GetMainCamera();
+			if (camera != NULL)
+				Graphics::Translate(camera->position * followCamera + position * (Vector2::one - followCamera));
+		}
         
 		if (rotation != 0.0f)
 			Graphics::Rotate(rotation, 0, 0, 1);
