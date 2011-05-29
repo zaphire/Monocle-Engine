@@ -13,15 +13,15 @@
 
 <Parts>
 	<Part id="0" name="torso" atlasEntry="torso">
-		<Part id="1" name="tortilla" atlasEntry="tortilla">
-			<Part id="2" name="mustache" atlasEntry="mustache"/>
-			<Part id="3" name="hat" atlasEntry="hat"/>
-			<Part id="4" name="nose" atlasEntry="nose"/>
-			<Part id="5" name="monocle" atlasEntry="monocle"/>
-			<Part id="6" name="" atlasEntry="eyeunderline-left"/>
-			<Part id="7" name="" atlasEntry="eye-left"/>
-			<Part id="8" name="" atlasEntry="eye-right"/>
-			<Part id="9" name="" atlasEntry="eyebrow"/>
+		<Part id="1" name="tortilla" atlasEntry="tortilla" layer="-1">
+			<Part id="2" name="mustache" atlasEntry="mustache" layer="-2"/>
+			<Part id="3" name="hat" atlasEntry="hat" layer="-2"/>
+			<Part id="4" name="nose" atlasEntry="nose" layer="-2"/>
+			<Part id="5" name="monocle" atlasEntry="monocle" layer="-2"/>
+			<Part id="6" name="" atlasEntry="eyeunderline-left" layer="-2"/>
+			<Part id="7" name="" atlasEntry="eye-left" layer="-2"/>
+			<Part id="8" name="" atlasEntry="eye-right" layer="-2"/>
+			<Part id="9" name="" atlasEntry="eyebrow" layer="-2"/>
 		</Part>
 	</Part>
 </Parts>
