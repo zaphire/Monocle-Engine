@@ -162,5 +162,4 @@ namespace Monocle {
         m_lastIndex = 0;
         m_curIndex = 0;
     }
-
 }

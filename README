@@ -41,16 +41,17 @@ If there is no project file for your platform, generate one automatically using 
 
 See: http://industriousone.com/premake
 
-=WINDOWS=
+Windows:
 To run on Windows, make sure working directory is set to:
 
 $(SolutionDir)..\..\..\Build\bin\
 
-=MAC OSX=
+Mac OSX:
 Make sure you're using XCode version 4 and that you have the shared Scheme selected.
 
-Change the #defined TEST_* values in main.cpp to try out different demos.
+Tests:
+Change premake4 commandline to build a project file with tests included.
 
-== Demo Controls ==
+== Test Controls ==
 
-Updated demo controls coming soon...
+Updated test controls coming soon...

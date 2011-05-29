@@ -426,5 +426,4 @@ namespace Monocle
     {
         m_lUses[0]=m_lUses[1]=m_lUses[2]=m_lUses[3]=0;
     }
-
 }
