@@ -29,6 +29,11 @@ namespace Monocle
 	{
 
 	}
+	
+	bool Color::operator==(const Color& rhs)
+	{
+		return ((r == rhs.r) && (g == rhs.g) && (b == rhs.b) && (a == rhs.a));
+	}
 
 	bool Color::operator!=(const Color& rhs)
 	{
