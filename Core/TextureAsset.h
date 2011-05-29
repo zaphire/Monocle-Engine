@@ -1,10 +1,11 @@
 #pragma once
  
 #include "Asset.h"
-#include "Vector2.h"
  
 namespace Monocle
 {
+	class Vector2;
+	
 	class TextureAsset : public Asset
 	{
 	public:
