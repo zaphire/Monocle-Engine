@@ -60,7 +60,7 @@ You can use the XCode project file included.
 Make sure you're using XCode version 4 and that you have the shared Scheme selected.
 
 Linux:
-Generate CMakeLists with Premake4.
+Generate makefiles with Premake4.
 They will show up in Build/gen-*
 
 Tests:
