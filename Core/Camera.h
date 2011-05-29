@@ -4,6 +4,9 @@
 
 namespace Monocle
 {
+	//! \brief Manages the details of a view through which items in a scene are rendered.
+	//! Cameras are the eyes of the engine, their position, rotation, and depth of vision determine what is rendered
+	//! onto the screen.
 	class Camera : public Transform
 	{
 	public:

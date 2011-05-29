@@ -134,9 +134,9 @@ namespace Monocle
 		printf("Set2D: center: (%f, %f)\n", instance->screenCenter.x, instance->screenCenter.y);
 	}
 
-	void Graphics::Set3D()
-	{
-	}
+	//void Graphics::Set3D()
+	//{
+	//}
 
 	void Graphics::Resize(int width, int height)
 	{
