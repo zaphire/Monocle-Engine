@@ -27,6 +27,7 @@ namespace Monocle
 
 		// return random vector
 		static Vector2 Random();
+		static Vector2 Reflect(const Vector2& a, const Vector2& b);
 
 		float GetSquaredMagnitude();
 		float GetMagnitude();
@@ -38,6 +39,7 @@ namespace Monocle
 		bool IsInRange(float range);
 		float Dot(Vector2 other);
 		float Cross(Vector2 other);
+		Vector2 Reflect(const Vector2 &other);
 		//! return angle in radians
 		float GetAngleRadians();
 		float GetAngleDegrees();
@@ -75,9 +77,6 @@ namespace Monocle
 	Vector2 operator/(const Vector2& lhs, float rhs);		// right scalar inverse multiplication
 	Vector2 operator/(float lhs, const Vector2 &rhs);
 
-	
-
-	
 	Vector2 operator*(const Vector2& lhs, const Vector2& rhs);	// multiply components (scale)
 	//float operator^(const Vector2& lhs, const Vector2& rhs);	// cross product
 }

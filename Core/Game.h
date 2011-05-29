@@ -16,10 +16,8 @@ namespace Monocle
 {
 
 	//! Base class for creating a new game. Manages the main loop, timer and high-level updating, rendering.
-	/*!
-	Some games will be able to get away with just instantiating this class and adding Scenes.
-	Some developers may want to extend Game and customize it, instead.
-	*/
+	//!	Some games will be able to get away with just instantiating this class and adding Scenes.
+	//! Some developers may want to extend Game and customize it, instead.
 	class Game
 	{
 	public:
@@ -29,12 +27,13 @@ namespace Monocle
 		//! Runs the main game loop. Handles timing and high-level updating, rendering.
 		void Main();
 
-		//! for overriding functionality
+		//! Updates the game state.  Derived classes may override this to provide extra functionality that must be
+		//! executed in each game loop iteration.
 		virtual void Update();
 
 		//! Sets the current Scene. Games can run one Scene at a time.
 		static void SetScene(Scene* scene);
-		//! Returns a pointer to the current Scene.
+		//! Returns a pointer to the currently running Scene.
 		static Scene* GetScene();
 
 		//! Call Game::Quit to quit the main loop. (exit your game)
@@ -49,10 +48,10 @@ namespace Monocle
 	private:
 		static Game *instance;
 
-		//! should we quit out of the Game::Main loop?
+		//! Notifies the Game if it needs to exit sanely at the next opportunity
 		bool isDone;
 
-		//! currently running Scene
+		//! The scene that is currently running
 		Scene* scene;
 
 		//! Scene to switch to at the end of the frame; if NULL, no switch

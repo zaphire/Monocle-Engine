@@ -9,6 +9,11 @@ namespace Monocle
 {
 	Input *Input::instance = NULL;
 
+    Input::EventHandler::~EventHandler()
+    {
+        Input::RemoveHandler(this);
+    }
+
 	Input::Input()
 	{
 		instance = this;
@@ -29,13 +34,55 @@ namespace Monocle
 		{
 			previousKeys[i] = currentKeys[i];
 			currentKeys[i] = Platform::keys[i];
+			
+			if(currentKeys[i] != previousKeys[i] && handlers.size() > 0)
+			{
+			    if( currentKeys[i] )
+                {
+                    for(std::list<EventHandler*>::iterator it = handlers.begin(); it != handlers.end(); it++)
+		                (*it)->OnKeyPress((KeyCode)i);
+                }else
+                {
+                    for(std::list<EventHandler*>::iterator it = handlers.begin(); it != handlers.end(); it++)
+		                (*it)->OnKeyRelease((KeyCode)i);
+                }
+			}
 		}
 
 		for (int i = 0; i < MOUSE_BUTTON_MAX; i++)
 		{
-			previousMouseButtons[i] = currentMouseButtons[i];
+		    previousMouseButtons[i] = currentMouseButtons[i];
 			currentMouseButtons[i] = Platform::mouseButtons[i];
+			
+			if( previousMouseButtons[i] != currentMouseButtons[i] && handlers.size() > 0 )
+		    {
+		        Vector2 mousePos = GetMousePosition();
+		        if(currentMouseButtons[i])
+		        {
+		            for(std::list<EventHandler*>::iterator it = handlers.begin(); it != handlers.end(); it++)
+		                (*it)->OnMousePress(mousePos, (MouseButton)i);
+		        }
+		        else
+		        {
+		            for(std::list<EventHandler*>::iterator it = handlers.begin(); it != handlers.end(); it++)
+		                (*it)->OnMouseRelease(mousePos, (MouseButton)i);
+		        }
+		    }
 		}
+		
+		if(Platform::mouseScroll != 0 && handlers.size() > 0)
+		{
+		    for(std::list<EventHandler*>::iterator it = handlers.begin(); it != handlers.end(); it++)
+                (*it)->OnMouseScroll(Platform::mouseScroll);
+		}
+		lastMouseScroll = Platform::mouseScroll;
+		
+		if(lastMousePos != Platform::mousePosition && handlers.size() > 0)
+		{
+		    for(std::list<EventHandler*>::iterator it = handlers.begin(); it != handlers.end(); it++)
+                (*it)->OnMouseMove(Platform::mousePosition);
+		}
+		lastMousePos = Platform::mousePosition;
 	}
 
 	//Keys API
@@ -160,5 +207,15 @@ namespace Monocle
 				return true;
 		}
 		return false;
+	}
+	
+	void Input::AddHandler(EventHandler *handler)
+	{
+	    instance->handlers.push_back(handler);
+	}
+	
+	void Input::RemoveHandler(EventHandler *handler)
+	{
+	    instance->handlers.remove(handler);
 	}
 }

@@ -40,4 +40,4 @@
 */
 #define LERP(a, b, t) (a + (b - a) * t)
 
-#define WEIGHTED_AVERAGE(current, target, slowdown) ((current * (slowdown - 1)) + target) / slowdown;
+#define WEIGHTED_AVERAGE(current, target, slowdown) ((current * (slowdown - 1)) + target) / slowdown
