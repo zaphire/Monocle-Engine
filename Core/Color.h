@@ -15,6 +15,7 @@ namespace Monocle
 
         //! Indirect accessor for rgba values. Color[0] = r, [1] = g, [2] = b, [3] = a, [4+] = undefined
 		float& operator[] (unsigned int i);
+		bool operator==(const Color& rhs);
 		bool operator!=(const Color& rhs);
 
 		//! Red, green, blue, alpha (translucency)
