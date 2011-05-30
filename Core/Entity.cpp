@@ -382,14 +382,6 @@ namespace Monocle
 
 	void Entity::SetGraphic(Graphic *graphic)
 	{
-		// not sure yet
-		/*
-		if (graphic == NULL && this->graphic)
-		{
-			delete this->graphic;
-		}
-		*/
-		
 		// not sure if we want this yet, sets our graphic's entity pointer to NULL
 		// if we're about to set the graphic pointer to NULL
 		if (graphic == NULL && this->graphic != NULL)
@@ -399,13 +391,10 @@ namespace Monocle
 
 		if (this->graphic != NULL)
 		{
-			Debug::Log("Error: Entity already has a graphic.");
+			Debug::Log("Note: Entity already has a graphic.");
 		}
-		else
-		{
-			this->graphic = graphic;
-			//graphic->entity = this;
-		}
+
+		this->graphic = graphic;
 	}
 
 	Graphic* Entity::GetGraphic()
