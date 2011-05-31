@@ -98,7 +98,7 @@ namespace Monocle
 	CocoaPlatform* CocoaPlatform::instance;
 	Platform*	   CocoaPlatform::platform;
     
-	bool CocoaPlatform::Init(const std::string &name, int w, int h, int bits, bool fullscreen)
+	void CocoaPlatform::Init(const std::string &name, int w, int h, int bits, bool fullscreen)
 	{
 		//  Init event loop
 		Cocoa_RegisterApp();
@@ -123,7 +123,6 @@ namespace Monocle
 		NSOpenGLContext* context = Cocoa_GL_CreateContext();
 		if (Cocoa_GL_MakeCurrent(window, context) < 0) {
 			Cocoa_GL_DeleteContext(context);
-			return false;
 		}
 
 		windowData = AttachWindowListener(window);
@@ -135,7 +134,6 @@ namespace Monocle
 		gettimeofday(&startTime, NULL);
 
         [pool release];
-        return true;
 	}
 
 	Platform* Platform::instance;
@@ -156,15 +154,14 @@ namespace Monocle
         }
 	}
 
-	void Platform::Init()
-	{
-		Init("Monocle Powered", 1024, 768, 32, false);
-	}
+//	void Platform::Init()
+//	{
+//		Init("Monocle Powered", 1024, 768, 32, false);
+//	}
 
 	void Platform::Init(const std::string &name, int w, int h, int bits, bool fullscreen)
 	{
-		if (!CocoaPlatform::instance->Init(name, w, h, bits, fullscreen))
-			Debug::Log("Error initializing Monocle window/context");
+		CocoaPlatform::instance->Init(name, w, h, bits, fullscreen);
 
 		WindowData* data = CocoaPlatform::instance->windowData;
 		NSRect rect = [data->nswindow contentRectForFrameRect:[data->nswindow frame]];
