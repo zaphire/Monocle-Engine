@@ -128,10 +128,10 @@ namespace Monocle
 		// if > 4:3, do something else
 		instance->resolutionScale = Vector2(float(Platform::GetWidth())/virtualWidth, float(Platform::GetWidth())/virtualWidth);
 
-		printf("Set2D: resScale: (%f, %f)\n window (%d, %d)\n", instance->resolutionScale.x, instance->resolutionScale.y, Platform::GetWidth(), Platform::GetHeight());
+//		printf("Set2D: resScale: (%f, %f)\n window (%d, %d)\n", instance->resolutionScale.x, instance->resolutionScale.y, Platform::GetWidth(), Platform::GetHeight());
 		instance->screenCenter = Vector2(virtualWidth/2, virtualHeight/2);
 
-		printf("Set2D: center: (%f, %f)\n", instance->screenCenter.x, instance->screenCenter.y);
+//		printf("Set2D: center: (%f, %f)\n", instance->screenCenter.x, instance->screenCenter.y);
 	}
 
 	//void Graphics::Set3D()
