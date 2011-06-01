@@ -2,6 +2,7 @@
 #include "Input.h"
 #include "Scene.h"
 #include "Entity.h"
+#include "MonocleToolkit.h"
 #include <cstdio>
 
 namespace Monocle
@@ -55,6 +56,13 @@ namespace Monocle
 				Vector2 camPos = mainCamera->position;
 				printf("camPos (%d, %d)\n", (int)camPos.x, (int)camPos.y);
 			}
+
+			Vector2 diff = (Input::IsKeyHeld(KEY_KP4) ? Vector2::left : Vector2::zero) + (Input::IsKeyHeld(KEY_KP6) ? Vector2::right : Vector2::zero);
+			diff += (Input::IsKeyHeld(KEY_KP8) ? Vector2::up : Vector2::zero) + (Input::IsKeyHeld(KEY_KP5) ? Vector2::down : Vector2::zero);
+
+			const float cameraMoveSpeed = 800.0f; // replace with virtualWidth
+			diff *= Monocle::deltaTime * cameraMoveSpeed;
+			mainCamera->position += diff;
 		}
 	}
 }
