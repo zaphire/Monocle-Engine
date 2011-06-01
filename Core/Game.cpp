@@ -104,6 +104,7 @@ namespace Monocle
 #else
 			Monocle::deltaTime = MIN(((double)(tick - lastTick))/1000.0, MAX_DELTA_TIME);
 			Monocle::timeSinceStart += Monocle::deltaTime;
+			Monocle::timeSinceSceneStart += Monocle::deltaTime;
 			//printf("ms: %f\n", Monocle::deltaTime);
 
 			//Update
@@ -139,6 +140,7 @@ namespace Monocle
 				{
 					scene->game = this;
 					scene->Begin();
+					timeSinceSceneStart = 0.0;
 				}
 			}
 		}

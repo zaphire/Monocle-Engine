@@ -12,6 +12,9 @@ namespace Monocle
 	//! Time in seconds since game started
 	extern double timeSinceStart;
 
+	//! Time in seconds since current scene started
+	extern double timeSinceSceneStart;
+
 	//! Math symbol PI
 	extern const float pi;
 

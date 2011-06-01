@@ -11,8 +11,9 @@
 
 namespace Monocle
 {
-	double deltaTime		= 0.0;
-	double timeSinceStart		= 0.0;
+	double deltaTime					= 0.0;
+	double timeSinceStart			= 0.0;
+	double timeSinceSceneStart		= 0.0;
 
 	const float pi			= 3.14159265358979f;
 	const float rad2Deg		= 57.29578f;
