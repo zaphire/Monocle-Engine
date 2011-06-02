@@ -43,6 +43,8 @@ namespace Monocle
 		//! return angle in radians
 		float GetAngleRadians();
 		float GetAngleDegrees();
+		//! initialize x and y from the passed angle in degrees
+		void SetFromAngleDegrees(float angle);
 		
 		/*
 		static Vector2 Add(Vector2 a, Vector2 b);

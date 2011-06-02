@@ -34,7 +34,9 @@ namespace Monocle
 
 	Vector2 Vector2::Random()
 	{
-		float rad = (Random::Range(0,360)) * Monocle::deg2Rad;
+		float rad = (Random::Int(0,360)) * Monocle::deg2Rad;
+		//x = sin(rad);
+		//y = cos(rad);
 		return Vector2(sin(rad), cos(rad));
 	}
 
@@ -69,6 +71,14 @@ namespace Monocle
 	Vector2 Vector2::GetPerpendicularRight()
 	{
 		return Vector2(y, -x);
+	}
+
+	void Vector2::SetFromAngleDegrees(float angle)
+	{
+		x = sin(angle * Monocle::deg2Rad);
+		y = cos(angle * Monocle::deg2Rad);
+
+		printf("angle %f x,y (%f, %f)\n", angle, x, y);
 	}
 
 	void Vector2::Clamp(float max)

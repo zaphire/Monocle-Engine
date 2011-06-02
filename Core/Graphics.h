@@ -35,7 +35,10 @@ namespace Monocle
 	class Graphic
 	{
 	public:
+		Graphic() : rotation(0.0f)
+		{}
 		Vector2 position;
+		float rotation;
 		//virtual void Update()=0;
 		virtual void Render(Entity *entity)=0;
 		virtual void GetWidthHeight(int *width, int *height)=0;
