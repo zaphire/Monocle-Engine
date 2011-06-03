@@ -85,6 +85,7 @@ namespace Monocle
 		Graphics::PushMatrix();
 
 			Graphics::Translate(position.x, position.y, 0.0f);
+			Graphics::Rotate(rotation, 0, 0, 1);
 			Graphics::BindTexture(texture);
 			Graphics::SetBlend(blend);
 
@@ -114,7 +115,6 @@ namespace Monocle
 		{
 			Graphics::PushMatrix();
 			Graphics::Translate(position.x, position.y, 0.0f);
-			Graphics::Rotate(rotation, 0, 0, 0);
 
 			if (Debug::selectedEntity == entity)
 				Graphics::SetColor(Color::orange);
