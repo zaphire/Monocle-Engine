@@ -47,7 +47,8 @@ to see all options.
 Windows:
 Generate Windows project files with Premake4.
 e.g. To generate project files for vs2010, including tests
-run: premake4 vs2010 --testapp
+run:
+	premake4 --testapp vs2010
 in the Monocle-Engine root directory.
 
 The project files will show up in Build/gen-vs2010-All and Build/gen-vs2010-Monocle
