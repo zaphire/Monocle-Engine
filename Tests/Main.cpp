@@ -1,7 +1,7 @@
 #include <memory>
 
-#include <cpptest-suite.h>
-#include <cpptest.h>
+#include <cpptest/cpptest-suite.h>
+#include <cpptest/cpptest.h>
 
 #include <Unit/AssetTest.h>
 #include <Unit/FontAssetTest.h>

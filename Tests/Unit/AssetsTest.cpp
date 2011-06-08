@@ -1,7 +1,7 @@
 #include "AssetsTest.h"
 #include "../Tests.h"
 
-#include <cpptest-assert.h>
+#include <cpptest/cpptest-assert.h>
 
 #include <Platform.h>
 

@@ -1,4 +1,4 @@
-#include <cpptest-assert.h>
+#include <cpptest/cpptest-assert.h>
 
 #include "CameraTest.h"
 #include <Camera.h>

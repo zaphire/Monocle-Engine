@@ -1,6 +1,6 @@
 #pragma once
 
-#include <cpptest-suite.h>
+#include <cpptest/cpptest-suite.h>
 
 namespace Monocle
 {
