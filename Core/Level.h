@@ -72,7 +72,7 @@ namespace Monocle
 			{
 				Entity *entity = *i;
 				T *t = dynamic_cast<T*>(entity);
-				if (t)
+				if (t && !t->GetParent())
 				{
 					TiXmlElement saveElement(name);
 					xmlFileNode.element = &saveElement;
@@ -83,7 +83,6 @@ namespace Monocle
 
 					element->InsertEndChild(saveElement);
 				}
-
 			}
 		}
 

@@ -41,14 +41,18 @@ If there is no project file for your platform, generate one automatically using 
 
 See: http://industriousone.com/premake
 
-Run: premake4 --help
+Run: premake4.exe --help
 to see all options.
 
 Windows:
-Generate Windows project files with Premake4.
+Generate Windows project files with Premake4. To do this, you must download premake4.exe.
+Place it in your root Monocle-Engine directory. Then run it with commands through the 
+Windows commandline. (cmd.exe)
+
 e.g. To generate project files for vs2010, including tests
+
 run:
-	premake4 --testapp=all vs2010
+	premake4.exe --testapp=all vs2010
 in the Monocle-Engine root directory.
 
 The project files will show up in Build/gen-vs2010-All and Build/gen-vs2010-Monocle
