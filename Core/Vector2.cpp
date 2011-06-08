@@ -77,8 +77,6 @@ namespace Monocle
 	{
 		x = sin(angle * Monocle::deg2Rad);
 		y = cos(angle * Monocle::deg2Rad);
-
-		printf("angle %f x,y (%f, %f)\n", angle, x, y);
 	}
 
 	void Vector2::Clamp(float max)
