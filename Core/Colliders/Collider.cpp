@@ -318,6 +318,10 @@ namespace Monocle
 						maxPenetration = MAX(collisionData->penetration, maxPenetration);
 						numNormals++;
 					}
+					else
+					{
+						return true;
+					}
 				}
 			}
 			prevNode = node;
