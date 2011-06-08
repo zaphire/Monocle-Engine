@@ -6,13 +6,13 @@
 //
 
 #include "Monocle.h"
-#include "AudioTest.h"
-#include "Flash.h"
-#include "Jumper.h"
-#include "LevelEditorTest.h"
-#include "Ogmo.h"
-#include "Pong.h"
-#include "PuppetTest.h"
+#include "AudioTest/AudioTest.h"
+#include "Flash/Flash.h"
+#include "Jumper/Jumper.h"
+#include "LevelEditor/LevelEditorTest.h"
+#include "Ogmo/Ogmo.h"
+#include "Pong/Pong.h"
+#include "PuppetTest/PuppetTest.h"
 
 using namespace Monocle;
 

@@ -1,7 +1,0 @@
-add_subdirectory(Flash)
-add_subdirectory(LevelEditor)
-add_subdirectory(Jumper)
-add_subdirectory(Ogmo)
-add_subdirectory(Pong)
-add_subdirectory(PuppetTest)
-add_subdirectory(AudioTest)
