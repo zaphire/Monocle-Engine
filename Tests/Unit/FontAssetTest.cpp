@@ -51,7 +51,7 @@ namespace Monocle
                     float x,y;
                     font->GetGlyphData(c, &x, &y, glyphbounds, texcoords);
                     
-                    std::cout << "Rect: ( loc: (" << glyphbounds.topLeft.x << "," << glyphbounds.topLeft.y << ") dim: (" << (glyphbounds.bottomRight.x - glyphbounds.topLeft.x) << "," << (glyphbounds.bottomRight.y - glyphbounds.topLeft.y) << ") )" << std::endl;
+                    //std::cout << "Rect: ( loc: (" << glyphbounds.topLeft.x << "," << glyphbounds.topLeft.y << ") dim: (" << (glyphbounds.bottomRight.x - glyphbounds.topLeft.x) << "," << (glyphbounds.bottomRight.y - glyphbounds.topLeft.y) << ") )" << std::endl;
                 }
             }
         }

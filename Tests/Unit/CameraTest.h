@@ -4,29 +4,27 @@
 
 namespace Monocle
 {
-    class FontAsset;
+    class Camera;
     
     namespace Test
     {
         namespace Unit
         {            
             //Dependencies: Assets, Asset
-            class FontAsset: public ::Test::Suite
+            class Camera: public ::Test::Suite
             {
             public:
-                FontAsset();
+                Camera();
                 
             protected:
                 virtual void setup();
                 virtual void tear_down();
                 
             private:
-                void Type();
-                void GetGlyphData();
-                void GetTextWidth();
-                void GetTextHeight();
+				void Visibility();
+				void VisibleLayers();
                 
-                Monocle::FontAsset *font;
+                Monocle::Camera *camera;
             };
 
         }
