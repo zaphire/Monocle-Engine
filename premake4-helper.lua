@@ -105,8 +105,8 @@ end
 
 --Helper function to include a testapp project into solution
 function monocle_project_testapp( name )
-		_TESTAPP_PREMAKE_GENERIC_SCRIPT 	= _MONOCLE_BASE.."/Tests/premake4-test-generic.lua"
-		_TESTAPP_PREMAKE_SCRIPT 		= _MONOCLE_BASE.."/Tests/"..name.."/premake4-"..name..".lua"
+		_TESTAPP_PREMAKE_GENERIC_SCRIPT 	= _MONOCLE_BASE.."/Samples/premake4-test-generic.lua"
+		_TESTAPP_PREMAKE_SCRIPT 		= _MONOCLE_BASE.."/Samples/"..name.."/premake4-"..name..".lua"
 		
 		if os.isfile( _TESTAPP_PREMAKE_SCRIPT ) then
 			dofile( _TESTAPP_PREMAKE_SCRIPT )
