@@ -119,6 +119,12 @@ namespace Monocle
 		// or if we'll use this later
 		//void SendNoteToGame(const std::string &note);
 
+		friend class Game;
+		
+		// scene has a game pointer
+		// so that it can request scene switches
+		Game *game;
+
 		friend class Entity;
 		virtual void ReceiveNote(const std::string &note);
 
@@ -129,12 +135,6 @@ namespace Monocle
 
 	private:
 		static Scene *instance;
-
-		friend class Game;
-		
-		// scene has a game pointer
-		// so that it can request scene switches
-		Game *game;
 
 		void RelayNoteTo(const std::string &tag, const std::string &note);
 
