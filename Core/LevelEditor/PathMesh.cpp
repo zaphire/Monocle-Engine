@@ -77,8 +77,8 @@ namespace Monocle
 				Graphics::RenderPathMesh(nodes, cells, size, flipX, flipY);
 
 			Graphics::PopMatrix();
-
 		}
+
 		Entity::Render();
 
 		// HACK: temporary

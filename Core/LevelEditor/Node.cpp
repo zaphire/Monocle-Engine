@@ -53,10 +53,18 @@ namespace Monocle
 	{
 		Entity::Render();
 
-		if (Debug::showBounds)
+		//HACK:
+		//if (Debug::showBounds)
+		if (true)
 		{
 			Graphics::BindTexture(NULL);
-			if (variant == -1)
+
+			if (GetParent() && GetParent()->HasTag("solid"))
+			{
+				// hack
+				Graphics::SetColor(Color::red);
+			}
+			else if (variant == -1)
 			{
 				Graphics::SetColor(Color::grey);
 			}
