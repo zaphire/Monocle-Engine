@@ -265,36 +265,40 @@ namespace Monocle
 
 	void WindowsPlatform::CenterWindow()
 	{
-		RECT    rChild,  rWorkArea;
-		int     wChild, hChild;
-		int     xNew, yNew;
-		BOOL    bResult;
+		if (!fullscreen)
+		{
+			RECT    rChild,  rWorkArea;
+			int     wChild, hChild;
+			int     xNew, yNew;
+			BOOL    bResult;
 
-		// Get the Height and Width of the child window
-		GetWindowRect (hWnd, &rChild);
-		wChild = rChild.right - rChild.left;
-		hChild = rChild.bottom - rChild.top;
+			// Get the Height and Width of the child window
+			GetWindowRect (hWnd, &rChild);
+			wChild = rChild.right - rChild.left;
+			hChild = rChild.bottom - rChild.top;
 
-		// Get the limits of the 'workarea'
-		bResult = SystemParametersInfo(
-			SPI_GETWORKAREA,    // system parameter to query or set
-			sizeof(RECT),
-			&rWorkArea,
-			0);
-		if (!bResult) {
-			rWorkArea.left = rWorkArea.top = 0;
-			rWorkArea.right = GetSystemMetrics(SM_CXSCREEN);
-			rWorkArea.bottom = GetSystemMetrics(SM_CYSCREEN);
+			// Get the limits of the 'workarea'
+			bResult = SystemParametersInfo(
+				SPI_GETWORKAREA,    // system parameter to query or set
+				sizeof(RECT),
+				&rWorkArea,
+				0);
+			if (!bResult) {
+				rWorkArea.left = rWorkArea.top = 0;
+				rWorkArea.right = GetSystemMetrics(SM_CXSCREEN);
+				rWorkArea.bottom = GetSystemMetrics(SM_CYSCREEN);
+			}
+
+			// Calculate new X position, then adjust for workarea
+			xNew = (rWorkArea.right /2) - wChild/2;
+
+			// Calculate new Y position, then adjust for workarea
+			yNew = (rWorkArea.bottom/2) - hChild/2;
+
+			// Set it, and return
+			SetWindowPos (hWnd, HWND_TOPMOST, xNew, yNew, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 		}
 
-		// Calculate new X position, then adjust for workarea
-		xNew = (rWorkArea.right /2) - wChild/2;
-
-		// Calculate new Y position, then adjust for workarea
-		yNew = (rWorkArea.bottom/2) - hChild/2;
-
-		// Set it, and return
-		SetWindowPos (hWnd, NULL, xNew, yNew, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 	}
 
 	void WindowsPlatform::KillPlatformWindow()								// Properly Kill The Window
