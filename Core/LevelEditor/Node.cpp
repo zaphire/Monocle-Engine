@@ -1,6 +1,9 @@
 #include "Node.h"
 #include "../Graphics.h"
 
+///HACK:
+#include "PathMesh.h"
+
 namespace Monocle
 {
 	/// NODE
@@ -43,10 +46,31 @@ namespace Monocle
 
 	void Node::TakeOut()
 	{
+		if (GetParent())
+		{
+			/// HACK:
+			PathMesh *pathMesh = dynamic_cast<PathMesh*>(GetParent());
+			if (prev)
+			{
+				pathMesh->SetStartNode(prev);
+			}
+			else if (next)
+			{
+				pathMesh->SetStartNode(next);
+			}
+			else
+			{
+				pathMesh->SetStartNode(NULL);
+			}
+		}
+
 		if (next)
 			next->prev = prev;
 		if (prev)
 			prev->next = next;
+
+		prev = NULL;
+		next = NULL;
 	}
 
 	void Node::Render()

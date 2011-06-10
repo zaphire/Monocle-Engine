@@ -437,12 +437,16 @@ namespace Monocle
 			CloneEntity(selectedEntity, Input::GetWorldMousePosition());
 		}
 
-		if (Input::IsKeyPressed(keyDelete))
+		if (!selectedNode)
 		{
-			scene->Remove(selectedEntity);
-			Select(NULL);
-			return;
+			if (Input::IsKeyPressed(keyDelete))
+			{
+				scene->Remove(selectedEntity);
+				Select(NULL);
+				return;
+			}
 		}
+
 
 		if (Input::IsKeyPressed(keyScaleUp))
 		{

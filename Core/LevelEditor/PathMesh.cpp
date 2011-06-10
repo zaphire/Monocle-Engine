@@ -46,7 +46,7 @@ namespace Monocle
 		this->startNode = node;
 		if (pathCollider)
 			pathCollider->startNode = node;
-
+		 
 		Node *current = this->startNode;
 		while (current)
 		{
