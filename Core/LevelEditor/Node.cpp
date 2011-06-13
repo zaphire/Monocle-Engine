@@ -77,25 +77,26 @@ namespace Monocle
 	{
 		Entity::Render();
 
-		//HACK:
-		//if (Debug::showBounds)
-		if (true)
+		///HACK:
+		if (Debug::showBounds)
+		//if (true)
 		{
 			Graphics::BindTexture(NULL);
 
-			if (GetParent() && GetParent()->HasTag("solid"))
+			if (variant == -1)
+			{
+				Graphics::SetColor(Color::grey);
+			}
+			else if (GetParent() && GetParent()->HasTag("solid"))
 			{
 				// hack
 				Graphics::SetColor(Color::red);
-			}
-			else if (variant == -1)
-			{
-				Graphics::SetColor(Color::grey);
 			}
 			else
 			{
 				Graphics::SetColor(Color::blue);
 			}
+
 			Vector2 position = GetWorldPosition();
 			Graphics::RenderLineRect(position.x, position.y, 64, 64);
 			if (next)
