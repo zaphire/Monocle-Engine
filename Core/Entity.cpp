@@ -366,27 +366,6 @@ namespace Monocle
 	}
 	*/
 
-	void Entity::SendNoteToScene(const std::string &note)
-	{
-		if (scene)
-		{
-			scene->ReceiveNote(note);
-		}
-	}
-
-	void Entity::SendNote(const std::string &tag, const std::string &note)
-	{
-		if (scene)
-		{
-			scene->RelayNoteTo(tag, note);
-		}
-	}
-
-	void Entity::ReceiveNote(const std::string &tag, const std::string &note)
-	{
-
-	}
-
 	void Entity::SetGraphic(Graphic *graphic)
 	{
 		// not sure if we want this yet, sets our graphic's entity pointer to NULL

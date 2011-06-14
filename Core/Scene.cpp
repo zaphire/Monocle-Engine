@@ -293,20 +293,6 @@ namespace Monocle
 		return NULL;
 	}
 
-	/*
-	Entity* Scene::GetEntity(int index)
-	{
-		int c = 0;
-		for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
-		{
-			if (c == index)
-				return *i;
-			c++;
-		}
-		return NULL;
-	}
-	*/
-
 	Entity* Scene::GetNearestEntity(const Vector2 &position, Entity *ignoreEntity)
 	{
 		float smallestSqrMag = -1.0f;
@@ -328,33 +314,6 @@ namespace Monocle
 
 		return nearestEntity;
 	}
-
-	/*
-	Entity* Scene::GetNearestEntityContaining(const Vector2 &position, Entity *ignoreEntity)
-	{
-		float smallestSqrMag = -1.0f;
-
-		Entity *nearestEntity = NULL;
-
-		for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
-		{
-			if ((*i) != ignoreEntity)
-			{
-				if ((*i)->IsPositionInGraphic(position))
-				{
-					Vector2 diff = (*i)->position - position;
-					float sqrMag = diff.GetSquaredMagnitude();
-					if (smallestSqrMag == -1 || sqrMag < smallestSqrMag)
-					{
-						nearestEntity = (*i);
-					}
-				}
-			}
-		}
-
-		return nearestEntity;
-	}
-	*/
 
 	Entity* Scene::GetNearestEntityByControlPoint(const Vector2 &position, const std::string &tag, Entity *ignoreEntity)
 	{
@@ -428,20 +387,6 @@ namespace Monocle
 		return &entities;
 	}
 
-	void Scene::ReceiveNote(const std::string &note)
-	{
-	}
-
-	void Scene::RelayNoteTo(const std::string &tag, const std::string &note)
-	{
-		std::list<Entity*>* taggedEntities = GetAllTag(tag);
-		for (std::list<Entity*>::iterator i = (*taggedEntities).begin(); i != (*taggedEntities).end(); ++i)
-		{
-			//if ((*i) != fromEntity)
-			(*i)->ReceiveNote(tag, note);//, fromEntity);
-		}
-	}
-
 	Entity* Scene::GetEntityAtPosition(const Vector2 &position)
 	{
 		for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
@@ -483,16 +428,6 @@ namespace Monocle
 		if (entityIterator != entities.end())
 			return *entityIterator;
 		return NULL;
-	}
-	*/
-
-	/*
-	void Scene::SendNoteToGame(const std::string &note)
-	{
-		if (game)
-		{
-			game->ReceiveNote(note);
-		}
 	}
 	*/
 }
