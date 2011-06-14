@@ -49,7 +49,7 @@ namespace Monocle
 
 		while (!isDone)
 		{
-			this->Update();
+			Update();
 
 			platform.Update();
 

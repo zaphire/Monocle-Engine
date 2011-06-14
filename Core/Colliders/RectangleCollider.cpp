@@ -38,7 +38,7 @@ namespace Monocle
 		Vector2 pC = GetBottomRight();
 		Vector2 pD = GetBottomLeft();
 		
-		return (LinesIntersect(start, end, pA, pB) || LinesIntersect(start, end, pB, pC) || LinesIntersect(start, end, pC, pD) || LinesIntersect(start, end, pD, pA));
+		return (LinesIntersect(start, end, pA, pB, collisionData) || LinesIntersect(start, end, pB, pC, collisionData) || LinesIntersect(start, end, pC, pD, collisionData) || LinesIntersect(start, end, pD, pA, collisionData));
 	}
 
 	float RectangleCollider::GetRight(bool relativeToEntity)

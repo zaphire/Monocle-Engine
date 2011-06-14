@@ -78,8 +78,8 @@ namespace Monocle
 		Entity::Render();
 
 		///HACK:
-		if (Debug::showBounds)
-		//if (true)
+		//if (Debug::showBounds)
+		if (true)
 		{
 			Graphics::BindTexture(NULL);
 
