@@ -40,7 +40,7 @@ namespace Monocle
 		Vector2 closest = (t * dir) + start;
 		Vector2 d = (ePos + offset) - closest;
 
-		bool didCollide = d.GetSquaredMagnitude() <= (radius + lineRadius) * (radius + lineRadius);
+		bool didCollide = (d.GetSquaredMagnitude() <= pow(radius + lineRadius, 2));
 
 		if (didCollide && collisionData)
 		{
