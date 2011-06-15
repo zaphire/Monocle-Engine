@@ -40,13 +40,16 @@ namespace Monocle
 		Vector2 closest = (t * dir) + start;
 		Vector2 d = (ePos + offset) - closest;
 
-		bool didCollide = (d.GetSquaredMagnitude() <= pow(radius + lineRadius, 2));
+		bool didCollide = d.GetSquaredMagnitude() <= (radius + lineRadius) * (radius + lineRadius);
 
 		if (didCollide && collisionData)
 		{
-			collisionData->hitPoint = closest;
+			Vector2 diff = start - ePos;
+			diff.Clamp(radius);
+			collisionData->hitPoint = ePos + diff;
 			collisionData->penetration = fabs(d.GetMagnitude() - (radius + lineRadius));
 			collisionData->normal = (ePos - closest).GetNormalized();
+			collisionData->collider = this;
 		}
 
 		return didCollide;

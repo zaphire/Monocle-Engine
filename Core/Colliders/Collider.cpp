@@ -170,14 +170,14 @@ namespace Monocle
 
 	bool Collider::CollideCircleCircle(CircleCollider* a, CircleCollider* b, CollisionData *collisionData)
 	{
-		Vector2 diff = b->GetCenter() - a->GetCenter();
+		Vector2 diff = a->GetCenter() - b->GetCenter();
 		if (diff.IsInRange(a->radius + b->radius))
 		{
 			if (collisionData)
 			{
 				collisionData->normal = diff.GetNormalized();
 				collisionData->penetration = (a->radius + b->radius) - diff.GetMagnitude();
-				collisionData->hitPoint = (b->GetCenter() - a->GetCenter()) * 0.5f + a->GetCenter();
+				collisionData->hitPoint = diff * 0.5f + b->GetCenter();
 			}
 			return true;
 		}
