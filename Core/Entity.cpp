@@ -315,21 +315,28 @@ namespace Monocle
 	//	children.remove(entity);
 	//}
 
-	void Entity::SetCollider(Collider *collider)
+	void Entity::SetCollider(Collider *setCollider)
 	{
-		if (collider == NULL && this->collider != NULL)
+		if (setCollider == NULL && this->collider != NULL)
 		{
-			Collision::RemoveCollider(collider);
-			collider = NULL;
+			// if we want to set null, and we already have a collider
+			// remove the collider that we had
+			Collision::RemoveCollider(this->collider);
+			// set it to null
+			this->collider = NULL;
+			// note the code doesn't delete it
 		}
 		else if (this->collider != NULL)
 		{
+			// we could change this so that it auto-removes the existing collider instead
 			Debug::Log("Error: Entity already has a collider.");
 		}
 		else
 		{
-			this->collider = collider;
-			Collision::RegisterColliderWithEntity(collider, this);
+			// set our collider pointer to the passed in collider
+			this->collider = setCollider;
+			// register the collider with the Collision manager
+			Collision::RegisterColliderWithEntity(setCollider, this);
 		}
 	}
 
@@ -358,27 +365,6 @@ namespace Monocle
 		return Collision::AddRectangleCollider(this, width, height, offset);
 	}
 	*/
-
-	void Entity::SendNoteToScene(const std::string &note)
-	{
-		if (scene)
-		{
-			scene->ReceiveNote(note);
-		}
-	}
-
-	void Entity::SendNote(const std::string &tag, const std::string &note)
-	{
-		if (scene)
-		{
-			scene->RelayNoteTo(tag, note);
-		}
-	}
-
-	void Entity::ReceiveNote(const std::string &tag, const std::string &note)
-	{
-
-	}
 
 	void Entity::SetGraphic(Graphic *graphic)
 	{

@@ -115,18 +115,10 @@ namespace Monocle
 		virtual void LoadLevel(FileNode *fileNode);
 
 	protected:
-		// not sure if we need to pass scene or not yet
-		// or if we'll use this later
-		//void SendNoteToGame(const std::string &note);
-
-		friend class Game;
-		
 		// scene has a game pointer
 		// so that it can request scene switches
+		friend class Game;
 		Game *game;
-
-		friend class Entity;
-		virtual void ReceiveNote(const std::string &note);
 
 		friend class Level;
 		//Resolves all entities to be added or removed
@@ -135,8 +127,6 @@ namespace Monocle
 
 	private:
 		static Scene *instance;
-
-		void RelayNoteTo(const std::string &tag, const std::string &note);
 
 		//Holds all the entities currently in the scene
 		std::list<Entity*> entities;
