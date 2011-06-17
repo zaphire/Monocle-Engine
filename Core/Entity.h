@@ -35,6 +35,20 @@ namespace Monocle
 		void *me;
 	};
 
+
+	class EntityTagData
+	{
+	public:
+		EntityTagData();
+		EntityTagData(const std::string &name, bool save);
+		EntityTagData(const EntityTagData &);
+
+		std::string name;
+		bool save;
+	};
+
+	typedef std::vector<EntityTagData> EntityTags;
+
 	//! \brief An object that can Update, Render and be derived to perform other actions.
 	//!
 	//! Examples of what you might use entities for: players, enemies, items, menus.
@@ -90,7 +104,7 @@ namespace Monocle
 		Collider* CollideAt(const std::string &tag, const Vector2& atPosition, CollisionData *collisionData=NULL);
 
 		//! Associates this entity with the given tag
-		void AddTag(const std::string& tag);
+		void AddTag(const std::string& tag, bool save=false);
 		//! Checks whether this entity is associated with a given tag
 		bool HasTag(const std::string& tag);
 		//! Removes a tag from this Entity
@@ -169,7 +183,7 @@ namespace Monocle
 		// only for use by scene
 		//friend class Scene;
 		
-		std::vector<std::string> tags;
+		std::vector<EntityTagData> tags;
 		int layer;
 
 		std::list<InvokeData*> invokes;

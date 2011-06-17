@@ -305,10 +305,29 @@ namespace Monocle
 			{
 				Vector2 diff = (*i)->position - position;
 				float sqrMag = diff.GetSquaredMagnitude();
-				if (smallestSqrMag == -1 || sqrMag < smallestSqrMag)
+				if (smallestSqrMag <= -1 || sqrMag < smallestSqrMag)
 				{
 					nearestEntity = (*i);
 				}
+			}
+		}
+
+		return nearestEntity;
+	}
+
+	Entity* Scene::GetNearestEntityWithTag(const Vector2 &position, const std::string &tag)
+	{
+		float smallestSqrMag = -1.0f;
+
+		Entity *nearestEntity = NULL;
+
+		for (std::list<Entity*>::iterator i = tagMap[tag].begin(); i != tagMap[tag].end(); ++i)
+		{
+			Vector2 diff = (*i)->position - position;
+			float sqrMag = diff.GetSquaredMagnitude();
+			if (smallestSqrMag <= -1 || sqrMag < smallestSqrMag)
+			{
+				nearestEntity = (*i);
 			}
 		}
 
@@ -414,6 +433,8 @@ namespace Monocle
 		//}
 		return NULL;
 	}
+
+
 
 	/*
 	Entity *Scene::GetFirstEntity()
