@@ -225,18 +225,29 @@ namespace Monocle
 	bool Collider::CollideRectCircle(RectangleCollider* a, CircleCollider* b, CollisionData *collisionData)
 	{
 		//TODO: store data in collisionData!
+		//printf("CollideRectCircle\n");
 
 		//The center of the circle is within the rectangle
 		if (a->IntersectsPoint(b->GetCenter()))
+		{
+			//printf("collided\n");
 			return true;
+		}
 
 		//Check the circle against the four edges of the rectangle
 		Vector2 pA = a->GetTopLeft();
 		Vector2 pB = a->GetTopRight();
 		Vector2 pC = a->GetBottomRight();
 		Vector2 pD = a->GetBottomLeft();
-		if (b->IntersectsLine(pA, pB) || b->IntersectsLine(pB, pC) || b->IntersectsLine(pC, pD) || b->IntersectsLine(pD, pA))
+		if (b->IntersectsLine(pA, pB, 0.0f, collisionData) || b->IntersectsLine(pB, pC, 0.0f, collisionData) || b->IntersectsLine(pC, pD, 0.0f, collisionData) || b->IntersectsLine(pD, pA, 0.0f, collisionData))
+		{
+			//printf("collided\n");
+			if (collisionData)
+			{
+				//printf("collisionData.normal (%f, %f) penetration: %f hitPoint: (%f, %f)\n", collisionData->normal.x, collisionData->normal.y, collisionData->penetration, collisionData->hitPoint.x, collisionData->hitPoint.y);
+			}
 			return true;
+		}
 
 		return false;
 	}

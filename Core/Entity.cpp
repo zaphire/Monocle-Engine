@@ -26,13 +26,32 @@ namespace Monocle
 		}
 	}
 
+	///=====
+
+	EntityTagData::EntityTagData()
+	{
+		save = false;
+	}
+
+	EntityTagData::EntityTagData(const std::string &name, bool save)
+		: name(name), save(save)
+	{
+	}
+
+	EntityTagData::EntityTagData(const EntityTagData &entityTagData)
+		: name(entityTagData.name), save(entityTagData.save)
+	{
+	}
+
+	///=====
+
 	Entity::Entity(const Entity &entity)
 		: Transform(entity), isEnabled(true), followCamera(entity.followCamera), scene(NULL), collider(NULL), graphic(NULL), parent(NULL), depth(entity.depth), isVisible(entity.isVisible), color(entity.color), layer(entity.layer)//, tags(entity.tags)
 	{
-		std::vector<std::string> copyTags = entity.tags;
-		for (std::vector<std::string>::iterator i = copyTags.begin(); i != copyTags.end(); ++i)
+		EntityTags copyTags = entity.tags;
+		for (EntityTags::iterator i = copyTags.begin(); i != copyTags.end(); ++i)
 		{
-			AddTag(*i);
+			AddTag((*i).name, (*i).save);
 		}
 	}
 
@@ -217,10 +236,10 @@ namespace Monocle
 		if (index >= tags.size())
 			Debug::Log("ERROR: Tag index out of bounds.");
 #endif
-		return tags[index];
+		return tags[index].name;
 	}
 
-	void Entity::AddTag(const std::string& tag)
+	void Entity::AddTag(const std::string& tag, bool save)
 	{
 #ifdef DEBUG
 		//Error: If the entity already has that tag
@@ -229,7 +248,7 @@ namespace Monocle
 #endif
 		if (!HasTag(tag))
 		{
-			tags.push_back(tag);
+			tags.push_back(EntityTagData(tag, save));
 			if (scene != NULL)
 				scene->EntityAddTag(this, tag);
 		}
@@ -242,9 +261,9 @@ namespace Monocle
 		if (!HasTag(tag))
 			Debug::Log("ERROR: Removing tag from an entity that doesn't have that tag.");
 #endif
-		for (std::vector<std::string>::iterator i = tags.begin(); i != tags.end(); ++i)
+		for (EntityTags::iterator i = tags.begin(); i != tags.end(); ++i)
 		{
-			if ((*i).compare(tag) == 0)
+			if ((*i).name.compare(tag) == 0)
 			{
 				tags.erase(i);
 				break;
@@ -256,9 +275,9 @@ namespace Monocle
 
 	bool Entity::HasTag(const std::string& tag)
 	{
-		for (std::vector<std::string>::iterator i = tags.begin(); i != tags.end(); ++i)
+		for (EntityTags::iterator i = tags.begin(); i != tags.end(); ++i)
 		{
-			if ((*i).compare(tag) == 0)
+			if ((*i).name.compare(tag) == 0)
 				return true;
 		}
 
@@ -501,9 +520,10 @@ namespace Monocle
 		if (tags.size() != 0)
 		{
 			std::ostringstream os;
-			for (std::vector<std::string>::iterator i = tags.begin(); i != tags.end(); ++i)
+			for (EntityTags::iterator i = tags.begin(); i != tags.end(); ++i)
 			{
-				os << (*i) << " ";
+				if ((*i).save)
+					os << (*i).name << " ";
 			}
 			fileNode->Write("tags", os.str());
 		}
@@ -527,8 +547,7 @@ namespace Monocle
 			std::istringstream is(tags);
 			while (is >> tag)
 			{
-				//printf("loading tag: %s\n", tag.c_str());
-				AddTag(tag);
+				AddTag(tag, true);
 			}
 		}
 		fileNode->Read("followCamera", followCamera);

@@ -30,8 +30,11 @@ namespace Monocle
 	{
 		//TODO: Support line width!
 
-		if (IntersectsPoint(start) || IntersectsPoint(end))
-			return true;
+		if (!collisionData)
+		{
+			if (IntersectsPoint(start) || IntersectsPoint(end))
+				return true;
+		}
 
 		Vector2 pA = GetTopLeft();
 		Vector2 pB = GetTopRight();
