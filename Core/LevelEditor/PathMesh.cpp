@@ -39,6 +39,11 @@ namespace Monocle
 	//	}
 	//}
 
+	Node* PathMesh::GetStartNode()
+	{
+		return startNode;
+	}
+
 	void PathMesh::SetStartNode(Node *node)
 	{
 		nodes.clear();
