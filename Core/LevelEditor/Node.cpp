@@ -50,7 +50,8 @@ namespace Monocle
 		{
 			/// HACK:
 			PathMesh *pathMesh = dynamic_cast<PathMesh*>(GetParent());
-			if (pathMesh->GetStartNode() == this)
+
+			if (this == pathMesh->GetStartNode())
 			{
 				if (prev)
 				{
@@ -68,9 +69,14 @@ namespace Monocle
 		}
 
 		if (next)
+		{
 			next->prev = prev;
+		}
+		
 		if (prev)
+		{
 			prev->next = next;
+		}
 
 		prev = NULL;
 		next = NULL;

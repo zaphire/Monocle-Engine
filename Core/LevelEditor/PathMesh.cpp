@@ -39,6 +39,11 @@ namespace Monocle
 	//	}
 	//}
 
+	Node* PathMesh::GetStartNode()
+	{
+		return startNode;
+	}
+
 	void PathMesh::SetStartNode(Node *node)
 	{
 		nodes.clear();
@@ -54,11 +59,6 @@ namespace Monocle
 			//textures.push_back(current->tile);
 			current = current->GetNext();
 		}
-	}
-
-	Node* PathMesh::GetStartNode()
-	{
-		return startNode;
 	}
 
 	void PathMesh::Render()
