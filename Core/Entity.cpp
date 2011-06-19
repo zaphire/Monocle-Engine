@@ -525,7 +525,11 @@ namespace Monocle
 				if ((*i).save)
 					os << (*i).name << " ";
 			}
-			fileNode->Write("tags", os.str());
+			std::string saveString = os.str();
+			if (!saveString.empty())
+			{
+				fileNode->Write("tags", os.str());
+			}
 		}
 		if (followCamera != Vector2::zero)
 			fileNode->Write("followCamera", followCamera);

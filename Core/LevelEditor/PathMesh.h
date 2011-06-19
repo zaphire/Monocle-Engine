@@ -14,6 +14,7 @@ namespace Monocle
 		PathMesh();
 		PathMesh(const std::string &textureFilename, int cells, Node *startNode, int size);
 		void SetStartNode(Node *node);
+		Node* GetStartNode();
 		void Render();
 		void Save(FileNode *fileNode);
 		void Load(FileNode *fileNode);

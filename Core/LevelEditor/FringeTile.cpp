@@ -67,7 +67,7 @@ namespace Monocle
 	}
 
 	FringeTile::FringeTile()
-		: Entity(), tileID(0), sprite(NULL) //fringeTileset(NULL), tileID(0), sprite(NULL)
+		: Entity(), tileID(0), sprite(NULL)
 	{
 		//AddTag("FringeTile");
 		sprite = new Sprite();
@@ -149,6 +149,22 @@ namespace Monocle
 		sprite->blend = (BlendType)spriteBlend;
 	}
 
+	void FringeTile::Update()
+	{
+		Entity::Update();
+		if (sprite->texture && (sprite->texture->repeatX || sprite->texture->repeatY))
+		{
+			if (sprite->texture->repeatX)
+			{
+				sprite->textureScale.x = scale.x;
+			}
+			if (sprite->texture->repeatY)
+			{
+				sprite->textureScale.y = scale.y;
+			}
+		}
+	}
+
 	void FringeTile::RefreshTexture()
 	{
 		printf("RefreshTexture to tileID: %d\n", tileID);
@@ -175,7 +191,18 @@ namespace Monocle
 				sprite->height = fringeTileData->height;
 			}
 
-			if (fringeTileData->atlasX != 0 || fringeTileData->atlasW != 0 || fringeTileData->atlasY != 0 || fringeTileData->atlasH != 0)
+			if (sprite->texture && (sprite->texture->repeatX || sprite->texture->repeatY))
+			{
+				if (sprite->texture->repeatX)
+				{
+					sprite->textureScale.x = scale.x;
+				}
+				if (sprite->texture->repeatY)
+				{
+					sprite->textureScale.y = scale.y;
+				}
+			}
+			else if (fringeTileData->atlasX != 0 || fringeTileData->atlasW != 0 || fringeTileData->atlasY != 0 || fringeTileData->atlasH != 0)
 			{
 				sprite->textureOffset = Vector2(fringeTileData->atlasX / (float)sprite->texture->width, fringeTileData->atlasY / (float)sprite->texture->height);
 				sprite->textureScale = Vector2(fringeTileData->atlasW / (float)sprite->texture->width, fringeTileData->atlasH / (float)sprite->texture->height);

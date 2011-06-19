@@ -48,10 +48,11 @@ namespace Monocle
 		//should have getter functions and be private
 		unsigned int width, height;
 		unsigned int texID;
+		bool repeatX, repeatY;
  
 	private:
 		FilterType filter;
-		bool repeatX, repeatY;
+		
 	};
 }
  

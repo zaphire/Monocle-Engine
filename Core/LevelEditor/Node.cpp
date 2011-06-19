@@ -50,17 +50,20 @@ namespace Monocle
 		{
 			/// HACK:
 			PathMesh *pathMesh = dynamic_cast<PathMesh*>(GetParent());
-			if (prev)
+			if (pathMesh->GetStartNode() == this)
 			{
-				pathMesh->SetStartNode(prev);
-			}
-			else if (next)
-			{
-				pathMesh->SetStartNode(next);
-			}
-			else
-			{
-				pathMesh->SetStartNode(NULL);
+				if (prev)
+				{
+					pathMesh->SetStartNode(prev);
+				}
+				else if (next)
+				{
+					pathMesh->SetStartNode(next);
+				}
+				else
+				{
+					pathMesh->SetStartNode(NULL);
+				}
 			}
 		}
 

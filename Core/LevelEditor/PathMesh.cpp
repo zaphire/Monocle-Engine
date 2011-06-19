@@ -56,6 +56,11 @@ namespace Monocle
 		}
 	}
 
+	Node* PathMesh::GetStartNode()
+	{
+		return startNode;
+	}
+
 	void PathMesh::Render()
 	{
 		if (texture != NULL || size != 0)
