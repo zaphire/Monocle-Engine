@@ -64,10 +64,11 @@ namespace Monocle
 	PuppetEntity::PuppetEntity()
 		: Entity()
 	{
-		std::string puppetFile;
-		puppetFile = "puppet";
+	}
 
-		puppet.Load(puppetFile + ".xml", this);
+	void PuppetEntity::Load(const std::string &filename)
+	{
+		puppet.Load(filename, this);
 
 		puppet.Play("idle");
 	}
@@ -81,6 +82,11 @@ namespace Monocle
 	/// PUPPET EDITOR
 	PuppetEditor::PuppetEditor() : Editor()
 	{
+	}
+
+	void PuppetEditor::Load(const std::string &filename)
+	{
+		puppetEntity->Load(filename);
 	}
 
 	void PuppetEditor::Added()
@@ -171,7 +177,7 @@ namespace Monocle
 				{
 					if (Input::IsKeyPressed(KEY_S))
 					{
-						puppetEntity->puppet.Save(puppetEntity);
+						puppetEntity->puppet.Save();
 					}
 				}
 
@@ -187,7 +193,7 @@ namespace Monocle
 						float multiplier = 5.0f;
 						moveSpeed *= multiplier;
 						rotateSpeed *= multiplier;
-					}
+					} 
 
 					if (Input::IsKeyPressed(keyZero))
 					{
@@ -196,7 +202,7 @@ namespace Monocle
 						part->GetSprite()->position = Vector2::zero;
 					}
 
-					float moveAmount = Monocle::deltaTime * moveSpeed;
+					float moveAmount = Monocle::deltaTime * moveSpeed * 10.0f;
 					float rotateAmount = Monocle::deltaTime * rotateSpeed;
 
 					if (Input::IsKeyHeld(KEY_LCTRL))
@@ -240,7 +246,7 @@ namespace Monocle
 
 
 				}
-				else
+				else 
 				{
 
 				}

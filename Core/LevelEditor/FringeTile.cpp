@@ -152,16 +152,27 @@ namespace Monocle
 	void FringeTile::Update()
 	{
 		Entity::Update();
+		
+		RefreshScale();
+	}
+
+	void FringeTile::RefreshScale()
+	{
 		if (sprite->texture && (sprite->texture->repeatX || sprite->texture->repeatY))
 		{
-			if (sprite->texture->repeatX)
+			const FringeTileData *fringeTileData = Level::GetCurrentFringeTileset()->GetFringeTileDataByID(tileID);
+			if (fringeTileData->autoTile)
 			{
-				sprite->textureScale.x = scale.x;
+				if (sprite->texture->repeatX)
+				{
+					sprite->textureScale.x = scale.x;
+				}
+				if (sprite->texture->repeatY)
+				{
+					sprite->textureScale.y = scale.y;
+				}
 			}
-			if (sprite->texture->repeatY)
-			{
-				sprite->textureScale.y = scale.y;
-			}
+
 		}
 	}
 
@@ -193,14 +204,7 @@ namespace Monocle
 
 			if (sprite->texture && (sprite->texture->repeatX || sprite->texture->repeatY))
 			{
-				if (sprite->texture->repeatX)
-				{
-					sprite->textureScale.x = scale.x;
-				}
-				if (sprite->texture->repeatY)
-				{
-					sprite->textureScale.y = scale.y;
-				}
+				RefreshScale();
 			}
 			else if (fringeTileData->atlasX != 0 || fringeTileData->atlasW != 0 || fringeTileData->atlasY != 0 || fringeTileData->atlasH != 0)
 			{

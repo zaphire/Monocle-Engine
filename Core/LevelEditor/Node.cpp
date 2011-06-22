@@ -106,10 +106,18 @@ namespace Monocle
 				Graphics::SetColor(Color::blue);
 			}
 
-			Vector2 position = GetWorldPosition();
-			Graphics::RenderLineRect(position.x, position.y, 64, 64);
+			Vector2 pos = GetWorldPosition();
+			Graphics::RenderLineRect(pos.x, pos.y, 64, 64);
 			if (next)
-				Graphics::RenderLine(position, next->GetWorldPosition());
+			{
+				Vector2 nextPos = next->GetWorldPosition();
+				Vector2 diff = (nextPos - pos);
+				Vector2 halfPos = diff * 0.5f + pos;
+				Vector2 dir = diff.GetNormalized();
+				Graphics::RenderLine(pos, next->GetWorldPosition());
+				Graphics::RenderLine(halfPos, halfPos + dir.GetPerpendicularLeft() * 10.0f - dir * 10.0f);
+				Graphics::RenderLine(halfPos, halfPos + dir.GetPerpendicularRight() * 10.0f - dir * 10.0f);
+			}
 		}
 	}
 
