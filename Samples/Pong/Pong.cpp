@@ -85,18 +85,6 @@ namespace Pong
             if (sfxWall)
                 sfxWall->Play(1,1.0,pan,2.0); // Play it higher, you won't even notice it's the same ;D
 		}
-		
-		// if we go off the left side of the screen
-		if (position.x < 0)
-		{
-			SendNoteToScene("BallOffLeft");
-		}
-
-		// if we go off the right side of the screen
-		if (position.x > 800)
-		{
-			SendNoteToScene("BallOffRight");
-		}
 	}
 
 	void Ball::Render()
@@ -229,22 +217,6 @@ namespace Pong
         Add(scoreText);
 	}
 
-	void GameScene::ReceiveNote(const std::string &note)
-	{
-		if (note == "BallOffLeft")
-		{
-            p2Score++;
-            scoreText->SetText(GetScoreString());
-			ResetBall();
-		}
-		else if (note == "BallOffRight")
-		{
-            p1Score++;
-            scoreText->SetText(GetScoreString());
-			ResetBall();
-		}
-	}
-
 	void GameScene::ResetBall()
 	{
 		ball->position = Vector2(400,300);
@@ -258,14 +230,24 @@ namespace Pong
         return str.str();
     }
 
-	/*
 	void GameScene::Update()
 	{
 		Scene::Update();
 
 		// do pong specific update
+		if (ball->position.x < 0)
+		{
+            p2Score++;
+            scoreText->SetText(GetScoreString());
+			ResetBall();
+		}
+		else if (ball->position.x > 800)
+		{
+            p1Score++;
+            scoreText->SetText(GetScoreString());
+			ResetBall();
+		}
 	}
-	*/
 
 	void GameScene::End()
 	{
