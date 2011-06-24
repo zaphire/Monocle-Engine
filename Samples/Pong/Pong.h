@@ -55,11 +55,8 @@ namespace Pong
 		void ResetBall();
         const std::string GetScoreString();
 
-
 		void Begin();
 		void End();
-		//void Update();
-		
-		void ReceiveNote(const std::string &note);
+		void Update();
 	};
 }
