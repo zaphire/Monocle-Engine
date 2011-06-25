@@ -59,6 +59,8 @@ namespace Monocle
         hRootWindow = DefaultRootWindow(hDisplay);
         hScreen = DefaultScreen(hDisplay);
 
+		if(bits < 0) bits = DefaultDepth(hDisplay, hScreen);
+
         vi = glXChooseVisual(hDisplay, 0, att);
 
         if(vi == NULL) {

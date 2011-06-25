@@ -101,6 +101,18 @@ namespace Monocle
 		wc.lpszMenuName		= NULL;									// We Don't Want A Menu
 		wc.lpszClassName		= windowName;								// Set The Class Name
 
+		if(bits < 0)
+		{
+			DEVMODE dmScreenSettings;
+			if(!EnumDisplaySettings( NULL, ENUM_CURRENT_SETTINGS, &dmScreenSettings ))
+			{
+				Debug::Log("Could not get display settings");
+				return false;
+			}
+			
+			bits = dmScreenSettings.dmBitsPerPel;
+		}
+
 		if (!RegisterClass(&wc))									// Attempt To Register The Window Class
 		{
 			Debug::Log("Failed To Register The Window Class.");
@@ -618,7 +630,7 @@ namespace Monocle
 		}
 		else
 		{
-			instance->keys[instance->localKeymap[key]] = on;			
+			instance->keys[instance->localKeymap[key]] = on;
 		}
 	}
 
