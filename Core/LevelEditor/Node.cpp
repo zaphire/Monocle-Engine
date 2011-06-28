@@ -91,20 +91,22 @@ namespace Monocle
 		if (true)
 		{
 			Graphics::BindTexture(NULL);
+			
+			PathMesh *pathMesh = dynamic_cast<PathMesh*>(GetParent());
+			if (pathMesh)
+			{
+				Color color = pathMesh->color;
+				color.a = 1;
+				if (variant == -1)
+				{
+					Graphics::SetColor(color * 0.5f);
+				}
+				else
+				{
+					Graphics::SetColor(pathMesh->color);
+				}
+			}
 
-			if (variant == -1)
-			{
-				Graphics::SetColor(Color::grey);
-			}
-			else if (GetParent() && GetParent()->HasTag("solid"))
-			{
-				// hack
-				Graphics::SetColor(Color::red);
-			}
-			else
-			{
-				Graphics::SetColor(Color::blue);
-			}
 
 			Vector2 pos = GetWorldPosition();
 			Graphics::RenderLineRect(pos.x, pos.y, 64, 64);
