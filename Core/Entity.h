@@ -102,6 +102,8 @@ namespace Monocle
 		Collider* Collide(const std::string &tag, CollisionData *collisionData=NULL);
 		//! Check our collider against all entities that have "tag" - warping us to atPosition first, then back to our original position after
 		Collider* CollideAt(const std::string &tag, const Vector2& atPosition, CollisionData *collisionData=NULL);
+		//! Do a circle collision
+		Collider *CollideWith(Collider *collider, const std::string &tag, CollisionData *collisionData=NULL);
 
 		//! Associates this entity with the given tag
 		void AddTag(const std::string& tag, bool save=false);
