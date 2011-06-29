@@ -60,11 +60,14 @@ namespace Monocle
 		//glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
  
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
- 
+		
+#ifdef MONOCLE_MAC
+		gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA8, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
+#else
 		// mipmaps: OpenGL 3.0 version
 		glGenerateMipmap(GL_TEXTURE_2D);
+#endif
  
-		//gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA8, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
  
 		Debug::Log("Loaded texture from data");
 	}
@@ -116,9 +119,12 @@ namespace Monocle
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
  
 			// mipmaps: OpenGL 3.0 version
+#ifndef MONOCLE_MAC
 			glGenerateMipmap(GL_TEXTURE_2D);
+#else
  
-			//gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA8, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA8, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
+#endif
  
 			Debug::Log("Loaded texture: " + filename);
 			return true;
