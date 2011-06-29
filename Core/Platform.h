@@ -131,6 +131,8 @@ namespace Monocle
 		MOUSE_BUTTON_MAX
 	};
 
+	#define MONOCLE_DETECT_COLOR_DEPTH	-1
+
 	// placeholder class for Android/iOS touch input
 	// based on Unity's method for now
 	class Touch

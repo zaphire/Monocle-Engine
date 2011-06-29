@@ -22,7 +22,7 @@ namespace Monocle
 	{
 	public:
 		//! Initializes all the default sub-systems. Platform, Input, Graphics, Debug, Assets, Tween, Collision, Random, Audio, Level
-		Game(const std::string &name="MonoclePowered.org", int w=1024, int h=768, int bits=-1, bool fullscreen=false);
+		Game(const std::string &name="MonoclePowered.org", int w=1024, int h=768, int bits = MONOCLE_DETECT_COLOR_DEPTH, bool fullscreen=false);
 
 		//! Runs the main game loop. Handles timing and high-level updating, rendering.
 		void Main();
