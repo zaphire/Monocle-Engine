@@ -37,6 +37,7 @@ namespace Monocle
 		Vector2 GetPerpendicularRight();
 		void Clamp(float max);
 		bool IsInRange(float range);
+		bool IsZero();
 		float Dot(Vector2 other);
 		float Cross(Vector2 other);
 		Vector2 Reflect(const Vector2 &other);

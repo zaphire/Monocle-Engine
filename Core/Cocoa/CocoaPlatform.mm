@@ -134,6 +134,14 @@ namespace Monocle
 		gettimeofday(&startTime, NULL);
 
         [pool release];
+		
+		if(fullscreen)
+		{	
+			//CGConfigureDisplayWithDisplayMode (kCGDirectMainDisplay, CGDisplayBestModeForParameters (kCGDirectMainDisplay, 32, xRes, yRes, NULL) );						
+			//[glView enterFullScreenMode:[NSScreen mainScreen] withOptions:[NSDictionary dictionaryWithObjectsAndKeys:
+			//															   nil]];
+			
+		}
 	}
 
 	Platform* Platform::instance;

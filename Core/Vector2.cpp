@@ -93,6 +93,11 @@ namespace Monocle
 	{
 		return ((pow(x, 2) + pow(y, 2)) <= pow(range, 2));
 	}
+	
+	bool Vector2::IsZero()
+	{
+		return (x == 0) && (y == 0);
+	}
 
 	float Vector2::Dot(Vector2 b)
 	{
