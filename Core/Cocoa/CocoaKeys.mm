@@ -145,7 +145,8 @@ void Cocoa_HandleKeyEvent(NSEvent *event)
 		key = darwin_scancode_table[scancode];
 	}
 	else {
-		Debug::Log("Unknown scancode");
+        printf("unknown scancode: %d", scancode);
+		//Debug::Log("Unknown scancode");
 	}
 
 	switch ([event type]) {
