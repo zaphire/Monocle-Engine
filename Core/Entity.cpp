@@ -133,6 +133,11 @@ namespace Monocle
 			}
 		}
 
+		if (graphic)
+		{
+			graphic->Update();
+		}
+
 		for (std::list<InvokeData*>::iterator i = removeInvokes.begin(); i != removeInvokes.end(); ++i)
 		{
 			delete *i;

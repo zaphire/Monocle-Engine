@@ -27,6 +27,7 @@ namespace Monocle
 		void Play(const std::string &name);
 		void Stop(const std::string &name);
 		Anim* GetAnim(const std::string &name);
+		void Update();
 		void Render(Entity *entity);
 
 		std::list<Anim> animations;

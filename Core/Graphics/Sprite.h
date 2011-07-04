@@ -16,7 +16,7 @@ namespace Monocle
 		Sprite(const std::string &filename, FilterType filter, float width=-1, float height=-1);
 		Sprite();
 		~Sprite();
-		//void Update();
+		void Update();
 		void Render(Entity *entity);
 		void GetWidthHeight(int *width, int *height);
 

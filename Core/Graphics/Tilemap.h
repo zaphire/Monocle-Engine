@@ -28,6 +28,7 @@ namespace Monocle
 
 			void WorldToTile(const Vector2 &position, int *tx, int *ty);
 
+			void Update();
 			void Render(Entity *entity);
 
 			void Clear(int tileID=-1);

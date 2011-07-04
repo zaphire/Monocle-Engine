@@ -43,19 +43,25 @@ namespace Monocle
 		}
 	}
 
+	void SpriteAnimation::Update()
+	{
+		if (animation)
+		{
+			if (animation->isPlaying)
+			{
+				animation->frame += animation->speed * Monocle::deltaTime;
+				if(animation->frame > animation->end + 1) { animation->frame = animation->start; }
+			}
+		}
+	}
+
 	void SpriteAnimation::Render(Entity *entity)
 	{
 		int x = 0;
 		int y = 0;
 
-		if(animation)
+		if (animation)
 		{
-			if(animation->isPlaying)
-			{
-				animation->frame += animation->speed * Monocle::deltaTime;
-				if(animation->frame > animation->end + 1) { animation->frame = animation->start; }
-			}
-
 			x = (int) animation->frame % (int) (texture->width / width);
 			y = (int) animation->frame / (texture->width / width);
 		}
