@@ -31,8 +31,8 @@ namespace Monocle
 
 		float GetSquaredMagnitude();
 		float GetMagnitude();
-		Vector2 GetNormalized();
-		void Normalize();
+		Vector2 GetNormalized(float length = 1.0f);
+		void Normalize(float length = 1.0f);
 		Vector2 GetPerpendicularLeft();
 		Vector2 GetPerpendicularRight();
 		void Clamp(float max);

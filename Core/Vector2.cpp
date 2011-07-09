@@ -50,17 +50,22 @@ namespace Monocle
 		return sqrt(pow(x, 2) + pow(y, 2));
 	}
 
-	Vector2 Vector2::GetNormalized()
+	Vector2 Vector2::GetNormalized(float length)
 	{
 		float mag = GetMagnitude();
-		return Vector2(x / mag, y / mag);
+		return Vector2((x / mag) * length, (y / mag) * length);
 	}
 
-	void Vector2::Normalize()
+	void Vector2::Normalize(float length)
 	{
 		float mag = GetMagnitude();
 		x /= mag;
 		y /= mag;
+		if (length != 1.0f)
+		{
+			x *= length;
+			y *= length;
+		}
 	}
 
 	Vector2 Vector2::GetPerpendicularLeft()

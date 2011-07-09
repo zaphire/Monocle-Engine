@@ -53,7 +53,6 @@ namespace Monocle
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, glRepeatX);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, glRepeatY);
 
-
 		width = (unsigned int)w;
 		height = (unsigned int)h;
  
