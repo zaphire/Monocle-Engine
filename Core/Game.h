@@ -45,6 +45,18 @@ namespace Monocle
 		//virtual void Init();
         static float frames_per_sec;
 
+	protected:
+		Platform platform;
+		Input input;
+		Graphics graphics;
+		Debug debug;
+		Assets assets;
+		Tween tween;
+		Collision collision;
+		Random random;
+		Audio audio;
+		Level level;
+
 	private:
 		static Game *instance;
 
@@ -56,16 +68,5 @@ namespace Monocle
 
 		//! Scene to switch to at the end of the frame; if NULL, no switch
 		Scene* switchTo;
-
-		Platform platform;
-		Input input;
-		Graphics graphics;
-		Debug debug;
-		Assets assets;
-		Tween tween;
-		Collision collision;
-		Random random;
-		Audio audio;
-		Level level;
 	};
 }
