@@ -178,9 +178,11 @@ namespace Monocle
 						instance->fringeTileset = instance->GetFringeTilesetByName(fringeTilesetName);
 					}
 
+					/*
 					Color backgroundColor = Color::black;
 					XMLReadColor(eLevel, "backgroundColor", &backgroundColor);
 					Graphics::SetBackgroundColor(backgroundColor);
+					*/
 
 					XMLFileNode xmlFileNode(eLevel);
 					instance->scene->LoadLevel(&xmlFileNode);
@@ -332,11 +334,14 @@ namespace Monocle
 				{
 					eLevel.SetAttribute("fringeTileset", instance->fringeTileset->GetName());
 				}
+				
+				/*
 				Color backgroundColor = Graphics::GetBackgroundColor();
 				if (backgroundColor != Color::black)
 				{
 					XMLWriteColor(&eLevel, "backgroundColor", backgroundColor);
 				}
+				*/
 
 				XMLFileNode xmlFileNode(&eLevel);
 				instance->scene->SaveLevel(&xmlFileNode);
