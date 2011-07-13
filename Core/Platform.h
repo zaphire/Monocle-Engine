@@ -157,6 +157,7 @@ namespace Monocle
 		void Init(const std::string &name, int w, int h, int bits, bool fullscreen);
 		void Update();
 
+		static bool ResizeWindow(int width, int height, bool fullscreen, int bits = MONOCLE_DETECT_COLOR_DEPTH);
 		static long GetMilliseconds();
 		static void ShowBuffer();
 		static bool IsKeyPressed(KeyCode keyCode);

@@ -539,6 +539,65 @@ namespace Monocle
 		WindowsPlatform::instance->CreatePlatformWindow(name.c_str(), w, h, bits, fullscreen);
 	}
 
+	bool Platform::ResizeWindow(int width, int height, bool fullscreen, int bits)
+	{
+		WindowsPlatform::instance->fullscreen = fullscreen;
+		instance->width = width;
+		instance->height = height;
+
+		DWORD dwStyle = GetWindowLong(WindowsPlatform::instance->hWnd, GWL_STYLE);
+		DWORD dwExStyle = GetWindowLong(WindowsPlatform::instance->hWnd, GWL_EXSTYLE);
+		ShowWindow(WindowsPlatform::instance->hWnd,SW_SHOW);
+
+		if(bits < 0)
+		{
+			DEVMODE dmScreenSettings;
+			if(!EnumDisplaySettings( NULL, ENUM_CURRENT_SETTINGS, &dmScreenSettings ))
+			{
+				Debug::Log("Could not get display settings");
+				return false;
+			}
+
+			bits = dmScreenSettings.dmBitsPerPel;
+		}
+
+		if(fullscreen)
+		{
+			DWORD dwRemove = WS_OVERLAPPEDWINDOW;
+			DWORD dwNewStyle = dwStyle & ~dwRemove;
+			DWORD dwNewExStyle = dwExStyle & ~WS_EX_WINDOWEDGE;
+			SetWindowLong(WindowsPlatform::instance->hWnd, GWL_STYLE, dwNewStyle);
+			SetWindowLong(WindowsPlatform::instance->hWnd, GWL_EXSTYLE, dwNewExStyle);
+			SetWindowPos(WindowsPlatform::instance->hWnd, NULL, 0, 0,width,
+				height, SWP_SHOWWINDOW|SWP_FRAMECHANGED);
+			DEVMODE settings;
+			settings.dmBitsPerPel = bits;
+			settings.dmPelsWidth = width;
+			settings.dmPelsHeight = height;
+			settings.dmFields = DM_PELSWIDTH | DM_PELSHEIGHT | DM_BITSPERPEL;
+			if(!ChangeDisplaySettings(&settings, CDS_FULLSCREEN) ==
+				DISP_CHANGE_SUCCESSFUL)
+			{
+				Debug::Log("Could not set window to full screen");
+				return false;
+			}
+		}
+		else
+		{
+			DWORD dwNewStyle = dwStyle | WS_OVERLAPPEDWINDOW;
+			DWORD dwNewExStyle = dwExStyle | WS_EX_WINDOWEDGE;
+			SetWindowLong(WindowsPlatform::instance->hWnd, GWL_STYLE, dwNewStyle);
+			SetWindowLong(WindowsPlatform::instance->hWnd, GWL_EXSTYLE, dwNewExStyle);
+			SetWindowPos(WindowsPlatform::instance->hWnd, NULL, 0, 0,width,
+				height, SWP_SHOWWINDOW|SWP_FRAMECHANGED);
+			WindowsPlatform::instance->CenterWindow();
+		}
+
+		Graphics::Resize(width, height);
+
+		return true;
+	}
+
 	void Platform::Update()
 	{
 		mouseScroll = 0;
