@@ -51,7 +51,7 @@ namespace Flash
 		if (texture != NULL)
 		{
 			Entity *entity = new Entity();
-			Sprite *sprite = new Sprite(Assets::GetContentPath() + textureSheet.name + "/" + name + ".png");
+			Sprite *sprite = new Sprite(textureSheet.name + "/" + name + ".png");
 			sprite->position = (texture->registrationPoint * -1) + Vector2(sprite->width, sprite->height)*0.5f;
 			//sprite->position = texture->registrationPoint * -1;
 			entity->SetGraphic(sprite);
