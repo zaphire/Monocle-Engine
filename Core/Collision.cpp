@@ -93,6 +93,8 @@ namespace Monocle
 				}
 			}
 		}
+        
+        return NULL;
 	}
 
 	//OPTION: refactor to add multiple colliders? (consider carefully)
