@@ -210,25 +210,29 @@ namespace Monocle
 			Graphics::PushMatrix();
 
 			MatrixChain();
-			
-			/*
-			if (followCamera == Vector2::zero || Debug::render)
-				Graphics::Translate(position.x, position.y, depth);
-			else
-				Graphics::Translate(scene->GetCamera()->position * followCamera + position * (Vector2::one - followCamera));
-			*/
+
+			Graphics::PopMatrix();
             
 			if (Debug::selectedEntity == this)
+			{
 				Graphics::SetColor(Color::orange);
+			}
 			else
+			{
 				Graphics::SetColor(Color(0.9f,0.9f,1.0f,0.8f));
+			}
             
-			Graphics::RenderLineRect(offset.x, offset.y, ENTITY_CONTROLPOINT_SIZE, ENTITY_CONTROLPOINT_SIZE);
+			// use world position, so we don't have to render with the matrix scale on
+			Vector2 worldPosition = GetWorldPosition();
+
+			//draw the control point
+			Graphics::RenderLineRect(worldPosition.x, worldPosition.y, ENTITY_CONTROLPOINT_SIZE, ENTITY_CONTROLPOINT_SIZE);
             
 			if (Debug::selectedEntity != this)
 				Graphics::SetColor(Color(0.0f,0.0f,0.25f,0.8f));
             
-			Graphics::RenderLineRect(offset.x, offset.y, ENTITY_CONTROLPOINT_SIZE * 0.75f, ENTITY_CONTROLPOINT_SIZE * 0.75f);
+			// draw the control point center
+			Graphics::RenderLineRect(worldPosition.x, worldPosition.y, ENTITY_CONTROLPOINT_SIZE * 0.75f, ENTITY_CONTROLPOINT_SIZE * 0.75f);
             
 			Graphics::PopMatrix();
 		}

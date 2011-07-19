@@ -47,33 +47,33 @@ namespace Monocle
 	float RectangleCollider::GetRight(bool relativeToEntity)
 	{
 		if (relativeToEntity)
-			return offset.x + width*0.5;
+			return offset.x + width*0.5f * GetEntity()->scale.x;
 		else
-			return GetEntityPosition().x + offset.x + width*0.5;
+			return GetEntityPosition().x + offset.x + width*0.5f * GetEntity()->scale.x;
 	}
 
 	float RectangleCollider::GetLeft(bool relativeToEntity)
 	{
 		if (relativeToEntity)
-			return offset.x - width*0.5f;		
+			return offset.x - width*0.5f * GetEntity()->scale.x;		
 		else
-			return GetEntityPosition().x + offset.x - width*0.5;
+			return GetEntityPosition().x + offset.x - width*0.5f * GetEntity()->scale.x;
 	}
 
 	float RectangleCollider::GetTop(bool relativeToEntity)
 	{
 		if (relativeToEntity)
-			return offset.y - height*0.5f;
+			return offset.y - height*0.5f * GetEntity()->scale.y;
 		else
-			return GetEntityPosition().y + offset.y - height*0.5f;	
+			return GetEntityPosition().y + offset.y - height*0.5f * GetEntity()->scale.y;	
 	}
 
 	float RectangleCollider::GetBottom(bool relativeToEntity)
 	{
 		if (relativeToEntity)
-			return offset.y + height*0.5f;	
+			return offset.y + height*0.5f * GetEntity()->scale.y;	
 		else
-			return GetEntityPosition().y + offset.y + height*0.5f;
+			return GetEntityPosition().y + offset.y + height*0.5f * GetEntity()->scale.y;
 	}
 
 	Vector2 RectangleCollider::GetTopLeft(bool relativeToEntity)
