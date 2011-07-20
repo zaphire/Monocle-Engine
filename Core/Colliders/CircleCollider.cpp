@@ -33,11 +33,13 @@ namespace Monocle
 		
 		Vector2 dir = end - start;
 		Vector2 diff = (eWorldPos) - start;
+
 		float t = diff.Dot(dir) / dir.GetSquaredMagnitude();
 		if (t < 0.0f)
 			t = 0.0f;
 		if (t > 1.0f)
 			t = 1.0f;
+
 		Vector2 closest = (t * dir) + start;
 		Vector2 d = (eWorldPos) - closest;
 

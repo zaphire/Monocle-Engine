@@ -95,7 +95,7 @@ namespace Monocle
 			{
 				T *t = new T();
 
-				printf("made a new %s\n", name.c_str());
+				//printf("made a new %s\n", name.c_str());
 
 				Entity *entity = dynamic_cast<Entity*>(t);
 				//if (intoEntity == NULL)

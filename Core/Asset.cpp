@@ -23,7 +23,7 @@ namespace Monocle
 	{
 		referenceCount--;
 
-		Debug::Log("referenceCount decreased for: " + filename);
+		//Debug::Log("referenceCount decreased for: " + filename);
 		Debug::Log(referenceCount);
 
 		if (referenceCount == 0)

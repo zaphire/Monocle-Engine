@@ -73,7 +73,7 @@ namespace Monocle
 		sprite = new Sprite();
 		SetGraphic(sprite);
 
-		RefreshTexture();
+		//RefreshTexture();
 	}
 
 	FringeTile::FringeTile(const FringeTile &fringeTile)
@@ -178,7 +178,7 @@ namespace Monocle
 
 	void FringeTile::RefreshTexture()
 	{
-		printf("RefreshTexture to tileID: %d\n", tileID);
+		//printf("RefreshTexture to tileID: %d\n", tileID);
 
 		// free old texture here somehow:
 		if (sprite->texture)
