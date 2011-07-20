@@ -28,17 +28,18 @@ namespace Monocle
 	{
 		//Algorithm stolen from: http://www.gamedev.net/topic/304578-finite-line-circle-intersection/page__view__findpost__p__2938618
 
-		Vector2 ePos = GetEntity()->GetWorldPosition(offset);
-
+		Vector2 ePos = GetEntityPosition();
+		Vector2 eWorldPos = GetEntity()->GetWorldPosition(offset);
+		
 		Vector2 dir = end - start;
-		Vector2 diff = ePos - start;
+		Vector2 diff = (eWorldPos) - start;
 		float t = diff.Dot(dir) / dir.GetSquaredMagnitude();
 		if (t < 0.0f)
 			t = 0.0f;
 		if (t > 1.0f)
 			t = 1.0f;
 		Vector2 closest = (t * dir) + start;
-		Vector2 d = ePos - closest;
+		Vector2 d = (eWorldPos) - closest;
 
 		bool didCollide = d.GetSquaredMagnitude() <= (radius + lineRadius)  * (radius + lineRadius);
 
