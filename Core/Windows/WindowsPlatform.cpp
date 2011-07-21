@@ -35,7 +35,7 @@
 #define VK_J	'J'
 #define VK_K	'K'
 #define VK_L	'L'
-#define VK_M	'M'
+#define VK_M		'M'
 #define VK_N	'N'
 #define VK_O	'O'
 #define VK_P	'P'
@@ -45,9 +45,9 @@
 #define VK_T	'T'
 #define VK_U	'U'
 #define VK_V	'V'
-#define VK_W	'W'
+#define VK_W		'W'
 #define VK_X	'X'
-#define VK_Y	'Y'
+#define VK_Y		'Y'
 #define VK_Z	'Z'
 #endif
 

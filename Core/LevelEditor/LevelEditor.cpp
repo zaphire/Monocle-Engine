@@ -280,7 +280,7 @@ namespace Monocle
 		if (entity != NULL)
 		{
 //			printf("entity type: %s and %s\n", typeid(entity).name(), typeid(entity).raw_name());
-			printf("entity selected: p(%f, %f) s(%f, %f) r(%f)\n", entity->position.x, entity->position.y, entity->scale.x, entity->scale.y, rotation);
+			printf("entity selected: p(%f, %f) s(%f, %f) r(%f)\n", entity->position.x, entity->position.y, entity->scale.x, entity->scale.y, entity->rotation);
 
 			printf("(Q) move (W) rotate (E) scale\n");
 		}
