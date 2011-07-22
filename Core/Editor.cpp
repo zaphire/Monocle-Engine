@@ -42,12 +42,22 @@ namespace Monocle
 				printf("camZoom (%f, %f)\n", camZoom.x, camZoom.y);
 			}
 
-			if (Input::IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE))
+			if (Input::IsKeyPressed(KEY_LALT))
 			{
 				lastWorldMousePosition = Input::GetWorldMousePosition();
 			}
+			else if (Input::IsKeyHeld(KEY_LALT))
+			{
+				Vector2 diff = Input::GetWorldMousePosition() - lastWorldMousePosition;
+				mainCamera->scale += Vector2::one * diff.y * Monocle::deltaTime * 0.05f;
+				lastWorldMousePosition = Input::GetWorldMousePosition();
+			}
 
-			if (Input::IsMouseButtonHeld(MOUSE_BUTTON_MIDDLE))
+			if (Input::IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE) || Input::IsKeyPressed(KEY_LSHIFT))
+			{
+				lastWorldMousePosition = Input::GetWorldMousePosition();
+			}
+			else if (Input::IsMouseButtonHeld(MOUSE_BUTTON_MIDDLE) || Input::IsKeyHeld(KEY_LSHIFT))
 			{
 				Vector2 diff = Input::GetWorldMousePosition() - lastWorldMousePosition;
 				mainCamera->position += (-1*diff);

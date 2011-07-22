@@ -887,6 +887,7 @@ namespace Monocle
 		{
 			isNumberEntry = false;
 			numberEntryString = "";
+			moveAxisLock = 0;
 		}
 	}
 }
