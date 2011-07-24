@@ -125,9 +125,14 @@ namespace Monocle
 		}
 		Vector2 resScale = Graphics::GetResolutionScale();
 		Vector2 invResScale = Vector2(1.0f/resScale.x, 1.0f/resScale.y);
-		Vector2 adjustedToCameraMousePosition = Platform::mousePosition / Vector2(camera->viewport.width, camera->viewport.height);
-		//adjustedToCameraMousePosition += Vector2(camera->viewport.x * Platform::GetWidth(), (1.0f - (camera->viewport.y + camera->viewport.height)) * Platform::GetHeight());
-		//printf("adjusted: (%f, %f)\n", adjustedToCameraMousePosition.x, adjdToCameraMousePosition.y);
+		Vector2 adjustedToCameraMousePosition = Platform::mousePosition;
+
+		adjustedToCameraMousePosition = adjustedToCameraMousePosition / Vector2(camera->viewport.width, camera->viewport.height);
+
+		Vector2 adjust = Vector2(-camera->viewport.x * Platform::GetWidth() * 2.0f, -(1.0 - (camera->viewport.height + camera->viewport.y)) * Platform::GetHeight() * 2.0f);
+		//printf("adjust (%f, %f)\n", adjust.x, adjust.y);
+		adjustedToCameraMousePosition += adjust;
+
 		Vector2 diff = (adjustedToCameraMousePosition * invResScale) - Graphics::GetScreenCenter();
 		Vector2 cameraZoom = camera->scale;
 		return camera->position + (diff * Vector2(1/cameraZoom.x, 1/cameraZoom.y));

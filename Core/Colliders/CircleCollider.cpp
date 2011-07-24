@@ -16,12 +16,19 @@ namespace Monocle
 		return CT_CIRCLE;
 	}
 
+	float CircleCollider::GetRadius()
+	{
+		float scale = (fabs(GetEntity()->scale.x) + fabs(GetEntity()->scale.y)) * 0.5f;
+		//printf("GetRadius scale: %f\n", scale);
+		return radius * scale;
+	}
+
 	bool CircleCollider::IntersectsPoint(const Vector2& point, CollisionData *collisionData)
 	{
 		Vector2 ePos = GetEntity()->GetWorldPosition(offset);
 
 		Vector2 diff = point - ePos;
-		return (diff.IsInRange(radius));
+		return (diff.IsInRange(GetRadius()));
 	}
 
 	bool CircleCollider::IntersectsLine(const Vector2& start, const Vector2& end, float lineRadius, CollisionData *collisionData)
@@ -30,7 +37,9 @@ namespace Monocle
 
 		Vector2 ePos = GetEntityPosition();
 		Vector2 eWorldPos = GetEntity()->GetWorldPosition(offset);
-		
+		float eRadius = GetRadius();
+		//float eRadius = radius;
+
 		Vector2 dir = end - start;
 		Vector2 diff = (eWorldPos) - start;
 
@@ -43,14 +52,14 @@ namespace Monocle
 		Vector2 closest = (t * dir) + start;
 		Vector2 d = (eWorldPos) - closest;
 
-		bool didCollide = d.GetSquaredMagnitude() <= (radius + lineRadius)  * (radius + lineRadius);
+		bool didCollide = d.IsInRange(eRadius + lineRadius);
 
 		if (didCollide && collisionData)
 		{
 			Vector2 diff = start - ePos;
-			diff.Clamp(radius);
+			diff.Clamp(eRadius);
 			collisionData->hitPoint = ePos + diff;
-			collisionData->penetration = fabs(d.GetMagnitude() - (radius + lineRadius));
+			collisionData->penetration = fabs(d.GetMagnitude() - (eRadius + lineRadius));
 			collisionData->normal = (ePos - closest).GetNormalized();
 			collisionData->collider = this;
 		}
