@@ -81,5 +81,6 @@ namespace Monocle
 	Vector2 operator/(float lhs, const Vector2 &rhs);
 
 	Vector2 operator*(const Vector2& lhs, const Vector2& rhs);	// multiply components (scale)
+	Vector2 operator/(const Vector2& lhs, const Vector2& rhs);	// divide components (scale)
 	//float operator^(const Vector2& lhs, const Vector2& rhs);	// cross product
 }

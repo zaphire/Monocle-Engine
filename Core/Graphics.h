@@ -57,6 +57,8 @@ namespace Monocle
 		static void Set2D(int virtualWidth, int virtualHeight);
 		//static void Set3D();
 
+		static void Viewport(int x, int y, int width, int height);
+
 		//! Resizes the Graphics' viewport.
 		//! \remark This does not resize the platform window, it only changes
 		//! the graphics' perspective.

@@ -8,6 +8,8 @@
 
 namespace Monocle
 {    
+	class Camera;
+
 	//!
 	//! \brief Manages input for Monocle
 	//! 
@@ -40,7 +42,7 @@ namespace Monocle
 		//! get mouse position relative to virtual screen
 		static Vector2 GetMousePosition();
 		//! take camera into account
-		static Vector2 GetWorldMousePosition();
+		static Vector2 GetWorldMousePosition(Camera *camera = NULL);
 		//! get the scroll wheel
 		static int GetMouseScroll();
 
@@ -100,6 +102,9 @@ namespace Monocle
 		//! list.
 		static void RemoveHandler(EventHandler *handler);
 		
+
+		static void SetWorldMouseCamera(Camera *camera);
+
 		void Update();
 	
 	protected:
@@ -115,6 +120,8 @@ namespace Monocle
 	
 		bool previousMouseButtons[MOUSE_BUTTON_MAX];
 		bool currentMouseButtons[MOUSE_BUTTON_MAX];
+
+		Camera *worldMouseCamera;
 
 		std::map<std::string, std::list<KeyCode> > keyMasks;
 		int lastMouseScroll;

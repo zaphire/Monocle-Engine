@@ -256,6 +256,11 @@ namespace Monocle
 		return Vector2(lhs.x * rhs.x, lhs.y * rhs.y);
 	}
 
+	Vector2 operator/(const Vector2& lhs, const Vector2& rhs)		// divide component (scale)
+	{
+		return Vector2(lhs.x / rhs.x, lhs.y / rhs.y);
+	}
+
 	Vector2 operator/(float lhs, const Vector2 &rhs)
 	{
 		return Vector2(lhs / rhs.x, lhs / rhs.y);

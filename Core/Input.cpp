@@ -21,6 +21,8 @@ namespace Monocle
 
 	void Input::Init()
 	{
+		worldMouseCamera = NULL;
+
 		for (int i = 0; i < (int)KEY_MAX; i++)
 			previousKeys[i] = currentKeys[i] = false;
 
@@ -108,14 +110,32 @@ namespace Monocle
 		return Vector2((Platform::mousePosition.x / Platform::GetWidth()) * Graphics::GetVirtualWidth(), (Platform::mousePosition.y / Platform::GetHeight()) * Graphics::GetVirtualHeight());
 	}
 
-	Vector2 Input::GetWorldMousePosition()
+	Vector2 Input::GetWorldMousePosition(Camera *camera)
 	{
-		Camera *mainCamera = Scene::GetMainCamera();
+		if (!camera)
+		{
+			if (instance->worldMouseCamera)
+			{
+				camera = instance->worldMouseCamera;
+			}
+			else
+			{
+				camera = Scene::GetMainCamera();
+			}
+		}
 		Vector2 resScale = Graphics::GetResolutionScale();
 		Vector2 invResScale = Vector2(1.0f/resScale.x, 1.0f/resScale.y);
-		Vector2 diff = (Platform::mousePosition*invResScale) - Graphics::GetScreenCenter();
-		Vector2 cameraZoom = mainCamera->scale;
-		return mainCamera->position + (diff * Vector2(1/cameraZoom.x, 1/cameraZoom.y));
+		Vector2 adjustedToCameraMousePosition = Platform::mousePosition / Vector2(camera->viewport.width, camera->viewport.height);
+		//adjustedToCameraMousePosition += Vector2(camera->viewport.x * Platform::GetWidth(), (1.0f - (camera->viewport.y + camera->viewport.height)) * Platform::GetHeight());
+		//printf("adjusted: (%f, %f)\n", adjustedToCameraMousePosition.x, adjdToCameraMousePosition.y);
+		Vector2 diff = (adjustedToCameraMousePosition * invResScale) - Graphics::GetScreenCenter();
+		Vector2 cameraZoom = camera->scale;
+		return camera->position + (diff * Vector2(1/cameraZoom.x, 1/cameraZoom.y));
+	}
+
+	void Input::SetWorldMouseCamera(Camera *camera)
+	{
+		instance->worldMouseCamera = camera;
 	}
 
 	int Input::GetMouseScroll()

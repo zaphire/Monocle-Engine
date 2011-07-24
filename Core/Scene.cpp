@@ -2,6 +2,7 @@
 #include "Entity.h"
 #include "Graphics.h"
 #include "MonocleToolkit.h"
+#include "Platform.h"
 
 namespace Monocle
 {
@@ -70,12 +71,18 @@ namespace Monocle
 
 			//printf("\n\n****\n");
 
+
 			for (std::list<Camera*>::iterator camera = cameras.begin(); camera != cameras.end(); ++camera)
 			{
 				activeCamera = *camera;
 
+				Graphics::Viewport(activeCamera->viewport.x * Platform::GetWidth(), activeCamera->viewport.y * Platform::GetHeight(), Platform::GetWidth() * activeCamera->viewport.width, Platform::GetHeight() * activeCamera->viewport.height);
+				//Graphics::Viewport(viewport.x * Platform::GetWidth(), viewport.y * Platform::GetHeight(), Platform::GetWidth() * viewport.width, Platform::GetHeight() * viewport.height);
+
 				if (activeCamera->isVisible)
 				{
+					// set viewport
+
 					activeCamera->ApplyMatrix();
 
 					///HACK: optimize later so we don't run through all the layers

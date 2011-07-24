@@ -3,6 +3,26 @@
 
 namespace Monocle
 {
+
+	Viewport::Viewport()
+	{
+		x = y = 0.0f;
+		width = height = 1.0f;
+	}
+
+	Viewport::Viewport(float x, float y, float width, float height) : x(x), y(y), width(width), height(height)
+	{
+	}
+
+	void Viewport::Set(float x, float y, float width, float height)
+	{
+		this->x = x;
+		this->y = y;
+		this->width = width;
+		this->height = height;
+	}
+
+
 	Camera::Camera(const Camera& camera)
 		: Transform(camera), isVisible(camera.isVisible), frontLayer(camera.frontLayer), backLayer(camera.backLayer)
 	{
@@ -39,4 +59,14 @@ namespace Monocle
 	{
 		return frontLayer;
 	}
+
+	//void Camera::SetActive(bool on)
+	//{
+	//	isActive = on;
+	//}
+
+	//bool Camera::IsActive()
+	//{
+	//	return isActive;
+	//}
 }

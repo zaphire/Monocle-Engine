@@ -65,6 +65,11 @@ namespace Monocle
 		//cameraZoom = Vector2::one;
 	}
 
+	void Graphics::Viewport(int x, int y, int width, int height)
+	{
+		glViewport(x, y, width, height);
+	}
+
 	void Graphics::SetBackgroundColor(const Color &color)
 	{
 		glClearColor(color.r, color.g, color.b, color.a);
