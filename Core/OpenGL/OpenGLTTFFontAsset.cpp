@@ -1,3 +1,5 @@
+#ifdef MONOCLE_OPENGL
+
 #include "../TTFFontAsset.h"
 #include "../Debug.h"
 
@@ -132,3 +134,5 @@ namespace Monocle
 		texCoords.bottomRight.y = q.t1;
     }
 }
+
+#endif
