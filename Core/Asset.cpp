@@ -39,8 +39,8 @@ namespace Monocle
 	std::string Asset::GetName()
 	{
 	    //Will this stop working correctly if the content path is changed?
-		int size = Assets::GetContentPath().size();
-		return filename.substr(size, filename.size() - size);
+		size_t size = Assets::GetContentPath().size();
+		return filename.substr(size, filename.size() - int(size));
 	}
     
     std::string Asset::GetExtension()

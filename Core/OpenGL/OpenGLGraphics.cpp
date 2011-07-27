@@ -101,6 +101,8 @@ namespace Monocle
 			case BLEND_MULTIPLY:
 				glBlendFunc(GL_ZERO, GL_SRC_COLOR);
 				break;
+            default:
+                break;
 			}
 			instance->currentBlend = blend;
 		}

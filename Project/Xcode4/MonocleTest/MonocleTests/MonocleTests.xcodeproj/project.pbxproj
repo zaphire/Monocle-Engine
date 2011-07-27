@@ -86,6 +86,7 @@
 				0328BB9B136EFC3A0031F7A3 /* Main.cpp */,
 			);
 			name = "Test Selector";
+			path = ../Samples;
 			sourceTree = "<group>";
 		};
 		03836F19136EED5D006746F2 = {
@@ -159,7 +160,7 @@
 				03836F72136EEE56006746F2 /* PuppetTest */,
 			);
 			name = Tests;
-			path = ../../../../Tests;
+			path = ../../../../Samples;
 			sourceTree = "<group>";
 		};
 		03836F52136EEE56006746F2 /* AudioTest */ = {
@@ -388,6 +389,7 @@
 				HEADER_SEARCH_PATHS = (
 					"\"$(MONOCLE_LIBRARY_PATH)/Core\"",
 					"\"$(MONOCLE_LIBRARY_PATH)/Libraries\"",
+					"\"$(MONOCLE_LIBRARY_PATH)/Samples\"",
 				);
 				INFOPLIST_FILE = "MonocleTests/MonocleTests-Info.plist";
 				MONOCLE_CONTENT_PATH = "$(MONOCLE_LIBRARY_PATH)/Content";
@@ -414,6 +416,7 @@
 				HEADER_SEARCH_PATHS = (
 					"\"$(MONOCLE_LIBRARY_PATH)/Core\"",
 					"\"$(MONOCLE_LIBRARY_PATH)/Libraries\"",
+					"\"$(MONOCLE_LIBRARY_PATH)/Samples\"",
 				);
 				INFOPLIST_FILE = "MonocleTests/MonocleTests-Info.plist";
 				MONOCLE_CONTENT_PATH = "$(MONOCLE_LIBRARY_PATH)/Content";
