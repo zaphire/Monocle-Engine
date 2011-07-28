@@ -26,6 +26,9 @@ namespace Monocle
 
 		//! Runs the main game loop. Handles timing and high-level updating, rendering.
 		void Main();
+        
+        //! One game loop.
+        void OneLoop();
 
 		//! Updates the game state.  Derived classes may override this to provide extra functionality that must be
 		//! executed in each game loop iteration.
@@ -68,5 +71,9 @@ namespace Monocle
 
 		//! Scene to switch to at the end of the frame; if NULL, no switch
 		Scene* switchTo;
+        
+        // Loop stuff
+        long lastTick;
+        long firstTick;
 	};
 }

@@ -8,6 +8,7 @@
 #include "../Color.h"
 #include "../Tween.h"
 #include "../LevelEditor/Node.h"
+#include "../MonocleToolkit.h"
 
 #include <cstdlib>
 #include <cstdio>
@@ -60,6 +61,10 @@ namespace Monocle
 //		}
         
 		glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+        
+        currentBlend = BLEND_ALPHA;
+        
 		glDisable(GL_LIGHTING);
 		glEnable(GL_TEXTURE_2D);
 		glCullFace(GL_BACK);
@@ -400,17 +405,18 @@ namespace Monocle
         GLfloat vertex_arr[8] = {
             ul.x, ul.y,
             ur.x, ur.y,
-            lr.x, lr.y,
-            ll.x, ll.y
+            ll.x, ll.y,
+            lr.x, lr.y
         };
         
         GLfloat texture_arr[8] = {
             textureOffset.x, textureOffset.y,
             textureOffset.x + textureScale.x, textureOffset.y,
-            textureOffset.x + textureScale.x, textureOffset.y + textureScale.y,
-            textureOffset.x, textureOffset.y + textureScale.y
+            textureOffset.x, textureOffset.y + textureScale.y,
+            textureOffset.x + textureScale.x, textureOffset.y + textureScale.y
         };
         
+        glDisableClientState(GL_COLOR_ARRAY);
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
         glVertexPointer(2, GL_FLOAT, 0, vertex_arr);
@@ -445,17 +451,18 @@ namespace Monocle
         GLfloat vertex_arr[8] = {
             -halfWidth + position.x, -halfHeight + position.y,
             halfWidth + position.x, -halfHeight + position.y,
-            halfWidth + position.x, halfHeight + position.y,
-            -halfWidth + position.x, halfHeight + position.y
+            -halfWidth + position.x, halfHeight + position.y,
+            halfWidth + position.x, halfHeight + position.y
         };
         
         GLfloat texture_arr[8] = {
             textureOffset.x, textureOffset.y,
             textureOffset.x + textureScale.x, textureOffset.y,
-            textureOffset.x + textureScale.x, textureOffset.y + textureScale.y,
-            textureOffset.x, textureOffset.y + textureScale.y
+            textureOffset.x, textureOffset.y + textureScale.y,
+            textureOffset.x + textureScale.x, textureOffset.y + textureScale.y
         };
         
+        glDisableClientState(GL_COLOR_ARRAY);
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
         glVertexPointer(2, GL_FLOAT, 0, vertex_arr);
@@ -478,17 +485,18 @@ namespace Monocle
                 GLfloat vertex_arr[8] = {
                     verts.topLeft.x, verts.topLeft.y,
                     verts.bottomRight.x, verts.topLeft.y,
-                    verts.bottomRight.x, verts.bottomRight.y,
-                    verts.topLeft.x,verts.bottomRight.y
+                    verts.topLeft.x,verts.bottomRight.y,
+                    verts.bottomRight.x, verts.bottomRight.y
                 };
                 
                 GLfloat texture_arr[8] = {
                     texCoords.topLeft.x, texCoords.topLeft.y,
                     texCoords.bottomRight.x, texCoords.topLeft.y,
-                    texCoords.bottomRight.x, texCoords.bottomRight.y,
-                    texCoords.topLeft.x, texCoords.bottomRight.y
+                    texCoords.topLeft.x, texCoords.bottomRight.y,
+                    texCoords.bottomRight.x, texCoords.bottomRight.y
                 };
                 
+                glDisableClientState(GL_COLOR_ARRAY);
                 glEnableClientState(GL_VERTEX_ARRAY);
                 glEnableClientState(GL_TEXTURE_COORD_ARRAY);
                 glVertexPointer(2, GL_FLOAT, 0, vertex_arr);
@@ -684,8 +692,8 @@ namespace Monocle
                 Vector2 pVectorVertex[4] = {
                     pos1 - perp1 * nodes[i]->scale.y * size * 0.5f,
                     pos2 - perp2 * nodes[i+1]->scale.y * size * 0.5f,
-                    pos2 + perp2 * nodes[i+1]->scale.y * size * 0.5f,
-                    pos1 + perp1 * nodes[i]->scale.y * size * 0.5f
+                    pos1 + perp1 * nodes[i]->scale.y * size * 0.5f,
+                    pos2 + perp2 * nodes[i+1]->scale.y * size * 0.5f
                 };
                 
                 GLfloat vertex_arr[8] = {
@@ -698,15 +706,15 @@ namespace Monocle
                 GLfloat texture_arr[8] = {
                     texOffset.x, texOffset.y,
                     texOffset.x + texScale.x, texOffset.y,
-                    texOffset.x + texScale.x, texOffset.y + texScale.y,
-                    texOffset.x, texOffset.y + texScale.y
+                    texOffset.x, texOffset.y + texScale.y,
+                    texOffset.x + texScale.x, texOffset.y + texScale.y
                 };
                 
                 GLfloat color_arr[4 * 4] = {
                     nodes[i]->color.r, nodes[i]->color.g, nodes[i]->color.b, nodes[i]->color.a,
                     nodes[i+1]->color.r, nodes[i+1]->color.g, nodes[i+1]->color.b, nodes[i+1]->color.a,
-                    nodes[i+1]->color.r, nodes[i+1]->color.g, nodes[i+1]->color.b, nodes[i+1]->color.a,
-                    nodes[i]->color.r, nodes[i]->color.g, nodes[i]->color.b, nodes[i]->color.a
+                    nodes[i]->color.r, nodes[i]->color.g, nodes[i]->color.b, nodes[i]->color.a,
+                    nodes[i+1]->color.r, nodes[i+1]->color.g, nodes[i+1]->color.b, nodes[i+1]->color.a
                 };
                 
                 glEnableClientState(GL_VERTEX_ARRAY);
@@ -775,6 +783,15 @@ namespace Monocle
         
         delete tmpline;
         delete data;
+    }
+    
+    void Graphics::CheckErrors()
+    {
+        GLenum err = glGetError();
+        if (err == GL_NO_ERROR)
+            return;
+        
+        Debug::Log("GL ERROR: " + StringOf(err));
     }
 }
 

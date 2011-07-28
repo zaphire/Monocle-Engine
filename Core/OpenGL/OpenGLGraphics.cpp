@@ -620,6 +620,15 @@ namespace Monocle
         delete tmpline;
         delete data;
     }
+    
+    void Graphics::CheckErrors()
+    {
+        GLenum err = glGetError();
+        if (err == GL_NO_ERROR)
+            return;
+        
+        Debug::Log("GL ERROR: " + std::string((char*)gluErrorString(err)));
+    }
 }
 
 #endif

@@ -1,0 +1,315 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0352EC9413E0BF6B00265680 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0352EC9313E0BF6B00265680 /* UIKit.framework */; };
+		0352EC9613E0BF6B00265680 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0352EC9513E0BF6B00265680 /* Foundation.framework */; };
+		0352EC9813E0BF6B00265680 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0352EC9713E0BF6B00265680 /* CoreGraphics.framework */; };
+		0352EC9E13E0BF6B00265680 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0352EC9C13E0BF6B00265680 /* InfoPlist.strings */; };
+		0352ECA013E0BF6B00265680 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0352EC9F13E0BF6B00265680 /* main.m */; };
+		0352ECA413E0BF6B00265680 /* MonocleIOSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0352ECA313E0BF6B00265680 /* MonocleIOSAppDelegate.m */; };
+		0352ECA813E0BF6B00265680 /* MonocleIOSAppDelegate_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 0352ECA713E0BF6B00265680 /* MonocleIOSAppDelegate_iPhone.m */; };
+		0352ECAB13E0BF6B00265680 /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0352ECA913E0BF6B00265680 /* MainWindow_iPhone.xib */; };
+		0352ECAF13E0BF6B00265680 /* MonocleIOSAppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0352ECAE13E0BF6B00265680 /* MonocleIOSAppDelegate_iPad.m */; };
+		0352ECB213E0BF6B00265680 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0352ECB013E0BF6B00265680 /* MainWindow_iPad.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0352EC8F13E0BF6B00265680 /* MonocleIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonocleIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0352EC9313E0BF6B00265680 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0352EC9513E0BF6B00265680 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0352EC9713E0BF6B00265680 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0352EC9B13E0BF6B00265680 /* MonocleIOS-Info.plist */ = {isa = PBXFileReference; path = "MonocleIOS-Info.plist"; sourceTree = "<group>"; };
+		0352EC9D13E0BF6B00265680 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0352EC9F13E0BF6B00265680 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0352ECA113E0BF6B00265680 /* MonocleIOS-Prefix.pch */ = {isa = PBXFileReference; path = "MonocleIOS-Prefix.pch"; sourceTree = "<group>"; };
+		0352ECA213E0BF6B00265680 /* MonocleIOSAppDelegate.h */ = {isa = PBXFileReference; path = MonocleIOSAppDelegate.h; sourceTree = "<group>"; };
+		0352ECA313E0BF6B00265680 /* MonocleIOSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonocleIOSAppDelegate.m; sourceTree = "<group>"; };
+		0352ECA613E0BF6B00265680 /* MonocleIOSAppDelegate_iPhone.h */ = {isa = PBXFileReference; name = MonocleIOSAppDelegate_iPhone.h; path = iPhone/MonocleIOSAppDelegate_iPhone.h; sourceTree = "<group>"; };
+		0352ECA713E0BF6B00265680 /* MonocleIOSAppDelegate_iPhone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MonocleIOSAppDelegate_iPhone.m; path = iPhone/MonocleIOSAppDelegate_iPhone.m; sourceTree = "<group>"; };
+		0352ECAA13E0BF6B00265680 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPhone/en.lproj/MainWindow_iPhone.xib; sourceTree = "<group>"; };
+		0352ECAD13E0BF6B00265680 /* MonocleIOSAppDelegate_iPad.h */ = {isa = PBXFileReference; name = MonocleIOSAppDelegate_iPad.h; path = iPad/MonocleIOSAppDelegate_iPad.h; sourceTree = "<group>"; };
+		0352ECAE13E0BF6B00265680 /* MonocleIOSAppDelegate_iPad.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MonocleIOSAppDelegate_iPad.m; path = iPad/MonocleIOSAppDelegate_iPad.m; sourceTree = "<group>"; };
+		0352ECB113E0BF6B00265680 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPad/en.lproj/MainWindow_iPad.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0352EC8C13E0BF6B00265680 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0352EC9413E0BF6B00265680 /* UIKit.framework in Frameworks */,
+				0352EC9613E0BF6B00265680 /* Foundation.framework in Frameworks */,
+				0352EC9813E0BF6B00265680 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0352EC8413E0BF6B00265680 = {
+			isa = PBXGroup;
+			children = (
+				0352EC9913E0BF6B00265680 /* MonocleIOS */,
+				0352EC9213E0BF6B00265680 /* Frameworks */,
+				0352EC9013E0BF6B00265680 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0352EC9013E0BF6B00265680 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0352EC8F13E0BF6B00265680 /* MonocleIOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0352EC9213E0BF6B00265680 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0352EC9313E0BF6B00265680 /* UIKit.framework */,
+				0352EC9513E0BF6B00265680 /* Foundation.framework */,
+				0352EC9713E0BF6B00265680 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0352EC9913E0BF6B00265680 /* MonocleIOS */ = {
+			isa = PBXGroup;
+			children = (
+				0352ECA213E0BF6B00265680 /* MonocleIOSAppDelegate.h */,
+				0352ECA313E0BF6B00265680 /* MonocleIOSAppDelegate.m */,
+				0352ECA513E0BF6B00265680 /* iPhone */,
+				0352ECAC13E0BF6B00265680 /* iPad */,
+				0352EC9A13E0BF6B00265680 /* Supporting Files */,
+			);
+			path = MonocleIOS;
+			sourceTree = "<group>";
+		};
+		0352EC9A13E0BF6B00265680 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0352EC9B13E0BF6B00265680 /* MonocleIOS-Info.plist */,
+				0352EC9C13E0BF6B00265680 /* InfoPlist.strings */,
+				0352EC9F13E0BF6B00265680 /* main.m */,
+				0352ECA113E0BF6B00265680 /* MonocleIOS-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0352ECA513E0BF6B00265680 /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				0352ECA613E0BF6B00265680 /* MonocleIOSAppDelegate_iPhone.h */,
+				0352ECA713E0BF6B00265680 /* MonocleIOSAppDelegate_iPhone.m */,
+				0352ECA913E0BF6B00265680 /* MainWindow_iPhone.xib */,
+			);
+			name = iPhone;
+			sourceTree = "<group>";
+		};
+		0352ECAC13E0BF6B00265680 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				0352ECAD13E0BF6B00265680 /* MonocleIOSAppDelegate_iPad.h */,
+				0352ECAE13E0BF6B00265680 /* MonocleIOSAppDelegate_iPad.m */,
+				0352ECB013E0BF6B00265680 /* MainWindow_iPad.xib */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0352EC8E13E0BF6B00265680 /* MonocleIOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0352ECB513E0BF6B00265680 /* Build configuration list for PBXNativeTarget "MonocleIOS" */;
+			buildPhases = (
+				0352EC8B13E0BF6B00265680 /* Sources */,
+				0352EC8C13E0BF6B00265680 /* Frameworks */,
+				0352EC8D13E0BF6B00265680 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MonocleIOS;
+			productName = MonocleIOS;
+			productReference = 0352EC8F13E0BF6B00265680 /* MonocleIOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0352EC8613E0BF6B00265680 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = jwmusic.org;
+			};
+			buildConfigurationList = 0352EC8913E0BF6B00265680 /* Build configuration list for PBXProject "MonocleIOS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0352EC8413E0BF6B00265680;
+			productRefGroup = 0352EC9013E0BF6B00265680 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0352EC8E13E0BF6B00265680 /* MonocleIOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0352EC8D13E0BF6B00265680 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0352EC9E13E0BF6B00265680 /* InfoPlist.strings in Resources */,
+				0352ECAB13E0BF6B00265680 /* MainWindow_iPhone.xib in Resources */,
+				0352ECB213E0BF6B00265680 /* MainWindow_iPad.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0352EC8B13E0BF6B00265680 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0352ECA013E0BF6B00265680 /* main.m in Sources */,
+				0352ECA413E0BF6B00265680 /* MonocleIOSAppDelegate.m in Sources */,
+				0352ECA813E0BF6B00265680 /* MonocleIOSAppDelegate_iPhone.m in Sources */,
+				0352ECAF13E0BF6B00265680 /* MonocleIOSAppDelegate_iPad.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0352EC9C13E0BF6B00265680 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0352EC9D13E0BF6B00265680 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0352ECA913E0BF6B00265680 /* MainWindow_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0352ECAA13E0BF6B00265680 /* en */,
+			);
+			name = MainWindow_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		0352ECB013E0BF6B00265680 /* MainWindow_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0352ECB113E0BF6B00265680 /* en */,
+			);
+			name = MainWindow_iPad.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0352ECB313E0BF6B00265680 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0352ECB413E0BF6B00265680 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0352ECB613E0BF6B00265680 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MonocleIOS/MonocleIOS-Prefix.pch";
+				INFOPLIST_FILE = "MonocleIOS/MonocleIOS-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0352ECB713E0BF6B00265680 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MonocleIOS/MonocleIOS-Prefix.pch";
+				INFOPLIST_FILE = "MonocleIOS/MonocleIOS-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0352EC8913E0BF6B00265680 /* Build configuration list for PBXProject "MonocleIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0352ECB313E0BF6B00265680 /* Debug */,
+				0352ECB413E0BF6B00265680 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0352ECB513E0BF6B00265680 /* Build configuration list for PBXNativeTarget "MonocleIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0352ECB613E0BF6B00265680 /* Debug */,
+				0352ECB713E0BF6B00265680 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0352EC8613E0BF6B00265680 /* Project object */;
+}

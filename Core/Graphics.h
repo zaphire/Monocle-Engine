@@ -191,6 +191,8 @@ namespace Monocle
 		//! \param filename [in] The filename of the image file to save to.  Relative to the running directory, not ContentPath.
 		//! \param type [in] The type of file to write
 		static void ScreenToImage(const std::string &filename, ImageType type);
+        
+        static void CheckErrors();
 	protected:
 		friend class Game;
 		Graphics();
