@@ -3,6 +3,7 @@
 #include "../Color.h"
 #include "../TextureAsset.h"
 #include "../Graphics.h"
+#include "../Shader.h"
 #include <string>
 
 namespace Monocle
@@ -19,6 +20,8 @@ namespace Monocle
 		void Update();
 		void Render(Entity *entity);
 		void GetWidthHeight(int *width, int *height);
+		void SetShader(Shader* shader);
+		Shader* GetShader();
 
 		TextureAsset *texture;
 		float width, height;//,angle;
@@ -26,5 +29,7 @@ namespace Monocle
 		Vector2 textureScale;
 
 		BlendType blend;
+	private:
+		Shader* shader;
 	};
 }
