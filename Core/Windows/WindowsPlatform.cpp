@@ -398,6 +398,8 @@ namespace Monocle
 	bool Platform::mouseButtons[3];
 	Vector2 Platform::mousePosition;
 	int Platform::mouseScroll = 0;
+    Touch Platform::touches[TOUCHES_MAX];
+    int Platform::numTouches=0;
 
 	Platform::Platform()
 	{

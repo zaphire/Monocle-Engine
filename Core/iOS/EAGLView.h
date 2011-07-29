@@ -123,6 +123,20 @@
     id displayLink_;
     
     Monocle::Game           *game_;
+    
+    NSTimer *touchHoldTimer;                    ///< Main Timer
+    NSInteger touchAndHoldCounter;              ///< Used for informational purposes only.
+    NSDate *firstTouchTime;                     ///< Used for informational purposes only.
+    
+    // Double tap and hold
+    NSInteger doubleTapAndHoldCounter;          ///< Used for informational purposes only.
+    NSDate *doubleTapTime;                      ///< Used for informational purposes only.
+    
+    // Tracking All touches
+    NSMutableArray *activeTouches;              ///< Used to keep track of all current touches.
+    
+    // Pinch and Zoom
+    CGSize originalDifference;                  ///< Used for calulating the relative difference between two multi-taps for pinch/strech and zoom/unzoom
 }
 
 /** creates an initializes an EAGLView with a frame and 0-bit depth buffer, and a RGB565 color buffer. */

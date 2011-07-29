@@ -9,6 +9,21 @@
 #ifndef MonocleIOS_TestSelector_h
 #define MonocleIOS_TestSelector_h
 
+#include "Scene.h"
 
+using namespace Monocle;
+
+namespace TestSelector
+{
+    class GameScene : public Scene
+    {
+    public:
+        
+        GameScene();
+        
+        void Begin();
+        void Update();
+    };
+};
 
 #endif

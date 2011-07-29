@@ -47,8 +47,20 @@ namespace Ogmo
 
 	void Player::Update()
 	{
+        bool heldLeft;
+        bool heldRight;
+        bool jumpKey;
+        
+        Entity::Update();
+        
+        heldLeft = (Input::IsKeyMaskHeld("left") || Input::IsTouchInRect(Vector2(0,0),
+                                                                        Vector2(position.x-1,120)));
+        heldRight = (Input::IsKeyMaskHeld("right") || Input::IsTouchInRect(Vector2(position.x,0),
+                                                                          Vector2(160,120)));
+        jumpKey = (Input::IsKeyMaskPressed("jump") || Input::IsTouchInRect(Vector2(0,121),Vector2(160,1000),TOUCH_PHASE_BEGIN));
+        
 		// GRAB INPUT AND ACCELERATE
-		if (Input::IsKeyMaskHeld("left"))
+		if (heldLeft)
 		{
 			scale.x = -1;
 			if(cling < 0)
@@ -59,7 +71,7 @@ namespace Ogmo
 			direction = false;
 			scale.x = -1;
 		}
-		else if (Input::IsKeyMaskHeld("right"))
+		else if (heldRight)
 		{
 			scale.x = 1;
 			if(cling < 0)
@@ -86,7 +98,7 @@ namespace Ogmo
 		}
 
 		// JUMP INPUT
-		if (Input::IsKeyMaskPressed("jump") && (onGround || cling > 0 || !doubleJump))
+		if (jumpKey && (onGround || cling > 0 || !doubleJump))
 		{
 			// jump
 			velocity.y = - JUMP;
@@ -143,12 +155,12 @@ namespace Ogmo
 			}
 
 			//check for wall jump
-			if(CollideAt("WALL", position.x + 1, position.y) && Input::IsKeyMaskHeld("right")) 
+			if(CollideAt("WALL", position.x + 1, position.y) && heldRight) 
 			{ 
 				cling = 10; 
 				clingDir = -1; 
 			}
-			if(CollideAt("WALL", position.x - 1, position.y) && Input::IsKeyMaskHeld("left")) 
+			if(CollideAt("WALL", position.x - 1, position.y) && heldLeft) 
 			{ 
 				cling = 10; 
 				clingDir = 1;

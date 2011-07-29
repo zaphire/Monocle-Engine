@@ -122,12 +122,14 @@ namespace Pong
 		const float friction = 500.0f;
 		const float maxY = 600.0f;
 
-		if (Input::IsKeyHeld(keyUp))
+		if (Input::IsKeyHeld(keyUp) || Input::IsTouchInRect(Vector2(position.x-150,position.y-500),
+                                                            Vector2(position.x+150,position.y)))
 		{
 			speed += accel * Monocle::deltaTime;
 			if (speed > maxSpeed) speed = maxSpeed;
 		}
-		else if (Input::IsKeyHeld(keyDown))
+		else if (Input::IsKeyHeld(keyDown) || Input::IsTouchInRect(Vector2(position.x-150,position.y+1),
+                                                                   Vector2(position.x+150,position.y+500)))
 		{
 			speed -= accel * Monocle::deltaTime;
 			if (speed < -maxSpeed) speed = -maxSpeed;

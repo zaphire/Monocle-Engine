@@ -34,6 +34,8 @@ namespace Monocle
 	bool Platform::mouseButtons[3];
 	Vector2 Platform::mousePosition;
 	int Platform::mouseScroll=0;
+    Touch Platform::touches[TOUCHES_MAX];
+    int Platform::numTouches=0;
     
 	Platform::Platform()
 	{
@@ -44,6 +46,11 @@ namespace Monocle
         for (int ic = 0; ic < (int) KEY_MAX; ++ic) {
             KeyCode kc = (KeyCode) ic;
             localKeymap[kc] = kc;
+        }
+        
+        for (int it = 0; it < (int) TOUCHES_MAX; it++ ) {
+            Touch *t = &Platform::touches[it];
+            t->phase = TOUCH_PHASE_NONE;
         }
 	}
     

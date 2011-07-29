@@ -61,6 +61,8 @@
  
  */
 
+
+
 #ifdef MONOCLE_IOS
 
 // Only compile this code on iOS. These files should NOT be included on your Mac project.
@@ -75,6 +77,9 @@
 
 #import <sys/time.h>
 #include "Game.h"
+#include "Platform.h"
+
+using namespace Monocle;
 
 //CLASS IMPLEMENTATIONS:
 
@@ -196,6 +201,13 @@
 
 - (void) dealloc
 {
+    [touchHoldTimer invalidate];
+    touchHoldTimer = nil;
+    [firstTouchTime release];
+    [doubleTapTime release];
+    [activeTouches release];
+    [super dealloc];
+    
     delete game_;
 	[renderer_ release];
 	[super dealloc];
@@ -304,12 +316,257 @@
 // Pass the touches to the superview
 #pragma mark EAGLView - Touch Delegate
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+CGSize CGSizeDistanceBetween2Points(CGPoint point1, CGPoint point2)
+{
+    return CGSizeMake(point1.x -point2.x, point1.y - point2.y);
+}
+
+-(CGPoint)pointToGL:(CGPoint)uiPoint
+{
+	CGSize s = [self bounds].size;
+	float newY = s.height - uiPoint.y;
+//	float newX = s.width - uiPoint.x;
+    
+    float res = float(Graphics::GetVirtualWidth())/s.width;
+	
+	CGPoint ret = CGPointMake( uiPoint.x, uiPoint.y );
+    
+/*	switch ( orientation ) {
+		case Portrait:
+			ret = CGPointMake( uiPoint.x, uiPoint.y );
+			break;
+		case PortraitUpsideDown:
+			ret = CGPointMake(newX, newY);
+			break;
+		case LandscapeLeft:
+			ret.x = uiPoint.y;
+			ret.y = uiPoint.x;
+			break;
+		case LandscapeRight:
+			ret.x = newY;
+			ret.y = newX;
+			break;
+	}*/
+    
+    ret.x *= res;
+    ret.y *= res;
+	return ret;
+}
+
+-(void)UpdateTouches
+{
+    NSMutableArray *touches = activeTouches;
+    int count = [touches count];
+    
+    if (count > TOUCHES_MAX) count = TOUCHES_MAX;
+    
+    Platform::numTouches = count;
+    
+    for (int i=0; i<count; i++)
+    {
+        TouchPhase newPhase;
+        UITouch *touch = [touches objectAtIndex:i];
+        Touch *oTouch = &Platform::touches[i];
+        
+        oTouch->fingerID = i;
+        CGPoint p = [self pointToGL:[touch locationInView:self]];
+        oTouch->position = Vector2(p.x,p.y);
+        
+//        printf("Touch: (%f,%f)\n",oTouch->position.x,oTouch->position.y);
+        
+        // (There is no vertical stretching)
+        
+        switch ([touch phase]){
+            case UITouchPhaseBegan:
+                newPhase = TOUCH_PHASE_BEGIN;
+                break;
+            case UITouchPhaseCancelled:
+                newPhase = TOUCH_PHASE_CANCELLED;
+                break;
+            case UITouchPhaseEnded:
+                newPhase = TOUCH_PHASE_ENDED;
+                break;
+            case UITouchPhaseMoved:
+                newPhase = TOUCH_PHASE_MOVED;
+                break;
+            case UITouchPhaseStationary:
+                newPhase = TOUCH_PHASE_STATIONARY;
+                break;
+            default:
+                newPhase = TOUCH_PHASE_NONE;
+        }
+        
+        if (newPhase != oTouch->phase){
+            oTouch->phase = newPhase;
+            oTouch->touched = 0;
+        }
+        
+        oTouch->deltaTime = 0; // TODO: deltaTime in touch
+        oTouch->tapCount = [touch tapCount];
+        
+        CGPoint prv = [self pointToGL:[touch previousLocationInView:self]];
+        
+        oTouch->deltaPosition = Vector2(prv.x,prv.y) - oTouch->position;
+    }
+}
+
+- (void)touchIsBeingPinchedOrStretched:(NSSet *)touches;
+{
+    // calculate the distance between the two touches    
+//    CGSize difference = CGSizeDistanceBetween2Points([[activeTouches objectAtIndex:0] locationInView:self], 
+//                                                     [[activeTouches objectAtIndex:1] locationInView:self]);    
+//    CGFloat x_scale_factor = originalDifference.width/difference.width;
+//    CGFloat y_scale_factor = originalDifference.height/difference.height;
+//    NSLog(@"Scale Factor: %x:f, y:%f", x_scale_factor, y_scale_factor);
+}
+
+#define TOUCHUPDATETIME (1.0/15.0)
+
+- (void)touchIsBeingHeld:(NSTimer *)timer;
+{
+    NSSet *touches = [timer userInfo];
+    NSInteger count = [[touches anyObject] tapCount];
+//    NSTimeInterval hold_time = -1*[firstTouchTime timeIntervalSinceNow];
+    if (count == 1) {
+        touchAndHoldCounter += 1;
+        
+    }
+    else if (count == 2) {
+        doubleTapAndHoldCounter += 1;
+        //        NSLog(@"Held for %d counts and %g seconds.", DoubleTapAndHoldCounter, -1*[DoubleTapTime timeIntervalSinceNow]);
+    }
+}
+- (void)cleanupTimers;
+{
+    [touchHoldTimer invalidate];
+    touchHoldTimer = nil;
+    [firstTouchTime release];
+    firstTouchTime = nil;
+    [doubleTapTime release];
+    doubleTapTime = nil;
+}
+
+/*********************************************************************/
+#pragma mark -
+#pragma mark ** Touch Handlers **
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event 
+{
+    // NSSet *touches is the set of touches that began now.  We want to 
+    // keep track of ALL touches, including touches that may have began 
+    // sometime ago.  We have our own NSMutableArray* ActiveTouches to 
+    // do so.
+    if (activeTouches == nil)
+        activeTouches = [[NSMutableArray alloc] init];
+    
+    for (UITouch *touch in touches) {
+        if (![activeTouches containsObject:touch])
+            [activeTouches addObject:touch];
+    }
+    
+    if ([activeTouches count] == 1) { //single touch
+        //Start touch timer
+        touchAndHoldCounter = 0.0;
+        firstTouchTime = [[NSDate alloc] init];
+        touchHoldTimer = [NSTimer scheduledTimerWithTimeInterval:TOUCHUPDATETIME
+                                                          target:self
+                                                        selector:@selector(touchIsBeingHeld:) 
+                                                        userInfo:touches
+                                                         repeats:YES];
+        if ([[touches anyObject] tapCount] == 2)
+            doubleTapTime = [[NSDate alloc] init];
+    } else if ([activeTouches count] == 2) { //two finger touch
+        originalDifference = CGSizeDistanceBetween2Points([[activeTouches objectAtIndex:0] locationInView:self], 
+                                                          [[activeTouches objectAtIndex:1] locationInView:self]);    
+    }
+    
+    [self UpdateTouches];
+}
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event 
+{
+    if ([activeTouches count] == 1) { //single touch
+        // do nothing
+    } else if ([activeTouches count] == 2) { //two finger touch
+        [self cleanupTimers];
+        [self touchIsBeingPinchedOrStretched:touches];
+    }
+    
+    [self UpdateTouches];
+}
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event 
+{
+    [self UpdateTouches];
+    
+    for (UITouch *touch in touches) {
+        [activeTouches removeObject:touch];
+    }
+    
+    [self cleanupTimers];
+    
+    if ([touches count] == 1) { //single touch
+        // do nothing
+    } else if ([touches count] == 2) { //two finger touch
+        //
+    }        
+}
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event 
+{
+    [self cleanupTimers];
+    [activeTouches removeAllObjects];
+    
+    [self UpdateTouches];
+}
+
+/*- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	if(touchDelegate_)
 	{
 		[touchDelegate_ touchesBegan:touches withEvent:event];
 	}
+    
+    NSSet *allTouches = [event allTouches];
+    int count = [allTouches count];
+    
+    if (count > TOUCHES_MAX) count = TOUCHES_MAX;
+    
+    Platform::numTouches = count;
+    
+    for (int i=0; i<count; i++)
+    {
+        UITouch *touch = [[allTouches allObjects] objectAtIndex:i];
+        Touch *oTouch = &Platform::touches[i];
+        
+        oTouch->fingerID = i;
+        CGPoint p = [touch locationInView:self];
+        oTouch->position = Vector2(p.x,p.y);
+        
+        switch ([touch phase]){
+            case UITouchPhaseBegan:
+                oTouch->phase = TOUCH_PHASE_BEGIN;
+                break;
+            case UITouchPhaseCancelled:
+                oTouch->phase = TOUCH_PHASE_CANCELLED;
+                break;
+            case UITouchPhaseEnded:
+                oTouch->phase = TOUCH_PHASE_ENDED;
+                break;
+            case UITouchPhaseMoved:
+                oTouch->phase = TOUCH_PHASE_MOVED;
+                break;
+            case UITouchPhaseStationary:
+                oTouch->phase = TOUCH_PHASE_STATIONARY;
+                break;
+            default:
+                oTouch->phase = TOUCH_PHASE_NONE;
+        }
+        
+        oTouch->deltaTime = 0; // TODO: deltaTime in touch
+        oTouch->tapCount = [touch tapCount];
+
+        CGPoint prv = [touch previousLocationInView:self];
+        
+        oTouch->deltaPosition = Vector2(prv.x,prv.y) - oTouch->position;
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -333,7 +590,7 @@
 	{
 		[touchDelegate_ touchesCancelled:touches withEvent:event];
 	}
-}
+}*/
 
 - (void) startAnimation
 {

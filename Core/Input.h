@@ -95,6 +95,18 @@ namespace Monocle
 		//! Determines whether any of the keys in the given mask
 		//! has been pressed this frame.
 		static bool IsKeyMaskPressed(const std::string& mask);
+        
+        //Touch API
+        static Touch *GetTouchWithStatus( TouchPhase phase, int index = 0 );
+        static Touch *IsTouchBeginning( int index = 0 );
+        static Touch *IsTouchEnding( int index = 0 );
+        static Touch *IsTouchMoving( int index = 0 );
+        static int TouchCount();
+        static int TouchCountWithPhase( TouchPhase phase );
+        static Touch *IsTouchInRect( Vector2 topLeft, Vector2 bottomRight, TouchPhase phase = TOUCH_PHASE_ANY );
+        
+        //! Determines if there is a touch with a specific index in the rectangle provided. This is for when you expect multi-touch.
+        static Touch *IsTouchWithIndexInRect( Vector2 topLeft, Vector2 bottomRight, TouchPhase phase = TOUCH_PHASE_ANY, int index = 0 );
 
 		//! Adds an event handler to the callback list.
 		static void AddHandler(EventHandler *handler);

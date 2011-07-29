@@ -28,6 +28,9 @@ namespace Monocle
 
 		for (int i = 0; i < MOUSE_BUTTON_MAX; i++)
 			previousMouseButtons[i] = currentMouseButtons[i] = false;
+        
+        for (int i = 0; i < TOUCHES_MAX; i++)
+            Platform::touches[i].touched = 0;
 	}
 
 	void Input::Update()
@@ -85,6 +88,23 @@ namespace Monocle
                 (*it)->OnMouseMove(Platform::mousePosition);
 		}
 		lastMousePos = Platform::mousePosition;
+        
+        /** Push out the ending touches and move existing beginning touches to stationary (so they don't retrigger) **/
+        for (int i=0; i<TOUCHES_MAX; i++)
+        {
+            Touch *t = &Platform::touches[i];
+            if (t->phase == TOUCH_PHASE_ENDED && t->touched > 0){
+                t->phase = TOUCH_PHASE_NONE;
+                t->touched = 0;
+            }
+            
+            if (t->phase == TOUCH_PHASE_BEGIN && t->touched > 0){
+                t->phase = TOUCH_PHASE_STATIONARY;
+                t->touched = 0;
+            }
+            
+            t->touched++;
+        }
 	}
 
 	//Keys API
@@ -243,4 +263,92 @@ namespace Monocle
 	{
 	    instance->handlers.remove(handler);
 	}
+    
+    Touch *Input::GetTouchWithStatus( TouchPhase phase, int index )
+    {
+        int numTouches = Platform::numTouches;
+        int sk=0;
+        
+        for (int i=0;i<numTouches&&i<TOUCHES_MAX;i++)
+        {
+            Touch *t = &Platform::touches[i];
+            if ((phase == TOUCH_PHASE_ANY && t->phase != TOUCH_PHASE_NONE) || t->phase == phase){
+                if (sk==index) return t;
+                sk++;
+            }
+        }
+        
+        return NULL;
+    }
+    
+    int Input::TouchCountWithPhase( TouchPhase phase )
+    {
+        int numTouches = Platform::numTouches;
+        int num=0;
+        
+        for (int i=0;i<numTouches&&i<TOUCHES_MAX;i++)
+        {
+            Touch *t = &Platform::touches[i];
+            if ((phase == TOUCH_PHASE_ANY && t->phase != TOUCH_PHASE_NONE) || t->phase == phase){
+                num++;
+            }
+        }
+        
+        return num;
+    }
+    
+    Touch *Input::IsTouchBeginning( int index )
+    {
+        return GetTouchWithStatus( TOUCH_PHASE_BEGIN, index );
+    }
+    
+    Touch *Input::IsTouchEnding( int index )
+    {
+        return GetTouchWithStatus( TOUCH_PHASE_ENDED, index );
+    }
+    
+    Touch *Input::IsTouchMoving( int index )
+    {
+        return GetTouchWithStatus( TOUCH_PHASE_MOVED, index );
+    }
+    
+    Touch *Input::IsTouchWithIndexInRect( Vector2 topLeft, Vector2 bottomRight, TouchPhase phase, int index )
+    {
+        Touch *t = GetTouchWithStatus( phase, index );
+        if (!t) return NULL;
+        
+        if (t->position.x >= topLeft.x &&
+            t->position.x <= bottomRight.x &&
+            t->position.y >= topLeft.y &&
+            t->position.y <= bottomRight.y)
+            return t;
+        
+        return NULL;
+    }
+    
+    Touch *Input::IsTouchInRect( Vector2 topLeft, Vector2 bottomRight, TouchPhase phase )
+    {
+        int numTouches = Platform::numTouches;
+        
+        for (int i=0;i<numTouches&&i<TOUCHES_MAX;i++)
+        {
+            Touch *t = &Platform::touches[i];
+            if ((phase == TOUCH_PHASE_ANY && t->phase != TOUCH_PHASE_NONE) || t->phase == phase){
+                if (t->position.x >= topLeft.x &&
+                    t->position.x <= bottomRight.x &&
+                    t->position.y >= topLeft.y &&
+                    t->position.y <= bottomRight.y){
+//                    printf("T: (%f,%f)\n",t->position.x,t->position.y);
+                    return t;
+                }
+            }
+        }
+        
+        return NULL;
+    }
+
+    int Input::TouchCount()
+    {
+        return Platform::numTouches;
+    }
 }

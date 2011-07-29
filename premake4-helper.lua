@@ -75,17 +75,15 @@ function monocle_os_links_base()
 	
 	monocle_extlib("glew")
 	monocle_extlib("openal")
-	monocle_extlib("ogg")
-	monocle_extlib("vorbis")
 	monocle_extlib("TinyXML")
 	
 	if os.is( "windows" ) == true then
-		links {"Winmm", "glew32s", "opengl32", "glu32", "openal32", "libogg_static","libvorbis_static","libvorbisfile_static"}
+		links {"Winmm", "glew32s", "opengl32", "glu32", "openal32"}
 	elseif os.is( "linux" ) == true then
-		links { "X11","GLEW","GL","GLU","openal","ogg","vorbis","vorbisfile","vorbisenc" }
+		links { "X11","GLEW","GL","GLU","openal" }
 	elseif os.is( "macosx" ) == true then
 		links { "OpenGL.framework", "OpenAL.framework", "Cocoa.framework" }
-		links {"GLEW", "ogg","vorbis","vorbisfile","vorbisenc" }
+		links {"GLEW" }
 	end
 end
 
