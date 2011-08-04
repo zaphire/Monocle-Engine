@@ -199,8 +199,8 @@ namespace Monocle {
             this->vis = new AudioVis();
             this->vis->PrepData();
             
-            if (cs->IsPlaying())
-                Flush();
+//            if (cs->IsPlaying())
+            Flush();
             
             if (cs->IsOpen())
                 this->vizlast = cs->GetTotalPlayTime();
@@ -704,98 +704,87 @@ namespace Monocle {
                 if (IsVisEnabled()) this->vis->bClear = false;
             }
             
-            if (IsVisEnabled())
-            {
-                while (l && pos<size && !decoder->outOfData){
-                    
-                    // What to do if the Decoder says we're almost out of data?
-                    
-                    {
-                        vc.SetWrittenTime( this->writtenpos );
-                        vc.SetEngineerData(0,0,0,0);
-                    }
-                    
-                    l = this->decoder->Render((size-pos<576*sampsize)?(size-pos):576*sampsize,(void*)((long)data+(long)pos));
-                    
-                    {
-                        if (l >= 576*sampsize)
-                        {				
-                            int i = 0;
-                            int samp = 0;
-                            
-                            if (decoder->bit == 16)
-                            {
-                                short *copybuf = (short*)((long)data+(long)pos);
-                                
-                                for (i=0; i<576; i++, samp+=decoder->ch)
-                                {
-                                    temp_waveL[i] = C168(copybuf[samp]);
-                                    
-                                    if (decoder->ch == 1)
-                                        temp_waveR[i] = C168(copybuf[samp]);
-                                    else
-                                        temp_waveR[i] = C168(copybuf[samp+1]); // Stereo (:
-                                    
-                                    //temp_waveL[i] = copybuf[samp] >> 8;
-                                    //temp_waveR[i] = copybuf[samp+1] >> 8;
-                                    //temp_waveL[i] = 0xFF;
-                                    //temp_waveR[i] = 0xFF;
-                                }
-                            }
-                            else if (decoder->bit == 8)
-                            {
-                                unsigned char *copybuf = (unsigned char*)((long)data+(long)pos);
-                                
-                                for (i=0; i<576; i++, samp+=decoder->ch)
-                                {
-                                    temp_waveL[i] = copybuf[samp];
-                                    
-                                    if (decoder->ch == 1)
-                                        temp_waveR[i] = copybuf[samp];
-                                    else
-                                        temp_waveR[i] = copybuf[samp+1]; // Stereo (:
-                                    
-                                    //temp_waveL[i] = copybuf[samp] >> 8;
-                                    //temp_waveR[i] = copybuf[samp+1] >> 8;
-                                    //temp_waveL[i] = 0xFF;
-                                    //temp_waveR[i] = 0xFF;
-                                }
-                            }
-                            
-                            vc.PutWaveLeft(temp_waveL);
-                            vc.PutWaveRight(temp_waveR);
-                        }
-                        else
+
+            while (l && pos<size && !decoder->outOfData){
+                
+                // What to do if the Decoder says we're almost out of data?
+                
+                if (IsVisEnabled())
+                {
+                    vc.SetWrittenTime( this->writtenpos );
+                    vc.SetEngineerData(0,0,0,0);
+                }
+                
+                l = this->decoder->Render((size-pos<576*sampsize)?(size-pos):576*sampsize,(void*)((long)data+(long)pos));
+                
+                if (IsVisEnabled())
+                {
+                    if (l >= 576*sampsize)
+                    {				
+                        int i = 0;
+                        int samp = 0;
+                        
+                        if (decoder->bit == 16)
                         {
-                            vc.PutWaveLeft(temp_waveL);
-                            vc.PutWaveRight(temp_waveR);
+                            short *copybuf = (short*)((long)data+(long)pos);
+                            
+                            for (i=0; i<576; i++, samp+=decoder->ch)
+                            {
+                                temp_waveL[i] = C168(copybuf[samp]);
+                                
+                                if (decoder->ch == 1)
+                                    temp_waveR[i] = C168(copybuf[samp]);
+                                else
+                                    temp_waveR[i] = C168(copybuf[samp+1]); // Stereo (:
+                                
+                                //temp_waveL[i] = copybuf[samp] >> 8;
+                                //temp_waveR[i] = copybuf[samp+1] >> 8;
+                                //temp_waveL[i] = 0xFF;
+                                //temp_waveR[i] = 0xFF;
+                            }
+                        }
+                        else if (decoder->bit == 8)
+                        {
+                            unsigned char *copybuf = (unsigned char*)((long)data+(long)pos);
+                            
+                            for (i=0; i<576; i++, samp+=decoder->ch)
+                            {
+                                temp_waveL[i] = copybuf[samp];
+                                
+                                if (decoder->ch == 1)
+                                    temp_waveR[i] = copybuf[samp];
+                                else
+                                    temp_waveR[i] = copybuf[samp+1]; // Stereo (:
+                                
+                                //temp_waveL[i] = copybuf[samp] >> 8;
+                                //temp_waveR[i] = copybuf[samp+1] >> 8;
+                                //temp_waveL[i] = 0xFF;
+                                //temp_waveR[i] = 0xFF;
+                            }
                         }
                         
-                        vc.EndEntry();
-                    
+                        vc.PutWaveLeft(temp_waveL);
+                        vc.PutWaveRight(temp_waveR);
+                    }
+                    else
+                    {
+                        vc.PutWaveLeft(temp_waveL);
+                        vc.PutWaveRight(temp_waveR);
                     }
                     
-                    UpdateVizJunk();
-                    
-                    unsigned long nlen;
-                    nlen = (unsigned long)(float)((float)l*1000.0f)/((float)(decoder->samplerate*sampsize));
-                    totsamps += l;
-                    this->writtenpos = (totsamps*1000)/(decoder->samplerate*sampsize);
-                    this->currentPosition += nlen;
-                    
-                    pos += l;
+                    vc.EndEntry();
+                
                 }
-            }
-            else
-            {
-                // Optimized for no viz
-                this->decoder->Render(size,data);
+                
+                UpdateVizJunk();
                 
                 unsigned long nlen;
                 nlen = (unsigned long)(float)((float)l*1000.0f)/((float)(decoder->samplerate*sampsize));
                 totsamps += l;
                 this->writtenpos = (totsamps*1000)/(decoder->samplerate*sampsize);
                 this->currentPosition += nlen;
+                
+                pos += l;
             }
 			
 			this->cs->LockBuffer(size);

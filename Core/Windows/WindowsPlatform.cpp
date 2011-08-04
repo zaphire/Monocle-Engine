@@ -714,6 +714,12 @@ namespace Monocle
     {
 //        instance->orientation = orientation;
     }
+    
+    void Platform::ErrorShutdown( std::string msg )
+    {
+        fprintf(stderr,"EXCEPTION: %s\n",msg.c_str());
+        exit(1);
+    }
 }
 
 #endif

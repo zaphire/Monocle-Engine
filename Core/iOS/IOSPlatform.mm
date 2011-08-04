@@ -11,9 +11,12 @@
 #import "IOSPlatform.h"
 #include "../Graphics.h"
 #include "../Debug.h"
+#include "../Audio/Audio.h"
 
 namespace Monocle
 {	
+    AudioDecoder *makeCAFDecFunc( AudioAsset *asset );
+    
 	static struct timeval startTime;
     
 	IOSPlatform*   IOSPlatform::instance;
@@ -69,6 +72,8 @@ namespace Monocle
 		instance->width  = (int)[window bounds].size.width;
 		instance->height = (int)[window bounds].size.height;
         instance->orientation = PLATFORM_ORIENTATION_PORTRAIT;
+        
+        Audio::RegisterDecoder(makeCAFDecFunc, "caf");
 	}
     
     PlatformOrientation Platform::GetOrientation()
@@ -178,6 +183,13 @@ namespace Monocle
         const char *resourceDirCStyle = [resourceDir UTF8String];
         
         return std::string(resourceDirCStyle) + "/Content/";
+    }
+    
+    void Platform::ErrorShutdown( std::string msg )
+    {
+        NSString *errorMessage = [NSString stringWithCString:msg.c_str() 
+                                                    encoding:[NSString defaultCStringEncoding]];
+        [NSException raise:errorMessage format:@"%s" , errorMessage];
     }
 }
 

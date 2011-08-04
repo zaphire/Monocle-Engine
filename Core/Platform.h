@@ -223,6 +223,8 @@ namespace Monocle
         static void PlatformOrientationChanged( PlatformOrientation orientation );
         
         static std::string GetDefaultContentPath();
+        
+        static void ErrorShutdown( std::string msg = "" );
 
 	private:
 		static Platform *instance;

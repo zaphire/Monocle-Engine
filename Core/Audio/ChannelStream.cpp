@@ -23,7 +23,7 @@
 
 
 #define BUFFER_SIZE (1024 * 64)
-#define NUM_BUFFERS 2
+#define NUM_BUFFERS 3
 
 
 
@@ -102,7 +102,7 @@ namespace Monocle
         
         Check("opengensource");
         
-        alSourcei(source, AL_BUFFER, 0);
+        alSourcei(source, AL_BUFFER, AL_NONE);
         
         Check("buffer reset");
 
@@ -219,6 +219,10 @@ namespace Monocle
     void ChannelStream::Play()
     {
 //        alSourceQueueBuffers(source, NUM_BUFFERS, buffers);
+        /*int queued, state;
+        alGetSourcei(source, AL_BUFFERS_QUEUED, &queued);
+        alGetSourcei(source, AL_SOURCE_TYPE, &state);
+        Debug::Log("Playing Queued Buffers: "+StringOf(queued)+ " TYPE: "+StringOf(state));*/
         
         alSourcePlay(source);
         Check("play");
@@ -249,6 +253,8 @@ namespace Monocle
 
             Check("empty " + StringOf(queued+1));
         }
+        
+        
     }
 
     void ChannelStream::Check( std::string erat )

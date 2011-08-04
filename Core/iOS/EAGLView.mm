@@ -674,9 +674,16 @@ CGSize CGSizeDistanceBetween2Points(CGPoint point1, CGPoint point2)
 	[displayLink_ addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 }
 
+Monocle::Scene *GetIOSFirstScene();
+
 -(void) mainLoop:(id)sender
 {
     game_->OneLoop();
+    
+    if (game_->IsDone()){
+        game_->PlatformReset();
+        game_->SetScene(GetIOSFirstScene());
+    }
 }
 
 - (void) stopAnimation

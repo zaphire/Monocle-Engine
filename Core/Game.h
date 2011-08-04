@@ -47,6 +47,12 @@ namespace Monocle
 		
 		//virtual void Init();
         static float frames_per_sec;
+        
+        //! Called particularly for iOS to reset isDone and other variables. Caused by a Game::Quit
+        void PlatformReset();
+        
+        //! Getter for isDone
+        bool IsDone();
 
 	protected:
 		Platform platform;

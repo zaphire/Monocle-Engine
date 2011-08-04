@@ -139,7 +139,7 @@ namespace AudioTest
         coin = Assets::RequestAudio("AudioTest/Coin.wav");
         
         if (!laser || !coin)
-            return Game::Quit();
+            return Platform::ErrorShutdown("Couldn't load Laser.wav or Coin.wav");
 	}
     
 	void GameScene::ReceiveNote(const std::string &note)
@@ -197,13 +197,18 @@ namespace AudioTest
         scText = new Text("Dual-worlds Audio Demo", font);
         scText->position = Vector2(50, 50);
         Add(scText);
-        
+    
         // Make the deck, and it starts playing... (we need a play())
+#ifdef MONOCLE_IOS
+        deck = Audio::NewDeck( Assets::RequestAudio("AudioTest/pgl.caf") );
+#else
         deck = Audio::NewDeck( Assets::RequestAudio("AudioTest/ShortLoop.ogg", true) );
+#endif
         
         if (!deck)
-            return Game::Quit();
+            return Platform::ErrorShutdown("Couldn't load ShortLoop.ogg");
     
+        deck->EnableVis();
         deck->Play();
         deck->SetLoops(0);
         deck->SetFadeOut(500);
@@ -282,7 +287,7 @@ namespace AudioTest
 		deck2 = Audio::NewDeck(Assets::RequestAudio("AudioTest/City01Hell.g2m",true,"hellogirl"));
         
         if (!deck1 || !deck2)
-            return Game::Quit();
+            return Platform::ErrorShutdown("Couldn't Load City01.g2m or City01Hell.g2m");
         
         deck2->Mute();
 

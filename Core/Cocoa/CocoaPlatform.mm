@@ -266,4 +266,11 @@ namespace Monocle
     {
 //        instance->orientation = orientation;
     }
+    
+    void Platform::ErrorShutdown( std::string msg )
+    {
+        NSString *errorMessage = [NSString stringWithCString:msg.c_str() 
+                                                    encoding:[NSString defaultCStringEncoding]];
+        [NSException raise:errorMessage format:@"%s" , errorMessage];
+    }
 }

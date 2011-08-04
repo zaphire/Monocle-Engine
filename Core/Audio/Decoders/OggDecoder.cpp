@@ -168,7 +168,7 @@ namespace Monocle {
             pos += ret;
         }
         
-        // reached the and?
+        // reached the end?
         if (!ret && (loopsRemaining!=0))
         {
             // we are looping so restart from the beginning

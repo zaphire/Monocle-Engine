@@ -33,7 +33,9 @@ namespace Monocle {
         ChannelStream::Init();
         
         // Register decoders
+#ifdef MONOCLE_AUDIO_OGG
         RegisterDecoder(makeOggFunc, "ogg g2m");
+#endif
         RegisterDecoder(makeWaveFunc, "wav wave");
             
         Debug::Log("...Done");

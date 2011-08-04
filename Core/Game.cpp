@@ -192,4 +192,14 @@ namespace Monocle
 		instance->editor = editor;
 	}
 	*/
+    
+    void Game::PlatformReset()
+    {
+        isDone = false;
+    }
+    
+    bool Game::IsDone()
+    {
+        return isDone;
+    }
 }
