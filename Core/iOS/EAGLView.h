@@ -155,6 +155,8 @@
 /** Initializes an EAGLView with a frame, a color buffer format, a depth buffer format, a sharegroup and multisampling support */
 - (id) initWithFrame:(CGRect)frame pixelFormat:(NSString*)format depthFormat:(GLuint)depth preserveBackbuffer:(BOOL)retained sharegroup:(EAGLSharegroup*)sharegroup multiSampling:(BOOL)sampling numberOfSamples:(unsigned int)nSamples;
 
+- (void) prepare;
+
 /** pixel format: it could be RGBA8 (32-bit) or RGB565 (16-bit) */
 @property(nonatomic,readonly) NSString* pixelFormat;
 /** depth format of the render buffer: 0, 16 or 24 bits*/

@@ -4,8 +4,8 @@
 #include <sstream>
 #include <math.h>
 
-#define MONOCLE_AUDIOTEST_CROSSFADING
-//#define MONOCLE_AUDIOTEST_LOOPER
+//#define MONOCLE_AUDIOTEST_CROSSFADING
+#define MONOCLE_AUDIOTEST_LOOPER
 //#define MONOCLE_AUDIOTEST_SFX
 
 namespace AudioTest
@@ -65,7 +65,7 @@ namespace AudioTest
                 thispos.y = deck->GetVisWaveform(i)*128.0 + midy;
                 thispos.x = xstep*i;
                 
-                if (deck->vis->bClear) thispos.y = midy;
+                if (deck->vis && deck->vis->bClear) thispos.y = midy;
                 
                 Graphics::RenderLine(lastpos, thispos);
                 
@@ -75,7 +75,7 @@ namespace AudioTest
         } else {
             // Do the spectrum blocks
             
-            if (deck->vis->bClear){
+            if (deck->vis && deck->vis->bClear){
                 Graphics::SetColor(Color::white);
                 Graphics::RenderTriangle(400.0);
                 Graphics::PopMatrix();
@@ -151,12 +151,12 @@ namespace AudioTest
 	{
 		Scene::Update();
         
-        if (Input::IsKeyPressed(KEY_L)){
+        if (Input::IsKeyPressed(KEY_L) || Input::IsTouchBeginning()){
             cnt++;
             laser->Play();
         }
         
-        if (Input::IsKeyPressed(KEY_C)){
+        if (Input::IsKeyPressed(KEY_C) || Input::IsTouchEnding()){
             cnt++;
             coin->Play();
         }
@@ -203,7 +203,7 @@ namespace AudioTest
         
         if (!deck)
             return Game::Quit();
-        
+    
         deck->Play();
         deck->SetLoops(0);
         deck->SetFadeOut(500);
@@ -227,12 +227,12 @@ namespace AudioTest
         std::string looping = "off";
         if (deck->LoopsRemaining()==-1) looping = "on";
         
-        scText->SetText("Looping " + looping + " (L), pos is " + StringOf(deck->GetCurrentTime()) + " / " + StringOf(deck->GetTotalLength()));
+        scText->SetText("Looping " + looping + " (L), pos is " + StringOf(deck->GetCurrentTime()) + " / " + StringOf(deck->GetTotalLength()) + "  | "+ StringOf(deck->GetChannelStream()->IsPlaying()));
         
         if (Input::IsKeyPressed(KEY_S))
             deck->Seek(500);
         
-        if (Input::IsKeyPressed(KEY_L)){
+        if (Input::IsKeyPressed(KEY_L) || Input::IsTouchBeginning()){
             if (deck->LoopsRemaining()==-1)
                 deck->SetLoops(1);
             else
@@ -309,7 +309,7 @@ namespace AudioTest
         
         scText->SetText("Press F to crossfade. " + StringOf(deck1->GetCurrentTime()) + " / " + StringOf(deck1->GetTotalLength()));
         
-        if (Input::IsKeyPressed(KEY_F))
+        if (Input::IsKeyPressed(KEY_F) || Input::IsTouchBeginning())
 		{
 			if (deck2->IsMuted()){
 				deck2->UnmuteWithFade(1000);

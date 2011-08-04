@@ -406,6 +406,8 @@ namespace Monocle
 		WindowsPlatform::instance = new WindowsPlatform();
 		instance = this;
 		WindowsPlatform::instance->platform = this;
+        
+        orientation = PLATFORM_ORIENTATION_NOTSUPPORTED;
 
 		// 1ms timer
 		timeBeginPeriod(1);
@@ -702,6 +704,16 @@ namespace Monocle
 	{
 		return "../../Content/";
 	}
+    
+    PlatformOrientation Platform::GetOrientation()
+    {
+        return instance->orientation;
+    }
+    
+    void Platform::PlatformOrientationChanged( PlatformOrientation orientation )
+    {
+//        instance->orientation = orientation;
+    }
 }
 
 #endif

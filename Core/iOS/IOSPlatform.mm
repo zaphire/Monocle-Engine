@@ -42,6 +42,7 @@ namespace Monocle
 		IOSPlatform::instance = new IOSPlatform();
 		IOSPlatform::platform = this;
 		instance = this;
+        orientation = PLATFORM_ORIENTATION_PORTRAIT;
         
         for (int ic = 0; ic < (int) KEY_MAX; ++ic) {
             KeyCode kc = (KeyCode) ic;
@@ -67,7 +68,33 @@ namespace Monocle
         
 		instance->width  = (int)[window bounds].size.width;
 		instance->height = (int)[window bounds].size.height;
+        instance->orientation = PLATFORM_ORIENTATION_PORTRAIT;
 	}
+    
+    PlatformOrientation Platform::GetOrientation()
+    {
+        return instance->orientation;
+    }
+    
+    void Platform::PlatformOrientationChanged( PlatformOrientation orientation )
+    {
+        if (instance->orientation == orientation)
+            return;
+        
+        instance->orientation = orientation;
+        
+        /*switch (instance->orientation)
+        {
+            case PLATFORM_ORIENTATION_LANDSCAPE_LEFT:
+            case PLATFORM_ORIENTATION_LANDSCAPE_RIGHT:
+                Graphics::Resize(Platform::GetHeight(),Platform::GetWidth());
+                break;
+            default:
+                Graphics::Resize(Platform::GetWidth(),Platform::GetHeight());
+                break;
+        }*/
+        Graphics::Resize(Platform::GetWidth(),Platform::GetHeight());
+    }
     
 	void Platform::Update()
 	{
@@ -84,6 +111,7 @@ namespace Monocle
 		struct timeval now;
 		gettimeofday(&now, NULL);
 		ticks = (now.tv_sec - startTime.tv_sec) * 1000 + (now.tv_usec - startTime.tv_usec) / 1000;
+        
 		return ticks;
 	}
     
@@ -113,9 +141,9 @@ namespace Monocle
 	void Platform::WindowSizeChanged(int w, int h)
 	{
         // This probably doesn't happen. :P
-		instance->width = w;
+		/*instance->width = w;
 		instance->height = h;
-		Graphics::Resize(w, h);
+		Graphics::Resize(w, h);*/
 	}
     
 	void Platform::SetLocalKey(int key, bool on)

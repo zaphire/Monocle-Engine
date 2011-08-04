@@ -162,6 +162,8 @@ namespace Monocle
             KeyCode kc = (KeyCode) ic;
             localKeymap[kc] = kc;
         }
+        
+        orientation = PLATFORM_ORIENTATION_NOTSUPPORTED;
 	}
 
 //	void Platform::Init()
@@ -253,5 +255,15 @@ namespace Monocle
     std::string Platform::GetDefaultContentPath() {
 //        return CocoaPlatform::instance->bundleResourcesPath;
         return "../../Content/";
+    }
+    
+    PlatformOrientation Platform::GetOrientation()
+    {
+        return instance->orientation;
+    }
+    
+    void Platform::PlatformOrientationChanged( PlatformOrientation orientation )
+    {
+//        instance->orientation = orientation;
     }
 }

@@ -39,6 +39,8 @@
 	_glView = [EAGLView viewWithFrame:[_window bounds]];
     
     [_glView retain];
+    
+    [_glView prepare];
 	
 	// enable multiple touches
 	[_glView setMultipleTouchEnabled:YES];

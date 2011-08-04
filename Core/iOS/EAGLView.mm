@@ -74,10 +74,12 @@
 
 #import "EAGLView.h"
 #import "ES1Renderer.h"
+#import "AudioToolbox/AudioToolbox.h"
 
 #import <sys/time.h>
 #include "Game.h"
 #include "Platform.h"
+#include "Audio.h"
 
 using namespace Monocle;
 
@@ -195,8 +197,69 @@ using namespace Monocle;
 	[context_ renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:eaglLayer];
     
 	discardFramebufferSupported_ = YES;
+    
+    // Check for device orientation
+    // Tell the UIDevice to send notifications when the orientation changes
+	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:@"UIDeviceOrientationDidChangeNotification" object:nil];
 	
 	return YES;
+}
+
+- (void) setDeviceOrientation:(UIDeviceOrientation)orientation
+{
+    PlatformOrientation orient;
+    
+    switch (orientation)
+    {
+        case UIDeviceOrientationPortrait:
+            orient = PLATFORM_ORIENTATION_PORTRAIT;
+            [[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationPortrait animated:NO];
+            break;
+        case UIDeviceOrientationPortraitUpsideDown:
+            orient = PLATFORM_ORIENTATION_PORTRAIT_UPSIDEDOWN;
+            [[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationPortraitUpsideDown animated:NO];
+            break;
+        case UIDeviceOrientationLandscapeLeft:
+            orient = PLATFORM_ORIENTATION_LANDSCAPE_LEFT;
+            [[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationLandscapeRight animated:NO];
+            break;
+        case UIDeviceOrientationLandscapeRight:
+            orient = PLATFORM_ORIENTATION_LANDSCAPE_RIGHT;
+            [[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationLandscapeLeft animated:NO];
+            break;
+        default:
+            return;
+    }
+    
+    Platform::PlatformOrientationChanged( orient );
+    return;
+}
+
+// tell the director that the orientation has changed
+- (void) orientationChanged:(NSNotification *)notification
+{
+	UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+	[self setDeviceOrientation:orientation];
+}
+
+void interruptionListenerCallback (void   *inUserData, UInt32    interruptionState ) 
+{
+	if (interruptionState == kAudioSessionBeginInterruption) {
+        Audio::SystemHalt();
+        AudioSessionSetActive(NO);
+	} else if (interruptionState == kAudioSessionEndInterruption) {
+        Audio::SystemResume();
+        AudioSessionSetActive(YES);
+	}
+}
+
+- (void) prepare
+{
+    UInt32 category = kAudioSessionCategory_AmbientSound; //TODO: Change this value to whatever makes sense for this app
+    OSStatus result = AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(category), &category);
+    
+    result = AudioSessionInitialize(NULL, NULL, interruptionListenerCallback, self);
 }
 
 - (void) dealloc
@@ -212,6 +275,8 @@ using namespace Monocle;
 	[renderer_ release];
 	[super dealloc];
 }
+
+
 
 - (void) layoutSubviews
 {
@@ -325,28 +390,32 @@ CGSize CGSizeDistanceBetween2Points(CGPoint point1, CGPoint point2)
 {
 	CGSize s = [self bounds].size;
 	float newY = s.height - uiPoint.y;
-//	float newX = s.width - uiPoint.x;
+	float newX = s.width - uiPoint.x;
     
-    float res = float(Graphics::GetVirtualWidth())/s.width;
-	
-	CGPoint ret = CGPointMake( uiPoint.x, uiPoint.y );
+    float res;
+    CGPoint ret;
     
-/*	switch ( orientation ) {
-		case Portrait:
+	switch ( Platform::GetOrientation() ) {
+        default:
+		case Monocle::PLATFORM_ORIENTATION_PORTRAIT:
+            res = float(Graphics::GetVirtualWidth())/s.width;
 			ret = CGPointMake( uiPoint.x, uiPoint.y );
 			break;
-		case PortraitUpsideDown:
+		case Monocle::PLATFORM_ORIENTATION_PORTRAIT_UPSIDEDOWN:
+            res = float(Graphics::GetVirtualWidth())/s.width;
 			ret = CGPointMake(newX, newY);
 			break;
-		case LandscapeLeft:
+		case Monocle::PLATFORM_ORIENTATION_LANDSCAPE_LEFT:
+            res = float(Graphics::GetVirtualHeight())/s.width;
 			ret.x = uiPoint.y;
-			ret.y = uiPoint.x;
-			break;
-		case LandscapeRight:
-			ret.x = newY;
 			ret.y = newX;
 			break;
-	}*/
+		case Monocle::PLATFORM_ORIENTATION_LANDSCAPE_RIGHT:
+            res = float(Graphics::GetVirtualHeight())/s.width;
+			ret.x = newY;
+			ret.y = uiPoint.x;
+			break;
+	}
     
     ret.x *= res;
     ret.y *= res;

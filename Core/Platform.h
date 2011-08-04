@@ -173,6 +173,18 @@ namespace Monocle
 
 	// add an option to automatically use touches as "mouse position" and "mouse buttons"
     
+    enum PlatformOrientation
+    {
+        PLATFORM_ORIENTATION_LANDSCAPE_LEFT,
+        PLATFORM_ORIENTATION_LANDSCAPE_RIGHT,
+        PLATFORM_ORIENTATION_PORTRAIT,
+        PLATFORM_ORIENTATION_PORTRAIT_UPSIDEDOWN,
+        
+        PLATFORM_ORIENTATION_NOTSUPPORTED,
+        
+        PLATFORM_ORIENTATION_COUNT
+    };
+    
 #define MONOCLE_DETECT_COLOR_DEPTH	-1
 
 	class Platform
@@ -190,6 +202,7 @@ namespace Monocle
 		static bool IsKeyPressed(KeyCode keyCode);
 		static int GetWidth();
 		static int GetHeight();
+        static PlatformOrientation GetOrientation();
 
 		static bool keys[KEY_MAX];
 		static bool mouseButtons[MOUSE_BUTTON_MAX];
@@ -207,6 +220,7 @@ namespace Monocle
 		static bool IsActive();
 
 		void WindowSizeChanged(int w, int h);
+        static void PlatformOrientationChanged( PlatformOrientation orientation );
         
         static std::string GetDefaultContentPath();
 
@@ -214,6 +228,7 @@ namespace Monocle
 		static Platform *instance;
 		int localKeymap[KEY_MAX];
 		int width, height;
+        PlatformOrientation orientation;
         void BindLocalKey(int local, int global);
 	};
 }

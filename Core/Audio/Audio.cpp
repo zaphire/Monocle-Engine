@@ -250,4 +250,14 @@ namespace Monocle {
         
         instance->allPaused = false;
     }
+    
+    void Audio::SystemHalt()
+    {
+        ChannelStream::InterruptBegin();
+    }
+    
+    void Audio::SystemResume()
+    {
+        ChannelStream::InterruptEnd();
+    }
 }

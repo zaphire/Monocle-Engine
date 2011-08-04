@@ -152,7 +152,17 @@ namespace Monocle
 		// avoid vertical stretch:
         
 		// if > 4:3, do something else
-		instance->resolutionScale = Vector2(float(Platform::GetWidth())/virtualWidth, float(Platform::GetWidth())/virtualWidth);
+        
+        switch (Platform::GetOrientation())
+        {
+            case PLATFORM_ORIENTATION_LANDSCAPE_LEFT:
+            case PLATFORM_ORIENTATION_LANDSCAPE_RIGHT:
+                instance->resolutionScale = Vector2(float(Platform::GetWidth())/virtualHeight, float(Platform::GetWidth())/virtualHeight);
+                break;
+            default:
+                instance->resolutionScale = Vector2(float(Platform::GetWidth())/virtualWidth, float(Platform::GetWidth())/virtualWidth);
+                break;
+        }
         
         //		printf("Set2D: resScale: (%f, %f)\n window (%d, %d)\n", instance->resolutionScale.x, instance->resolutionScale.y, Platform::GetWidth(), Platform::GetHeight());
 		instance->screenCenter = Vector2(virtualWidth/2, virtualHeight/2);
@@ -526,9 +536,42 @@ namespace Monocle
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
 	}
     
+    void PrepareForOrientation()
+    {
+        float centerX, centerY;
+        
+        centerX = Platform::GetWidth()*0.5;
+        centerY = Platform::GetHeight()*0.5;
+        
+        // XXX it's using hardcoded values.
+        // What if the the screen size changes in the future?
+        switch ( Platform::GetOrientation() ) {
+            default:
+                // nothing
+                break;
+            case PLATFORM_ORIENTATION_PORTRAIT_UPSIDEDOWN:
+                // upside down
+                glTranslatef(centerX,centerY,0);
+                glRotatef(180,0,0,1);
+                glTranslatef(-centerX,-centerY,0);
+                break;
+            case PLATFORM_ORIENTATION_LANDSCAPE_LEFT:
+                glTranslatef(centerX,centerY,0);
+                glRotatef(90,0,0,1);
+                glTranslatef(-centerY,-centerX,0);
+                break;
+            case PLATFORM_ORIENTATION_LANDSCAPE_RIGHT:
+                glTranslatef(centerX,centerY,0);
+                glRotatef(-90,0,0,1);
+                glTranslatef(-centerY,-centerX,0);
+                break;
+        }
+    }
+    
 	void Graphics::DefaultMatrix()
 	{
 		glLoadIdentity();
+        PrepareForOrientation();
 		glScalef(instance->resolutionScale.x, instance->resolutionScale.y, 0.0f);
 		glTranslatef(instance->screenCenter.x, instance->screenCenter.y, 0.0f);
 	}
@@ -536,8 +579,8 @@ namespace Monocle
 	void Graphics::ResolutionMatrix()
 	{
 		glLoadIdentity();
+        PrepareForOrientation();
 		glScalef(instance->resolutionScale.x, instance->resolutionScale.y, 0.0f);
-		//glTranslatef(instance->screenCenter.x, instance->screenCenter.y, 0.0f);
 	}
     
 	void Graphics::IdentityMatrix()

@@ -57,7 +57,9 @@ namespace Ogmo
                                                                         Vector2(position.x-1,120)));
         heldRight = (Input::IsKeyMaskHeld("right") || Input::IsTouchInRect(Vector2(position.x,0),
                                                                           Vector2(160,120)));
-        jumpKey = (Input::IsKeyMaskPressed("jump") || Input::IsTouchInRect(Vector2(0,121),Vector2(160,1000),TOUCH_PHASE_BEGIN));
+        
+        // Jump touch is below screen or in the top bit of screen
+        jumpKey = (Input::IsKeyMaskPressed("jump") || Input::IsTouchInRect(Vector2(0,121),Vector2(160,1000),TOUCH_PHASE_BEGIN) || Input::IsTouchInRect(Vector2(0,0),Vector2(800,10),TOUCH_PHASE_BEGIN));
         
 		// GRAB INPUT AND ACCELERATE
 		if (heldLeft)

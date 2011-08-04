@@ -150,6 +150,8 @@ namespace Monocle
         LinuxPlatform::instance = new LinuxPlatform();
         instance = this;
         LinuxPlatform::instance->platform = this;
+        
+        orientation = PLATFORM_ORIENTATION_NOTSUPPORTED;
 
         for (int i = 0; i < KEY_MAX; i++)
         {
@@ -417,6 +419,16 @@ namespace Monocle
 	{
 		return "../../Content/";
 	}
+    
+    PlatformOrientation Platform::GetOrientation()
+    {
+        return instance->orientation;
+    }
+    
+    void Platform::PlatformOrientationChanged( PlatformOrientation orientation )
+    {
+//        instance->orientation = orientation;
+    }
 }
 
 #endif
