@@ -371,9 +371,9 @@ namespace Ogmo
 		Level::LoadProject("project.xml");
 		Level::Load("level01.xml");
         
-        sfxCoin = Assets::RequestAudio("../AudioTest/coin.wav");
-        sfxJump = Assets::RequestAudio("../AudioTest/jump.wav");
-        sfxUFO = Assets::RequestAudio("../AudioTest/UFO.wav");
+        sfxCoin = Assets::RequestAudio("coin.wav");
+        sfxJump = Assets::RequestAudio("jump.wav");
+        sfxUFO = Assets::RequestAudio("UFO.wav");
 
 		//add player
 		player = new Player(120, 8);
