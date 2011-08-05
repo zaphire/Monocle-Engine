@@ -82,6 +82,7 @@
 #include "Audio.h"
 
 using namespace Monocle;
+Monocle::Scene *GetIOSFirstScene();
 
 //CLASS IMPLEMENTATIONS:
 
@@ -487,6 +488,7 @@ CGSize CGSizeDistanceBetween2Points(CGPoint point1, CGPoint point2)
 //    CGFloat x_scale_factor = originalDifference.width/difference.width;
 //    CGFloat y_scale_factor = originalDifference.height/difference.height;
 //    NSLog(@"Scale Factor: %x:f, y:%f", x_scale_factor, y_scale_factor);
+//    
 }
 
 #define TOUCHUPDATETIME (1.0/15.0)
@@ -568,6 +570,11 @@ CGSize CGSizeDistanceBetween2Points(CGPoint point1, CGPoint point2)
     
     for (UITouch *touch in touches) {
         [activeTouches removeObject:touch];
+        
+        if ([touch tapCount] == 3){
+            // Right now, 3 taps triggers a restart.
+            game_->SetScene(GetIOSFirstScene());
+        }
     }
     
     [self cleanupTimers];
@@ -575,7 +582,7 @@ CGSize CGSizeDistanceBetween2Points(CGPoint point1, CGPoint point2)
     if ([touches count] == 1) { //single touch
         // do nothing
     } else if ([touches count] == 2) { //two finger touch
-        //
+        
     }        
 }
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event 
@@ -673,8 +680,6 @@ CGSize CGSizeDistanceBetween2Points(CGPoint point1, CGPoint point2)
 	[displayLink_ setFrameInterval:1];
 	[displayLink_ addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 }
-
-Monocle::Scene *GetIOSFirstScene();
 
 -(void) mainLoop:(id)sender
 {

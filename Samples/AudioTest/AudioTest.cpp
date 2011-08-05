@@ -199,11 +199,11 @@ namespace AudioTest
         Add(scText);
     
         // Make the deck, and it starts playing... (we need a play())
-#ifdef MONOCLE_IOS
-        deck = Audio::NewDeck( Assets::RequestAudio("AudioTest/pgl.caf") );
-#else
+//#ifdef MONOCLE_IOS
+//        deck = Audio::NewDeck( Assets::RequestAudio("AudioTest/pgl.caf") );
+//#else
         deck = Audio::NewDeck( Assets::RequestAudio("AudioTest/ShortLoop.ogg", true) );
-#endif
+//#endif
         
         if (!deck)
             return Platform::ErrorShutdown("Couldn't load ShortLoop.ogg");

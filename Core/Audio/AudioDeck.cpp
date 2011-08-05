@@ -52,10 +52,10 @@ namespace Monocle {
                 vol *= ((float)pos) / ((float)this->fades.nFadeIn);
             }
             else
-                // Fade Out (only if no loops remain)
-                if (this->fades.nFadeOut && opos > fadeoutstart && this->decoder->loopsRemaining == 0) {
-                    vol *= 1.0f - ((float)(opos - fadeoutstart)) / ((float)this->fades.nFadeOut);
-                }
+            // Fade Out (only if no loops remain)
+            if (this->fades.nFadeOut && opos > fadeoutstart && this->decoder->loopsRemaining == 0) {
+                vol *= 1.0f - ((float)(opos - fadeoutstart)) / ((float)this->fades.nFadeOut);
+            }
             
             // Active Instant Fade In
             // When would pos be before aFadeInStart? :P

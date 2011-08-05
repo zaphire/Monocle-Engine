@@ -16,6 +16,7 @@
 namespace Monocle
 {	
     AudioDecoder *makeCAFDecFunc( AudioAsset *asset );
+    AudioDecoder *makeSTBOggFunc( AudioAsset *asset );
     
 	static struct timeval startTime;
     
@@ -74,6 +75,7 @@ namespace Monocle
         instance->orientation = PLATFORM_ORIENTATION_PORTRAIT;
         
         Audio::RegisterDecoder(makeCAFDecFunc, "caf");
+        Audio::RegisterDecoder(makeSTBOggFunc, "ogg g2m");
 	}
     
     PlatformOrientation Platform::GetOrientation()
