@@ -47,8 +47,8 @@ namespace Monocle
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, glMagFilter);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, glMinFilter);
  
-		unsigned int glRepeatX = repeatX?GL_REPEAT:GL_CLAMP;
-		unsigned int glRepeatY = repeatY?GL_REPEAT:GL_CLAMP;
+		unsigned int glRepeatX = repeatX?GL_REPEAT:GL_CLAMP_TO_EDGE;
+		unsigned int glRepeatY = repeatY?GL_REPEAT:GL_CLAMP_TO_EDGE;
  
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, glRepeatX);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, glRepeatY);
@@ -107,8 +107,8 @@ namespace Monocle
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, glMagFilter);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, glMinFilter);
  
-		unsigned int glRepeatX = repeatX?GL_REPEAT:GL_CLAMP;
-		unsigned int glRepeatY = repeatY?GL_REPEAT:GL_CLAMP;
+		unsigned int glRepeatX = repeatX?GL_REPEAT:GL_CLAMP_TO_EDGE;
+		unsigned int glRepeatY = repeatY?GL_REPEAT:GL_CLAMP_TO_EDGE;
  
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, glRepeatX);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, glRepeatY);
