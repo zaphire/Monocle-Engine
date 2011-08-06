@@ -11,13 +11,17 @@ namespace Monocle
 		width(width),
 		height(height),
 		textureOffset(Vector2::zero),
-		textureScale(Vector2::one),
+        textureScale(Vector2::one),
+        originalTextureOffset(Vector2::zero),
+        originalTextureScale(Vector2::one),
+        trimOffset(Vector2::zero),
+        trimScale(Vector2::one),
 		blend(BLEND_ALPHA)
 	{
 		texture = Assets::RequestTexture(filename, filter);
 		if (texture != NULL)
 		{
-			if (width == -1 || height == -1)
+			if (width == -1.0 || height == -1.0)
 			{
 				this->width = texture->width;
 				this->height = texture->height;
@@ -31,19 +35,78 @@ namespace Monocle
 		width(width),
 		height(height),
 		textureOffset(Vector2::zero),
-		textureScale(Vector2::one),
+        textureScale(Vector2::one),
+        originalTextureOffset(Vector2::zero),
+        originalTextureScale(Vector2::one),
+        trimOffset(Vector2::zero),
+        trimScale(Vector2::one),
 		blend(BLEND_ALPHA)
 	{
 		texture = Assets::RequestTexture(filename);
 		if (texture != NULL)
 		{
-			if (width == -1 || height == -1)
+			if (width == -1.0 || height == -1.0)
 			{
 				this->width = texture->width;
 				this->height = texture->height;
 			}
 		}
 	}
+    
+    Sprite::Sprite(ZwopSprite *zwopSprite, FilterType filter, float width, float height)
+        : Graphic(),
+        texture(NULL),
+        width(width),
+        height(height),
+        textureOffset(Vector2::zero),
+        textureScale(Vector2::one),
+        originalTextureOffset(Vector2::zero),
+        originalTextureScale(Vector2::one),
+        trimOffset(Vector2::zero),
+        trimScale(Vector2::one),
+        blend(BLEND_ALPHA)
+    {
+        texture = Assets::RequestTexture( zwopSprite->GetSheet()->GetTextureName(), filter );
+        if (width == -1.0 || height == -1.0)
+        {
+            this->width = zwopSprite->GetSourceSize().x;
+            this->height = zwopSprite->GetSourceSize().y;
+        }
+        
+        originalTextureScale = textureScale = zwopSprite->GetTextureScale();
+        originalTextureOffset = textureOffset = zwopSprite->GetTextureOffset();
+    }
+    
+    Sprite::Sprite(ZwopSprite *zwopSprite, float width, float height)
+    : Graphic(),
+        texture(NULL),
+        width(width),
+        height(height),
+        textureOffset(Vector2::zero),
+        textureScale(Vector2::one),
+        originalTextureOffset(Vector2::zero),
+        originalTextureScale(Vector2::one),
+        trimOffset(Vector2::zero),
+        trimScale(Vector2::one),
+        blend(BLEND_ALPHA)
+    {
+        texture = Assets::RequestTexture( zwopSprite->GetSheet()->GetTextureName() );
+        if (width == -1.0 || height == -1.0)
+        {
+            this->width = zwopSprite->GetSourceSize().x;
+            this->height = zwopSprite->GetSourceSize().y;
+        } 
+        
+        originalTextureScale = textureScale = zwopSprite->GetTextureScale();
+        originalTextureOffset = textureOffset = zwopSprite->GetTextureOffset(); 
+        
+        // Calculate offset from sprite
+        Rect cr = zwopSprite->GetColorRect();
+        
+        trimScale = zwopSprite->GetSize() / zwopSprite->GetSourceSize();
+
+        trimOffset = zwopSprite->GetSpriteOffset();
+    }
 
 	Sprite::Sprite()
 		: Graphic(),
@@ -51,7 +114,11 @@ namespace Monocle
 		width(1.0f),
 		height(1.0f),
 		textureOffset(Vector2::zero),
-		textureScale(Vector2::one),
+        textureScale(Vector2::one),
+        originalTextureOffset(Vector2::zero),
+        originalTextureScale(Vector2::one),
+        trimOffset(Vector2::zero),
+        trimScale(Vector2::one),
 		blend(BLEND_ALPHA)
 	{
 	}
@@ -87,9 +154,13 @@ namespace Monocle
 	void Sprite::Render(Entity *entity)
 	{
 		Graphics::PushMatrix();
+        
+            // Calculate proper offset
+            Vector2 offset = trimOffset;
 
-			Graphics::Translate(position.x, position.y, 0.0f);
+			Graphics::Translate(position.x+offset.x, position.y-offset.y, 0.0f);
 			Graphics::Rotate(rotation, 0, 0, 1);
+            Graphics::Scale( trimScale );
 			Graphics::BindTexture(texture);
 			Graphics::SetBlend(blend);
 
