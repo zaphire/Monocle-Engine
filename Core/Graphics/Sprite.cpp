@@ -75,6 +75,9 @@ namespace Monocle
         
         originalTextureScale = textureScale = zwopSprite->GetTextureScale();
         originalTextureOffset = textureOffset = zwopSprite->GetTextureOffset();
+        
+        trimScale = zwopSprite->GetSize() / zwopSprite->GetSourceSize();
+        trimOffset = zwopSprite->GetSpriteOffset();
     }
     
     Sprite::Sprite(ZwopSprite *zwopSprite, float width, float height)
@@ -100,11 +103,7 @@ namespace Monocle
         originalTextureScale = textureScale = zwopSprite->GetTextureScale();
         originalTextureOffset = textureOffset = zwopSprite->GetTextureOffset(); 
         
-        // Calculate offset from sprite
-        Rect cr = zwopSprite->GetColorRect();
-        
         trimScale = zwopSprite->GetSize() / zwopSprite->GetSourceSize();
-
         trimOffset = zwopSprite->GetSpriteOffset();
     }
 
