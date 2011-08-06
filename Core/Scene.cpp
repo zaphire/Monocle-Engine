@@ -235,7 +235,7 @@ namespace Monocle
 		int c = 0;
 		for (std::list<Camera*>::iterator i = instance->cameras.begin(); i != instance->cameras.end(); i++)
 		{
-			if (c == cameraIndex)
+			if (c++ == cameraIndex)
 				return *i;
 		}
 		return NULL;
