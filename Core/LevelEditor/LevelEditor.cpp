@@ -142,6 +142,9 @@ namespace Monocle
 					case FTES_COLOR:
 						UpdateColor();
 						break;
+                            
+                    default:
+                        break;
 					}
 				}
 			}
