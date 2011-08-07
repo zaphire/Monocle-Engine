@@ -29,7 +29,7 @@ namespace Monocle {
         Vector2 originalSize;
         Vector2 originalVirtualSize;
         
-        void Use();
+        void Use( bool set2D = true );
         void Stop();
         
         void Bind();

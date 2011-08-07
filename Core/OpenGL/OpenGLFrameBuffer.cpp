@@ -64,7 +64,7 @@ namespace Monocle
     }
     
     
-    void OpenGLFrameBuffer::Use()
+    void OpenGLFrameBuffer::Use( bool set2D )
     {
         originalSize = Vector2(Platform::GetWidth(), Platform::GetHeight());
         originalVirtualSize = Vector2(Graphics::GetVirtualWidth(), Graphics::GetVirtualHeight());
@@ -76,7 +76,8 @@ namespace Monocle
         
 //        glViewport(0,0, width, height);
         
-        Graphics::Set2D(width,height);
+        if (set2D)
+            Graphics::Set2D(width,height);
         
         // Render as normal here
         // output goes to the FBO and it’s attached buffers
