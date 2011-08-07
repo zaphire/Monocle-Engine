@@ -3,6 +3,7 @@
 #include "../Color.h"
 #include "../TextureAsset.h"
 #include "../Graphics.h"
+#include "../Shader.h"
 #include "ZwopSpriteSheet.h"
 #include <string>
 
@@ -24,6 +25,8 @@ namespace Monocle
 		void Update();
 		void Render(Entity *entity);
 		void GetWidthHeight(int *width, int *height);
+		void SetShader(Shader* shader);
+		Shader* GetShader();
 
 		TextureAsset *texture;
 		float width, height;//,angle;
@@ -39,5 +42,7 @@ namespace Monocle
         Vector2 trimScale;
 
 		BlendType blend;
+	private:
+		Shader* shader;
 	};
 }
