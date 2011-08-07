@@ -8,6 +8,7 @@ namespace Monocle
 	Sprite::Sprite(const std::string &filename, FilterType filter, float width, float height)
 		: Graphic(),
 		texture(NULL),
+		shader(NULL),
 		width(width),
 		height(height),
 		textureOffset(Vector2::zero),
@@ -32,6 +33,7 @@ namespace Monocle
 	Sprite::Sprite(const std::string &filename, float width, float height)
 		: Graphic(),
 		texture(NULL),
+		shader(NULL),
 		width(width),
 		height(height),
 		textureOffset(Vector2::zero),
@@ -110,6 +112,7 @@ namespace Monocle
 	Sprite::Sprite()
 		: Graphic(),
 		texture(NULL),
+		shader(NULL),
 		width(1.0f),
 		height(1.0f),
 		textureOffset(Vector2::zero),
@@ -128,6 +131,11 @@ namespace Monocle
 		{
 			texture->RemoveReference();
 			texture = NULL;
+		}
+		if(shader != NULL)
+		{
+			delete shader;
+			shader = NULL;
 		}
 	}
 
@@ -152,6 +160,10 @@ namespace Monocle
 	// or make materials system...
 	void Sprite::Render(Entity *entity)
 	{
+		if(shader != NULL)
+		{
+			shader->Use();
+		}
 		Graphics::PushMatrix();
         
             // Calculate proper offset
@@ -182,7 +194,7 @@ namespace Monocle
 			Graphics::RenderQuad(width, height, textureOffset, textureScale);
 
 		Graphics::PopMatrix();
-
+		Shader::None();
 
 		// show bounds, for editor/selection purposes
 		if ((Debug::showBounds || Debug::selectedEntity == entity) && entity->IsDebugLayer())
@@ -221,5 +233,25 @@ namespace Monocle
 			*width = texture->width;
 			*height = texture->height;
 		}
+	}
+
+	void Sprite::SetShader(Shader *shader)
+	{
+		if(this->shader == nullptr)
+		{
+			this->shader = shader;
+		}
+		else
+		{
+			Engine::Shader::None();
+			delete this->shader;
+			this->shader = nullptr;
+			this->shader = shader;
+		}
+	}
+	
+	Shader* Sprite::GetShader()
+	{
+		return shader;
 	}
 }
