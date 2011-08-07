@@ -58,6 +58,7 @@ namespace Monocle
     Sprite::Sprite(ZwopSprite *zwopSprite, FilterType filter, float width, float height)
         : Graphic(),
         texture(NULL),
+        shader(NULL),
         width(width),
         height(height),
         textureOffset(Vector2::zero),
@@ -85,6 +86,7 @@ namespace Monocle
     Sprite::Sprite(ZwopSprite *zwopSprite, float width, float height)
     : Graphic(),
         texture(NULL),
+        shader(NULL),
         width(width),
         height(height),
         textureOffset(Vector2::zero),
@@ -237,15 +239,14 @@ namespace Monocle
 
 	void Sprite::SetShader(Shader *shader)
 	{
-		if(this->shader == nullptr)
+		if(this->shader == NULL)
 		{
 			this->shader = shader;
 		}
 		else
 		{
-			Engine::Shader::None();
+			Shader::None();
 			delete this->shader;
-			this->shader = nullptr;
 			this->shader = shader;
 		}
 	}

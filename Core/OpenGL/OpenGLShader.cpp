@@ -115,32 +115,32 @@ namespace Monocle
 	{
 		glUseProgram(shaderProgram);
         
-		for(auto iter = floats.begin(); iter != floats.end();iter++)
+		for(std::map<std::string,float>::iterator iter = floats.begin(); iter != floats.end();iter++)
 		{
 			GLint var = glGetUniformLocation(shaderProgram, iter->first.c_str());
 			glUniform1f(var,iter->second);
 		}
-		for(auto iter = vec2s.begin(); iter != vec2s.end();iter++)
+		for(std::map<std::string,Vector2>::iterator iter = vec2s.begin(); iter != vec2s.end();iter++)
 		{
 			GLint var = glGetUniformLocation(shaderProgram, iter->first.c_str());
 			glUniform2f(var,iter->second.x,iter->second.y);
 		}
-		for(auto iter = vec3s.begin(); iter != vec3s.end();iter++)
+		for(std::map<std::string,Vector3>::iterator iter = vec3s.begin(); iter != vec3s.end();iter++)
 		{
 			GLint var = glGetUniformLocation(shaderProgram, iter->first.c_str());
 			glUniform3f(var,iter->second.x,iter->second.y,iter->second.z);
 		}
-		for(auto iter = vec4s.begin(); iter != vec4s.end();iter++)
+		for(std::map<std::string,Color>::iterator iter = vec4s.begin(); iter != vec4s.end();iter++)
 		{
 			GLint var = glGetUniformLocation(shaderProgram, iter->first.c_str());
 			glUniform4f(var,iter->second.r,iter->second.g,iter->second.b,iter->second.a);
 		}
-		for(auto iter = ints.begin(); iter != ints.end();iter++)
+		for(std::map<std::string,int>::iterator iter = ints.begin(); iter != ints.end();iter++)
 		{
 			GLint var = glGetUniformLocation(shaderProgram, iter->first.c_str());
 			glUniform1i(var,iter->second);
 		}
-		for(auto iter = textures.begin(); iter != textures.end();iter++)
+		for(std::map<std::string,unsigned int>::iterator iter = textures.begin(); iter != textures.end();iter++)
 		{
 			GLint var = glGetUniformLocation(shaderProgram, iter->first.c_str());
 			glUniform1i(var,iter->second);
