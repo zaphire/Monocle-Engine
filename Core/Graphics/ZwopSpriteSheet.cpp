@@ -206,6 +206,11 @@ namespace Monocle
     {
         
     }
+    
+    Vector2 ZwopSpriteSheet::GetSize()
+    {
+        return size;
+    }
 }
 
 /**

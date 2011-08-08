@@ -1,5 +1,6 @@
 #ifdef MONOCLE_OPENGL
  
+#include "../MonocleToolkit.h"
 #include "../TextureAsset.h"
 #include "../Debug.h"
  
@@ -20,12 +21,21 @@ namespace Monocle
 		: Asset(ASSET_TEXTURE)
 	{
 	}
+    
+    bool TextureAsset::IsPremultiplied()
+    {
+        return this->premultiplied;
+    }
  
-	void TextureAsset::Load(const unsigned char* data, int w, int h, FilterType filter, bool repeatX, bool repeatY)
+	void TextureAsset::Load(const unsigned char* data, int w, int h, FilterType filter, bool repeatX, bool repeatY, bool premultiply)
 	{
 		this->filter = filter;
 		this->repeatX = repeatX;
 		this->repeatY = repeatY;
+        this->premultiplied = premultiply;
+        
+        if (premultiply)
+            PremultiplyAlpha((unsigned char*)data,w,h);
  
 		glGenTextures(1, &texID);
 		glBindTexture(GL_TEXTURE_2D, texID);
@@ -80,12 +90,13 @@ namespace Monocle
 		Debug::Log("Loaded texture from data");
 	}
  
-	bool TextureAsset::Load(const std::string &filename, FilterType filter, bool repeatX, bool repeatY)
+	bool TextureAsset::Load(const std::string &filename, FilterType filter, bool repeatX, bool repeatY, bool premultiply)
 	{
 		this->filter = filter;
 		this->repeatX = repeatX;
 		this->repeatY = repeatY;
 		this->filename = filename;
+        this->premultiplied = premultiply;
  
 		glGenTextures(1, &texID);
 		glBindTexture(GL_TEXTURE_2D, texID);
@@ -115,6 +126,9 @@ namespace Monocle
  
 		int w,h,n;
 		unsigned char* data = stbi_load(filename.c_str(), &w, &h, &n, STBI_rgb_alpha);
+        
+        if (premultiply)
+            PremultiplyAlpha(data,w,h);
  
 		if (data)
 		{

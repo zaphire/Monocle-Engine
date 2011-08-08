@@ -38,4 +38,6 @@ namespace Monocle
 		os << object;
 		return(os.str());
 	};
+    
+    void PremultiplyAlpha( unsigned char *data, int w, int h );
 }

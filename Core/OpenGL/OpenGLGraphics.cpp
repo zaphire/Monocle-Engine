@@ -98,7 +98,10 @@ namespace Monocle
 			switch (blend)
 			{
 			case BLEND_ALPHA:
-				glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+				glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA); 
+                break;
+            case BLEND_ALPHA_PREMULTIPLIED:
+                glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 				break;
 			case BLEND_ADDITIVE:
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE);
@@ -306,7 +309,10 @@ namespace Monocle
 
 	void Graphics::SetColor(const Color &color)
 	{
-		glColor4f(color.r, color.g, color.b, color.a);
+        if (instance->currentBlend == BLEND_ALPHA_PREMULTIPLIED)
+            glColor4f(color.r*color.a,color.g*color.a,color.b*color.a,color.a);
+        else
+            glColor4f(color.r, color.g, color.b, color.a);
 	}
 
 	int Graphics::GetVirtualWidth()

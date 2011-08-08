@@ -5,9 +5,10 @@
 //  Copyright 2011 jwmusic.org. All rights reserved.
 //  Some additions by Tom Rab
 
-#include "Shader.h"
-#include "Assets.h"
-#include "Debug.h"
+#include "../Monocle.h"
+#include "../Shader.h"
+#include "../Assets.h"
+#include "../Debug.h"
 #define GLEW_STATIC
 #include <GL/glew.h>
 #include <stdlib.h>
@@ -145,6 +146,12 @@ namespace Monocle
 			GLint var = glGetUniformLocation(shaderProgram, iter->first.c_str());
 			glUniform1i(var,iter->second);
 		}
+        
+        GLint dT = glGetUniformLocation(shaderProgram, "deltaTime");
+        glUniform1f(dT,Monocle::deltaTime);
+        
+        GLint tT = glGetUniformLocation(shaderProgram, "totalTime");
+        glUniform1f(tT,Monocle::timeSinceStart);
 	}
     
 	void Shader::SetUniformFloat(const std::string &name, float value )
@@ -174,7 +181,7 @@ namespace Monocle
 
 	void Shader::SetUniformSampler2D(const std::string &name)
 	{
-		textures[name] = textures.size();
+		textures[name] = textures.size()-1;
 	}
     
 	void Shader::None()

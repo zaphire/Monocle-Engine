@@ -19,6 +19,7 @@ namespace Monocle
 	{
 		BLEND_NONE=0,
 		BLEND_ALPHA,
+        BLEND_ALPHA_PREMULTIPLIED,
 		BLEND_ADDITIVE,
 		BLEND_MULTIPLY,
 	};

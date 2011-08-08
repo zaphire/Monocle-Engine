@@ -155,6 +155,11 @@ namespace Monocle
 
 	void Sprite::Update()
 	{
+        // Prepare for premultiplied textures?
+        if (blend == BLEND_ALPHA && texture->IsPremultiplied())
+            blend = BLEND_ALPHA_PREMULTIPLIED;
+        else if (blend == BLEND_ALPHA_PREMULTIPLIED && !texture->IsPremultiplied())
+            blend = BLEND_ALPHA;
 	}
 
 	// store color info in entity?
@@ -166,6 +171,7 @@ namespace Monocle
 		{
 			shader->Use();
 		}
+        
 		Graphics::PushMatrix();
         
             // Calculate proper offset
@@ -176,6 +182,7 @@ namespace Monocle
             Graphics::Scale( trimScale );
 			Graphics::BindTexture(texture);
 			Graphics::SetBlend(blend);
+            Graphics::SetColor(entity->color);
 
 			if (Debug::showBounds && entity->IsDebugLayer())
 			{

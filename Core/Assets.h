@@ -29,7 +29,7 @@ namespace Monocle
 		//! \param repeatX Whether the texture should be repeated horizontally if necessary when rendered.
 		//! \param repeatY Whether the texture should be repeated vertically if necessary when rendered.
 		//! \sa RequestAudio, RequestFont, FilterType
-		static TextureAsset *RequestTexture(const std::string &filename, FilterType filter = FILTER_LINEAR, bool repeatX = false, bool repeatY = false);
+		static TextureAsset *RequestTexture(const std::string &filename, FilterType filter = FILTER_LINEAR, bool repeatX = false, bool repeatY = false, bool premultiply = true);
 		//! \brief Requests a font asset
 		//! Returns a pointer to the requested Font Asset, NULL on failure.  Calling this function multiple times with the same filename will return
 		//! a pointer to the same Font.  Pointers returned from this function should not be deleted by the caller.

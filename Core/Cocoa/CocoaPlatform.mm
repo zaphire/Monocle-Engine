@@ -253,8 +253,8 @@ namespace Monocle
 	}
 
     std::string Platform::GetDefaultContentPath() {
-//        return CocoaPlatform::instance->bundleResourcesPath;
-        return "../../Content/";
+        return CocoaPlatform::instance->bundleResourcesPath;
+//        return "../../Content/";
     }
     
     PlatformOrientation Platform::GetOrientation()

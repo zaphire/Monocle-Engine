@@ -160,4 +160,21 @@ namespace Monocle
 		FindClose(hList);
 #endif
 	}
+    
+    void PremultiplyAlpha( unsigned char *data, int w, int h )
+    {
+        int pixels = w*h;
+        unsigned char *ptr = data;
+        
+        for (int i=0;i<pixels;i++)
+        {
+            int a = ptr[3];
+            
+            ptr[0] *= (a/255.0);
+            ptr[1] *= (a/255.0);
+            ptr[2] *= (a/255.0);
+            
+            ptr += 4;
+        }
+    }
 }
