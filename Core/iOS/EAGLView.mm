@@ -573,7 +573,7 @@ CGSize CGSizeDistanceBetween2Points(CGPoint point1, CGPoint point2)
         
         if ([touch tapCount] == 3){
             // Right now, 3 taps triggers a restart.
-            game_->SetScene(GetIOSFirstScene());
+//            game_->SetScene(GetIOSFirstScene());
         }
     }
     

@@ -235,13 +235,16 @@ namespace Monocle
 		}
 	}
 	
-	void Sprite::GetWidthHeight(int *width, int *height)
+    /**
+        jw: why this changed.
+            Previously, we were doing texture->width and texture->height.
+            There are instances where the sprite drawn is NOT the size of the texture.
+            >> Sprite Sheets or Animations. - The texture is bigger than the sprite used.
+     **/
+	void Sprite::GetWidthHeight(float *width, float *height)
 	{
-		if (texture)
-		{
-			*width = texture->width;
-			*height = texture->height;
-		}
+        *width = (float)this->width;
+        *height = (float)this->height;
 	}
 
 	void Sprite::SetShader(Shader *shader)

@@ -24,7 +24,7 @@ namespace Monocle
 		~Sprite();
 		void Update();
 		void Render(Entity *entity);
-		void GetWidthHeight(int *width, int *height);
+		void GetWidthHeight(float *width, float *height);
 		void SetShader(Shader* shader);
 		Shader* GetShader();
 

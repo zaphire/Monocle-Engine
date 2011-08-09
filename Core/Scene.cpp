@@ -64,6 +64,8 @@ namespace Monocle
 
 	void Scene::Render()
 	{
+        long entitiesDrawn = 0;
+        
 		if (isVisible)
 		{
 			//Render all the entities
@@ -94,7 +96,10 @@ namespace Monocle
 						{
 							if ((*i)->isVisible && (*i)->IsLayer(layer))
 							{
-								(*i)->Render();
+                                if ((*i)->IsOnCamera(activeCamera)){
+                                    (*i)->Render();
+                                    entitiesDrawn++;
+                                }
 							}
 						}
 					}
@@ -103,6 +108,8 @@ namespace Monocle
 
 			activeCamera = NULL;
 		}
+        
+        Monocle::entitiesDrawn = entitiesDrawn;
 	}
 
 	void Scene::Add(Entity* entity)

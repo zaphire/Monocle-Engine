@@ -14,6 +14,9 @@ namespace Monocle
 
 	//! Time in seconds since current scene started
 	extern double timeSinceSceneStart;
+    
+    //! Entities drawn last frame
+    extern long entitiesDrawn;
 
 	//! Math symbol PI
 	extern const float pi;

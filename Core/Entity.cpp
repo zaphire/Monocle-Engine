@@ -421,13 +421,50 @@ namespace Monocle
 	{
 		return graphic;
 	}
+    
+    bool Entity::IsOnCamera( Camera *camera )
+    {
+        Graphic* graphic = GetGraphic();
+		if (graphic != NULL)
+		{
+			float biggersize, h, w;
+            
+            graphic->GetWidthHeight(&w, &h);
+            
+            // We use the greatest possible rectangle in case of rotations
+            biggersize = MAX(w,h);
+            
+			Vector2 ul = position - (Vector2(biggersize,biggersize)*0.5f*scale);
+			Vector2 lr = position + (Vector2(biggersize,biggersize)*0.5f*scale);
+            
+            float vw = Graphics::GetVirtualWidth()*camera->scale.x;
+            float vh = Graphics::GetVirtualHeight()*camera->scale.x;
+            float cx = (camera->position.x);
+            float cy = (camera->position.y);
+            
+            // As long as any one of the corners could be on screen we draw
+            return !(
+                    // What it means to be off screen:
+                     (ul.x > cx+vw) || (lr.x < cx-vw) ||
+                     (ul.y > cy+vh) || (lr.y < cy-vh)
+                    );
+            
+//            printf("%.2f < %.2f && %.2f > %.2f && %.2f < %.2f && %.2f > %.2f\n",cx-vw,ul.x,cx+vw,lr.x,cy-vh,ul.y,cy+vh,lr.y);
+            
+//			return (cx-vw < ul.x && cx+vw > lr.x && cy-vh < ul.y && cy+vh > lr.y);
+            
+//            return (ul.x < cx+vw && ul.x > cx-vw && ul.y > cy-vh && ul.y < cy+vh) ||
+//                    (lr.x > cx-vw && lr.x < cx+vw && lr.y > cy-vh && lr.y < cy+vh);
+		}
+		return true;
+    }
 
 	bool Entity::IsPositionInGraphic(const Vector2 &point)
 	{
 		Graphic* graphic = GetGraphic();
 		if (graphic != NULL)
 		{
-			int width, height;
+			float width, height;
 			graphic->GetWidthHeight(&width, &height);
 			Vector2 ul = GetWorldPosition(Vector2( - width * 0.5f, - height * 0.5f));
 			Vector2 lr = GetWorldPosition(Vector2( + width * 0.5f, + height * 0.5f));

@@ -17,7 +17,7 @@ namespace Monocle
 
 			void Resize(int width, int height);
 
-			void GetWidthHeight(int *width, int *height);
+			void GetWidthHeight(float *width, float *height);
 
 			bool IsTile(int tx, int ty, int tileID);
 			int GetTile(int tx, int ty);

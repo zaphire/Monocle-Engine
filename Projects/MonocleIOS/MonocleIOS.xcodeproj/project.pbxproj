@@ -78,9 +78,6 @@
 		03AC9DA513E1C05D0010578E /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03AC9D3513E1C05D0010578E /* Entity.cpp */; };
 		03AC9DA613E1C05D0010578E /* FileNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03AC9D3713E1C05D0010578E /* FileNode.cpp */; };
 		03AC9DA713E1C05D0010578E /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03AC9D3A13E1C05D0010578E /* Game.cpp */; };
-		03AC9DA813E1C05D0010578E /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03AC9D3D13E1C05D0010578E /* Sprite.cpp */; };
-		03AC9DA913E1C05D0010578E /* SpriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03AC9D3F13E1C05D0010578E /* SpriteAnimation.cpp */; };
-		03AC9DAA13E1C05D0010578E /* Tilemap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03AC9D4113E1C05D0010578E /* Tilemap.cpp */; };
 		03AC9DAB13E1C05D0010578E /* GUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03AC9D4413E1C05D0010578E /* GUI.cpp */; };
 		03AC9DAC13E1C05D0010578E /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03AC9D4613E1C05D0010578E /* Input.cpp */; };
 		03AC9DAD13E1C05D0010578E /* Level.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03AC9D4913E1C05D0010578E /* Level.cpp */; };
@@ -160,9 +157,6 @@
 		03FD08EF13F1015400DC65A4 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03AC9D3513E1C05D0010578E /* Entity.cpp */; };
 		03FD08F013F1015400DC65A4 /* FileNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03AC9D3713E1C05D0010578E /* FileNode.cpp */; };
 		03FD08F113F1015400DC65A4 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03AC9D3A13E1C05D0010578E /* Game.cpp */; };
-		03FD08F213F1015400DC65A4 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03AC9D3D13E1C05D0010578E /* Sprite.cpp */; };
-		03FD08F313F1015400DC65A4 /* SpriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03AC9D3F13E1C05D0010578E /* SpriteAnimation.cpp */; };
-		03FD08F413F1015400DC65A4 /* Tilemap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03AC9D4113E1C05D0010578E /* Tilemap.cpp */; };
 		03FD08F513F1015400DC65A4 /* GUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03AC9D4413E1C05D0010578E /* GUI.cpp */; };
 		03FD08F613F1015400DC65A4 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03AC9D4613E1C05D0010578E /* Input.cpp */; };
 		03FD08F713F1015400DC65A4 /* stb_vorbis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03C3416E13EB8DAD009AD915 /* stb_vorbis.cpp */; };
@@ -232,6 +226,9 @@
 		03FD094913F1039300DC65A4 /* ES1Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0340F52413E20C6F00FDD23D /* ES1Renderer.m */; };
 		03FD094D13F103E200DC65A4 /* OpenGLESShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03FD094C13F103E200DC65A4 /* OpenGLESShader.cpp */; };
 		03FD094E13F103E200DC65A4 /* OpenGLESShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03FD094C13F103E200DC65A4 /* OpenGLESShader.cpp */; };
+		03FFCC8113F1C14100A98EE9 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03FD093913F1036200DC65A4 /* Sprite.cpp */; };
+		03FFCC8213F1C14100A98EE9 /* SpriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03FD093B13F1036200DC65A4 /* SpriteAnimation.cpp */; };
+		03FFCC8313F1C14100A98EE9 /* Tilemap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03FD093D13F1036200DC65A4 /* Tilemap.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -390,12 +387,6 @@
 		03AC9D3913E1C05D0010578E /* FontAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontAsset.h; sourceTree = "<group>"; };
 		03AC9D3A13E1C05D0010578E /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		03AC9D3B13E1C05D0010578E /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
-		03AC9D3D13E1C05D0010578E /* Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite.cpp; sourceTree = "<group>"; };
-		03AC9D3E13E1C05D0010578E /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
-		03AC9D3F13E1C05D0010578E /* SpriteAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteAnimation.cpp; sourceTree = "<group>"; };
-		03AC9D4013E1C05D0010578E /* SpriteAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteAnimation.h; sourceTree = "<group>"; };
-		03AC9D4113E1C05D0010578E /* Tilemap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tilemap.cpp; sourceTree = "<group>"; };
-		03AC9D4213E1C05D0010578E /* Tilemap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tilemap.h; sourceTree = "<group>"; };
 		03AC9D4313E1C05D0010578E /* Graphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Graphics.h; sourceTree = "<group>"; };
 		03AC9D4413E1C05D0010578E /* GUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUI.cpp; sourceTree = "<group>"; };
 		03AC9D4513E1C05D0010578E /* GUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUI.h; sourceTree = "<group>"; };
@@ -796,7 +787,6 @@
 				03AC9D3A13E1C05D0010578E /* Game.cpp */,
 				03AC9D3B13E1C05D0010578E /* Game.h */,
 				03FD093813F1036200DC65A4 /* Graphics */,
-				03AC9D3C13E1C05D0010578E /* Graphics */,
 				03AC9D4313E1C05D0010578E /* Graphics.h */,
 				03AC9D4413E1C05D0010578E /* GUI.cpp */,
 				03AC9D4513E1C05D0010578E /* GUI.h */,
@@ -898,19 +888,6 @@
 				03AC9D2813E1C05D0010578E /* RectangleCollider.h */,
 			);
 			path = Colliders;
-			sourceTree = "<group>";
-		};
-		03AC9D3C13E1C05D0010578E /* Graphics */ = {
-			isa = PBXGroup;
-			children = (
-				03AC9D3D13E1C05D0010578E /* Sprite.cpp */,
-				03AC9D3E13E1C05D0010578E /* Sprite.h */,
-				03AC9D3F13E1C05D0010578E /* SpriteAnimation.cpp */,
-				03AC9D4013E1C05D0010578E /* SpriteAnimation.h */,
-				03AC9D4113E1C05D0010578E /* Tilemap.cpp */,
-				03AC9D4213E1C05D0010578E /* Tilemap.h */,
-			);
-			path = Graphics;
 			sourceTree = "<group>";
 		};
 		03AC9D4813E1C05D0010578E /* iOS */ = {
@@ -1158,9 +1135,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03FD08F213F1015400DC65A4 /* Sprite.cpp in Sources */,
-				03FD08F313F1015400DC65A4 /* SpriteAnimation.cpp in Sources */,
-				03FD08F413F1015400DC65A4 /* Tilemap.cpp in Sources */,
+				03FFCC8113F1C14100A98EE9 /* Sprite.cpp in Sources */,
+				03FFCC8213F1C14100A98EE9 /* SpriteAnimation.cpp in Sources */,
+				03FFCC8313F1C14100A98EE9 /* Tilemap.cpp in Sources */,
 				03FD094813F1039300DC65A4 /* ZwopSpriteSheet.cpp in Sources */,
 				03FD094913F1039300DC65A4 /* ES1Renderer.m in Sources */,
 				03FD091313F1016700DC65A4 /* analysis.c in Sources */,
@@ -1292,9 +1269,6 @@
 				03AC9DA513E1C05D0010578E /* Entity.cpp in Sources */,
 				03AC9DA613E1C05D0010578E /* FileNode.cpp in Sources */,
 				03AC9DA713E1C05D0010578E /* Game.cpp in Sources */,
-				03AC9DA813E1C05D0010578E /* Sprite.cpp in Sources */,
-				03AC9DA913E1C05D0010578E /* SpriteAnimation.cpp in Sources */,
-				03AC9DAA13E1C05D0010578E /* Tilemap.cpp in Sources */,
 				03AC9DAB13E1C05D0010578E /* GUI.cpp in Sources */,
 				03AC9DAC13E1C05D0010578E /* Input.cpp in Sources */,
 				03AC9DAD13E1C05D0010578E /* Level.cpp in Sources */,
@@ -1514,6 +1488,7 @@
 					../../Libraries,
 				);
 				INFOPLIST_FILE = "MonocleIOS/MonocleIOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../Libraries/Compiled/MacOSX\"",
@@ -1543,6 +1518,7 @@
 					../../Libraries,
 				);
 				INFOPLIST_FILE = "MonocleIOS/MonocleIOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../Libraries/Compiled/MacOSX\"",

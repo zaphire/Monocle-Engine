@@ -60,10 +60,10 @@ namespace Monocle
 		}
 	}
 
-	void Tilemap::GetWidthHeight(int *width, int *height)
+	void Tilemap::GetWidthHeight(float *width, float *height)
 	{
-		*width = this->width;
-		*height = this->height;
+		*width = (float)this->width;
+		*height = (float)this->height;
 	}
 
 	bool Tilemap::IsTile(int tx, int ty, int tileID)
