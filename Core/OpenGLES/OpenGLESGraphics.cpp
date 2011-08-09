@@ -481,10 +481,21 @@ namespace Monocle
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	}
     
-    void Graphics::RenderText(const FontAsset& font, const std::string& text, float x, float y)
+    void Graphics::RenderText(const FontAsset& font, const std::string& text, float x, float y, TextAlign align)
     {
         Rect verts, texCoords;
-//        glBegin(GL_QUADS);
+        float width;
+
+        width = font.GetTextWidth(text);
+        
+        glPushMatrix();
+        
+        if (x_align == TEXTALIGN_RIGHT){
+            glTranslatef( -width, 0.0, 0.0 );
+        }else if (x_align == TEXTALIGN_CENTER){
+            glTranslatef( width/-2.0, 0.0, 0.0 );
+        }
+        
         for (int i = 0; i < text.size(); i++)
         {
             char c = text[i];
@@ -527,7 +538,6 @@ namespace Monocle
 				glVertex2f(verts.topLeft.x, verts.bottomRight.y);*/
 			}
         }
-//        glEnd();
     }
     
 	void Graphics::BeginFrame()

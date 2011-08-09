@@ -31,6 +31,13 @@ namespace Monocle
 	    IMAGE_PNG,
 	    IMAGE_TGA
 	};
+    
+    enum TextAlign
+    {
+        TEXTALIGN_LEFT,
+        TEXTALIGN_CENTER,
+        TEXTALIGN_RIGHT,
+    };
 
 	//! Base class for graphic types that may be attached to and rendered with entities.
 	class Graphic
@@ -125,7 +132,7 @@ namespace Monocle
 		//! \param x [int] The x coordinate of the origin of the text, which serves as the baseline for the text
 		//! \param y [int] The y coordinate of the origin of the text
 		//! \sa FontAsset
-		static void RenderText(const FontAsset& font, const std::string& text, float x, float y);
+		static void RenderText(const FontAsset& font, const std::string& text, float x, float y, TextAlign x_align = TEXTALIGN_LEFT);
 		//! \brief Renders a wireframe quad
 		//! \sa RenderQuad
 		static void RenderLineRect(float x, float y, float w, float h);

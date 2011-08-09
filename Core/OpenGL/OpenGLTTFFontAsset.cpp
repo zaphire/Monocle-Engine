@@ -93,7 +93,7 @@ namespace Monocle
 		}
 	}
 
-	float TTFFontAsset::GetTextWidth(const std::string &text)
+	float TTFFontAsset::GetTextWidth(const std::string &text) const 
 	{
 		float width = 0;
 		float x,y;
@@ -107,7 +107,7 @@ namespace Monocle
 		return width;
 	}
 
-	float TTFFontAsset::GetTextHeight(const std::string &text)
+	float TTFFontAsset::GetTextHeight(const std::string &text) const
 	{
 		//float height = 0;
 		float top = 0, bottom = 0;

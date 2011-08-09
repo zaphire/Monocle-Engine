@@ -31,7 +31,7 @@ namespace Monocle
 		//! \param text [in] The string to compute bounds for
 		//! \remark This function should not render text.  A font asset should have the ability to measure a string by
 		//! computing the character bounds in memory.
-		virtual float GetTextWidth(const std::string &text) = 0;
+		virtual float GetTextWidth(const std::string &text) const = 0;
 		//! Determines the height a string of text occupies if rendered.  This function measures height from the top of
 		//! the highest character to the bottom of the character that spans the lowest.  For example, if given the string
 		//! "The lazy fox," it should return the height from the top of the 'T' to the bottom of the 'y.'
@@ -42,7 +42,7 @@ namespace Monocle
 		//! return the height from the baseline, so basing the rendering position on output from this function (ie
 		//! rendering text at GetTextHeight()/2 to attempt to center the baseline) will cause the baseline position
 		//! to fluctuate between strings like "flies" and "fly" when the y changes the overall string height.
-		virtual float GetTextHeight(const std::string &text) = 0;
+		virtual float GetTextHeight(const std::string &text) const = 0;
 
 		unsigned int texID;
 	};
