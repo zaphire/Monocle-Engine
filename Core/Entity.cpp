@@ -182,7 +182,8 @@ namespace Monocle
 		if (rotation != 0.0f)
 			Graphics::Rotate(rotation, 0, 0, 1);
         
-		Graphics::Scale(scale);
+        if (scale != Vector2::one)
+            Graphics::Scale(scale);
 	}
 
 	void Entity::Render()

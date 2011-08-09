@@ -76,11 +76,7 @@ namespace Monocle
             this->height = zwopSprite->GetSourceSize().y;
         }
         
-        textureScaleModifier = textureScale = zwopSprite->GetTextureScale();
-        textureOffsetModifier = textureOffset = zwopSprite->GetTextureOffset();
-        
-        trimScale = zwopSprite->GetSize() / zwopSprite->GetSourceSize();
-        trimOffset = zwopSprite->GetSpriteOffset();
+        AdjustForZwopSprite( zwopSprite );
     }
     
     Sprite::Sprite(ZwopSprite *zwopSprite, float width, float height)
@@ -104,11 +100,7 @@ namespace Monocle
             this->height = zwopSprite->GetSourceSize().y;
         } 
         
-        textureScaleModifier = textureScale = zwopSprite->GetTextureScale();
-        textureOffsetModifier = textureOffset = zwopSprite->GetTextureOffset(); 
-        
-        trimScale = zwopSprite->GetSize() / zwopSprite->GetSourceSize();
-        trimOffset = zwopSprite->GetSpriteOffset();
+        AdjustForZwopSprite( zwopSprite );
     }
 
 	Sprite::Sprite()
@@ -140,6 +132,15 @@ namespace Monocle
 			shader = NULL;
 		}
 	}
+    
+    void Sprite::AdjustForZwopSprite( ZwopSprite *zs )
+    {
+        textureScaleModifier = textureScale = zs->GetTextureScale();
+        textureOffsetModifier = textureOffset = zs->GetTextureOffset();
+        
+        trimScale = zs->GetSize() / zs->GetSourceSize();
+        trimOffset = zs->GetSpriteOffset();
+    }
 
 	/*
 	Sprite::Sprite()

@@ -23,7 +23,7 @@ namespace LevelEditorTest
 
 		position += velocity * Monocle::deltaTime;
 
-		Scene::GetCamera()->position = position;
+		Game::GetScene()->GetCamera()->position = position;
 		//Graphics::SetCameraPosition(position);
 	}
 

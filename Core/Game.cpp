@@ -141,7 +141,6 @@ namespace Monocle
             }
             
             scene = switchTo;
-            
             switchTo = NULL;
             
             if (scene != NULL)

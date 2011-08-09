@@ -12,9 +12,10 @@
 
 namespace Monocle
 {
-    ZwopSprite::ZwopSprite( ZwopSpriteSheet *sheet )
+    ZwopSprite::ZwopSprite( ZwopSpriteSheet *sheet, int index )
     {
         this->sheet = sheet;
+        this->spriteIndex = index;
     }
     
     ZwopSprite::~ZwopSprite()
@@ -75,6 +76,11 @@ namespace Monocle
     Vector2 ZwopSprite::GetSpriteOffset()
     {
         return spriteOffset;
+    }
+    
+    int ZwopSprite::GetSpriteIndex()
+    {
+        return spriteIndex;
     }
     
     ZwopSpriteSheet *ZwopSprite::GetSheet()
@@ -154,10 +160,12 @@ namespace Monocle
 		{
 			XMLFileNode zwopSpriteNode(xmlSprite);
             
-			ZwopSprite *zSprite = new ZwopSprite(this);
+			ZwopSprite *zSprite = new ZwopSprite(this,orderedSprites.size());
 			zSprite->Load(xmlSprite);
 			if (zSprite->name != "")
 				entries[zSprite->name] = zSprite;
+            
+            orderedSprites.push_back(zSprite);
             
 			xmlSprite = xmlSprite->NextSiblingElement("Sprite");
 		}
@@ -172,6 +180,7 @@ namespace Monocle
 			delete (*i).second;
 		}
 		entries.clear();
+        orderedSprites.clear();
     }
     
     std::string ZwopSpriteSheet::GetTextureName()
@@ -182,6 +191,11 @@ namespace Monocle
     ZwopSprite* ZwopSpriteSheet::GetSpriteByName(const std::string &name)
     {
         return entries[name];
+    }
+    
+    ZwopSprite* ZwopSpriteSheet::GetSpriteByIndex(int index)
+    {
+        return orderedSprites[index];
     }
     
     ZwopSpriteSheet *ZwopSpriteSheet::GetSheet( const std::string &sheetFilename, const std::string &textureFilename )

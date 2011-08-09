@@ -3,6 +3,7 @@
 #include "Scene.h"
 #include "Entity.h"
 #include "MonocleToolkit.h"
+#include "Game.h"
 #include <cstdio>
 
 namespace Monocle
@@ -28,7 +29,7 @@ namespace Monocle
 				zoomSpeed *= 2.0f;
 			}
 
-			Camera *mainCamera = Scene::GetMainCamera();
+			Camera *mainCamera = Game::GetScene()->GetMainCamera();
 
 			if (Platform::mouseScroll != 0)
 			{

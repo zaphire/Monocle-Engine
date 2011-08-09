@@ -5,6 +5,7 @@
 #include "Rect.h"
 
 #include <map>
+#include <vector>
 
 class TiXmlDocument;
 class TiXmlElement;
@@ -19,7 +20,7 @@ namespace Monocle
     {
     public:
         
-        ZwopSprite( ZwopSpriteSheet *sheet );
+        ZwopSprite( ZwopSpriteSheet *sheet, int index );
         ~ZwopSprite();
         
         void Load(TiXmlElement *element);
@@ -37,6 +38,8 @@ namespace Monocle
         
         ZwopSpriteSheet *GetSheet();
         
+        int GetSpriteIndex();
+        
     private:
         
         friend class ZwopSpriteSheet;
@@ -51,6 +54,8 @@ namespace Monocle
         Rect colorRect;
         
         std::string name;
+        
+        int spriteIndex;
     };
     
 	class ZwopSpriteSheet
@@ -58,7 +63,8 @@ namespace Monocle
     public:
 		
 		~ZwopSpriteSheet();
-		ZwopSprite* GetSpriteByName(const std::string &name);
+		ZwopSprite* GetSpriteByName( const std::string &name );
+        ZwopSprite* GetSpriteByIndex( int index );
 
 		std::string GetTextureName();
         
@@ -81,6 +87,7 @@ namespace Monocle
         
 	private:
 		std::map<std::string, ZwopSprite*> entries;
+        std::vector<ZwopSprite*> orderedSprites;
         
 	};
 }

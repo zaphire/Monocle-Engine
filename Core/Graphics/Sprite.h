@@ -27,6 +27,8 @@ namespace Monocle
 		void GetWidthHeight(float *width, float *height);
 		void SetShader(Shader* shader);
 		Shader* GetShader();
+        
+        void AdjustForZwopSprite( ZwopSprite *zs );
 
 		TextureAsset *texture;
 		float width, height;//,angle;

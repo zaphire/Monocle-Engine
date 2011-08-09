@@ -4,6 +4,7 @@
 #include "Graphics.h"
 #include "Camera.h"
 #include "Scene.h"
+#include "Game.h"
 
 namespace Monocle
 {
@@ -140,7 +141,7 @@ namespace Monocle
 			}
 			else
 			{
-				camera = Scene::GetMainCamera();
+				camera = Game::GetScene()->GetMainCamera();
 			}
 		}
 		Vector2 resScale = Graphics::GetResolutionScale();

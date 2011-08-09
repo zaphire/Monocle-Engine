@@ -100,15 +100,15 @@ namespace Monocle
 		const std::list<Entity*>* GetEntities();
 
 		//! Add a new camera
-		static void AddCamera(Camera *camera);
+		void AddCamera(Camera *camera);
 		//! Get camera by index number
-		static Camera *GetCamera(int cameraIndex=0);
+		Camera *GetCamera(int cameraIndex=0);
 		//! Return the camera that is currently being used to render, or NULL
 		//static Camera *GetActiveCamera();
 
-		static Camera *GetMainCamera();
-		static Camera *GetActiveCamera();
-		static void SetMainCamera(Camera *camera);
+		Camera *GetMainCamera();
+		Camera *GetActiveCamera();
+		void SetMainCamera(Camera *camera);
 
 		///TODO: replace TiXml with wrapper
 		virtual Entity *CreateEntity(const std::string &entityTypeName);
@@ -129,7 +129,6 @@ namespace Monocle
 
 
 	private:
-		static Scene *instance;
 
 		//Holds all the entities currently in the scene
 		std::list<Entity*> entities;

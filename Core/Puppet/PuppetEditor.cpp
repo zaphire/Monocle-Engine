@@ -1,4 +1,5 @@
 #include "PuppetEditor.h"
+#include "Game.h"
 
 #include "../MonocleToolkit.h"
 #include "../Assets.h"
@@ -112,7 +113,7 @@ namespace Monocle
 
 		Graphics::Set2D(800, 600);
 		//Graphics::SetBackgroundColor(Color::white);
-		Scene::GetCamera()->position = Graphics::GetScreenCenter();
+        Game::GetScene()->GetCamera()->position = Graphics::GetScreenCenter();
 
 		puppetEntity = new PuppetEntity();
 		puppetEntity->position = Graphics::GetScreenCenter() + Vector2::down * 100;

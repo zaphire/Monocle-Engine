@@ -1,3 +1,4 @@
+#include "ZwopSpriteSheet.h"
 #include "SpriteAnimation.h"
 #include "Sprite.h"
 #include "../MonocleToolkit.h"
@@ -7,21 +8,33 @@ namespace Monocle
 {
 
 	Anim::Anim(const std::string &name, int start, int end, float speed)
-		: name(name), start(start), end(end), speed(speed), frame(start), isPlaying(false)
+		: name(name), start(start), end(end), speed(speed), frame(start), isPlaying(false), firstSprite(NULL)
 	{
-
+        
 	}
+    
+    Anim::Anim(const std::string &name, ZwopSprite *firstSprite, int numFrames, float speed)
+        : name(name), start(0), end(numFrames-1), speed(speed), frame(0), isPlaying(false), firstSprite(firstSprite)
+    {
+        
+    }
 
 	SpriteAnimation::SpriteAnimation(const std::string &filename, FilterType filter, float width, float height)
 		: Sprite(filename, filter, width, height)
 	{
-
+        zSheet=NULL;
 	}
     
     SpriteAnimation::SpriteAnimation(ZwopSprite *zs, FilterType filter, float width, float height)
     : Sprite(zs, filter, width, height)
 	{
-        
+        zSheet=NULL;
+	}
+    
+    SpriteAnimation::SpriteAnimation(ZwopSpriteSheet *zSheet, FilterType filter, float width, float height)
+    : Sprite(zSheet->GetSpriteByIndex(0), filter, width, height)
+	{
+        this->zSheet = zSheet;
 	}
 
 	void SpriteAnimation::Add(const std::string &name, int start, int end, float speed)
@@ -29,6 +42,14 @@ namespace Monocle
 		Anim a = Anim(name, start, end, speed);
 		animations.push_back(a);
 	}
+    
+    void SpriteAnimation::Add(const std::string &name, std::string startSprite, int numFrames, float speed)
+    {
+        if (!zSheet) return;
+        
+        Anim a = Anim(name, zSheet->GetSpriteByName(startSprite), numFrames, speed);
+        animations.push_back(a);
+    }
 
 	void SpriteAnimation::Play(const std::string &name)
 	{
@@ -56,7 +77,7 @@ namespace Monocle
 			if (animation->isPlaying)
 			{
 				animation->frame += animation->speed * Monocle::deltaTime;
-				if(animation->frame > animation->end + 1) { animation->frame = animation->start; }
+				if(animation->frame > animation->end) { animation->frame = animation->start; }
 			}
 		}
 	}
@@ -66,21 +87,39 @@ namespace Monocle
 		int x = 0;
 		int y = 0;
         
-        float tw = texture->width*textureScaleModifier.x;
-        float th = texture->height*textureScaleModifier.y;
+        if (zSheet == NULL)
+        {
+            // Render off full spritesheet as expected
+            
+            float tw = texture->width*textureScaleModifier.x;
+            float th = texture->height*textureScaleModifier.y;
 
-		if (animation)
-		{
-			x = (int) animation->frame % (int) (tw / width);
-			y = (int) animation->frame / (tw / width);
-		}
+            if (animation)
+            {
+                x = (int) animation->frame % (int) (tw / width);
+                y = (int) animation->frame / (tw / width);
+            }
 
-		textureOffset = Vector2((x * width) / tw, (y * height) / th);
-		textureScale = Vector2(width / tw, height / th);
-        
-        textureOffset = textureOffset*textureScaleModifier;
-        textureOffset += textureOffsetModifier;
-        textureScale = textureScale * textureScaleModifier;
+            textureOffset = Vector2((x * width) / tw, (y * height) / th);
+            textureScale = Vector2(width / tw, height / th);
+            
+            textureOffset = textureOffset*textureScaleModifier;
+            textureOffset += textureOffsetModifier;
+            textureScale = textureScale * textureScaleModifier;
+        }
+        else
+        {
+            // Render from an obtained ZwopSprite (from within the ZwopSpriteSheet)
+            
+            if (animation && animation->firstSprite)
+            {
+                int zIndex = animation->frame + animation->firstSprite->GetSpriteIndex();
+                ZwopSprite *zs = zSheet->GetSpriteByIndex( zIndex );
+                
+                if (zs)
+                    AdjustForZwopSprite(zs);
+            }
+        }
 
 		Sprite::Render(entity);
 	}
