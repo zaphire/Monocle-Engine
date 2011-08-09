@@ -23,6 +23,7 @@ namespace Monocle
 	{
 	public:
 		SpriteAnimation(const std::string &filename, FilterType filter, float width, float height);
+        SpriteAnimation(ZwopSprite *zs, FilterType filter, float width, float height);
 		void Add(const std::string &name, int start, int end, float speed);
 		void Play(const std::string &name);
 		void Stop(const std::string &name);

@@ -13,8 +13,8 @@ namespace Monocle
 		height(height),
 		textureOffset(Vector2::zero),
         textureScale(Vector2::one),
-        originalTextureOffset(Vector2::zero),
-        originalTextureScale(Vector2::one),
+        textureOffsetModifier(Vector2::zero),
+        textureScaleModifier(Vector2::one),
         trimOffset(Vector2::zero),
         trimScale(Vector2::one),
 		blend(BLEND_ALPHA)
@@ -38,8 +38,8 @@ namespace Monocle
 		height(height),
 		textureOffset(Vector2::zero),
         textureScale(Vector2::one),
-        originalTextureOffset(Vector2::zero),
-        originalTextureScale(Vector2::one),
+        textureOffsetModifier(Vector2::zero),
+        textureScaleModifier(Vector2::one),
         trimOffset(Vector2::zero),
         trimScale(Vector2::one),
 		blend(BLEND_ALPHA)
@@ -63,8 +63,8 @@ namespace Monocle
         height(height),
         textureOffset(Vector2::zero),
         textureScale(Vector2::one),
-        originalTextureOffset(Vector2::zero),
-        originalTextureScale(Vector2::one),
+        textureOffsetModifier(Vector2::zero),
+        textureScaleModifier(Vector2::one),
         trimOffset(Vector2::zero),
         trimScale(Vector2::one),
         blend(BLEND_ALPHA)
@@ -76,8 +76,8 @@ namespace Monocle
             this->height = zwopSprite->GetSourceSize().y;
         }
         
-        originalTextureScale = textureScale = zwopSprite->GetTextureScale();
-        originalTextureOffset = textureOffset = zwopSprite->GetTextureOffset();
+        textureScaleModifier = textureScale = zwopSprite->GetTextureScale();
+        textureOffsetModifier = textureOffset = zwopSprite->GetTextureOffset();
         
         trimScale = zwopSprite->GetSize() / zwopSprite->GetSourceSize();
         trimOffset = zwopSprite->GetSpriteOffset();
@@ -91,8 +91,8 @@ namespace Monocle
         height(height),
         textureOffset(Vector2::zero),
         textureScale(Vector2::one),
-        originalTextureOffset(Vector2::zero),
-        originalTextureScale(Vector2::one),
+        textureOffsetModifier(Vector2::zero),
+        textureScaleModifier(Vector2::one),
         trimOffset(Vector2::zero),
         trimScale(Vector2::one),
         blend(BLEND_ALPHA)
@@ -104,8 +104,8 @@ namespace Monocle
             this->height = zwopSprite->GetSourceSize().y;
         } 
         
-        originalTextureScale = textureScale = zwopSprite->GetTextureScale();
-        originalTextureOffset = textureOffset = zwopSprite->GetTextureOffset(); 
+        textureScaleModifier = textureScale = zwopSprite->GetTextureScale();
+        textureOffsetModifier = textureOffset = zwopSprite->GetTextureOffset(); 
         
         trimScale = zwopSprite->GetSize() / zwopSprite->GetSourceSize();
         trimOffset = zwopSprite->GetSpriteOffset();
@@ -119,8 +119,8 @@ namespace Monocle
 		height(1.0f),
 		textureOffset(Vector2::zero),
         textureScale(Vector2::one),
-        originalTextureOffset(Vector2::zero),
-        originalTextureScale(Vector2::one),
+        textureOffsetModifier(Vector2::zero),
+        textureScaleModifier(Vector2::one),
         trimOffset(Vector2::zero),
         trimScale(Vector2::one),
 		blend(BLEND_ALPHA)

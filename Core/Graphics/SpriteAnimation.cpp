@@ -17,6 +17,12 @@ namespace Monocle
 	{
 
 	}
+    
+    SpriteAnimation::SpriteAnimation(ZwopSprite *zs, FilterType filter, float width, float height)
+    : Sprite(zs, filter, width, height)
+	{
+        
+	}
 
 	void SpriteAnimation::Add(const std::string &name, int start, int end, float speed)
 	{
@@ -59,15 +65,22 @@ namespace Monocle
 	{
 		int x = 0;
 		int y = 0;
+        
+        float tw = texture->width*textureScaleModifier.x;
+        float th = texture->height*textureScaleModifier.y;
 
 		if (animation)
 		{
-			x = (int) animation->frame % (int) (texture->width / width);
-			y = (int) animation->frame / (texture->width / width);
+			x = (int) animation->frame % (int) (tw / width);
+			y = (int) animation->frame / (tw / width);
 		}
 
-		textureOffset = Vector2((x * width) / texture->width, (y * height) / texture->height);
-		textureScale = Vector2(width / texture->width, height / texture->height);
+		textureOffset = Vector2((x * width) / tw, (y * height) / th);
+		textureScale = Vector2(width / tw, height / th);
+        
+        textureOffset = textureOffset*textureScaleModifier;
+        textureOffset += textureOffsetModifier;
+        textureScale = textureScale * textureScaleModifier;
 
 		Sprite::Render(entity);
 	}

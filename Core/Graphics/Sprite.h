@@ -34,8 +34,8 @@ namespace Monocle
 		Vector2 textureScale;
         
         // Original textureOffset and textureScale (for animations within spritesheets)
-        Vector2 originalTextureOffset;
-        Vector2 originalTextureScale;
+		Vector2 textureOffsetModifier;
+		Vector2 textureScaleModifier;
         
         // Offsets (for trimmed sprites)
         Vector2 trimOffset;
