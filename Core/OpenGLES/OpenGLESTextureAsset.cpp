@@ -2,6 +2,7 @@
 
 #include "../TextureAsset.h"
 #include "../Debug.h"
+#include "../MonocleToolkit.h"
 
 #ifdef MONOCLE_WINDOWS
 #define WIN32_LEAN_AND_MEAN
@@ -31,7 +32,7 @@ namespace Monocle
         return this->premultiplied;
     }
     
-	void TextureAsset::Load(const unsigned char* data, int w, int h, FilterType filter, bool repeatX, bool repeatY. bool premultiply)
+	void TextureAsset::Load(const unsigned char* data, int w, int h, FilterType filter, bool repeatX, bool repeatY, bool premultiply)
 	{
 		this->filter = filter;
 		this->repeatX = repeatX;

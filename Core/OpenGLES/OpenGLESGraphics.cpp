@@ -481,7 +481,7 @@ namespace Monocle
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	}
     
-    void Graphics::RenderText(const FontAsset& font, const std::string& text, float x, float y, TextAlign align)
+    void Graphics::RenderText(const FontAsset& font, const std::string& text, float x, float y, TextAlign x_align)
     {
         Rect verts, texCoords;
         float width;

@@ -12,6 +12,8 @@
 #include "MonocleToolkit.h"
 #include "Debug.h"
 
+#import "Foundation/NSString.h"
+
 namespace Monocle
 {
     /***
