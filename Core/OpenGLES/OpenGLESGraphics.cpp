@@ -65,6 +65,9 @@ namespace Monocle
         
         currentBlend = BLEND_ALPHA;
         
+        currentColor = Color::white;
+        glColor4f(1.0,1.0,1.0,1.0);
+        
 		glDisable(GL_LIGHTING);
 		glEnable(GL_TEXTURE_2D);
 		glCullFace(GL_BACK);
@@ -79,6 +82,8 @@ namespace Monocle
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		ShowBuffer();
         
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+        glPixelStorei(GL_PACK_ALIGNMENT, 1);
         
 		Set2D(800,600);
         
@@ -129,6 +134,9 @@ namespace Monocle
                     break;
                 case BLEND_MULTIPLY:
                     glBlendFunc(GL_ZERO, GL_SRC_COLOR);
+                    break;
+                case BLEND_ALPHA_PREMULTIPLIED:
+                    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
                     break;
 			}
 			instance->currentBlend = blend;
@@ -372,7 +380,10 @@ namespace Monocle
     
 	void Graphics::SetColor(const Color &color)
 	{
-		glColor4f(color.r, color.g, color.b, color.a);
+		if (instance->currentColor != color){
+            glColor4f(color.r, color.g, color.b, color.a);
+            instance->currentColor = color;
+        }
 	}
     
 	int Graphics::GetVirtualWidth()
@@ -677,7 +688,7 @@ namespace Monocle
 //		glEnd();
 	}
     
-	void Graphics::RenderPathMesh(const std::vector<Node*> &nodes, int cells, float size, bool flipX, bool flipY)
+	void Graphics::RenderPathMesh(const std::vector<Node*> &nodes, int cells, float size, bool flipX, bool flipY, Vector2 textureOffset, Vector2 textureScale)
 	{
 //		glBegin(GL_QUADS);
 		for (int i = 0; i < nodes.size()-1; i++)
@@ -721,14 +732,14 @@ namespace Monocle
 				Vector2 pos1 = nodes[i]->position;
 				Vector2 pos2 = nodes[i+1]->position;
                 
-				Vector2 texOffset = Vector2::zero;
-				Vector2 texScale = Vector2::one * 1.0f/(float)cells;
-				texOffset.x = (nodes[i]->variant % (cells)) * texScale.x;
-				texOffset.y = (int)(nodes[i]->variant / (cells)) * texScale.y;
+				Vector2 texOffset = textureOffset;
+				Vector2 texScale = textureScale * 1.0f/(float)cells;
+				texOffset.x += (nodes[i]->variant % (cells)) * texScale.x;
+				texOffset.y += (int)(nodes[i]->variant / (cells)) * texScale.y;
                 
 				if (flipY)
 				{
-					texOffset.y = 1.0f - texOffset.y;
+					texOffset.y = (textureOffset.y+textureScale.y) - texOffset.y;
 					texScale.y = - texScale.y;
 					//printf("%f, %f\n", texOffset.y, texScale.y);
 				}

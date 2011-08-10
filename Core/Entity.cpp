@@ -48,6 +48,9 @@ namespace Monocle
 	Entity::Entity(const Entity &entity)
 		: Transform(entity), isEnabled(true), followCamera(entity.followCamera), scene(NULL), collider(NULL), graphic(NULL), parent(NULL), depth(entity.depth), isVisible(entity.isVisible), color(entity.color), layer(entity.layer)//, tags(entity.tags)
 	{
+        lastPositionWhenCached = Vector2(-666.6666,-666.6666);
+        cachedWorldPosition = Vector2::zero;
+        
 		EntityTags copyTags = entity.tags;
 		for (EntityTags::iterator i = copyTags.begin(); i != copyTags.end(); ++i)
 		{
@@ -59,6 +62,8 @@ namespace Monocle
 		: Transform(), isEnabled(true), scene(NULL), collider(NULL), graphic(NULL), parent(NULL), layer(0), depth(0.0f), color(Color::white), isVisible(true)
 		//, willDie(false)
 	{
+        lastPositionWhenCached = Vector2(-666.6666,-666.6666);
+        cachedWorldPosition = Vector2::zero;
 	}
 
 	Entity::~Entity()
@@ -479,18 +484,24 @@ namespace Monocle
 	Vector2 Entity::GetWorldPosition(const Vector2 &position)
 	{
 		Vector2 returnPos;
+        
+        if (this->position == lastPositionWhenCached)
+            return this->cachedWorldPosition;
 
 		Graphics::PushMatrix();
 		Graphics::IdentityMatrix();
 
 		MatrixChain();
-
-		Graphics::Translate(position);
+        
+        Graphics::Translate(position);
 
 		returnPos = Graphics::GetMatrixPosition();
 
 		Graphics::PopMatrix();
 
+        this->cachedWorldPosition = returnPos;
+        this->lastPositionWhenCached = this->position;
+        
 		return returnPos;
 	}
 

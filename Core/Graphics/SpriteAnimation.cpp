@@ -4,6 +4,8 @@
 #include "../MonocleToolkit.h"
 #include "../Debug.h"
 
+#include <math.h>
+
 namespace Monocle
 {
 
@@ -77,9 +79,13 @@ namespace Monocle
 			if (animation->isPlaying)
 			{
 				animation->frame += animation->speed * Monocle::deltaTime;
-				if(animation->frame > animation->end) { animation->frame = animation->start; }
+				while(animation->frame >= animation->end + 1) { 
+                    animation->frame -= (animation->end-animation->start); 
+                }
+                /*if (animation->frame > animation->end)
+                    animation->frame = animation->start;*/
 			}
-		}
+		} 
 	}
 
 	void SpriteAnimation::Render(Entity *entity)
@@ -96,8 +102,8 @@ namespace Monocle
 
             if (animation)
             {
-                x = (int) animation->frame % (int) (tw / width);
-                y = (int) animation->frame / (tw / width);
+                x = (int) floor(animation->frame) % (int) (tw / width);
+                y = (int) floor(animation->frame) / (tw / width);
             }
 
             textureOffset = Vector2((x * width) / tw, (y * height) / th);
@@ -113,7 +119,7 @@ namespace Monocle
             
             if (animation && animation->firstSprite)
             {
-                int zIndex = animation->frame + animation->firstSprite->GetSpriteIndex();
+                int zIndex = floor(animation->frame) + animation->firstSprite->GetSpriteIndex();
                 ZwopSprite *zs = zSheet->GetSpriteByIndex( zIndex );
                 
                 if (zs)

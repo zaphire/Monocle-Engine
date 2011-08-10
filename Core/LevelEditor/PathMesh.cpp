@@ -4,6 +4,7 @@
 #include "../Graphics.h"
 #include "../TextureAsset.h"
 #include "../Colliders/PathCollider.h"
+#include "../Graphics/ZwopSpriteSheet.h"
 
 namespace Monocle
 {
@@ -22,6 +23,14 @@ namespace Monocle
 		//
 		SetStartNode(startNode);
 	}
+    
+    PathMesh::PathMesh(ZwopSprite *zs, int cells, Node *startNode, int size)
+        : Entity(), size(size), cells(cells), pathCollider(NULL), flipX(false), flipY(false)
+    {
+        texture = Assets::RequestTexture(zs->GetSheet()->GetTextureName());
+        SetStartNode(startNode);
+        zSprite = zs;
+    }
 
 	void PathMesh::MakeCollision(float radius)
 	{
@@ -78,8 +87,12 @@ namespace Monocle
 			Graphics::Rotate(rotation, 0, 0, 1);
 			Graphics::Scale(scale);
 
-			if (nodes.size() > 0)
-				Graphics::RenderPathMesh(nodes, cells, size, flipX, flipY);
+			if (nodes.size() > 0){
+                if (zSprite)
+                    Graphics::RenderPathMesh(nodes, cells, size, flipX, flipY,zSprite->GetTextureOffset(),zSprite->GetTextureScale());
+                else
+                    Graphics::RenderPathMesh(nodes, cells, size, flipX, flipY);
+            }
 
 			Graphics::PopMatrix();
 		}

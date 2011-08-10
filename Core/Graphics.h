@@ -141,7 +141,7 @@ namespace Monocle
 		//! \param pos2 [in] The end position of the line
 		static void RenderLine(const Vector2 &pos1, const Vector2 &pos2);
 		//! 
-		static void RenderPathMesh(const std::vector<Node*> &nodes, int cells, float size, bool flipX=false, bool flipY=false);
+		static void RenderPathMesh(const std::vector<Node*> &nodes, int cells, float size, bool flipX=false, bool flipY=false, Vector2 textureOffset=Vector2::zero, Vector2 textureScale=Vector2::one);
 		
 		//! \brief Pushes a view matrix onto the stack.
 		//! Coupled with PopMatrix, this function allows the caller to make rotations, translations, etc, to the matrix
@@ -218,6 +218,7 @@ namespace Monocle
 		int virtualWidth, virtualHeight;
 		unsigned int lastBoundTextureID;
 		BlendType currentBlend;
+        Color currentColor;
         
         bool bgReset;
 	};

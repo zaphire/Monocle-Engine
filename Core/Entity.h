@@ -195,7 +195,8 @@ namespace Monocle
 		std::list<InvokeData*> invokes;
 		std::list<InvokeData*> removeInvokes;
 
-
+        Vector2 cachedWorldPosition;
+        Vector2 lastPositionWhenCached;
 	public:
 		//Entity* GetChildEntityAtPosition(const Vector2 &position);
 		//template <class T>

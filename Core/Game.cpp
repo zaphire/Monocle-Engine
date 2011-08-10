@@ -136,7 +136,7 @@ namespace Monocle
             if (scene != NULL)
             {
                 scene->End();
-                scene->game = NULL;
+
                 // delete scene?
             }
             
