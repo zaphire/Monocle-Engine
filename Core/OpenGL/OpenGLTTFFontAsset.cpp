@@ -96,6 +96,7 @@ namespace Monocle
 	{
 		float width = 0;
 		float x,y;
+        x=y=0.0;
 		for (int i = 0; i < text.size(); i++)
 		{
 			Rect verts;

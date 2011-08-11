@@ -25,6 +25,8 @@ namespace Monocle
 		
 		int cells;
 		bool flipX, flipY;
+        
+        Vector2 textureOffset, textureScale;
 
 	private:
 		//std::list<Node*> nodes;
