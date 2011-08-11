@@ -283,13 +283,6 @@ namespace Monocle
 		BindLocalKey(KeySymParts::Get(XK_F15).low, KEY_F15);
     }
 
-    void Platform::BindLocalKey(int local, int global) {
-        //Needed to avoid key redefinition
-        if (localKeymap[local] == KEY_UNDEFINED) {
-            localKeymap[local] = global;
-        }
-    }
-
     void Platform::Init(const std::string &name, int w, int h, int bits, bool fullscreen)
     {
         LinuxPlatform::instance->CreatePlatformWindow(name.c_str(), w, h, bits, fullscreen);
@@ -349,16 +342,10 @@ namespace Monocle
         }
     }
 
-    void Platform::SetMouseButton(int button, bool on)
-    {
-        if(button == MOUSE_BUTTON_UNDEFINED)
-        {
-            Debug::Log("Received unknown button");
-            Debug::Log(button);
-        } else {
-            mouseButtons[button] = on;
-        }
-    }
+	bool Platform::ResizeWindow(int width, int height, bool fullscreen, int bits)
+	{
+		XResizeWindow(LinuxPlatform::instance->hDisplay, LinuxPlatform::instance->hWindow, width, height);
+	}
 
     long Platform::GetMilliseconds()
     {
@@ -369,14 +356,14 @@ namespace Monocle
         return ticks;
     }
 
-    bool Platform::IsKeyPressed(KeyCode keyCode)
-    {
-        return instance->keys[(int)keyCode];
-    }
-
     void Platform::ShowBuffer()
     {
         glXSwapBuffers(LinuxPlatform::instance->hDisplay, LinuxPlatform::instance->hWindow);
+    }
+
+    bool Platform::IsKeyPressed(KeyCode keyCode)
+    {
+        return instance->keys[(int)keyCode];
     }
 
     int Platform::GetWidth()
@@ -388,14 +375,12 @@ namespace Monocle
     {
         return instance->height;
     }
-
-    void Platform::WindowSizeChanged(int w, int h)
+    
+    PlatformOrientation Platform::GetOrientation()
     {
-        instance->width = w;
-        instance->height = h;
-        Graphics::Resize(w, h);
+        return instance->orientation;
     }
-
+    
     void Platform::SetLocalKey(int key, bool on)
     {
         KeyCode keyCode = (KeyCode)instance->localKeymap[key];
@@ -410,30 +395,55 @@ namespace Monocle
         }
     }
 
+    void Platform::SetMouseButton(int button, bool on)
+    {
+        if(button == MOUSE_BUTTON_UNDEFINED)
+        {
+            Debug::Log("Received unknown button");
+            Debug::Log(button);
+        } else {
+            mouseButtons[button] = on;
+        }
+    }
+
+	bool Platform::IsTouchEnabled()
+	{
+		return false;
+	}
+
     bool Platform::IsActive()
     {
         return LinuxPlatform::instance->active;
     }
 
-	std::string Platform::GetDefaultContentPath()
-	{
-		return "../../Content/";
-	}
-    
-    PlatformOrientation Platform::GetOrientation()
+    void Platform::WindowSizeChanged(int w, int h)
     {
-        return instance->orientation;
+        instance->width = w;
+        instance->height = h;
+        Graphics::Resize(w, h);
     }
-    
+  
     void Platform::PlatformOrientationChanged( PlatformOrientation orientation )
     {
 //        instance->orientation = orientation;
     }
     
+	std::string Platform::GetDefaultContentPath()
+	{
+		return "../../Content/";
+	}
+
     void Platform::ErrorShutdown( std::string msg )
     {
         fprintf(stderr,"EXCEPTION: %s\n",msg.c_str());
         exit(1);
+    }
+
+    void Platform::BindLocalKey(int local, int global) {
+        //Needed to avoid key redefinition
+        if (localKeymap[local] == KEY_UNDEFINED) {
+            localKeymap[local] = global;
+        }
     }
 }
 
