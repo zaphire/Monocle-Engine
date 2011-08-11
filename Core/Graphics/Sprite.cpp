@@ -209,7 +209,7 @@ namespace Monocle
 			Graphics::RenderQuad(width, height, textureOffset, textureScale);
 
 		Graphics::PopMatrix();
-		Shader::None();
+		Shader::UseNone();
 
 		// show bounds, for editor/selection purposes
 		if ((Debug::showBounds || Debug::selectedEntity == entity) && entity->IsDebugLayer())
@@ -261,7 +261,7 @@ namespace Monocle
 		}
 		else
 		{
-			Shader::None();
+			Shader::UseNone();
 			delete this->shader;
 			this->shader = shader;
 		}
