@@ -30,7 +30,7 @@ namespace Monocle
 		void SetUniformInt(const std::string &name, int value );
 		void SetUniformSampler2D(const std::string &name);
         
-		static void None();
+		static void UseNone();
         
 		unsigned int vertexShader;
 		unsigned int fragmentShader;
