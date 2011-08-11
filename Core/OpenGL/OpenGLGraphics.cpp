@@ -582,8 +582,6 @@ namespace Monocle
 
 				if (flipY)
 				{
-                    // TODO: Work with textureOffset provided from parameter (zSprite?)
-                    
 					texOffset.y = (textureOffset.y+textureScale.y) - texOffset.y;
 					texScale.y = - texScale.y;
 					//printf("%f, %f\n", texOffset.y, texScale.y);

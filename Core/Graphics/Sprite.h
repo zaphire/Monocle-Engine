@@ -39,6 +39,10 @@ namespace Monocle
 		Vector2 textureOffsetModifier;
 		Vector2 textureScaleModifier;
         
+        // Render offset (use for hotspots in animations, etc)
+        // This essentially is how far from position we'll render (but we want to retain our position for worldposition purposes)
+        Vector2 renderOffset;
+        
         // Offsets (for trimmed sprites)
         Vector2 trimOffset;
         Vector2 trimScale;

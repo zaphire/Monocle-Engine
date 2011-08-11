@@ -9,14 +9,14 @@
 namespace Monocle
 {
 
-	Anim::Anim(const std::string &name, int start, int end, float speed)
-		: name(name), start(start), end(end), speed(speed), frame(start), isPlaying(false), firstSprite(NULL)
+	Anim::Anim(const std::string &name, int start, int end, float speed, bool loop)
+		: name(name), start(start), end(end), speed(speed), frame(start), isPlaying(false), firstSprite(NULL), loop(loop)
 	{
         
 	}
     
-    Anim::Anim(const std::string &name, ZwopSprite *firstSprite, int numFrames, float speed)
-        : name(name), start(0), end(numFrames-1), speed(speed), frame(0), isPlaying(false), firstSprite(firstSprite)
+    Anim::Anim(const std::string &name, ZwopSprite *firstSprite, int numFrames, float speed, bool loop)
+        : name(name), start(0), end(numFrames-1), speed(speed), frame(0), isPlaying(false), firstSprite(firstSprite), loop(loop)
     {
         
     }
@@ -39,26 +39,31 @@ namespace Monocle
         this->zSheet = zSheet;
 	}
 
-	void SpriteAnimation::Add(const std::string &name, int start, int end, float speed)
+	void SpriteAnimation::Add(const std::string &name, int start, int end, float speed, bool loop)
 	{
-		Anim a = Anim(name, start, end, speed);
+		Anim a = Anim(name, start, end, speed, loop);
 		animations.push_back(a);
 	}
     
-    void SpriteAnimation::Add(const std::string &name, std::string startSprite, int numFrames, float speed)
+    void SpriteAnimation::Add(const std::string &name, std::string startSprite, int numFrames, float speed, bool loop)
     {
         if (!zSheet) return;
         
-        Anim a = Anim(name, zSheet->GetSpriteByName(startSprite), numFrames, speed);
+        Anim a = Anim(name, zSheet->GetSpriteByName(startSprite), numFrames, speed, loop);
         animations.push_back(a);
     }
 
 	void SpriteAnimation::Play(const std::string &name)
 	{
-		animation = GetAnim(name);
+		Anim *anim = GetAnim(name);
+        
+        if (anim == animation && animation->isPlaying == true) return;
+        animation = anim;
+        
 		if (animation)
 		{
 			animation->isPlaying = true;
+            animation->frame = animation->start;
 		}
 
 	}
@@ -79,7 +84,13 @@ namespace Monocle
 			if (animation->isPlaying)
 			{
 				animation->frame += animation->speed * Monocle::deltaTime;
+                
 				while(animation->frame >= animation->end + 1) { 
+                    if (!animation->loop){
+                        animation->isPlaying = false;
+                        animation->frame = animation->end;
+                        break;
+                    }
                     animation->frame -= (animation->end-animation->start); 
                 }
                 /*if (animation->frame > animation->end)
@@ -122,8 +133,23 @@ namespace Monocle
                 int zIndex = floor(animation->frame) + animation->firstSprite->GetSpriteIndex();
                 ZwopSprite *zs = zSheet->GetSpriteByIndex( zIndex );
                 
-                if (zs)
+                if (zs){
+                    Vector2 sourceSize = zs->GetSourceSize();
+                    Vector2 baseSize = Vector2(width,height);
+                    
                     AdjustForZwopSprite(zs);
+                    
+                    if (sourceSize != baseSize)
+                    {
+                        // We have an animation frame where the size of the sprite changes.
+                        trimScale = trimScale * (sourceSize / baseSize);
+                        
+                        // Render offset TODO: HOTSPOT
+                        renderOffset = (sourceSize - baseSize) * 0.5;
+                    }
+                    else
+                        renderOffset = Vector2::zero;
+                }
             }
         }
 

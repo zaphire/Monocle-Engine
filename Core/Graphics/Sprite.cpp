@@ -17,6 +17,7 @@ namespace Monocle
         textureScaleModifier(Vector2::one),
         trimOffset(Vector2::zero),
         trimScale(Vector2::one),
+        renderOffset(Vector2::zero),
 		blend(BLEND_ALPHA)
 	{
 		texture = Assets::RequestTexture(filename, filter);
@@ -42,6 +43,7 @@ namespace Monocle
         textureScaleModifier(Vector2::one),
         trimOffset(Vector2::zero),
         trimScale(Vector2::one),
+        renderOffset(Vector2::zero),
 		blend(BLEND_ALPHA)
 	{
 		texture = Assets::RequestTexture(filename);
@@ -67,6 +69,7 @@ namespace Monocle
         textureScaleModifier(Vector2::one),
         trimOffset(Vector2::zero),
         trimScale(Vector2::one),
+        renderOffset(Vector2::zero),
         blend(BLEND_ALPHA)
     {
         texture = Assets::RequestTexture( zwopSprite->GetSheet()->GetTextureName(), filter );
@@ -91,6 +94,7 @@ namespace Monocle
         textureScaleModifier(Vector2::one),
         trimOffset(Vector2::zero),
         trimScale(Vector2::one),
+        renderOffset(Vector2::zero),
         blend(BLEND_ALPHA)
     {
         texture = Assets::RequestTexture( zwopSprite->GetSheet()->GetTextureName() );
@@ -115,6 +119,7 @@ namespace Monocle
         textureScaleModifier(Vector2::one),
         trimOffset(Vector2::zero),
         trimScale(Vector2::one),
+        renderOffset(Vector2::zero),
 		blend(BLEND_ALPHA)
 	{
 	}
@@ -210,7 +215,7 @@ namespace Monocle
 		if ((Debug::showBounds || Debug::selectedEntity == entity) && entity->IsDebugLayer())
 		{
 			Graphics::PushMatrix();
-			Graphics::Translate(position.x, position.y, 0.0f);
+			Graphics::Translate(position.x+renderOffset.x, position.y+renderOffset.y, 0.0f);
 
 			if (Debug::selectedEntity == entity)
 				Graphics::SetColor(Color::orange);
