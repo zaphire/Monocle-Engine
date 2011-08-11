@@ -184,7 +184,7 @@ namespace Monocle
 		textures[name] = textures.size()-1;
 	}
     
-	void Shader::None()
+	void Shader::UseNone()
 	{
 		glUseProgram(0);
 	}
