@@ -152,6 +152,11 @@ Monocle::Scene *GetIOSFirstScene();
 		}
 	}
     
+    allowedOrientations_[0] = true;
+    allowedOrientations_[1] = true;
+    allowedOrientations_[2] = true;
+    allowedOrientations_[3] = true;
+    
 	return self;
 }
 
@@ -207,6 +212,27 @@ Monocle::Scene *GetIOSFirstScene();
 	return YES;
 }
 
+- (void) allowOrientation:(UIDeviceOrientation)orientation valid:(BOOL)allow
+{
+    switch (orientation)
+    {
+        case UIDeviceOrientationPortrait:
+            allowedOrientations_[0] = allow;
+            break;
+        case UIDeviceOrientationPortraitUpsideDown:
+            allowedOrientations_[1] = allow;
+            break;
+        case UIDeviceOrientationLandscapeLeft:
+            allowedOrientations_[2] = allow;
+            break;
+        case UIDeviceOrientationLandscapeRight:
+            allowedOrientations_[3] = allow;
+            break;
+        default:
+            return;
+    }
+}
+
 - (void) setDeviceOrientation:(UIDeviceOrientation)orientation
 {
     PlatformOrientation orient;
@@ -214,18 +240,22 @@ Monocle::Scene *GetIOSFirstScene();
     switch (orientation)
     {
         case UIDeviceOrientationPortrait:
+            if (!allowedOrientations_[0]) return;
             orient = PLATFORM_ORIENTATION_PORTRAIT;
             [[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationPortrait animated:NO];
             break;
         case UIDeviceOrientationPortraitUpsideDown:
+            if (!allowedOrientations_[1]) return;
             orient = PLATFORM_ORIENTATION_PORTRAIT_UPSIDEDOWN;
             [[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationPortraitUpsideDown animated:NO];
             break;
         case UIDeviceOrientationLandscapeLeft:
+            if (!allowedOrientations_[2]) return;
             orient = PLATFORM_ORIENTATION_LANDSCAPE_LEFT;
             [[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationLandscapeRight animated:NO];
             break;
         case UIDeviceOrientationLandscapeRight:
+            if (!allowedOrientations_[3]) return;
             orient = PLATFORM_ORIENTATION_LANDSCAPE_RIGHT;
             [[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationLandscapeLeft animated:NO];
             break;

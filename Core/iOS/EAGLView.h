@@ -137,6 +137,8 @@
     
     // Pinch and Zoom
     CGSize originalDifference;                  ///< Used for calulating the relative difference between two multi-taps for pinch/strech and zoom/unzoom
+    
+    bool allowedOrientations_[4];                ///< Allowed orientations. (0 portrait, 1 portrait upsidedown, 2 landscape left, 3 landscape right)
 }
 
 /** creates an initializes an EAGLView with a frame and 0-bit depth buffer, and a RGB565 color buffer. */
@@ -154,6 +156,9 @@
 - (id) initWithFrame:(CGRect)frame pixelFormat:(NSString*)format;
 /** Initializes an EAGLView with a frame, a color buffer format, a depth buffer format, a sharegroup and multisampling support */
 - (id) initWithFrame:(CGRect)frame pixelFormat:(NSString*)format depthFormat:(GLuint)depth preserveBackbuffer:(BOOL)retained sharegroup:(EAGLSharegroup*)sharegroup multiSampling:(BOOL)sampling numberOfSamples:(unsigned int)nSamples;
+
+- (void) allowOrientation:(UIDeviceOrientation)orientation valid:(BOOL)allow;
+- (void) setDeviceOrientation:(UIDeviceOrientation)orientation;
 
 - (void) prepare;
 

@@ -106,7 +106,7 @@ namespace Monocle
         
         Check("buffer reset");
 
-        Debug::Log("AUDIO: Opening Audio Channel: " + StringOf(samplerate) + "hz w/ " + StringOf(bits) + "bits w/ " + StringOf(channels) + " channels (ALformat:" + StringOf(format) +") SOURCE ID: " + StringOf(source));
+//        Debug::Log("AUDIO: Opening Audio Channel: " + StringOf(samplerate) + "hz w/ " + StringOf(bits) + "bits w/ " + StringOf(channels) + " channels (ALformat:" + StringOf(format) +") SOURCE ID: " + StringOf(source));
         
         Check("openbufferdata");
         
