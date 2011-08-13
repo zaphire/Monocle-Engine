@@ -1,6 +1,7 @@
 
 #include "ZwopSpriteSheet.h"
 #include "../Assets.h"
+#include "../TextureAsset.h"
 
 #include <XML/XMLFileNode.h>
 #include <TinyXML/tinyxml.h>
@@ -171,6 +172,7 @@ namespace Monocle
 		}
         
         this->textureName = textureName;
+        this->texture = Assets::RequestTexture(textureName);
     }
     
     ZwopSpriteSheet::~ZwopSpriteSheet()
@@ -181,6 +183,8 @@ namespace Monocle
 		}
 		entries.clear();
         orderedSprites.clear();
+        
+        this->texture->RemoveReference();
     }
     
     std::string ZwopSpriteSheet::GetTextureName()

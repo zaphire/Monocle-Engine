@@ -14,6 +14,7 @@ namespace Monocle
 {
     class XMLFileNode;
     class ZwopSpriteSheet;
+    class TextureAsset;
     
     // (frames)
     class ZwopSprite
@@ -67,6 +68,7 @@ namespace Monocle
         ZwopSprite* GetSpriteByIndex( int index );
 
 		std::string GetTextureName();
+        TextureAsset *GetTexture();
         
         Vector2 GetSize();
         
@@ -84,6 +86,8 @@ namespace Monocle
 		Vector2 size;
         
         std::string textureName;
+        
+        TextureAsset *texture;
         
 	private:
 		std::map<std::string, ZwopSprite*> entries;
