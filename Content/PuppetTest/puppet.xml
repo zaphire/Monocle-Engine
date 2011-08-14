@@ -1,75 +1,73 @@
-<TextureAtlas image="graphics/monocleman.png" width="512" height="512">
-	<TextureAtlasEntry name="torso" coords="262 2 90 118"/>
-	<TextureAtlasEntry name="tortilla" coords="2 2 258 183"/>
-	<TextureAtlasEntry name="mustache" coords="262 122 109 43"/>
-	<TextureAtlasEntry name="nose" coords="354 2 40 81"/>
-	<TextureAtlasEntry name="hat" coords="396 2 86 69"/>
-	<TextureAtlasEntry name="eye-left" coords="62 249 12 15"/>
-	<TextureAtlasEntry name="eye-right" coords="76 249 12 14"/>
-	<TextureAtlasEntry name="eyeunderline-left" coords="396 73 28 10"/>
-	<TextureAtlasEntry name="eyebrow" coords="46 281 42 16"/>
-	<TextureAtlasEntry name="monocle" coords="119 187 54 50"/>
+<TextureAtlas image="graphics/monocleman.png" width="512" height="512" scale="1">
+    <TextureAtlasEntry name="eye-left" x="62" y="249" width="12" height="15" />
+    <TextureAtlasEntry name="eye-right" x="76" y="249" width="12" height="14" />
+    <TextureAtlasEntry name="eyebrow" x="46" y="281" width="42" height="16" />
+    <TextureAtlasEntry name="eyeunderline-left" x="396" y="73" width="28" height="10" />
+    <TextureAtlasEntry name="hat" x="396" y="2" width="86" height="69" />
+    <TextureAtlasEntry name="logo" x="258" y="231" width="254" height="125" />
+    <TextureAtlasEntry name="monocle" x="119" y="187" width="54" height="50" />
+    <TextureAtlasEntry name="mustache" x="262" y="122" width="109" height="43" />
+    <TextureAtlasEntry name="nose" x="354" y="2" width="40" height="81" />
+    <TextureAtlasEntry name="torso" x="262" y="2" width="90" height="118" />
+    <TextureAtlasEntry name="tortilla" x="2" y="2" width="258" height="183" />
 </TextureAtlas>
-
 <Parts>
-	<Part id="0" name="torso" atlasEntry="torso">
-		<Part id="1" name="tortilla" atlasEntry="tortilla" layer="-1">
-			<Part id="2" name="mustache" atlasEntry="mustache" layer="-2"/>
-			<Part id="3" name="hat" atlasEntry="hat" layer="-2"/>
-			<Part id="4" name="nose" atlasEntry="nose" layer="-2"/>
-			<Part id="5" name="monocle" atlasEntry="monocle" layer="-2"/>
-			<Part id="6" name="" atlasEntry="eyeunderline-left" layer="-2"/>
-			<Part id="7" name="" atlasEntry="eye-left" layer="-2"/>
-			<Part id="8" name="" atlasEntry="eye-right" layer="-2"/>
-			<Part id="9" name="" atlasEntry="eyebrow" layer="-2"/>
-		</Part>
-	</Part>
+    <Part id="0" name="torso" atlasEntry="torso">
+        <Part id="1" name="tortilla" atlasEntry="tortilla" layer="-1">
+            <Part id="2" name="mustache" atlasEntry="mustache" layer="-2" />
+            <Part id="3" name="hat" atlasEntry="hat" layer="-2" />
+            <Part id="4" name="nose" atlasEntry="nose" layer="-2" />
+            <Part id="5" name="monocle" atlasEntry="monocle" layer="-2" />
+            <Part id="6" name="" atlasEntry="eyeunderline-left" layer="-2" />
+            <Part id="7" name="" atlasEntry="eye-left" layer="-2" />
+            <Part id="8" name="" atlasEntry="eye-right" layer="-2" />
+            <Part id="9" name="" atlasEntry="eyebrow" layer="-2" />
+        </Part>
+    </Part>
+    <Part id="10" name="logo" atlasEntry="logo" layer="10" />
 </Parts>
-
-<AnimationLayers>
-    <AnimationLayer name="head" ids="1 2 3 4 5 6 7 8 9 "/>
-    <AnimationLayer name="body" idx="0 "/>
-</AnimationLayers>
-
 <Animations>
-	<Animation name="idle">
-		<PartKeyFrames id="0">
-			<KeyFrame time="0" position="-50 0"/>
-			<KeyFrame time="0.5" position="50 0"/>
-			<KeyFrame time="1" position="-50 0"/>
-		</PartKeyFrames>
-		<PartKeyFrames id="1">
-			<KeyFrame time="0" position="0 -138" rotation="-10"/>
-			<KeyFrame time="0.5" position="0 -138" rotation="10"/>
-			<KeyFrame time="1.0" position="0 -138" rotation="-10"/>
-		</PartKeyFrames>
-		<PartKeyFrames id="2">
-			<KeyFrame time="0.0" position="0 52" rotation="-10"/>
-			<KeyFrame time="0.25" position="0 52" rotation="10"/>
-			<KeyFrame time="0.5" position="0 52" rotation="-10"/>
-			<KeyFrame time="0.75" position="0 52" rotation="10"/>
-			<KeyFrame time="1.0" position="0 52" rotation="-10"/>
-		</PartKeyFrames>
-		<PartKeyFrames id="3">
-			<KeyFrame time="0" position="-10 -95"/>
-		</PartKeyFrames>
-		<PartKeyFrames id="4">
-			<KeyFrame time="0" position="0 5"/>
-		</PartKeyFrames>
-		<PartKeyFrames id="5">
-			<KeyFrame time="0" position="20 -28"/>
-		</PartKeyFrames>
-		<PartKeyFrames id="6">
-			<KeyFrame time="0" position="-35 4"/>
-		</PartKeyFrames>
-		<PartKeyFrames id="7">
-			<KeyFrame time="0" position="-30 -11"/>
-		</PartKeyFrames>
-		<PartKeyFrames id="8">
-			<KeyFrame time="0" position="11 -22"/>
-		</PartKeyFrames>
-		<PartKeyFrames id="9">
-			<KeyFrame time="0" position="-29 -26"/>
-		</PartKeyFrames>
-	</Animation>
+    <Animation name="idle">
+        <PartKeyFrames id="2">
+            <KeyFrame position="0 52" rotation="-10" time="0" />
+            <KeyFrame position="0 52" rotation="10" time="0.25" />
+            <KeyFrame position="0 52" rotation="-10" time="0.5" />
+            <KeyFrame position="0 52" rotation="10" time="0.75" />
+            <KeyFrame position="0 52" rotation="-10" time="1" />
+        </PartKeyFrames>
+        <PartKeyFrames id="3">
+            <KeyFrame position="-10 -95" time="0" />
+        </PartKeyFrames>
+        <PartKeyFrames id="4">
+            <KeyFrame position="0 5" time="0" />
+        </PartKeyFrames>
+        <PartKeyFrames id="5">
+            <KeyFrame position="20 -28" time="0" />
+        </PartKeyFrames>
+        <PartKeyFrames id="6">
+            <KeyFrame position="-35 4" time="0" />
+        </PartKeyFrames>
+        <PartKeyFrames id="7">
+            <KeyFrame position="-30 -11" time="0" />
+        </PartKeyFrames>
+        <PartKeyFrames id="8">
+            <KeyFrame position="11 -22" time="0" />
+        </PartKeyFrames>
+        <PartKeyFrames id="9">
+            <KeyFrame position="-29 -26" time="0" />
+        </PartKeyFrames>
+        <PartKeyFrames id="1">
+            <KeyFrame position="0 -138" rotation="-10" time="0" />
+            <KeyFrame position="0 -138" rotation="10" time="0.5" />
+            <KeyFrame position="0 -138" rotation="-10" time="1" />
+        </PartKeyFrames>
+        <PartKeyFrames id="0">
+            <KeyFrame position="-50 0" time="0" />
+            <KeyFrame position="50 0" time="0.5" />
+            <KeyFrame position="-50 0" time="1" />
+        </PartKeyFrames>
+        <PartKeyFrames id="10">
+            <KeyFrame position="0 -325" scale="1.3 1.3" time="0" />
+        </PartKeyFrames>
+    </Animation>
 </Animations>

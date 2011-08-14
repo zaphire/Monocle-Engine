@@ -83,15 +83,8 @@ namespace Monocle
 	/// PUPPET EDITOR
 	PuppetEditor::PuppetEditor() : Editor()
 	{
-	}
+		puppetEntity = new PuppetEntity();
 
-	void PuppetEditor::Load(const std::string &filename)
-	{
-		puppetEntity->Load(filename);
-	}
-
-	void PuppetEditor::Added()
-	{
 		keyTogglePause = KEY_TAB;
 
 		keyMoveLeft = KEY_A;
@@ -110,21 +103,23 @@ namespace Monocle
 		keyOffset = KEY_LALT;
 
 		keyZero = KEY_0;
+	}
 
-		Graphics::Set2D(800, 600);
+	void PuppetEditor::Load(const std::string &filename)
+	{
+		puppetEntity->Load(filename);
+	}
+
+	void PuppetEditor::Added()
+	{
+		//Graphics::Set2D(800, 600);
 		//Graphics::SetBackgroundColor(Color::white);
-        Game::GetScene()->GetCamera()->position = Graphics::GetScreenCenter();
+        //Game::GetScene()->GetCamera()->position = Graphics::GetScreenCenter();
 
-		puppetEntity = new PuppetEntity();
 		puppetEntity->position = Graphics::GetScreenCenter() + Vector2::down * 100;
 		puppetEntity->scale = Vector2::one * 0.75f;
+		//Load("puppet.xml");
 		scene->Add(puppetEntity);
-
-		Entity *entity = new Entity();
-		entity->SetLayer(5);
-		entity->SetGraphic(new Sprite("graphics/logo.png"));
-		entity->position = Graphics::GetScreenCenter() + Vector2::up * 138;
-		scene->Add(entity);
 
 		timeline = new Timeline();
 		scene->Add(timeline);

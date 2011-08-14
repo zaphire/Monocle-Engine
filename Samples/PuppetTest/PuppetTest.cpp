@@ -11,6 +11,7 @@ namespace PuppetTest
 		Graphics::SetBackgroundColor(Color::white);
 
 		Add(puppetEditor = new PuppetEditor());
+		puppetEditor->Load("puppet.xml");
 	}
 
 	void TestScene::Update()
