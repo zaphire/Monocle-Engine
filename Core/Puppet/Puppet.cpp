@@ -452,7 +452,7 @@ namespace Monocle
 	}
 
 	Puppet::Puppet()
-		: isPlaying(false), isPaused(false), textureAtlas(NULL)
+		: isPlaying(false), isPaused(false), textureAtlas(NULL), currentAnimation(NULL)
 	{
 	}
 	
