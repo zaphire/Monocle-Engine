@@ -12,4 +12,4 @@
 --add-brackets
 --align-pointer=name
 --align-reference=name
-
+--suffix=none
