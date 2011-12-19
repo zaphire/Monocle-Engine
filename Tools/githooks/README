@@ -1,0 +1,1 @@
+These scripts are intended to go in your %MONOCLE_DIR%/.git/hooks directory.  They are automatically run at certain times during your interaction with this git repository.
