@@ -1,0 +1,15 @@
+--style=allman
+--indent=tab
+--indent-namespaces
+--indent-preprocessor
+--indent-col1-comments
+--min-conditional-indent=0
+--break-blocks
+--pad-oper
+--pad-paren-in
+--pad-header
+--unpad-paren
+--add-brackets
+--align-pointer=name
+--align-reference=name
+
