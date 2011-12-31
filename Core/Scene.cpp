@@ -2,15 +2,13 @@
 #include "Entity.h"
 #include "Graphics.h"
 #include "MonocleToolkit.h"
+#include "Platform.h"
 
 namespace Monocle
 {
-	Scene *Scene::instance = NULL;
-
 	Scene::Scene()
 		: isVisible(true), isPaused(false), activeCamera(NULL), mainCamera(NULL)
 	{
-		instance = this;
 		Camera *camera = new Camera();
 		camera->position = Graphics::GetScreenCenter();
 		AddCamera(camera);
@@ -26,7 +24,6 @@ namespace Monocle
 
 	void Scene::Begin()
 	{
-
 	}
 
 	void Scene::End()
@@ -63,6 +60,8 @@ namespace Monocle
 
 	void Scene::Render()
 	{
+        long entitiesDrawn = 0;
+        
 		if (isVisible)
 		{
 			//Render all the entities
@@ -70,12 +69,18 @@ namespace Monocle
 
 			//printf("\n\n****\n");
 
+
 			for (std::list<Camera*>::iterator camera = cameras.begin(); camera != cameras.end(); ++camera)
 			{
 				activeCamera = *camera;
 
+				Graphics::Viewport(activeCamera->viewport.x * Platform::GetWidth(), activeCamera->viewport.y * Platform::GetHeight(), Platform::GetWidth() * activeCamera->viewport.width, Platform::GetHeight() * activeCamera->viewport.height);
+				//Graphics::Viewport(viewport.x * Platform::GetWidth(), viewport.y * Platform::GetHeight(), Platform::GetWidth() * viewport.width, Platform::GetHeight() * viewport.height);
+
 				if (activeCamera->isVisible)
 				{
+					// set viewport
+
 					activeCamera->ApplyMatrix();
 
 					///HACK: optimize later so we don't run through all the layers
@@ -87,7 +92,10 @@ namespace Monocle
 						{
 							if ((*i)->isVisible && (*i)->IsLayer(layer))
 							{
-								(*i)->Render();
+//                                if ((*i)->IsOnCamera(activeCamera)){
+                                    (*i)->Render();
+                                    entitiesDrawn++;
+//                                }
 							}
 						}
 					}
@@ -96,6 +104,8 @@ namespace Monocle
 
 			activeCamera = NULL;
 		}
+        
+        Monocle::entitiesDrawn = entitiesDrawn;
 	}
 
 	void Scene::Add(Entity* entity)
@@ -220,33 +230,33 @@ namespace Monocle
 
 	void Scene::AddCamera(Camera *camera)
 	{
-		instance->cameras.push_back(camera);
+		cameras.push_back(camera);
 	}
 
 	Camera *Scene::GetCamera(int cameraIndex)
 	{
 		int c = 0;
-		for (std::list<Camera*>::iterator i = instance->cameras.begin(); i != instance->cameras.end(); i++)
+		for (std::list<Camera*>::iterator i = cameras.begin(); i != cameras.end(); i++)
 		{
-			if (c == cameraIndex)
+			if (c++ == cameraIndex)
 				return *i;
 		}
 		return NULL;
 	}
 
-	//Camera *Scene::GetActiveCamera()
-	//{
-	//	return instance->activeCamera;
-	//}
+	Camera *Scene::GetActiveCamera()
+	{
+		return activeCamera;
+	}
 
 	Camera *Scene::GetMainCamera()
 	{
-		return instance->mainCamera;
+		return mainCamera;
 	}
 	
 	void Scene::SetMainCamera(Camera *camera)
 	{
-		instance->mainCamera = camera;
+		mainCamera = camera;
 	}
 
 	void Scene::DestroyAllCameras()
@@ -293,20 +303,6 @@ namespace Monocle
 		return NULL;
 	}
 
-	/*
-	Entity* Scene::GetEntity(int index)
-	{
-		int c = 0;
-		for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
-		{
-			if (c == index)
-				return *i;
-			c++;
-		}
-		return NULL;
-	}
-	*/
-
 	Entity* Scene::GetNearestEntity(const Vector2 &position, Entity *ignoreEntity)
 	{
 		float smallestSqrMag = -1.0f;
@@ -319,7 +315,7 @@ namespace Monocle
 			{
 				Vector2 diff = (*i)->position - position;
 				float sqrMag = diff.GetSquaredMagnitude();
-				if (smallestSqrMag == -1 || sqrMag < smallestSqrMag)
+				if (smallestSqrMag <= -1 || sqrMag < smallestSqrMag)
 				{
 					nearestEntity = (*i);
 				}
@@ -329,32 +325,24 @@ namespace Monocle
 		return nearestEntity;
 	}
 
-	/*
-	Entity* Scene::GetNearestEntityContaining(const Vector2 &position, Entity *ignoreEntity)
+	Entity* Scene::GetNearestEntityWithTag(const Vector2 &position, const std::string &tag)
 	{
 		float smallestSqrMag = -1.0f;
 
 		Entity *nearestEntity = NULL;
 
-		for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+		for (std::list<Entity*>::iterator i = tagMap[tag].begin(); i != tagMap[tag].end(); ++i)
 		{
-			if ((*i) != ignoreEntity)
+			Vector2 diff = (*i)->position - position;
+			float sqrMag = diff.GetSquaredMagnitude();
+			if (smallestSqrMag <= -1 || sqrMag < smallestSqrMag)
 			{
-				if ((*i)->IsPositionInGraphic(position))
-				{
-					Vector2 diff = (*i)->position - position;
-					float sqrMag = diff.GetSquaredMagnitude();
-					if (smallestSqrMag == -1 || sqrMag < smallestSqrMag)
-					{
-						nearestEntity = (*i);
-					}
-				}
+				nearestEntity = (*i);
 			}
 		}
 
 		return nearestEntity;
 	}
-	*/
 
 	Entity* Scene::GetNearestEntityByControlPoint(const Vector2 &position, const std::string &tag, Entity *ignoreEntity)
 	{
@@ -428,20 +416,6 @@ namespace Monocle
 		return &entities;
 	}
 
-	void Scene::ReceiveNote(const std::string &note)
-	{
-	}
-
-	void Scene::RelayNoteTo(const std::string &tag, const std::string &note)
-	{
-		std::list<Entity*>* taggedEntities = GetAllTag(tag);
-		for (std::list<Entity*>::iterator i = (*taggedEntities).begin(); i != (*taggedEntities).end(); ++i)
-		{
-			//if ((*i) != fromEntity)
-			(*i)->ReceiveNote(tag, note);//, fromEntity);
-		}
-	}
-
 	Entity* Scene::GetEntityAtPosition(const Vector2 &position)
 	{
 		for (std::list<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
@@ -470,6 +444,8 @@ namespace Monocle
 		return NULL;
 	}
 
+
+
 	/*
 	Entity *Scene::GetFirstEntity()
 	{
@@ -483,16 +459,6 @@ namespace Monocle
 		if (entityIterator != entities.end())
 			return *entityIterator;
 		return NULL;
-	}
-	*/
-
-	/*
-	void Scene::SendNoteToGame(const std::string &note)
-	{
-		if (game)
-		{
-			game->ReceiveNote(note);
-		}
 	}
 	*/
 }

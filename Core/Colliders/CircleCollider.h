@@ -18,5 +18,6 @@ namespace Monocle
 		float GetCenterX(bool relativeToEntity = false);
 		float GetCenterY(bool relativeToEntity = false);
 		Vector2 GetCenter(bool relativeToEntity = false);
+		float GetRadius();
 	};
 }

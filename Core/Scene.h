@@ -54,12 +54,15 @@ namespace Monocle
 
 		//! create a new entity of type T and add it to the scene
 		template<class T>
-		T* Create(Entity *parent=NULL)
+		T* Create(Entity *parent=NULL, const Vector2 &position=Vector2::zero, float rotation=0.0f, const Vector2 &scale=Vector2::one)
 		{
 			T *t = new T();
 			Add(t);
 			if (parent)
 				t->SetParent(parent);
+			t->position = position;
+			t->rotation = rotation;
+			t->scale = scale;
 			return t;
 		}
 
@@ -86,6 +89,7 @@ namespace Monocle
 		//Entity *GetNextEntity();
 
 		Entity* GetNearestEntity(const Vector2 &position, Entity *ignoreEntity=NULL);
+		Entity* GetNearestEntityWithTag(const Vector2 &position, const std::string &tag);
 		//Entity* GetNearestEntityContaining(const Vector2 &position, Entity *ignoreEntity=NULL);
 		Entity* GetNearestEntityByControlPoint(const Vector2 &position, const std::string &tag, Entity *ignoreEntity=NULL);
 
@@ -96,14 +100,15 @@ namespace Monocle
 		const std::list<Entity*>* GetEntities();
 
 		//! Add a new camera
-		static void AddCamera(Camera *camera);
+		void AddCamera(Camera *camera);
 		//! Get camera by index number
-		static Camera *GetCamera(int cameraIndex=0);
+		Camera *GetCamera(int cameraIndex=0);
 		//! Return the camera that is currently being used to render, or NULL
 		//static Camera *GetActiveCamera();
 
-		static Camera *GetMainCamera();
-		static void SetMainCamera(Camera *camera);
+		Camera *GetMainCamera();
+		Camera *GetActiveCamera();
+		void SetMainCamera(Camera *camera);
 
 		///TODO: replace TiXml with wrapper
 		virtual Entity *CreateEntity(const std::string &entityTypeName);
@@ -113,12 +118,10 @@ namespace Monocle
 		virtual void LoadLevel(FileNode *fileNode);
 
 	protected:
-		// not sure if we need to pass scene or not yet
-		// or if we'll use this later
-		//void SendNoteToGame(const std::string &note);
-
-		friend class Entity;
-		virtual void ReceiveNote(const std::string &note);
+		// scene has a game pointer
+		// so that it can request scene switches
+		friend class Game;
+		Game *game;
 
 		friend class Level;
 		//Resolves all entities to be added or removed
@@ -126,15 +129,6 @@ namespace Monocle
 
 
 	private:
-		static Scene *instance;
-
-		friend class Game;
-		
-		// scene has a game pointer
-		// so that it can request scene switches
-		Game *game;
-
-		void RelayNoteTo(const std::string &tag, const std::string &note);
 
 		//Holds all the entities currently in the scene
 		std::list<Entity*> entities;

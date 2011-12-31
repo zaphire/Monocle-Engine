@@ -1,4 +1,5 @@
 #include "Color.h"
+#include <sstream>
 
 namespace Monocle
 {
@@ -28,6 +29,22 @@ namespace Monocle
 		: r(r), g(g), b(b), a(a)
 	{
 
+	}
+
+	Color::Color(const std::string &hexString)
+	{
+		std::istringstream is(hexString);
+
+		unsigned int hexcolor;
+		is >> std::hex >> hexcolor;
+
+		r = ( hexcolor >> 16 ) & 0xFF;
+		g = ( hexcolor >> 8 ) & 0xFF;
+		b = hexcolor & 0xFF;
+		r /= 255.0f;
+		g /= 255.0f;
+		b /= 255.0f;
+		a = 1.0f;
 	}
 	
 	bool Color::operator==(const Color& rhs)

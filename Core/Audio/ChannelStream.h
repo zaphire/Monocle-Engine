@@ -1,8 +1,5 @@
 #pragma once
 
-#define BUFFER_SIZE (1024 * 64)
-#define NUM_BUFFERS 2
-
 #include <string>
 
 namespace Monocle
@@ -145,7 +142,7 @@ namespace Monocle
          */
         bool IsPlaying();
         
-        void Check( std::string erat = "unk" );                 // checks OpenAL error state
+        static void Check( std::string erat = "unk" );                 // checks OpenAL error state
         
         /**
             Init() opens the sound drivers for the entire audio platform and is called once.
@@ -153,10 +150,17 @@ namespace Monocle
         static int Init();
         static void Exit();
         
+        // Particularly needed for iOS
+        static void InterruptBegin();
+        static void InterruptEnd();
+        
         /**
             @return true if the ChannelStream successfully opened and is presently open
          */
         bool IsOpen();
+        
+        unsigned int GetNumberBuffers();
+        unsigned long GetBufferSize();
         
     protected:
         
@@ -171,7 +175,7 @@ namespace Monocle
         
         // This OpenAL implementation stuff needs to be moved
         
-        unsigned int buffers[NUM_BUFFERS]; // buffers
+        unsigned int *buffers; // buffers
         unsigned int source;     // audio source
         int format;     // format
         unsigned int active_buffer; // active buffer (0 or 1)
@@ -182,6 +186,8 @@ namespace Monocle
         
         unsigned int startBuffer;
         
-        unsigned char obtainedBuffer[BUFFER_SIZE];
+        unsigned char *obtainedBuffer;
+        
+        float lastVol;
     };
 }

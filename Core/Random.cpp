@@ -14,9 +14,14 @@ namespace Monocle
 		srand(seed);
 	}
 	
-	int Random::Range(int start, int end)
+	int Random::Int(int start, int end)
 	{
 		return start + (rand() % (end-start));
+	}
+
+	float Random::Float(float start, float end)
+	{
+		return ((((float) rand()) / (float) RAND_MAX) * (end-start)) + start;
 	}
 
 	float Random::Percent()
@@ -24,8 +29,5 @@ namespace Monocle
 		return ((float) rand()) / (float) RAND_MAX;
 	}
 
-	float Random::RangeFloat(float start, float end)
-	{
-		return ((((float) rand()) / (float) RAND_MAX) * (end-start)) + start;
-	}
+
 }

@@ -26,13 +26,35 @@ namespace Monocle
 		}
 	}
 
+	///=====
+
+	EntityTagData::EntityTagData()
+	{
+		save = false;
+	}
+
+	EntityTagData::EntityTagData(const std::string &name, bool save)
+		: name(name), save(save)
+	{
+	}
+
+	EntityTagData::EntityTagData(const EntityTagData &entityTagData)
+		: name(entityTagData.name), save(entityTagData.save)
+	{
+	}
+
+	///=====
+
 	Entity::Entity(const Entity &entity)
 		: Transform(entity), isEnabled(true), followCamera(entity.followCamera), scene(NULL), collider(NULL), graphic(NULL), parent(NULL), depth(entity.depth), isVisible(entity.isVisible), color(entity.color), layer(entity.layer)//, tags(entity.tags)
 	{
-		std::vector<std::string> copyTags = entity.tags;
-		for (std::vector<std::string>::iterator i = copyTags.begin(); i != copyTags.end(); ++i)
+        lastPositionWhenCached = Vector2(-666.6666,-666.6666);
+        cachedWorldPosition = Vector2::zero;
+        
+		EntityTags copyTags = entity.tags;
+		for (EntityTags::iterator i = copyTags.begin(); i != copyTags.end(); ++i)
 		{
-			AddTag(*i);
+			AddTag((*i).name, (*i).save);
 		}
 	}
 
@@ -40,6 +62,8 @@ namespace Monocle
 		: Transform(), isEnabled(true), scene(NULL), collider(NULL), graphic(NULL), parent(NULL), layer(0), depth(0.0f), color(Color::white), isVisible(true)
 		//, willDie(false)
 	{
+        lastPositionWhenCached = Vector2(-666.6666,-666.6666);
+        cachedWorldPosition = Vector2::zero;
 	}
 
 	Entity::~Entity()
@@ -114,6 +138,11 @@ namespace Monocle
 			}
 		}
 
+		if (graphic)
+		{
+			graphic->Update();
+		}
+
 		for (std::list<InvokeData*>::iterator i = removeInvokes.begin(); i != removeInvokes.end(); ++i)
 		{
 			delete *i;
@@ -144,15 +173,22 @@ namespace Monocle
 
 	void Entity::ApplyMatrix()
 	{
-		//if (followCamera == Vector2::zero || (Debug::render && Debug::selectedEntity != this && IsDebugLayer()))
-		Graphics::Translate(position.x, position.y, depth);
-		//else
-			//Graphics::Translate(camera->position * followCamera + position * (Vector2::one - followCamera));
+		if (followCamera == Vector2::zero || (Debug::render && Debug::selectedEntity != this && IsDebugLayer()))
+			Graphics::Translate(position.x, position.y, depth);
+		else
+		{
+			Camera *camera = scene->GetActiveCamera();
+			if (!camera)
+				camera = scene->GetMainCamera();
+			if (camera != NULL)
+				Graphics::Translate(camera->position * followCamera + position * (Vector2::one - followCamera));
+		}
         
 		if (rotation != 0.0f)
 			Graphics::Rotate(rotation, 0, 0, 1);
         
-		Graphics::Scale(scale);
+        if (scale != Vector2::one)
+            Graphics::Scale(scale);
 	}
 
 	void Entity::Render()
@@ -180,25 +216,29 @@ namespace Monocle
 			Graphics::PushMatrix();
 
 			MatrixChain();
-			
-			/*
-			if (followCamera == Vector2::zero || Debug::render)
-				Graphics::Translate(position.x, position.y, depth);
-			else
-				Graphics::Translate(scene->GetCamera()->position * followCamera + position * (Vector2::one - followCamera));
-			*/
+
+			Graphics::PopMatrix();
             
 			if (Debug::selectedEntity == this)
+			{
 				Graphics::SetColor(Color::orange);
+			}
 			else
+			{
 				Graphics::SetColor(Color(0.9f,0.9f,1.0f,0.8f));
+			}
             
-			Graphics::RenderLineRect(offset.x, offset.y, ENTITY_CONTROLPOINT_SIZE, ENTITY_CONTROLPOINT_SIZE);
+			// use world position, so we don't have to render with the matrix scale on
+			Vector2 worldPosition = GetWorldPosition();
+
+			//draw the control point
+			Graphics::RenderLineRect(worldPosition.x, worldPosition.y, ENTITY_CONTROLPOINT_SIZE, ENTITY_CONTROLPOINT_SIZE);
             
 			if (Debug::selectedEntity != this)
 				Graphics::SetColor(Color(0.0f,0.0f,0.25f,0.8f));
             
-			Graphics::RenderLineRect(offset.x, offset.y, ENTITY_CONTROLPOINT_SIZE * 0.75f, ENTITY_CONTROLPOINT_SIZE * 0.75f);
+			// draw the control point center
+			Graphics::RenderLineRect(worldPosition.x, worldPosition.y, ENTITY_CONTROLPOINT_SIZE * 0.75f, ENTITY_CONTROLPOINT_SIZE * 0.75f);
             
 			Graphics::PopMatrix();
 		}
@@ -211,10 +251,10 @@ namespace Monocle
 		if (index >= tags.size())
 			Debug::Log("ERROR: Tag index out of bounds.");
 #endif
-		return tags[index];
+		return tags[index].name;
 	}
 
-	void Entity::AddTag(const std::string& tag)
+	void Entity::AddTag(const std::string& tag, bool save)
 	{
 #ifdef DEBUG
 		//Error: If the entity already has that tag
@@ -223,7 +263,7 @@ namespace Monocle
 #endif
 		if (!HasTag(tag))
 		{
-			tags.push_back(tag);
+			tags.push_back(EntityTagData(tag, save));
 			if (scene != NULL)
 				scene->EntityAddTag(this, tag);
 		}
@@ -236,9 +276,9 @@ namespace Monocle
 		if (!HasTag(tag))
 			Debug::Log("ERROR: Removing tag from an entity that doesn't have that tag.");
 #endif
-		for (std::vector<std::string>::iterator i = tags.begin(); i != tags.end(); ++i)
+		for (EntityTags::iterator i = tags.begin(); i != tags.end(); ++i)
 		{
-			if ((*i).compare(tag) == 0)
+			if ((*i).name.compare(tag) == 0)
 			{
 				tags.erase(i);
 				break;
@@ -250,9 +290,9 @@ namespace Monocle
 
 	bool Entity::HasTag(const std::string& tag)
 	{
-		for (std::vector<std::string>::iterator i = tags.begin(); i != tags.end(); ++i)
+		for (EntityTags::iterator i = tags.begin(); i != tags.end(); ++i)
 		{
-			if ((*i).compare(tag) == 0)
+			if ((*i).name.compare(tag) == 0)
 				return true;
 		}
 
@@ -309,21 +349,28 @@ namespace Monocle
 	//	children.remove(entity);
 	//}
 
-	void Entity::SetCollider(Collider *collider)
+	void Entity::SetCollider(Collider *setCollider)
 	{
-		if (collider == NULL && this->collider != NULL)
+		if (setCollider == NULL && this->collider != NULL)
 		{
-			Collision::RemoveCollider(collider);
-			collider = NULL;
+			// if we want to set null, and we already have a collider
+			// remove the collider that we had
+			Collision::RemoveCollider(this->collider);
+			// set it to null
+			this->collider = NULL;
+			// note the code doesn't delete it
 		}
 		else if (this->collider != NULL)
 		{
+			// we could change this so that it auto-removes the existing collider instead
 			Debug::Log("Error: Entity already has a collider.");
 		}
 		else
 		{
-			this->collider = collider;
-			Collision::RegisterColliderWithEntity(collider, this);
+			// set our collider pointer to the passed in collider
+			this->collider = setCollider;
+			// register the collider with the Collision manager
+			Collision::RegisterColliderWithEntity(setCollider, this);
 		}
 	}
 
@@ -346,6 +393,12 @@ namespace Monocle
 		return collider;
 	}
 
+	Collider* Entity::CollideWith(Collider *pCollider, const std::string &tag, CollisionData *collisionData)
+	{
+		Collider *collider = Collision::Collide(pCollider, tag, collisionData);
+		return collider;
+	}
+
 	/*
 	RectangleCollider* Entity::AddRectangleCollider(float width, float height, const Vector2 &offset)
 	{
@@ -353,37 +406,8 @@ namespace Monocle
 	}
 	*/
 
-	void Entity::SendNoteToScene(const std::string &note)
-	{
-		if (scene)
-		{
-			scene->ReceiveNote(note);
-		}
-	}
-
-	void Entity::SendNote(const std::string &tag, const std::string &note)
-	{
-		if (scene)
-		{
-			scene->RelayNoteTo(tag, note);
-		}
-	}
-
-	void Entity::ReceiveNote(const std::string &tag, const std::string &note)
-	{
-
-	}
-
 	void Entity::SetGraphic(Graphic *graphic)
 	{
-		// not sure yet
-		/*
-		if (graphic == NULL && this->graphic)
-		{
-			delete this->graphic;
-		}
-		*/
-		
 		// not sure if we want this yet, sets our graphic's entity pointer to NULL
 		// if we're about to set the graphic pointer to NULL
 		if (graphic == NULL && this->graphic != NULL)
@@ -393,26 +417,60 @@ namespace Monocle
 
 		if (this->graphic != NULL)
 		{
-			Debug::Log("Error: Entity already has a graphic.");
+			Debug::Log("Note: Entity already has a graphic.");
 		}
-		else
-		{
-			this->graphic = graphic;
-			//graphic->entity = this;
-		}
+
+		this->graphic = graphic;
 	}
 
 	Graphic* Entity::GetGraphic()
 	{
 		return graphic;
 	}
+    
+    bool Entity::IsOnCamera( Camera *camera )
+    {
+        Graphic* graphic = GetGraphic();
+		if (graphic != NULL)
+		{
+			float biggersize, h, w;
+            
+            graphic->GetWidthHeight(&w, &h);
+            
+            // We use the greatest possible rectangle in case of rotations
+            biggersize = MAX(w,h);
+            
+			Vector2 ul = position - (Vector2(biggersize,biggersize)*0.5f*scale);
+			Vector2 lr = position + (Vector2(biggersize,biggersize)*0.5f*scale);
+            
+            float vw = Graphics::GetVirtualWidth()*camera->scale.x;
+            float vh = Graphics::GetVirtualHeight()*camera->scale.x;
+            float cx = (camera->position.x);
+            float cy = (camera->position.y);
+            
+            // As long as any one of the corners could be on screen we draw
+            return !(
+                    // What it means to be off screen:
+                     (ul.x > cx+vw) || (lr.x < cx-vw) ||
+                     (ul.y > cy+vh) || (lr.y < cy-vh)
+                    );
+            
+//            printf("%.2f < %.2f && %.2f > %.2f && %.2f < %.2f && %.2f > %.2f\n",cx-vw,ul.x,cx+vw,lr.x,cy-vh,ul.y,cy+vh,lr.y);
+            
+//			return (cx-vw < ul.x && cx+vw > lr.x && cy-vh < ul.y && cy+vh > lr.y);
+            
+//            return (ul.x < cx+vw && ul.x > cx-vw && ul.y > cy-vh && ul.y < cy+vh) ||
+//                    (lr.x > cx-vw && lr.x < cx+vw && lr.y > cy-vh && lr.y < cy+vh);
+		}
+		return true;
+    }
 
 	bool Entity::IsPositionInGraphic(const Vector2 &point)
 	{
 		Graphic* graphic = GetGraphic();
 		if (graphic != NULL)
 		{
-			int width, height;
+			float width, height;
 			graphic->GetWidthHeight(&width, &height);
 			Vector2 ul = GetWorldPosition(Vector2( - width * 0.5f, - height * 0.5f));
 			Vector2 lr = GetWorldPosition(Vector2( + width * 0.5f, + height * 0.5f));
@@ -426,18 +484,24 @@ namespace Monocle
 	Vector2 Entity::GetWorldPosition(const Vector2 &position)
 	{
 		Vector2 returnPos;
+        
+        if (this->position == lastPositionWhenCached)
+            return this->cachedWorldPosition;
 
 		Graphics::PushMatrix();
 		Graphics::IdentityMatrix();
 
 		MatrixChain();
-
-		Graphics::Translate(position);
+        
+        Graphics::Translate(position);
 
 		returnPos = Graphics::GetMatrixPosition();
 
 		Graphics::PopMatrix();
 
+        this->cachedWorldPosition = returnPos;
+        this->lastPositionWhenCached = this->position;
+        
 		return returnPos;
 	}
 
@@ -520,11 +584,16 @@ namespace Monocle
 		if (tags.size() != 0)
 		{
 			std::ostringstream os;
-			for (std::vector<std::string>::iterator i = tags.begin(); i != tags.end(); ++i)
+			for (EntityTags::iterator i = tags.begin(); i != tags.end(); ++i)
 			{
-				os << (*i) << " ";
+				if ((*i).save)
+					os << (*i).name << " ";
 			}
-			fileNode->Write("tags", os.str());
+			std::string saveString = os.str();
+			if (!saveString.empty())
+			{
+				fileNode->Write("tags", os.str());
+			}
 		}
 		if (followCamera != Vector2::zero)
 			fileNode->Write("followCamera", followCamera);
@@ -546,8 +615,7 @@ namespace Monocle
 			std::istringstream is(tags);
 			while (is >> tag)
 			{
-				//printf("loading tag: %s\n", tag.c_str());
-				AddTag(tag);
+				AddTag(tag, true);
 			}
 		}
 		fileNode->Read("followCamera", followCamera);

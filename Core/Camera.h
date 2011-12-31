@@ -4,6 +4,17 @@
 
 namespace Monocle
 {
+	class Viewport
+	{
+	public:
+		Viewport();
+		Viewport(float x, float y, float width, float height);
+
+		void Set(float x, float y, float width, float height);
+
+		float x, y, width, height;
+	};
+
 	//! \brief Manages the details of a view through which items in a scene are rendered.
 	//! Cameras are the eyes of the engine, their position, rotation, and depth of vision determine what is rendered
 	//! onto the screen.
@@ -27,6 +38,8 @@ namespace Monocle
 
         //! Whether or not the camera is to be rendered
 		bool isVisible;
+
+		Viewport viewport;
 
 	private:
 		int backLayer, frontLayer;

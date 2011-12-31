@@ -18,6 +18,7 @@ namespace Monocle
 	{
 	public:
 		PuppetEntity();
+		void Load(const std::string &filename);
 		void Update();
 
 		Puppet puppet;
@@ -27,12 +28,11 @@ namespace Monocle
 	{
 	public:
 		PuppetEditor();
+		void Load(const std::string &filename);
 		void Enable();
 		void Disable();
 		void Update();
 		void Added();
-
-		PuppetEntity *puppetEntity;
 
 		KeyCode keyTogglePause;
 
@@ -54,6 +54,9 @@ namespace Monocle
 		KeyCode keyOffset;
 
 		Timeline *timeline;
+
+	private:
+		PuppetEntity *puppetEntity;
 	};
 
 }

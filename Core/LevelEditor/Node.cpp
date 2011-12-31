@@ -1,6 +1,9 @@
 #include "Node.h"
 #include "../Graphics.h"
 
+///HACK:
+#include "PathMesh.h"
+
 namespace Monocle
 {
 	/// NODE
@@ -43,31 +46,80 @@ namespace Monocle
 
 	void Node::TakeOut()
 	{
+		if (GetParent())
+		{
+			/// HACK:
+			PathMesh *pathMesh = dynamic_cast<PathMesh*>(GetParent());
+
+			if (this == pathMesh->GetStartNode())
+			{
+				if (prev)
+				{
+					pathMesh->SetStartNode(prev);
+				}
+				else if (next)
+				{
+					pathMesh->SetStartNode(next);
+				}
+				else
+				{
+					pathMesh->SetStartNode(NULL);
+				}
+			}
+		}
+
 		if (next)
+		{
 			next->prev = prev;
+		}
+		
 		if (prev)
+		{
 			prev->next = next;
+		}
+
+		prev = NULL;
+		next = NULL;
 	}
 
 	void Node::Render()
 	{
 		Entity::Render();
 
-		if (Debug::showBounds)
+		///HACK:
+		//if (Debug::showBounds)
+		if (true)
 		{
 			Graphics::BindTexture(NULL);
-			if (variant == -1)
+			
+			PathMesh *pathMesh = dynamic_cast<PathMesh*>(GetParent());
+			if (pathMesh)
 			{
-				Graphics::SetColor(Color::grey);
+				Color color = pathMesh->color;
+				color.a = 1;
+				if (variant == -1)
+				{
+					Graphics::SetColor(color * 0.5f);
+				}
+				else
+				{
+					Graphics::SetColor(pathMesh->color);
+				}
 			}
-			else
-			{
-				Graphics::SetColor(Color::blue);
-			}
-			Vector2 position = GetWorldPosition();
-			Graphics::RenderLineRect(position.x, position.y, 64, 64);
+
+
+			Vector2 pos = GetWorldPosition();
+			Graphics::RenderLineRect(pos.x, pos.y, 64, 64);
 			if (next)
-				Graphics::RenderLine(position, next->GetWorldPosition());
+			{
+				Vector2 nextPos = next->GetWorldPosition();
+				Vector2 diff = (nextPos - pos);
+				Vector2 halfPos = diff * 0.5f + pos;
+				Vector2 dir = diff.GetNormalized();
+				Graphics::RenderLine(pos, next->GetWorldPosition());
+				Graphics::RenderLine(halfPos, halfPos + dir.GetPerpendicularLeft() * 10.0f - dir * 10.0f);
+				Graphics::RenderLine(halfPos, halfPos + dir.GetPerpendicularRight() * 10.0f - dir * 10.0f);
+			}
 		}
 	}
 

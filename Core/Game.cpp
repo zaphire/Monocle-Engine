@@ -19,6 +19,7 @@ namespace Monocle
 		instance = this;
         frames_per_sec = 0.0;
 		Monocle::deltaTime	= 0.0f;
+        lastTick = firstTick = 0;
 
 		debug.Init();
 		platform.Init(name, w, h, bits, fullscreen);
@@ -43,106 +44,113 @@ namespace Monocle
 	//! 
 	void Game::Main()
 	{
-		long lastTick = Platform::GetMilliseconds();
-		long firstTick = Platform::GetMilliseconds();
-		long tick;
+		lastTick = Platform::GetMilliseconds();
+		firstTick = Platform::GetMilliseconds();
 
 		while (!isDone)
 		{
-			this->Update();
-
-			platform.Update();
-
-			while (!platform.IsActive())
-			{
-                if (!audio.IsPaused())
-                    audio.PauseAll();
-                
-                // Otherwise, if we're not supposed to care if it pauses, we'll call audio.Update();
-                
-				platform.Update();
-			}
-            
-            if (audio.IsPaused())
-                audio.ResumeAll();
-
-            audio.Update();
-			tween.Update();
-
-			// update timer
-			tick = Platform::GetMilliseconds();
-            
-            // Frames per second
-            frames_per_sec = (frames_per_sec * 0.9) + ((tick-lastTick) * 0.1);
-
-#if defined(FIXED_TIMESTEP)
-			int updates = 0;
-			while (updates < MAX_UPDATES_PER_RENDER && (tick - lastTick) >= MILLISECONDS_PER_FRAME)
-			{
-				Monocle::deltaTime = MILLISECONDS_PER_FRAME/1000.0;
-				Monocle::timeSinceStart += Monocle::deltaTime;
-				//printf("ms: %f\n", Monocle::deltaTime);
-
-				input.Update();	
-				//Update
-				if (scene != NULL)
-					scene->Update();
-				++updates;
-				lastTick += MILLISECONDS_PER_FRAME;
-			}
-
-			//Auto catch-up if it is really slowing down
-			if (updates == MAX_UPDATES_PER_RENDER)
-				lastTick = tick;
-
-			//Render
-			graphics.BeginFrame();
-			if (scene != NULL)
-				scene->Render();
-			graphics.EndFrame();
-			graphics.ShowBuffer();
-#else
-			Monocle::deltaTime = MIN(((double)(tick - lastTick))/1000.0, MAX_DELTA_TIME);
-			Monocle::timeSinceStart += Monocle::deltaTime;
-			//printf("ms: %f\n", Monocle::deltaTime);
-
-			//Update
-			input.Update();
-			if (scene != NULL)
-				scene->Update();
-
-			//Render
-			graphics.BeginFrame();
-			if (scene != NULL)
-				scene->Render();
-			graphics.EndFrame();
-			graphics.ShowBuffer();
-
-			lastTick = tick;
-#endif
-
-			//Switch scenes if necessary
-			if (switchTo != NULL)
-			{
-				if (scene != NULL)
-				{
-					scene->End();
-					scene->game = NULL;
-					// delete scene?
-				}
-
-				scene = switchTo;
-
-				switchTo = NULL;
-
-				if (scene != NULL)
-				{
-					scene->game = this;
-					scene->Begin();
-				}
-			}
+			OneLoop();
 		}
 	}
+    
+    void Game::OneLoop()
+    {
+        long tick;
+        
+        Update();
+        
+        platform.Update();
+        
+        while (!platform.IsActive())
+        {
+            if (!audio.IsPaused())
+                audio.PauseAll();
+            
+            // Otherwise, if we're not supposed to care if it pauses, we'll call audio.Update();
+            
+            platform.Update();
+        }
+        
+        if (audio.IsPaused())
+            audio.ResumeAll();
+        
+        audio.Update();
+        tween.Update();
+        
+        // update timer
+        tick = Platform::GetMilliseconds();
+        
+        // Frames per second
+        frames_per_sec = (frames_per_sec * 0.9) + ((tick-lastTick) * 0.1);
+        
+#if defined(FIXED_TIMESTEP)
+        int updates = 0;
+        while (updates < MAX_UPDATES_PER_RENDER && (tick - lastTick) >= MILLISECONDS_PER_FRAME)
+        {
+            Monocle::deltaTime = MILLISECONDS_PER_FRAME/1000.0;
+            Monocle::timeSinceStart += Monocle::deltaTime;
+            //printf("ms: %f\n", Monocle::deltaTime);
+            
+            input.Update();	
+            //Update
+            if (scene != NULL)
+                scene->Update();
+            ++updates;
+            lastTick += MILLISECONDS_PER_FRAME;
+        }
+        
+        //Auto catch-up if it is really slowing down
+        if (updates == MAX_UPDATES_PER_RENDER)
+            lastTick = tick;
+        
+        //Render
+        graphics.BeginFrame();
+        if (scene != NULL)
+            scene->Render();
+        graphics.EndFrame();
+        graphics.ShowBuffer();
+#else
+        Monocle::deltaTime = MIN(((double)(tick - lastTick))/1000.0, MAX_DELTA_TIME);
+        Monocle::timeSinceStart += Monocle::deltaTime;
+        Monocle::timeSinceSceneStart += Monocle::deltaTime;
+        //printf("ms: %f\n", Monocle::deltaTime);
+        
+        //Update
+        input.Update();
+        if (scene != NULL)
+            scene->Update();
+        
+        //Render
+        graphics.BeginFrame();
+        if (scene != NULL)
+            scene->Render();
+        graphics.EndFrame();
+        graphics.ShowBuffer();
+        
+        lastTick = tick;
+#endif
+        
+        //Switch scenes if necessary
+        if (switchTo != NULL)
+        {
+            if (scene != NULL)
+            {
+                scene->End();
+
+                // delete scene?
+            }
+            
+            scene = switchTo;
+            switchTo = NULL;
+            
+            if (scene != NULL)
+            {
+                scene->game = this;
+                scene->Begin();
+                timeSinceSceneStart = 0.0;
+            }
+        }
+    }
 
 	void Game::Update()
 	{
@@ -183,4 +191,14 @@ namespace Monocle
 		instance->editor = editor;
 	}
 	*/
+    
+    void Game::PlatformReset()
+    {
+        isDone = false;
+    }
+    
+    bool Game::IsDone()
+    {
+        return isDone;
+    }
 }

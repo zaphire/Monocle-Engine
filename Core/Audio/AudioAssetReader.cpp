@@ -201,4 +201,9 @@ namespace Monocle {
             return ftell(file);
         }
     }
+    
+    long AudioAssetReader::GetSize()
+    {
+        return dataSize;
+    }
 }

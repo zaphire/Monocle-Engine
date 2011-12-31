@@ -17,7 +17,7 @@ namespace Monocle
 
 			void Resize(int width, int height);
 
-			void GetWidthHeight(int *width, int *height);
+			void GetWidthHeight(float *width, float *height);
 
 			bool IsTile(int tx, int ty, int tileID);
 			int GetTile(int tx, int ty);
@@ -28,6 +28,7 @@ namespace Monocle
 
 			void WorldToTile(const Vector2 &position, int *tx, int *ty);
 
+			void Update();
 			void Render(Entity *entity);
 
 			void Clear(int tileID=-1);

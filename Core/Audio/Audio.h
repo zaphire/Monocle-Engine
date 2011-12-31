@@ -106,6 +106,17 @@ namespace Monocle
             Returns the static music AudioDeck.
          */
         static AudioDeck *GetMusicDeck();
+        
+        /**
+            For Interrupts in the system (iOS)
+         */
+        static void SystemHalt();
+        
+        /**
+            For Interrupts in the system (iOS)
+         */
+        static void SystemResume();
+        
     private:
         
         static Audio *instance;        

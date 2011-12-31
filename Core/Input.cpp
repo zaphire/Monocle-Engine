@@ -4,6 +4,7 @@
 #include "Graphics.h"
 #include "Camera.h"
 #include "Scene.h"
+#include "Game.h"
 
 namespace Monocle
 {
@@ -21,11 +22,16 @@ namespace Monocle
 
 	void Input::Init()
 	{
+		worldMouseCamera = NULL;
+
 		for (int i = 0; i < (int)KEY_MAX; i++)
 			previousKeys[i] = currentKeys[i] = false;
 
 		for (int i = 0; i < MOUSE_BUTTON_MAX; i++)
 			previousMouseButtons[i] = currentMouseButtons[i] = false;
+        
+        for (int i = 0; i < TOUCHES_MAX; i++)
+            Platform::touches[i].touched = 0;
 	}
 
 	void Input::Update()
@@ -83,6 +89,23 @@ namespace Monocle
                 (*it)->OnMouseMove(Platform::mousePosition);
 		}
 		lastMousePos = Platform::mousePosition;
+        
+        /** Push out the ending touches and move existing beginning touches to stationary (so they don't retrigger) **/
+        for (int i=0; i<TOUCHES_MAX; i++)
+        {
+            Touch *t = &Platform::touches[i];
+            if (t->phase == TOUCH_PHASE_ENDED && t->touched > 0){
+                t->phase = TOUCH_PHASE_NONE;
+                t->touched = 0;
+            }
+            
+            if (t->phase == TOUCH_PHASE_BEGIN && t->touched > 0){
+                t->phase = TOUCH_PHASE_STATIONARY;
+                t->touched = 0;
+            }
+            
+            t->touched++;
+        }
 	}
 
 	//Keys API
@@ -108,14 +131,37 @@ namespace Monocle
 		return Vector2((Platform::mousePosition.x / Platform::GetWidth()) * Graphics::GetVirtualWidth(), (Platform::mousePosition.y / Platform::GetHeight()) * Graphics::GetVirtualHeight());
 	}
 
-	Vector2 Input::GetWorldMousePosition()
+	Vector2 Input::GetWorldMousePosition(Camera *camera)
 	{
-		Camera *mainCamera = Scene::GetMainCamera();
+		if (!camera)
+		{
+			if (instance->worldMouseCamera)
+			{
+				camera = instance->worldMouseCamera;
+			}
+			else
+			{
+				camera = Game::GetScene()->GetMainCamera();
+			}
+		}
 		Vector2 resScale = Graphics::GetResolutionScale();
 		Vector2 invResScale = Vector2(1.0f/resScale.x, 1.0f/resScale.y);
-		Vector2 diff = (Platform::mousePosition*invResScale) - Graphics::GetScreenCenter();
-		Vector2 cameraZoom = mainCamera->scale;
-		return mainCamera->position + (diff * Vector2(1/cameraZoom.x, 1/cameraZoom.y));
+		Vector2 adjustedToCameraMousePosition = Platform::mousePosition;
+
+		adjustedToCameraMousePosition = adjustedToCameraMousePosition / Vector2(camera->viewport.width, camera->viewport.height);
+
+		Vector2 adjust = Vector2(-camera->viewport.x * Platform::GetWidth() * 2.0f, -(1.0 - (camera->viewport.height + camera->viewport.y)) * Platform::GetHeight() * 2.0f);
+		//printf("adjust (%f, %f)\n", adjust.x, adjust.y);
+		adjustedToCameraMousePosition += adjust;
+
+		Vector2 diff = (adjustedToCameraMousePosition * invResScale) - Graphics::GetScreenCenter();
+		Vector2 cameraZoom = camera->scale;
+		return camera->position + (diff * Vector2(1/cameraZoom.x, 1/cameraZoom.y));
+	}
+
+	void Input::SetWorldMouseCamera(Camera *camera)
+	{
+		instance->worldMouseCamera = camera;
 	}
 
 	int Input::GetMouseScroll()
@@ -218,4 +264,92 @@ namespace Monocle
 	{
 	    instance->handlers.remove(handler);
 	}
+    
+    Touch *Input::GetTouchWithStatus( TouchPhase phase, int index )
+    {
+        int numTouches = Platform::numTouches;
+        int sk=0;
+        
+        for (int i=0;i<numTouches&&i<TOUCHES_MAX;i++)
+        {
+            Touch *t = &Platform::touches[i];
+            if ((phase == TOUCH_PHASE_ANY && t->phase != TOUCH_PHASE_NONE) || t->phase == phase){
+                if (sk==index) return t;
+                sk++;
+            }
+        }
+        
+        return NULL;
+    }
+    
+    int Input::TouchCountWithPhase( TouchPhase phase )
+    {
+        int numTouches = Platform::numTouches;
+        int num=0;
+        
+        for (int i=0;i<numTouches&&i<TOUCHES_MAX;i++)
+        {
+            Touch *t = &Platform::touches[i];
+            if ((phase == TOUCH_PHASE_ANY && t->phase != TOUCH_PHASE_NONE) || t->phase == phase){
+                num++;
+            }
+        }
+        
+        return num;
+    }
+    
+    Touch *Input::IsTouchBeginning( int index )
+    {
+        return GetTouchWithStatus( TOUCH_PHASE_BEGIN, index );
+    }
+    
+    Touch *Input::IsTouchEnding( int index )
+    {
+        return GetTouchWithStatus( TOUCH_PHASE_ENDED, index );
+    }
+    
+    Touch *Input::IsTouchMoving( int index )
+    {
+        return GetTouchWithStatus( TOUCH_PHASE_MOVED, index );
+    }
+    
+    Touch *Input::IsTouchWithIndexInRect( Vector2 topLeft, Vector2 bottomRight, TouchPhase phase, int index )
+    {
+        Touch *t = GetTouchWithStatus( phase, index );
+        if (!t) return NULL;
+        
+        if (t->position.x >= topLeft.x &&
+            t->position.x <= bottomRight.x &&
+            t->position.y >= topLeft.y &&
+            t->position.y <= bottomRight.y)
+            return t;
+        
+        return NULL;
+    }
+    
+    Touch *Input::IsTouchInRect( Vector2 topLeft, Vector2 bottomRight, TouchPhase phase )
+    {
+        int numTouches = Platform::numTouches;
+        
+        for (int i=0;i<numTouches&&i<TOUCHES_MAX;i++)
+        {
+            Touch *t = &Platform::touches[i];
+            if ((phase == TOUCH_PHASE_ANY && t->phase != TOUCH_PHASE_NONE) || t->phase == phase){
+                if (t->position.x >= topLeft.x &&
+                    t->position.x <= bottomRight.x &&
+                    t->position.y >= topLeft.y &&
+                    t->position.y <= bottomRight.y){
+//                    printf("T: (%f,%f)\n",t->position.x,t->position.y);
+                    return t;
+                }
+            }
+        }
+        
+        return NULL;
+    }
+
+    int Input::TouchCount()
+    {
+        return Platform::numTouches;
+    }
 }

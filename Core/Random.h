@@ -7,9 +7,11 @@ namespace Monocle
 	public:
 		Random();
 		static void Seed(unsigned int seed);
-		static int Range(int start, int end);
+		//! not inclusive
+		static int Int(int start, int end);
+		static float Float(float start, float end);
 		static float Percent();
-		static float RangeFloat(float start, float end);
+		
 	private:
 		//static Random *instance;
 	};

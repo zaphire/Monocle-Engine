@@ -98,7 +98,7 @@ namespace Monocle
 	CocoaPlatform* CocoaPlatform::instance;
 	Platform*	   CocoaPlatform::platform;
     
-	bool CocoaPlatform::Init(const std::string &name, int w, int h, int bits, bool fullscreen)
+	void CocoaPlatform::Init(const std::string &name, int w, int h, int bits, bool fullscreen)
 	{
 		//  Init event loop
 		Cocoa_RegisterApp();
@@ -123,7 +123,6 @@ namespace Monocle
 		NSOpenGLContext* context = Cocoa_GL_CreateContext();
 		if (Cocoa_GL_MakeCurrent(window, context) < 0) {
 			Cocoa_GL_DeleteContext(context);
-			return false;
 		}
 
 		windowData = AttachWindowListener(window);
@@ -135,7 +134,14 @@ namespace Monocle
 		gettimeofday(&startTime, NULL);
 
         [pool release];
-        return true;
+		
+		if(fullscreen)
+		{	
+			//CGConfigureDisplayWithDisplayMode (kCGDirectMainDisplay, CGDisplayBestModeForParameters (kCGDirectMainDisplay, 32, xRes, yRes, NULL) );						
+			//[glView enterFullScreenMode:[NSScreen mainScreen] withOptions:[NSDictionary dictionaryWithObjectsAndKeys:
+			//															   nil]];
+			
+		}
 	}
 
 	Platform* Platform::instance;
@@ -143,6 +149,8 @@ namespace Monocle
 	bool Platform::mouseButtons[3];
 	Vector2 Platform::mousePosition;
 	int Platform::mouseScroll=0;
+    Touch Platform::touches[TOUCHES_MAX];
+    int Platform::numTouches=0;
 
 	Platform::Platform()
 	{
@@ -154,17 +162,18 @@ namespace Monocle
             KeyCode kc = (KeyCode) ic;
             localKeymap[kc] = kc;
         }
+        
+        orientation = PLATFORM_ORIENTATION_NOTSUPPORTED;
 	}
 
-	void Platform::Init()
-	{
-		Init("Monocle Powered", 1024, 768, 32, false);
-	}
+//	void Platform::Init()
+//	{
+//		Init("Monocle Powered", 1024, 768, 32, false);
+//	}
 
 	void Platform::Init(const std::string &name, int w, int h, int bits, bool fullscreen)
 	{
-		if (!CocoaPlatform::instance->Init(name, w, h, bits, fullscreen))
-			Debug::Log("Error initializing Monocle window/context");
+		CocoaPlatform::instance->Init(name, w, h, bits, fullscreen);
 
 		WindowData* data = CocoaPlatform::instance->windowData;
 		NSRect rect = [data->nswindow contentRectForFrameRect:[data->nswindow frame]];
@@ -244,7 +253,24 @@ namespace Monocle
 	}
 
     std::string Platform::GetDefaultContentPath() {
-//        return CocoaPlatform::instance->bundleResourcesPath;
-        return "../../Content/";
+        return CocoaPlatform::instance->bundleResourcesPath;
+//        return "../../Content/";
+    }
+    
+    PlatformOrientation Platform::GetOrientation()
+    {
+        return instance->orientation;
+    }
+    
+    void Platform::PlatformOrientationChanged( PlatformOrientation orientation )
+    {
+//        instance->orientation = orientation;
+    }
+    
+    void Platform::ErrorShutdown( std::string msg )
+    {
+        NSString *errorMessage = [NSString stringWithCString:msg.c_str() 
+                                                    encoding:[NSString defaultCStringEncoding]];
+        [NSException raise:errorMessage format:@"%s" , errorMessage];
     }
 }

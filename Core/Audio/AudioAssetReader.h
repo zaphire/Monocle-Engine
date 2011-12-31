@@ -26,6 +26,8 @@ namespace Monocle {
         void        Seek( size_t offset, int whence );
         size_t      Tell();                             // Gets the position we're at (dataRead)
         
+        long        GetSize();
+        
     private:
         
         // When Reading from Buffer

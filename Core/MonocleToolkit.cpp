@@ -11,12 +11,15 @@
 
 namespace Monocle
 {
-	double deltaTime		= 0.0;
-	double timeSinceStart		= 0.0;
+	double deltaTime					= 0.0;
+	double timeSinceStart			= 0.0;
+	double timeSinceSceneStart		= 0.0;
 
 	const float pi			= 3.14159265358979f;
 	const float rad2Deg		= 57.29578f;
 	const float deg2Rad		= 0.01745329f;
+    
+    long entitiesDrawn              = 0;
 
 	void OpenURL(const std::string &url)
 	{
@@ -159,4 +162,21 @@ namespace Monocle
 		FindClose(hList);
 #endif
 	}
+    
+    void PremultiplyAlpha( unsigned char *data, int w, int h )
+    {
+        int pixels = w*h;
+        unsigned char *ptr = data;
+        
+        for (int i=0;i<pixels;i++)
+        {
+            int a = ptr[3];
+            
+            ptr[0] *= (a/255.0);
+            ptr[1] *= (a/255.0);
+            ptr[2] *= (a/255.0);
+            
+            ptr += 4;
+        }
+    }
 }

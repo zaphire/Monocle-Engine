@@ -40,6 +40,7 @@ namespace Monocle
 		static void RegisterColliderWithEntity(Collider *collider, Entity *entity);
 		static void RemoveCollider(Collider *collider);
 		static Collider* Collide(Entity *entity, const std::string &tag, CollisionData *collisionData=NULL);
+		static Collider* Collide(Collider *collider, const std::string &tag, CollisionData *collisionData=NULL);
 
 	private:
 		static Collision *instance;

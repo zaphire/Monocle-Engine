@@ -15,7 +15,7 @@ namespace Monocle
 
 		~CocoaPlatform();
 
-		bool Init(const std::string &name, int w, int h, int bits, bool fullscreen);
+		void Init(const std::string &name, int w, int h, int bits, bool fullscreen);
 
 		NSWindow* window;
 		WindowData* windowData;

@@ -12,11 +12,11 @@ namespace Monocle
 	{
 	public:
 		FringeTileData()
-			: width(-1), height(-1), repeatX(false), repeatY(false)
+			: width(-1), height(-1), repeatX(false), repeatY(false), autoTile(false)
 		{}
 
-		FringeTileData(const std::string &imageFilename, int width=-1, int height=-1, FilterType filter=FILTER_LINEAR, bool repeatX=false, bool repeatY=false, int atlasX=0, int atlasY=0, int atlasW=0, int atlasH=0)
-			: imageFilename(imageFilename), repeatX(repeatX), repeatY(repeatY), filter(filter), width(width), height(height), atlasX(atlasX), atlasY(atlasY), atlasW(atlasW), atlasH(atlasH)
+		FringeTileData(const std::string &imageFilename, int width=-1, int height=-1, FilterType filter=FILTER_LINEAR, bool repeatX=false, bool repeatY=false, int atlasX=0, int atlasY=0, int atlasW=0, int atlasH=0, bool autoTile = false)
+			: imageFilename(imageFilename), repeatX(repeatX), repeatY(repeatY), filter(filter), width(width), height(height), atlasX(atlasX), atlasY(atlasY), atlasW(atlasW), atlasH(atlasH), autoTile(autoTile)
 		{}
 
 		std::string imageFilename;
@@ -24,6 +24,7 @@ namespace Monocle
 		FilterType filter;
 		bool repeatX, repeatY;
 		int atlasX, atlasY, atlasW, atlasH;
+		bool autoTile;
 		// bool useFiltering;
 	};
 
@@ -61,6 +62,7 @@ namespace Monocle
 		void NextTile();
 		void PrevBlend();
 		void NextBlend();
+		void Update();
 		//FringeTileset *GetFringeTileset();
 		Sprite *sprite;
 
@@ -69,6 +71,7 @@ namespace Monocle
 
 	private:
 		void RefreshTexture();
+		void RefreshScale();
 		int tileID;
 		//FringeTileset *fringeTileset;
 	};

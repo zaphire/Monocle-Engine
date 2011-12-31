@@ -1,5 +1,7 @@
 #include "RectangleCollider.h"
 
+#include <cmath>
+
 namespace Monocle
 {
 	//Note: collision is centered
@@ -30,47 +32,50 @@ namespace Monocle
 	{
 		//TODO: Support line width!
 
-		if (IntersectsPoint(start) || IntersectsPoint(end))
-			return true;
+		if (!collisionData)
+		{
+			if (IntersectsPoint(start) || IntersectsPoint(end))
+				return true;
+		}
 
 		Vector2 pA = GetTopLeft();
 		Vector2 pB = GetTopRight();
 		Vector2 pC = GetBottomRight();
 		Vector2 pD = GetBottomLeft();
 		
-		return (LinesIntersect(start, end, pA, pB) || LinesIntersect(start, end, pB, pC) || LinesIntersect(start, end, pC, pD) || LinesIntersect(start, end, pD, pA));
+		return (LinesIntersect(start, end, pA, pB, collisionData) || LinesIntersect(start, end, pB, pC, collisionData) || LinesIntersect(start, end, pC, pD, collisionData) || LinesIntersect(start, end, pD, pA, collisionData));
 	}
 
 	float RectangleCollider::GetRight(bool relativeToEntity)
 	{
 		if (relativeToEntity)
-			return offset.x + width*0.5;
+			return offset.x + width*0.5f * fabs(GetEntity()->scale.x);
 		else
-			return GetEntityPosition().x + offset.x + width*0.5;
+			return GetEntityPosition().x + offset.x + width*0.5f * fabs(GetEntity()->scale.x);
 	}
 
 	float RectangleCollider::GetLeft(bool relativeToEntity)
 	{
 		if (relativeToEntity)
-			return offset.x - width*0.5f;		
+			return offset.x - width*0.5f * fabs(GetEntity()->scale.x);		
 		else
-			return GetEntityPosition().x + offset.x - width*0.5;
+			return GetEntityPosition().x + offset.x - width*0.5f * fabs(GetEntity()->scale.x);
 	}
 
 	float RectangleCollider::GetTop(bool relativeToEntity)
 	{
 		if (relativeToEntity)
-			return offset.y - height*0.5f;
+			return offset.y - height*0.5f * fabs(GetEntity()->scale.y);
 		else
-			return GetEntityPosition().y + offset.y - height*0.5f;	
+			return GetEntityPosition().y + offset.y - height*0.5f * fabs(GetEntity()->scale.y);	
 	}
 
 	float RectangleCollider::GetBottom(bool relativeToEntity)
 	{
 		if (relativeToEntity)
-			return offset.y + height*0.5f;	
+			return offset.y + height*0.5f * fabs(GetEntity()->scale.y);	
 		else
-			return GetEntityPosition().y + offset.y + height*0.5f;
+			return GetEntityPosition().y + offset.y + height*0.5f * fabs(GetEntity()->scale.y);
 	}
 
 	Vector2 RectangleCollider::GetTopLeft(bool relativeToEntity)

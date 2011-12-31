@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 namespace Monocle
 {
 	//! Describes a color using 4 floats in 0.0 - 1.0 range.
@@ -9,6 +11,7 @@ namespace Monocle
 		Color(const Color &color);
 		Color();
 		Color(float r, float g, float b, float a);
+		Color(const std::string &hexString);
 
         //! Clamps the rgba values to between 0 and 1.0, inclusive.
 		void Clamp();

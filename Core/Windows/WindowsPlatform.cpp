@@ -35,7 +35,7 @@
 #define VK_J	'J'
 #define VK_K	'K'
 #define VK_L	'L'
-#define VK_M	'M'
+#define VK_M		'M'
 #define VK_N	'N'
 #define VK_O	'O'
 #define VK_P	'P'
@@ -45,9 +45,9 @@
 #define VK_T	'T'
 #define VK_U	'U'
 #define VK_V	'V'
-#define VK_W	'W'
+#define VK_W		'W'
 #define VK_X	'X'
-#define VK_Y	'Y'
+#define VK_Y		'Y'
 #define VK_Z	'Z'
 #endif
 
@@ -100,6 +100,18 @@ namespace Monocle
 		wc.hbrBackground		= NULL;									// No Background Required For GL
 		wc.lpszMenuName		= NULL;									// We Don't Want A Menu
 		wc.lpszClassName		= windowName;								// Set The Class Name
+
+		if(bits < 0)
+		{
+			DEVMODE dmScreenSettings;
+			if(!EnumDisplaySettings( NULL, ENUM_CURRENT_SETTINGS, &dmScreenSettings ))
+			{
+				Debug::Log("Could not get display settings");
+				return false;
+			}
+			
+			bits = dmScreenSettings.dmBitsPerPel;
+		}
 
 		if (!RegisterClass(&wc))									// Attempt To Register The Window Class
 		{
@@ -265,36 +277,40 @@ namespace Monocle
 
 	void WindowsPlatform::CenterWindow()
 	{
-		RECT    rChild,  rWorkArea;
-		int     wChild, hChild;
-		int     xNew, yNew;
-		BOOL    bResult;
+		if (!fullscreen)
+		{
+			RECT    rChild,  rWorkArea;
+			int     wChild, hChild;
+			int     xNew, yNew;
+			BOOL    bResult;
 
-		// Get the Height and Width of the child window
-		GetWindowRect (hWnd, &rChild);
-		wChild = rChild.right - rChild.left;
-		hChild = rChild.bottom - rChild.top;
+			// Get the Height and Width of the child window
+			GetWindowRect (hWnd, &rChild);
+			wChild = rChild.right - rChild.left;
+			hChild = rChild.bottom - rChild.top;
 
-		// Get the limits of the 'workarea'
-		bResult = SystemParametersInfo(
-			SPI_GETWORKAREA,    // system parameter to query or set
-			sizeof(RECT),
-			&rWorkArea,
-			0);
-		if (!bResult) {
-			rWorkArea.left = rWorkArea.top = 0;
-			rWorkArea.right = GetSystemMetrics(SM_CXSCREEN);
-			rWorkArea.bottom = GetSystemMetrics(SM_CYSCREEN);
+			// Get the limits of the 'workarea'
+			bResult = SystemParametersInfo(
+				SPI_GETWORKAREA,    // system parameter to query or set
+				sizeof(RECT),
+				&rWorkArea,
+				0);
+			if (!bResult) {
+				rWorkArea.left = rWorkArea.top = 0;
+				rWorkArea.right = GetSystemMetrics(SM_CXSCREEN);
+				rWorkArea.bottom = GetSystemMetrics(SM_CYSCREEN);
+			}
+
+			// Calculate new X position, then adjust for workarea
+			xNew = (rWorkArea.right /2) - wChild/2;
+
+			// Calculate new Y position, then adjust for workarea
+			yNew = (rWorkArea.bottom/2) - hChild/2;
+
+			// Set it, and return
+			SetWindowPos (hWnd, HWND_TOPMOST, xNew, yNew, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 		}
 
-		// Calculate new X position, then adjust for workarea
-		xNew = (rWorkArea.right /2) - wChild/2;
-
-		// Calculate new Y position, then adjust for workarea
-		yNew = (rWorkArea.bottom/2) - hChild/2;
-
-		// Set it, and return
-		SetWindowPos (hWnd, NULL, xNew, yNew, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 	}
 
 	void WindowsPlatform::KillPlatformWindow()								// Properly Kill The Window
@@ -382,12 +398,16 @@ namespace Monocle
 	bool Platform::mouseButtons[3];
 	Vector2 Platform::mousePosition;
 	int Platform::mouseScroll = 0;
+    Touch Platform::touches[TOUCHES_MAX];
+    int Platform::numTouches=0;
 
 	Platform::Platform()
 	{
 		WindowsPlatform::instance = new WindowsPlatform();
 		instance = this;
 		WindowsPlatform::instance->platform = this;
+        
+        orientation = PLATFORM_ORIENTATION_NOTSUPPORTED;
 
 		// 1ms timer
 		timeBeginPeriod(1);
@@ -518,17 +538,68 @@ namespace Monocle
 		localKeymap[KEY_MENU] = VK_APPS;
 	}
 
-	//void Platform::Init()
-	//{
-	//	Init("Monocle Powered", 1024, 768, 32, false);
-	//}
-
 	void Platform::Init(const std::string &name, int w, int h, int bits, bool fullscreen)
 	{
 		WindowsPlatform::instance->CreatePlatformWindow(name.c_str(), w, h, bits, fullscreen);
-		//TEMP: hack
-		//width = w;
-		//height = h;
+	}
+
+	bool Platform::ResizeWindow(int width, int height, bool fullscreen, int bits)
+	{
+		WindowsPlatform::instance->fullscreen = fullscreen;
+		instance->width = width;
+		instance->height = height;
+
+		DWORD dwStyle = GetWindowLong(WindowsPlatform::instance->hWnd, GWL_STYLE);
+		DWORD dwExStyle = GetWindowLong(WindowsPlatform::instance->hWnd, GWL_EXSTYLE);
+		ShowWindow(WindowsPlatform::instance->hWnd,SW_SHOW);
+
+		if(bits < 0)
+		{
+			DEVMODE dmScreenSettings;
+			if(!EnumDisplaySettings( NULL, ENUM_CURRENT_SETTINGS, &dmScreenSettings ))
+			{
+				Debug::Log("Could not get display settings");
+				return false;
+			}
+
+			bits = dmScreenSettings.dmBitsPerPel;
+		}
+
+		if(fullscreen)
+		{
+			DWORD dwRemove = WS_OVERLAPPEDWINDOW;
+			DWORD dwNewStyle = dwStyle & ~dwRemove;
+			DWORD dwNewExStyle = dwExStyle & ~WS_EX_WINDOWEDGE;
+			SetWindowLong(WindowsPlatform::instance->hWnd, GWL_STYLE, dwNewStyle);
+			SetWindowLong(WindowsPlatform::instance->hWnd, GWL_EXSTYLE, dwNewExStyle);
+			SetWindowPos(WindowsPlatform::instance->hWnd, NULL, 0, 0,width,
+				height, SWP_SHOWWINDOW|SWP_FRAMECHANGED);
+			DEVMODE settings;
+			settings.dmBitsPerPel = bits;
+			settings.dmPelsWidth = width;
+			settings.dmPelsHeight = height;
+			settings.dmFields = DM_PELSWIDTH | DM_PELSHEIGHT | DM_BITSPERPEL;
+			if(!ChangeDisplaySettings(&settings, CDS_FULLSCREEN) ==
+				DISP_CHANGE_SUCCESSFUL)
+			{
+				Debug::Log("Could not set window to full screen");
+				return false;
+			}
+		}
+		else
+		{
+			DWORD dwNewStyle = dwStyle | WS_OVERLAPPEDWINDOW;
+			DWORD dwNewExStyle = dwExStyle | WS_EX_WINDOWEDGE;
+			SetWindowLong(WindowsPlatform::instance->hWnd, GWL_STYLE, dwNewStyle);
+			SetWindowLong(WindowsPlatform::instance->hWnd, GWL_EXSTYLE, dwNewExStyle);
+			SetWindowPos(WindowsPlatform::instance->hWnd, NULL, 0, 0,width,
+				height, SWP_SHOWWINDOW|SWP_FRAMECHANGED);
+			WindowsPlatform::instance->CenterWindow();
+		}
+
+		Graphics::Resize(width, height);
+
+		return true;
 	}
 
 	void Platform::Update()
@@ -614,7 +685,7 @@ namespace Monocle
 		}
 		else
 		{
-			instance->keys[instance->localKeymap[key]] = on;			
+			instance->keys[instance->localKeymap[key]] = on;
 		}
 	}
 
@@ -633,6 +704,22 @@ namespace Monocle
 	{
 		return "../../Content/";
 	}
+    
+    PlatformOrientation Platform::GetOrientation()
+    {
+        return instance->orientation;
+    }
+    
+    void Platform::PlatformOrientationChanged( PlatformOrientation orientation )
+    {
+//        instance->orientation = orientation;
+    }
+    
+    void Platform::ErrorShutdown( std::string msg )
+    {
+        fprintf(stderr,"EXCEPTION: %s\n",msg.c_str());
+        exit(1);
+    }
 }
 
 #endif

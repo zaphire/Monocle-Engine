@@ -22,6 +22,7 @@ namespace Monocle
 	class Graphics;
 	class Graphic;
 	class CollisionData;
+    class Camera;
 
 	class InvokeData
 	{
@@ -34,6 +35,20 @@ namespace Monocle
 		bool isDone;
 		void *me;
 	};
+
+
+	class EntityTagData
+	{
+	public:
+		EntityTagData();
+		EntityTagData(const std::string &name, bool save);
+		EntityTagData(const EntityTagData &);
+
+		std::string name;
+		bool save;
+	};
+
+	typedef std::vector<EntityTagData> EntityTags;
 
 	//! \brief An object that can Update, Render and be derived to perform other actions.
 	//!
@@ -83,25 +98,37 @@ namespace Monocle
 		virtual void Removed();
 		//! Called when Entity is destroyed
 		virtual void Destroyed();
+        
+        //! Called to determine if the entity should be drawn
+        virtual bool IsOnCamera( Camera *camera );
 
 		//! Check our collider against all entities that have "tag"
 		Collider* Collide(const std::string &tag, CollisionData *collisionData=NULL);
 		//! Check our collider against all entities that have "tag" - warping us to atPosition first, then back to our original position after
 		Collider* CollideAt(const std::string &tag, const Vector2& atPosition, CollisionData *collisionData=NULL);
+		//! Do a circle collision
+		Collider *CollideWith(Collider *collider, const std::string &tag, CollisionData *collisionData=NULL);
 
-		//Tagging API
-		void AddTag(const std::string& tag);
+		//! Associates this entity with the given tag
+		void AddTag(const std::string& tag, bool save=false);
+		//! Checks whether this entity is associated with a given tag
 		bool HasTag(const std::string& tag);
+		//! Removes a tag from this Entity
 		void RemoveTag(const std::string& tag);
+		//! Gets the tag at the given offset from the list of tags
 		const std::string& GetTag(int index);
+		//! Gets the number of tags associated with this entity
 		int GetNumberOfTags();
 
-		//! is our layer number equal to the layer passed in
+		//! Checks if this entity is on the given layer
 		bool IsLayer(int layer);
+		//! Gets the layer that this entity is on
 		//! \return our layer number
 		int GetLayer();
-		//! set our current layer to the layer passed in
+		//! Moves the entity to the given layer
 		void SetLayer(int layer);
+		//! Moves the entity to the layer determined by the given offset, relative to the layer it
+		//! is currently on
 		void AdjustLayer(int layerAdjustAmount);
 
 		//! is our layer number in the debug render range?
@@ -109,11 +136,6 @@ namespace Monocle
 
 		void SetCollider(Collider *collider);
 		void SetGraphic(Graphic *graphic);
-
-		////! add an Entity as a child
-		//void Add(Entity *entity);
-		////! remove an Entity from our list of children
-		//void Remove(Entity *entity);
 
 		//! set parent entity
 		void SetParent(Entity *parent);
@@ -128,8 +150,6 @@ namespace Monocle
 		Vector2 GetWorldPosition(const Vector2 &position=Vector2::zero);
 		Vector2 GetWorldScale(const Vector2 &scale);
 		Vector2 GetLocalPosition(const Vector2 &worldPosition);
-
-
 		void Invoke(void (*functionPointer)(void*), float delay);
 
 		float depth;
@@ -138,8 +158,6 @@ namespace Monocle
 
 		Color color;
 
-		
-
 	protected:
 		//void DestroyChildren();
 
@@ -147,16 +165,6 @@ namespace Monocle
 
 		//! The scene that contains the entity
 		Scene* scene;
-
-		//Entity *GetNearestEntityByControlPoint(const Vector2 &position, const std::string &tag, Entity *ignoreEntity, float &smallestSqrMag);
-		
-		// notes are very simple "messages"
-		void SendNoteToScene(const std::string &note);
-		// send a note to all entites with tag "tag"
-		void SendNote(const std::string &tag, const std::string &note);
-		virtual void ReceiveNote(const std::string &tag, const std::string &note);
-		
-		//std::list<Entity*> children;
 
 		bool isEnabled;
 
@@ -181,13 +189,14 @@ namespace Monocle
 		// only for use by scene
 		//friend class Scene;
 		
-		std::vector<std::string> tags;
+		std::vector<EntityTagData> tags;
 		int layer;
 
 		std::list<InvokeData*> invokes;
 		std::list<InvokeData*> removeInvokes;
 
-
+        Vector2 cachedWorldPosition;
+        Vector2 lastPositionWhenCached;
 	public:
 		//Entity* GetChildEntityAtPosition(const Vector2 &position);
 		//template <class T>

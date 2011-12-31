@@ -1,5 +1,6 @@
 #ifdef MONOCLE_OPENGL
  
+#include "../MonocleToolkit.h"
 #include "../TextureAsset.h"
 #include "../Debug.h"
  
@@ -20,12 +21,21 @@ namespace Monocle
 		: Asset(ASSET_TEXTURE)
 	{
 	}
+    
+    bool TextureAsset::IsPremultiplied()
+    {
+        return this->premultiplied;
+    }
  
-	void TextureAsset::Load(const unsigned char* data, int w, int h, FilterType filter, bool repeatX, bool repeatY)
+	void TextureAsset::Load(const unsigned char* data, int w, int h, FilterType filter, bool repeatX, bool repeatY, bool premultiply)
 	{
 		this->filter = filter;
 		this->repeatX = repeatX;
 		this->repeatY = repeatY;
+        this->premultiplied = premultiply;
+        
+        if (premultiply)
+            PremultiplyAlpha((unsigned char*)data,w,h);
  
 		glGenTextures(1, &texID);
 		glBindTexture(GL_TEXTURE_2D, texID);
@@ -47,34 +57,46 @@ namespace Monocle
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, glMagFilter);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, glMinFilter);
  
-		unsigned int glRepeatX = repeatX?GL_REPEAT:GL_CLAMP;
-		unsigned int glRepeatY = repeatY?GL_REPEAT:GL_CLAMP;
+		unsigned int glRepeatX = repeatX?GL_REPEAT:GL_CLAMP_TO_EDGE;
+		unsigned int glRepeatY = repeatY?GL_REPEAT:GL_CLAMP_TO_EDGE;
  
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, glRepeatX);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, glRepeatY);
- 
+
 		width = (unsigned int)w;
 		height = (unsigned int)h;
  
 		// mipmaps: OpenGL 1.4 version
 		//glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
  
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		//TODO: cache on graphics init
+		bool glVersion3_0 = !glewIsSupported("GL_VERSION_3_0");
+
+		if (!glVersion3_0)
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		}
+		
+//#ifdef MONOCLE_MAC
+//		gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA8, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
+//#else
+		if (glVersion3_0)
+		{
+			glGenerateMipmap(GL_TEXTURE_2D);
+		}
+//#endif
  
-		// mipmaps: OpenGL 3.0 version
-		glGenerateMipmap(GL_TEXTURE_2D);
- 
-		//gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA8, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
  
 		Debug::Log("Loaded texture from data");
 	}
  
-	bool TextureAsset::Load(const std::string &filename, FilterType filter, bool repeatX, bool repeatY)
+	bool TextureAsset::Load(const std::string &filename, FilterType filter, bool repeatX, bool repeatY, bool premultiply)
 	{
 		this->filter = filter;
 		this->repeatX = repeatX;
 		this->repeatY = repeatY;
 		this->filename = filename;
+        this->premultiplied = premultiply;
  
 		glGenTextures(1, &texID);
 		glBindTexture(GL_TEXTURE_2D, texID);
@@ -96,14 +118,17 @@ namespace Monocle
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, glMagFilter);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, glMinFilter);
  
-		unsigned int glRepeatX = repeatX?GL_REPEAT:GL_CLAMP;
-		unsigned int glRepeatY = repeatY?GL_REPEAT:GL_CLAMP;
+		unsigned int glRepeatX = repeatX?GL_REPEAT:GL_CLAMP_TO_EDGE;
+		unsigned int glRepeatY = repeatY?GL_REPEAT:GL_CLAMP_TO_EDGE;
  
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, glRepeatX);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, glRepeatY);
  
 		int w,h,n;
 		unsigned char* data = stbi_load(filename.c_str(), &w, &h, &n, STBI_rgb_alpha);
+        
+        if (premultiply)
+            PremultiplyAlpha(data,w,h);
  
 		if (data)
 		{
@@ -116,11 +141,14 @@ namespace Monocle
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
  
 			// mipmaps: OpenGL 3.0 version
+#ifndef MONOCLE_MAC
 			glGenerateMipmap(GL_TEXTURE_2D);
+#else
  
-			//gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA8, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA8, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
+#endif
  
-			Debug::Log("Loaded texture: " + filename);
+			//Debug::Log("Loaded texture: " + filename);
 			return true;
 		}
 		else
@@ -213,6 +241,11 @@ namespace Monocle
 	void TextureAsset::Unload()
 	{
 		Debug::Log("Freeing texture memory for: " + filename);
+		if (filename.find("tower-wall-rep") != std::string::npos)
+		{
+			int p;
+			p = 55;
+		}
 		glDeleteTextures(1, &texID);
 	}
 }

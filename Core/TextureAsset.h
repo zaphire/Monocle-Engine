@@ -18,15 +18,17 @@ namespace Monocle
 		//! \param filter [in] The type of filter to use on the image
 		//! \param repeatX [in] Whether or not the texture should be repeated on the x axis if necessary when rendered
 		//! \param repeatY [in] Whether or not the texture should be repeated on the y axis if necessary when rendered
-		void Load(const unsigned char* data, int w, int h, FilterType filter, bool repeatX, bool repeatY);
+        //! \param premultiply [in] Whether or not to apply premulitplication to the texture as it loads
+		void Load(const unsigned char* data, int w, int h, FilterType filter, bool repeatX, bool repeatY, bool premultiply = false);
 		//! \brief Loads a texture from a file
 		//! \return Whether the load was successful.  If this is false, the texture is invalid and should not be used except to attempt another Load
 		//! \param filename [in] The filename to load from, relative to the current ContentPath
 		//! \param filter [in] The filter to use on the texture.
 		//! \param repeatX [in] Whether or not the texture should be repeated on the x axis if necessary when rendered
 		//! \param repeatY [in] Whether or not the texture should be repeated on the y axis if necessary when rendered
+        //! \param premultiply [in] Whether or not to apply premulitplication to the texture as it loads
 		//! \sa Assets::GetContentPath
-		bool Load(const std::string &filename, FilterType filter, bool repeatX, bool repeatY);
+		bool Load(const std::string &filename, FilterType filter, bool repeatX, bool repeatY, bool premultiply = false);
 		//! \brief Replaces the pixels in a rectangular area of the texture using the data pointed to.
 		//! \param data [in] The pointer to the data to fill the rectangle with
 		//! \param position [in] The top left hand corner of the rect to update
@@ -44,14 +46,19 @@ namespace Monocle
 		void Reload();
 		//! \brief Unloads the texture
 		void Unload();
+        
+        //! \brief Does the texture contain premultiplied alpha?
+        bool IsPremultiplied();
  
 		//should have getter functions and be private
 		unsigned int width, height;
 		unsigned int texID;
+		bool repeatX, repeatY;
+        bool premultiplied;
  
 	private:
 		FilterType filter;
-		bool repeatX, repeatY;
+		
 	};
 }
  

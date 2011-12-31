@@ -130,21 +130,62 @@ namespace Monocle
 		MOUSE_BUTTON_MIDDLE,
 		MOUSE_BUTTON_MAX
 	};
+    
+    // The max number that iOS handles is 5~
+#define TOUCHES_MAX     5
+    
+    enum TouchPhase
+    {
+        TOUCH_PHASE_NONE,
+        
+        TOUCH_PHASE_BEGIN,          //  UITouchPhaseBegan,
+        TOUCH_PHASE_MOVED,          //  UITouchPhaseMoved,
+        TOUCH_PHASE_STATIONARY,     //  UITouchPhaseStationary,
+        TOUCH_PHASE_ENDED,          //  UITouchPhaseEnded,
+        TOUCH_PHASE_CANCELLED,      //  UITouchPhaseCancelled,
+        
+        TOUCH_PHASE_ANY,            // Used when using Input::GetTouchWithStatus()
+        
+        TOUCH_PHASE_MAX
+    };
 
-	// placeholder class for Android/iOS touch input
-	// based on Unity's method for now
 	class Touch
 	{
 	public:
-		Vector2 position;
-		//fingerID
-		//deltaPosition
-		//deltaTime
-		//tapCount
-		//stage
+        /*  fingerId	 The unique index for touch.
+            position	 The position of the touch.
+            deltaPosition	 The position delta since last change.
+            deltaTime	 Amount of time passed since last change.
+            tapCount	 Number of taps.
+            phase	 Describes the phase of the touch.*/
+
+		int fingerID;
+        Vector2 position;
+		Vector2 deltaPosition;
+		long deltaTime;
+		int tapCount;
+        
+		TouchPhase phase;
+        
+        // Counts how many frames have passed in the current phase.
+        int touched;
 	};
 
 	// add an option to automatically use touches as "mouse position" and "mouse buttons"
+    
+    enum PlatformOrientation
+    {
+        PLATFORM_ORIENTATION_LANDSCAPE_LEFT,
+        PLATFORM_ORIENTATION_LANDSCAPE_RIGHT,
+        PLATFORM_ORIENTATION_PORTRAIT,
+        PLATFORM_ORIENTATION_PORTRAIT_UPSIDEDOWN,
+        
+        PLATFORM_ORIENTATION_NOTSUPPORTED,
+        
+        PLATFORM_ORIENTATION_COUNT
+    };
+    
+#define MONOCLE_DETECT_COLOR_DEPTH	-1
 
 	class Platform
 	{
@@ -155,11 +196,13 @@ namespace Monocle
 		void Init(const std::string &name, int w, int h, int bits, bool fullscreen);
 		void Update();
 
+		static bool ResizeWindow(int width, int height, bool fullscreen, int bits = MONOCLE_DETECT_COLOR_DEPTH);
 		static long GetMilliseconds();
 		static void ShowBuffer();
 		static bool IsKeyPressed(KeyCode keyCode);
 		static int GetWidth();
 		static int GetHeight();
+        static PlatformOrientation GetOrientation();
 
 		static bool keys[KEY_MAX];
 		static bool mouseButtons[MOUSE_BUTTON_MAX];
@@ -171,17 +214,23 @@ namespace Monocle
 
 		// does this platform support touches?
 		static bool IsTouchEnabled();
+        static Touch touches[TOUCHES_MAX];
+        static int numTouches;
 
 		static bool IsActive();
 
 		void WindowSizeChanged(int w, int h);
+        static void PlatformOrientationChanged( PlatformOrientation orientation );
         
         static std::string GetDefaultContentPath();
+        
+        static void ErrorShutdown( std::string msg = "" );
 
 	private:
 		static Platform *instance;
 		int localKeymap[KEY_MAX];
 		int width, height;
+        PlatformOrientation orientation;
         void BindLocalKey(int local, int global);
 	};
 }

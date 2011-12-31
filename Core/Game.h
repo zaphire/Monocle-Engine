@@ -22,10 +22,13 @@ namespace Monocle
 	{
 	public:
 		//! Initializes all the default sub-systems. Platform, Input, Graphics, Debug, Assets, Tween, Collision, Random, Audio, Level
-		Game(const std::string &name="MonoclePowered.org", int w=1024, int h=768, int bits=24, bool fullscreen=false);
+		Game(const std::string &name="MonoclePowered.org", int w=1024, int h=768, int bits = MONOCLE_DETECT_COLOR_DEPTH, bool fullscreen=false);
 
 		//! Runs the main game loop. Handles timing and high-level updating, rendering.
 		void Main();
+        
+        //! One game loop.
+        void OneLoop();
 
 		//! Updates the game state.  Derived classes may override this to provide extra functionality that must be
 		//! executed in each game loop iteration.
@@ -44,6 +47,24 @@ namespace Monocle
 		
 		//virtual void Init();
         static float frames_per_sec;
+        
+        //! Called particularly for iOS to reset isDone and other variables. Caused by a Game::Quit
+        void PlatformReset();
+        
+        //! Getter for isDone
+        bool IsDone();
+
+	protected:
+		Platform platform;
+		Input input;
+		Graphics graphics;
+		Debug debug;
+		Assets assets;
+		Tween tween;
+		Collision collision;
+		Random random;
+		Audio audio;
+		Level level;
 
 	private:
 		static Game *instance;
@@ -56,16 +77,9 @@ namespace Monocle
 
 		//! Scene to switch to at the end of the frame; if NULL, no switch
 		Scene* switchTo;
-
-		Platform platform;
-		Input input;
-		Graphics graphics;
-		Debug debug;
-		Assets assets;
-		Tween tween;
-		Collision collision;
-		Random random;
-		Audio audio;
-		Level level;
+        
+        // Loop stuff
+        long lastTick;
+        long firstTick;
 	};
 }

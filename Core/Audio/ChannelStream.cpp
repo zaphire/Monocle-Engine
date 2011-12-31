@@ -6,7 +6,7 @@
 #include "../Debug.h"
 #include "../MonocleToolkit.h"
 
-#ifdef MONOCLE_MAC
+#if MONOCLE_MAC || MONOCLE_IOS
 	#include <OpenAL/al.h>
 	#include <OpenAL/alc.h>
 #else
@@ -19,6 +19,13 @@
 #define VERBOSE(x) Debug::Log(std::string("VERBOSE: ") + x)
 #undef VERBOSE
 #define VERBOSE(x)
+
+
+
+#define BUFFER_SIZE (1024 * 64)
+#define NUM_BUFFERS 3
+
+
 
 std::string GetALErrorString(ALenum err)
 {
@@ -95,26 +102,29 @@ namespace Monocle
         
         Check("opengensource");
         
+        alSourcei(source, AL_BUFFER, AL_NONE);
+        
+        Check("buffer reset");
+
+//        Debug::Log("AUDIO: Opening Audio Channel: " + StringOf(samplerate) + "hz w/ " + StringOf(bits) + "bits w/ " + StringOf(channels) + " channels (ALformat:" + StringOf(format) +") SOURCE ID: " + StringOf(source));
+        
+        Check("openbufferdata");
+        
         alSource3f(source, AL_POSITION, 0.0, 0.0, 0.0);
-        alSource3f(source, AL_VELOCITY, 0.0, 0.0, 0.0);
-        alSource3f(source, AL_DIRECTION, 0.0, 0.0, 0.0);
+        /*alSource3f(source, AL_VELOCITY, 0.0, 0.0, 0.0);
+         alSource3f(source, AL_DIRECTION, 0.0, 0.0, 0.0);*/
+        
+        this->lastVol = 1.0;
+        alSourcef(source, AL_GAIN, 1.0);
+        alSourcef(source, AL_PITCH, 1.0);
+        alSourcei(source, AL_LOOPING, AL_FALSE);
         
         Check("opensetsource");
         
-        alSourcei(source, AL_ROLLOFF_FACTOR, 0);
         alSourcei(source, AL_SOURCE_RELATIVE, AL_TRUE);
+        alSourcei(source, AL_ROLLOFF_FACTOR, 0);
         
         Check("opensetsource2");
-        
-        memset(obtainedBuffer,0,BUFFER_SIZE);
-        
-        for (int i=0; i<NUM_BUFFERS; i++)
-            alBufferData(buffers[i], format, obtainedBuffer, BUFFER_SIZE, samplerate);
-        //alBufferData(buffers[1], format, obtainedBuffer, BUFFER_SIZE, samplerate);
-
-        //Debug::Log("AUDIO: Opening Audio Channel: " + StringOf(samplerate) + "hz w/ " + StringOf(channels) + " channels (ALformat:" + StringOf(format) +")");
-        
-        Check("openbufferdata");
 
         this->samplerate = samplerate;
         this->started = true;
@@ -152,6 +162,12 @@ namespace Monocle
         
         if (this->startBuffer >= NUM_BUFFERS){
             alGetSourcei(source, AL_BUFFERS_PROCESSED, &processed);
+            
+//            Debug::Log("nu: "+StringOf(qb) + " " + StringOf(IsPlaying()));
+            
+            /*ALenum state;
+            alGetSourcei(source, AL_SOURCE_STATE, &state);
+            Debug::Log(StringOf(state==AL_PLAYING));*/
             return processed;
         }else{
             return NUM_BUFFERS-this->startBuffer;
@@ -162,6 +178,9 @@ namespace Monocle
     {
         alBufferData(buffers[buff], format, obtainedBuffer, size, samplerate);
         Check("locknumberbuff");
+        
+        alSourceQueueBuffers(source, 1, &buffers[buff]);
+        Check("locknumberqb");
     }
 
     unsigned char *ChannelStream::GetBuffer( unsigned int *size )
@@ -199,7 +218,12 @@ namespace Monocle
 
     void ChannelStream::Play()
     {
-        alSourceQueueBuffers(source, NUM_BUFFERS, buffers);
+//        alSourceQueueBuffers(source, NUM_BUFFERS, buffers);
+        /*int queued, state;
+        alGetSourcei(source, AL_BUFFERS_QUEUED, &queued);
+        alGetSourcei(source, AL_SOURCE_TYPE, &state);
+        Debug::Log("Playing Queued Buffers: "+StringOf(queued)+ " TYPE: "+StringOf(state));*/
+        
         alSourcePlay(source);
         Check("play");
         
@@ -229,6 +253,8 @@ namespace Monocle
 
             Check("empty " + StringOf(queued+1));
         }
+        
+        
     }
 
     void ChannelStream::Check( std::string erat )
@@ -244,6 +270,9 @@ namespace Monocle
 
     ChannelStream::ChannelStream()
     {
+        this->buffers = new unsigned int [NUM_BUFFERS];
+        this->obtainedBuffer = new unsigned char [BUFFER_SIZE];
+        
         memset(this->buffers,0,sizeof(this->buffers));
         memset(this->obtainedBuffer,0,sizeof(this->obtainedBuffer));
         
@@ -257,21 +286,29 @@ namespace Monocle
         this->playStart = 0;
         
         this->source = 0;
+        
+        this->lastVol = 1.0;
     }
 
     ChannelStream::~ChannelStream()
     {
         if (started)
             Close();
+        
+        delete this->buffers;
+        delete this->obtainedBuffer;
     }
+    
+    static         ALCcontext *s_context=NULL;
+    static         ALCdevice *s_device=NULL;
 
     void __alexit()
     {
-        ALCcontext *context;
-        ALCdevice *device;
+        ALCcontext *context=s_context;
+        ALCdevice *device=s_device;
         
-        context = alcGetCurrentContext();
-        device = alcGetContextsDevice(context);
+/*        context = alcGetCurrentContext();
+        device = alcGetContextsDevice(context);*/
         
         alcMakeContextCurrent(NULL);
         alcDestroyContext(context);
@@ -288,9 +325,13 @@ namespace Monocle
             return -1;
         }
         
+        s_device = device;
+        
         context = alcCreateContext(device, NULL);
         alcMakeContextCurrent(context);
         alcProcessContext(context);
+        
+        s_context = context;
         
         atexit(__alexit);
         
@@ -299,6 +340,26 @@ namespace Monocle
         
         alGetError();    /* clear any AL errors beforehand */
         return 0;	
+    }
+    
+    void ChannelStream::InterruptBegin()
+    {
+        // set the current context to NULL will 'shutdown' openAL
+        alcMakeContextCurrent(NULL);
+        // now suspend your context to 'pause' your sound world
+        alcSuspendContext(s_context);
+        
+        Check("InterruptBegin()");
+    }
+    
+    void ChannelStream::InterruptEnd()
+    {
+        // Restore open al context
+        alcMakeContextCurrent(s_context);
+        // 'unpause' my context
+        alcProcessContext(s_context);
+        
+        Check("InterruptEnd()");
     }
 
     void ChannelStream::Exit()
@@ -354,8 +415,10 @@ namespace Monocle
     
     void ChannelStream::SetVolume( float vol )
     {
-        if (started)
+        if (started && this->lastVol != vol){
             alSourcef(source,AL_GAIN,vol);
+            this->lastVol = vol;
+        }
     }
     
     void ChannelStream::SetPan( float pan )
@@ -373,6 +436,16 @@ namespace Monocle
     bool ChannelStream::IsOpen()
     {
         return started;
+    }
+    
+    unsigned int ChannelStream::GetNumberBuffers()
+    {
+        return NUM_BUFFERS;
+    }
+    
+    unsigned long ChannelStream::GetBufferSize()
+    {
+        return BUFFER_SIZE;
     }
     
 }

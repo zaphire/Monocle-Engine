@@ -12,6 +12,12 @@ namespace Monocle
 	//! Time in seconds since game started
 	extern double timeSinceStart;
 
+	//! Time in seconds since current scene started
+	extern double timeSinceSceneStart;
+    
+    //! Entities drawn last frame
+    extern long entitiesDrawn;
+
 	//! Math symbol PI
 	extern const float pi;
 
@@ -35,4 +41,6 @@ namespace Monocle
 		os << object;
 		return(os.str());
 	};
+    
+    void PremultiplyAlpha( unsigned char *data, int w, int h );
 }

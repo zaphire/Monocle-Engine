@@ -73,6 +73,29 @@ namespace Monocle
 		return NULL;
 	}
 
+	Collider* Collision::Collide(Collider *passedCollider, const std::string &tag, CollisionData *collisionData)
+	{
+		if (passedCollider != NULL)
+		{
+			for (std::list<Collider*>::iterator i = instance->colliders.begin(); i != instance->colliders.end(); ++i)
+			{
+				Entity* otherEntity = (*i)->GetEntity();
+				if (otherEntity != NULL) //&& otherEntity != entity)
+				{
+					Collider* otherCollider = otherEntity->GetCollider();
+					if (otherCollider != NULL && otherEntity->HasTag(tag))
+					{
+						if (Collider::Collide(passedCollider, otherCollider, collisionData))
+						{
+							return otherCollider;
+						}
+					}
+				}
+			}
+		}
+		return NULL;
+	}
+
 	//OPTION: refactor to add multiple colliders? (consider carefully)
 	//FORNOW: limit to one collider per entity (simpler, makes more sense)
 	//LATER: rename these to "Set" or something else?

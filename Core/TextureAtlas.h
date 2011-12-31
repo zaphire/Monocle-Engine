@@ -46,6 +46,7 @@ namespace Monocle
 		friend class TextureAtlasEntry;
 		std::string image;
 		int width, height;
+		float scale;
 
 	private:
 		std::map<std::string, TextureAtlasEntry*> entries;

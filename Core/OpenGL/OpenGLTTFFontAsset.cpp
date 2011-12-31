@@ -1,3 +1,5 @@
+#if MONOCLE_OPENGL || MONOCLE_OPENGLES
+
 #include "../TTFFontAsset.h"
 #include "../Debug.h"
 
@@ -12,8 +14,15 @@
 #include <stb/stb_truetype.h>
 
 // OpenGL Headers
+#ifdef MONOCLE_OPENGLES
+#include <OpenGLES/ES1/gl.h>
+#include <OpenGLES/ES1/glext.h>
+#include <OpenGLES/ES2/gl.h>
+#include <OpenGLES/ES2/glext.h>
+#else
 #define GLEW_STATIC
 #include <GL/glew.h>
+#endif
 
 #include "../Macros.h"
 
@@ -57,11 +66,10 @@ namespace Monocle
 
         glGenTextures(1, &texID);
         glBindTexture(GL_TEXTURE_2D, texID);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, this->textureWidth, this->textureHeight, 0, GL_ALPHA, GL_UNSIGNED_BYTE, temp_bitmap);
 
         free(temp_bitmap);
-
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
         return true;
 	}
@@ -84,10 +92,11 @@ namespace Monocle
 		}
 	}
 
-	float TTFFontAsset::GetTextWidth(const std::string &text)
+	float TTFFontAsset::GetTextWidth(const std::string &text) const 
 	{
 		float width = 0;
 		float x,y;
+        x=y=0.0;
 		for (int i = 0; i < text.size(); i++)
 		{
 			Rect verts;
@@ -98,7 +107,7 @@ namespace Monocle
 		return width;
 	}
 
-	float TTFFontAsset::GetTextHeight(const std::string &text)
+	float TTFFontAsset::GetTextHeight(const std::string &text) const
 	{
 		//float height = 0;
 		float top = 0, bottom = 0;
@@ -132,3 +141,5 @@ namespace Monocle
 		texCoords.bottomRight.y = q.t1;
     }
 }
+
+#endif

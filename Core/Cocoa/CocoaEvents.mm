@@ -176,6 +176,12 @@ Cocoa_PumpEvents()
 				if (([event modifierFlags] & NSCommandKeyMask) || [event type] == NSFlagsChanged)
 					[NSApp sendEvent: event];
 				break;
+            case NSFlagsChanged:
+                if ([event modifierFlags] & NSControlKeyMask)
+                {
+                    printf("control key changed\n");
+                }
+                break;
 			default:
 				[NSApp sendEvent:event];
 				break;

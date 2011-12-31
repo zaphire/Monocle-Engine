@@ -52,10 +52,10 @@ namespace Monocle {
                 vol *= ((float)pos) / ((float)this->fades.nFadeIn);
             }
             else
-                // Fade Out (only if no loops remain)
-                if (this->fades.nFadeOut && opos > fadeoutstart && this->decoder->loopsRemaining == 0) {
-                    vol *= 1.0f - ((float)(opos - fadeoutstart)) / ((float)this->fades.nFadeOut);
-                }
+            // Fade Out (only if no loops remain)
+            if (this->fades.nFadeOut && opos > fadeoutstart && this->decoder->loopsRemaining == 0) {
+                vol *= 1.0f - ((float)(opos - fadeoutstart)) / ((float)this->fades.nFadeOut);
+            }
             
             // Active Instant Fade In
             // When would pos be before aFadeInStart? :P
@@ -147,7 +147,7 @@ namespace Monocle {
         
         // We don't init. lastSeekPos because we could have set that before a Flush(). (important)
         
-        this->bufferCountdown = NUM_BUFFERS;
+        this->bufferCountdown = cs->GetNumberBuffers();
         cs->Open(decoder->ch, decoder->bit, decoder->samplerate);
         FillBuffers();
         
@@ -192,13 +192,14 @@ namespace Monocle {
         {
             // Careful calculations calculated the buflen
 //            vc.Init((BUFFER_SIZE/32768)*(NUM_BUFFERS+2), decoder->samplerate);
-            vc.Init((BUFFER_SIZE/32768)*(NUM_BUFFERS+2),decoder->samplerate);
+            vc.Init((cs->GetBufferSize()/32768)*(cs->GetNumberBuffers()+2),decoder->samplerate);
             
             vc.Clean();
             
             this->vis = new AudioVis();
             this->vis->PrepData();
             
+//            if (cs->IsPlaying())
             Flush();
             
             if (cs->IsOpen())
@@ -237,7 +238,7 @@ namespace Monocle {
         // Eventually maybe we'll enable vis before a deck opens.
         if (IsVisEnabled()){
             // Careful calculations calculated the buflen
-            vc.Init((BUFFER_SIZE/32768)*(NUM_BUFFERS+2), decoder->samplerate);
+            vc.Init((cs->GetBufferSize()/32768)*(cs->GetNumberBuffers()+2), decoder->samplerate);
             vc.Clean();
             
             this->vis = new AudioVis();
@@ -532,6 +533,7 @@ namespace Monocle {
             
             // Let the visualization know we're to be clear
             if (this->vis) this->vis->bClear = true;
+            
             return;
         }
         else
@@ -702,11 +704,13 @@ namespace Monocle {
                 if (IsVisEnabled()) this->vis->bClear = false;
             }
             
+
             while (l && pos<size && !decoder->outOfData){
                 
                 // What to do if the Decoder says we're almost out of data?
                 
-                if (IsVisEnabled()){
+                if (IsVisEnabled())
+                {
                     vc.SetWrittenTime( this->writtenpos );
                     vc.SetEngineerData(0,0,0,0);
                 }

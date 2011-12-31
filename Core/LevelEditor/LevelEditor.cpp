@@ -142,10 +142,12 @@ namespace Monocle
 					case FTES_COLOR:
 						UpdateColor();
 						break;
+                            
+                    default:
+                        break;
 					}
 				}
 			}
-
 		}
 	}
 
@@ -280,7 +282,8 @@ namespace Monocle
 
 		if (entity != NULL)
 		{
-			printf("entity (%d, %d)\n", (int)entity->position.x, (int)entity->position.y);
+//			printf("entity type: %s and %s\n", typeid(entity).name(), typeid(entity).raw_name());
+			printf("entity selected: p(%f, %f) s(%f, %f) r(%f)\n", entity->position.x, entity->position.y, entity->scale.x, entity->scale.y, entity->rotation);
 
 			printf("(Q) move (W) rotate (E) scale\n");
 		}
@@ -438,12 +441,16 @@ namespace Monocle
 			CloneEntity(selectedEntity, Input::GetWorldMousePosition());
 		}
 
-		if (Input::IsKeyPressed(keyDelete))
+		if (!selectedNode)
 		{
-			scene->Remove(selectedEntity);
-			Select(NULL);
-			return;
+			if (Input::IsKeyPressed(keyDelete))
+			{
+				scene->Remove(selectedEntity);
+				Select(NULL);
+				return;
+			}
 		}
+
 
 		if (Input::IsKeyPressed(keyScaleUp))
 		{
@@ -883,6 +890,7 @@ namespace Monocle
 		{
 			isNumberEntry = false;
 			numberEntryString = "";
+			moveAxisLock = 0;
 		}
 	}
 }

@@ -19,6 +19,7 @@ namespace Monocle
 		Part();
 		int GetID();
 		bool IsName(const std::string &name);
+		std::string GetName();
 		bool IsID(int id);
 
 		void SetPuppet(Puppet *puppet);
@@ -27,6 +28,8 @@ namespace Monocle
 		void Load(FileNode *fileNode);
 
 		Sprite *GetSprite();
+
+		std::list<Part*> parts;
 
 	private:
 		friend class Puppet;
@@ -124,7 +127,7 @@ namespace Monocle
 		Puppet();
 		~Puppet();
 
-		void Save(Entity *entity);
+		void Save();
 		void Load(const std::string &filename, Entity *entity);
 
 		void Play(const std::string &animationName, bool isLooping=true);
@@ -147,7 +150,9 @@ namespace Monocle
 
 		void AdjustTime(float time);
 		
-	private:		
+	private:
+		Entity *entity;
+
 		Animation *GetAnimationByName(const std::string &animName);
 		bool isPlaying;
 		bool isPaused;
@@ -162,11 +167,11 @@ namespace Monocle
 
 		std::string filename;
 
-		void SaveParts(TiXmlElement *element, Entity *fromEntity);
-		void LoadParts(TiXmlElement *element, Entity *intoEntity);
+		void SavePart(TiXmlElement *parentElement, Part *part);
+		void LoadParts(TiXmlElement *element, Part *intoPart);
 
 	private:
-		
+
 	};
 
 }

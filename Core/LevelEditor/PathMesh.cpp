@@ -4,24 +4,33 @@
 #include "../Graphics.h"
 #include "../TextureAsset.h"
 #include "../Colliders/PathCollider.h"
+#include "../Graphics/ZwopSpriteSheet.h"
 
 namespace Monocle
 {
 	PathMesh::PathMesh()
-		: Entity(), size(0.0f), startNode(NULL), cells(1), texture(NULL), pathCollider(NULL), flipX(false), flipY(false)
+		: Entity(), size(0.0f), startNode(NULL), cells(1), texture(NULL), pathCollider(NULL), flipX(false), flipY(false), textureOffset(Vector2::zero), textureScale(Vector2::one)
 	{
 		///HACK
 		//texture = Assets::RequestTexture("graphics/wallpieces.png");
 	}
 	
 	PathMesh::PathMesh(const std::string &textureFilename, int cells, Node *startNode, int size)
-		: Entity(), size(size), cells(cells), pathCollider(NULL), flipX(false), flipY(false)
+        : Entity(), size(size), cells(cells), pathCollider(NULL), flipX(false), flipY(false), textureOffset(Vector2::zero), textureScale(Vector2::one)
 	{
 		//const std::string &textureFilename, 
 		texture = Assets::RequestTexture(textureFilename);
 		//
 		SetStartNode(startNode);
 	}
+    
+    PathMesh::PathMesh(ZwopSprite *zs, int cells, Node *startNode, int size)
+        : Entity(), size(size), cells(cells), pathCollider(NULL), flipX(false), flipY(false), textureOffset(Vector2::zero), textureScale(Vector2::one)
+    {
+        texture = Assets::RequestTexture(zs->GetSheet()->GetTextureName());
+        SetStartNode(startNode);
+        zSprite = zs;
+    }
 
 	void PathMesh::MakeCollision(float radius)
 	{
@@ -39,6 +48,11 @@ namespace Monocle
 	//	}
 	//}
 
+	Node* PathMesh::GetStartNode()
+	{
+		return startNode;
+	}
+
 	void PathMesh::SetStartNode(Node *node)
 	{
 		nodes.clear();
@@ -46,7 +60,7 @@ namespace Monocle
 		this->startNode = node;
 		if (pathCollider)
 			pathCollider->startNode = node;
-
+		 
 		Node *current = this->startNode;
 		while (current)
 		{
@@ -73,12 +87,16 @@ namespace Monocle
 			Graphics::Rotate(rotation, 0, 0, 1);
 			Graphics::Scale(scale);
 
-			if (nodes.size() > 0)
-				Graphics::RenderPathMesh(nodes, cells, size, flipX, flipY);
+			if (nodes.size() > 0){
+                if (zSprite)
+                    Graphics::RenderPathMesh(nodes, cells, size, flipX, flipY,zSprite->GetTextureOffset()+(textureOffset*zSprite->GetTextureScale()),zSprite->GetTextureScale()*textureScale);
+                else
+                    Graphics::RenderPathMesh(nodes, cells, size, flipX, flipY,textureOffset,textureScale);
+            }
 
 			Graphics::PopMatrix();
-
 		}
+
 		Entity::Render();
 
 		// HACK: temporary

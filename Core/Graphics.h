@@ -19,6 +19,7 @@ namespace Monocle
 	{
 		BLEND_NONE=0,
 		BLEND_ALPHA,
+        BLEND_ALPHA_PREMULTIPLIED,
 		BLEND_ADDITIVE,
 		BLEND_MULTIPLY,
 	};
@@ -30,15 +31,25 @@ namespace Monocle
 	    IMAGE_PNG,
 	    IMAGE_TGA
 	};
+    
+    enum TextAlign
+    {
+        TEXTALIGN_LEFT,
+        TEXTALIGN_CENTER,
+        TEXTALIGN_RIGHT,
+    };
 
 	//! Base class for graphic types that may be attached to and rendered with entities.
 	class Graphic
 	{
 	public:
+		Graphic() : rotation(0.0f)
+		{}
 		Vector2 position;
-		//virtual void Update()=0;
+		float rotation;
+		virtual void Update()=0;
 		virtual void Render(Entity *entity)=0;
-		virtual void GetWidthHeight(int *width, int *height)=0;
+		virtual void GetWidthHeight(float *width, float *height)=0;
 	};
 
 	//! \brief Static class responsble for rendering to the screen.
@@ -53,6 +64,8 @@ namespace Monocle
 		//! Sets the virtual resolution of the window
 		static void Set2D(int virtualWidth, int virtualHeight);
 		//static void Set3D();
+
+		static void Viewport(int x, int y, int width, int height);
 
 		//! Resizes the Graphics' viewport.
 		//! \remark This does not resize the platform window, it only changes
@@ -119,7 +132,7 @@ namespace Monocle
 		//! \param x [int] The x coordinate of the origin of the text, which serves as the baseline for the text
 		//! \param y [int] The y coordinate of the origin of the text
 		//! \sa FontAsset
-		static void RenderText(const FontAsset& font, const std::string& text, float x, float y);
+		static void RenderText(const FontAsset& font, const std::string& text, float x, float y, TextAlign x_align = TEXTALIGN_LEFT);
 		//! \brief Renders a wireframe quad
 		//! \sa RenderQuad
 		static void RenderLineRect(float x, float y, float w, float h);
@@ -128,7 +141,7 @@ namespace Monocle
 		//! \param pos2 [in] The end position of the line
 		static void RenderLine(const Vector2 &pos1, const Vector2 &pos2);
 		//! 
-		static void RenderPathMesh(const std::vector<Node*> &nodes, int cells, float size, bool flipX=false, bool flipY=false);
+		static void RenderPathMesh(const std::vector<Node*> &nodes, int cells, float size, bool flipX=false, bool flipY=false, Vector2 textureOffset=Vector2::zero, Vector2 textureScale=Vector2::one);
 		
 		//! \brief Pushes a view matrix onto the stack.
 		//! Coupled with PopMatrix, this function allows the caller to make rotations, translations, etc, to the matrix
@@ -186,6 +199,8 @@ namespace Monocle
 		//! \param filename [in] The filename of the image file to save to.  Relative to the running directory, not ContentPath.
 		//! \param type [in] The type of file to write
 		static void ScreenToImage(const std::string &filename, ImageType type);
+        
+        static void CheckErrors();
 	protected:
 		friend class Game;
 		Graphics();
@@ -203,6 +218,7 @@ namespace Monocle
 		int virtualWidth, virtualHeight;
 		unsigned int lastBoundTextureID;
 		BlendType currentBlend;
+        Color currentColor;
         
         bool bgReset;
 	};

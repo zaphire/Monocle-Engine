@@ -19,12 +19,12 @@ namespace Monocle
 
 	int TextureAtlasEntry::GetWidth()
 	{
-		return width;
+		return width * textureAtlas->scale;
 	}
 
 	int TextureAtlasEntry::GetHeight()
 	{
-		return height;
+		return height * textureAtlas->scale;
 	}
 
 	Vector2 TextureAtlasEntry::GetTextureOffset()
@@ -40,22 +40,35 @@ namespace Monocle
 	void TextureAtlasEntry::Save(FileNode *fileNode)
 	{
 		fileNode->Write("name", name);
-		std::ostringstream os;
-		os << x << " " << y << " " << width << " " << height;
-		fileNode->Write("coords", os.str());
+
+		fileNode->Write("x", x);
+		fileNode->Write("y", y);
+		fileNode->Write("width", width);
+		fileNode->Write("height", height);
+		//std::ostringstream os;
+		//os << x << " " << y << " " << width << " " << height;
+		//fileNode->Write("coords", os.str());
 	}
 
 	void TextureAtlasEntry::Load(FileNode *fileNode)
 	{
 		fileNode->Read("name", name);
+
+		fileNode->Read("x", x);
+		fileNode->Read("y", y);
+		fileNode->Read("width", width);
+		fileNode->Read("height", height);
+
+		/*
 		std::string read;
 		fileNode->Read("coords", read);
 		std::istringstream is(read);
 		is >> x >> y >> width >> height;
+		*/
 	}
 
 	TextureAtlas::TextureAtlas()
-		: width(0), height(0)
+		: width(0), height(0), scale(1.0f)
 	{
 	}
 
@@ -76,10 +89,12 @@ namespace Monocle
 	void TextureAtlas::Save(TiXmlDocument *document)
 	{
 		TiXmlElement xmlTextureAtlas("TextureAtlas");
-		XMLFileNode xmlFileNodeTextureAtlas(&xmlTextureAtlas);
-		xmlFileNodeTextureAtlas.Write("image", image);
-		xmlFileNodeTextureAtlas.Write("width", width);
-		xmlFileNodeTextureAtlas.Write("height", height);
+
+		XMLFileNode xmlOut(&xmlTextureAtlas);
+		xmlOut.Write("image", image);
+		xmlOut.Write("width", width);
+		xmlOut.Write("height", height);
+		xmlOut.Write("scale", scale);
 
 		for (std::map<std::string, TextureAtlasEntry*>::iterator i = entries.begin(); i != entries.end(); ++i)
 		{
@@ -101,6 +116,7 @@ namespace Monocle
 		xmlFileNodeTextureAtlas.Read("image", image);
 		xmlFileNodeTextureAtlas.Read("width", width);
 		xmlFileNodeTextureAtlas.Read("height", height);
+		xmlFileNodeTextureAtlas.Read("scale", scale);
 
 		TiXmlElement *xmlAtlasEntry = element->FirstChildElement("TextureAtlasEntry");
 		while (xmlAtlasEntry)

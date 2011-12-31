@@ -1,4 +1,5 @@
 #include "PuppetEditor.h"
+#include "Game.h"
 
 #include "../MonocleToolkit.h"
 #include "../Assets.h"
@@ -64,10 +65,11 @@ namespace Monocle
 	PuppetEntity::PuppetEntity()
 		: Entity()
 	{
-		std::string puppetFile;
-		puppetFile = "puppet";
+	}
 
-		puppet.Load(puppetFile + ".xml", this);
+	void PuppetEntity::Load(const std::string &filename)
+	{
+		puppet.Load(filename, this);
 
 		puppet.Play("idle");
 	}
@@ -81,10 +83,8 @@ namespace Monocle
 	/// PUPPET EDITOR
 	PuppetEditor::PuppetEditor() : Editor()
 	{
-	}
+		puppetEntity = new PuppetEntity();
 
-	void PuppetEditor::Added()
-	{
 		keyTogglePause = KEY_TAB;
 
 		keyMoveLeft = KEY_A;
@@ -103,21 +103,23 @@ namespace Monocle
 		keyOffset = KEY_LALT;
 
 		keyZero = KEY_0;
+	}
 
-		Graphics::Set2D(800, 600);
+	void PuppetEditor::Load(const std::string &filename)
+	{
+		puppetEntity->Load(filename);
+	}
+
+	void PuppetEditor::Added()
+	{
+		//Graphics::Set2D(800, 600);
 		//Graphics::SetBackgroundColor(Color::white);
-		Scene::GetCamera()->position = Graphics::GetScreenCenter();
+        //Game::GetScene()->GetCamera()->position = Graphics::GetScreenCenter();
 
-		puppetEntity = new PuppetEntity();
 		puppetEntity->position = Graphics::GetScreenCenter() + Vector2::down * 100;
 		puppetEntity->scale = Vector2::one * 0.75f;
+		//Load("puppet.xml");
 		scene->Add(puppetEntity);
-
-		Entity *entity = new Entity();
-		entity->SetLayer(5);
-		entity->SetGraphic(new Sprite("graphics/logo.png"));
-		entity->position = Graphics::GetScreenCenter() + Vector2::up * 138;
-		scene->Add(entity);
 
 		timeline = new Timeline();
 		scene->Add(timeline);
@@ -171,7 +173,7 @@ namespace Monocle
 				{
 					if (Input::IsKeyPressed(KEY_S))
 					{
-						puppetEntity->puppet.Save(puppetEntity);
+						puppetEntity->puppet.Save();
 					}
 				}
 
@@ -187,7 +189,7 @@ namespace Monocle
 						float multiplier = 5.0f;
 						moveSpeed *= multiplier;
 						rotateSpeed *= multiplier;
-					}
+					} 
 
 					if (Input::IsKeyPressed(keyZero))
 					{
@@ -196,7 +198,7 @@ namespace Monocle
 						part->GetSprite()->position = Vector2::zero;
 					}
 
-					float moveAmount = Monocle::deltaTime * moveSpeed;
+					float moveAmount = Monocle::deltaTime * moveSpeed * 10.0f;
 					float rotateAmount = Monocle::deltaTime * rotateSpeed;
 
 					if (Input::IsKeyHeld(KEY_LCTRL))
@@ -240,7 +242,7 @@ namespace Monocle
 
 
 				}
-				else
+				else 
 				{
 
 				}
