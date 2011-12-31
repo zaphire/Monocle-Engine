@@ -15,7 +15,6 @@ namespace Monocle
 	class Debug
 	{
 	public:
-		void Init();
 		static void Log(const char *string);
 		static void Log(bool boolean);
 		static void Log(int num);
@@ -25,6 +24,12 @@ namespace Monocle
 		static void Log(const Vector2& vec);
 		static void Log(const Vector3& vec);
 		static void Log(const std::string& string);
+		
+		static void SetFileLogging(bool useFile);
+		static void SetConsoleLogging(bool useConsole);
+		
+		static bool GetFileLogging();
+		static bool GetConsoleLogging();
 
 		static bool render;
 		static bool showBounds;
@@ -35,7 +40,15 @@ namespace Monocle
 		//! Entities in layers outside of this range won't be subject to Debug::render or Debug::showBounds
 		static int layerMin;
 		static int layerMax;
+
+	protected:
+		friend class Game;
+		void Init();
+
     private:
         std::ofstream logout;
+		static bool useConsole;
+		static bool useFile;
+
 	};
 }
