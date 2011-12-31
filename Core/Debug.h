@@ -3,6 +3,7 @@
 #include "Vector2.h"
 #include "Vector3.h"
 #include <string>
+#include <fstream>
 
 namespace Monocle
 {
@@ -34,5 +35,7 @@ namespace Monocle
 		//! Entities in layers outside of this range won't be subject to Debug::render or Debug::showBounds
 		static int layerMin;
 		static int layerMax;
+    private:
+        std::ofstream logout;
 	};
 }
