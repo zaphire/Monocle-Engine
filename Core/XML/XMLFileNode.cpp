@@ -1,5 +1,4 @@
 #include "XMLFileNode.h"
-#include <iostream>
 #include "../Vector2.h"
 #include "../Color.h"
 #include <TinyXML/tinyxml.h>

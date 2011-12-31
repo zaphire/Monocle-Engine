@@ -10,7 +10,6 @@
 #include "../LevelEditor/Node.h"
 
 #include <cstdlib>
-#include <cstdio>
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include <stb/stb_image_write.h>

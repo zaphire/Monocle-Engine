@@ -1,6 +1,7 @@
 #include "Debug.h"
 
 #include <iostream>
+#include <fstream>
 #include "Entity.h"
 
 namespace Monocle
@@ -14,6 +15,8 @@ namespace Monocle
 	void Debug::Init()
 	{
 		render = false;
+		logout.open("monocle.log");
+		std::clog.rdbuf(logout.rdbuf());
 	}
 
 	void Debug::Log(const char *outputString)
@@ -21,46 +24,46 @@ namespace Monocle
 		// poop stuff out to a file!
 		//outputString
 
-		std::cout << outputString << std::endl;
+		std::clog << outputString << std::endl;
 	}
 
 	void Debug::Log(bool boolean)
 	{
-		std::cout << (boolean?"true":"false") << std::endl;
+		std::clog << (boolean?"true":"false") << std::endl;
 	}
 
 	void Debug::Log(int num)
 	{
-		std::cout << num << std::endl;
+		std::clog << num << std::endl;
 	}
 
 	void Debug::Log(long num)
 	{
-		std::cout << num << std::endl;
+		std::clog << num << std::endl;
 	}
 
 	void Debug::Log(float num)
 	{
-		std::cout << num << std::endl;
+		std::clog << num << std::endl;
 	}
 
 	void Debug::Log(double num)
 	{
-		std::cout << num << std::endl;
+		std::clog << num << std::endl;
 	}
 
 	void Debug::Log(const Vector2& vec)
 	{
-		std::cout << "Vector2: (" << vec.x << ", " << vec.y << ")" << std::endl;
+		std::clog << "Vector2: (" << vec.x << ", " << vec.y << ")" << std::endl;
 	}
 
 	void Debug::Log(const Vector3& vec)
 	{
-		std::cout << "Vector3: (" << vec.x << ", " << vec.y << ", " << vec.z << ")" << std::endl;
+		std::clog << "Vector3: (" << vec.x << ", " << vec.y << ", " << vec.z << ")" << std::endl;
 	}
 
 	void Debug::Log(const std::string& string)
 	{
-		std::cout << string << std::endl;
+		std::clog << string << std::endl;
 	}
 }
