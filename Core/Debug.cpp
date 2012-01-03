@@ -6,107 +6,166 @@
 
 namespace Monocle
 {
+	class Debug::DebugOutStream
+	{
+	public:
+		DebugOutStream() : logOut(), logFilename(""), outDest(LOG_COUT) {}
+
+		~DebugOutStream()
+		{
+			if(logOut.is_open())
+			{
+				logOut.close();
+			}
+		}
+
+		void SetLogFile(const std::string &filename)
+		{
+			if(filename == "")
+			{
+				outDest &= ~LOG_FILE;
+			}
+
+			if(filename != logFilename)
+			{
+				if(logOut.is_open())
+				{
+					logOut.close();
+				}
+
+				if(filename != "")
+				{
+					logOut.open(filename);
+				}
+
+				logFilename = filename;
+			}
+		}
+		
+		void SetDestination(int dest, const std::string &filename)
+		{
+			outDest = dest;
+
+			if(dest & LOG_FILE)
+			{
+				SetLogFile(filename);
+			}
+			else
+			{
+				SetLogFile("");
+			}
+		}
+
+		template <typename T>
+		DebugOutStream &operator<<(const T &obj)
+		{
+			if(outDest & LOG_FILE)
+			{
+				logOut << obj;
+			}
+			if(outDest & LOG_COUT)
+			{
+				std::cout << obj;
+			}
+			if(outDest & LOG_CERR)
+			{
+				std::cerr << obj;
+			}
+			if(outDest & LOG_CLOG)
+			{
+				std::clog << obj;
+			}
+
+			return *this;
+		}
+
+		DebugOutStream &operator<<(std::ostream& func(std::ostream&))
+		{
+			if(outDest & LOG_FILE)
+			{
+				logOut << func;
+			}
+			if(outDest & LOG_COUT)
+			{
+				std::cout << func;
+			}
+			if(outDest & LOG_CERR)
+			{
+				std::cerr << func;
+			}
+			if(outDest & LOG_CLOG)
+			{
+				std::clog << func;
+			}
+
+			return *this;
+		}
+	private:
+		std::ofstream logOut;
+		std::string logFilename;
+		int outDest;
+	};
+
 	bool Debug::render = false;
 	bool Debug::showBounds = false;
 	Entity *Debug::selectedEntity;
 	int Debug::layerMin = -50;
 	int Debug::layerMax = 50;
-	bool Debug::useFile = false;
-	bool Debug::useConsole = true;
-	
+
+	Debug::DebugOutStream Debug::outStream = Debug::DebugOutStream();
+
 	void Debug::Init()
 	{
 		render = false;
-		logout.open("monocle.log");
-		std::clog.rdbuf(logout.rdbuf());
 	}
 
 	void Debug::Log(const char *outputString)
 	{
-		if (useConsole)
-			std::cout << outputString << std::endl;
-		if (useFile)
-			std::clog << outputString << std::endl;
+		outStream << outputString << std::endl;
 	}
 
 	void Debug::Log(bool boolean)
 	{
-		if (useConsole)
-			std::cout << (boolean?"true":"false") << std::endl;
-		if (useFile)
-			std::clog << (boolean?"true":"false") << std::endl;
+		outStream << (boolean?"true":"false") << std::endl;
 	}
 
 	void Debug::Log(int num)
 	{
-		if (useConsole)
-			std::cout << num << std::endl;
-		if (useFile)
-			std::clog << num << std::endl;
+		outStream << num << std::endl;
 	}
 
 	void Debug::Log(long num)
 	{
-		if (useConsole)
-			std::cout << num << std::endl;
-		if (useFile)
-			std::clog << num << std::endl;
+		outStream << num << std::endl;
 	}
 
 	void Debug::Log(float num)
 	{
-		std::clog << num << std::endl;
+		outStream << num << std::endl;
 	}
 
 	void Debug::Log(double num)
 	{
-		if (useConsole)
-			std::cout << num << std::endl;
-		if (useFile)
-			std::clog << num << std::endl;
+		outStream << num << std::endl;
 	}
 
 	void Debug::Log(const Vector2& vec)
 	{
-		if (useConsole)
-			std::cout << "Vector2: (" << vec.x << ", " << vec.y << ")" << std::endl;
-		if (useFile)
-			std::clog << "Vector2: (" << vec.x << ", " << vec.y << ")" << std::endl;
+		outStream << "Vector2: (" << vec.x << ", " << vec.y << ")" << std::endl;
 	}
 
 	void Debug::Log(const Vector3& vec)
 	{
-		if (useConsole)
-			std::cout << "Vector3: (" << vec.x << ", " << vec.y << ", " << vec.z << ")" << std::endl;
-		if (useFile)
-			std::clog << "Vector3: (" << vec.x << ", " << vec.y << ", " << vec.z << ")" << std::endl;
+		outStream << "Vector3: (" << vec.x << ", " << vec.y << ", " << vec.z << ")" << std::endl;
 	}
 
 	void Debug::Log(const std::string& string)
 	{
-		if (useConsole)
-			std::cout << string << std::endl;
-		if (useFile)
-			std::clog << string << std::endl;
-	}
-	
-	void Debug::SetFileLogging(bool useFile)
-	{
-		Debug::useFile = useFile;
+		outStream << string << std::endl;
 	}
 
-	void Debug::SetConsoleLogging(bool useConsole)
+	void Debug::SetLogDestination(OutputDestFlags dest, const std::string &filename)
 	{
-		Debug::useConsole = useConsole;
-	}
-
-	bool Debug::GetFileLogging()
-	{
-		return useFile;
-	}
-
-	bool Debug::GetConsoleLogging()
-	{
-		return useConsole;
+		outStream.SetDestination(dest, filename);
 	}
 }
