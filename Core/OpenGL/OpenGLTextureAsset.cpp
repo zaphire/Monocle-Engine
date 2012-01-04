@@ -3,6 +3,7 @@
 #include "../MonocleToolkit.h"
 #include "../TextureAsset.h"
 #include "../Debug.h"
+#include "../Graphics.h"
  
 #ifdef MONOCLE_WINDOWS
 #define WIN32_LEAN_AND_MEAN
@@ -17,6 +18,18 @@
  
 namespace Monocle
 {
+	struct PixelFormat
+	{
+	private:
+		friend class TextureAsset;
+
+		PixelFormat(GLenum fmt) : glPixFormat(fmt) {}
+		GLenum glPixFormat;
+	};
+
+	PixelFormat TextureAsset::RGBA = PixelFormat(GL_RGBA);
+	PixelFormat TextureAsset::BGRA = PixelFormat(GL_BGRA);
+	
 	TextureAsset::TextureAsset()
 		: Asset(ASSET_TEXTURE)
 	{
@@ -27,8 +40,9 @@ namespace Monocle
         return this->premultiplied;
     }
  
-	void TextureAsset::Load(const unsigned char* data, int w, int h, FilterType filter, bool repeatX, bool repeatY, bool premultiply)
+	void TextureAsset::Load(const unsigned char* data, int w, int h, FilterType filter, bool repeatX, bool repeatY, bool premultiply, const PixelFormat &fmt)
 	{
+		this->format = &fmt;
 		this->filter = filter;
 		this->repeatX = repeatX;
 		this->repeatY = repeatY;
@@ -74,7 +88,7 @@ namespace Monocle
 
 		if (!glVersion3_0)
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, format->glPixFormat, GL_UNSIGNED_BYTE, data);
 		}
 		
 //#ifdef MONOCLE_MAC
@@ -92,6 +106,7 @@ namespace Monocle
  
 	bool TextureAsset::Load(const std::string &filename, FilterType filter, bool repeatX, bool repeatY, bool premultiply)
 	{
+		this->format = &RGBA;
 		this->filter = filter;
 		this->repeatX = repeatX;
 		this->repeatY = repeatY;
@@ -138,14 +153,14 @@ namespace Monocle
 			// mipmaps: OpenGL 1.4 version
 			//glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
  
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, format->glPixFormat, GL_UNSIGNED_BYTE, data);
  
 			// mipmaps: OpenGL 3.0 version
 #ifndef MONOCLE_MAC
 			glGenerateMipmap(GL_TEXTURE_2D);
 #else
  
-			gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA8, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA8, width, height, fmt.glPixFormat, GL_UNSIGNED_BYTE, data);
 #endif
  
 			//Debug::Log("Loaded texture: " + filename);
@@ -165,7 +180,7 @@ namespace Monocle
 	{
 		//allows updating of a portion of the texture.
 		glBindTexture(GL_TEXTURE_2D, texID);
-		glTexSubImage2D(GL_TEXTURE_2D, 0, position.x, position.y, size.x, size.y, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glTexSubImage2D(GL_TEXTURE_2D, 0, position.x, position.y, size.x, size.y, format->glPixFormat, GL_UNSIGNED_BYTE, data);
 	}
  
 	void TextureAsset::CopyRect(Monocle::Vector2 srcPos, Monocle::Vector2 dstPos, Monocle::Vector2 copysize)
@@ -201,7 +216,7 @@ namespace Monocle
 		//get the image data back out of gl
 		unsigned char *data = new unsigned char[width * height * 4];
  
-		glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glGetTexImage(GL_TEXTURE_2D, 0, format->glPixFormat, GL_UNSIGNED_BYTE, data);
  
 		unsigned char *buffer = new unsigned char [(int)size.y * (int)size.x * 4];
 		unsigned char *buffPos = buffer;
