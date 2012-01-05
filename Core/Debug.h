@@ -14,7 +14,19 @@ namespace Monocle
 	//!
 	class Debug
 	{
+	private:
+		class DebugOutStream;
 	public:
+		typedef int OutputDestFlags;
+
+		enum OutputDest
+		{
+			LOG_FILE = 1,
+			LOG_COUT = 2,
+			LOG_CERR = 4,
+			LOG_CLOG = 8
+		};
+
 		static void Log(const char *string);
 		static void Log(bool boolean);
 		static void Log(int num);
@@ -24,12 +36,8 @@ namespace Monocle
 		static void Log(const Vector2& vec);
 		static void Log(const Vector3& vec);
 		static void Log(const std::string& string);
-		
-		static void SetFileLogging(bool useFile);
-		static void SetConsoleLogging(bool useConsole);
-		
-		static bool GetFileLogging();
-		static bool GetConsoleLogging();
+
+		static void SetLogDestination(OutputDestFlags dest, const std::string &filename = "monocle.log");
 
 		static bool render;
 		static bool showBounds;
@@ -44,11 +52,8 @@ namespace Monocle
 	protected:
 		friend class Game;
 		void Init();
-
     private:
-        std::ofstream logout;
-		static bool useConsole;
-		static bool useFile;
 
+		static DebugOutStream outStream;
 	};
 }
