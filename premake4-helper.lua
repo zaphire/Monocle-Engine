@@ -71,7 +71,6 @@ end
 
 -- convenient if one wants to build a project that includes all the core source 'n libs
 function monocle_os_links_base()
-	print( _MONOCLE_EXTLIB_BASE );
 	
 	monocle_extlib("glew")
 	monocle_extlib("openal")
