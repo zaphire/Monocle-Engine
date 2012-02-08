@@ -22,6 +22,18 @@
 
 namespace Monocle
 {
+	struct PixelFormat
+	{
+	private:
+		friend class TextureAsset;
+
+		PixelFormat(GLenum fmt) : glPixFormat(fmt) {}
+		GLenum glPixFormat;
+	};
+
+	PixelFormat TextureAsset::RGBA = PixelFormat(GL_RGBA);
+	PixelFormat TextureAsset::BGRA = PixelFormat(GL_BGRA);
+
 	TextureAsset::TextureAsset()
     : Asset(ASSET_TEXTURE)
 	{
@@ -32,8 +44,9 @@ namespace Monocle
         return this->premultiplied;
     }
     
-	void TextureAsset::Load(const unsigned char* data, int w, int h, FilterType filter, bool repeatX, bool repeatY, bool premultiply)
+	void TextureAsset::Load(const unsigned char* data, int w, int h, FilterType filter, bool repeatX, bool repeatY, bool premultiply, const PixelFormat &fmt)
 	{
+		this->format = &fmt;
 		this->filter = filter;
 		this->repeatX = repeatX;
 		this->repeatY = repeatY;
@@ -74,7 +87,7 @@ namespace Monocle
 		// mipmaps: OpenGL 1.4 version
 		//glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
         
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, format->glPixFormat, GL_UNSIGNED_BYTE, data);
         
         // Todo: Mipmaps?
 //        glGenerateMipmap(GL_TEXTURE_2D);
@@ -84,6 +97,7 @@ namespace Monocle
     
 	bool TextureAsset::Load(const std::string &filename, FilterType filter, bool repeatX, bool repeatY, bool premultiply)
 	{
+		this->format = &RGBA;
 		this->filter = filter;
 		this->repeatX = repeatX;
 		this->repeatY = repeatY;
@@ -132,7 +146,7 @@ namespace Monocle
 			// mipmaps: OpenGL 1.4 version
 			//glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
             
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, format->glPixFormat, GL_UNSIGNED_BYTE, data);
             
 			// mipmaps: OpenGL 3.0 version
 
