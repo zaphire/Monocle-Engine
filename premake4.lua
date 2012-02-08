@@ -10,8 +10,9 @@ _MONOCLE_APP_BASE		= os.getcwd()			--root directory of your project
 _MONOCLE_BASE			= os.getcwd()			--root directory for monocle
 
 dofile( (_MONOCLE_BASE.."/premake4-helper.lua") )
+dofile( (_MONOCLE_BASE.."/Addons/premake4-addons.lua") )
 
-print( _MONOCLE_EXTLIB_BASE );
+--print( _MONOCLE_EXTLIB_BASE );
 
 --
 -- Monocle Solution
@@ -24,6 +25,8 @@ solution (_MONOCLE_SOLUTION_NAME)
 	if _OPTIONS["testapp"] ~= NIL then
 		monocle_project_testapp( _OPTIONS["testapp"] )
 	end
+
+	monocle_project_addons()
 
 	-- Monocle Core Library
 	monocle_project_corelib();
