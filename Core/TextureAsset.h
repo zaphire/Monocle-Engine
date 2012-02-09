@@ -6,6 +6,8 @@ namespace Monocle
 {
 	class Vector2;
 	
+	struct PixelFormat;
+
 	class TextureAsset : public Asset
 	{
 	public:
@@ -19,7 +21,7 @@ namespace Monocle
 		//! \param repeatX [in] Whether or not the texture should be repeated on the x axis if necessary when rendered
 		//! \param repeatY [in] Whether or not the texture should be repeated on the y axis if necessary when rendered
         //! \param premultiply [in] Whether or not to apply premulitplication to the texture as it loads
-		void Load(const unsigned char* data, int w, int h, FilterType filter, bool repeatX, bool repeatY, bool premultiply = false);
+		void Load(const unsigned char* data, int w, int h, FilterType filter, bool repeatX, bool repeatY, bool premultiply = false, const PixelFormat &fmt = RGBA);
 		//! \brief Loads a texture from a file
 		//! \return Whether the load was successful.  If this is false, the texture is invalid and should not be used except to attempt another Load
 		//! \param filename [in] The filename to load from, relative to the current ContentPath
@@ -56,9 +58,11 @@ namespace Monocle
 		bool repeatX, repeatY;
         bool premultiplied;
  
+		static PixelFormat RGBA;
+		static PixelFormat BGRA;
 	private:
 		FilterType filter;
-		
+		const PixelFormat *format;
 	};
 }
  
