@@ -160,7 +160,7 @@ namespace Monocle
 			glGenerateMipmap(GL_TEXTURE_2D);
 #else
  
-			gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA8, width, height, fmt.glPixFormat, GL_UNSIGNED_BYTE, data);
+			gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA8, width, height, format->glPixFormat, GL_UNSIGNED_BYTE, data);
 #endif
  
 			//Debug::Log("Loaded texture: " + filename);

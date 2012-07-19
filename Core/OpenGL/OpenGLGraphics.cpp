@@ -394,7 +394,7 @@ namespace Monocle
         glBegin(GL_QUADS);
         for (int i = 0; i < text.size(); i++)
         {
-            char c = text[i];
+            unsigned char c = text[i];
 			if ((c >= 32) && (c < 128))
 			{
 				font.GetGlyphData(c, &x, &y, verts, texCoords);
