@@ -273,8 +273,8 @@ namespace Monocle
         this->buffers = new unsigned int [NUM_BUFFERS];
         this->obtainedBuffer = new unsigned char [BUFFER_SIZE];
         
-        memset(this->buffers,0,sizeof(this->buffers));
-        memset(this->obtainedBuffer,0,sizeof(this->obtainedBuffer));
+        memset(this->buffers,0,sizeof(*this->buffers));
+        memset(this->obtainedBuffer,0,sizeof(*this->obtainedBuffer));
         
         this->started = false;
         this->startBuffer=0;

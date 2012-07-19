@@ -147,6 +147,7 @@ void Cocoa_HandleKeyEvent(NSEvent *event)
 	else {
         printf("unknown scancode: %d", scancode);
 		//Debug::Log("Unknown scancode");
+		return;
 	}
 
 	switch ([event type]) {

@@ -60,11 +60,11 @@ CreateApplicationMenus(void)
 	NSString *appName;
 	NSString *title;
 	NSMenu *appleMenu;
-	NSMenu *windowMenu;
+	//NSMenu *windowMenu;
 	NSMenuItem *menuItem;
 
 	/* Create the main menu bar */
-	[NSApp setMainMenu:[[NSMenu alloc] init]];
+	[NSApp setMainMenu:[[[NSMenu alloc] init] autorelease]];
 
 	/* Create the application menu */
 	appName = GetApplicationName();

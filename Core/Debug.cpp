@@ -35,7 +35,9 @@ namespace Monocle
 
 				if(filename != "")
 				{
-					logOut.open(filename);
+					char *cfilename = strdup(filename.c_str());
+					logOut.open(cfilename);
+					free(cfilename);
 				}
 
 				logFilename = filename;
@@ -112,8 +114,11 @@ namespace Monocle
 	int Debug::layerMin = -50;
 	int Debug::layerMax = 50;
 
-	Debug::DebugOutStream Debug::outStream = Debug::DebugOutStream();
-
+	Debug::DebugOutStream Debug::outStream
+#ifndef MONOCLE_MAC
+     = Debug::DebugOutStream()
+#endif
+    ;
 	void Debug::Init()
 	{
 		render = false;
