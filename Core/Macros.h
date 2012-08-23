@@ -5,8 +5,13 @@
 		MIN returns the smaller of the arguments.
 		MAX returns the larger of the arguments.
 */
+#ifndef MIN
 #define MIN(a, b) (((a) < (b)) ? (a) : (b)) 
+#endif
+
+#ifndef MAX
 #define MAX(a, b) (((a) > (b)) ? (a) : (b)) 
+#endif
 
 /*	CLAMP
 		Combines min and max in one macro for convenience.
