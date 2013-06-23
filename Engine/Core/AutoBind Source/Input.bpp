@@ -1,0 +1,22 @@
+#import Engine.InternalConstructorOnlyException
+
+class Engine.Input
+{
+	/// <summary>
+	/// A non-public constructor for initalizing a Input instance.
+	/// </summary>
+	/// <internal>true</internal>
+	/// <exception>Engine::InternalConstructorOnlyException</exception>
+	bound Input()
+	{
+		if (byuser)
+		{
+			throw new Engine::InternalConstructorOnlyException();
+		}
+		// TODO: Implement.
+	}
+
+	public unbound Input()
+	{
+	}
+}

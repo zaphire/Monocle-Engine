@@ -1,0 +1,18 @@
+#import Engine.InternalConstructorOnlyException
+
+class Engine.TextureAsset
+{
+	/// <summary>
+	/// A non-public constructor for initalizing a TextureAsset instance.
+	/// </summary>
+	/// <internal>true</internal>
+	/// <exception>Engine::InternalConstructorOnlyException</exception>
+	bound TextureAsset()
+	{
+		if (byuser)
+		{
+			throw new Engine::InternalConstructorOnlyException();
+		}
+		// TODO: Implement.
+	}
+}

@@ -1,0 +1,58 @@
+#import Engine.InterpreterException
+#include <vector>
+#include <string>
+#include <sstream>
+
+class Engine.ArgumentTypeNotValidException : Engine.InterpreterException
+{
+	public static const char* Message = "The specified argument at position ${1} is not of the correct type (got '${2}', expected '${3}').";
+
+	/// <summary>
+	/// Exception constructor for C++ code.
+	/// </summay>
+	unbound public ArgumentTypeNotValidException(int narg, std::string got, std::string expect)
+	{
+		std::stringstream sstr;
+		sstr << narg;
+		this->Arguments.insert(this->Arguments.end(), sstr.str());
+		this->Arguments.insert(this->Arguments.end(), got);
+		this->Arguments.insert(this->Arguments.end(), expect);
+	}
+
+	/// <summary>
+	/// Exception constructor for Lua code.
+	/// </summary>
+	bound ArgumentTypeNotValidException()
+	{
+	}
+
+	/// <summary>
+	/// Returns the static Message variable.  Required for downcasting.
+	/// <summary>
+	unbound public virtual const char* GetMessage()
+	{
+		return this->Message;
+	}
+
+	/// <summary>
+	/// Returns the static ClassName variable.  Required for downcasting.
+	/// <summary>
+	unbound public virtual const char* GetName()
+	{
+		return this->ClassName;
+	}
+
+	/// <summary>
+	/// A property to access the exception message.
+	/// </summary>
+	/// <readonly>true</readonly>
+	bound property string Message
+	{
+		get: call GetMessageL;
+	}
+
+	unbound ::string GetMessageL()
+	{
+		return Engine::Exception::GetParsedMessage(this->Message, this->Arguments).c_str();
+	}
+}

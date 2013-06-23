@@ -1,0 +1,18 @@
+#import Engine.InternalConstructorOnlyException
+
+class Engine.Vector3
+{
+	/// <summary>
+	/// A non-public constructor for initalizing a Vector3 instance.
+	/// </summary>
+	/// <internal>true</internal>
+	/// <exception>Engine::InternalConstructorOnlyException</exception>
+	bound Vector3()
+	{
+		if (byuser)
+		{
+			throw new Engine::InternalConstructorOnlyException();
+		}
+		// TODO: Implement.
+	}
+}

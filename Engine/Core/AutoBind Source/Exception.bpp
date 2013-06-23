@@ -1,0 +1,214 @@
+#include <string>
+#include <sstream>
+#include <vector>
+#include "Utility.h"
+#include "Program.h"
+#include "StackPoint.h"
+
+class Engine.Exception
+{
+	public static const char* Message = "A general exception was raised.";
+	public int LineNumber;
+	public std::string FileName;
+	public std::vector<std::string> Arguments;
+	public std::vector<Monocle::CallStackPoint> CallStackTrace;
+	public std::vector<Monocle::DataStackPoint> DataStackTrace;
+
+	/// <summary>
+	/// Exception constructor for C++ code.
+	/// </summay>
+	unbound public Exception()
+	{
+		if (Monocle::Program::GlobalState != NULL)
+			this->GatherEnvironmentData(Monocle::Program::GlobalState);
+		else
+		{
+			this->LineNumber = 0;
+			this->FileName = "<outside lua>";
+		}
+	}
+
+	/// <summary>
+	/// Exception constructor for Lua code.
+	/// </summary>
+	bound Exception()
+	{
+		this->GatherEnvironmentData(L);
+	}
+
+	/// <summary>
+	/// A function to gather information about the current environment
+	/// in which the exception was thrown.
+	/// </summary>
+	unbound private void GatherEnvironmentData(lua_State * L)
+	{
+		// Get information about the data on the Lua stack.
+		for (int i = 1; i <= lua_gettop(L); i += 1)
+		{
+			Monocle::DataStackPoint p;
+			std::stringstream a;
+			
+			a << i;
+			p.Level = a.str().c_str();
+			p.BaseType = lua_typename(L, lua_type(L, i));
+			if (lua_type(L, i) == LUA_TTABLE)
+			{
+				std::stringstream s;
+				s << lua_advtypename(L, i) << ": " << (int)lua_topointer(L, i);
+				p.StringRepr = s.str().c_str();
+			}
+			else if (lua_type(L, i) == LUA_TSTRING)
+				p.StringRepr = lua_tostring(L, i);
+			else if (lua_type(L, i) == LUA_TNUMBER)
+				p.StringRepr = lua_tostring(L, i);
+			else if (lua_type(L, i) == LUA_TBOOLEAN)
+				p.StringRepr = lua_toboolean(L, i) ? "true" : "false";
+			else if (lua_type(L, i) == LUA_TNIL)
+				p.StringRepr = "";
+			else
+			{
+				std::stringstream s;
+				s << p.BaseType << ": " << (int)lua_topointer(L, i);
+				p.StringRepr = s.str().c_str();
+			}
+
+			this->DataStackTrace.insert(this->DataStackTrace.end(), p);
+		}
+		
+		// Get information about the call stack.
+		lua_Debug ar;
+		int ret;
+		int i = 0;
+		bool hasdefinedline = false;
+		while ((ret = lua_getstack(L, i, &ar)) == 1)
+		{
+			lua_getinfo(L, "S", &ar);
+			Monocle::CallStackPoint p;
+			std::stringstream a;
+			std::stringstream b;
+
+			if (strcmp(ar.what, "Lua") == 0)
+			{
+				lua_getinfo(L, "ln", &ar);
+
+				a << (i + 1);
+				b << ar.currentline;
+				p.Level = a.str().c_str();
+				p.Source = ar.short_src;
+				if (ar.name != NULL)
+				{
+					p.Function = ar.name;
+					p.FuncType = ar.namewhat;
+				}
+				else
+				{
+					p.Function = "???";
+					p.FuncType = "Lua";
+				}
+				p.LineNumber = b.str().c_str();
+
+				if (!hasdefinedline)
+				{
+					this->LineNumber = ar.linedefined;
+					this->FileName = ar.short_src;
+					hasdefinedline = true;
+				}
+			}
+			else if (strcmp(ar.what, "C") == 0)
+			{
+				lua_getinfo(L, "n", &ar);
+
+				a << (i + 1);
+				p.Level = a.str().c_str();
+				p.Source = "<native>";
+				if (ar.name != NULL)
+				{
+					p.Function = ar.name;
+					p.FuncType = ar.namewhat;
+				}
+				else
+				{
+					p.Function = "???";
+					p.FuncType = "C";
+				}
+				p.LineNumber = "???";
+			}
+			else if (strcmp(ar.what, "main") == 0)
+			{
+				lua_getinfo(L, "l", &ar);
+
+				a << (i + 1);
+				b << ar.currentline;
+				p.Level = a.str().c_str();
+				p.Source = "<main>";
+				p.Function = ar.short_src;
+				p.FuncType = "";
+				p.LineNumber = b.str().c_str();
+			}
+			else if (strcmp(ar.what, "tail") == 0)
+			{
+				a << (i + 1);
+				p.Level = a.str().c_str();
+				p.Source = "<tail>";
+				p.Function = "";
+				p.FuncType = "";
+				p.LineNumber = "";
+			}
+			else
+			{
+				i++;
+				continue;
+			}
+
+			this->CallStackTrace.insert(this->CallStackTrace.end(), p);
+
+			i++;
+		}
+	}
+
+	/// <summary>
+	/// A function which parses the static Message variable according
+	/// to the arguments in the Arguments vector.
+	/// <summary>
+	unbound public static std::string GetParsedMessage(std::string msg, std::vector<std::string> args)
+	{
+		std::string ret = msg;
+		for (unsigned int i = 0; i < args.size(); i++)
+		{
+			std::stringstream from;
+			from << "${" << (i + 1) << "}";
+			ret = Monocle::Utility::ReplaceAll(ret, from.str(), args[i]);
+		}
+		return ret;
+	}
+
+	/// <summary>
+	/// Returns the static Message variable.  Required for downcasting.
+	/// <summary>
+	unbound public virtual const char* GetMessage()
+	{
+		return this->Message;
+	}
+
+	/// <summary>
+	/// Returns the static ClassName variable.  Required for downcasting.
+	/// <summary>
+	unbound public virtual const char* GetName()
+	{
+		return this->ClassName;
+	}
+
+	/// <summary>
+	/// A property to access the exception message.
+	/// </summary>
+	/// <readonly>true</readonly>
+	bound property string Message
+	{
+		get: call GetMessageL;
+	}
+
+	unbound ::string GetMessageL()
+	{
+		return Engine::Exception::GetParsedMessage(this->Message, this->Arguments).c_str();
+	}
+}

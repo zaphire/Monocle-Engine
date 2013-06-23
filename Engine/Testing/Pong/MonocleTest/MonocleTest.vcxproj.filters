@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Monocle">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Test">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Monocle\Windows">
+      <UniqueIdentifier>{359e2e0d-6b74-4021-9d89-0af58ffa0042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\Tests">
+      <UniqueIdentifier>{108f55c5-9ca0-4a9b-9d2c-29a184c1ac10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monocle\Tests\Pong">
+      <UniqueIdentifier>{a012267c-9d76-4faa-8f4f-8ce0d9f25d62}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Monocle.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Platform.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Vector2.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Math.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Core.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Input.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Graphics.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Debug.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Scene.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Windows\WindowsPlatform.h">
+      <Filter>Monocle\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Entity.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Vector3.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Asset.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TextureAsset.h">
+      <Filter>Monocle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Tests\Pong\Pong.h">
+      <Filter>Monocle\Tests\Pong</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Monocle.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Main.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Vector2.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Math.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Core.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Debug.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Input.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Scene.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Windows\WindowsPlatform.cpp">
+      <Filter>Monocle\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Entity.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Vector3.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Asset.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Tests\Pong\Pong.cpp">
+      <Filter>Monocle\Tests\Pong</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\TextureAsset.cpp">
+      <Filter>Monocle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Windows\OpenGLGraphics.cpp">
+      <Filter>Monocle\Windows</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,34 @@
+#import Engine.InternalConstructorOnlyException
+
+class Engine.Scene
+{
+	/// <summary>
+	/// A non-public constructor for initalizing a Scene instance.
+	/// </summary>
+	/// <internal>true</internal>
+	/// <exception>Engine::InternalConstructorOnlyException</exception>
+	bound Scene()
+	{
+		if (byuser)
+		{
+			throw new Engine::InternalConstructorOnlyException();
+		}
+		// TODO: Implement.
+	}
+
+	public unbound void Begin()
+	{
+	}
+
+	public unbound void Update()
+	{
+	}
+
+	public unbound void Render()
+	{
+	}
+
+	public unbound void End()
+	{
+	}
+}

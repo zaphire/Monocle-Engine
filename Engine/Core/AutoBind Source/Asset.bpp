@@ -1,0 +1,21 @@
+#import Engine.InternalConstructorOnlyException
+#include "Enumerations.h"
+
+class Engine.Asset
+{
+	private std::string m_Name;
+
+	/// <summary>
+	/// A non-public constructor for initalizing a Asset instance.
+	/// </summary>
+	/// <internal>true</internal>
+	/// <exception>Engine::InternalConstructorOnlyException</exception>
+	bound Asset()
+	{
+		if (byuser)
+		{
+			throw new Engine::InternalConstructorOnlyException();
+		}
+		// TODO: Implement.
+	}
+}

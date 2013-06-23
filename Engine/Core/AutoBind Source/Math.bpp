@@ -1,0 +1,18 @@
+#import Engine.InternalConstructorOnlyException
+
+class Engine.Math
+{
+	/// <summary>
+	/// A non-public constructor for initalizing a Math instance.
+	/// </summary>
+	/// <internal>true</internal>
+	/// <exception>Engine::InternalConstructorOnlyException</exception>
+	bound Math()
+	{
+		if (byuser)
+		{
+			throw new Engine::InternalConstructorOnlyException();
+		}
+		// TODO: Implement.
+	}
+}

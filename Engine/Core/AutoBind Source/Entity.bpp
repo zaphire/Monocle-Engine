@@ -1,0 +1,18 @@
+#import Engine.InternalConstructorOnlyException
+
+class Engine.Entity
+{
+	/// <summary>
+	/// A non-public constructor for initalizing a Entity instance.
+	/// </summary>
+	/// <internal>true</internal>
+	/// <exception>Engine::InternalConstructorOnlyException</exception>
+	bound Entity()
+	{
+		if (byuser)
+		{
+			throw new Engine::InternalConstructorOnlyException();
+		}
+		// TODO: Implement.
+	}
+}

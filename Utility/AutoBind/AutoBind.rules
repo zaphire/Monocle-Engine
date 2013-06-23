@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualStudioToolFile
+	Name="AutoBind"
+	Version="8.00"
+	>
+	<Rules>
+		<CustomBuildRule
+			Name="AutoBind"
+			DisplayName="AutoBind"
+			CommandLine="&quot;$(SolutionDir)\Utility\AutoBind\bin\Debug\autobind.exe&quot; &quot;[CPPBaseLocation]\[ClassPath] &quot; &quot;[HBaseLocation]\[ClassPath] &quot; [inputs]"
+			Outputs="[CPPBaseLocation]\[ClassPath]\$(InputName).cpp"
+			AdditionalDependencies="&quot;$(SolutionDir)\Utility\AutoBind\bin\Debug\autobind.exe&quot;"
+			FileExtensions="*.bpp"
+			>
+			<Properties>
+				<StringProperty
+					Name="CPPBaseLocation"
+					DisplayName="C++ Base Location"
+					Category="Directories"
+					Description="The location for the output C++ files, excluding the class paths."
+					Switch="[value]"
+					DefaultValue="$(ProjectDir)\Generated Source"
+				/>
+				<StringProperty
+					Name="ClassPath"
+					DisplayName="Class Path"
+					Category="Directories"
+					Description="The class path for the file (i.e. Engine/Unmanaged/Physics)"
+					Switch="[value]"
+				/>
+				<StringProperty
+					Name="HBaseLocation"
+					DisplayName="H Base Location"
+					Category="Directories"
+					Description="The location for the output H files, excluding the class paths."
+					Switch="[value]"
+					DefaultValue="$(ProjectDir)\Generated Headers"
+				/>
+			</Properties>
+		</CustomBuildRule>
+	</Rules>
+</VisualStudioToolFile>
